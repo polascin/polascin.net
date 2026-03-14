@@ -43,7 +43,6 @@
     <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
     <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
 
-
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -92,7 +91,14 @@
     <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/all.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css">
+    <script>
+      (function () {
+        var stylesheet = document.createElement("link");
+        stylesheet.rel = "stylesheet";
+        stylesheet.href = "css/styles.css?v=" + Date.now();
+        document.head.appendChild(stylesheet);
+      })();
+    </script>
     <script src="js/main.js" defer></script>
   </head>
 
