@@ -1,0 +1,15 @@
+{
+  "files.autoSave": "onFocusChange",
+  "editor.wordWrap": "on",
+  "editor.wrapOnEscapedLineFeeds": true,
+  "editor.wrappingIndent": "same",
+  "editor.wrappingStrategy": "simple",
+  "workbench.editor.wrapTabs": true,
+  "notebook.output.wordWrap": true,
+  "chat.editor.wordWrap": "on",
+  "html.format.wrapLineLength": 80,
+  "editor.defaultFormatter": null,
+  "diffEditor.wordWrap": "on",
+  "bladeFormatter.format.wrapAttributes": "auto",
+  "bladeFormatter.format.wrapLineLength": 120
+}
