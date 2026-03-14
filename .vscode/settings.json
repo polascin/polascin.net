@@ -14,5 +14,6 @@
   "bladeFormatter.format.wrapLineLength": 120,
   "git.autofetch": true,
   "git.autofetchPeriod": 180,
-  "git.autoStash": true
+  "git.autoStash": true,
+  "git.postCommitCommand": "sync"
 }
