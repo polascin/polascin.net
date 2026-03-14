@@ -91,14 +91,7 @@
     <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/all.css">
 
     <!-- Styles -->
-    <script>
-      (function () {
-        var stylesheet = document.createElement("link");
-        stylesheet.rel = "stylesheet";
-        stylesheet.href = "css/styles.css?v=" + Date.now();
-        document.head.appendChild(stylesheet);
-      })();
-    </script>
+    <link rel="stylesheet" href="css/styles.css?v=20260314">
     <script src="js/main.js" defer></script>
   </head>
 
@@ -109,14 +102,14 @@
       <div class="container nav-container">
         <a href="#" class="nav-brand">Polascin.net</a>
         <button class="nav-toggle" id="navToggle"
-                aria-label="Toggle navigation">
+                aria-label="Toggle navigation" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
         </button>
         <button class="theme-toggle-btn" id="themeToggle"
                 aria-label="Toggle Dark Mode">
-          <i class="fa-solid fa-moon"></i>
+          <i class="fa-solid fa-moon" aria-hidden="true"></i>
         </button>
         <ul class="nav-menu" id="navMenu">
           <li><a href="#home" class="nav-link">Home</a></li>
@@ -236,20 +229,20 @@
 
         <div class="card-grid">
           <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-stethoscope"></i></div>
+            <div class="card-icon"><i class="fa-solid fa-stethoscope" aria-hidden="true"></i></div>
             <h3>Chronic Kidney Disease (CKD)</h3>
             <p>Management of progressive loss of kidney function over time due
               to diabetes, hypertension, or other factors.</p>
           </div>
           <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-bolt-lightning"></i>
+            <div class="card-icon"><i class="fa-solid fa-bolt-lightning" aria-hidden="true"></i>
             </div>
             <h3>Acute Kidney Injury (AKI)</h3>
             <p>Treatment of sudden, often temporary, loss of kidney function
               caused by infections, dehydration, or toxins.</p>
           </div>
           <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-droplet"></i></div>
+            <div class="card-icon"><i class="fa-solid fa-droplet" aria-hidden="true"></i></div>
             <h3>Haemodialysis</h3>
             <p>
               A procedure where a dialysis machine and a special filter called
@@ -257,7 +250,7 @@
             </p>
           </div>
           <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-house-medical"></i>
+            <div class="card-icon"><i class="fa-solid fa-house-medical" aria-hidden="true"></i>
             </div>
             <h3>Peritoneal Dialysis</h3>
             <p>A treatment that uses the lining of your abdomen (belly), called
@@ -266,14 +259,14 @@
           </div>
           <div class="card">
             <div class="card-icon"><i
-                 class="fa-solid fa-hand-holding-medical"></i></div>
+                 class="fa-solid fa-hand-holding-medical" aria-hidden="true"></i></div>
             <h3>Transplantation</h3>
             <p>The best treatment for kidney failure. A healthy kidney is placed
               into your body to do the work your own kidneys can no longer do.
             </p>
           </div>
           <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-magnifying-glass"></i>
+            <div class="card-icon"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
             </div>
             <h3>Diagnostics</h3>
             <p>Utilizing ultrasound, kidney biopsy, and advanced lab tests to
@@ -298,10 +291,10 @@
             <p>Bezpečnostný manuál k hladovaniu od nefrológa. Odhalíte riziká
               nesprávne vedeného hladovania a spoznáte inovatívny „Nephro-Safe“
               protokol Neera 2.0.</p>
-            <a href="https://polascin.gumroad.com/l/hcilux?_gl=1*7w2232*_ga*NDIyNTEyMDY3LjE3Njg3NzQ2NDg.*_ga_6LJN6D94N6*czE3Njk5NTc3MTAkbzIkZzEkdDE3Njk5NTc3NTgkajEyJGwwJGgw"
+            <a href="https://polascin.gumroad.com/l/hcilux"
                target="_blank" class="btn btn-primary">
               Get it on Gumroad <i
-                 class="fa-solid fa-arrow-up-right-from-square"
+                 class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"
                  style="margin-left: 5px;"></i>
             </a>
           </div>
@@ -318,7 +311,7 @@
             <a href="https://polascin.gumroad.com/l/veszhk"
                target="_blank" class="btn btn-primary">
               Get it on Gumroad <i
-                 class="fa-solid fa-arrow-up-right-from-square"
+                 class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"
                  style="margin-left: 5px;"></i>
             </a>
           </div>
@@ -330,49 +323,49 @@
     <section id="links" class="links-section">
       <div class="container">
         <h2 class="section-title">Network & Resources</h2>
-        <p style="text-align: center; color: var(--text-light);">Explore other
+        <p style="text-align: center; color: var(--text-muted);">Explore other
           related sites and resources.</p>
         <div class="link-grid">
           <a href="https://polascin.com/" class="pill-link" target="_blank">
-            <i class="fa-solid fa-staff-snake"></i>
+            <i class="fa-solid fa-staff-snake" aria-hidden="true"></i>
             polascin.com
           </a>
           <a href="https://polascin.sk/" class="pill-link" target="_blank">
-            <i class="fa-solid fa-globe"></i>
+            <i class="fa-solid fa-globe" aria-hidden="true"></i>
             polascin.sk
           </a>
           <a href="https://polascin.org/" class="pill-link" target="_blank">
-            <i class="fa-solid fa-building"></i>
+            <i class="fa-solid fa-building" aria-hidden="true"></i>
             polascin.org
           </a>
           <a href="https://nephrosite.polascin.net/" class="pill-link"
              target="_blank">
-            <i class="fa-solid fa-hospital-user"></i>
+            <i class="fa-solid fa-hospital-user" aria-hidden="true"></i>
             NephroSite (in Slovak)
           </a>
           <a href="https://amzn.to/45y4INd" class="pill-link" target="_blank">
-            <i class="fa-solid fa-book"></i>
+            <i class="fa-solid fa-book" aria-hidden="true"></i>
             Vital Algorithm - the second edition (Amazon)
           </a>
           <a href="https://amzn.to/4t4mBNs" class="pill-link" target="_blank">
-            <i class="fa-solid fa-book"></i>
+            <i class="fa-solid fa-book" aria-hidden="true"></i>
             The Vital Algorithm - the first edition (Amazon)
           </a>
           <a href="https://amzn.to/4pYuL7D" class="pill-link" target="_blank">
-            <i class="fa-solid fa-book"></i>
+            <i class="fa-solid fa-book" aria-hidden="true"></i>
             Blood Equity (Amazon)
           </a>
           <a href="https://amzn.to/3NJurvZ" class="pill-link" target="_blank">
-            <i class="fa-solid fa-book"></i>
+            <i class="fa-solid fa-book" aria-hidden="true"></i>
             Pulse Of The Body (Amazon)
           </a>
           <a href="https://time.is/" class="pill-link" target="_blank">
-            <i class="fa-solid fa-clock"></i>
+            <i class="fa-solid fa-clock" aria-hidden="true"></i>
             Time.is
           </a>
           <a href="https://pr.tn/ref/63X184P7" class="pill-link" target="_blank"
              style="border-color: #6d4aff; color: #6d4aff;">
-            <i class="fa-solid fa-envelope"></i>
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             Proton Mail
           </a>
         </div>
@@ -386,7 +379,7 @@
         <p>Feel free to reach out for inquiries or collaboration.</p>
         <a href="mailto:lubomir@polascin.net" class="btn btn-primary"
            style="font-size: 1.2rem; display: inline-flex; align-items: center; gap: 10px;">
-          <i class="fa-solid fa-envelope"></i> lubomir@polascin.net
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i> lubomir@polascin.net
         </a>
       </div>
     </section>
@@ -397,17 +390,29 @@
         <h4>Connect</h4>
         <div class="social-links">
           <a href="https://www.linkedin.com/in/lubomirpolascin/"
-             aria-label="LinkedIn" title="LinkedIn Profile">💼</a>
+             aria-label="LinkedIn" title="LinkedIn Profile">
+            <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+          </a>
           <a href="https://x.com/polascin" aria-label="X (Twitter)"
-             title="X Profile">🐦</a>
+             title="X Profile">
+            <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+          </a>
           <a href="https://www.facebook.com/lubomir.polascin"
-             aria-label="Facebook" title="Facebook Profile">📘</a>
+             aria-label="Facebook" title="Facebook Profile">
+            <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+          </a>
           <a href="mailto:lubomir@polascin.net" aria-label="Email"
-             title="Send Email">✉️</a>
+             title="Send Email">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          </a>
           <a href="https://www.patreon.com/c/Csoelle?vanity=user"
-             aria-label="Patreon" title="Support on Patreon">🟠</a>
-          <a href="https://discord.com/channels/696992368792043620/696992368792043623"
-             aria-label="Discord" title="Join Discord">🎮</a>
+             aria-label="Patreon" title="Support on Patreon">
+            <i class="fa-brands fa-patreon" aria-hidden="true"></i>
+          </a>
+          <a href="https://discord.gg/MsGmMZbz"
+             aria-label="Discord" title="Join Discord">
+            <i class="fa-brands fa-discord" aria-hidden="true"></i>
+          </a>
         </div>
         <p class="footer-contact">
           <a href="mailto:lubomir@polascin.net">lubomir@polascin.net</a>

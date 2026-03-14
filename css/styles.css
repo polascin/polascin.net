@@ -44,6 +44,20 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body,
+.navbar,
+.nav-menu,
+.card,
+.product-card,
+.pill-link,
+.btn,
+.btn-cookie-accept,
+.btn-cookie-decline,
+.theme-toggle-btn,
+.cookie-banner,
+footer {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -265,7 +279,12 @@ section {
   position: relative;
   z-index: 1;
   max-width: 800px;
-  animation: fadeIn 1s ease-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-content {
+    animation: fadeIn 1s ease-out;
+  }
 }
 
 .hero-title {
@@ -556,7 +575,12 @@ footer a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: slideUp 0.5s ease-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cookie-banner {
+    animation: slideUp 0.5s ease-out;
+  }
 }
 
 .cookie-content {
