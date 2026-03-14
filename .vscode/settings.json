@@ -11,5 +11,8 @@
   "editor.defaultFormatter": null,
   "diffEditor.wordWrap": "on",
   "bladeFormatter.format.wrapAttributes": "auto",
-  "bladeFormatter.format.wrapLineLength": 120
+  "bladeFormatter.format.wrapLineLength": 120,
+  "git.autofetch": true,
+  "git.autofetchPeriod": 180,
+  "git.autoStash": true
 }
