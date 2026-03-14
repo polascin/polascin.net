@@ -376,7 +376,7 @@ section {
   border-radius: 12px;
   padding: var(--spacing-md);
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0 auto 2rem;
   box-shadow: 0 4px 6px var(--shadow-color);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
