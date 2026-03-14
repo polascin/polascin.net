@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <script>
+      // 1. Define dataLayer and the gtag function immediately
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      // 2. Set default consent to 'denied'
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500
+      });
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="Dr. Lubomir Polascin - Nephrologist and Medical Professional. Information on Kidney Health, Dialysis, and Transplantation.">
+    <meta name="keywords"
+          content="Nephrology, Kidney Health, Dialysis, Hemodialysis, Renal Transplantation, Lubomir Polascin">
+    <meta name="author" content="Lubomir Polascin">
+    <meta name="theme-color" content="#ffffff">
+    <title>Dr. Lubomir Polascin | Nephrology & Internal Medicine</title>
+
+
+    <link rel="canonical" href="https://polascin.net/">
+    <link rel="icon" href="CrystalKidney.png" type="image/png">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57"
+          href="apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60"
+          href="apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120"
+          href="apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76"
+          href="apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152"
+          href="apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="favicon-196x196.png"
+          sizes="196x196" />
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="&nbsp;" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dr. Lubomir Polascin",
+      "url": "https://polascin.net/",
+      "image": "https://polascin.net/images/profile.jpg",
+      "jobTitle": "Nephrologist",
+      "description": "Dr. Lubomir Polascin - Nephrologist and Medical Professional. Information on Kidney Health, Dialysis, and Transplantation.",
+      "alumniOf": "University of Pavol Jozef Šafárik",
+      "sameAs": [
+        "https://polascin.com/",
+        "https://polascin.sk/",
+        "http://polascin.org/",
+        "https://www.amazon.com/stores/author/B07PN436VJ/about"
+      ]
+    }
+    </script>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://polascin.net/">
+    <meta property="og:title"
+          content="Dr. Lubomir Polascin | Nephrology & Internal Medicine">
+    <meta property="og:description"
+          content="Dr. Lubomir Polascin - Nephrologist and Medical Professional. Information on Kidney Health, Dialysis, and Transplantation.">
+    <meta property="og:image" content="https://polascin.net/images/profile.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://polascin.net/">
+    <meta property="twitter:title"
+          content="Dr. Lubomir Polascin | Nephrology & Internal Medicine">
+    <meta property="twitter:description"
+          content="Dr. Lubomir Polascin - Nephrologist and Medical Professional. Information on Kidney Health, Dialysis, and Transplantation.">
+    <meta property="twitter:image"
+          content="https://polascin.net/images/profile.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Open+Sans:wght@400;500;600&display=swap"
+          rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/all.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/main.js" defer></script>
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container nav-container">
+        <a href="#" class="nav-brand">Polascin.net</a>
+        <button class="nav-toggle" id="navToggle"
+                aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <button class="theme-toggle-btn" id="themeToggle"
+                aria-label="Toggle Dark Mode">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#about" class="nav-link">Bio</a></li>
+          <li><a href="#nephrology" class="nav-link">Nephrology</a></li>
+          <li><a href="#products" class="nav-link">Shop</a></li>
+          <li><a href="#links" class="nav-link">Links</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <img src="CrystalKidney.png" alt="Crystal Kidney" class="profile-img">
+          <h1 class="hero-title">Advancing Kidney Health</h1>
+          <p class="hero-subtitle">Dr. Lubomir Polascin - Dedicated to
+            excellence in Nephrology, Dialysis, and Patient Care.</p>
+          <div class="hero-buttons">
+            <a href="#about" class="btn btn-primary">About Me</a>
+            <a href="#nephrology" class="btn btn-secondary">Learn Nephrology</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bio Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-text">
+          <div class="profile-container">
+            <img src="images/profile.jpg" alt="Dr. Lubomir Polascin"
+                 class="profile-img" loading="lazy">
+          </div>
+          <p
+             style="font-size: 1.1em; font-weight: 500; color: var(--primary-color);">
+            Hi, I’m Lubomir Polascin — a Medical Doctor and Internal Medicine
+            Specialist by profession, a Fiction and Non-Fiction Writer by
+            calling, and a Self-Taught Programmer by passion.
+          </p>
+
+          <h3>Who I Am</h3>
+          <p>My work rests at the intersection of medicine, storytelling, and
+            technology. Medicine sharpens my clinical precision; writing lets me
+            explore the human condition through fiction and non-fiction; and
+            technology empowers me to solve complex problems. As a consultant, I
+            bridge these worlds to deliver thoughtful, well-informed solutions.
+          </p>
+          <p>I approach every challenge with curiosity and rigor—whether I’m
+            treating patients, debugging code, translating nuanced text, or
+            exploring AI.</p>
+          <br>
+
+          <h3>Professional Identity</h3>
+          <p>I am a medical doctor who graduated in General Medicine (1995) and
+            specialized in Nephrology (2009). I am attested in Internal Medicine
+            (1998) and certified in Abdominal Ultrasonic Imaging in Adults
+            (2009).</p>
+          <p><strong>Areas of Expertise:</strong></p>
+          <ul>
+            <li>Dialysis and renal replacement therapies (Hemodialysis,
+              Hemodiafiltration, Hemofiltration)</li>
+            <li>Vascular access ultrasonography for dialysis</li>
+            <li>Extra-corporeal and intra-corporeal elimination therapies</li>
+            <li>Membrane plasma separation and related therapies</li>
+            <li>Kidney transplantation</li>
+          </ul>
+          <p>I have extensive experience teaching and lecturing in Internal
+            Medicine, Diabetology, nephrology, and related fields. I am also a
+            translator specializing in English-Slovak and Slovak-English medical
+            translation and software localization.</p>
+          <br>
+
+          <h3>Technology & Programming</h3>
+          <p>I am deeply involved in information technology, computer science,
+            and programming. My interests include:</p>
+          <ul>
+            <li>HTML / CSS / JS</li>
+            <li>PHP & SQL</li>
+            <li>Python</li>
+            <li>Linux / Unix</li>
+            <li>AI & FOSS</li>
+          </ul>
+          <br>
+
+          <h3>Background & Journey</h3>
+          <p>I began my medical education at the University of Pavol Jozef
+            Šafárik in Košice, Slovakia. Since 1995, my focus has been on
+            dialysis and nephrology. From 2013 to 2022, I served as Chief
+            Medical Officer/Head Physician at two dialysis centers in
+            Bratislava.</p>
+          <br>
+
+          <h3>Personal Touch</h3>
+          <p>Born in 1971 in Czechoslovakia, I was raised in Kyjov. My Ruthenian
+            roots inform my worldview. My passions include reading, travel,
+            philosophy, and poetry.</p>
+          <br>
+
+          <a href="https://www.amazon.com/stores/author/B07PN436VJ/about"
+             target="_blank" class="btn btn-primary"
+             style="font-size: 0.9em;">View on Amazon Author Central</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nephrology Section -->
+    <section id="nephrology" class="nephrology">
+      <div class="container">
+        <h2 class="section-title">Nephrology</h2>
+        <p>Nephrology is an essential medical specialty dealing with the
+          kidneys, vital organs responsible for fluid balance, waste filtration,
+          and blood pressure regulation.</p>
+
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-stethoscope"></i></div>
+            <h3>Chronic Kidney Disease (CKD)</h3>
+            <p>Management of progressive loss of kidney function over time due
+              to diabetes, hypertension, or other factors.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-bolt-lightning"></i>
+            </div>
+            <h3>Acute Kidney Injury (AKI)</h3>
+            <p>Treatment of sudden, often temporary, loss of kidney function
+              caused by infections, dehydration, or toxins.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-droplet"></i></div>
+            <h3>Haemodialysis</h3>
+            <p>
+              A procedure where a dialysis machine and a special filter called
+              an artificial kidney, or a dialyzer, are used to clean your blood.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-house-medical"></i>
+            </div>
+            <h3>Peritoneal Dialysis</h3>
+            <p>A treatment that uses the lining of your abdomen (belly), called
+              the peritoneum, and a cleaning solution called dialysate to clean
+              your blood.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><i
+                 class="fa-solid fa-hand-holding-medical"></i></div>
+            <h3>Transplantation</h3>
+            <p>The best treatment for kidney failure. A healthy kidney is placed
+              into your body to do the work your own kidneys can no longer do.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3>Diagnostics</h3>
+            <p>Utilizing ultrasound, kidney biopsy, and advanced lab tests to
+              accurately diagnose renal conditions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Digital Products Section -->
+    <section id="products" class="products-section">
+      <div class="container">
+        <h2 class="section-title">Digital Products</h2>
+        <p style="text-align: center; margin-bottom: 2rem;">Exclusive guides and
+          resources for your health journey.</p>
+
+        <div class="product-card">
+          <div class="product-content">
+            <h3>Medicínsky pôst</h3>
+            <p class="product-subtitle">Ako využiť silu hladovania a nezničiť si
+              metabolizmus.</p>
+            <p>Bezpečnostný manuál k hladovaniu od nefrológa. Odhalíte riziká
+              nesprávne vedeného hladovania a spoznáte inovatívny „Nephro-Safe“
+              protokol Neera 2.0.</p>
+            <a href="https://polascin.gumroad.com/l/hcilux?_gl=1*7w2232*_ga*NDIyNTEyMDY3LjE3Njg3NzQ2NDg.*_ga_6LJN6D94N6*czE3Njk5NTc3MTAkbzIkZzEkdDE3Njk5NTc3NTgkajEyJGwwJGgw"
+               target="_blank" class="btn btn-primary">
+              Get it on Gumroad <i
+                 class="fa-solid fa-arrow-up-right-from-square"
+                 style="margin-left: 5px;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Links Section -->
+    <section id="links" class="links-section">
+      <div class="container">
+        <h2 class="section-title">Network & Resources</h2>
+        <p style="text-align: center; color: var(--text-light);">Explore other
+          related sites and resources.</p>
+        <div class="link-grid">
+          <a href="https://polascin.com/" class="pill-link" target="_blank">
+            <i class="fa-solid fa-staff-snake"></i>
+            polascin.com
+          </a>
+          <a href="https://polascin.sk/" class="pill-link" target="_blank">
+            <i class="fa-solid fa-globe"></i>
+            polascin.sk
+          </a>
+          <a href="https://polascin.org/" class="pill-link" target="_blank">
+            <i class="fa-solid fa-building"></i>
+            polascin.org
+          </a>
+          <a href="https://nephrosite.polascin.net/" class="pill-link"
+             target="_blank">
+            <i class="fa-solid fa-hospital-user"></i>
+            NephroSite (in Slovak)
+          </a>
+          <a href="https://amzn.to/45y4INd" class="pill-link" target="_blank">
+            <i class="fa-solid fa-book"></i>
+            Vital Algorithm - the second edition (Amazon)
+          </a>
+          <a href="https://amzn.to/4t4mBNs" class="pill-link" target="_blank">
+            <i class="fa-solid fa-book"></i>
+            The Vital Algorithm - the first edition (Amazon)
+          </a>
+          <a href="https://amzn.to/4pYuL7D" class="pill-link" target="_blank">
+            <i class="fa-solid fa-book"></i>
+            Blood Equity (Amazon)
+          </a>
+          <a href="https://amzn.to/3NJurvZ" class="pill-link" target="_blank">
+            <i class="fa-solid fa-book"></i>
+            Pulse Of The Body (Amazon)
+          </a>
+          <a href="https://time.is/" class="pill-link" target="_blank">
+            <i class="fa-solid fa-clock"></i>
+            Time.is
+          </a>
+          <a href="https://pr.tn/ref/63X184P7" class="pill-link" target="_blank"
+             style="border-color: #6d4aff; color: #6d4aff;">
+            <i class="fa-solid fa-envelope"></i>
+            Proton Mail
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container" style="text-align: center;">
+        <h2 class="section-title">Contact</h2>
+        <p>Feel free to reach out for inquiries or collaboration.</p>
+        <a href="mailto:lubomir@polascin.net" class="btn btn-primary"
+           style="font-size: 1.2rem; display: inline-flex; align-items: center; gap: 10px;">
+          <i class="fa-solid fa-envelope"></i> lubomir@polascin.net
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/lubomirpolascin/"
+             aria-label="LinkedIn" title="LinkedIn Profile">💼</a>
+          <a href="https://x.com/polascin" aria-label="X (Twitter)"
+             title="X Profile">🐦</a>
+          <a href="https://www.facebook.com/lubomir.polascin"
+             aria-label="Facebook" title="Facebook Profile">📘</a>
+          <a href="mailto:lubomir@polascin.net" aria-label="Email"
+             title="Send Email">✉️</a>
+          <a href="https://www.patreon.com/c/Csoelle?vanity=user"
+             aria-label="Patreon" title="Support on Patreon">🟠</a>
+          <a href="https://discord.com/channels/696992368792043620/696992368792043623"
+             aria-label="Discord" title="Join Discord">🎮</a>
+        </div>
+        <p class="footer-contact">
+          <a href="mailto:lubomir@polascin.net">lubomir@polascin.net</a>
+        </p>
+
+        <p>&copy; 1998 - <span id="current-year"></span> Lubomir Polascin. All
+          rights
+          reserved.</p>
+        <p style="font-size: 0.9em; opacity: 0.8; margin-top: 10px;">
+          <a href="https://polascin.net">polascin.net</a> |
+          <a href="privacy.html">Privacy Policy</a> |
+          <a href="terms.html">Terms of Service</a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Cookie Consent Container -->
+    <div id="cookie-consent-container"></div>
+  </body>
+
+</html>
