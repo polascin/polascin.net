@@ -203,6 +203,16 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(showCookieBanner, 1000);
     }
 
+    // Cookie Settings Trigger — re-open banner on demand
+    document.querySelectorAll('.cookie-settings-trigger').forEach(trigger => {
+        trigger.addEventListener('click', e => {
+            e.preventDefault();
+            const existing = cookieContainer && cookieContainer.querySelector('.cookie-banner');
+            if (existing) existing.remove();
+            showCookieBanner();
+        });
+    });
+
     // Dynamic Current Year
     const yearSpan = document.getElementById('current-year');
     if (yearSpan) {

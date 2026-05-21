@@ -7,7 +7,7 @@
   /* Cyan */
   --accent-color: #ff6b6b;
   --text-main: #2c3e50;
-  --text-muted: #6c757d;
+  --text-muted: #5a6472;
   --bg-body: #ffffff;
   --bg-surface: #f8f9fa;
   --bg-card: #ffffff;
@@ -671,5 +671,49 @@ footer a:hover {
   .cookie-buttons {
     width: 100%;
     justify-content: center;
+  }
+}
+
+/* Cookie Settings Trigger */
+.cookie-settings-trigger {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85em;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  font-family: inherit;
+}
+
+.cookie-settings-trigger:hover {
+  color: white;
+}
+
+/* Small mobile breakpoint */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pill-link {
+    font-size: 0.85rem;
+    padding: 8px 14px;
   }
 }
