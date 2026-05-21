@@ -1,12 +1,10 @@
 {
     "recommendations": [
-        "bmewburn.vscode-intelephense-client",
+        "trunk.io",
         "yandeu.five-server",
         "github.copilot",
         "github.copilot-chat",
         "github.vscode-pull-request-github",
-        "mtxr.sqltools",
-        "mtxr.sqltools-driver-mysql",
         "sonarsource.sonarlint-vscode"
     ]
 }
