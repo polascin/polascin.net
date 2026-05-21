@@ -164,6 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const banner = document.createElement('div');
         banner.className = 'cookie-banner';
+        banner.setAttribute('role', 'dialog');
+        banner.setAttribute('aria-label', 'Cookie consent');
+        banner.setAttribute('aria-live', 'polite');
         banner.innerHTML = `
             <div class="cookie-content">
                 <div class="cookie-text">
