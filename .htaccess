@@ -13,7 +13,7 @@ ServerSignature Off
     Header always set X-Permitted-Cross-Domain-Policies "none"
     Header always unset X-Powered-By
     Header unset X-Powered-By
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
 </IfModule>
 
 # ── Blokovanie .git adresára a citlivých súborov ─────────────────────────────
@@ -27,6 +27,6 @@ ServerSignature Off
 </IfModule>
 
 # ── Blokovanie citlivých typov súborov ───────────────────────────────────────
-<FilesMatch "\.(env|ini|log|sql|bak|tgz|tar\.gz|bz2|7z)$">
+<FilesMatch "\.(env|ini|log|sql|bak|tgz|tar\.gz|bz2|7z|key|pem|p12|pfx)$">
     Require all denied
 </FilesMatch>

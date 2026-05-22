@@ -1,14 +1,14 @@
 # robots.txt — polascin.net
-# Aktualizované: 2026-05-21
+# Updated: 2026-05-22
 
-# ── Všeobecné pravidlá ───────────────────────────────────────────────────────
+# ── General rules ────────────────────────────────────────────────────────────
 User-agent: *
 Allow: /
 Disallow: /.git/
 
 Crawl-delay: 10
 
-# ── Blokovaní agresívni scrapovací roboti ────────────────────────────────────
+# ── Blocked aggressive scrapers ──────────────────────────────────────────────
 User-agent: SemrushBot
 Disallow: /
 
@@ -25,6 +25,19 @@ User-agent: BLEXBot
 Disallow: /
 
 User-agent: PetalBot
+Disallow: /
+
+# ── AI training crawlers ──────────────────────────────────────────────────────
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: CCBot
 Disallow: /
 
 # ── Sitemap ──────────────────────────────────────────────────────────────────

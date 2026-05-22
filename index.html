@@ -143,14 +143,20 @@
     />
 
     <!-- FontAwesome -->
-    <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/all.css" />
+    <link
+      rel="stylesheet"
+      href="fontawesome-free-7.1.0-web/css/fontawesome.css"
+    />
+    <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/solid.css" />
+    <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/brands.css" />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=20260314" />
+    <link rel="stylesheet" href="css/styles.css?v=20260522" />
     <script src="js/main.js" defer></script>
   </head>
 
   <body>
+    <a href="#home" class="skip-link">Skip to main content</a>
     <!-- Navigation -->
     <nav class="navbar">
       <div class="container nav-container">
@@ -227,13 +233,7 @@
               loading="lazy"
             />
           </div>
-          <p
-            style="
-              font-size: 1.1em;
-              font-weight: 500;
-              color: var(--primary-color);
-            "
-          >
+          <p class="bio-intro">
             Hi, I’m Lubomir Polascin — a Medical Doctor, Nephrologist, and
             Internal Medicine Specialist by profession, a Fiction and
             Non-Fiction Writer by calling, and a Self-Taught Programmer by
@@ -317,8 +317,7 @@
             href="https://www.amazon.com/stores/author/B07PN436VJ/about"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn-primary"
-            style="font-size: 0.9em"
+            class="btn btn-primary btn-sm"
             >View on Amazon Author Central</a
           >
         </div>
@@ -408,7 +407,7 @@
     <section id="products" class="products-section">
       <div class="container">
         <h2 class="section-title">Digital Products</h2>
-        <p style="text-align: center; margin-bottom: 2rem">
+        <p class="section-intro">
           Exclusive guides and resources for your health journey.
         </p>
 
@@ -431,9 +430,8 @@
             >
               Kúpiť na Gumroad
               <i
-                class="fa-solid fa-arrow-up-right-from-square"
+                class="fa-solid fa-arrow-up-right-from-square btn-icon"
                 aria-hidden="true"
-                style="margin-left: 5px"
               ></i>
             </a>
           </div>
@@ -458,9 +456,8 @@
             >
               Get it on Gumroad
               <i
-                class="fa-solid fa-arrow-up-right-from-square"
+                class="fa-solid fa-arrow-up-right-from-square btn-icon"
                 aria-hidden="true"
-                style="margin-left: 5px"
               ></i>
             </a>
           </div>
@@ -472,9 +469,7 @@
     <section id="links" class="links-section">
       <div class="container">
         <h2 class="section-title">Network & Resources</h2>
-        <p style="text-align: center; color: var(--text-muted)">
-          Explore other related sites and resources.
-        </p>
+        <p class="section-muted">Explore other related sites and resources.</p>
         <div class="link-grid">
           <a
             href="https://polascin.com/"
@@ -577,10 +572,9 @@
           </a>
           <a
             href="https://pr.tn/ref/63X184P7"
-            class="pill-link"
+            class="pill-link pill-link--proton"
             target="_blank"
             rel="noopener noreferrer"
-            style="border-color: #6d4aff; color: #6d4aff"
           >
             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             Proton Mail
@@ -591,18 +585,12 @@
 
     <!-- Contact Section -->
     <section id="contact">
-      <div class="container" style="text-align: center">
+      <div class="container">
         <h2 class="section-title">Contact</h2>
         <p>Feel free to reach out for inquiries or collaboration.</p>
         <a
           href="mailto:lubomir@polascin.net"
-          class="btn btn-primary"
-          style="
-            font-size: 1.2rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-          "
+          class="btn btn-primary btn-contact"
         >
           <i class="fa-solid fa-envelope" aria-hidden="true"></i>
           lubomir@polascin.net
@@ -676,7 +664,7 @@
           &copy; 1998 - <span id="current-year"></span> Lubomir Polascin. All
           rights reserved.
         </p>
-        <p style="font-size: 0.9em; opacity: 0.8; margin-top: 10px">
+        <p class="footer-meta">
           <a href="https://polascin.net/">polascin.net</a> |
           <a
             href="https://books.polascin.net/"
@@ -686,7 +674,9 @@
           >
           | <a href="privacy.html">Privacy Policy</a> |
           <a href="terms.html">Terms of Service</a> |
-          <button class="cookie-settings-trigger" aria-haspopup="dialog">Cookie Settings</button>
+          <button class="cookie-settings-trigger" aria-haspopup="dialog">
+            Cookie Settings
+          </button>
         </p>
       </div>
     </footer>

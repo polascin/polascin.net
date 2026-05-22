@@ -12,8 +12,16 @@
     <title>Terms of Service | Dr. Lubomir Polascin</title>
     <link rel="canonical" href="https://polascin.net/terms.html" />
     <meta name="robots" content="noindex, follow" />
-    <link rel="alternate" hreflang="en" href="https://polascin.net/terms.html" />
-    <link rel="alternate" hreflang="x-default" href="https://polascin.net/terms.html" />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://polascin.net/terms.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://polascin.net/terms.html"
+    />
     <link rel="icon" href="CrystalKidney.png" type="image/png" />
 
     <!-- Fonts -->
@@ -25,14 +33,20 @@
     />
 
     <!-- FontAwesome -->
-    <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/all.css" />
+    <link
+      rel="stylesheet"
+      href="fontawesome-free-7.1.0-web/css/fontawesome.css"
+    />
+    <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/solid.css" />
+    <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/brands.css" />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=20260314" />
+    <link rel="stylesheet" href="css/styles.css?v=20260522" />
     <script src="js/main.js" defer></script>
   </head>
 
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Navigation -->
     <nav class="navbar">
       <div class="container nav-container">
@@ -75,7 +89,7 @@
     </nav>
 
     <!-- Content -->
-    <section class="page-content" style="padding-top: 120px; min-height: 80vh">
+    <section id="main-content" class="page-content">
       <div class="container">
         <h1 class="section-title">Terms of Service</h1>
         <p><strong>Last Updated: January 30, 2026</strong></p>
@@ -88,15 +102,7 @@
         </p>
 
         <h3>2. Medical Disclaimer</h3>
-        <div
-          style="
-            background-color: rgba(255, 107, 107, 0.1);
-            border-left: 4px solid var(--accent-color);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 4px;
-          "
-        >
+        <div class="medical-disclaimer">
           <p>
             <strong>IMPORTANT:</strong> The content provided on this website is
             for informational purposes only. It is <strong>not</strong> intended
@@ -147,7 +153,7 @@
           &copy; <span id="current-year"></span> Lubomir Polascin. All rights
           reserved.
         </p>
-        <p style="font-size: 0.9em; opacity: 0.8; margin-top: 10px">
+        <p class="footer-meta">
           <a href="index.html">polascin.net</a> |
           <a
             href="https://books.polascin.net/"
@@ -157,7 +163,9 @@
           >
           | <a href="privacy.html">Privacy Policy</a> |
           <a href="terms.html">Terms of Service</a> |
-          <button class="cookie-settings-trigger" aria-haspopup="dialog">Cookie Settings</button>
+          <button class="cookie-settings-trigger" aria-haspopup="dialog">
+            Cookie Settings
+          </button>
         </p>
       </div>
     </footer>

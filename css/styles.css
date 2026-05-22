@@ -15,8 +15,11 @@
   --shadow-color: rgba(0, 0, 0, 0.1);
 
   /* Typography */
-  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-body: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body:
+    "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -58,7 +61,10 @@ body,
 .theme-toggle-btn,
 .cookie-banner,
 footer {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 html {
@@ -193,7 +199,7 @@ section {
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 2px;
@@ -213,7 +219,11 @@ section {
   border: none;
   cursor: pointer;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .nav-toggle span {
@@ -238,6 +248,8 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .theme-toggle-btn:hover {
@@ -270,7 +282,11 @@ section {
 .hero {
   margin-top: 80px;
   /* Navbar height */
-  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-body) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--bg-surface) 0%,
+    var(--bg-body) 100%
+  );
   min-height: 80vh;
   display: flex;
   align-items: center;
@@ -279,7 +295,7 @@ section {
 }
 
 .hero::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50px;
   right: -50px;
@@ -305,7 +321,11 @@ section {
 .hero-title {
   font-size: 3.5rem;
   margin-bottom: var(--spacing-md);
-  background: -webkit-linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  background: -webkit-linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -373,7 +393,10 @@ section {
   border-radius: 12px;
   box-shadow: 0 2px 4px var(--shadow-color);
   border: 1px solid var(--border-color);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
   height: 100%;
 }
 
@@ -412,7 +435,9 @@ section {
   max-width: 800px;
   margin: 0 auto 2rem;
   box-shadow: 0 4px 6px var(--shadow-color);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   text-align: center;
 }
 
@@ -434,7 +459,6 @@ section {
   color: var(--text-main);
   margin-bottom: var(--spacing-sm);
 }
-
 
 /* Links Section */
 .quick-links {
@@ -688,6 +712,94 @@ footer a:hover {
 
 .cookie-settings-trigger:hover {
   color: white;
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary-color);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 0 0 4px 0;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Legal pages (privacy, terms) */
+.page-content {
+  padding-top: 120px;
+  min-height: 80vh;
+}
+
+/* Bio intro paragraph */
+.bio-intro {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+/* Section utilities */
+.section-intro {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section-muted {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Contact section centering */
+#contact .container {
+  text-align: center;
+}
+
+/* Contact email button */
+.btn-contact {
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: auto;
+}
+
+/* Small button modifier */
+.btn-sm {
+  font-size: 0.9em;
+}
+
+/* Icon inside button */
+.btn-icon {
+  margin-left: 5px;
+}
+
+/* Footer meta links line */
+.footer-meta {
+  font-size: 0.9em;
+  opacity: 0.8;
+  margin-top: 10px;
+}
+
+/* ProtonMail brand pill link */
+.pill-link--proton {
+  border-color: #6d4aff;
+  color: #6d4aff;
+}
+
+/* Medical disclaimer box */
+.medical-disclaimer {
+  background-color: rgba(255, 107, 107, 0.1);
+  border-left: 4px solid var(--accent-color);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
 }
 
 /* Small mobile breakpoint */
