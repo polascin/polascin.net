@@ -147,11 +147,11 @@ SQL;
 runSql($pdo, $schema);
 
 $defaultBlocks = [
-    ['hero_title', 'Advancing Kidney Health', 'en', 0],
-    ['hero_subtitle', 'Dr. Lubomir Polascin — dedicated to excellence in nephrology, dialysis, patient care and medical technology.', 'en', 1],
-    ['about_intro', "Hi, I'm Lubomir Polascin — a Medical Doctor, Nephrologist, and Internal Medicine Specialist by profession, a Fiction and Non-Fiction Writer by calling, and a Self-Taught Programmer by passion.", 'en', 2],
-    ['about_who', 'My work rests at the intersection of medicine, storytelling, and technology. Medicine sharpens my clinical precision; writing lets me explore the human condition through fiction and non-fiction; and technology empowers me to solve complex problems.', 'en', 3],
-    ['contact_intro', 'Feel free to reach out for inquiries or collaboration.', 'en', 4],
+    ['hero_title', '', 'Advancing Kidney Health', 'en', 0],
+    ['hero_subtitle', '', 'Dr. Lubomir Polascin — dedicated to excellence in nephrology, dialysis, patient care and medical technology.', 'en', 1],
+    ['about_intro', '', "Hi, I'm Lubomir Polascin — a Medical Doctor, Nephrologist, and Internal Medicine Specialist by profession, a Fiction and Non-Fiction Writer by calling, and a Self-Taught Programmer by passion.", 'en', 2],
+    ['about_who', '', 'My work rests at the intersection of medicine, storytelling, and technology. Medicine sharpens my clinical precision; writing lets me explore the human condition through fiction and non-fiction; and technology empowers me to solve complex problems.', 'en', 3],
+    ['contact_intro', '', 'Feel free to reach out for inquiries or collaboration.', 'en', 4],
 ];
 
 $stmt = $pdo->prepare(
