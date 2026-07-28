@@ -85,7 +85,10 @@ jobs:
           define('DEPLOY_BRANCH', '${BRANCH}');
           PHPEOF
 
-          scp ${SSH_OPTS// -p / -P} "$TMP_INFO" "${DEPLOY_USER}@${DEPLOY_HOST}:${REMOTE_PATH}/deploy_info.php"
+          rsync -avz \
+            -e "ssh ${SSH_OPTS}" \
+            "$TMP_INFO" \
+            "${DEPLOY_USER}@${DEPLOY_HOST}:${REMOTE_PATH}/deploy_info.php"
 
           rm -f "$TMP_INFO"
 
