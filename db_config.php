@@ -48,6 +48,7 @@ $options = [
 
 try {
     $pdo = new PDO($dsn, $dbUser, $dbPass, $options);
+    $pdo->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
 } catch (\PDOException $e) {
     error_log("Chyba pripojenia k databáze: " . $e->getMessage());
     exit("Chyba: Pripojenie k databáze zlyhalo.");
