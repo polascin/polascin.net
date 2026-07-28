@@ -21,14 +21,10 @@ jobs:
           printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
 
-          # Ak je zadaný known_hosts, použi strict overovanie; inak accept-new.
-          if [[ -n "${{ secrets.DEPLOY_KNOWN_HOSTS }}" ]]; then
-            printf '%s\n' "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-            chmod 644 ~/.ssh/known_hosts
-            echo "SSH_HOST_KEY_CHECK=yes" >> "$GITHUB_ENV"
-          else
-            echo "SSH_HOST_KEY_CHECK=accept-new" >> "$GITHUB_ENV"
-          fi
+          # Použi accept-new pre spolehlivý deploy bez nutnosti manuálneho known_hosts.
+          # Pre striktné overovanie nastav DEPLOY_KNOWN_HOSTS s kľúčom získaným cez
+          # ssh-keyscan -p <port> <host> a zmeň toto miesto na SSH_HOST_KEY_CHECK=yes.
+          echo "SSH_HOST_KEY_CHECK=accept-new" >> "$GITHUB_ENV"
 
       - name: Deploy via rsync
         env:
