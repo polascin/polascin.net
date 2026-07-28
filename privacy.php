@@ -2,6 +2,26 @@
 
 declare(strict_types=1);
 
+$envFiles = [
+    __DIR__ . '/env.ini',
+    __DIR__ . '/private/env.ini',
+    __DIR__ . '/private/polascin.env.ini',
+    dirname(__DIR__) . '/polascin.env.ini',
+    dirname(__DIR__) . '/private/polascin.env.ini',
+];
+$envReady = getenv('POLASCIN_ENV_PATH') !== false;
+foreach ($envFiles as $envFile) {
+    if (file_exists($envFile)) {
+        $envReady = true;
+        break;
+    }
+}
+
+if (!$envReady) {
+    readfile(__DIR__ . '/privacy.html');
+    exit;
+}
+
 require_once __DIR__ . '/auth.php';
 
 $baseUrl = getAppBaseUrl();

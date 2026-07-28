@@ -1,0 +1,14 @@
+fix(deploy): static fallback for missing DB config and robust CI workflow
+
+- Add env.ini detection fallback in index.php, privacy.php, terms.php so static
+  HTML pages are served until the database is configured.
+- Update .htaccess rewrite to avoid redirecting existing .html files.
+- Fix GitHub Actions SSH host-key handling: use known_hosts if provided,
+  otherwise accept-new.
+- Make database migration step conditional on remote env.ini existence to avoid
+  CI failures before POLASCIN_ENV_INI secret is configured.
+- Disable local .git/hooks post-commit deploy in favor of GitHub Actions.
+
+Generated with [Devin](https://devin.ai)
+
+Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>

@@ -25,9 +25,12 @@ DirectoryIndex index.php index.html
 </IfModule>
 
 # ── Presmerovanie starých statických .html adries na .php ─────────────────────
+# Presmerovanie sa neaplikuje, ak cieľový .html súbor existuje (fallback počas
+# konfigurácie databázy alebo keď je PHP dočasne nefunkčné).
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{THE_REQUEST} \s/+([^.]+)\.html\s [NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ /%1.php [R=301,L]
 
     RewriteRule ^(\.git|\.vscode|private)(/.*)?$ - [F,L]

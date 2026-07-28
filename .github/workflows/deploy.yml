@@ -20,10 +20,11 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          printf '%s\n' "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
 
-          if [[ -s ~/.ssh/known_hosts ]]; then
+          # Ak je zadaný known_hosts, použi strict overovanie; inak accept-new.
+          if [[ -n "${{ secrets.DEPLOY_KNOWN_HOSTS }}" ]]; then
+            printf '%s\n' "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+            chmod 644 ~/.ssh/known_hosts
             echo "SSH_HOST_KEY_CHECK=yes" >> "$GITHUB_ENV"
           else
             echo "SSH_HOST_KEY_CHECK=accept-new" >> "$GITHUB_ENV"
@@ -119,12 +120,22 @@ jobs:
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
           DEPLOY_REMOTE_PATH: ${{ secrets.DEPLOY_REMOTE_PATH }}
           POLASCIN_ADMIN_PASSWORD: ${{ secrets.POLASCIN_ADMIN_PASSWORD }}
+          POLASCIN_ENV_PATH: ${{ secrets.POLASCIN_ENV_PATH }}
         run: |
           set -euo pipefail
 
           PORT="${DEPLOY_PORT:-22}"
           REMOTE_PATH="${DEPLOY_REMOTE_PATH%/}"
+          REMOTE_ENV_PATH="${POLASCIN_ENV_PATH:-private/polascin.env.ini}"
           SSH_OPTS="-p ${PORT} -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 -o StrictHostKeyChecking=${SSH_HOST_KEY_CHECK}"
+
+          echo "Checking for remote env config..."
+          if ! ssh ${SSH_OPTS} "${DEPLOY_USER}@${DEPLOY_HOST}" \
+              "test -f '${REMOTE_PATH}/${REMOTE_ENV_PATH}'"; then
+            echo "Remote env config not found; skipping database migrations."
+            echo "Set the POLASCIN_ENV_INI secret and push again to initialize the database."
+            exit 0
+          fi
 
           echo "Running database migrations on server..."
           ssh ${SSH_OPTS} "${DEPLOY_USER}@${DEPLOY_HOST}" \
