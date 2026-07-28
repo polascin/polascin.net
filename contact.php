@@ -15,7 +15,7 @@ $formData = ['name' => '', 'email' => '', 'subject' => '', 'message' => ''];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
     if (!validateCsrfToken((string) $csrfToken)) {
-        $errors[] = 'Invalid security token. Please refresh the page and try again.';
+        $errors[] = 'Neplatný bezpečnostný token. Obnovte stránku a skúste to znova.';
     } else {
         $name = trim((string) ($_POST['name'] ?? ''));
         $email = trim((string) ($_POST['email'] ?? ''));
@@ -24,21 +24,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $formData = compact('name', 'email', 'subject', 'message');
 
         if ($name === '' || mb_strlen($name) > 255) {
-            $errors[] = 'Please enter a valid name.';
+            $errors[] = 'Prosím, zadajte platné meno.';
         }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($email) > 255) {
-            $errors[] = 'Please enter a valid email address.';
+            $errors[] = 'Prosím, zadajte platnú e-mailovú adresu.';
         }
         if ($subject !== '' && mb_strlen($subject) > 255) {
-            $errors[] = 'Subject is too long.';
+            $errors[] = 'Predmet je príliš dlhý.';
         }
         if ($message === '' || mb_strlen($message) > 5000) {
-            $errors[] = 'Please enter a message (max 5000 characters).';
+            $errors[] = 'Prosím, zadajte správu (max 5000 znakov).';
         }
 
         $ip = getClientIpAddress();
         if (!checkFormRateLimit($pdo, 'contact_form', $ip, 5, 3600)) {
-            $errors[] = 'Too many messages from this address. Please try again later.';
+            $errors[] = 'Príliš veľa správ z tejto adresy. Skúste to znova neskôr.';
         }
 
         if (empty($errors)) {
@@ -57,30 +57,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $formData = ['name' => '', 'email' => '', 'subject' => '', 'message' => ''];
             } catch (\PDOException $e) {
                 error_log('contact.php insert error: ' . $e->getMessage());
-                $errors[] = 'Failed to send message. Please try again later.';
+                $errors[] = 'Nepodarilo sa odoslať správu. Skúste to znova neskôr.';
             }
         }
     }
 }
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Contact | Dr. Lubomir Polascin';
-$seoDescription = 'Contact Dr. Lubomir Polascin for professional inquiries, collaboration or questions.';
+$pageTitle = 'Kontakt | MUDr. Ľubomír Polaščin';
+$seoDescription = 'Kontaktujte MUDr. Ľubomíra Polaščina pre profesionálne otázky, spoluprácu alebo dotazy.';
 $canonicalUrl = $baseUrl . '/contact.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
 <?php include __DIR__ . '/head_meta.php'; ?>
 </head>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main-content" tabindex="-1" aria-label="Contact form">
+<main id="main-content" tabindex="-1" aria-label="Kontaktný formulár">
   <section class="contact-section">
     <div class="container">
-      <h1 class="section-title reveal">Contact</h1>
+      <h1 class="section-title reveal">Kontakt</h1>
       <?php if ($success): ?>
-        <div class="alert alert-success"><p>Thank you for your message. We will get back to you soon.</p></div>
+        <div class="alert alert-success"><p>Ďakujeme za vašu správu. Ozveme sa vám čoskoro.</p></div>
       <?php endif; ?>
       <?php foreach ($errors as $error): ?>
         <div class="alert alert-error"><p><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p></div>
@@ -89,22 +89,22 @@ $canonicalUrl = $baseUrl . '/contact.php';
       <form method="post" action="contact.php" class="contact-form" novalidate>
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
         <div class="form-group">
-          <label for="name">Name <span aria-label="required">*</span></label>
+          <label for="name">Meno <span aria-label="povinné">*</span></label>
           <input type="text" id="name" name="name" value="<?= htmlspecialchars($formData['name'], ENT_QUOTES, 'UTF-8') ?>" required maxlength="255">
         </div>
         <div class="form-group">
-          <label for="email">Email <span aria-label="required">*</span></label>
+          <label for="email">E-mail <span aria-label="povinné">*</span></label>
           <input type="email" id="email" name="email" value="<?= htmlspecialchars($formData['email'], ENT_QUOTES, 'UTF-8') ?>" required maxlength="255">
         </div>
         <div class="form-group">
-          <label for="subject">Subject</label>
+          <label for="subject">Predmet</label>
           <input type="text" id="subject" name="subject" value="<?= htmlspecialchars($formData['subject'], ENT_QUOTES, 'UTF-8') ?>" maxlength="255">
         </div>
         <div class="form-group">
-          <label for="message">Message <span aria-label="required">*</span></label>
+          <label for="message">Správa <span aria-label="povinné">*</span></label>
           <textarea id="message" name="message" rows="6" required maxlength="5000"><?= htmlspecialchars($formData['message'], ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Send Message</button>
+        <button type="submit" class="btn btn-primary">Odoslať správu</button>
       </form>
     </div>
   </section>

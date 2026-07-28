@@ -16,23 +16,23 @@ if (!function_exists('_navA')) {
 }
 ?>
 <ul class="nav-menu" id="navMenu">
-  <li><?= _navA($_onIndex ? '#home' : 'index.php', 'Home', $_navCurrent === 'index.php') ?></li>
+  <li><?= _navA($_onIndex ? '#home' : 'index.php', 'Domov', $_navCurrent === 'index.php') ?></li>
   <li><?= _navA('articles.php', 'Blog', $_navCurrent === 'articles.php' || $_navCurrent === 'article.php') ?></li>
-  <li><?= _navA($_onIndex ? '#about' : 'index.php#about', 'Bio', false) ?></li>
-  <li><?= _navA($_onIndex ? '#nephrology' : 'index.php#nephrology', 'Nephrology', false) ?></li>
-  <li><?= _navA($_onIndex ? '#projects' : 'index.php#projects', 'Projects', false) ?></li>
-  <li><?= _navA('https://books.polascin.net/', 'Books', false) ?></li>
-  <li><?= _navA($_onIndex ? '#links' : 'index.php#links', 'Links', false) ?></li>
-  <li><?= _navA($_onIndex ? '#contact' : 'index.php#contact', 'Contact', false) ?></li>
+  <li><?= _navA($_onIndex ? '#about' : 'index.php#about', 'Životopis', false) ?></li>
+  <li><?= _navA($_onIndex ? '#nephrology' : 'index.php#nephrology', 'Nefrológia', false) ?></li>
+  <li><?= _navA($_onIndex ? '#projects' : 'index.php#projects', 'Projekty', false) ?></li>
+  <li><?= _navA('https://books.polascin.net/', 'Knihy', false) ?></li>
+  <li><?= _navA($_onIndex ? '#links' : 'index.php#links', 'Odkazy', false) ?></li>
+  <li><?= _navA($_onIndex ? '#contact' : 'index.php#contact', 'Kontakt', false) ?></li>
   <?php if (function_exists('isLoggedIn') && isLoggedIn() && function_exists('isAdmin') && isAdmin()): ?>
-    <li><?= _navA('admin.php', 'Admin', in_array($_navCurrent, ['admin.php', 'admin_articles.php', 'admin_content.php', 'admin_contact.php', 'admin_newsletter.php'], true)) ?></li>
+    <li><?= _navA('admin.php', 'Administrácia', in_array($_navCurrent, ['admin.php', 'admin_articles.php', 'admin_content.php', 'admin_contact.php', 'admin_newsletter.php'], true)) ?></li>
     <li>
       <form action="logout.php" method="post" class="nav-logout-form">
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
-        <button type="submit" class="nav-link nav-logout-btn">Logout</button>
+        <button type="submit" class="nav-link nav-logout-btn">Odhlásiť sa</button>
       </form>
     </li>
   <?php else: ?>
-    <li><?= _navA('login.php', 'Login', $_navCurrent === 'login.php') ?></li>
+    <li><?= _navA('login.php', 'Prihlásenie', $_navCurrent === 'login.php') ?></li>
   <?php endif; ?>
 </ul>

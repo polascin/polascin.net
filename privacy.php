@@ -25,51 +25,51 @@ if (!$envReady) {
 require_once __DIR__ . '/auth.php';
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Privacy Policy | Dr. Lubomir Polascin';
-$seoDescription = 'Privacy Policy for Dr. Lubomir Polascin\'s website.';
+$pageTitle = 'Ochrana súkromia | MUDr. Ľubomír Polaščin';
+$seoDescription = 'Zásady ochrany súkromia webovej stránky MUDr. Ľubomíra Polaščina.';
 $robotsMeta = 'noindex, follow';
 $canonicalUrl = $baseUrl . '/privacy.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
 <?php include __DIR__ . '/head_meta.php'; ?>
 </head>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main-content" class="page-content" tabindex="-1" aria-label="Privacy policy content">
+<main id="main-content" class="page-content" tabindex="-1" aria-label="Ochrana súkromia">
   <div class="container">
-    <h1 class="section-title">Privacy Policy</h1>
-    <p><strong>Last Updated: July 28, 2026</strong></p>
+    <h1 class="section-title">Ochrana súkromia</h1>
+    <p><strong>Posledná aktualizácia: 28. júla 2026</strong></p>
 
-    <h3>1. Introduction</h3>
-    <p>Welcome to <strong>polascin.net</strong>. I respect your privacy and am committed to protecting your personal data. This privacy policy explains how I handle your personal data when you visit this website, and outlines your privacy rights and the applicable legal protections.</p>
+    <h3>1. Úvod</h3>
+    <p>Vitajte na stránke <strong>polascin.net</strong>. Rešpektujem vaše súkromie a zaväzujem sa chrániť vaše osobné údaje. Táto politika ochrany súkromia vysvetľuje, ako nakladám s vašimi osobnými údajmi pri návšteve tejto webovej stránky, a popisuje vaše práva na ochranu súkromia a príslušnú právnu ochranu.</p>
 
-    <h3>2. Information I Collect</h3>
-    <p>This website is primarily informational. I do not require you to create an account.</p>
+    <h3>2. Informácie, ktoré zhromažďujem</h3>
+    <p>Táto webová stránka má predovšetkým informačný charakter. Nevyžadujem od vás vytvorenie účtu.</p>
     <ul>
-      <li><strong>Technical Data:</strong> Includes internet protocol (IP) address, browser type and version, time zone setting, operating system and platform. This data is collected automatically via server logs for security and performance purposes.</li>
-      <li><strong>Cookies:</strong> I use minimal local storage to remember your theme preference (Dark/Light mode).
-        <strong>Google Analytics 4 (GA4):</strong> I use Google Analytics to analyze website traffic and user behavior. I implement <strong>Google Consent Mode v2</strong> to respect your privacy preferences. By default, all tracking consent is set to <strong>'denied'</strong>. Scripts may load to ensure basic site functionality, but they will not store cookies or access personal data for tracking purposes unless you explicitly click Accept on the consent banner. You can manage your preferences at any time.</li>
+      <li><strong>Technické údaje:</strong> Zahŕňajú adresu internetového protokolu (IP), typ a verziu prehliadača, nastavenie časového pásma, operačný systém a platformu. Tieto údaje sa zhromažďujú automaticky prostredníctvom serverových protokolov na účely zabezpečenia a výkonu.</li>
+      <li><strong>Cookies:</strong> Používam minimálne lokálne úložisko na zapamätanie vašej preferencie témy (tmavý/svetlý režim).
+        <strong>Google Analytics 4 (GA4):</strong> Používam Google Analytics na analýzu návštevnosti webovej stránky a správania používateľov. Implementujem <strong>Google Consent Mode v2</strong>, aby som rešpektoval vaše preferencie ohľadom súkromia. V predvolenom nastavení je súhlas so sledovaním nastavený na <strong>„odmietnutý“</strong>. Skripty sa môžu načítať s cieľom zabezpečiť základnú funkčnosť stránky, no nebudú ukladať cookies ani pristupovať k osobným údajom na účely sledovania, pokiaľ výslovne nekliknete na tlačidlo Prijať v lište súhlasu. Svoje preferencie môžete kedykoľvek spravovať.</li>
     </ul>
 
-    <h3>3. How I Use Your Information</h3>
-    <p>I use your data to:</p>
+    <h3>3. Ako používam vaše informácie</h3>
+    <p>Vaše údaje používam na:</p>
     <ul>
-      <li>Deliver the website content to you.</li>
-      <li>Ensure the security of the website.</li>
-      <li>Remember your preferences (e.g., theme).</li>
-      <li>Analyze website traffic and usage patterns via Google Analytics 4, but only if you click <strong>Accept</strong> on the cookie consent banner. Legal basis: your consent (GDPR Art. 6(1)(a)). Analytics data is retained by Google according to its own retention settings (typically up to 14 months). You can withdraw consent at any time via the <strong>Cookie Settings</strong> button in the footer and choosing <strong>Decline</strong>.</li>
+      <li>Poskytovanie obsahu webovej stránky.</li>
+      <li>Zabezpečenie bezpečnosti webovej stránky.</li>
+      <li>Zapamätanie vašich preferencií (napr. témy).</li>
+      <li>Analýzu návštevnosti a spôsobov používania webovej stránky prostredníctvom Google Analytics 4, avšak iba v prípade, že kliknete na tlačidlo <strong>Prijať</strong> v lište súhlasu s cookies. Právny základ: váš súhlas (článok 6 ods. 1 písm. a) GDPR). Analytické údaje uchováva spoločnosť Google podľa vlastných pravidiel uchovávania (zvyčajne najviac 14 mesiacov). Súhlas môžete kedykoľvek odvolať prostredníctvom tlačidla <strong>Nastavenia cookies</strong> v pätičke a výberom možnosti <strong>Odmietnuť</strong>.</li>
     </ul>
 
-    <h3>4. Third-Party Links</h3>
-    <p>This website may include links to third-party websites, plug-ins, and applications (e.g., Amazon, Social Media). Clicking on those links may allow third parties to collect or share data about you. I do not control these third-party websites and am not responsible for their privacy statements.</p>
+    <h3>4. Odkazy tretích strán</h3>
+    <p>Táto webová stránka môže obsahovať odkazy na webové stránky, doplnky a aplikácie tretích strán (napr. Amazon, sociálne siete). Kliknutím na tieto odkazy môžu tretie strany zhromažďovať alebo zdieľať údaje o vás. Nemám kontrolu nad týmito webovými stránkami tretích strán a nenesiem zodpovednosť za ich vyhlásenia o ochrane súkromia.</p>
 
-    <h3>5. Your Legal Rights (GDPR/CCPA)</h3>
-    <p>Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to request access, correction, erasure, or restriction of processing of your personal data.</p>
+    <h3>5. Vaše zákonné práva (GDPR/CCPA)</h3>
+    <p>Za určitých okolností máte práva vyplývajúce zo zákonov o ochrane osobných údajov vo vzťahu k vašim osobným údajom, vrátane práva požiadať o prístup, opravu, vymazanie alebo obmedzenie spracúvania vašich osobných údajov.</p>
 
-    <h3>6. Contact</h3>
-    <p>If you have any questions about this privacy policy, please contact me at: <a href="mailto:lubomir@polascin.net">lubomir@polascin.net</a>.</p>
+    <h3>6. Kontakt</h3>
+    <p>Ak máte akékoľvek otázky týkajúce sa tejto politiky ochrany súkromia, kontaktujte ma na adrese: <a href="mailto:lubomir@polascin.net">lubomir@polascin.net</a>.</p>
   </div>
 </main>
 <?php include __DIR__ . '/footer.php'; ?>

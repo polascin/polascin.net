@@ -14,6 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-setFlashMessage('info', 'You have been logged out.');
+setFlashMessage('info', 'Boli ste odhlásení.');
 header('Location: index.php');
 exit;

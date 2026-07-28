@@ -15,7 +15,7 @@ $editing = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
     if (!validateCsrfToken((string) $csrfToken)) {
-        $errors[] = 'Invalid security token.';
+        $errors[] = 'Neplatný bezpečnostný token.';
     } else {
         $action = $_POST['action'] ?? '';
         if ($action === 'delete' && isset($_POST['id'])) {
@@ -31,22 +31,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $blockKey = trim((string) ($_POST['block_key'] ?? ''));
             $title = trim((string) ($_POST['title'] ?? ''));
             $content = sanitizeHtmlContent(trim((string) ($_POST['content'] ?? '')));
-            $lang = trim((string) ($_POST['lang'] ?? 'en'));
+            $lang = trim((string) ($_POST['lang'] ?? 'sk'));
             $sortOrder = (int) ($_POST['sort_order'] ?? 0);
             $isActive = isset($_POST['is_active']) ? 1 : 0;
 
             if (!preg_match('/^[a-z0-9_\-]+$/', $blockKey) || mb_strlen($blockKey) > 64) {
-                $errors[] = 'Block key is required and must contain only lowercase letters, numbers, underscores and hyphens.';
+                $errors[] = 'Kľúč bloku je povinný a musí obsahovať iba malé písmená, čísla, podčiarkovníky a pomlčky.';
             }
             if ($title === '' || mb_strlen($title) > 255) {
-                $errors[] = 'Title is required (max 255 characters).';
+                $errors[] = 'Názov je povinný (max 255 znakov).';
             }
 
             if (empty($errors)) {
                 $dupStmt = $pdo->prepare("SELECT id FROM content_blocks WHERE block_key = :block_key AND id != :id LIMIT 1");
                 $dupStmt->execute([':block_key' => $blockKey, ':id' => $id ?? 0]);
                 if ($dupStmt->fetch()) {
-                    $errors[] = 'Block key already exists.';
+                    $errors[] = 'Kľúč bloku už existuje.';
                 } else {
                     if ($id) {
                         $stmt = $pdo->prepare(
@@ -85,29 +85,29 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
 }
 
 if (isset($_GET['saved']) && $editing) {
-    $success = 'Content block saved successfully.';
+    $success = 'Obsahový blok bol úspešne uložený.';
 }
 
 $allBlocks = $pdo->query("SELECT * FROM content_blocks ORDER BY block_key ASC")->fetchAll();
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Admin Content Blocks | Dr. Lubomir Polascin';
-$seoDescription = 'Manage homepage content blocks on Polascin.net.';
+$pageTitle = 'Správa obsahu | MUDr. Ľubomír Polaščin';
+$seoDescription = 'Správa obsahových blokov na Polascin.net.';
 $robotsMeta = 'noindex, nofollow';
 $canonicalUrl = $baseUrl . '/admin_content.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
 <?php include __DIR__ . '/head_meta.php'; ?>
 </head>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main-content" tabindex="-1" aria-label="Admin content blocks">
+<main id="main-content" tabindex="-1" aria-label="Správa obsahových blokov">
   <section class="admin-section">
     <div class="container">
-      <h1>Manage Content Blocks</h1>
-      <p><a href="admin.php" class="btn btn-secondary btn-sm">Back to dashboard</a></p>
+      <h1>Správa obsahových blokov</h1>
+      <p><a href="admin.php" class="btn btn-secondary btn-sm">Späť na panel</a></p>
       <?php if ($success): ?><div class="alert alert-success"><p><?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?></p></div><?php endif; ?>
       <?php foreach ($errors as $error): ?><div class="alert alert-error"><p><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p></div><?php endforeach; ?>
 
@@ -116,51 +116,51 @@ $canonicalUrl = $baseUrl . '/admin_content.php';
         <input type="hidden" name="action" value="save">
         <?php if ($editing): ?><input type="hidden" name="id" value="<?= (int) $editing['id'] ?>"><?php endif; ?>
         <div class="form-group">
-          <label for="block_key">Block key</label>
+          <label for="block_key">Kľúč bloku</label>
           <input type="text" id="block_key" name="block_key" value="<?= htmlspecialchars((string) ($editing['block_key'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" required maxlength="64" placeholder="e.g. hero_title">
         </div>
         <div class="form-group">
-          <label for="title">Title</label>
+          <label for="title">Názov</label>
           <input type="text" id="title" name="title" value="<?= htmlspecialchars((string) ($editing['title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" required maxlength="255">
         </div>
         <div class="form-group">
-          <label for="content">Content (HTML allowed)</label>
+          <label for="content">Obsah (HTML povolené)</label>
           <textarea id="content" name="content" rows="8"><?= htmlspecialchars((string) ($editing['content'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
         <div class="form-group">
-          <label for="lang">Language</label>
-          <input type="text" id="lang" name="lang" value="<?= htmlspecialchars((string) ($editing['lang'] ?? 'en'), ENT_QUOTES, 'UTF-8') ?>" maxlength="5">
+          <label for="lang">Jazyk</label>
+          <input type="text" id="lang" name="lang" value="<?= htmlspecialchars((string) ($editing['lang'] ?? 'sk'), ENT_QUOTES, 'UTF-8') ?>" maxlength="5">
         </div>
         <div class="form-group">
-          <label for="sort_order">Sort order</label>
+          <label for="sort_order">Poradie</label>
           <input type="number" id="sort_order" name="sort_order" value="<?= (int) ($editing['sort_order'] ?? 0) ?>">
         </div>
         <div class="form-checks">
-          <label><input type="checkbox" name="is_active" value="1" <?= (isset($editing['is_active']) && (int) $editing['is_active'] === 1) ? 'checked' : '' ?>> Active</label>
+          <label><input type="checkbox" name="is_active" value="1" <?= (isset($editing['is_active']) && (int) $editing['is_active'] === 1) ? 'checked' : '' ?>> Aktívny</label>
         </div>
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Save block</button>
-          <?php if ($editing): ?><a href="admin_content.php" class="btn btn-secondary">New block</a><?php endif; ?>
+          <button type="submit" class="btn btn-primary">Uložiť blok</button>
+          <?php if ($editing): ?><a href="admin_content.php" class="btn btn-secondary">Nový blok</a><?php endif; ?>
         </div>
       </form>
 
-      <h2>Existing Blocks</h2>
+      <h2>Existujúce bloky</h2>
       <table class="admin-table">
-        <thead><tr><th>Key</th><th>Title</th><th>Lang</th><th>Active</th><th>Actions</th></tr></thead>
+        <thead><tr><th>Kľúč</th><th>Názov</th><th>Jazyk</th><th>Aktívny</th><th>Akcie</th></tr></thead>
         <tbody>
           <?php foreach ($allBlocks as $block): ?>
           <tr>
             <td><?= htmlspecialchars((string) $block['block_key'], ENT_QUOTES, 'UTF-8') ?></td>
             <td><?= htmlspecialchars((string) $block['title'], ENT_QUOTES, 'UTF-8') ?></td>
             <td><?= htmlspecialchars((string) $block['lang'], ENT_QUOTES, 'UTF-8') ?></td>
-            <td><?= (int) $block['is_active'] === 1 ? 'Yes' : 'No' ?></td>
+            <td><?= (int) $block['is_active'] === 1 ? 'Áno' : 'Nie' ?></td>
             <td class="actions">
-              <a href="admin_content.php?edit=<?= (int) $block['id'] ?>" class="btn btn-sm btn-secondary">Edit</a>
-              <form method="post" action="admin_content.php" class="inline-form" data-confirm="Delete this block?">
+              <a href="admin_content.php?edit=<?= (int) $block['id'] ?>" class="btn btn-sm btn-secondary">Upraviť</a>
+              <form method="post" action="admin_content.php" class="inline-form" data-confirm="Odstrániť tento blok?">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
                 <input type="hidden" name="action" value="delete">
                 <input type="hidden" name="id" value="<?= (int) $block['id'] ?>">
-                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                <button type="submit" class="btn btn-sm btn-danger">Odstrániť</button>
               </form>
             </td>
           </tr>

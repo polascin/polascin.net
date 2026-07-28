@@ -21,7 +21,7 @@ $ip = getClientIpAddress();
 
 if ($action === 'confirm' && $token !== '') {
     if (!checkFormRateLimit($pdo, 'newsletter_confirm', $ip, 10, 3600)) {
-        $message = 'Too many confirmation attempts. Please try again later.';
+        $message = 'Príliš veľa pokusov o potvrdenie. Skúste to znova neskôr.';
         $messageType = 'error';
     } else {
         $hash = hashToken($token);
@@ -29,21 +29,21 @@ if ($action === 'confirm' && $token !== '') {
             $stmt = $pdo->prepare("UPDATE newsletter_subscribers SET is_confirmed = 1, confirm_token_hash = NULL, confirmed_at = NOW() WHERE confirm_token_hash = :hash LIMIT 1");
             $stmt->execute([':hash' => $hash]);
             if ($stmt->rowCount() > 0) {
-                $message = 'Your subscription has been confirmed. Thank you!';
+                $message = 'Vaše predplatné bolo potvrdené. Ďakujeme!';
                 $messageType = 'success';
             } else {
-                $message = 'Confirmation link is invalid or already used.';
+                $message = 'Potvrdzovací odkaz je neplatný alebo už bol použitý.';
                 $messageType = 'error';
             }
         } catch (\PDOException $e) {
             error_log('newsletter confirm error: ' . $e->getMessage());
-            $message = 'An error occurred. Please try again later.';
+            $message = 'Vyskytla sa chyba. Skúste to znova neskôr.';
             $messageType = 'error';
         }
     }
 } elseif ($action === 'unsubscribe' && $token !== '') {
     if (!checkFormRateLimit($pdo, 'newsletter_unsubscribe', $ip, 10, 3600)) {
-        $message = 'Too many unsubscribe attempts. Please try again later.';
+        $message = 'Príliš veľa pokusov o odhlásenie. Skúste to znova neskôr.';
         $messageType = 'error';
     } else {
         $hash = hashToken($token);
@@ -51,15 +51,15 @@ if ($action === 'confirm' && $token !== '') {
             $stmt = $pdo->prepare("DELETE FROM newsletter_subscribers WHERE unsubscribe_token_hash = :hash LIMIT 1");
             $stmt->execute([':hash' => $hash]);
             if ($stmt->rowCount() > 0) {
-                $message = 'You have been unsubscribed successfully.';
+                $message = 'Boli ste úspešne odhlásení z odberu.';
                 $messageType = 'success';
             } else {
-                $message = 'Unsubscribe link is invalid or already used.';
+                $message = 'Odkaz na odhlásenie je neplatný alebo už bol použitý.';
                 $messageType = 'error';
             }
         } catch (\PDOException $e) {
             error_log('newsletter unsubscribe error: ' . $e->getMessage());
-            $message = 'An error occurred. Please try again later.';
+            $message = 'Vyskytla sa chyba. Skúste to znova neskôr.';
             $messageType = 'error';
         }
     }
@@ -70,18 +70,18 @@ $email = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
     if (!validateCsrfToken((string) $csrfToken)) {
-        $errors[] = 'Invalid security token. Please refresh the page and try again.';
+        $errors[] = 'Neplatný bezpečnostný token. Obnovte stránku a skúste to znova.';
     } else {
         $email = trim((string) ($_POST['email'] ?? ''));
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($email) > 255) {
-            $errors[] = 'Please enter a valid email address.';
+            $errors[] = 'Prosím, zadajte platnú e-mailovú adresu.';
         } elseif (!isEmailDomainValid($email)) {
-            $errors[] = 'The email domain does not appear to be valid.';
+            $errors[] = 'Doména e-mailovej adresy sa nezdá byť platná.';
         }
 
         $ip = getClientIpAddress();
         if (empty($errors) && !checkFormRateLimit($pdo, 'newsletter_subscribe', $ip, 5, 3600)) {
-            $errors[] = 'Too many subscription attempts. Please try again later.';
+            $errors[] = 'Príliš veľa pokusov o prihlásenie na odber. Skúste to znova neskôr.';
         }
 
         if (empty($errors)) {
@@ -99,31 +99,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ':confirm_hash' => hashToken($confirmToken),
                     ':unsubscribe_hash' => hashToken($unsubscribeToken),
                 ]);
-                $message = 'Thank you for subscribing! You can unsubscribe at any time using the link in our emails.';
+                $message = 'Ďakujeme za prihlásenie na odber! Odhlásiť sa môžete kedykoľvek pomocou odkazu v našich e-mailoch.';
                 $messageType = 'success';
                 $email = '';
             } catch (\PDOException $e) {
                 error_log('newsletter subscribe error: ' . $e->getMessage());
-                $errors[] = 'An error occurred. Please try again later.';
+                $errors[] = 'Vyskytla sa chyba. Skúste to znova neskôr.';
             }
         }
     }
 }
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Newsletter | Dr. Lubomir Polascin';
-$seoDescription = 'Subscribe to the Polascin.net newsletter for updates on nephrology, internal medicine, books and technology.';
+$pageTitle = 'Newsletter | MUDr. Ľubomír Polaščin';
+$seoDescription = 'Prihláste sa na odber noviniek z Polascin.net — aktuality o nefrológii, internej medicíne, knihách a technológiách.';
 $robotsMeta = 'noindex, follow';
 $canonicalUrl = $baseUrl . '/newsletter.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
 <?php include __DIR__ . '/head_meta.php'; ?>
 </head>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main-content" tabindex="-1" aria-label="Newsletter subscription">
+<main id="main-content" tabindex="-1" aria-label="Prihlásenie na odber noviniek">
   <section class="newsletter-section">
     <div class="container">
       <h1 class="section-title reveal">Newsletter</h1>
@@ -135,14 +135,14 @@ $canonicalUrl = $baseUrl . '/newsletter.php';
       <?php endforeach; ?>
 
       <?php if ($action === ''): ?>
-        <p>Subscribe to receive updates on articles, books, and projects.</p>
+        <p>Prihláste sa na odber aktualít o článkoch, knihách a projektoch.</p>
         <form method="post" action="newsletter.php" class="newsletter-form" novalidate>
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
           <div class="form-group">
-            <label for="email">Email address <span aria-label="required">*</span></label>
+            <label for="email">E-mailová adresa <span aria-label="povinné">*</span></label>
             <input type="email" id="email" name="email" value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>" required maxlength="255">
           </div>
-          <button type="submit" class="btn btn-primary">Subscribe</button>
+          <button type="submit" class="btn btn-primary">Odoberať</button>
         </form>
       <?php endif; ?>
     </div>

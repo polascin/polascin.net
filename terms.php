@@ -25,40 +25,40 @@ if (!$envReady) {
 require_once __DIR__ . '/auth.php';
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Terms of Service | Dr. Lubomir Polascin';
-$seoDescription = 'Terms of Service for Dr. Lubomir Polascin\'s website.';
+$pageTitle = 'Podmienky používania | MUDr. Ľubomír Polaščin';
+$seoDescription = 'Podmienky používania webovej stránky MUDr. Ľubomíra Polaščina.';
 $robotsMeta = 'noindex, follow';
 $canonicalUrl = $baseUrl . '/terms.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
 <?php include __DIR__ . '/head_meta.php'; ?>
 </head>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main-content" class="page-content" tabindex="-1" aria-label="Terms of service content">
+<main id="main-content" class="page-content" tabindex="-1" aria-label="Podmienky používania">
   <div class="container">
-    <h1 class="section-title">Terms of Service</h1>
-    <p><strong>Last Updated: July 28, 2026</strong></p>
+    <h1 class="section-title">Podmienky používania</h1>
+    <p><strong>Posledná aktualizácia: 28. júla 2026</strong></p>
 
-    <h3>1. Acceptance of Terms</h3>
-    <p>By accessing and using <strong>polascin.net</strong> ("Website"), you accept and agree to be bound by the terms and provisions of this agreement.</p>
+    <h3>1. Akceptácia podmienok</h3>
+    <p>Prístupom na webovú stránku a jej používaním <strong>polascin.net</strong> (ďalej len „webová stránka“) akceptujete a súhlasíte, že vás zaväzujú podmienky a ustanovenia tejto dohody.</p>
 
-    <h3>2. Medical Disclaimer</h3>
+    <h3>2. Zdravotné zrieknutie sa zodpovednosti</h3>
     <div class="medical-disclaimer">
-      <p><strong>IMPORTANT:</strong> The content provided on this website is for informational purposes only. It is <strong>not</strong> intended to be a substitute for professional medical advice, diagnosis, or treatment.</p>
-      <p>Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read on this website.</p>
+      <p><strong>DÔLEŽITÉ:</strong> Obsah poskytovaný na tejto webovej stránke slúži len na informačné účely. <strong>Nenahrádza</strong> odborné lekárske poradenstvo, diagnostiku ani liečbu.</p>
+      <p>V prípade akýchkoľvek otázok týkajúcich sa zdravotného stavu sa vždy obráťte na svojho lekára alebo iného kvalifikovaného zdravotníckeho pracovníka. Nikdy nepodceňujte odborné lekárske odporúčanie ani neodkladajte vyhľadanie lekárskej pomoci z dôvodu informácií, ktoré ste si prečítali na tejto webovej stránke.</p>
     </div>
 
-    <h3>3. Intellectual Property</h3>
-    <p>The content, organization, graphics, design, compilation, and other matters related to the Site are protected under applicable copyrights and intellectual property laws. The copying, redistribution, use, or publication by you of any such matters or any part of the Site is strictly prohibited.</p>
+    <h3>3. Duševné vlastníctvo</h3>
+    <p>Obsah, štruktúra, grafika, dizajn, kompilácia a iné prvky súvisiace s touto webovou stránkou sú chránené príslušnými autorskými právami a zákonmi o duševnom vlastníctve. Akékoľvek kopírovanie, redistribúcia, použitie alebo publikovanie týchto prvkov alebo akejkoľvek časti webovej stránky používateľom je prísne zakázané.</p>
 
-    <h3>4. Limitation of Liability</h3>
-    <p>In no event will I be liable for any incidental, indirect, consequential, or special damages of any kind, or any damages whatsoever, including, without limitation, those resulting from loss of profit, loss of contracts, goodwill, data, information, income, anticipated savings or business relationships, whether or not advised of the possibility of such damage, arising out of or in connection with the use of this website or any linked websites.</p>
+    <h3>4. Obmedzenie zodpovednosti</h3>
+    <p>V žiadnom prípade nenesiem zodpovednosť za akékoľvek náhodné, nepriame, následné alebo mimoriadne škody akejkoľvek povahy, ani za akékoľvek iné škody, vrátane, ale nie výhradne, škôd vzniknutých v dôsledku straty zisku, straty zmlúv, goodwillu, údajov, informácií, príjmov, očakávaných úspor alebo obchodných vzťahov, bez ohľadu na to, či som bol upozornený na možnosť takýchto škôd, a to v súvislosti s používaním tejto webovej stránky alebo akýchkoľvek na ňu odkazovaných webových stránok.</p>
 
-    <h3>5. Governing Law</h3>
-    <p>These terms and conditions are governed by and construed in accordance with the laws of Slovakia and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>
+    <h3>5. Rozhodné právo</h3>
+    <p>Tieto podmienky a ustanovenia sa riadia a interpretujú v súlade s právnymi predpismi Slovenskej republiky a bez výhrad podriaďujete sa výlučnej právomoci súdov v tomto mieste.</p>
   </div>
 </main>
 <?php include __DIR__ . '/footer.php'; ?>

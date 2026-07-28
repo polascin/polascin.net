@@ -22,7 +22,7 @@ $allArticles = (function () use ($pdo): array {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
     if (!validateCsrfToken((string) $csrfToken)) {
-        $errors[] = 'Invalid security token.';
+        $errors[] = 'Neplatný bezpečnostný token.';
     } else {
         $action = $_POST['action'] ?? '';
 
@@ -48,19 +48,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $isPublished = ($action === 'publish' || isset($_POST['is_published'])) ? 1 : 0;
 
             if ($title === '' || mb_strlen($title) > 255) {
-                $errors[] = 'Title is required (max 255 characters).';
+                $errors[] = 'Názov je povinný (max 255 znakov).';
             }
             if ($slug === '') {
                 $slug = slugify($title);
             }
             if (!preg_match('/^[a-z0-9-]+$/', $slug)) {
-                $errors[] = 'Slug must contain only lowercase letters, numbers, and hyphens.';
+                $errors[] = 'Slug musí obsahovať iba malé písmená, čísla a pomlčky.';
             }
             if (mb_strlen($slug) > 255) {
-                $errors[] = 'Slug is too long.';
+                $errors[] = 'Slug je príliš dlhý.';
             }
             if ($content === '') {
-                $errors[] = 'Content is required.';
+                $errors[] = 'Obsah je povinný.';
             }
             if ($publishedAt === '' || !strtotime($publishedAt)) {
                 $publishedAt = date('Y-m-d H:i:s');
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $dupStmt = $pdo->prepare("SELECT id FROM articles WHERE slug = :slug AND id != :id LIMIT 1");
                 $dupStmt->execute([':slug' => $slug, ':id' => $id ?? 0]);
                 if ($dupStmt->fetch()) {
-                    $errors[] = 'Slug already exists.';
+                    $errors[] = 'Slug už existuje.';
                 } else {
                     if ($id) {
                         $stmt = $pdo->prepare(
@@ -114,27 +114,27 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
 }
 
 if (isset($_GET['saved']) && $editing) {
-    $success = 'Article saved successfully.';
+    $success = 'Článok bol úspešne uložený.';
 }
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Admin Articles | Dr. Lubomir Polascin';
-$seoDescription = 'Manage articles on Polascin.net.';
+$pageTitle = 'Správa článkov | MUDr. Ľubomír Polaščin';
+$seoDescription = 'Správa článkov na Polascin.net.';
 $robotsMeta = 'noindex, nofollow';
 $canonicalUrl = $baseUrl . '/admin_articles.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
 <?php include __DIR__ . '/head_meta.php'; ?>
 </head>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main-content" tabindex="-1" aria-label="Admin articles">
+<main id="main-content" tabindex="-1" aria-label="Správa článkov">
   <section class="admin-section">
     <div class="container">
-      <h1>Manage Articles</h1>
-      <p><a href="admin.php" class="btn btn-secondary btn-sm">Back to dashboard</a></p>
+      <h1>Správa článkov</h1>
+      <p><a href="admin.php" class="btn btn-secondary btn-sm">Späť na panel</a></p>
       <?php if ($success): ?><div class="alert alert-success"><p><?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?></p></div><?php endif; ?>
       <?php foreach ($errors as $error): ?><div class="alert alert-error"><p><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p></div><?php endforeach; ?>
 
@@ -144,69 +144,69 @@ $canonicalUrl = $baseUrl . '/admin_articles.php';
         <?php if ($editing): ?><input type="hidden" name="id" value="<?= (int) $editing['id'] ?>"><?php endif; ?>
 
         <div class="form-group">
-          <label for="title">Title</label>
+          <label for="title">Názov</label>
           <input type="text" id="title" name="title" value="<?= htmlspecialchars((string) ($editing['title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" required maxlength="255">
         </div>
         <div class="form-group">
-          <label for="slug">Slug (URL part)</label>
-          <input type="text" id="slug" name="slug" value="<?= htmlspecialchars((string) ($editing['slug'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" maxlength="255" placeholder="auto-generated from title if empty">
+          <label for="slug">Slug (časť URL)</label>
+          <input type="text" id="slug" name="slug" value="<?= htmlspecialchars((string) ($editing['slug'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" maxlength="255" placeholder="automaticky vygenerovaný z názvu, ak je prázdny">
         </div>
         <div class="form-group">
-          <label for="author">Author</label>
+          <label for="author">Autor</label>
           <input type="text" id="author" name="author" value="<?= htmlspecialchars((string) ($editing['author'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" maxlength="255">
         </div>
         <div class="form-group">
-          <label for="excerpt">Excerpt</label>
+          <label for="excerpt">Úryvok</label>
           <textarea id="excerpt" name="excerpt" rows="3"><?= htmlspecialchars((string) ($editing['excerpt'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
         <div class="form-group">
-          <label for="content">Content (HTML allowed)</label>
+          <label for="content">Obsah (HTML povolené)</label>
           <textarea id="content" name="content" rows="12" required><?= htmlspecialchars((string) ($editing['content'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="sort_order">Sort order</label>
+            <label for="sort_order">Poradie</label>
             <input type="number" id="sort_order" name="sort_order" value="<?= (int) ($editing['sort_order'] ?? 0) ?>">
           </div>
           <div class="form-group">
-            <label for="published_at">Published at</label>
+            <label for="published_at">Publikované</label>
             <input type="datetime-local" id="published_at" name="published_at" value="<?= isset($editing['published_at']) ? date('Y-m-d\TH:i', strtotime((string) $editing['published_at'])) : date('Y-m-d\TH:i') ?>">
           </div>
         </div>
         <div class="form-checks">
-          <label><input type="checkbox" name="is_published" value="1" <?= (isset($editing['is_published']) && (int) $editing['is_published'] === 1) ? 'checked' : '' ?>> Published</label>
-          <label><input type="checkbox" name="is_top" value="1" <?= (isset($editing['is_top']) && (int) $editing['is_top'] === 1) ? 'checked' : '' ?>> Featured (top)</label>
+          <label><input type="checkbox" name="is_published" value="1" <?= (isset($editing['is_published']) && (int) $editing['is_published'] === 1) ? 'checked' : '' ?>> Publikovaný</label>
+          <label><input type="checkbox" name="is_top" value="1" <?= (isset($editing['is_top']) && (int) $editing['is_top'] === 1) ? 'checked' : '' ?>> Odporúčaný (top)</label>
         </div>
         <div class="form-actions">
-          <button type="submit" name="action" value="save" class="btn btn-secondary">Save draft</button>
-          <button type="submit" name="action" value="publish" class="btn btn-primary">Save &amp; publish</button>
-          <?php if ($editing): ?><a href="admin_articles.php" class="btn btn-secondary">New article</a><?php endif; ?>
+          <button type="submit" name="action" value="save" class="btn btn-secondary">Uložiť koncept</button>
+          <button type="submit" name="action" value="publish" class="btn btn-primary">Uložiť a&nbsp;publikovať</button>
+          <?php if ($editing): ?><a href="admin_articles.php" class="btn btn-secondary">Nový článok</a><?php endif; ?>
         </div>
       </form>
 
-      <h2>Existing Articles</h2>
+      <h2>Existujúce články</h2>
       <?php if (empty($allArticles)): ?>
-        <p>No articles yet.</p>
+        <p>Zatiaľ žiadne články.</p>
       <?php else: ?>
       <table class="admin-table">
         <thead>
-          <tr><th>Title</th><th>Slug</th><th>Status</th><th>Updated</th><th>Actions</th></tr>
+          <tr><th>Názov</th><th>Slug</th><th>Stav</th><th>Aktualizované</th><th>Akcie</th></tr>
         </thead>
         <tbody>
           <?php foreach ($allArticles as $article): ?>
           <tr>
             <td><?= htmlspecialchars((string) $article['title'], ENT_QUOTES, 'UTF-8') ?></td>
             <td><?= htmlspecialchars((string) $article['slug'], ENT_QUOTES, 'UTF-8') ?></td>
-            <td><?= (int) $article['is_published'] === 1 ? 'Published' : 'Draft' ?><?= (int) $article['is_top'] === 1 ? ' · Top' : '' ?></td>
+            <td><?= (int) $article['is_published'] === 1 ? 'Publikovaný' : 'Koncept' ?><?= (int) $article['is_top'] === 1 ? ' · Top' : '' ?></td>
             <td><?= htmlspecialchars((string) $article['updated_at'], ENT_QUOTES, 'UTF-8') ?></td>
             <td class="actions">
-              <a href="admin_articles.php?edit=<?= (int) $article['id'] ?>" class="btn btn-sm btn-secondary">Edit</a>
-              <a href="article.php?slug=<?= htmlspecialchars(rawurlencode((string) $article['slug']), ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">View</a>
-              <form method="post" action="admin_articles.php" class="inline-form" data-confirm="Delete this article?">
+              <a href="admin_articles.php?edit=<?= (int) $article['id'] ?>" class="btn btn-sm btn-secondary">Upraviť</a>
+              <a href="article.php?slug=<?= htmlspecialchars(rawurlencode((string) $article['slug']), ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">Zobraziť</a>
+              <form method="post" action="admin_articles.php" class="inline-form" data-confirm="Odstrániť tento článok?">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
                 <input type="hidden" name="action" value="delete">
                 <input type="hidden" name="id" value="<?= (int) $article['id'] ?>">
-                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                <button type="submit" class="btn btn-sm btn-danger">Odstrániť</button>
               </form>
             </td>
           </tr>

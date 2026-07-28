@@ -147,11 +147,11 @@ SQL;
 runSql($pdo, $schema);
 
 $defaultBlocks = [
-    ['hero_title', '', 'Advancing Kidney Health', 'en', 0],
-    ['hero_subtitle', '', 'Dr. Lubomir Polascin — dedicated to excellence in nephrology, dialysis, patient care and medical technology.', 'en', 1],
-    ['about_intro', '', "Hi, I'm Lubomir Polascin — a Medical Doctor, Nephrologist, and Internal Medicine Specialist by profession, a Fiction and Non-Fiction Writer by calling, and a Self-Taught Programmer by passion.", 'en', 2],
-    ['about_who', '', 'My work rests at the intersection of medicine, storytelling, and technology. Medicine sharpens my clinical precision; writing lets me explore the human condition through fiction and non-fiction; and technology empowers me to solve complex problems.', 'en', 3],
-    ['contact_intro', '', 'Feel free to reach out for inquiries or collaboration.', 'en', 4],
+    ['hero_title', '', 'Pokrok v zdraví obličiek', 'sk', 0],
+    ['hero_subtitle', '', 'MUDr. Ľubomír Polaščin — venovaný excelentnosti v nefrológii, dialýze, starostlivosti o pacientov a medicínskych technológiách.', 'sk', 1],
+    ['about_intro', '', "Volám sa Ľubomír Polaščin — som lekár, nefrológ a internista povolaním, spisovateľ beletrie a literatúry faktu poslaním a samouk programátor z vášne.", 'sk', 2],
+    ['about_who', '', 'Moja práca spočíva na priesečníku medicíny, rozprávania príbehov a technológií. Medicína cibrí moju klinickú presnosť; písanie mi umožňuje skúmať ľudský údel cez beletriu a literatúru faktu; a technológie ma posúvajú pri riešení zložitých problémov.', 'sk', 3],
+    ['contact_intro', '', 'Neváhajte ma kontaktovať s otázkami alebo ohľadom spolupráce.', 'sk', 4],
 ];
 
 $stmt = $pdo->prepare(

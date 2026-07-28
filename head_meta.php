@@ -9,8 +9,8 @@ $requestUri = filter_var($_SERVER['REQUEST_URI'] ?? '/', FILTER_SANITIZE_URL) ?:
 $currentUrl = $scheme . '://' . $allowedHost . $requestUri;
 
 $pageTitle = $pageTitle ?? $siteName;
-$seoDescription = $seoDescription ?? 'Dr. Lubomir Polascin — nephrologist, internal medicine specialist, medical translator, writer and self-taught programmer.';
-$seoKeywords = $seoKeywords ?? 'Lubomir Polascin, Nephrology, Internal Medicine, Dialysis, Medical Translation, Programming';
+$seoDescription = $seoDescription ?? 'MUDr. Ľubomír Polaščin — nefrológ, internista, lekársky prekladateľ, spisovateľ a samouk programátor.';
+$seoKeywords = $seoKeywords ?? 'Ľubomír Polaščin, nefrológia, interná medicína, dialýza, lekársky preklad, programovanie';
 $canonicalUrl = $canonicalUrl ?? $currentUrl;
 $robotsMeta = $robotsMeta ?? 'index, follow, max-image-preview:large';
 $ogType = $ogType ?? 'website';
@@ -27,12 +27,12 @@ $jsVersion = is_file(__DIR__ . '/js/main.js') ? (string) filemtime(__DIR__ . '/j
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="<?= htmlspecialchars($seoDescription, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="keywords" content="<?= htmlspecialchars($seoKeywords, ENT_QUOTES, 'UTF-8') ?>">
-<meta name="author" content="Lubomir Polascin">
+<meta name="author" content="Ľubomír Polaščin">
 <meta name="theme-color" content="<?= htmlspecialchars($themeColor, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="robots" content="<?= htmlspecialchars($robotsMeta, ENT_QUOTES, 'UTF-8') ?>">
 <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
 <link rel="canonical" href="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
-<link rel="alternate" hreflang="en" href="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
+<link rel="alternate" hreflang="sk" href="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
 <link rel="alternate" hreflang="x-default" href="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
 
 <meta property="og:type" content="<?= htmlspecialchars($ogType, ENT_QUOTES, 'UTF-8') ?>">
@@ -40,7 +40,7 @@ $jsVersion = is_file(__DIR__ . '/js/main.js') ? (string) filemtime(__DIR__ . '/j
 <meta property="og:description" content="<?= htmlspecialchars($seoDescription, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:url" content="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:site_name" content="<?= htmlspecialchars($siteName, ENT_QUOTES, 'UTF-8') ?>">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="sk_SK">
 <meta property="og:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:image:width" content="<?= (int) $ogImageWidth ?>">
 <meta property="og:image:height" content="<?= (int) $ogImageHeight ?>">

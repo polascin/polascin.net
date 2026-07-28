@@ -19,23 +19,23 @@ $total = (int) $countStmt->fetchColumn();
 $totalPages = max(1, (int) ceil($total / $perPage));
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Articles | Dr. Lubomir Polascin';
-$seoDescription = 'Latest articles and insights from Dr. Lubomir Polascin on nephrology, internal medicine, technology and writing.';
+$pageTitle = 'Články | MUDr. Ľubomír Polaščin';
+$seoDescription = 'Najnovšie články a postrehy od MUDr. Ľubomíra Polaščina o nefrológii, internej medicíne, technológiách a písaní.';
 $canonicalUrl = $baseUrl . '/articles.php' . ($page > 1 ? '?page=' . $page : '');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
 <?php include __DIR__ . '/head_meta.php'; ?>
 </head>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main-content" tabindex="-1" aria-label="Articles">
+<main id="main-content" tabindex="-1" aria-label="Články">
   <section class="articles-list">
     <div class="container">
-      <h1 class="section-title reveal">Articles</h1>
+      <h1 class="section-title reveal">Články</h1>
       <?php if (empty($articles)): ?>
-        <p>No articles published yet.</p>
+        <p>Zatiaľ neboli publikované žiadne články.</p>
       <?php else: ?>
         <div class="card-grid">
           <?php foreach ($articles as $article): ?>
@@ -47,7 +47,7 @@ $canonicalUrl = $baseUrl . '/articles.php' . ($page > 1 ? '?page=' . $page : '')
           <?php endforeach; ?>
         </div>
         <?php if ($totalPages > 1): ?>
-        <nav class="pagination" aria-label="Article pagination">
+        <nav class="pagination" aria-label="Stránkovanie článkov">
           <?php for ($i = 1; $i <= $totalPages; $i++): ?>
             <?php if ($i === $page): ?>
               <span class="page-current" aria-current="page"><?= $i ?></span>

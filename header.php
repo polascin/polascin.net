@@ -6,7 +6,7 @@ if (!function_exists('isLoggedIn')) {
 
 $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
 ?>
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#main-content" class="skip-link">Preskočiť na hlavný obsah</a>
 
 <nav class="navbar">
   <div class="container nav-container">
@@ -14,7 +14,7 @@ $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
     <button
       class="nav-toggle"
       id="navToggle"
-      aria-label="Toggle navigation"
+      aria-label="Prepnúť navigáciu"
       aria-expanded="false"
     >
       <span></span>
@@ -24,7 +24,7 @@ $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
     <button
       class="theme-toggle-btn"
       id="themeToggle"
-      aria-label="Toggle dark mode"
+      aria-label="Prepnúť tmavý režim"
     >
       <i class="fa-solid fa-moon" aria-hidden="true"></i>
     </button>

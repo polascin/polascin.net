@@ -19,30 +19,30 @@ $article = getArticleBySlug($pdo, $slug);
 
 if (!$article || ((int) $article['is_published'] !== 1 && !isAdmin())) {
     http_response_code(404);
-    $pageTitle = 'Not Found | Dr. Lubomir Polascin';
-    $seoDescription = 'Article not found.';
+    $pageTitle = 'Nenájdené | MUDr. Ľubomír Polaščin';
+    $seoDescription = 'Článok nebol nájdený.';
     $canonicalUrl = getAppBaseUrl() . '/articles.php';
     include __DIR__ . '/head_meta.php';
     include __DIR__ . '/header.php';
-    echo '<main id="main-content" tabindex="-1" aria-label="Article not found"><section class="article-detail"><div class="container"><h1>Article not found</h1><p>The requested article does not exist or is not published.</p><p><a href="articles.php" class="btn btn-secondary">Back to articles</a></p></div></section></main>';
+    echo '<main id="main-content" tabindex="-1" aria-label="Článok nebol nájdený"><section class="article-detail"><div class="container"><h1>Článok nebol nájdený</h1><p>Požadovaný článok neexistuje alebo nie je publikovaný.</p><p><a href="articles.php" class="btn btn-secondary">Späť na články</a></p></div></section></main>';
     include __DIR__ . '/footer.php';
     exit;
 }
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = htmlspecialchars((string) $article['title'], ENT_QUOTES, 'UTF-8') . ' | Dr. Lubomir Polascin';
+$pageTitle = htmlspecialchars((string) $article['title'], ENT_QUOTES, 'UTF-8') . ' | MUDr. Ľubomír Polaščin';
 $seoDescription = buildSeoExcerpt((string) ($article['excerpt'] ?? $article['content'] ?? ''), 170);
 $canonicalUrl = $baseUrl . '/article.php?slug=' . rawurlencode((string) $article['slug']);
 $ogType = 'article';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
 <?php include __DIR__ . '/head_meta.php'; ?>
 </head>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main-content" tabindex="-1" aria-label="Article content">
+<main id="main-content" tabindex="-1" aria-label="Obsah článku">
   <article class="article-detail">
     <div class="container">
       <h1><?= htmlspecialchars((string) $article['title'], ENT_QUOTES, 'UTF-8') ?></h1>
@@ -53,7 +53,7 @@ $ogType = 'article';
       <div class="article-body">
         <?= sanitizeHtmlContent((string) ($article['content'] ?? '')) ?>
       </div>
-      <p><a href="articles.php" class="btn btn-secondary">Back to articles</a></p>
+      <p><a href="articles.php" class="btn btn-secondary">Späť na články</a></p>
     </div>
   </article>
 </main>

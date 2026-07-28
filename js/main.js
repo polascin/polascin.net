@@ -149,16 +149,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const banner = document.createElement("div");
     banner.className = "cookie-banner";
     banner.setAttribute("role", "dialog");
-    banner.setAttribute("aria-label", "Cookie consent");
+    banner.setAttribute("aria-label", "Súhlas s cookies");
     banner.setAttribute("aria-live", "polite");
     banner.innerHTML = `
       <div class="cookie-content">
         <div class="cookie-text">
-          <p>We use cookies to analyze our traffic. By clicking "Accept", you consent to our use of tracking cookies (Google Analytics 4). You can also decline to continue without tracking. See our <a href="privacy.php" class="cookie-link">Privacy Policy</a>.</p>
+          <p>Používame cookies na analýzu návštevnosti. Kliknutím na „Súhlasím" vyjadrujete súhlas s použitím sledovacích cookies (Google Analytics 4). Môžete tiež odmietnuť a pokračovať bez sledovania. Pozrite si naše <a href="privacy.php" class="cookie-link">Zásady ochrany súkromia</a>.</p>
         </div>
         <div class="cookie-buttons">
-          <button id="cookieDecline" class="btn-cookie-decline">Decline</button>
-          <button id="cookieAccept" class="btn-cookie-accept">Accept</button>
+          <button id="cookieDecline" class="btn-cookie-decline">Odmietnuť</button>
+          <button id="cookieAccept" class="btn-cookie-accept">Súhlasím</button>
         </div>
       </div>
     `;
