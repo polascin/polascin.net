@@ -12,10 +12,11 @@ function getContentBlock(PDO $pdo, string $key, string $default = ''): string {
         $stmt = $pdo->prepare("SELECT content FROM content_blocks WHERE block_key = :key AND is_active = 1 LIMIT 1");
         $stmt->execute([':key' => $key]);
         $row = $stmt->fetch();
-        return is_array($row) && !empty($row['content']) ? (string) $row['content'] : $default;
+        $content = is_array($row) && !empty($row['content']) ? (string) $row['content'] : $default;
+        return sanitizeHtmlContent($content);
     } catch (\PDOException $e) {
         error_log('getContentBlock error: ' . $e->getMessage());
-        return $default;
+        return sanitizeHtmlContent($default);
     }
 }
 
@@ -80,6 +81,94 @@ function buildSeoExcerpt(string $text, int $maxLen = 170): string {
     $slice = preg_replace('/\s+\S*$/u', '', $slice) ?? $slice;
     $slice = rtrim($slice, " \t\n\r\0\x0B,.;:-");
     return $slice . '…';
+}
+
+function sanitizeHtmlContent(string $html): string {
+    if (trim($html) === '') {
+        return '';
+    }
+
+    $allowedTags = [
+        'p', 'br', 'hr', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+        'strong', 'b', 'em', 'i', 'u', 'ul', 'ol', 'li',
+        'blockquote', 'a', 'span', 'img', 'div',
+    ];
+    $allowedGlobalAttrs = ['class', 'id', 'title'];
+    $allowedTagAttrs = [
+        'a' => ['href'],
+        'img' => ['src', 'alt', 'title', 'loading'],
+    ];
+
+    $dom = new DOMDocument('1.0', 'UTF-8');
+    $prevUseInternalErrors = libxml_use_internal_errors(true);
+
+    $wrapped = '<div>' . $html . '</div>';
+    $loaded = $dom->loadHTML($wrapped, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    libxml_clear_errors();
+    libxml_use_internal_errors($prevUseInternalErrors);
+
+    if (!$loaded) {
+        return htmlspecialchars(strip_tags($html), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+
+    $container = $dom->getElementsByTagName('div')->item(0);
+    if (!$container instanceof DOMElement) {
+        return htmlspecialchars(strip_tags($html), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+
+    $nodesToRemove = [];
+    $elements = $container->getElementsByTagName('*');
+
+    for ($i = $elements->length - 1; $i >= 0; $i--) {
+        $node = $elements->item($i);
+        if (!$node instanceof DOMElement) {
+            continue;
+        }
+
+        $tag = strtolower($node->nodeName);
+        if (!in_array($tag, $allowedTags, true)) {
+            $nodesToRemove[] = $node;
+            continue;
+        }
+
+        $allowed = array_merge($allowedGlobalAttrs, $allowedTagAttrs[$tag] ?? []);
+        $attrsToRemove = [];
+
+        if ($node->hasAttributes()) {
+            foreach ($node->attributes as $attr) {
+                $name = strtolower($attr->name);
+                if ($name === 'style' || !in_array($name, $allowed, true)) {
+                    $attrsToRemove[] = $name;
+                    continue;
+                }
+                if (($name === 'href' || $name === 'src') && preg_match('/^\s*javascript:/i', $attr->value)) {
+                    $attrsToRemove[] = $name;
+                }
+            }
+        }
+
+        foreach ($attrsToRemove as $name) {
+            $node->removeAttribute($name);
+        }
+    }
+
+    foreach ($nodesToRemove as $node) {
+        $parent = $node->parentNode;
+        if (!$parent instanceof DOMNode) {
+            continue;
+        }
+        while ($node->firstChild) {
+            $parent->insertBefore($node->firstChild, $node);
+        }
+        $parent->removeChild($node);
+    }
+
+    $result = '';
+    foreach ($container->childNodes as $child) {
+        $result .= $dom->saveHTML($child);
+    }
+
+    return trim($result);
 }
 
 function slugify(string $text): string {

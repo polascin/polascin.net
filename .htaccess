@@ -10,8 +10,10 @@ DirectoryIndex index.php index.html
 <IfModule mod_headers.c>
     Header always set X-Frame-Options "SAMEORIGIN"
     Header always set X-Content-Type-Options "nosniff"
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    <If "-n(req('HTTPS') || req('X-Forwarded-Proto') == 'https'">
+        Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    </If>
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
     Header always set Cross-Origin-Opener-Policy "same-origin"
     Header always set X-Permitted-Cross-Domain-Policies "none"
@@ -22,6 +24,12 @@ DirectoryIndex index.php index.html
     <If "! %{REQUEST_FILENAME} =~ /\.php$/">
         Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests"
     </If>
+</IfModule>
+
+# ── Presmerovanie sitemap.xml na dynamický sitemap.php ─────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^sitemap\.xml$ sitemap.php [L]
 </IfModule>
 
 # ── Presmerovanie starých statických .html adries na .php ─────────────────────

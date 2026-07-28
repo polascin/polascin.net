@@ -74,7 +74,7 @@ $jsVersion = is_file(__DIR__ . '/js/main.js') ? (string) filemtime(__DIR__ . '/j
 <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/brands.css">
 
 <link rel="stylesheet" href="css/styles.css?v=<?= htmlspecialchars(rawurlencode($cssVersion), ENT_QUOTES, 'UTF-8') ?>">
-<script src="js/consent-default.js?v=<?= htmlspecialchars(rawurlencode($consentVersion), ENT_QUOTES, 'UTF-8') ?>"></script>
+<script src="js/consent-default.js?v=<?= htmlspecialchars(rawurlencode($consentVersion), ENT_QUOTES, 'UTF-8') ?>" defer></script>
 <script src="js/main.js?v=<?= htmlspecialchars(rawurlencode($jsVersion), ENT_QUOTES, 'UTF-8') ?>" defer></script>
 
 <?php if (!empty($structuredData)): ?>

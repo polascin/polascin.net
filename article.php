@@ -51,7 +51,7 @@ $ogType = 'article';
         <p class="article-excerpt"><?= htmlspecialchars((string) $article['excerpt'], ENT_QUOTES, 'UTF-8') ?></p>
       <?php endif; ?>
       <div class="article-body">
-        <?= $article['content'] ?? '' ?>
+        <?= sanitizeHtmlContent((string) ($article['content'] ?? '')) ?>
       </div>
       <p><a href="articles.php" class="btn btn-secondary">Back to articles</a></p>
     </div>

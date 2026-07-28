@@ -40,7 +40,7 @@ $canonicalUrl = $baseUrl . '/terms.php';
 <main id="main-content" class="page-content" tabindex="-1" aria-label="Terms of service content">
   <div class="container">
     <h1 class="section-title">Terms of Service</h1>
-    <p><strong>Last Updated: January 30, 2026</strong></p>
+    <p><strong>Last Updated: July 28, 2026</strong></p>
 
     <h3>1. Acceptance of Terms</h3>
     <p>By accessing and using <strong>polascin.net</strong> ("Website"), you accept and agree to be bound by the terms and provisions of this agreement.</p>

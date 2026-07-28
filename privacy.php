@@ -40,7 +40,7 @@ $canonicalUrl = $baseUrl . '/privacy.php';
 <main id="main-content" class="page-content" tabindex="-1" aria-label="Privacy policy content">
   <div class="container">
     <h1 class="section-title">Privacy Policy</h1>
-    <p><strong>Last Updated: January 30, 2026</strong></p>
+    <p><strong>Last Updated: July 28, 2026</strong></p>
 
     <h3>1. Introduction</h3>
     <p>Welcome to <strong>polascin.net</strong>. I respect your privacy and am committed to protecting your personal data. This privacy policy explains how I handle your personal data when you visit this website, and outlines your privacy rights and the applicable legal protections.</p>

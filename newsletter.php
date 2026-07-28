@@ -17,39 +17,51 @@ function hashToken(string $token): string {
     return hash('sha256', $token);
 }
 
+$ip = getClientIpAddress();
+
 if ($action === 'confirm' && $token !== '') {
-    $hash = hashToken($token);
-    try {
-        $stmt = $pdo->prepare("UPDATE newsletter_subscribers SET is_confirmed = 1, confirm_token_hash = NULL, confirmed_at = NOW() WHERE confirm_token_hash = :hash LIMIT 1");
-        $stmt->execute([':hash' => $hash]);
-        if ($stmt->rowCount() > 0) {
-            $message = 'Your subscription has been confirmed. Thank you!';
-            $messageType = 'success';
-        } else {
-            $message = 'Confirmation link is invalid or already used.';
+    if (!checkFormRateLimit($pdo, 'newsletter_confirm', $ip, 10, 3600)) {
+        $message = 'Too many confirmation attempts. Please try again later.';
+        $messageType = 'error';
+    } else {
+        $hash = hashToken($token);
+        try {
+            $stmt = $pdo->prepare("UPDATE newsletter_subscribers SET is_confirmed = 1, confirm_token_hash = NULL, confirmed_at = NOW() WHERE confirm_token_hash = :hash LIMIT 1");
+            $stmt->execute([':hash' => $hash]);
+            if ($stmt->rowCount() > 0) {
+                $message = 'Your subscription has been confirmed. Thank you!';
+                $messageType = 'success';
+            } else {
+                $message = 'Confirmation link is invalid or already used.';
+                $messageType = 'error';
+            }
+        } catch (\PDOException $e) {
+            error_log('newsletter confirm error: ' . $e->getMessage());
+            $message = 'An error occurred. Please try again later.';
             $messageType = 'error';
         }
-    } catch (\PDOException $e) {
-        error_log('newsletter confirm error: ' . $e->getMessage());
-        $message = 'An error occurred. Please try again later.';
-        $messageType = 'error';
     }
 } elseif ($action === 'unsubscribe' && $token !== '') {
-    $hash = hashToken($token);
-    try {
-        $stmt = $pdo->prepare("DELETE FROM newsletter_subscribers WHERE unsubscribe_token_hash = :hash LIMIT 1");
-        $stmt->execute([':hash' => $hash]);
-        if ($stmt->rowCount() > 0) {
-            $message = 'You have been unsubscribed successfully.';
-            $messageType = 'success';
-        } else {
-            $message = 'Unsubscribe link is invalid or already used.';
+    if (!checkFormRateLimit($pdo, 'newsletter_unsubscribe', $ip, 10, 3600)) {
+        $message = 'Too many unsubscribe attempts. Please try again later.';
+        $messageType = 'error';
+    } else {
+        $hash = hashToken($token);
+        try {
+            $stmt = $pdo->prepare("DELETE FROM newsletter_subscribers WHERE unsubscribe_token_hash = :hash LIMIT 1");
+            $stmt->execute([':hash' => $hash]);
+            if ($stmt->rowCount() > 0) {
+                $message = 'You have been unsubscribed successfully.';
+                $messageType = 'success';
+            } else {
+                $message = 'Unsubscribe link is invalid or already used.';
+                $messageType = 'error';
+            }
+        } catch (\PDOException $e) {
+            error_log('newsletter unsubscribe error: ' . $e->getMessage());
+            $message = 'An error occurred. Please try again later.';
             $messageType = 'error';
         }
-    } catch (\PDOException $e) {
-        error_log('newsletter unsubscribe error: ' . $e->getMessage());
-        $message = 'An error occurred. Please try again later.';
-        $messageType = 'error';
     }
 }
 

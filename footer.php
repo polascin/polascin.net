@@ -4,7 +4,7 @@ $year = date('Y');
 ?>
 <footer>
   <div class="container">
-    <h4>Connect</h4>
+    <h2 class="footer-heading">Connect</h2>
     <div class="social-links">
       <a href="https://www.linkedin.com/in/lubomirpolascin/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn Profile">
         <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
@@ -35,7 +35,7 @@ $year = date('Y');
       <a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer">books.polascin.net</a> |
       <a href="privacy.php">Privacy Policy</a> |
       <a href="terms.php">Terms of Service</a> |
-      <button class="cookie-settings-trigger" aria-haspopup="dialog">Cookie Settings</button>
+      <button class="cookie-settings-trigger" aria-haspopup="dialog" aria-controls="cookie-consent-container">Cookie Settings</button>
     </p>
   </div>
 </footer>

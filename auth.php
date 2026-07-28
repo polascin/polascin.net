@@ -42,7 +42,9 @@ function sendSecurityHeaders(): void {
     header('X-Frame-Options: SAMEORIGIN');
     header('X-XSS-Protection: 0');
     header('X-Content-Type-Options: nosniff');
-    header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
+    if (isRequestHttps()) {
+        header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
+    }
     header('Referrer-Policy: ' . getRequestReferrerPolicy());
     header('Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()');
     header('Cross-Origin-Opener-Policy: same-origin');
@@ -62,6 +64,7 @@ function sendSecurityHeaders(): void {
 }
 
 ini_set('session.cookie_httponly', '1');
+ini_set('session.cookie_path', '/');
 ini_set('session.use_only_cookies', '1');
 ini_set('session.use_strict_mode', '1');
 ini_set('session.gc_maxlifetime', (string) SESSION_IDLE_TIMEOUT);

@@ -47,7 +47,7 @@ $structuredData = [
     'image' => $baseUrl . '/images/profile.jpg',
     'jobTitle' => 'Nephrologist and Internal Medicine Specialist',
     'description' => 'Dr. Lubomir Polascin — nephrologist, internal medicine specialist, medical translator, writer and self-taught programmer.',
-    'alumniOf' => 'University of Pavol Jozef Šafárik',
+    'alumniOf' => 'Pavol Jozef Šafárik University in Košice',
     'sameAs' => [
         'https://polascin.com/',
         'https://polascin.sk/',
@@ -58,6 +58,10 @@ $structuredData = [
         'https://www.amazon.com/stores/author/B07PN436VJ/about',
         'https://www.linkedin.com/in/lubomirpolascin/',
         'https://x.com/polascin',
+        'https://www.facebook.com/lubomir.polascin',
+        'https://www.patreon.com/c/Csoelle',
+        'https://discord.gg/MsGmMZbz',
+        'https://github.com/polascin',
     ],
 ];
 
@@ -113,7 +117,7 @@ $seoDescription = 'Dr. Lubomir Polascin — nephrologist, internal medicine spec
             <li>AI &amp; FOSS</li>
           </ul>
           <h3>Background &amp; Journey</h3>
-          <p>I began my medical education at the University of Pavol Jozef Šafárik in Košice, Slovakia. Since 1995, my focus has been on dialysis and nephrology. From 2013 to 2022, I served as Chief Medical Officer / Head Physician at two dialysis centers in Bratislava.</p>
+          <p>I began my medical education at the Pavol Jozef Šafárik University in Košice, Slovakia. Since 1995, my focus has been on dialysis and nephrology. From 2013 to 2022, I served as Chief Medical Officer / Head Physician at two dialysis centers in Bratislava.</p>
           <h3>Personal Touch</h3>
           <p>Born in 1971 in Czechoslovakia, I was raised in Kyjov. My Ruthenian roots inform my worldview. My passions include reading, travel, philosophy, and poetry.</p>
           <a href="https://www.amazon.com/stores/author/B07PN436VJ/about" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">View on Amazon Author Central</a>

@@ -91,6 +91,7 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   background-color: var(--bg-body);
+  overflow-x: hidden;
 }
 
 img {
@@ -735,7 +736,12 @@ footer a:hover {
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.85em;
   cursor: pointer;
-  padding: 0;
+  padding: 8px 12px;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: underline;
   font-family: inherit;
 }
@@ -757,6 +763,10 @@ footer a:hover {
   background: var(--primary-color);
   color: white;
   padding: 8px 16px;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
   border-radius: 0 0 4px 0;
   z-index: 9999;
@@ -1132,4 +1142,44 @@ footer a:hover {
 .latest-articles .center-link {
   text-align: center;
   margin-top: 1.5rem;
+}
+
+/* Accessibility / touch target improvements */
+.btn-sm,
+.pill-link {
+  min-width: 44px;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+.footer-heading {
+  font-size: 1.25rem;
+}
+
+/* Very small screens */
+@media (max-width: 320px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .card-grid,
+  .project-grid,
+  .link-grid,
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .pill-link {
+    width: 100%;
+    justify-content: center;
+  }
 }

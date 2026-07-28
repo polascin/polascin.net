@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = isset($_POST['id']) && is_numeric($_POST['id']) ? (int) $_POST['id'] : null;
             $blockKey = trim((string) ($_POST['block_key'] ?? ''));
             $title = trim((string) ($_POST['title'] ?? ''));
-            $content = trim((string) ($_POST['content'] ?? ''));
+            $content = sanitizeHtmlContent(trim((string) ($_POST['content'] ?? '')));
             $lang = trim((string) ($_POST['lang'] ?? 'en'));
             $sortOrder = (int) ($_POST['sort_order'] ?? 0);
             $isActive = isset($_POST['is_active']) ? 1 : 0;

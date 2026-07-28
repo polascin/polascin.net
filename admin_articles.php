@@ -39,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = isset($_POST['id']) && is_numeric($_POST['id']) ? (int) $_POST['id'] : null;
             $title = trim((string) ($_POST['title'] ?? ''));
             $slug = trim((string) ($_POST['slug'] ?? ''));
-            $excerpt = trim((string) ($_POST['excerpt'] ?? ''));
-            $content = trim((string) ($_POST['content'] ?? ''));
+            $excerpt = strip_tags(trim((string) ($_POST['excerpt'] ?? '')));
+            $content = sanitizeHtmlContent(trim((string) ($_POST['content'] ?? '')));
             $author = trim((string) ($_POST['author'] ?? ''));
             $sortOrder = (int) ($_POST['sort_order'] ?? 0);
             $publishedAt = trim((string) ($_POST['published_at'] ?? ''));
