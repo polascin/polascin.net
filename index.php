@@ -32,8 +32,8 @@ $baseUrl = getAppBaseUrl();
 $siteName = 'Polascin.net';
 
 $heroTitle = getContentBlock($pdo, 'hero_title', 'Pokrok v zdraví obličiek');
-$heroSubtitle = getContentBlock($pdo, 'hero_subtitle', 'MUDr. Ľubomír Polaščin — venovaný excelentnosti v nefrológii, dialýze, starostlivosti o pacientov a medicínskych technológiách.');
-$aboutIntro = getContentBlock($pdo, 'about_intro', "Volám sa Ľubomír Polaščin — som lekár, nefrológ a internista povolaním, spisovateľ beletrie a literatúry faktu poslaním a samouk programátor z vášne.");
+$heroSubtitle = getContentBlock($pdo, 'hero_subtitle', 'MUDr. Ľubomír Polaščín — venovaný excelentnosti v nefrológii, dialýze, starostlivosti o pacientov a medicínskych technológiách.');
+$aboutIntro = getContentBlock($pdo, 'about_intro', "Volám sa Ľubomír Polaščín — som lekár, nefrológ a internista povolaním, spisovateľ beletrie a literatúry faktu poslaním a samouk programátor z vášne.");
 $aboutWho = getContentBlock($pdo, 'about_who', 'Moja práca spočíva na priesečníku medicíny, rozprávania príbehov a technológií. Medicína cibrí moju klinickú presnosť; písanie mi umožňuje skúmať ľudský údel cez beletriu a literatúru faktu; a technológie ma posúvajú pri riešení zložitých problémov.');
 $contactIntro = getContentBlock($pdo, 'contact_intro', 'Neváhajte ma kontaktovať s otázkami alebo ohľadom spolupráce.');
 
@@ -46,7 +46,7 @@ $structuredData = [
     'url' => $baseUrl . '/',
     'image' => $baseUrl . '/images/profile.jpg',
     'jobTitle' => 'Nefrológ a internista',
-    'description' => 'MUDr. Ľubomír Polaščin — nefrológ, internista, lekársky prekladateľ, spisovateľ a samouk programátor.',
+    'description' => 'MUDr. Ľubomír Polaščín — nefrológ, internista, lekársky prekladateľ, spisovateľ a samouk programátor.',
     'alumniOf' => 'Pavol Jozef Šafárik University in Košice',
     'sameAs' => [
         'https://polascin.com/',
@@ -65,8 +65,8 @@ $structuredData = [
     ],
 ];
 
-$pageTitle = 'Domov | MUDr. Ľubomír Polaščin';
-$seoDescription = 'MUDr. Ľubomír Polaščin — nefrológ, internista, lekársky prekladateľ, spisovateľ a samouk programátor.';
+$pageTitle = 'Domov | MUDr. Ľubomír Polaščín';
+$seoDescription = 'MUDr. Ľubomír Polaščín — nefrológ, internista, lekársky prekladateľ, spisovateľ a samouk programátor.';
 ?>
 <!DOCTYPE html>
 <html lang="sk">
@@ -93,7 +93,7 @@ $seoDescription = 'MUDr. Ľubomír Polaščin — nefrológ, internista, lekárs
 
   <section id="about" class="about">
     <div class="container">
-      <h2 class="section-title reveal">O MUDr. Ľubomírovi Polaščinovi</h2>
+      <h2 class="section-title reveal">O MUDr. Ľubomírovi Polaščínovi</h2>
       <div class="about-grid">
         <div class="about-text">
           <p><?= nl2br(htmlspecialchars($aboutIntro, ENT_QUOTES, 'UTF-8'), false) ?></p>
@@ -166,7 +166,7 @@ $seoDescription = 'MUDr. Ľubomír Polaščin — nefrológ, internista, lekárs
       <div class="card-grid">
         <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-microscope" aria-hidden="true"></i></div><h3>Nefro-projekt Slovensko</h3><p>Slovenský nefrologický portál s klinickými článkami, aktualitami o dialýze a transplantáciách, kalkulačkami, referenciami liekov a študijnými poznámkami.</p><a href="https://nefro.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">Navštíviť nefro.polascin.net</a></article>
         <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-hospital-user" aria-hidden="true"></i></div><h3>NephroSite</h3><p>Vzdelávacie prednášky a referenčné stránky o nefrológii, dialýze, metódach očisťovania krvi a internom lekárstve (v slovenčine).</p><a href="https://nephrosite.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">Navštíviť nephrosite.polascin.net</a></article>
-        <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></div><h3>Bibliotheca Polascini</h3><p>Centrálny archív kníh, akademických publikácií, kapitol a literárnych diel MUDr. Ľubomíra Polaščina.</p><a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">Navštíviť books.polascin.net</a></article>
+        <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></div><h3>Bibliotheca Polascini</h3><p>Centrálny archív kníh, akademických publikácií, kapitol a literárnych diel MUDr. Ľubomíra Polaščína.</p><a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">Navštíviť books.polascin.net</a></article>
         <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-ticket" aria-hidden="true"></i></div><h3>AlphaGrab</h3><p>Experimentálny projekt na objavovanie lístkov, ktorý obohacuje záložné odkazy cez Ticketmaster Discovery API.</p><a href="https://alphagrab.de/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">Navštíviť alphagrab.de</a></article>
         <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-bus" aria-hidden="true"></i></div><h3>Arenibus Demo</h3><p>Verejná demo inštancia pre webový projekt o udalostiach a doprave.</p><a href="https://demo.arenibus.com/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">Navštíviť demo.arenibus.com</a></article>
       </div>

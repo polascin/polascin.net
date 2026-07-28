@@ -11,7 +11,7 @@ requireAdmin();
 $subscribers = $pdo->query("SELECT id, email, is_confirmed, confirmed_at, created_at FROM newsletter_subscribers ORDER BY created_at DESC LIMIT 1000")->fetchAll();
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Newsletter – odberatelia | MUDr. Ľubomír Polaščin';
+$pageTitle = 'Newsletter – odberatelia | MUDr. Ľubomír Polaščín';
 $seoDescription = 'Správa odberateľov newslettera na Polascin.net.';
 $robotsMeta = 'noindex, nofollow';
 $canonicalUrl = $baseUrl . '/admin_newsletter.php';

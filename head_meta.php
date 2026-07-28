@@ -9,8 +9,8 @@ $requestUri = filter_var($_SERVER['REQUEST_URI'] ?? '/', FILTER_SANITIZE_URL) ?:
 $currentUrl = $scheme . '://' . $allowedHost . $requestUri;
 
 $pageTitle = $pageTitle ?? $siteName;
-$seoDescription = $seoDescription ?? 'MUDr. Ľubomír Polaščin — nefrológ, internista, lekársky prekladateľ, spisovateľ a samouk programátor.';
-$seoKeywords = $seoKeywords ?? 'Ľubomír Polaščin, nefrológia, interná medicína, dialýza, lekársky preklad, programovanie';
+$seoDescription = $seoDescription ?? 'MUDr. Ľubomír Polaščín — nefrológ, internista, lekársky prekladateľ, spisovateľ a samouk programátor.';
+$seoKeywords = $seoKeywords ?? 'Ľubomír Polaščín, nefrológia, interná medicína, dialýza, lekársky preklad, programovanie';
 $canonicalUrl = $canonicalUrl ?? $currentUrl;
 $robotsMeta = $robotsMeta ?? 'index, follow, max-image-preview:large';
 $ogType = $ogType ?? 'website';
@@ -27,7 +27,7 @@ $jsVersion = is_file(__DIR__ . '/js/main.js') ? (string) filemtime(__DIR__ . '/j
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="<?= htmlspecialchars($seoDescription, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="keywords" content="<?= htmlspecialchars($seoKeywords, ENT_QUOTES, 'UTF-8') ?>">
-<meta name="author" content="Ľubomír Polaščin">
+<meta name="author" content="Ľubomír Polaščín">
 <meta name="theme-color" content="<?= htmlspecialchars($themeColor, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="robots" content="<?= htmlspecialchars($robotsMeta, ENT_QUOTES, 'UTF-8') ?>">
 <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>

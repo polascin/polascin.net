@@ -118,7 +118,7 @@ if (isset($_GET['saved']) && $editing) {
 }
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Správa článkov | MUDr. Ľubomír Polaščin';
+$pageTitle = 'Správa článkov | MUDr. Ľubomír Polaščín';
 $seoDescription = 'Správa článkov na Polascin.net.';
 $robotsMeta = 'noindex, nofollow';
 $canonicalUrl = $baseUrl . '/admin_articles.php';

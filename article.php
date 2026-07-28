@@ -19,7 +19,7 @@ $article = getArticleBySlug($pdo, $slug);
 
 if (!$article || ((int) $article['is_published'] !== 1 && !isAdmin())) {
     http_response_code(404);
-    $pageTitle = 'Nenájdené | MUDr. Ľubomír Polaščin';
+    $pageTitle = 'Nenájdené | MUDr. Ľubomír Polaščín';
     $seoDescription = 'Článok nebol nájdený.';
     $canonicalUrl = getAppBaseUrl() . '/articles.php';
     include __DIR__ . '/head_meta.php';
@@ -30,7 +30,7 @@ if (!$article || ((int) $article['is_published'] !== 1 && !isAdmin())) {
 }
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = htmlspecialchars((string) $article['title'], ENT_QUOTES, 'UTF-8') . ' | MUDr. Ľubomír Polaščin';
+$pageTitle = htmlspecialchars((string) $article['title'], ENT_QUOTES, 'UTF-8') . ' | MUDr. Ľubomír Polaščín';
 $seoDescription = buildSeoExcerpt((string) ($article['excerpt'] ?? $article['content'] ?? ''), 170);
 $canonicalUrl = $baseUrl . '/article.php?slug=' . rawurlencode((string) $article['slug']);
 $ogType = 'article';

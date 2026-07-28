@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Newsletter | MUDr. Ľubomír Polaščin';
+$pageTitle = 'Newsletter | MUDr. Ľubomír Polaščín';
 $seoDescription = 'Prihláste sa na odber noviniek z Polascin.net — aktuality o nefrológii, internej medicíne, knihách a technológiách.';
 $robotsMeta = 'noindex, follow';
 $canonicalUrl = $baseUrl . '/newsletter.php';

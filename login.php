@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Prihlásenie | MUDr. Ľubomír Polaščin';
+$pageTitle = 'Prihlásenie | MUDr. Ľubomír Polaščín';
 $seoDescription = 'Prihlásenie administrátora na Polascin.net.';
 $robotsMeta = 'noindex, nofollow';
 $canonicalUrl = $baseUrl . '/login.php';

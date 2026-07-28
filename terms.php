@@ -25,8 +25,8 @@ if (!$envReady) {
 require_once __DIR__ . '/auth.php';
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Podmienky používania | MUDr. Ľubomír Polaščin';
-$seoDescription = 'Podmienky používania webovej stránky MUDr. Ľubomíra Polaščina.';
+$pageTitle = 'Podmienky používania | MUDr. Ľubomír Polaščín';
+$seoDescription = 'Podmienky používania webovej stránky MUDr. Ľubomíra Polaščína.';
 $robotsMeta = 'noindex, follow';
 $canonicalUrl = $baseUrl . '/terms.php';
 ?>

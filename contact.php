@@ -64,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Kontakt | MUDr. Ľubomír Polaščin';
-$seoDescription = 'Kontaktujte MUDr. Ľubomíra Polaščina pre profesionálne otázky, spoluprácu alebo dotazy.';
+$pageTitle = 'Kontakt | MUDr. Ľubomír Polaščín';
+$seoDescription = 'Kontaktujte MUDr. Ľubomíra Polaščína pre profesionálne otázky, spoluprácu alebo dotazy.';
 $canonicalUrl = $baseUrl . '/contact.php';
 ?>
 <!DOCTYPE html>

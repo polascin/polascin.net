@@ -91,7 +91,7 @@ if (isset($_GET['saved']) && $editing) {
 $allBlocks = $pdo->query("SELECT * FROM content_blocks ORDER BY block_key ASC")->fetchAll();
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Správa obsahu | MUDr. Ľubomír Polaščin';
+$pageTitle = 'Správa obsahu | MUDr. Ľubomír Polaščín';
 $seoDescription = 'Správa obsahových blokov na Polascin.net.';
 $robotsMeta = 'noindex, nofollow';
 $canonicalUrl = $baseUrl . '/admin_content.php';

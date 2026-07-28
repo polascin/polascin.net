@@ -25,8 +25,8 @@ if (!$envReady) {
 require_once __DIR__ . '/auth.php';
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Ochrana súkromia | MUDr. Ľubomír Polaščin';
-$seoDescription = 'Zásady ochrany súkromia webovej stránky MUDr. Ľubomíra Polaščina.';
+$pageTitle = 'Ochrana súkromia | MUDr. Ľubomír Polaščín';
+$seoDescription = 'Zásady ochrany súkromia webovej stránky MUDr. Ľubomíra Polaščína.';
 $robotsMeta = 'noindex, follow';
 $canonicalUrl = $baseUrl . '/privacy.php';
 ?>

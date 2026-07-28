@@ -29,7 +29,7 @@ $year = date('Y');
       <a href="mailto:lubomir@polascin.net">lubomir@polascin.net</a>
     </p>
 
-    <p>&copy; 1998 – <?= $year ?> Ľubomír Polaščin. Všetky práva vyhradené.</p>
+    <p>&copy; 1998 – <?= $year ?> Ľubomír Polaščín. Všetky práva vyhradené.</p>
     <p class="footer-meta">
       <a href="index.php">polascin.net</a> |
       <a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer">books.polascin.net</a> |

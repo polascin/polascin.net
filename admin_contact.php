@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mark_read']) && isset
 $messages = $pdo->query("SELECT * FROM contact_messages ORDER BY created_at DESC LIMIT 500")->fetchAll();
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Správy z kontaktného formulára | MUDr. Ľubomír Polaščin';
+$pageTitle = 'Správy z kontaktného formulára | MUDr. Ľubomír Polaščín';
 $seoDescription = 'Správa kontaktných správ na Polascin.net.';
 $robotsMeta = 'noindex, nofollow';
 $canonicalUrl = $baseUrl . '/admin_contact.php';

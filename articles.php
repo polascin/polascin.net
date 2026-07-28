@@ -19,8 +19,8 @@ $total = (int) $countStmt->fetchColumn();
 $totalPages = max(1, (int) ceil($total / $perPage));
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Články | MUDr. Ľubomír Polaščin';
-$seoDescription = 'Najnovšie články a postrehy od MUDr. Ľubomíra Polaščina o nefrológii, internej medicíne, technológiách a písaní.';
+$pageTitle = 'Články | MUDr. Ľubomír Polaščín';
+$seoDescription = 'Najnovšie články a postrehy od MUDr. Ľubomíra Polaščína o nefrológii, internej medicíne, technológiách a písaní.';
 $canonicalUrl = $baseUrl . '/articles.php' . ($page > 1 ? '?page=' . $page : '');
 ?>
 <!DOCTYPE html>

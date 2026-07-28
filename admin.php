@@ -15,7 +15,7 @@ $unreadCount = (int) $pdo->query("SELECT COUNT(*) FROM contact_messages WHERE is
 $subscriberCount = (int) $pdo->query("SELECT COUNT(*) FROM newsletter_subscribers WHERE is_confirmed = 1")->fetchColumn();
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Administrácia | MUDr. Ľubomír Polaščin';
+$pageTitle = 'Administrácia | MUDr. Ľubomír Polaščín';
 $seoDescription = 'Administračný panel pre Polascin.net.';
 $robotsMeta = 'noindex, nofollow';
 $canonicalUrl = $baseUrl . '/admin.php';
