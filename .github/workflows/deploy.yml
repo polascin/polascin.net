@@ -26,6 +26,12 @@ jobs:
           # ssh-keyscan -p <port> <host> a zmeň toto miesto na SSH_HOST_KEY_CHECK=yes.
           echo "SSH_HOST_KEY_CHECK=accept-new" >> "$GITHUB_ENV"
 
+      - name: Debug SSH key
+        run: |
+          echo "SSH key fingerprint:"
+          ssh-keygen -l -f ~/.ssh/deploy_key || echo "Invalid key file"
+          echo "Host: ${{ secrets.DEPLOY_HOST }}, User: ${{ secrets.DEPLOY_USER }}, Port: ${{ secrets.DEPLOY_PORT }}"
+
       - name: Deploy via rsync
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
