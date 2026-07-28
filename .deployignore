@@ -1,0 +1,35 @@
+# Git / GitHub
+.git
+.gitattributes
+.github
+.gitignore
+
+# Lokálne konfigurácie a IDE
+.vscode
+.claude
+.trunk
+.idea
+
+# Dokumentácia a auditné súbory (nie sú verejný web root)
+.audit.md
+.doaudit.md
+README.md
+DEPLOY.md
+
+# Citlivé / environment súbory
+private
+.env
+*.env
+*.ini
+
+# Cache / logy
+*.log
+*.cache
+
+# Hooky a nástroje (nie sú súčasťou web rootu)
+hooks
+
+# Ostatné nepoužívané adresáre
+scratch
+tmp
+*.ps1

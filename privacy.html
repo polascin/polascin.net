@@ -40,13 +40,16 @@
     <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/solid.css" />
     <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/brands.css" />
 
+    <!-- Consent default must load before any analytics configuration -->
+    <script src="js/consent-default.js"></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=20260522" />
+    <link rel="stylesheet" href="css/styles.css?v=20260728" />
     <script src="js/main.js" defer></script>
   </head>
 
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="navbar">
       <div class="container nav-container">
@@ -64,7 +67,7 @@
         <button
           class="theme-toggle-btn"
           id="themeToggle"
-          aria-label="Toggle Dark Mode"
+          aria-label="Toggle dark mode"
         >
           <i class="fa-solid fa-moon" aria-hidden="true"></i>
         </button>
@@ -89,7 +92,12 @@
     </nav>
 
     <!-- Content -->
-    <section id="main-content" class="page-content">
+    <main
+      id="main-content"
+      class="page-content"
+      tabindex="-1"
+      aria-label="Privacy policy content"
+    >
       <div class="container">
         <h1 class="section-title">Privacy Policy</h1>
         <p><strong>Last Updated: January 30, 2026</strong></p>
@@ -136,6 +144,15 @@
           <li>Deliver the website content to you.</li>
           <li>Ensure the security of the website.</li>
           <li>Remember your preferences (e.g., theme).</li>
+          <li>
+            Analyze website traffic and usage patterns via Google Analytics 4,
+            but only if you click <strong>Accept</strong> on the cookie consent
+            banner. Legal basis: your consent (GDPR Art. 6(1)(a)). Analytics
+            data is retained by Google according to its own retention settings
+            (typically up to 14 months). You can withdraw consent at any time
+            via the <strong>Cookie Settings</strong> button in the footer and
+            choosing <strong>Decline</strong>.
+          </li>
         </ul>
 
         <h3>4. Third-Party Links</h3>
@@ -161,7 +178,7 @@
           at: <a href="mailto:lubomir@polascin.net">lubomir@polascin.net</a>.
         </p>
       </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -186,5 +203,6 @@
         </p>
       </div>
     </footer>
+    <div id="cookie-consent-container"></div>
   </body>
 </html>

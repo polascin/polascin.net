@@ -1,5 +1,5 @@
 # robots.txt — polascin.net
-# Updated: 2026-05-22
+# Updated: 2026-07-28
 
 # ── General rules ────────────────────────────────────────────────────────────
 User-agent: *
@@ -39,6 +39,19 @@ Disallow: /
 
 User-agent: CCBot
 Disallow: /
+
+# ── Private / dynamic routes ─────────────────────────────────────────────────
+User-agent: *
+Disallow: /admin
+Disallow: /admin_articles.php
+Disallow: /admin_content.php
+Disallow: /admin_contact.php
+Disallow: /admin_newsletter.php
+Disallow: /login.php
+Disallow: /logout.php
+Disallow: /private/
+Disallow: /setup_db.php
+Disallow: /.git/
 
 # ── Sitemap ──────────────────────────────────────────────────────────────────
 Sitemap: https://polascin.net/sitemap.xml

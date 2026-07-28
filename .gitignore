@@ -10,10 +10,18 @@
 # Citlivé súbory — nikdy do gitu
 .env
 *.env
+*.ini
+!env.ini.example
 *.pem
 *.key
 *.p12
 *.pfx
+private/
 
 # Lokálne pomocné súbory
 code.txt
+
+# PHP session / cache
+private/sessions/
+private/cache/
+private/logs/

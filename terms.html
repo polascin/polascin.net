@@ -40,13 +40,16 @@
     <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/solid.css" />
     <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/brands.css" />
 
+    <!-- Consent default must load before any analytics configuration -->
+    <script src="js/consent-default.js"></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=20260522" />
+    <link rel="stylesheet" href="css/styles.css?v=20260728" />
     <script src="js/main.js" defer></script>
   </head>
 
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="navbar">
       <div class="container nav-container">
@@ -64,7 +67,7 @@
         <button
           class="theme-toggle-btn"
           id="themeToggle"
-          aria-label="Toggle Dark Mode"
+          aria-label="Toggle dark mode"
         >
           <i class="fa-solid fa-moon" aria-hidden="true"></i>
         </button>
@@ -89,7 +92,12 @@
     </nav>
 
     <!-- Content -->
-    <section id="main-content" class="page-content">
+    <main
+      id="main-content"
+      class="page-content"
+      tabindex="-1"
+      aria-label="Terms of service content"
+    >
       <div class="container">
         <h1 class="section-title">Terms of Service</h1>
         <p><strong>Last Updated: January 30, 2026</strong></p>
@@ -128,7 +136,7 @@
 
         <h3>4. Limitation of Liability</h3>
         <p>
-          In no event will we be liable for any incidental, indirect,
+          In no event will I be liable for any incidental, indirect,
           consequential, or special damages of any kind, or any damages
           whatsoever, including, without limitation, those resulting from loss
           of profit, loss of contracts, goodwill, data, information, income,
@@ -144,7 +152,7 @@
           jurisdiction of the courts in that location.
         </p>
       </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -169,5 +177,6 @@
         </p>
       </div>
     </footer>
+    <div id="cookie-consent-container"></div>
   </body>
 </html>

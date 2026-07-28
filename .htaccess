@@ -1,8 +1,12 @@
 # ── Bezpečnostné nastavenia ──────────────────────────────────────────────────
 Options -Indexes
 ServerSignature Off
+DirectoryIndex index.php index.html
 
 # ── Globálne bezpečnostné HTTP hlavičky ──────────────────────────────────────
+# Poznámka: Content-Security-Policy nastavuje PHP (auth.php) dynamicky s CSP nonce.
+# Pre statické súbory (fallback .html) sa nastavuje základná CSP nižšie, aby sa
+# nebila s PHP nonce politikou.
 <IfModule mod_headers.c>
     Header always set X-Frame-Options "SAMEORIGIN"
     Header always set X-Content-Type-Options "nosniff"
@@ -13,18 +17,26 @@ ServerSignature Off
     Header always set X-Permitted-Cross-Domain-Policies "none"
     Header always unset X-Powered-By
     Header unset X-Powered-By
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+
+    # CSP pre statické .html súbory (neplatí pre .php, ktoré si nastavujú vlastnú nonce politiku)
+    <If "! %{REQUEST_FILENAME} =~ /\.php$/">
+        Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests"
+    </If>
 </IfModule>
 
-# ── Blokovanie .git adresára a citlivých súborov ─────────────────────────────
+# ── Presmerovanie starých statických .html adries na .php ─────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{THE_REQUEST} \s/+([^.]+)\.html\s [NC]
+    RewriteRule ^ /%1.php [R=301,L]
+
+    RewriteRule ^(\.git|\.vscode|private)(/.*)?$ - [F,L]
+</IfModule>
+
+# ── Blokovanie .git adresára a citlivých súborov ────────────────────────────
 <FilesMatch "^\.git">
     Require all denied
 </FilesMatch>
-
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteRule ^(\.git|\.vscode)(/.*)?$ - [F,L]
-</IfModule>
 
 # ── Blokovanie citlivých typov súborov ───────────────────────────────────────
 <FilesMatch "\.(env|ini|log|sql|bak|tgz|tar\.gz|bz2|7z|key|pem|p12|pfx)$">

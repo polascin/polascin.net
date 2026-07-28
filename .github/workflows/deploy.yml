@@ -1,0 +1,135 @@
+name: Deploy to polascin.net
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, '[skip deploy]') }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+          if [[ -s ~/.ssh/known_hosts ]]; then
+            echo "SSH_HOST_KEY_CHECK=yes" >> "$GITHUB_ENV"
+          else
+            echo "SSH_HOST_KEY_CHECK=accept-new" >> "$GITHUB_ENV"
+          fi
+
+      - name: Deploy via rsync
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_REMOTE_PATH: ${{ secrets.DEPLOY_REMOTE_PATH }}
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${DEPLOY_HOST:-}" || -z "${DEPLOY_USER:-}" || -z "${DEPLOY_REMOTE_PATH:-}" ]]; then
+            echo "Missing required deploy secrets (DEPLOY_HOST, DEPLOY_USER, DEPLOY_REMOTE_PATH)." >&2
+            exit 1
+          fi
+
+          PORT="${DEPLOY_PORT:-22}"
+          REMOTE_PATH="${DEPLOY_REMOTE_PATH%/}"
+          SSH_OPTS="-p ${PORT} -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 -o StrictHostKeyChecking=${SSH_HOST_KEY_CHECK}"
+
+          echo "Deploying to ${DEPLOY_USER}@${DEPLOY_HOST}:${REMOTE_PATH} ..."
+
+          rsync -avz --delete \
+            -e "ssh ${SSH_OPTS}" \
+            ./ \
+            "${DEPLOY_USER}@${DEPLOY_HOST}:${REMOTE_PATH}/" \
+            --exclude-from=.deployignore
+
+      - name: Generate deploy info
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_REMOTE_PATH: ${{ secrets.DEPLOY_REMOTE_PATH }}
+        run: |
+          set -euo pipefail
+
+          PORT="${DEPLOY_PORT:-22}"
+          REMOTE_PATH="${DEPLOY_REMOTE_PATH%/}"
+          SSH_OPTS="-p ${PORT} -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 -o StrictHostKeyChecking=${SSH_HOST_KEY_CHECK}"
+
+          COMMIT="${GITHUB_SHA::7}"
+          BRANCH="${GITHUB_REF_NAME}"
+          TIMESTAMP=$(date '+%d.%m.%Y %H:%M')
+          UNIX_TS=$(date '+%s')
+
+          TMP_INFO=$(mktemp)
+          cat >"$TMP_INFO" <<PHPEOF
+          <?php
+          define('DEPLOY_TIME', '${TIMESTAMP}');
+          define('DEPLOY_TIMESTAMP', ${UNIX_TS});
+          define('DEPLOY_COMMIT', '${COMMIT}');
+          define('DEPLOY_BRANCH', '${BRANCH}');
+          PHPEOF
+
+          scp ${SSH_OPTS// -p / -P} "$TMP_INFO" "${DEPLOY_USER}@${DEPLOY_HOST}:${REMOTE_PATH}/deploy_info.php"
+
+          rm -f "$TMP_INFO"
+
+      - name: Create remote environment config
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_REMOTE_PATH: ${{ secrets.DEPLOY_REMOTE_PATH }}
+          POLASCIN_ENV_INI: ${{ secrets.POLASCIN_ENV_INI }}
+          POLASCIN_ENV_PATH: ${{ secrets.POLASCIN_ENV_PATH }}
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${POLASCIN_ENV_INI:-}" ]]; then
+            echo "POLASCIN_ENV_INI secret not set; skipping remote env.ini creation."
+            exit 0
+          fi
+
+          PORT="${DEPLOY_PORT:-22}"
+          REMOTE_PATH="${DEPLOY_REMOTE_PATH%/}"
+          SSH_OPTS="-p ${PORT} -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 -o StrictHostKeyChecking=${SSH_HOST_KEY_CHECK}"
+          REMOTE_ENV_PATH="${POLASCIN_ENV_PATH:-private/polascin.env.ini}"
+          REMOTE_ENV_DIR=$(dirname "$REMOTE_ENV_PATH")
+
+          echo "Creating remote env config: ${REMOTE_PATH}/${REMOTE_ENV_PATH}"
+          printf '%s\n' "$POLASCIN_ENV_INI" | ssh ${SSH_OPTS} "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            "cd '${REMOTE_PATH}' && mkdir -p '${REMOTE_ENV_DIR}' && umask 077 && cat > '${REMOTE_ENV_PATH}' && chmod 640 '${REMOTE_ENV_PATH}'"
+
+      - name: Run database migrations
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_REMOTE_PATH: ${{ secrets.DEPLOY_REMOTE_PATH }}
+          POLASCIN_ADMIN_PASSWORD: ${{ secrets.POLASCIN_ADMIN_PASSWORD }}
+        run: |
+          set -euo pipefail
+
+          PORT="${DEPLOY_PORT:-22}"
+          REMOTE_PATH="${DEPLOY_REMOTE_PATH%/}"
+          SSH_OPTS="-p ${PORT} -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 -o StrictHostKeyChecking=${SSH_HOST_KEY_CHECK}"
+
+          echo "Running database migrations on server..."
+          ssh ${SSH_OPTS} "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            "cd '${REMOTE_PATH}' && POLASCIN_SETUP_QUIET=1 POLASCIN_ADMIN_PASSWORD='${POLASCIN_ADMIN_PASSWORD}' php setup_db.php"
+
+      - name: Summary
+        run: |
+          echo "Deploy completed: ${{ github.sha }}"

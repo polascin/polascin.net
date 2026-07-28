@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Dr. Lubomir Polascin - Nephrologist and Medical Professional. Information on Kidney Health, Dialysis, and Transplantation."
+      content="Dr. Lubomir Polascin — nephrologist, internal medicine specialist, medical translator, writer and self-taught programmer. Kidney health, dialysis, medical education and technology."
     />
     <meta
       name="keywords"
-      content="Nephrology, Kidney Health, Dialysis, Hemodialysis, Renal Transplantation, Lubomir Polascin"
+      content="Lubomir Polascin, Nephrology, Internal Medicine, Dialysis, Hemodialysis, Renal Transplantation, Medical Translation, Books, Programming"
     />
     <meta name="author" content="Lubomir Polascin" />
     <meta name="theme-color" content="#ffffff" />
-    <title>Dr. Lubomir Polascin | Nephrology & Internal Medicine</title>
+    <title>Home | Dr. Lubomir Polascin</title>
     <link rel="canonical" href="https://polascin.net/" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="alternate" hreflang="en" href="https://polascin.net/" />
@@ -84,8 +84,8 @@
         "name": "Dr. Lubomir Polascin",
         "url": "https://polascin.net/",
         "image": "https://polascin.net/images/profile.jpg",
-        "jobTitle": "Nephrologist",
-        "description": "Dr. Lubomir Polascin - Nephrologist and Medical Professional. Information on Kidney Health, Dialysis, and Transplantation.",
+        "jobTitle": "Nephrologist and Internal Medicine Specialist",
+        "description": "Dr. Lubomir Polascin — nephrologist, internal medicine specialist, medical translator, writer and self-taught programmer.",
         "alumniOf": "University of Pavol Jozef Šafárik",
         "sameAs": [
           "https://polascin.com/",
@@ -93,7 +93,10 @@
           "https://polascin.org/",
           "https://books.polascin.net/",
           "https://nefro.polascin.net/",
-          "https://www.amazon.com/stores/author/B07PN436VJ/about"
+          "https://nephrosite.polascin.net/",
+          "https://www.amazon.com/stores/author/B07PN436VJ/about",
+          "https://www.linkedin.com/in/lubomirpolascin/",
+          "https://x.com/polascin"
         ]
       }
     </script>
@@ -107,7 +110,7 @@
     />
     <meta
       property="og:description"
-      content="Dr. Lubomir Polascin - Nephrologist and Medical Professional. Information on Kidney Health, Dialysis, and Transplantation."
+      content="Dr. Lubomir Polascin — nephrologist, internal medicine specialist, medical translator, writer and self-taught programmer."
     />
     <meta
       property="og:image"
@@ -116,6 +119,7 @@
     <meta property="og:image:width" content="768" />
     <meta property="og:image:height" content="1024" />
     <meta property="og:image:alt" content="Dr. Lubomir Polascin" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -126,13 +130,12 @@
     />
     <meta
       name="twitter:description"
-      content="Dr. Lubomir Polascin - Nephrologist and Medical Professional. Information on Kidney Health, Dialysis, and Transplantation."
+      content="Dr. Lubomir Polascin — nephrologist, internal medicine specialist, medical translator, writer and self-taught programmer."
     />
     <meta
       name="twitter:image"
       content="https://polascin.net/images/profile.jpg"
     />
-    <meta property="og:locale" content="en_US" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -150,13 +153,16 @@
     <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/solid.css" />
     <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/brands.css" />
 
+    <!-- Consent default must load before any analytics configuration -->
+    <script src="js/consent-default.js"></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=20260522" />
+    <link rel="stylesheet" href="css/styles.css?v=20260728" />
     <script src="js/main.js" defer></script>
   </head>
 
   <body>
-    <a href="#home" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="navbar">
       <div class="container nav-container">
@@ -174,7 +180,7 @@
         <button
           class="theme-toggle-btn"
           id="themeToggle"
-          aria-label="Toggle Dark Mode"
+          aria-label="Toggle dark mode"
         >
           <i class="fa-solid fa-moon" aria-hidden="true"></i>
         </button>
@@ -182,7 +188,7 @@
           <li><a href="#home" class="nav-link">Home</a></li>
           <li><a href="#about" class="nav-link">Bio</a></li>
           <li><a href="#nephrology" class="nav-link">Nephrology</a></li>
-          <li><a href="#products" class="nav-link">Shop</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
           <li>
             <a
               href="https://books.polascin.net/"
@@ -198,405 +204,471 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <img
-            src="CrystalKidney.png"
-            alt="Crystal Kidney"
-            class="profile-img"
-          />
-          <h1 class="hero-title">Advancing Kidney Health</h1>
-          <p class="hero-subtitle">
-            Dr. Lubomir Polascin - Dedicated to excellence in Nephrology,
-            Dialysis, and Patient Care.
-          </p>
-          <div class="hero-buttons">
-            <a href="#about" class="btn btn-primary">About Me</a>
-            <a href="#nephrology" class="btn btn-secondary">Learn Nephrology</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Bio Section -->
-    <section id="about" class="about">
-      <div class="container">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-text">
-          <div class="profile-container">
+    <main id="main-content" tabindex="-1" aria-label="Main content">
+      <!-- Hero Section -->
+      <section id="home" class="hero">
+        <div class="container">
+          <div class="hero-content">
             <img
-              src="images/profile.jpg"
-              alt="Dr. Lubomir Polascin"
+              src="CrystalKidney.png"
+              alt="Crystal Kidney logo"
               class="profile-img"
-              loading="lazy"
             />
-          </div>
-          <p class="bio-intro">
-            Hi, I’m Lubomir Polascin — a Medical Doctor, Nephrologist, and
-            Internal Medicine Specialist by profession, a Fiction and
-            Non-Fiction Writer by calling, and a Self-Taught Programmer by
-            passion.
-          </p>
-
-          <h3>Who I Am</h3>
-          <p>
-            My work rests at the intersection of medicine, storytelling, and
-            technology. Medicine sharpens my clinical precision; writing lets me
-            explore the human condition through fiction and non-fiction; and
-            technology empowers me to solve complex problems. As a consultant, I
-            bridge these worlds to deliver thoughtful, well-informed solutions.
-          </p>
-          <p>
-            I approach every challenge with curiosity and rigor—whether I’m
-            treating patients, debugging code, translating nuanced text, or
-            exploring AI.
-          </p>
-          <br />
-
-          <h3>Professional Identity</h3>
-          <p>
-            I am a medical doctor who graduated in General Medicine (1995) and
-            specialized in Nephrology (2009). I am attested in Internal Medicine
-            (1998) and certified in Abdominal Ultrasonic Imaging in Adults
-            (2009).
-          </p>
-          <p><strong>Areas of Expertise:</strong></p>
-          <ul>
-            <li>
-              Dialysis and renal replacement therapies (Hemodialysis,
-              Hemodiafiltration, Hemofiltration)
-            </li>
-            <li>Vascular access ultrasonography for dialysis</li>
-            <li>Extra-corporeal and intra-corporeal elimination therapies</li>
-            <li>Membrane plasma separation and related therapies</li>
-            <li>Kidney transplantation</li>
-          </ul>
-          <p>
-            I have extensive experience teaching and lecturing in Internal
-            Medicine, Diabetology, Nephrology, and related fields. I am also a
-            translator specializing in English-Slovak and Slovak-English medical
-            translation and software localization.
-          </p>
-          <br />
-
-          <h3>Technology & Programming</h3>
-          <p>
-            I am deeply involved in information technology, computer science,
-            and programming. My interests include:
-          </p>
-          <ul>
-            <li>HTML / CSS / JS</li>
-            <li>PHP & SQL</li>
-            <li>Python</li>
-            <li>Linux / Unix</li>
-            <li>AI & FOSS</li>
-          </ul>
-          <br />
-
-          <h3>Background & Journey</h3>
-          <p>
-            I began my medical education at the University of Pavol Jozef
-            Šafárik in Košice, Slovakia. Since 1995, my focus has been on
-            dialysis and nephrology. From 2013 to 2022, I served as Chief
-            Medical Officer/Head Physician at two dialysis centers in
-            Bratislava.
-          </p>
-          <br />
-
-          <h3>Personal Touch</h3>
-          <p>
-            Born in 1971 in Czechoslovakia, I was raised in Kyjov. My Ruthenian
-            roots inform my worldview. My passions include reading, travel,
-            philosophy, and poetry.
-          </p>
-          <br />
-
-          <a
-            href="https://www.amazon.com/stores/author/B07PN436VJ/about"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-primary btn-sm"
-            >View on Amazon Author Central</a
-          >
-        </div>
-      </div>
-    </section>
-
-    <!-- Nephrology Section -->
-    <section id="nephrology" class="nephrology">
-      <div class="container">
-        <h2 class="section-title">Nephrology</h2>
-        <p>
-          Nephrology is an essential medical specialty dealing with the kidneys,
-          vital organs responsible for fluid balance, waste filtration, and
-          blood pressure regulation.
-        </p>
-
-        <div class="card-grid">
-          <div class="card">
-            <div class="card-icon">
-              <i class="fa-solid fa-stethoscope" aria-hidden="true"></i>
-            </div>
-            <h3>Chronic Kidney Disease (CKD)</h3>
-            <p>
-              Management of progressive loss of kidney function over time due to
-              diabetes, hypertension, or other factors.
+            <h1 class="hero-title">Advancing Kidney Health</h1>
+            <p class="hero-subtitle">
+              Dr. Lubomir Polascin — dedicated to excellence in nephrology,
+              dialysis, patient care and medical technology.
             </p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <i class="fa-solid fa-bolt-lightning" aria-hidden="true"></i>
+            <div class="hero-buttons">
+              <a href="#about" class="btn btn-primary">About Me</a>
+              <a href="#nephrology" class="btn btn-secondary"
+                >Learn Nephrology</a
+              >
             </div>
-            <h3>Acute Kidney Injury (AKI)</h3>
-            <p>
-              Treatment of sudden, often temporary, loss of kidney function
-              caused by infections, dehydration, or toxins.
-            </p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <i class="fa-solid fa-droplet" aria-hidden="true"></i>
-            </div>
-            <h3>Hemodialysis</h3>
-            <p>
-              A procedure where a dialysis machine and a special filter called
-              an artificial kidney, or a dialyzer, are used to clean your blood.
-            </p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <i class="fa-solid fa-house-medical" aria-hidden="true"></i>
-            </div>
-            <h3>Peritoneal Dialysis</h3>
-            <p>
-              A treatment that uses the lining of your abdomen (belly), called
-              the peritoneum, and a cleaning solution called dialysate to clean
-              your blood.
-            </p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <i
-                class="fa-solid fa-hand-holding-medical"
-                aria-hidden="true"
-              ></i>
-            </div>
-            <h3>Transplantation</h3>
-            <p>
-              The best treatment for kidney failure. A healthy kidney is placed
-              into your body to do the work your own kidneys can no longer do.
-            </p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-            </div>
-            <h3>Diagnostics</h3>
-            <p>
-              Utilizing ultrasound, kidney biopsy, and advanced lab tests to
-              accurately diagnose renal conditions.
-            </p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Digital Products Section -->
-    <section id="products" class="products-section">
-      <div class="container">
-        <h2 class="section-title">Digital Products</h2>
-        <p class="section-intro">
-          Exclusive guides and resources for your health journey.
-        </p>
+      <!-- Bio Section -->
+      <section id="about" class="about">
+        <div class="container">
+          <h2 class="section-title reveal">About Me</h2>
+          <div class="about-text reveal">
+            <div class="profile-container">
+              <img
+                src="images/profile.jpg"
+                alt="Dr. Lubomir Polascin"
+                class="profile-img"
+                loading="lazy"
+              />
+            </div>
+            <p class="bio-intro">
+              Hi, I’m Lubomir Polascin — a Medical Doctor, Nephrologist, and
+              Internal Medicine Specialist by profession, a Fiction and
+              Non-Fiction Writer by calling, and a Self-Taught Programmer by
+              passion.
+            </p>
 
-        <div class="product-card" lang="sk">
-          <div class="product-content">
-            <h3>Medicínsky pôst</h3>
-            <p class="product-subtitle">
-              Ako využiť silu hladovania a nezničiť si metabolizmus.
+            <h3>Who I Am</h3>
+            <p>
+              My work rests at the intersection of medicine, storytelling, and
+              technology. Medicine sharpens my clinical precision; writing lets
+              me explore the human condition through fiction and non-fiction;
+              and technology empowers me to solve complex problems. As a
+              consultant, I bridge these worlds to deliver thoughtful,
+              well-informed solutions.
             </p>
             <p>
-              Bezpečnostný manuál k hladovaniu od nefrológa. Odhalíte riziká
-              nesprávne vedeného hladovania a spoznáte inovatívny „Nephro-Safe“
-              protokol Neera 2.0.
+              I approach every challenge with curiosity and rigor — whether I’m
+              treating patients, debugging code, translating nuanced text, or
+              exploring AI.
             </p>
+
+            <h3>Professional Identity</h3>
+            <p>
+              I am a medical doctor who graduated in General Medicine (1995) and
+              specialized in Nephrology (2009). I am attested in Internal
+              Medicine (1998) and certified in Abdominal Ultrasonic Imaging in
+              Adults (2009).
+            </p>
+            <p><strong>Areas of Expertise:</strong></p>
+            <ul>
+              <li>
+                Dialysis and renal replacement therapies (hemodialysis,
+                hemodiafiltration, hemofiltration)
+              </li>
+              <li>Vascular access ultrasonography for dialysis</li>
+              <li>Extra-corporeal and intra-corporeal elimination therapies</li>
+              <li>Membrane plasma separation and related therapies</li>
+              <li>Kidney transplantation</li>
+            </ul>
+            <p>
+              I have extensive experience teaching and lecturing in Internal
+              Medicine, Diabetology, Nephrology, and related fields. I am also a
+              translator specializing in English-Slovak and Slovak-English
+              medical translation and software localization.
+            </p>
+
+            <h3>Technology &amp; Programming</h3>
+            <p>
+              I am deeply involved in information technology, computer science,
+              and programming. My interests include:
+            </p>
+            <ul>
+              <li>HTML / CSS / JS</li>
+              <li>PHP &amp; SQL</li>
+              <li>Python</li>
+              <li>Linux / Unix</li>
+              <li>AI &amp; FOSS</li>
+            </ul>
+
+            <h3>Background &amp; Journey</h3>
+            <p>
+              I began my medical education at the University of Pavol Jozef
+              Šafárik in Košice, Slovakia. Since 1995, my focus has been on
+              dialysis and nephrology. From 2013 to 2022, I served as Chief
+              Medical Officer / Head Physician at two dialysis centers in
+              Bratislava.
+            </p>
+
+            <h3>Personal Touch</h3>
+            <p>
+              Born in 1971 in Czechoslovakia, I was raised in Kyjov. My
+              Ruthenian roots inform my worldview. My passions include reading,
+              travel, philosophy, and poetry.
+            </p>
+
             <a
-              href="https://polascin.gumroad.com/l/hcilux"
+              href="https://www.amazon.com/stores/author/B07PN436VJ/about"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn-primary"
+              class="btn btn-primary btn-sm"
             >
-              Kúpiť na Gumroad
-              <i
-                class="fa-solid fa-arrow-up-right-from-square btn-icon"
-                aria-hidden="true"
-              ></i>
+              View on Amazon Author Central
             </a>
           </div>
         </div>
+      </section>
 
-        <div class="product-card">
-          <div class="product-content">
-            <h3>Medical Fasting</h3>
-            <p class="product-subtitle">
-              How to Use the Power of Starvation and Not Damage Your Metabolism.
-            </p>
-            <p>
-              Nephrologist's guide to safe reduction and autophagy. Discover the
-              science behind fasting, debunk detox myths, and follow the
-              innovative Nephro-Safe protocol (Circadian Neera 2.0).
-            </p>
+      <!-- Nephrology Section -->
+      <section id="nephrology" class="nephrology">
+        <div class="container">
+          <h2 class="section-title reveal">Nephrology</h2>
+          <p class="section-intro">
+            Nephrology is an essential medical specialty dealing with the
+            kidneys, vital organs responsible for fluid balance, waste
+            filtration, and blood pressure regulation.
+          </p>
+
+          <div class="card-grid">
+            <article class="card reveal">
+              <div class="card-icon">
+                <i class="fa-solid fa-stethoscope" aria-hidden="true"></i>
+              </div>
+              <h3>Chronic Kidney Disease (CKD)</h3>
+              <p>
+                Management of progressive loss of kidney function over time due
+                to diabetes, hypertension, or other factors.
+              </p>
+            </article>
+            <article class="card reveal">
+              <div class="card-icon">
+                <i class="fa-solid fa-bolt-lightning" aria-hidden="true"></i>
+              </div>
+              <h3>Acute Kidney Injury (AKI)</h3>
+              <p>
+                Treatment of sudden, often temporary, loss of kidney function
+                caused by infections, dehydration, or toxins.
+              </p>
+            </article>
+            <article class="card reveal">
+              <div class="card-icon">
+                <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+              </div>
+              <h3>Hemodialysis</h3>
+              <p>
+                A procedure where a dialysis machine and a special filter called
+                an artificial kidney, or a dialyzer, are used to clean your
+                blood.
+              </p>
+            </article>
+            <article class="card reveal">
+              <div class="card-icon">
+                <i class="fa-solid fa-house-medical" aria-hidden="true"></i>
+              </div>
+              <h3>Peritoneal Dialysis</h3>
+              <p>
+                A treatment that uses the lining of your abdomen (belly), called
+                the peritoneum, and a cleaning solution called dialysate to
+                clean your blood.
+              </p>
+            </article>
+            <article class="card reveal">
+              <div class="card-icon">
+                <i
+                  class="fa-solid fa-hand-holding-medical"
+                  aria-hidden="true"
+                ></i>
+              </div>
+              <h3>Transplantation</h3>
+              <p>
+                The best treatment for kidney failure. A healthy kidney is
+                placed into your body to do the work your own kidneys can no
+                longer do.
+              </p>
+            </article>
+            <article class="card reveal">
+              <div class="card-icon">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              </div>
+              <h3>Diagnostics</h3>
+              <p>
+                Utilizing ultrasound, kidney biopsy, and advanced lab tests to
+                accurately diagnose renal conditions.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="projects-section">
+        <div class="container">
+          <h2 class="section-title reveal">Projects &amp; Network</h2>
+          <p class="section-intro">
+            A selection of websites, tools and resources I build or curate
+            across medicine, education and technology.
+          </p>
+
+          <div class="card-grid">
+            <article class="card project-card">
+              <div class="card-icon">
+                <i class="fa-solid fa-microscope" aria-hidden="true"></i>
+              </div>
+              <h3>Nefro-projekt Slovensko</h3>
+              <p>
+                Slovak nephrology portal with clinical articles, dialysis and
+                transplant updates, calculators, drug references and study
+                notes.
+              </p>
+              <a
+                href="https://nefro.polascin.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-sm"
+                >Visit nefro.polascin.net</a
+              >
+            </article>
+
+            <article class="card project-card">
+              <div class="card-icon">
+                <i class="fa-solid fa-hospital-user" aria-hidden="true"></i>
+              </div>
+              <h3>NephroSite</h3>
+              <p>
+                Educational lectures and reference pages on nephrology,
+                dialysis, blood purification methods and internal medicine (in
+                Slovak).
+              </p>
+              <a
+                href="https://nephrosite.polascin.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-sm"
+                >Visit nephrosite.polascin.net</a
+              >
+            </article>
+
+            <article class="card project-card">
+              <div class="card-icon">
+                <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+              </div>
+              <h3>Bibliotheca Polascini</h3>
+              <p>
+                Central archive for books, academic publications, chapters and
+                literary work by Dr. Lubomir Polascin.
+              </p>
+              <a
+                href="https://books.polascin.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-sm"
+                >Visit books.polascin.net</a
+              >
+            </article>
+
+            <article class="card project-card">
+              <div class="card-icon">
+                <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+              </div>
+              <h3>AlphaGrab</h3>
+              <p>
+                Experimental ticketing-discovery project that enriches fallback
+                links via the Ticketmaster Discovery API.
+              </p>
+              <a
+                href="https://alphagrab.de/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-sm"
+                >Visit alphagrab.de</a
+              >
+            </article>
+
+            <article class="card project-card">
+              <div class="card-icon">
+                <i class="fa-solid fa-bus" aria-hidden="true"></i>
+              </div>
+              <h3>Arenibus Demo</h3>
+              <p>
+                Public demo instance for an event and transport-related web
+                project.
+              </p>
+              <a
+                href="https://demo.arenibus.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary btn-sm"
+                >Visit demo.arenibus.com</a
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Links Section -->
+      <section id="links" class="links-section">
+        <div class="container">
+          <h2 class="section-title reveal">Network &amp; Resources</h2>
+          <p class="section-muted">
+            Explore other related sites and resources.
+          </p>
+          <div class="link-grid">
             <a
-              href="https://polascin.gumroad.com/l/veszhk"
+              href="https://polascin.com/"
+              class="pill-link"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn-primary"
             >
-              Get it on Gumroad
-              <i
-                class="fa-solid fa-arrow-up-right-from-square btn-icon"
-                aria-hidden="true"
-              ></i>
+              <i class="fa-solid fa-staff-snake" aria-hidden="true"></i>
+              polascin.com
+            </a>
+            <a
+              href="https://polascin.sk/"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-globe" aria-hidden="true"></i>
+              polascin.sk
+            </a>
+            <a
+              href="https://polascin.org/"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-building" aria-hidden="true"></i>
+              polascin.org
+            </a>
+            <a
+              href="https://nephrosite.polascin.net/"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-hospital-user" aria-hidden="true"></i>
+              NephroSite (in Slovak)
+            </a>
+            <a
+              href="https://nefro.polascin.net/"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-microscope" aria-hidden="true"></i>
+              Nefro-projekt Slovensko
+            </a>
+            <a
+              href="https://books.polascin.net/"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+              books.polascin.net
+            </a>
+            <a
+              href="https://alphagrab.de/"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+              AlphaGrab
+            </a>
+            <a
+              href="https://demo.arenibus.com/"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-bus" aria-hidden="true"></i>
+              Arenibus Demo
+            </a>
+            <a
+              href="https://amzn.to/45y4INd"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-book" aria-hidden="true"></i>
+              Vital Algorithm - 2nd ed. (Amazon)
+            </a>
+            <a
+              href="https://amzn.to/4t4mBNs"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-book" aria-hidden="true"></i>
+              The Vital Algorithm - 1st ed. (Amazon)
+            </a>
+            <a
+              href="https://amzn.to/4pYuL7D"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-book" aria-hidden="true"></i>
+              Blood Equity (Amazon)
+            </a>
+            <a
+              href="https://amzn.to/3NJurvZ"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-book" aria-hidden="true"></i>
+              Pulse Of The Body (Amazon)
+            </a>
+            <a
+              href="https://time.is/"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              Time.is
+            </a>
+            <a
+              href="https://pr.tn/ref/63X184P7"
+              class="pill-link pill-link--proton"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              Proton Mail
             </a>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Links Section -->
-    <section id="links" class="links-section">
-      <div class="container">
-        <h2 class="section-title">Network & Resources</h2>
-        <p class="section-muted">Explore other related sites and resources.</p>
-        <div class="link-grid">
+      <!-- Contact Section -->
+      <section id="contact">
+        <div class="container">
+          <h2 class="section-title reveal">Contact</h2>
+          <p>Feel free to reach out for inquiries or collaboration.</p>
           <a
-            href="https://polascin.com/"
-            class="pill-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-staff-snake" aria-hidden="true"></i>
-            polascin.com
-          </a>
-          <a
-            href="https://polascin.sk/"
-            class="pill-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-globe" aria-hidden="true"></i>
-            polascin.sk
-          </a>
-          <a
-            href="https://polascin.org/"
-            class="pill-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-building" aria-hidden="true"></i>
-            polascin.org
-          </a>
-          <a
-            href="https://nephrosite.polascin.net/"
-            class="pill-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-hospital-user" aria-hidden="true"></i>
-            NephroSite (in Slovak)
-          </a>
-          <a
-            href="https://nefro.polascin.net/"
-            class="pill-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-microscope" aria-hidden="true"></i>
-            Nefro-projekt Slovensko
-          </a>
-          <a
-            href="https://books.polascin.net/"
-            class="pill-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-book-open" aria-hidden="true"></i>
-            books.polascin.net
-          </a>
-          <a
-            href="https://amzn.to/45y4INd"
-            class="pill-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-book" aria-hidden="true"></i>
-            Vital Algorithm - the second edition (Amazon)
-          </a>
-          <a
-            href="https://amzn.to/4t4mBNs"
-            class="pill-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-book" aria-hidden="true"></i>
-            The Vital Algorithm - the first edition (Amazon)
-          </a>
-          <a
-            href="https://amzn.to/4pYuL7D"
-            class="pill-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-book" aria-hidden="true"></i>
-            Blood Equity (Amazon)
-          </a>
-          <a
-            href="https://amzn.to/3NJurvZ"
-            class="pill-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-book" aria-hidden="true"></i>
-            Pulse Of The Body (Amazon)
-          </a>
-          <a
-            href="https://time.is/"
-            class="pill-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-clock" aria-hidden="true"></i>
-            Time.is
-          </a>
-          <a
-            href="https://pr.tn/ref/63X184P7"
-            class="pill-link pill-link--proton"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:lubomir@polascin.net"
+            class="btn btn-primary btn-contact"
           >
             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-            Proton Mail
+            lubomir@polascin.net
           </a>
         </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-      <div class="container">
-        <h2 class="section-title">Contact</h2>
-        <p>Feel free to reach out for inquiries or collaboration.</p>
-        <a
-          href="mailto:lubomir@polascin.net"
-          class="btn btn-primary btn-contact"
-        >
-          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-          lubomir@polascin.net
-        </a>
-      </div>
-    </section>
+      </section>
+    </main>
 
     <!-- Footer -->
     <footer>
