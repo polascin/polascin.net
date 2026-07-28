@@ -102,8 +102,8 @@ function sanitizeHtmlContent(string $html): string {
     $dom = new DOMDocument('1.0', 'UTF-8');
     $prevUseInternalErrors = libxml_use_internal_errors(true);
 
-    $wrapped = '<div>' . $html . '</div>';
-    $loaded = $dom->loadHTML($wrapped, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    $wrapped = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body><div>' . $html . '</div></body></html>';
+    $loaded = $dom->loadHTML($wrapped, LIBXML_HTML_NODEFDTD);
     libxml_clear_errors();
     libxml_use_internal_errors($prevUseInternalErrors);
 
@@ -111,7 +111,8 @@ function sanitizeHtmlContent(string $html): string {
         return htmlspecialchars(strip_tags($html), ENT_QUOTES | ENT_HTML5, 'UTF-8');
     }
 
-    $container = $dom->getElementsByTagName('div')->item(0);
+    $body = $dom->getElementsByTagName('body')->item(0);
+    $container = $body instanceof DOMElement ? $body->getElementsByTagName('div')->item(0) : null;
     if (!$container instanceof DOMElement) {
         return htmlspecialchars(strip_tags($html), ENT_QUOTES | ENT_HTML5, 'UTF-8');
     }
