@@ -8,6 +8,21 @@ requireAdmin();
 
 /** @var PDO $pdo */
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $csrfToken = $_POST['csrf_token'] ?? '';
+    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+    if (!validateCsrfToken((string) $csrfToken) || $id < 1) {
+        setFlashMessage('error', 'Odstránenie sa nepodarilo overiť.');
+    } else {
+        $stmt = $pdo->prepare("DELETE FROM newsletter_subscribers WHERE id = :id LIMIT 1");
+        $stmt->execute([':id' => $id]);
+        logAdminAction($pdo, 'newsletter_subscriber_delete', 'newsletter_subscriber', $id);
+        setFlashMessage('success', 'Odberateľ bol odstránený.');
+    }
+    header('Location: admin_newsletter.php', true, 303);
+    exit;
+}
+
 $subscribers = $pdo->query("SELECT id, email, is_confirmed, confirmed_at, created_at FROM newsletter_subscribers ORDER BY created_at DESC LIMIT 1000")->fetchAll();
 
 $baseUrl = getAppBaseUrl();
@@ -30,7 +45,7 @@ $canonicalUrl = $baseUrl . '/admin_newsletter.php';
       <p><a href="admin.php" class="btn btn-secondary btn-sm">Späť na panel</a></p>
       <p>Celkovo potvrdených: <?= (int) $pdo->query("SELECT COUNT(*) FROM newsletter_subscribers WHERE is_confirmed = 1")->fetchColumn() ?></p>
       <table class="admin-table admin-table-wrap">
-        <thead><tr><th>E-mail</th><th>Stav</th><th>Prihlásený</th><th>Potvrdený</th></tr></thead>
+        <thead><tr><th>E-mail</th><th>Stav</th><th>Prihlásený</th><th>Potvrdený</th><th>Akcie</th></tr></thead>
         <tbody>
           <?php foreach ($subscribers as $sub): ?>
           <tr>
@@ -38,6 +53,13 @@ $canonicalUrl = $baseUrl . '/admin_newsletter.php';
             <td><?= (int) $sub['is_confirmed'] === 1 ? 'Potvrdený' : 'Čakajúci' ?></td>
             <td><?= htmlspecialchars((string) $sub['created_at'], ENT_QUOTES, 'UTF-8') ?></td>
             <td><?= $sub['confirmed_at'] ? htmlspecialchars((string) $sub['confirmed_at'], ENT_QUOTES, 'UTF-8') : '-' ?></td>
+            <td>
+              <form method="post" action="admin_newsletter.php" class="inline-form" data-confirm="Natrvalo odstrániť tohto odberateľa?">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
+                <input type="hidden" name="id" value="<?= (int) $sub['id'] ?>">
+                <button type="submit" class="btn btn-sm btn-danger">Odstrániť</button>
+              </form>
+            </td>
           </tr>
           <?php endforeach; ?>
         </tbody>

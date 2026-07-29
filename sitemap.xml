@@ -1,39 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://polascin.net/</loc>
-    <lastmod>2026-07-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://polascin.net/articles.php</loc>
-    <lastmod>2026-07-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://polascin.net/contact.php</loc>
-    <lastmod>2026-07-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://polascin.net/newsletter.php</loc>
-    <lastmod>2026-07-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://polascin.net/privacy.php</loc>
-    <lastmod>2026-07-28</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://polascin.net/terms.php</loc>
-    <lastmod>2026-07-28</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-</urlset>
+<!--
+  Zoznam adries generuje sitemap.php: jazykové varianty statických stránok,
+  všetky publikované články a k nim xhtml:link alternatívy.
+
+  Tento súbor je iba index. Apache prepisuje /sitemap.xml priamo na sitemap.php
+  (.htaccess), produkčný OpenResty však .htaccess ignoruje, takže bez tohto
+  indexu by sa na /sitemap.xml podával zastaraný jednojazyčný zoznam.
+-->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://polascin.net/sitemap.php</loc>
+  </sitemap>
+</sitemapindex>

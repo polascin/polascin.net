@@ -1,30 +1,52 @@
 <?php
 declare(strict_types=1);
+
+$partialName = basename(__FILE__);
+$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
+if (preg_match('~(?:^|/)' . preg_quote($partialName, '~') . '(?:/|$)~i', $requestedScript) === 1) {
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, "Chyba: {$partialName} je interný súbor a nemožno ho spúšťať priamo.\n");
+        exit(1);
+    }
+    http_response_code(403);
+    exit('Prístup odmietnutý.');
+}
+unset($partialName, $requestedScript);
+
 if (!function_exists('isLoggedIn')) {
     require_once __DIR__ . '/auth.php';
 }
 
 $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
 ?>
-<a href="#main-content" class="skip-link">Preskočiť na hlavný obsah</a>
+<a href="#main-content" class="skip-link"><?= te('common.skip_to_content') ?></a>
 
-<nav class="navbar">
+<nav class="navbar" aria-label="<?= te('common.main_navigation') ?>">
   <div class="container nav-container">
-    <a href="index.php" class="nav-brand">Polascin.net</a>
+    <a href="<?= htmlspecialchars(langUrl(currentLang(), 'index.php'), ENT_QUOTES, 'UTF-8') ?>" class="nav-brand"><?= te('common.site_name') ?></a>
     <button
+      type="button"
       class="nav-toggle"
       id="navToggle"
-      aria-label="Prepnúť navigáciu"
+      aria-label="<?= te('common.open_navigation') ?>"
+      data-label-open="<?= te('common.open_navigation') ?>"
+      data-label-close="<?= te('common.close_navigation') ?>"
+      aria-controls="navMenu"
       aria-expanded="false"
     >
       <span></span>
       <span></span>
       <span></span>
     </button>
+    <?php include __DIR__ . '/lang_switcher.php'; ?>
     <button
+      type="button"
       class="theme-toggle-btn"
       id="themeToggle"
-      aria-label="Prepnúť tmavý režim"
+      aria-label="<?= te('common.toggle_dark_mode') ?>"
+      data-label-dark="<?= te('common.switch_to_dark') ?>"
+      data-label-light="<?= te('common.switch_to_light') ?>"
+      aria-pressed="false"
     >
       <i class="fa-solid fa-moon" aria-hidden="true"></i>
     </button>

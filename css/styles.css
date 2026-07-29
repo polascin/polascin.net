@@ -3,7 +3,7 @@
   /* Base Variables (Light Mode Default) */
   --primary-color: #0056b3;
   /* Deep Blue */
-  --secondary-color: #00a8cc;
+  --secondary-color: #007c91;
   /* Cyan */
   --accent-color: #ff6b6b;
   --text-main: #2c3e50;
@@ -13,6 +13,43 @@
   --bg-card: #ffffff;
   --border-color: #e9ecef;
   --shadow-color: rgba(0, 0, 0, 0.1);
+  --on-primary: #ffffff;
+  --primary-hover: #004494;
+  --focus-color: #007c91;
+  --focus-on-primary: #ffffff;
+  --navbar-height: 77px;
+  color-scheme: light;
+
+  /* Paleta vlajky. Používa sa ako akcent, nie ako základná schéma.
+     Svetlé odtiene neprejdú kontrastom na bielom podklade a tmavé zase na
+     tmavom, preto sú nižšie odvodené premenné --flag-accent-* pre text a ikony
+     a plná sekvencia --flag-stripe len pre dekoratívne pruhy. */
+  --flag-green-dark: #078d70;
+  --flag-teal: #26ceaa;
+  --flag-mint: #98e8c1;
+  --flag-white: #ffffff;
+  --flag-blue: #7bade2;
+  --flag-violet: #5049cc;
+  --flag-purple: #3d1a78;
+
+  /* Akcenty čitateľné na svetlom podklade (4:1 a viac). */
+  --flag-accent-1: #078d70;
+  --flag-accent-2: #5049cc;
+  --flag-accent-3: #3d1a78;
+
+  /* Biely pruh vlajky by na svetlom podklade zmizol a pruh by vyzeral prerušene,
+     preto sa v svetlej téme používa najsvetlejší odtieň, ktorý je ešte viditeľný. */
+  --flag-stripe-white: #eef2f7;
+  --flag-stripe: linear-gradient(
+    90deg,
+    #078d70 0%,
+    #26ceaa 17%,
+    #98e8c1 33%,
+    var(--flag-stripe-white) 50%,
+    #7bade2 67%,
+    #5049cc 83%,
+    #3d1a78 100%
+  );
 
   /* Typography */
   --font-heading:
@@ -41,6 +78,18 @@
   --bg-card: #2d3748;
   --border-color: #4a5568;
   --shadow-color: rgba(0, 0, 0, 0.3);
+  --on-primary: #0f172a;
+  --primary-hover: #75baff;
+  --focus-color: #ffffff;
+  --focus-on-primary: #0f172a;
+
+  /* Na tmavom podklade sú čitateľné svetlé odtiene vlajky, nie tmavé. */
+  --flag-accent-1: #26ceaa;
+  --flag-accent-2: #98e8c1;
+  --flag-accent-3: #7bade2;
+  /* Na tmavom podklade môže byť biely pruh skutočne biely. */
+  --flag-stripe-white: #ffffff;
+  color-scheme: dark;
 }
 
 * {
@@ -69,6 +118,7 @@ footer {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--navbar-height) + var(--spacing-sm));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -92,6 +142,14 @@ body {
   line-height: 1.6;
   background-color: var(--bg-body);
   overflow-x: hidden;
+}
+
+body.nav-open {
+  overflow: hidden;
+}
+
+:target {
+  scroll-margin-top: calc(var(--navbar-height) + var(--spacing-sm));
 }
 
 img {
@@ -119,7 +177,7 @@ button:focus-visible,
 .btn-cookie-decline:focus-visible,
 .cookie-settings-trigger:focus-visible,
 .pill-link:focus-visible {
-  outline: 3px solid var(--secondary-color);
+  outline: 3px solid var(--focus-color);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -137,8 +195,14 @@ button:focus-visible,
   border: 0;
 }
 
-ul {
+.nav-menu {
   list-style: none;
+}
+
+main ul,
+main ol {
+  margin-bottom: var(--spacing-sm);
+  padding-left: 1.5rem;
 }
 
 /* Typography */
@@ -168,6 +232,23 @@ h2 {
   text-align: center;
 }
 
+/* Krátky farebný podčiarknik pod nadpismi sekcií — čisto dekoratívny. */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 96px;
+  height: 3px;
+  margin: var(--spacing-xs) auto 0;
+  border-radius: 3px;
+  background: var(--flag-stripe);
+}
+
+@media (forced-colors: active) {
+  .section-title::after {
+    display: none;
+  }
+}
+
 h3 {
   font-size: 1.5rem;
 }
@@ -190,7 +271,6 @@ section {
 /* Navigation */
 .navbar {
   background: var(--bg-card);
-  backdrop-filter: blur(10px);
   position: fixed;
   top: 0;
   left: 0;
@@ -199,6 +279,23 @@ section {
   box-shadow: 0 2px 4px var(--shadow-color);
   padding: var(--spacing-sm) 0;
   border-bottom: 1px solid var(--border-color);
+}
+
+/* Dekoratívny pruh v farbách vlajky. Nenesie žiadnu informáciu, preto sa naň
+   nevzťahuje požiadavka na kontrast a je skrytý pri vynútených farbách. */
+.navbar::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -3px;
+  height: 3px;
+  background: var(--flag-stripe);
+}
+
+@media (forced-colors: active) {
+  .navbar::after {
+    display: none;
+  }
 }
 
 .nav-container {
@@ -216,7 +313,7 @@ section {
 
 .nav-menu {
   display: flex;
-  gap: var(--spacing-md);
+  gap: clamp(0.75rem, 1.5vw, var(--spacing-md));
   align-items: center;
 }
 
@@ -240,6 +337,23 @@ section {
 
 .nav-link:hover::after {
   width: 100%;
+}
+
+.nav-link.active::after,
+.nav-link[aria-current="page"]::after {
+  width: 100%;
+}
+
+.nav-logout-form {
+  margin: 0;
+}
+
+.nav-logout-btn {
+  appearance: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
 }
 
 .nav-toggle {
@@ -286,6 +400,91 @@ section {
   color: var(--primary-color);
 }
 
+/* Prepínač jazyka — postavený na <details>, takže funguje aj bez JavaScriptu. */
+.lang-switcher {
+  position: relative;
+  margin-left: var(--spacing-xs);
+}
+
+.lang-switcher-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  list-style: none;
+  transition: background-color 0.3s;
+}
+
+.lang-switcher-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.lang-switcher-toggle:hover {
+  background-color: var(--bg-surface);
+  color: var(--primary-color);
+}
+
+.lang-switcher-code {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.lang-switcher-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  min-width: 190px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px var(--shadow-color);
+  padding: 6px;
+  z-index: 1200;
+  list-style: none;
+  margin: 0;
+}
+
+.lang-switcher-menu li {
+  list-style: none;
+}
+
+.lang-switcher-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.lang-switcher-link:hover,
+.lang-switcher-link:focus-visible {
+  background-color: var(--bg-surface);
+  color: var(--primary-color);
+}
+
+.lang-switcher-link[aria-current="true"] {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* Aktívny jazyk je označený aj textovou značkou, nielen farbou. */
+.lang-switcher-link[aria-current="true"]::after {
+  content: "✓";
+  font-weight: 700;
+}
+
 /* Profile Image */
 .profile-container {
   display: flex;
@@ -309,8 +508,7 @@ section {
 
 /* Hero Section */
 .hero {
-  margin-top: 80px;
-  /* Navbar height */
+  margin-top: var(--navbar-height);
   background: linear-gradient(
     135deg,
     var(--bg-surface) 0%,
@@ -350,14 +548,41 @@ section {
 .hero-title {
   font-size: 3.5rem;
   margin-bottom: var(--spacing-md);
-  background: -webkit-linear-gradient(
-    45deg,
-    var(--primary-color),
-    var(--secondary-color)
+  /* Odtiene vlajky, ktoré na svetlom podklade prejdú kontrastom pre veľký text. */
+  background: linear-gradient(
+    100deg,
+    var(--flag-green-dark) 0%,
+    var(--flag-violet) 55%,
+    var(--flag-purple) 100%
   );
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+[data-theme="dark"] .hero-title {
+  /* Na tmavom podklade sa poradie obracia na svetlé odtiene. */
+  background: linear-gradient(
+    100deg,
+    var(--flag-mint) 0%,
+    var(--flag-teal) 50%,
+    var(--flag-blue) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@media (forced-colors: active) {
+  /* Tmavý variant nadpisu má vyššiu špecificitu, preto ho musí reset uviesť
+     výslovne — inak by pri vynútených farbách zostal gradient orezaný do textu. */
+  .hero-title,
+  [data-theme="dark"] .hero-title {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    color: CanvasText;
+    -webkit-text-fill-color: CanvasText;
+  }
 }
 
 .hero-subtitle {
@@ -372,19 +597,26 @@ section {
   padding: 12px 28px;
   border-radius: 50px;
   font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px var(--shadow-color);
 }
 
 .btn-primary {
   background-color: var(--primary-color);
-  color: white;
+  color: var(--on-primary);
+  border: 2px solid var(--primary-color);
 }
 
-.btn-primary:hover {
-  background-color: #004494;
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: var(--on-primary);
   transform: translateY(-2px);
   box-shadow: 0 4px 6px var(--shadow-color);
+  outline-color: var(--focus-on-primary);
 }
 
 .btn-secondary {
@@ -394,8 +626,10 @@ section {
   margin-left: var(--spacing-sm);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
   background-color: var(--bg-surface);
+  color: var(--primary-color);
   transform: translateY(-2px);
 }
 
@@ -444,6 +678,20 @@ section {
   font-size: 2rem;
   color: var(--secondary-color);
   margin-bottom: var(--spacing-sm);
+}
+
+/* Ikony striedajú akcenty vlajky. Ide o grafické prvky, ktoré majú podľa
+   WCAG 1.4.11 spĺňať 3:1 — odvodené premenné to zabezpečujú v oboch témach. */
+.card-grid > *:nth-child(3n + 1) .card-icon {
+  color: var(--flag-accent-1);
+}
+
+.card-grid > *:nth-child(3n + 2) .card-icon {
+  color: var(--flag-accent-2);
+}
+
+.card-grid > *:nth-child(3n + 3) .card-icon {
+  color: var(--flag-accent-3);
 }
 
 .card h3 {
@@ -506,17 +754,40 @@ section {
 /* Footer */
 footer {
   background-color: var(--primary-color);
-  color: white;
+  color: var(--on-primary);
   padding: var(--spacing-lg) 0;
   text-align: center;
+  position: relative;
+  border-top: 3px solid transparent;
+  border-image: var(--flag-stripe) 1;
+}
+
+@media (forced-colors: active) {
+  footer {
+    border-image: none;
+  }
 }
 
 footer a {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--on-primary);
+  text-decoration: underline;
 }
 
-footer a:hover {
-  color: white;
+footer a:hover,
+footer a:focus-visible {
+  color: var(--on-primary);
+}
+
+footer h2,
+footer h3,
+footer h4,
+footer .footer-heading {
+  color: var(--on-primary);
+}
+
+footer a:focus-visible,
+footer button:focus-visible {
+  outline-color: var(--focus-on-primary);
 }
 
 .social-links {
@@ -529,7 +800,11 @@ footer a:hover {
 .social-links a {
   font-size: 1.5rem;
   transition: transform 0.3s ease;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   text-decoration: none;
 }
 
@@ -565,7 +840,7 @@ footer a:hover {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .reveal {
+  .reveal.reveal-pending {
     opacity: 0;
     transform: translateY(20px);
     transition:
@@ -573,38 +848,60 @@ footer a:hover {
       transform 0.6s ease-out;
   }
 
-  .reveal.is-visible {
+  .reveal.reveal-pending.is-visible {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
-  }
-
+@media (max-width: 1024px) {
   .nav-menu {
     position: fixed;
-    top: 70px;
+    top: var(--navbar-height);
     right: -100%;
     width: 100%;
-    height: calc(100vh - 70px);
+    height: calc(100vh - var(--navbar-height));
+    height: calc(100dvh - var(--navbar-height));
     background: var(--bg-card);
     flex-direction: column;
     align-items: center;
-    padding-top: var(--spacing-lg);
-    transition: 0.4s ease;
+    justify-content: flex-start;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md) var(--spacing-sm);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      right 0.3s ease,
+      visibility 0s linear 0.3s;
     box-shadow: -5px 0 10px var(--shadow-color);
   }
 
   .nav-menu.active {
     right: 0;
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
   }
 
   .nav-toggle {
     display: flex;
+  }
+
+  .nav-menu li,
+  .nav-menu .nav-logout-form {
+    width: min(100%, 24rem);
+  }
+
+  .nav-menu .nav-link {
+    display: flex;
+    min-height: 44px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
   }
 
   .nav-toggle.active span:nth-child(1) {
@@ -617,6 +914,12 @@ footer a:hover {
 
   .nav-toggle.active span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -6px);
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
   }
 
   .hero-content {
@@ -645,6 +948,10 @@ footer a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-height: 100vh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -670,24 +977,38 @@ footer a:hover {
   color: var(--text-main);
 }
 
+.cookie-title {
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-main);
+  font-size: 1.25rem;
+}
+
 .cookie-buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--spacing-sm);
 }
 
 .btn-cookie-accept {
   background-color: var(--primary-color);
-  color: white;
-  border: none;
+  color: var(--on-primary);
+  border: 1px solid var(--primary-color);
   padding: 10px 20px;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
+  font-family: inherit;
+  min-width: 44px;
+  min-height: 44px;
   transition: background-color 0.3s;
 }
 
-.btn-cookie-accept:hover {
-  background-color: #004494;
+.btn-cookie-accept:hover,
+.btn-cookie-accept:focus-visible {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: var(--on-primary);
+  outline-color: var(--focus-on-primary);
 }
 
 .btn-cookie-decline {
@@ -698,6 +1019,9 @@ footer a:hover {
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
+  font-family: inherit;
+  min-width: 44px;
+  min-height: 44px;
   transition: all 0.3s;
 }
 
@@ -718,14 +1042,23 @@ footer a:hover {
 }
 
 @media (max-width: 768px) {
+  .cookie-banner {
+    padding: var(--spacing-sm);
+  }
+
   .cookie-content {
     flex-direction: column;
     text-align: center;
+    padding: 0;
   }
 
   .cookie-buttons {
     width: 100%;
     justify-content: center;
+  }
+
+  .cookie-buttons > button {
+    flex: 1 1 9rem;
   }
 }
 
@@ -733,7 +1066,7 @@ footer a:hover {
 .cookie-settings-trigger {
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--on-primary);
   font-size: 0.85em;
   cursor: pointer;
   padding: 8px 12px;
@@ -748,7 +1081,8 @@ footer a:hover {
 
 .cookie-settings-trigger:hover,
 .cookie-settings-trigger:focus-visible {
-  color: white;
+  color: var(--on-primary);
+  outline-color: var(--focus-on-primary);
 }
 
 .cookie-link {
@@ -758,10 +1092,10 @@ footer a:hover {
 /* Skip Link */
 .skip-link {
   position: absolute;
-  top: -40px;
+  top: 0;
   left: 0;
   background: var(--primary-color);
-  color: white;
+  color: var(--on-primary);
   padding: 8px 16px;
   min-width: 44px;
   min-height: 44px;
@@ -770,17 +1104,34 @@ footer a:hover {
   text-decoration: none;
   border-radius: 0 0 4px 0;
   z-index: 9999;
-  transition: top 0.2s;
+  transform: translateY(-100%);
+  transition: transform 0.2s;
 }
 
 .skip-link:focus {
-  top: 0;
+  transform: translateY(0);
 }
 
 /* Legal pages (privacy, terms) */
 .page-content {
   padding-top: 120px;
   min-height: 80vh;
+}
+
+/* Číslované sekcie sú h2 kvôli hierarchii nadpisov, vizuál zostáva pôvodný */
+.page-content h2 {
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin-top: var(--spacing-md);
+}
+
+.articles-list {
+  padding-top: calc(var(--navbar-height) + 3rem);
+}
+
+.page-content .container,
+.article-detail .container {
+  max-width: 80ch;
 }
 
 /* Bio intro paragraph */
@@ -828,7 +1179,6 @@ footer a:hover {
 /* Footer meta links line */
 .footer-meta {
   font-size: 0.9em;
-  opacity: 0.8;
   margin-top: 10px;
 }
 
@@ -836,6 +1186,19 @@ footer a:hover {
 .pill-link--proton {
   border-color: #6d4aff;
   color: #6d4aff;
+}
+
+[data-theme="dark"] .pill-link--proton {
+  border-color: #b3a5ff;
+  color: #b3a5ff;
+}
+
+/* Tmavý override má rovnakú špecificitu ako .pill-link:hover a je neskôr v poradí,
+   preto sa interaktívny stav musí zopakovať, inak by pill prestal reagovať na kurzor. */
+[data-theme="dark"] .pill-link--proton:hover,
+[data-theme="dark"] .pill-link--proton:focus-visible {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 /* Medical disclaimer box */
@@ -910,12 +1273,39 @@ footer a:hover {
   border-color: rgba(239, 68, 68, 0.45);
 }
 
+/* Neutrálne oznámenie (napr. článok zobrazený v inom jazyku). */
+.alert-info {
+  background-color: rgba(80, 73, 204, 0.1);
+  color: #3d1a78;
+  border: 1px solid rgba(80, 73, 204, 0.35);
+}
+
+[data-theme="dark"] .alert-info {
+  background-color: rgba(123, 173, 226, 0.16);
+  color: #b9d6f5;
+  border-color: rgba(123, 173, 226, 0.45);
+}
+
+/* Odkazy na preklady pod článkom */
+.article-translations {
+  margin-top: var(--spacing-sm);
+  color: var(--text-muted);
+}
+
+/* Vysvetľujúci text pod poľom formulára */
+.form-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
 /* Forms */
 .admin-section,
 .contact-section,
 .newsletter-section,
 .auth-section {
-  padding: 3rem 0 4rem;
+  padding: calc(var(--navbar-height) + 3rem) 0 4rem;
 }
 
 .admin-form,
@@ -948,12 +1338,13 @@ footer a:hover {
   border-radius: 8px;
   font-family: inherit;
   font-size: 1rem;
-  background-color: var(--card-bg);
-  color: var(--text-primary);
+  background-color: var(--bg-card);
+  color: var(--text-main);
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
@@ -963,6 +1354,12 @@ footer a:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-checks {
@@ -1090,7 +1487,7 @@ footer a:hover {
 }
 
 .page-link {
-  background-color: var(--card-bg);
+  background-color: var(--bg-card);
   color: var(--primary-color);
 }
 
@@ -1108,11 +1505,11 @@ footer a:hover {
 
 /* Article detail */
 .article-detail {
-  padding: 3rem 0 4rem;
+  padding: calc(var(--navbar-height) + 3rem) 0 4rem;
 }
 
 .article-meta {
-  color: var(--text-secondary);
+  color: var(--text-muted);
   font-size: 0.95rem;
   margin-bottom: 1rem;
 }
@@ -1120,7 +1517,7 @@ footer a:hover {
 .article-excerpt {
   font-size: 1.1rem;
   font-style: italic;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   margin-bottom: 1.5rem;
 }
 

@@ -2,25 +2,26 @@
 <html lang="sk">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; base-uri 'self'; object-src 'none'; form-action 'self'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
       content="Podmienky používania webovej stránky MUDr. Ľubomíra Polaščína."
     />
-    <meta name="author" content="Lubomir Polascin" />
+    <meta name="author" content="Ľubomír Polaščín" />
     <meta name="theme-color" content="#ffffff" />
     <title>Podmienky používania | MUDr. Ľubomír Polaščín</title>
-    <link rel="canonical" href="https://polascin.net/terms.html" />
+    <link rel="canonical" href="https://polascin.net/terms.php" />
     <meta name="robots" content="noindex, follow" />
-    <link
-      rel="alternate"
-      hreflang="sk"
-      href="https://polascin.net/terms.html"
-    />
+    <link rel="alternate" hreflang="sk" href="https://polascin.net/terms.php" />
     <link
       rel="alternate"
       hreflang="x-default"
-      href="https://polascin.net/terms.html"
+      href="https://polascin.net/terms.php"
     />
     <link rel="icon" href="CrystalKidney.png" type="image/png" />
 
@@ -43,21 +44,23 @@
     <!-- Consent default must load before any analytics configuration -->
     <script src="js/consent-default.js"></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=20260728" />
-    <script src="js/main.js" defer></script>
+    <link rel="stylesheet" href="css/styles.css?v=20260728-2" />
+    <script src="js/main.js?v=20260728-2" defer></script>
   </head>
 
   <body>
     <a href="#main-content" class="skip-link">Preskočiť na hlavný obsah</a>
 
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Hlavná navigácia">
       <div class="container nav-container">
         <a href="index.html" class="nav-brand">Polascin.net</a>
         <button
+          type="button"
           class="nav-toggle"
           id="navToggle"
-          aria-label="Prepnúť navigáciu"
+          aria-label="Otvoriť navigáciu"
+          aria-controls="navMenu"
           aria-expanded="false"
         >
           <span></span>
@@ -65,9 +68,11 @@
           <span></span>
         </button>
         <button
+          type="button"
           class="theme-toggle-btn"
           id="themeToggle"
           aria-label="Prepnúť tmavý režim"
+          aria-pressed="false"
         >
           <i class="fa-solid fa-moon" aria-hidden="true"></i>
         </button>
@@ -100,57 +105,58 @@
     >
       <div class="container">
         <h1 class="section-title">Podmienky používania</h1>
-        <p><strong>Posledná aktualizácia: 30. januára 2026</strong></p>
+        <p><strong>Posledná aktualizácia: 28. júla 2026</strong></p>
 
-        <h3>1. Prijatie podmienok</h3>
+        <h2>1. Akceptácia podmienok</h2>
         <p>
-          Prístupom na stránku <strong>polascin.net</strong> („Webová stránka“)
-          a jej používaním prijímate tieto podmienky a ustanovenia tejto zmluvy
-          a súhlasíte s tým, že sú pre vás záväzné.
+          Prístupom na webovú stránku a jej používaním
+          <strong>polascin.net</strong> (ďalej len „webová stránka“) akceptujete
+          a súhlasíte, že vás zaväzujú podmienky a ustanovenia tejto dohody.
         </p>
 
-        <h3>2. Lekárske upozornenie</h3>
+        <h2>2. Zdravotné zrieknutie sa zodpovednosti</h2>
         <div class="medical-disclaimer">
           <p>
-            <strong>DÔLEŽITÉ:</strong> Obsah uvedený na tejto webovej stránke
-            slúži výlučne na informačné účely. <strong>Nie</strong> je určený
-            ako náhrada odbornej lekárskej rady, diagnózy ani liečby.
+            <strong>DÔLEŽITÉ:</strong> Obsah poskytovaný na tejto webovej
+            stránke slúži len na informačné účely.
+            <strong>Nenahrádza</strong> odborné lekárske poradenstvo,
+            diagnostiku ani liečbu.
           </p>
           <p>
-            V prípade akýchkoľvek otázok týkajúcich sa zdravotného stavu sa
-            vždy poraďte so svojím lekárom alebo iným kvalifikovaným
-            zdravotníckym pracovníkom. Nikdy nepodceňujte odbornú lekársku radu
-            ani neodkladajte jej vyhľadanie kvôli niečomu, čo ste si prečítali
-            na tejto webovej stránke.
+            V prípade akýchkoľvek otázok týkajúcich sa zdravotného stavu sa vždy
+            obráťte na svojho lekára alebo iného kvalifikovaného zdravotníckeho
+            pracovníka. Nikdy nepodceňujte odborné lekárske odporúčanie ani
+            neodkladajte vyhľadanie lekárskej pomoci z dôvodu informácií, ktoré
+            ste si prečítali na tejto webovej stránke.
           </p>
         </div>
 
-        <h3>3. Duševné vlastníctvo</h3>
+        <h2>3. Duševné vlastníctvo</h2>
         <p>
-          Obsah, usporiadanie, grafika, dizajn, kompilácia a ďalšie
-          náležitosti súvisiace s touto stránkou sú chránené príslušnými
-          autorskými právami a zákonmi o duševnom vlastníctve. Kopírovanie,
-          ďalšie šírenie, používanie alebo zverejňovanie akýchkoľvek takýchto
-          materiálov alebo akejkoľvek časti stránky je prísne zakázané.
+          Obsah, štruktúra, grafika, dizajn, kompilácia a iné prvky súvisiace s
+          touto webovou stránkou sú chránené príslušnými autorskými právami a
+          zákonmi o duševnom vlastníctve. Akékoľvek kopírovanie, redistribúcia,
+          použitie alebo publikovanie týchto prvkov alebo akejkoľvek časti
+          webovej stránky používateľom je prísne zakázané.
         </p>
 
-        <h3>4. Obmedzenie zodpovednosti</h3>
+        <h2>4. Obmedzenie zodpovednosti</h2>
         <p>
           V žiadnom prípade nenesiem zodpovednosť za akékoľvek náhodné,
-          nepriame, následné alebo osobitné škody akéhokoľvek druhu, ani za
-          akékoľvek iné škody, vrátane, bez obmedzenia, škôd vyplývajúcich zo
-          straty zisku, straty zmlúv, dobrého mena, údajov, informácií,
-          príjmov, očakávaných úspor alebo obchodných vzťahov, bez ohľadu na
-          to, či som bol upozornený na možnosť vzniku takejto škody, ktoré
-          vznikli v súvislosti s používaním tejto webovej stránky alebo
-          akýchkoľvek prepojených webových stránok.
+          nepriame, následné alebo mimoriadne škody akejkoľvek povahy, ani za
+          akékoľvek iné škody, vrátane, ale nie výhradne, škôd vzniknutých v
+          dôsledku straty zisku, straty zmlúv, goodwillu, údajov, informácií,
+          príjmov, očakávaných úspor alebo obchodných vzťahov, bez ohľadu na to,
+          či som bol upozornený na možnosť takýchto škôd, a to v súvislosti s
+          používaním tejto webovej stránky alebo akýchkoľvek na ňu odkazovaných
+          webových stránok.
         </p>
 
-        <h3>5. Rozhodné právo</h3>
+        <h2>5. Rozhodné právo</h2>
         <p>
-          Tieto podmienky sa riadia a vykladajú v súlade s právnym poriadkom
-          Slovenskej republiky a neodvolateľne sa podriaďujete výlučnej
-          právomoci súdov v tejto jurisdikcii.
+          Tieto podmienky a ustanovenia sa riadia a interpretujú v súlade s
+          právnymi predpismi Slovenskej republiky a bez výhrad sa podriaďujete
+          výlučnej právomoci súdov v tomto mieste.
         </p>
       </div>
     </main>
@@ -159,7 +165,7 @@
     <footer>
       <div class="container">
         <p>
-          &copy; <span id="current-year"></span> Ľubomír Polaščín. Všetky
+          &copy; 1998 – <span id="current-year"></span> Ľubomír Polaščín. Všetky
           práva vyhradené.
         </p>
         <p class="footer-meta">
@@ -170,14 +176,19 @@
             rel="noopener noreferrer"
             >books.polascin.net</a
           >
-          | <a href="privacy.html">Zásady ochrany osobných údajov</a> |
+          | <a href="privacy.html">Ochrana súkromia</a> |
           <a href="terms.html">Podmienky používania</a> |
-          <button class="cookie-settings-trigger" aria-haspopup="dialog">
+          <button
+            type="button"
+            class="cookie-settings-trigger"
+            aria-haspopup="dialog"
+            aria-controls="cookie-consent-container"
+          >
             Nastavenia cookies
           </button>
         </p>
       </div>
     </footer>
-    <div id="cookie-consent-container"></div>
+    <div id="cookie-consent-container" data-privacy-url="privacy.html"></div>
   </body>
 </html>
