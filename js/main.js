@@ -594,7 +594,7 @@
           now.getUTCSeconds() * 1000 +
           now.getUTCMilliseconds();
         beatClock.textContent =
-          "@" + (((ms + 3600000) % 86400000) / 86400).toFixed(2) + " .beat";
+          "@" + (((ms + 3600000) % 86400000) / 86400).toFixed(2);
       };
       updateBeat();
       window.setInterval(updateBeat, 500);

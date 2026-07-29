@@ -76,7 +76,7 @@ $footerBeat = '@' . number_format((($footerUpdateTs + 3600) % 86400) / 86.4, 2, 
     <p class="footer-updated">
       <span><?= te('footer.updated') ?> <?= htmlspecialchars($footerUpdated, ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars($footerTimezone, ENT_QUOTES, 'UTF-8') ?>)</span>
       <span class="footer-updated-sep" aria-hidden="true">·</span>
-      <span title="<?= te('footer.beat_title') ?>"><?= htmlspecialchars($footerBeat, ENT_QUOTES, 'UTF-8') ?> .beat</span>
+      <a href="https://www.swatch.com/en-us/internet-time.html" target="_blank" rel="noopener noreferrer" title="<?= te('footer.beat_title') ?>"><?= htmlspecialchars($footerBeat, ENT_QUOTES, 'UTF-8') ?></a>
     </p>
   </div>
 </footer>

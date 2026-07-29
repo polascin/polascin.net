@@ -55,7 +55,7 @@ $beatAktualny = number_format(((time() + 3600) % 86400) / 86.4, 2, '.', '');
         <span class="nav-age-years"><?= $vekRoky ?></span>
         <span class="nav-age-exact">(<?= $vekRoky ?><small><?= $vekZlomok ?></small>)</span>
       </span>
-      <span class="nav-beat" id="beatClock" title="<?= te('footer.beat_title') ?>">@<?= $beatAktualny ?> .beat</span>
+      <a class="nav-beat" id="beatClock" href="https://www.swatch.com/en-us/internet-time.html" target="_blank" rel="noopener noreferrer" title="<?= te('footer.beat_title') ?>">@<?= $beatAktualny ?></a>
     </div>
     <button
       type="button"
