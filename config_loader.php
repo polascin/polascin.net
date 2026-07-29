@@ -47,6 +47,7 @@ function loadAppConfig(): array {
         return $config;
     }
 
+    $unparsable = [];
     foreach (getAppConfigPaths() as $path) {
         if (!is_file($path) || !is_readable($path)) {
             continue;
@@ -56,6 +57,14 @@ function loadAppConfig(): array {
             $config = $parsed;
             return $parsed;
         }
+        $unparsable[] = $path;
+    }
+
+    // Rozlíšenie „nenašiel sa“ od „našiel sa, ale je poškodený“ — bez neho
+    // syntaktická chyba v INI (napr. neuvodzovkovaný znak &) zvádza hľadať
+    // chýbajúci súbor namiesto opravy jeho obsahu.
+    if ($unparsable !== []) {
+        throw new AppConfigException('Konfiguračný súbor existuje, ale nie je platné INI (hodnoty so špeciálnymi znakmi musia byť v dvojitých úvodzovkách): ' . implode(', ', $unparsable));
     }
 
     throw new AppConfigException('Konfiguračný súbor sa nenašiel. Hľadané cesty: ' . implode(', ', getAppConfigPaths()));

@@ -122,6 +122,37 @@ jobs:
           printf 'DEPLOY_REMOTE_PATH_SAFE=%s\n' "$REMOTE_PATH" >>"$GITHUB_ENV"
           printf 'POLASCIN_ENV_PATH_SAFE=%s\n' "$REMOTE_ENV_PATH" >>"$GITHUB_ENV"
 
+      # Tajomstvo prepíše konfiguráciu na serveri bezpodmienečne, preto sa
+      # validuje EŠTE PRED prvým zásahom na server. Nevalidné INI (napr.
+      # neuvodzovkovaný znak & v hesle) by inak zhodilo celú aplikáciu.
+      - name: Validate environment config secret
+        env:
+          POLASCIN_ENV_INI: ${{ secrets.POLASCIN_ENV_INI }}
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${POLASCIN_ENV_INI:-}" ]]; then
+            echo "POLASCIN_ENV_INI secret not set; nothing to validate."
+            exit 0
+          fi
+
+          printf '%s\n' "$POLASCIN_ENV_INI" > "$RUNNER_TEMP/polascin.env.ini"
+          php -r '
+            $parsed = parse_ini_file($argv[1], false, INI_SCANNER_TYPED);
+            if ($parsed === false) {
+              fwrite(STDERR, "POLASCIN_ENV_INI is not valid INI syntax. Wrap every value in double quotes (KEY = \"value\", one per line) — characters like & ? { } | ~ ! are special in INI files.\n");
+              exit(1);
+            }
+            foreach (["DB_HOST", "DB_NAME", "DB_USER", "DB_PASS"] as $key) {
+              if (!array_key_exists($key, $parsed) || (string) $parsed[$key] === "") {
+                fwrite(STDERR, "POLASCIN_ENV_INI is missing required key {$key}. The secret must contain the COMPLETE production config — it overwrites the server file on every deploy.\n");
+                exit(1);
+              }
+            }
+            echo "Environment config secret is valid INI with all required keys.\n";
+          ' "$RUNNER_TEMP/polascin.env.ini"
+          rm -f "$RUNNER_TEMP/polascin.env.ini"
+
       - name: Setup SSH
         env:
           DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
