@@ -58,7 +58,9 @@ $structuredData = [
     ],
 ];
 
-$pageTitle = t('meta.home_title') . ' | ' . t('common.author');
+// Na domovskej stránke nesie titulok meno a odbornosť, nie slovo „Domov“ —
+// to vo výsledkoch vyhľadávania nič nehovorí.
+$pageTitle = t('common.author') . ' | ' . t('meta.home_tagline');
 $seoDescription = t('meta.default_description');
 $canonicalUrl = absoluteLangUrl($lang, 'index.php');
 ?>
@@ -75,6 +77,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
     <div class="container">
       <div class="hero-content">
         <img src="CrystalKidney.png" alt="<?= te('home.logo_alt') ?>" class="profile-img" loading="eager">
+        <p class="hero-eyebrow"><?= te('home.hero_eyebrow') ?></p>
         <h1 class="hero-title"><?= htmlspecialchars($heroTitle, ENT_QUOTES, 'UTF-8') ?></h1>
         <p class="hero-subtitle"><?= htmlspecialchars($heroSubtitle, ENT_QUOTES, 'UTF-8') ?></p>
         <div class="hero-buttons">
@@ -91,74 +94,68 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
       <div class="about-grid">
         <div class="about-text">
           <p><?= nl2br(htmlspecialchars($aboutIntro, ENT_QUOTES, 'UTF-8'), false) ?></p>
-
-          <h3><?= te('home.who_heading') ?></h3>
           <p><?= nl2br(htmlspecialchars($aboutWho, ENT_QUOTES, 'UTF-8'), false) ?></p>
-          <p><?= te('home.who_approach') ?></p>
+          <p><?= te('home.about_synthesis') ?></p>
 
-          <h3><?= te('home.bio_heading') ?></h3>
-          <dl class="bio-list">
-            <dt><?= te('home.bio_name') ?></dt>
-            <dd><?= te('common.author') ?></dd>
-            <dt><?= te('home.bio_pronunciation') ?></dt>
-            <dd><span lang="en">Ljubomeer Polaschtcheen</span></dd>
-            <dt><?= te('home.bio_email') ?></dt>
-            <dd><a href="mailto:lubomir@polascin.net">lubomir@polascin.net</a></dd>
-            <dt><?= te('home.bio_web') ?></dt>
-            <dd>
-              <a href="<?= htmlspecialchars(langUrl($lang, 'index.php'), ENT_QUOTES, 'UTF-8') ?>">polascin.net</a> ·
-              <a href="https://sk.polascin.net/" target="_blank" rel="noopener noreferrer">sk.polascin.net</a> ·
-              <a href="https://polascin.sk/" target="_blank" rel="noopener noreferrer">polascin.sk</a> ·
-              <a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer">books.polascin.net</a>
-            </dd>
-            <dt><?= te('home.bio_social') ?></dt>
-            <dd>
-              <a href="https://www.linkedin.com/in/lubomirpolascin/" target="_blank" rel="noopener noreferrer">LinkedIn</a> ·
-              <a href="https://www.facebook.com/lubomir.polascin" target="_blank" rel="noopener noreferrer">Facebook</a> ·
-              <a href="https://x.com/polascin" target="_blank" rel="noopener noreferrer">X</a> ·
-              <a href="https://www.patreon.com/c/Csoelle" target="_blank" rel="noopener noreferrer">Patreon</a> ·
-              <a href="https://discord.gg/MsGmMZbz" target="_blank" rel="noopener noreferrer">Discord</a>
-            </dd>
-          </dl>
-
-          <h3><?= te('home.identity_heading') ?></h3>
-          <p><?= te('home.identity_text') ?></p>
-          <ul>
-            <li><?= te('home.identity_doctor') ?></li>
-            <li><?= te('home.identity_nephrologist') ?></li>
-            <li><?= te('home.identity_internist') ?></li>
-            <li><?= te('home.identity_translator') ?></li>
-            <li><?= te('home.identity_writer') ?></li>
-            <li><?= te('home.identity_programmer') ?></li>
-          </ul>
-          <h4><?= te('home.expertise_heading') ?></h4>
-          <ul>
-            <li><?= te('home.expertise_dialysis') ?></li>
-            <li><?= te('home.expertise_vascular') ?></li>
-            <li><?= te('home.expertise_elimination') ?></li>
-            <li><?= te('home.expertise_plasma') ?></li>
-            <li><?= te('home.expertise_transplant') ?></li>
-          </ul>
-          <p><?= te('home.teaching_text') ?></p>
+          <h3><?= te('home.areas_heading') ?></h3>
+          <div class="area-grid">
+            <div class="area">
+              <h4><?= te('home.areas_medicine') ?></h4>
+              <ul>
+                <li><?= te('home.areas_medicine_1') ?></li>
+                <li><?= te('home.areas_medicine_2') ?></li>
+                <li><?= te('home.areas_medicine_3') ?></li>
+                <li><?= te('home.areas_medicine_4') ?></li>
+                <li><?= te('home.areas_medicine_5') ?></li>
+              </ul>
+            </div>
+            <div class="area">
+              <h4><?= te('home.areas_language') ?></h4>
+              <ul>
+                <li><?= te('home.areas_language_1') ?></li>
+                <li><?= te('home.areas_language_2') ?></li>
+                <li><?= te('home.areas_language_3') ?></li>
+                <li><?= te('home.areas_language_4') ?></li>
+                <li><?= te('home.areas_language_5') ?></li>
+              </ul>
+            </div>
+            <div class="area">
+              <h4><?= te('home.areas_tech') ?></h4>
+              <ul>
+                <li><?= te('home.areas_tech_1') ?></li>
+                <li><?= te('home.areas_tech_2') ?></li>
+                <li><?= te('home.areas_tech_3') ?></li>
+                <li><?= te('home.areas_tech_4') ?></li>
+                <li><?= te('home.areas_tech_5') ?></li>
+              </ul>
+            </div>
+          </div>
 
           <h3><?= te('home.skills_heading') ?></h3>
-          <p><?= te('home.tech_text') ?></p>
-          <ul>
-            <li>HTML5 &amp; CSS3</li>
-            <li>JavaScript / TypeScript</li>
-            <li>PHP &amp; SQL</li>
-            <li>Python</li>
-            <li>Linux / Unix</li>
-            <li>AI &amp; FOSS</li>
-          </ul>
+          <dl class="skill-list">
+            <dt><?= te('home.skills_web') ?></dt>
+            <dd><?= te('home.skills_web_text') ?></dd>
+            <dt><?= te('home.skills_data') ?></dt>
+            <dd><?= te('home.skills_data_text') ?></dd>
+            <dt><?= te('home.skills_systems') ?></dt>
+            <dd><?= te('home.skills_systems_text') ?></dd>
+            <dt><?= te('home.skills_ai') ?></dt>
+            <dd><?= te('home.skills_ai_text') ?></dd>
+          </dl>
 
           <h3><?= te('home.education_heading') ?></h3>
           <p><?= te('home.education_text') ?></p>
+          <p><?= te('home.education_path') ?></p>
+          <p><?= te('home.education_scope') ?></p>
 
           <h3><?= te('home.personal_heading') ?></h3>
           <p><?= te('home.personal_text') ?></p>
+          <p><?= te('home.personal_writing') ?></p>
 
-          <a href="https://www.amazon.com/stores/author/B07PN436VJ/about" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><?= te('home.amazon_cta') ?></a>
+          <div class="about-actions">
+            <a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><?= te('home.books_cta') ?></a>
+            <a href="https://www.amazon.com/stores/author/B07PN436VJ/about" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('home.amazon_cta') ?></a>
+          </div>
         </div>
       </div>
     </div>

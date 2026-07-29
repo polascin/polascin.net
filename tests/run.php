@@ -248,6 +248,18 @@ foreach (array_keys(appLanguages()) as $entityLang) {
     expectSame([], $withEntities, "Katalóg {$entityLang} nesmie obsahovať HTML entity");
 }
 
+// Alt text obrázka je iba názov loga. Slovo „logo“ v ňom čítačka zopakuje
+// navyše („obrázok: Logo Crystal Kidney“) a na stránke to pôsobí ako nadpis.
+// Prekladatelia ho do alt textu opakovane dopĺňali, preto je to poistené (Beh #7).
+foreach (array_keys(appLanguages()) as $altLang) {
+    $altCatalogue = require dirname(__DIR__) . '/lang/' . $altLang . '.php';
+    expectSame(
+        'Crystal Kidney',
+        (string) ($altCatalogue['home.logo_alt'] ?? ''),
+        "Katalóg {$altLang} musí mať alt text bez slova „logo“"
+    );
+}
+
 // Katalógy smú obsahovať iba latinku a cyriliku. Zachytáva to znak, ktorý sa do
 // prekladu dostane omylom — pri ukrajinčine takto prešli dva čínske znaky (Beh #6).
 foreach (array_keys(appLanguages()) as $scriptLang) {

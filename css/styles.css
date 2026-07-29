@@ -643,37 +643,67 @@ section {
   background-color: var(--bg-body);
 }
 
-/* Bio list — label/value pairs in the About section */
-.bio-list {
+/* Skupiny oblastí pôsobenia — medicína, jazyk, technológie vedľa seba */
+.area-grid {
   display: grid;
-  grid-template-columns: minmax(9rem, max-content) 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-md);
+  margin: var(--spacing-sm) 0 var(--spacing-md);
+}
+
+.area h4 {
+  margin-bottom: var(--spacing-xs);
+}
+
+.area ul {
+  margin: 0;
+  padding-inline-start: 1.2rem;
+}
+
+/* Technologické zručnosti — dvojica označenie/obsah */
+.skill-list {
+  display: grid;
+  grid-template-columns: minmax(11rem, max-content) 1fr;
   gap: var(--spacing-xs) var(--spacing-sm);
   margin: var(--spacing-sm) 0 var(--spacing-md);
 }
 
-.bio-list dt {
+.skill-list dt {
   font-weight: 600;
   color: var(--text-muted);
 }
 
-.bio-list dd {
+.skill-list dd {
   margin: 0;
 }
 
-/* Odkazy v jednej bunke sa na úzkych displejoch musia zalomiť po položkách. */
-.bio-list dd a {
-  white-space: nowrap;
-}
-
 @media (max-width: 600px) {
-  .bio-list {
+  .skill-list {
     grid-template-columns: 1fr;
     gap: 0;
   }
 
-  .bio-list dt {
+  .skill-list dt {
     margin-top: var(--spacing-xs);
   }
+}
+
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-md);
+}
+
+/* Názov loga nad hlavným nadpisom. Je to popisok, nie nadpis — nesmie
+   konkurovať h1 ani pôsobiť ako samostatná úroveň nadpisu. */
+.hero-eyebrow {
+  margin-bottom: var(--spacing-xs);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 /* Ikona pri odkaze, ktorý opúšťa stránku. Je dekoratívna — informáciu nesie
