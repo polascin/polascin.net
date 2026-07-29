@@ -1,0 +1,21 @@
+# Konce riadkov sú LF v repozitári aj v pracovnom strome.
+#
+# Bez tohto git na Windows pri checkoute prepíše súbory na CRLF a
+# `prettier --check` (krok 4 auditného postupu v .doaudit.md) potom hlási
+# rozdiely, ktoré v commite vôbec nie sú. Server očakáva LF tak či tak.
+* text=auto eol=lf
+
+# Binárne súbory sa nesmú normalizovať.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.otf binary
+*.pdf binary
+*.zip binary

@@ -253,5 +253,41 @@ jobs:
           printf '%s' "$ADMIN_PASSWORD_B64" | ssh "${SSH_OPTS[@]}" "$TARGET" \
             "cd '${DEPLOY_REMOTE_PATH_SAFE}' && ADMIN_PASSWORD_B64=\$(cat) && POLASCIN_ADMIN_PASSWORD=\$( { printf '%s' \"\$ADMIN_PASSWORD_B64\" | base64 -d; printf '.'; } ) && POLASCIN_ADMIN_PASSWORD=\${POLASCIN_ADMIN_PASSWORD%.} && export POLASCIN_ADMIN_PASSWORD POLASCIN_SETUP_QUIET=1 POLASCIN_ENV_PATH='${REMOTE_ENV_ABSOLUTE}' && php setup_db.php && rm -f -- '${DEPLOY_REMOTE_PATH_SAFE}/env.ini' '${DEPLOY_REMOTE_PATH_SAFE}/private/polascin.env.ini' '${DEPLOY_REMOTE_PATH_SAFE}/private/env.ini'"
 
+      - name: Smoke check deployed site
+        env:
+          SMOKE_BASE_URL: ${{ secrets.SMOKE_BASE_URL || 'https://polascin.net' }}
+        run: |
+          set -euo pipefail
+
+          # Doteraz workflow overoval iba to, či jednotlivé kroky prešli, nie či
+          # stránka po nasadení naozaj funguje. Neúplné POLASCIN_ENV_INI prepísalo
+          # konfiguráciu na serveri a produkcia vracala 500 na všetkých stránkach;
+          # z hlásenia workflow to zrejmé nebolo.
+          FAILED=0
+          for PATH_SUFFIX in "/" "/contact.php" "/articles.php" "/sitemap.php"; do
+            URL="${SMOKE_BASE_URL%/}${PATH_SUFFIX}"
+            CODE=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 5 "$URL" || echo "000")
+            if [[ "$CODE" == "200" ]]; then
+              echo "  OK   $CODE  $PATH_SUFFIX"
+            else
+              echo "::error::Nasadená stránka vracia $CODE na $PATH_SUFFIX"
+              FAILED=1
+            fi
+          done
+
+          # Interné súbory nesmú byť po nasadení dostupné.
+          for PATH_SUFFIX in "/i18n.php" "/lang/sk.php" "/helpers.php"; do
+            URL="${SMOKE_BASE_URL%/}${PATH_SUFFIX}"
+            CODE=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "$URL" || echo "000")
+            if [[ "$CODE" == "403" || "$CODE" == "404" ]]; then
+              echo "  OK   $CODE  $PATH_SUFFIX (neprístupné)"
+            else
+              echo "::error::Interný súbor $PATH_SUFFIX je dostupný ($CODE)"
+              FAILED=1
+            fi
+          done
+
+          exit "$FAILED"
+
       - name: Summary
         run: echo "Deploy completed for commit ${GITHUB_SHA}."
