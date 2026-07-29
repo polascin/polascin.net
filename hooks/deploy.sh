@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
 
-set -uo pipefail
+set -eEuo pipefail
 
 usage() {
 	cat <<'EOF'
 Použitie: hooks/deploy.sh [--dry-run] [--migrate]
 
 Lokálny deploy polascin.net cez rsync/SSH.
-Konfiguráciu načíta z:
-  1. Premenných prostredia (POLASCIN_DEPLOY_*)
-  2. Súboru ~/.config/polascin/deploy.env
-  3. SSH config hostu nastaveného v ~/.ssh/config (cez POLASCIN_DEPLOY_TARGET)
+Konfiguráciu načíta zo súboru ~/.config/polascin/deploy.env alebo z premenných
+prostredia (POLASCIN_DEPLOY_*). Cieľ môže odkazovať aj na host definovaný
+v ~/.ssh/config (cez POLASCIN_DEPLOY_TARGET).
 
 Príklad ~/.config/polascin/deploy.env:
   POLASCIN_DEPLOY_TARGET=websupport
@@ -22,10 +21,30 @@ Alebo explicitne:
   POLASCIN_DEPLOY_USER=uid12345
   POLASCIN_REMOTE_PATH=/data/.../polascin.net
   POLASCIN_SSH_KEY=$HOME/.ssh/polascin_deploy
+  POLASCIN_DEPLOY_KNOWN_HOSTS_FILE=$HOME/.ssh/known_hosts
 
 S prepínačom --migrate sa po súborovom deployu automaticky spustí aj setup_db.php
 na serveri (pre novú inštaláciu treba nastaviť POLASCIN_ADMIN_PASSWORD).
 EOF
+}
+
+fail() {
+	echo "[deploy] $1" >&2
+	exit 1
+}
+
+validate_absolute_remote_path() {
+	local path=$1
+	local component
+	local -a components=()
+
+	[[ -n $path && $path == /* && ! $path =~ ^/+$ ]] || return 1
+	[[ $path =~ ^/[A-Za-z0-9._/-]+$ && $path != *"//"* ]] || return 1
+
+	IFS='/' read -r -a components <<<"$path"
+	for component in "${components[@]}"; do
+		[[ $component != "." && $component != ".." ]] || return 1
+	done
 }
 
 DRY_RUN=0
@@ -74,19 +93,24 @@ DEPLOY_HOST=${POLASCIN_DEPLOY_HOST:-""}
 DEPLOY_PORT=${POLASCIN_DEPLOY_PORT:-"22"}
 DEPLOY_USER=${POLASCIN_DEPLOY_USER:-""}
 SSH_KEY=${POLASCIN_SSH_KEY:-"$HOME/.ssh/polascin_deploy"}
+KNOWN_HOSTS_FILE=${POLASCIN_DEPLOY_KNOWN_HOSTS_FILE:-""}
+HOST_KEY_CHECK=${POLASCIN_SSH_HOST_KEY_CHECK:-"accept-new"}
+REMOTE_ENV_PATH=${POLASCIN_ENV_PATH:-""}
 
 if [[ -n $DEPLOY_TARGET ]]; then
+	[[ $DEPLOY_TARGET =~ ^[A-Za-z0-9._-]+$ ]] ||
+		fail "POLASCIN_DEPLOY_TARGET obsahuje nepodporované znaky."
 	SSH_SPEC="$DEPLOY_TARGET"
-	SSH_OPTS="-o BatchMode=yes -o ConnectTimeout=30 -o StrictHostKeyChecking=accept-new"
-	if [[ -f $SSH_KEY ]]; then
-		SSH_OPTS="$SSH_OPTS -i $SSH_KEY"
-	fi
 elif [[ -n $DEPLOY_HOST && -n $DEPLOY_USER ]]; then
+	[[ $DEPLOY_HOST =~ ^[A-Za-z0-9.-]+$ ]] ||
+		fail "POLASCIN_DEPLOY_HOST obsahuje nepodporované znaky."
+	[[ $DEPLOY_USER =~ ^[A-Za-z0-9._-]+$ ]] ||
+		fail "POLASCIN_DEPLOY_USER obsahuje nepodporované znaky."
+	[[ $DEPLOY_PORT =~ ^[0-9]{1,5}$ ]] ||
+		fail "POLASCIN_DEPLOY_PORT musí byť číslo od 1 do 65535."
+	((10#$DEPLOY_PORT >= 1 && 10#$DEPLOY_PORT <= 65535)) ||
+		fail "POLASCIN_DEPLOY_PORT musí byť číslo od 1 do 65535."
 	SSH_SPEC="${DEPLOY_USER}@${DEPLOY_HOST}"
-	SSH_OPTS="-p ${DEPLOY_PORT} -o BatchMode=yes -o ConnectTimeout=30 -o StrictHostKeyChecking=accept-new"
-	if [[ -f $SSH_KEY ]]; then
-		SSH_OPTS="$SSH_OPTS -i $SSH_KEY"
-	fi
 else
 	echo "[deploy] Nie je nastavený cieľ deployu." >&2
 	echo "         Použij buď POLASCIN_DEPLOY_TARGET (SSH config host) alebo POLASCIN_DEPLOY_HOST + POLASCIN_DEPLOY_USER." >&2
@@ -94,54 +118,96 @@ else
 	exit 1
 fi
 
-if [[ -z $REMOTE_PATH ]]; then
-	echo "[deploy] Chýba POLASCIN_REMOTE_PATH." >&2
-	exit 1
+while [[ $REMOTE_PATH == */ && $REMOTE_PATH != "/" ]]; do
+	REMOTE_PATH=${REMOTE_PATH%/}
+done
+validate_absolute_remote_path "$REMOTE_PATH" ||
+	fail "POLASCIN_REMOTE_PATH musí byť bezpečná absolútna cesta a nesmie byť koreň '/'."
+REMOTE_PARENT=${REMOTE_PATH%/*}
+[[ -n $REMOTE_PARENT ]] || REMOTE_PARENT="/"
+REMOTE_ENV_PATH=${REMOTE_ENV_PATH:-"${REMOTE_PARENT%/}/private/polascin.env.ini"}
+validate_absolute_remote_path "$REMOTE_ENV_PATH" ||
+	fail "POLASCIN_ENV_PATH musí byť bezpečná absolútna cesta mimo web rootu."
+case "$REMOTE_ENV_PATH" in
+"$REMOTE_PATH" | "$REMOTE_PATH"/*)
+	fail "POLASCIN_ENV_PATH musí byť mimo POLASCIN_REMOTE_PATH."
+	;;
+esac
+
+case "$HOST_KEY_CHECK" in
+yes | accept-new) ;;
+*)
+	fail "POLASCIN_SSH_HOST_KEY_CHECK podporuje iba hodnoty 'yes' alebo 'accept-new'."
+	;;
+esac
+
+if [[ -n $KNOWN_HOSTS_FILE ]]; then
+	[[ -r $KNOWN_HOSTS_FILE ]] ||
+		fail "Súbor POLASCIN_DEPLOY_KNOWN_HOSTS_FILE nie je čitateľný."
+	HOST_KEY_CHECK=yes
 fi
 
-REMOTE_PATH=${REMOTE_PATH%/}
+if [[ -n ${POLASCIN_SSH_KEY:-} && ! -f $SSH_KEY ]]; then
+	fail "Súbor POLASCIN_SSH_KEY neexistuje."
+fi
+
+SSH_OPTS=(
+	-o BatchMode=yes
+	-o ConnectTimeout=30
+	-o "StrictHostKeyChecking=${HOST_KEY_CHECK}"
+)
+
+if [[ -n $KNOWN_HOSTS_FILE ]]; then
+	SSH_OPTS+=(-o "UserKnownHostsFile=${KNOWN_HOSTS_FILE}")
+fi
+
+if [[ -z $DEPLOY_TARGET ]]; then
+	SSH_OPTS+=(-p "$DEPLOY_PORT")
+fi
+
+if [[ -f $SSH_KEY ]]; then
+	SSH_OPTS+=(-i "$SSH_KEY")
+fi
+
+# rsync -e rozdeľuje reťazec podľa úvodzoviek, nie podľa spätných lomítok,
+# preto sa každý argument obaľuje úvodzovkami (cesty môžu obsahovať medzery).
+RSYNC_RSH="ssh"
+for _ssh_opt in "${SSH_OPTS[@]}"; do
+	RSYNC_RSH+=" \"${_ssh_opt}\""
+done
+unset _ssh_opt
 
 echo "[deploy] Cieľ: ${SSH_SPEC}:${REMOTE_PATH}"
 
 if ((DRY_RUN)); then
-	echo "[deploy] DRY-RUN: rsync -avz --delete -e \"ssh ${SSH_OPTS}\" ./ ${SSH_SPEC}:${REMOTE_PATH}/ --exclude-from=.deployignore"
+	printf '[deploy] DRY-RUN: '
+	printf '%q ' rsync -avz --delete-delay --exclude-from=.deployignore -e "$RSYNC_RSH" ./ "${SSH_SPEC}:${REMOTE_PATH}/"
+	printf '\n'
 	exit 0
 fi
 
-if ! command -v rsync >/dev/null 2>&1; then
-	echo "[deploy] Chýba príkaz: rsync" >&2
-	exit 1
-fi
+for required_command in git rsync ssh date base64 tr dirname; do
+	command -v "$required_command" >/dev/null 2>&1 ||
+		fail "Chýba príkaz: ${required_command}"
+done
+
+echo "[deploy] Overujem vzdialený cieľový adresár..."
+ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "test -d '${REMOTE_PATH}'"
 
 echo "[deploy] Spúšťam rsync..."
-rsync -avz --delete \
-	-e "ssh ${SSH_OPTS}" \
+rsync -avz --delete-delay \
+	--exclude-from=.deployignore \
+	-e "$RSYNC_RSH" \
 	./ \
-	"${SSH_SPEC}:${REMOTE_PATH}/" \
-	--exclude-from=.deployignore
+	"${SSH_SPEC}:${REMOTE_PATH}/"
 
-RC=$?
-if ((RC != 0)); then
-	echo "[deploy] rsync zlyhal (exit code: $RC)." >&2
-	exit "$RC"
-fi
+echo "[deploy] Odstraňujem staré súbory určené iba pre repozitár..."
+ssh "${SSH_OPTS[@]}" "$SSH_SPEC" \
+	"set -eu; cd '${REMOTE_PATH}'; rm -f -- DEPLOY.md README.md .audit.md .doaudit.md .deployignore .gitignore .gitattributes env.ini.example deploy_info.php hooks/deploy.sh hooks/deploy.env.example tests/run.php .github/workflows/deploy.yml .vscode/settings.json .vscode/tasks.json .vscode/extensions.json .claude/settings.json .trunk/trunk.yaml .trunk/configs/svgo.config.js; rmdir hooks tests .github/workflows .github .vscode .claude .trunk/configs .trunk 2>/dev/null || true"
 
 COMMIT=$(git rev-parse --short HEAD)
 BRANCH=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || printf 'detached')
 TIMESTAMP=$(date '+%d.%m.%Y %H:%M')
-UNIX_TS=$(date '+%s')
-
-DEPLOY_INFO=$(mktemp)
-cat >"$DEPLOY_INFO" <<PHPEOF
-<?php
-define('DEPLOY_TIME', '${TIMESTAMP}');
-define('DEPLOY_TIMESTAMP', ${UNIX_TS});
-define('DEPLOY_COMMIT', '${COMMIT}');
-define('DEPLOY_BRANCH', '${BRANCH}');
-PHPEOF
-
-scp ${SSH_OPTS// -p / -P} "$DEPLOY_INFO" "${SSH_SPEC}:${REMOTE_PATH}/deploy_info.php"
-rm -f "$DEPLOY_INFO"
 
 POLASCIN_ENV_INI=${POLASCIN_ENV_INI:-""}
 if [[ -z $POLASCIN_ENV_INI && -n ${POLASCIN_ENV_INI_FILE:-} && -f $POLASCIN_ENV_INI_FILE ]]; then
@@ -149,21 +215,21 @@ if [[ -z $POLASCIN_ENV_INI && -n ${POLASCIN_ENV_INI_FILE:-} && -f $POLASCIN_ENV_
 fi
 
 if [[ -n $POLASCIN_ENV_INI ]]; then
-	REMOTE_ENV_PATH="${POLASCIN_ENV_PATH:-private/polascin.env.ini}"
-	REMOTE_ENV_DIR=$(dirname "$REMOTE_ENV_PATH")
+	REMOTE_ENV_DIR=$(dirname -- "$REMOTE_ENV_PATH")
 	echo "[deploy] Vytváram remote env config: ${REMOTE_ENV_PATH}"
-	printf '%s\n' "$POLASCIN_ENV_INI" | ssh ${SSH_OPTS} "${SSH_SPEC}" \
-		"cd '${REMOTE_PATH}' && mkdir -p '${REMOTE_ENV_DIR}' && umask 077 && cat > '${REMOTE_ENV_PATH}' && chmod 640 '${REMOTE_ENV_PATH}'"
+	printf '%s\n' "$POLASCIN_ENV_INI" | ssh "${SSH_OPTS[@]}" "$SSH_SPEC" \
+		"umask 077 && mkdir -p '${REMOTE_ENV_DIR}' && cat > '${REMOTE_ENV_PATH}' && chmod 600 '${REMOTE_ENV_PATH}'"
 fi
 
 if ((MIGRATE)); then
 	echo "[deploy] Spúšťam setup_db.php na serveri..."
 	if [[ -n ${POLASCIN_ADMIN_PASSWORD:-} ]]; then
-		ssh ${SSH_OPTS} "${SSH_SPEC}" \
-			"cd '${REMOTE_PATH}' && POLASCIN_SETUP_QUIET=1 POLASCIN_ADMIN_PASSWORD='${POLASCIN_ADMIN_PASSWORD}' php setup_db.php"
+		ADMIN_PASSWORD_B64=$(printf '%s' "$POLASCIN_ADMIN_PASSWORD" | base64 | tr -d '\n')
+		printf '%s' "$ADMIN_PASSWORD_B64" | ssh "${SSH_OPTS[@]}" "$SSH_SPEC" \
+			"cd '${REMOTE_PATH}' && ADMIN_PASSWORD_B64=\$(cat) && POLASCIN_ADMIN_PASSWORD=\$( { printf '%s' \"\$ADMIN_PASSWORD_B64\" | base64 -d; printf '.'; } ) && POLASCIN_ADMIN_PASSWORD=\${POLASCIN_ADMIN_PASSWORD%.} && export POLASCIN_ADMIN_PASSWORD POLASCIN_SETUP_QUIET=1 POLASCIN_ENV_PATH='${REMOTE_ENV_PATH}' && php setup_db.php && rm -f -- '${REMOTE_PATH}/env.ini' '${REMOTE_PATH}/private/polascin.env.ini' '${REMOTE_PATH}/private/env.ini'"
 	else
-		ssh ${SSH_OPTS} "${SSH_SPEC}" \
-			"cd '${REMOTE_PATH}' && php setup_db.php"
+		ssh "${SSH_OPTS[@]}" "$SSH_SPEC" \
+			"cd '${REMOTE_PATH}' && export POLASCIN_ENV_PATH='${REMOTE_ENV_PATH}' && php setup_db.php && rm -f -- '${REMOTE_PATH}/env.ini' '${REMOTE_PATH}/private/polascin.env.ini' '${REMOTE_PATH}/private/env.ini'"
 	fi
 fi
 

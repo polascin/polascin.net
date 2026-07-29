@@ -2,6 +2,11 @@
 <html lang="sk">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; base-uri 'self'; object-src 'none'; form-action 'self'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -10,17 +15,17 @@
     <meta name="author" content="Ľubomír Polaščín" />
     <meta name="theme-color" content="#ffffff" />
     <title>Ochrana súkromia | MUDr. Ľubomír Polaščín</title>
-    <link rel="canonical" href="https://polascin.net/privacy.html" />
+    <link rel="canonical" href="https://polascin.net/privacy.php" />
     <meta name="robots" content="noindex, follow" />
     <link
       rel="alternate"
       hreflang="sk"
-      href="https://polascin.net/privacy.html"
+      href="https://polascin.net/privacy.php"
     />
     <link
       rel="alternate"
       hreflang="x-default"
-      href="https://polascin.net/privacy.html"
+      href="https://polascin.net/privacy.php"
     />
     <link rel="icon" href="CrystalKidney.png" type="image/png" />
 
@@ -43,21 +48,23 @@
     <!-- Consent default must load before any analytics configuration -->
     <script src="js/consent-default.js"></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=20260728" />
-    <script src="js/main.js" defer></script>
+    <link rel="stylesheet" href="css/styles.css?v=20260728-2" />
+    <script src="js/main.js?v=20260728-2" defer></script>
   </head>
 
   <body>
     <a href="#main-content" class="skip-link">Preskočiť na hlavný obsah</a>
 
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Hlavná navigácia">
       <div class="container nav-container">
         <a href="index.html" class="nav-brand">Polascin.net</a>
         <button
+          type="button"
           class="nav-toggle"
           id="navToggle"
-          aria-label="Prepnúť navigáciu"
+          aria-label="Otvoriť navigáciu"
+          aria-controls="navMenu"
           aria-expanded="false"
         >
           <span></span>
@@ -65,15 +72,17 @@
           <span></span>
         </button>
         <button
+          type="button"
           class="theme-toggle-btn"
           id="themeToggle"
           aria-label="Prepnúť tmavý režim"
+          aria-pressed="false"
         >
           <i class="fa-solid fa-moon" aria-hidden="true"></i>
         </button>
         <ul class="nav-menu" id="navMenu">
           <li><a href="index.html#home" class="nav-link">Domov</a></li>
-          <li><a href="index.html#about" class="nav-link">O mne</a></li>
+          <li><a href="index.html#about" class="nav-link">Životopis</a></li>
           <li>
             <a href="index.html#nephrology" class="nav-link">Nefrológia</a>
           </li>
@@ -100,87 +109,105 @@
     >
       <div class="container">
         <h1 class="section-title">Ochrana súkromia</h1>
-        <p><strong>Posledná aktualizácia: 30. januára 2026</strong></p>
+        <p><strong>Posledná aktualizácia: 28. júla 2026</strong></p>
 
-        <h3>1. Úvod</h3>
+        <h2>1. Úvod</h2>
         <p>
-          Vitajte na <strong>polascin.net</strong>. Rešpektujem vaše súkromie a
-          zaväzujem sa chrániť vaše osobné údaje. Tieto zásady ochrany súkromia
-          vysvetľujú, ako nakladám s vašimi osobnými údajmi počas návštevy tejto
-          webovej stránky, a uvádzajú vaše práva v oblasti ochrany súkromia a
-          príslušné právne zabezpečenie.
+          Vitajte na stránke <strong>polascin.net</strong>. Rešpektujem vaše
+          súkromie a zaväzujem sa chrániť vaše osobné údaje. Táto politika
+          ochrany súkromia vysvetľuje, ako nakladám s vašimi osobnými údajmi pri
+          návšteve tejto webovej stránky, a popisuje vaše práva na ochranu
+          súkromia a príslušnú právnu ochranu.
         </p>
 
-        <h3>2. Informácie, ktoré zhromažďujem</h3>
+        <h2>2. Informácie, ktoré zhromažďujem</h2>
         <p>
-          Táto webová stránka je primárne informačná. Nevyžadujem od vás
-          vytvorenie účtu.
+          Táto webová stránka má predovšetkým informačný charakter. Nevyžadujem
+          od vás vytvorenie účtu.
         </p>
         <ul>
           <li>
-            <strong>Technické údaje:</strong> Zahŕňajú internetovú protokolovú
-            (IP) adresu, typ a verziu prehliadača, nastavenie časového pásma,
-            operačný systém a platformu. Tieto údaje sa automaticky zhromažďujú
-            prostredníctvom serverových záznamov na účely zabezpečenia a
-            výkonnosti.
+            <strong>Technické údaje:</strong> Zahŕňajú adresu internetového
+            protokolu (IP), typ prehliadača, navštívenú adresu, čas požiadavky a
+            základné údaje o odpovedi. Tieto údaje sa používajú na zabezpečenie,
+            diagnostiku a ochranu formulárov pred zneužitím. Citlivé parametre
+            odkazov sa pred uložením odstraňujú.
           </li>
           <li>
-            <strong>Cookies:</strong> Používam minimálne miestne úložisko na
-            zapamätanie vašej preferencie motívu (tmavý/svetlý režim).
-            <br /><br />
-            <strong>Google Analytics 4 (GA4):</strong> Používam Google Analytics
-            na analýzu návštevnosti a správania používateľov na webovej stránke.
-            Implementujem <strong>Google Consent Mode v2</strong>
-            na rešpektovanie vašich preferencií ochrany súkromia.
-            <br />
-            Predvolene je všetok súhlas so sledovaním nastavený na
-            <strong>'denied'</strong>. Skripty sa môžu načítať na zabezpečenie
-            základnej funkčnosti stránky, ale neukladajú cookies ani
-            nepristupujú k osobným údajom na účely sledovania, pokiaľ výslovne
-            nekliknete na „Prijať“ v banneri so súhlasom. Svoje preferencie môžete
-            kedykoľvek spravovať.
+            <strong>Kontaktný formulár:</strong> Ak odošlete správu, uložím
+            meno, e-mailovú adresu, predmet, text správy a čas odoslania, aby
+            som mohol na správu odpovedať.
+          </li>
+          <li>
+            <strong>Newsletter:</strong> Pri prihlásení na odber uložím
+            e-mailovú adresu, čas prihlásenia a kryptografické odtlačky tokenov
+            potrebné na potvrdenie a odhlásenie z odberu.
+          </li>
+          <li>
+            <strong>Cookies a lokálne úložisko:</strong> Lokálne ukladám iba
+            preferenciu témy (tmavý/svetlý režim) a vaše rozhodnutie o
+            analytike. <strong>Google Analytics 4 (GA4):</strong> Analytický
+            skript sa nenačíta, kým výslovne nekliknete na tlačidlo Súhlasím v
+            lište súhlasu. Reklamné kategórie súhlasu zostávajú vypnuté. Svoje
+            rozhodnutie môžete kedykoľvek zmeniť cez Nastavenia cookies v
+            pätičke.
           </li>
         </ul>
 
-        <h3>3. Ako používam vaše informácie</h3>
+        <h2>3. Ako používam vaše informácie</h2>
         <p>Vaše údaje používam na:</p>
         <ul>
-          <li>Dodanie obsahu webovej stránky vám.</li>
-          <li>Zabezpečenie webovej stránky.</li>
-          <li>Zapamätanie vašich preferencií (napr. motívu).</li>
+          <li>Poskytovanie obsahu webovej stránky.</li>
+          <li>Zabezpečenie bezpečnosti webovej stránky.</li>
+          <li>Zapamätanie preferencie témy a rozhodnutia o analytike.</li>
           <li>
-            Analýzu návštevnosti a vzorov používania webovej stránky
-            prostredníctvom Google Analytics 4, ale len ak kliknete na
-            <strong>„Prijať“</strong> v banneri so súhlasom s cookies. Právny
-            základ: váš súhlas (GDPR čl. 6 ods. 1 písm. a)). Analytické údaje
-            uchováva Google podľa vlastných nastavení uchovávania (zvyčajne až
-            14 mesiacov). Súhlas môžete kedykoľvek odvolať prostredníctvom
-            tlačidla <strong>Nastavenia cookies</strong> v pätičke a výberu
-            možnosti <strong>Zamietnuť</strong>.
+            Spracovanie kontaktných správ a správa odberu newslettera na základe
+            vašej žiadosti.
+          </li>
+          <li>
+            Analýzu návštevnosti a spôsobov používania webovej stránky
+            prostredníctvom Google Analytics 4, avšak iba v prípade, že kliknete
+            na tlačidlo <strong>Súhlasím</strong> v lište súhlasu s cookies.
+            Právny základ: váš súhlas (článok 6 ods. 1 písm. a) GDPR).
+            Analytické údaje uchováva spoločnosť Google podľa vlastných
+            pravidiel uchovávania (zvyčajne najviac 14 mesiacov). Súhlas môžete
+            kedykoľvek odvolať prostredníctvom tlačidla
+            <strong>Nastavenia cookies</strong> v pätičke a výberom možnosti
+            <strong>Odmietnuť</strong>.
           </li>
         </ul>
 
-        <h3>4. Odkazy tretích strán</h3>
+        <h2>4. Doba uchovávania</h2>
         <p>
-          Táto webová stránka môže obsahovať odkazy na webové stránky, pluginy a
+          Vlastné technické prístupové záznamy sa predvolene automaticky
+          odstraňujú po 90 dňoch; prevádzkovateľ môže túto dobu skrátiť.
+          Krátkodobé záznamy ochrany formulárov sa priebežne odstraňujú po
+          uplynutí ochranného okna. Kontaktné správy uchovávam iba po dobu
+          potrebnú na vybavenie komunikácie. E-mail newslettera uchovávam do
+          odhlásenia z odberu.
+        </p>
+
+        <h2>5. Odkazy tretích strán</h2>
+        <p>
+          Táto webová stránka môže obsahovať odkazy na webové stránky, doplnky a
           aplikácie tretích strán (napr. Amazon, sociálne siete). Kliknutím na
-          tieto odkazy môžu tretie strany zhromažďovať alebo zdieľať údaje o vás.
-          Tieto webové stránky tretích strán nekontrolujem a nenesiem
-          zodpovednosť za ich vyhlásenia o ochrane súkromia.
+          tieto odkazy môžu tretie strany zhromažďovať alebo zdieľať údaje o
+          vás. Nemám kontrolu nad týmito webovými stránkami tretích strán a
+          nenesiem zodpovednosť za ich vyhlásenia o ochrane súkromia.
         </p>
 
-        <h3>5. Vaše práva (GDPR/CCPA)</h3>
+        <h2>6. Vaše zákonné práva (GDPR/CCPA)</h2>
         <p>
-          V určitých prípadoch máte podľa zákonov o ochrane osobných údajov
-          práva týkajúce sa vašich osobných údajov, vrátane práva požadovať
-          prístup, opravu, vymazanie alebo obmedzenie spracúvania vašich osobných
-          údajov.
+          Za určitých okolností máte práva vyplývajúce zo zákonov o ochrane
+          osobných údajov vo vzťahu k vašim osobným údajom, vrátane práva
+          požiadať o prístup, opravu, vymazanie alebo obmedzenie spracúvania
+          vašich osobných údajov.
         </p>
 
-        <h3>6. Kontakt</h3>
+        <h2>7. Kontakt</h2>
         <p>
-          Ak máte akékoľvek otázky týkajúce sa týchto zásad ochrany súkromia,
-          kontaktujte ma na:
+          Ak máte akékoľvek otázky týkajúce sa tejto politiky ochrany súkromia,
+          kontaktujte ma na adrese:
           <a href="mailto:lubomir@polascin.net">lubomir@polascin.net</a>.
         </p>
       </div>
@@ -190,8 +217,8 @@
     <footer>
       <div class="container">
         <p>
-          &copy; <span id="current-year"></span> Ľubomír Polaščín. Všetky práva
-          vyhradené.
+          &copy; 1998 – <span id="current-year"></span> Ľubomír Polaščín. Všetky
+          práva vyhradené.
         </p>
         <p class="footer-meta">
           <a href="index.html">polascin.net</a> |
@@ -203,12 +230,17 @@
           >
           | <a href="privacy.html">Ochrana súkromia</a> |
           <a href="terms.html">Podmienky používania</a> |
-          <button class="cookie-settings-trigger" aria-haspopup="dialog">
+          <button
+            type="button"
+            class="cookie-settings-trigger"
+            aria-haspopup="dialog"
+            aria-controls="cookie-consent-container"
+          >
             Nastavenia cookies
           </button>
         </p>
       </div>
     </footer>
-    <div id="cookie-consent-container"></div>
+    <div id="cookie-consent-container" data-privacy-url="privacy.html"></div>
   </body>
 </html>

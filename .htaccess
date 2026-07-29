@@ -1,5 +1,6 @@
 # ── Bezpečnostné nastavenia ──────────────────────────────────────────────────
 Options -Indexes
+AcceptPathInfo Off
 ServerSignature Off
 DirectoryIndex index.php index.html
 
@@ -10,7 +11,7 @@ DirectoryIndex index.php index.html
 <IfModule mod_headers.c>
     Header always set X-Frame-Options "SAMEORIGIN"
     Header always set X-Content-Type-Options "nosniff"
-    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always setifempty Referrer-Policy "strict-origin-when-cross-origin"
     <If "%{HTTPS} == 'on' || %{HTTP:X-Forwarded-Proto} == 'https'">
         Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
     </If>
@@ -20,10 +21,11 @@ DirectoryIndex index.php index.html
     Header always unset X-Powered-By
     Header unset X-Powered-By
 
-    # CSP pre statické .html súbory (neplatí pre .php, ktoré si nastavujú vlastnú nonce politiku)
-    <If "! %{REQUEST_FILENAME} =~ /\.php$/">
+    # CSP iba pre priamo podávané statické HTML súbory. PHP odpovede si
+    # nastavujú vlastnú nonce politiku v auth.php.
+    <FilesMatch "\.html$">
         Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests"
-    </If>
+    </FilesMatch>
 </IfModule>
 
 # ── Presmerovanie sitemap.xml na dynamický sitemap.php ─────────────────────────
@@ -33,16 +35,18 @@ DirectoryIndex index.php index.html
 </IfModule>
 
 # ── Presmerovanie starých statických .html adries na .php ─────────────────────
-# Presmerovanie sa neaplikuje, ak cieľový .html súbor existuje (fallback počas
-# konfigurácie databázy alebo keď je PHP dočasne nefunkčné).
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteCond %{THE_REQUEST} \s/+([^.]+)\.html\s [NC]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ /%1.php [R=301,L]
+    RewriteRule ^(index|privacy|terms)\.html$ /$1.php [R=301,L,NE]
+    RewriteRule ^weblogo(?:/.*)?$ / [R=301,L,NE]
 
-    RewriteRule ^(\.git|\.vscode|private)(/.*)?$ - [F,L]
+    RewriteRule ^(\.claude|\.git|\.github|\.trunk|\.vscode|hooks|private|tests)(/.*)?$ - [F,L]
 </IfModule>
+
+# ── Blokovanie interných PHP skriptov a citlivých súborov ───────────────────
+<FilesMatch "^(auth|config_loader|db_config|footer|head_meta|header|helpers|main_nav|setup_db)\.php$">
+    Require all denied
+</FilesMatch>
 
 # ── Blokovanie .git adresára a citlivých súborov ────────────────────────────
 <FilesMatch "^\.git">
@@ -50,6 +54,10 @@ DirectoryIndex index.php index.html
 </FilesMatch>
 
 # ── Blokovanie citlivých typov súborov ───────────────────────────────────────
-<FilesMatch "\.(env|ini|log|sql|bak|tgz|tar\.gz|bz2|7z|key|pem|p12|pfx)$">
+<FilesMatch "\.(env|ini|log|sql|bak|tgz|tar\.gz|bz2|7z|key|pem|p12|pfx|md|ya?ml|sh)$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^(\.deployignore|env\.ini\.example)$">
     Require all denied
 </FilesMatch>

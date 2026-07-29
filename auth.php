@@ -2,11 +2,26 @@
 
 declare(strict_types=1);
 
+$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
+$executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
+if (
+    $executedFile === __FILE__
+    || preg_match('~(?:^|/)auth\.php(?:/|$)~i', $requestedScript) === 1
+) {
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, "Chyba: auth.php je interný súbor a nemožno ho spúšťať priamo.\n");
+        exit(1);
+    }
+    http_response_code(403);
+    exit('Prístup odmietnutý.');
+}
+unset($requestedScript, $executedFile);
+
 require_once __DIR__ . '/config_loader.php';
+require_once __DIR__ . '/helpers.php';
 
 const SESSION_IDLE_TIMEOUT = 3600;
-const APP_PASSWORD_MIN_BYTES = 8;
-const APP_PASSWORD_MAX_BYTES = 72;
+const SESSION_ACCOUNT_RECHECK_INTERVAL = 60;
 const APP_DUMMY_PASSWORD_HASH = '$2y$12$1tNSCTWlgcAYigjqkJKc4uj2t22PGxoKeDa2ajFJz1Bxb.I5bYPQy';
 
 function getScriptNonce(): string {
@@ -18,7 +33,7 @@ function getScriptNonce(): string {
 }
 
 function requestNeedsNoReferrer(): bool {
-    $script = basename((string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
+    $script = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
     $sensitiveScripts = [
         'login.php',
         'admin.php',
@@ -26,8 +41,15 @@ function requestNeedsNoReferrer(): bool {
         'admin_content.php',
         'admin_contact.php',
         'admin_newsletter.php',
+        'logout.php',
+        'newsletter.php',
     ];
-    return in_array($script, $sensitiveScripts, true);
+    foreach ($sensitiveScripts as $sensitiveScript) {
+        if (preg_match('~(?:^|/)' . preg_quote($sensitiveScript, '~') . '(?:/|$)~i', $script) === 1) {
+            return true;
+        }
+    }
+    return false;
 }
 
 function getRequestReferrerPolicy(): string {
@@ -59,8 +81,15 @@ function sendSecurityHeaders(): void {
         "script-src 'self' 'nonce-{$nonce}' https://www.googletagmanager.com https://www.google-analytics.com; " .
         "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com " .
             "https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; " .
-        "frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests";
+        "frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self'";
+    if (isRequestHttps()) {
+        $csp .= '; upgrade-insecure-requests';
+    }
     header('Content-Security-Policy: ' . $csp);
+    if (requestNeedsNoReferrer()) {
+        header('Cache-Control: no-store, private');
+        header('Pragma: no-cache');
+    }
 }
 
 ini_set('session.cookie_httponly', '1');
@@ -72,6 +101,9 @@ ini_set('session.gc_maxlifetime', (string) SESSION_IDLE_TIMEOUT);
 $isHttps = isRequestHttps();
 ini_set('session.cookie_secure', $isHttps ? '1' : '0');
 ini_set('session.cookie_samesite', 'Strict');
+if (session_status() === PHP_SESSION_NONE) {
+    session_name('POLASCINSESSID');
+}
 
 $projectSessionPath = __DIR__ . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'sessions';
 if ((is_dir($projectSessionPath) || @mkdir($projectSessionPath, 0700, true)) && is_writable($projectSessionPath)) {
@@ -90,6 +122,10 @@ if (session_status() === PHP_SESSION_NONE && !session_start()) {
     http_response_code(500);
     exit('Chyba: Nepodarilo sa spustiť reláciu.');
 }
+
+// Hlavičky sa posielajú ešte pred vetvou s vypršaním relácie, ktorá končí
+// presmerovaním a exitom — aj tá odpoveď musí niesť no-store a ostatné hlavičky.
+sendSecurityHeaders();
 
 if (!empty($_SESSION['user_id'])) {
     $now = time();
@@ -110,8 +146,15 @@ if (!empty($_SESSION['user_id'])) {
     }
 }
 
-sendSecurityHeaders();
-date_default_timezone_set('Europe/Bratislava');
+try {
+    $authEnv = loadAppConfig();
+    $authTimezone = trim((string) ($authEnv['APP_TIMEZONE'] ?? 'Europe/Bratislava'));
+    new DateTimeZone($authTimezone);
+    date_default_timezone_set($authTimezone);
+} catch (\Throwable) {
+    date_default_timezone_set('Europe/Bratislava');
+}
+unset($authEnv, $authTimezone);
 
 function isLoggedIn(): bool {
     return isset($_SESSION['user_id']) && (int) $_SESSION['user_id'] > 0;
@@ -121,11 +164,61 @@ function isAdmin(): bool {
     return !empty($_SESSION['is_admin']) && (int) $_SESSION['is_admin'] === 1;
 }
 
+/**
+ * Znovu overí, či je účet v relácii stále aktívny a s akými právami.
+ *
+ * Bez tejto kontroly by deaktivácia alebo degradácia účtu v databáze nemala
+ * žiadny účinok na už prebiehajúcu reláciu — a keďže sa `_last_activity`
+ * obnovuje pri každej požiadavke, aktívne používaná ukradnutá relácia by
+ * nevypršala nikdy. Výsledok sa cachuje, aby to nebol dotaz navyše pri každom
+ * načítaní stránky.
+ */
+function revalidateSessionAccount(): void {
+    if (!isLoggedIn()) {
+        return;
+    }
+
+    $now = time();
+    $checkedAt = isset($_SESSION['_account_checked']) ? (int) $_SESSION['_account_checked'] : 0;
+    if ($checkedAt > 0 && ($now - $checkedAt) < SESSION_ACCOUNT_RECHECK_INTERVAL) {
+        return;
+    }
+
+    $pdo = getAccessLogPdo();
+    if (!$pdo instanceof PDO) {
+        return;
+    }
+
+    try {
+        $stmt = $pdo->prepare("SELECT is_admin, is_active FROM users WHERE id = :id LIMIT 1");
+        $stmt->execute([':id' => (int) $_SESSION['user_id']]);
+        $account = $stmt->fetch();
+    } catch (\Throwable $e) {
+        error_log('Nepodarilo sa overiť stav účtu: ' . $e->getMessage());
+        return;
+    }
+
+    if (!is_array($account) || (int) $account['is_active'] !== 1) {
+        clearUserSession();
+        if (!session_start()) {
+            http_response_code(500);
+            exit('Chyba: Nepodarilo sa obnoviť reláciu.');
+        }
+        setFlashMessage('info', 'Váš účet už nie je aktívny. Prihláste sa znova.');
+        header('Location: login.php');
+        exit;
+    }
+
+    $_SESSION['is_admin'] = (int) $account['is_admin'];
+    $_SESSION['_account_checked'] = $now;
+}
+
 function requireLogin(): void {
     if (!isLoggedIn()) {
         header('Location: login.php');
         exit;
     }
+    revalidateSessionAccount();
 }
 
 function requireAdmin(): void {
@@ -134,22 +227,6 @@ function requireAdmin(): void {
         header('HTTP/1.1 403 Forbidden');
         exit('Prístup len pre administrátora.');
     }
-}
-
-function isAppPasswordValid(string $password): bool {
-    $length = strlen($password);
-    return $length >= APP_PASSWORD_MIN_BYTES
-        && $length <= APP_PASSWORD_MAX_BYTES
-        && preg_match('/[A-Z]/', $password) === 1
-        && preg_match('/[a-z]/', $password) === 1
-        && preg_match('/[0-9]/', $password) === 1;
-}
-
-function hashAppPassword(string $password): string {
-    if (!isAppPasswordValid($password)) {
-        throw new \InvalidArgumentException('Heslo nespĺňa bezpečnostné pravidlá.');
-    }
-    return password_hash($password, PASSWORD_DEFAULT);
 }
 
 function generateCsrfToken(): string {
@@ -164,7 +241,9 @@ function validateCsrfToken(mixed $token): bool {
         return false;
     }
     $valid = hash_equals($_SESSION['csrf_token'], $token);
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    if ($valid) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
     return $valid;
 }
 
@@ -207,33 +286,13 @@ function popFlashMessage(): ?array {
 }
 
 function getAccessLogPdo(): ?PDO {
-    $resolvedPdo = null;
     if (isset($GLOBALS['pdo']) && $GLOBALS['pdo'] instanceof PDO) {
-        $resolvedPdo = $GLOBALS['pdo'];
-    } else {
-        $configPath = __DIR__ . '/db_config.php';
-        if (is_file($configPath)) {
-            try {
-                require_once $configPath;
-            } catch (\Throwable $e) {
-                error_log('Access log DB load failed: ' . $e->getMessage());
-            }
-        }
-        if (isset($pdo) && $pdo instanceof PDO) {
-            $resolvedPdo = $pdo;
-        }
-        if ($resolvedPdo === null && isset($GLOBALS['pdo']) && $GLOBALS['pdo'] instanceof PDO) {
-            $resolvedPdo = $GLOBALS['pdo'];
-        }
+        return $GLOBALS['pdo'];
     }
-    return $resolvedPdo;
+    return null;
 }
 
-function saveAccessLog(array $record): bool {
-    $pdo = getAccessLogPdo();
-    if ($pdo === null) {
-        return false;
-    }
+function saveAccessLog(array $record, PDO $pdo): bool {
     try {
         $stmt = $pdo->prepare(
             "INSERT INTO access_logs (
@@ -258,15 +317,72 @@ function saveAccessLog(array $record): bool {
             ':response_time_ms' => $record['response_time_ms'],
             ':is_bot' => $record['is_bot'],
         ]);
+        if (random_int(1, 100) === 1) {
+            $cutoff = date('Y-m-d H:i:s', time() - (getAccessLogRetentionDays() * 86400));
+            $cleanup = $pdo->prepare("DELETE FROM access_logs WHERE created_at < :cutoff");
+            $cleanup->execute([':cutoff' => $cutoff]);
+        }
         return true;
-    } catch (\PDOException $e) {
+    } catch (\Throwable $e) {
         error_log('Access log write failed: ' . $e->getMessage());
         return false;
     }
 }
 
 function registerAccessLogger(): void {
-    register_shutdown_function('recordAccessLogShutdown');
+    if (isAccessLoggingEnabled()) {
+        register_shutdown_function('recordAccessLogShutdown');
+    }
+}
+
+function isAccessLoggingEnabled(): bool {
+    try {
+        $env = loadAppConfig();
+    } catch (\RuntimeException) {
+        return false;
+    }
+    return parseEnvBool($env['ACCESS_LOG_ENABLED'] ?? getenv('ACCESS_LOG_ENABLED'), true);
+}
+
+function getAccessLogRetentionDays(): int {
+    try {
+        $env = loadAppConfig();
+    } catch (\RuntimeException) {
+        return 90;
+    }
+    $days = (int) ($env['ACCESS_LOG_RETENTION_DAYS'] ?? getenv('ACCESS_LOG_RETENTION_DAYS') ?: 90);
+    return max(1, min($days, 365));
+}
+
+function redactSensitiveQuery(string $query): string {
+    $redacted = preg_replace_callback(
+        '/(^|[&;])([^=&;]*)(?:=([^&;]*))?/',
+        static function (array $matches): string {
+            $separator = $matches[1] ?? '';
+            $rawKey = $matches[2] ?? '';
+            $key = strtolower(rawurldecode($rawKey));
+            $isSensitive = preg_match(
+                '/(?:^|[^a-z0-9])(?:authorization|code|csrf|email|key|password|secret|signature|token)(?:$|[^a-z0-9])/',
+                $key
+            ) === 1;
+            if ($isSensitive) {
+                return $separator . $rawKey . '=%5BREDACTED%5D';
+            }
+            return $matches[0];
+        },
+        $query
+    );
+    return $redacted ?? '';
+}
+
+function redactSensitiveUrl(string $url): string {
+    $queryPosition = strpos($url, '?');
+    if ($queryPosition === false) {
+        return $url;
+    }
+    $path = substr($url, 0, $queryPosition);
+    $query = substr($url, $queryPosition + 1);
+    return $path . '?' . redactSensitiveQuery($query);
 }
 
 function recordAccessLogShutdown(): void {
@@ -274,8 +390,8 @@ function recordAccessLogShutdown(): void {
         return;
     }
     $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
-    $uri = (string) ($_SERVER['REQUEST_URI'] ?? ($_SERVER['PHP_SELF'] ?? '/'));
-    $query = (string) ($_SERVER['QUERY_STRING'] ?? '');
+    $uri = redactSensitiveUrl((string) ($_SERVER['REQUEST_URI'] ?? ($_SERVER['PHP_SELF'] ?? '/')));
+    $query = redactSensitiveQuery((string) ($_SERVER['QUERY_STRING'] ?? ''));
     $status = http_response_code();
     if (!is_int($status) || $status < 100 || $status > 599) {
         $status = 200;
@@ -284,20 +400,24 @@ function recordAccessLogShutdown(): void {
     $record = [
         'user_id' => isLoggedIn() ? (int) ($_SESSION['user_id'] ?? 0) : null,
         'username' => $_SESSION['username'] ?? null,
-        'method' => $method,
-        'request_uri' => $uri,
-        'query_string' => $query,
+        'method' => appTextSlice(strtoupper((string) $method), 0, 10),
+        'request_uri' => appTextSlice($uri, 0, 2048),
+        'query_string' => appTextSlice($query, 0, 2048),
         'http_status' => $status,
         'client_ip' => getClientIpAddress(),
-        'user_agent' => mb_substr((string) ($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 500),
-        'referer' => mb_substr((string) ($_SERVER['HTTP_REFERER'] ?? ''), 0, 2048),
-        'host' => mb_substr((string) ($_SERVER['HTTP_HOST'] ?? ''), 0, 255),
+        'user_agent' => appTextSlice((string) ($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 500),
+        'referer' => appTextSlice(redactSensitiveUrl((string) ($_SERVER['HTTP_REFERER'] ?? '')), 0, 2048),
+        'host' => appTextSlice((string) ($_SERVER['HTTP_HOST'] ?? ''), 0, 255),
         'response_time_ms' => isset($_SERVER['REQUEST_TIME_FLOAT']) ? (int) round((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']) * 1000) : null,
         'is_bot' => isKnownBotUserAgent() ? 1 : 0,
     ];
 
-    if (!saveAccessLog($record)) {
-        error_log('Access log fallback: ' . json_encode($record, JSON_UNESCAPED_UNICODE));
+    $pdo = getAccessLogPdo();
+    if ($pdo === null) {
+        return;
+    }
+    if (!saveAccessLog($record, $pdo)) {
+        error_log('Access log nebolo možné uložiť.');
     }
 }
 
@@ -319,27 +439,34 @@ function isEmailDomainValid(string $email): bool {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return false;
     }
+    if (!function_exists('checkdnsrr')) {
+        return true;
+    }
     $domain = substr(strrchr($email, '@'), 1);
     return $domain !== '' && (checkdnsrr($domain, 'MX') || checkdnsrr($domain, 'A'));
 }
 
-function columnExists(PDO $pdo, string $table, string $column): bool {
-    $stmt = $pdo->prepare(
-        "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
-         WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table AND COLUMN_NAME = :column"
-    );
-    $stmt->execute(['table' => $table, 'column' => $column]);
-    return (int) $stmt->fetchColumn() > 0;
-}
-
 function checkFormRateLimit(PDO $pdo, string $action, string $ip, int $maxAttempts, int $windowSeconds): bool {
-    $pdo->beginTransaction();
     try {
-        $pdo->prepare(
-            "DELETE FROM form_rate_limit
-             WHERE action = :action AND blocked_until IS NOT NULL AND blocked_until < NOW()"
-        )->execute(['action' => $action]);
+        // Housekeeping nie je súčasťou kritickej transakcie a beží iba občas.
+        // Index (action, last_attempt) pridáva verzovaná migrácia.
+        if (random_int(1, 100) === 1) {
+            $cleanupBefore = date('Y-m-d H:i:s', time() - max($windowSeconds * 2, 86400));
+            try {
+                $pdo->prepare(
+                    "DELETE FROM form_rate_limit
+                     WHERE action = :action
+                       AND (
+                           (blocked_until IS NOT NULL AND blocked_until < NOW())
+                           OR last_attempt < :cleanup_before
+                       )"
+                )->execute(['action' => $action, 'cleanup_before' => $cleanupBefore]);
+            } catch (\Throwable $cleanupError) {
+                error_log('Rate-limit cleanup chyba (' . $action . '): ' . $cleanupError->getMessage());
+            }
+        }
 
+        $pdo->beginTransaction();
         $pdo->prepare(
             "INSERT INTO form_rate_limit (ip, action, attempt_count, first_attempt, last_attempt)
              VALUES (:ip, :action, 0, NOW(), NOW())
@@ -389,7 +516,16 @@ function checkFormRateLimit(PDO $pdo, string $action, string $ip, int $maxAttemp
             $pdo->rollBack();
         }
         error_log('Rate-limit chyba (' . $action . '): ' . $e->getMessage());
-        return true;
+        return false;
+    }
+}
+
+function clearFormRateLimit(PDO $pdo, string $action, string $ip): void {
+    try {
+        $stmt = $pdo->prepare("DELETE FROM form_rate_limit WHERE ip = :ip AND action = :action");
+        $stmt->execute([':ip' => $ip, ':action' => $action]);
+    } catch (\PDOException $e) {
+        error_log('Rate-limit reset chyba (' . $action . '): ' . $e->getMessage());
     }
 }
 
@@ -410,8 +546,10 @@ function logAdminAction(PDO $pdo, string $action, ?string $targetType = null, ?i
             ':target_id' => $targetId,
             ':details' => empty($details) ? null : json_encode($details, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             ':client_ip' => getClientIpAddress(),
-            ':user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? null,
+            ':user_agent' => appTextSlice((string) ($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 500),
         ]);
+        $cleanup = $pdo->prepare("DELETE FROM admin_audit_log WHERE created_at < :cutoff");
+        $cleanup->execute([':cutoff' => date('Y-m-d H:i:s', time() - 31536000)]);
     } catch (\Throwable $e) {
         error_log('logAdminAction failed: ' . $e->getMessage());
     }

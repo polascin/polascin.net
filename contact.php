@@ -9,7 +9,6 @@ require_once __DIR__ . '/helpers.php';
 /** @var PDO $pdo */
 
 $errors = [];
-$success = false;
 $formData = ['name' => '', 'email' => '', 'subject' => '', 'message' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -23,21 +22,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = trim((string) ($_POST['message'] ?? ''));
         $formData = compact('name', 'email', 'subject', 'message');
 
-        if ($name === '' || mb_strlen($name) > 255) {
+        if ($name === '' || appTextLength($name) > 255) {
             $errors[] = 'Prosím, zadajte platné meno.';
         }
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($email) > 255) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || appTextLength($email) > 255) {
             $errors[] = 'Prosím, zadajte platnú e-mailovú adresu.';
         }
-        if ($subject !== '' && mb_strlen($subject) > 255) {
+        if ($subject !== '' && appTextLength($subject) > 255) {
             $errors[] = 'Predmet je príliš dlhý.';
         }
-        if ($message === '' || mb_strlen($message) > 5000) {
+        if ($message === '' || appTextLength($message) > 5000) {
             $errors[] = 'Prosím, zadajte správu (max 5000 znakov).';
         }
 
+        // Limit sa počíta až po validácii, aby preklep vo formulári nespotreboval
+        // pokus a nezablokoval odosielateľa na hodinu s mätúcou hláškou.
         $ip = getClientIpAddress();
-        if (!checkFormRateLimit($pdo, 'contact_form', $ip, 5, 3600)) {
+        if (empty($errors) && !checkFormRateLimit($pdo, 'contact_form', $ip, 5, 3600)) {
             $errors[] = 'Príliš veľa správ z tejto adresy. Skúste to znova neskôr.';
         }
 
@@ -53,8 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ':subject' => $subject ?: null,
                     ':message' => $message,
                 ]);
-                $success = true;
-                $formData = ['name' => '', 'email' => '', 'subject' => '', 'message' => ''];
+                setFlashMessage('success', 'Ďakujeme za vašu správu. Ozveme sa vám čoskoro.');
+                header('Location: contact.php', true, 303);
+                exit;
             } catch (\PDOException $e) {
                 error_log('contact.php insert error: ' . $e->getMessage());
                 $errors[] = 'Nepodarilo sa odoslať správu. Skúste to znova neskôr.';
@@ -79,9 +81,6 @@ $canonicalUrl = $baseUrl . '/contact.php';
   <section class="contact-section">
     <div class="container">
       <h1 class="section-title reveal">Kontakt</h1>
-      <?php if ($success): ?>
-        <div class="alert alert-success"><p>Ďakujeme za vašu správu. Ozveme sa vám čoskoro.</p></div>
-      <?php endif; ?>
       <?php foreach ($errors as $error): ?>
         <div class="alert alert-error"><p><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p></div>
       <?php endforeach; ?>

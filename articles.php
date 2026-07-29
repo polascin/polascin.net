@@ -9,19 +9,29 @@ require_once __DIR__ . '/helpers.php';
 /** @var PDO $pdo */
 
 $perPage = 10;
-$page = isset($_GET['page']) ? max(1, (int) $_GET['page']) : 1;
-$offset = ($page - 1) * $perPage;
-
-$articles = getPublishedArticles($pdo, $perPage, $offset);
-
 $countStmt = $pdo->query("SELECT COUNT(*) FROM articles WHERE is_published = 1 AND published_at <= NOW()");
 $total = (int) $countStmt->fetchColumn();
 $totalPages = max(1, (int) ceil($total / $perPage));
+$rawPage = $_GET['page'] ?? '1';
+$pageIsValid = is_string($rawPage)
+    && preg_match('/^[1-9][0-9]{0,8}$/D', $rawPage) === 1
+    && (int) $rawPage <= $totalPages;
+$page = $pageIsValid ? (int) $rawPage : 1;
+$offset = ($page - 1) * $perPage;
+$articles = $pageIsValid ? getPublishedArticles($pdo, $perPage, $offset) : [];
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Články | MUDr. Ľubomír Polaščín';
-$seoDescription = 'Najnovšie články a postrehy od MUDr. Ľubomíra Polaščína o nefrológii, internej medicíne, technológiách a písaní.';
-$canonicalUrl = $baseUrl . '/articles.php' . ($page > 1 ? '?page=' . $page : '');
+if (!$pageIsValid) {
+    http_response_code(404);
+    $pageTitle = 'Stránka článkov nebola nájdená | MUDr. Ľubomír Polaščín';
+    $seoDescription = 'Požadovaná stránka zoznamu článkov neexistuje.';
+    $canonicalUrl = $baseUrl . '/articles.php';
+    $robotsMeta = 'noindex, follow';
+} else {
+    $pageTitle = 'Články | MUDr. Ľubomír Polaščín';
+    $seoDescription = 'Najnovšie články a postrehy od MUDr. Ľubomíra Polaščína o nefrológii, internej medicíne, technológiách a písaní.';
+    $canonicalUrl = $baseUrl . '/articles.php' . ($page > 1 ? '?page=' . $page : '');
+}
 ?>
 <!DOCTYPE html>
 <html lang="sk">
@@ -34,7 +44,9 @@ $canonicalUrl = $baseUrl . '/articles.php' . ($page > 1 ? '?page=' . $page : '')
   <section class="articles-list">
     <div class="container">
       <h1 class="section-title reveal">Články</h1>
-      <?php if (empty($articles)): ?>
+      <?php if (!$pageIsValid): ?>
+        <p>Požadovaná stránka neexistuje. <a href="articles.php">Prejsť na prvú stránku článkov</a>.</p>
+      <?php elseif (empty($articles)): ?>
         <p>Zatiaľ neboli publikované žiadne články.</p>
       <?php else: ?>
         <div class="card-grid">

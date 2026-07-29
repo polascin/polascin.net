@@ -2,22 +2,11 @@
 
 declare(strict_types=1);
 
-$envFiles = [
-    __DIR__ . '/env.ini',
-    __DIR__ . '/private/env.ini',
-    __DIR__ . '/private/polascin.env.ini',
-    dirname(__DIR__) . '/polascin.env.ini',
-    dirname(__DIR__) . '/private/polascin.env.ini',
-];
-$envReady = getenv('POLASCIN_ENV_PATH') !== false;
-foreach ($envFiles as $envFile) {
-    if (file_exists($envFile)) {
-        $envReady = true;
-        break;
-    }
-}
+require_once __DIR__ . '/config_loader.php';
 
-if (!$envReady) {
+try {
+    loadAppConfig();
+} catch (AppConfigException) {
     readfile(__DIR__ . '/index.html');
     exit;
 }
@@ -42,12 +31,13 @@ $latestArticles = getPublishedArticles($pdo, 3);
 $structuredData = [
     '@context' => 'https://schema.org',
     '@type' => 'Person',
-    'name' => 'Dr. Lubomir Polascin',
+    'name' => 'MUDr. Ľubomír Polaščín',
+    'alternateName' => 'Lubomir Polascin',
     'url' => $baseUrl . '/',
     'image' => $baseUrl . '/images/profile.jpg',
     'jobTitle' => 'Nefrológ a internista',
     'description' => 'MUDr. Ľubomír Polaščín — nefrológ, internista, lekársky prekladateľ, spisovateľ a samouk programátor.',
-    'alumniOf' => 'Pavol Jozef Šafárik University in Košice',
+    'alumniOf' => 'Univerzita Pavla Jozefa Šafárika v Košiciach',
     'sameAs' => [
         'https://polascin.com/',
         'https://polascin.sk/',
@@ -67,6 +57,7 @@ $structuredData = [
 
 $pageTitle = 'Domov | MUDr. Ľubomír Polaščín';
 $seoDescription = 'MUDr. Ľubomír Polaščín — nefrológ, internista, lekársky prekladateľ, spisovateľ a samouk programátor.';
+$canonicalUrl = rtrim($baseUrl, '/') . '/';
 ?>
 <!DOCTYPE html>
 <html lang="sk">

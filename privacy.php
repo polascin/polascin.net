@@ -2,22 +2,11 @@
 
 declare(strict_types=1);
 
-$envFiles = [
-    __DIR__ . '/env.ini',
-    __DIR__ . '/private/env.ini',
-    __DIR__ . '/private/polascin.env.ini',
-    dirname(__DIR__) . '/polascin.env.ini',
-    dirname(__DIR__) . '/private/polascin.env.ini',
-];
-$envReady = getenv('POLASCIN_ENV_PATH') !== false;
-foreach ($envFiles as $envFile) {
-    if (file_exists($envFile)) {
-        $envReady = true;
-        break;
-    }
-}
+require_once __DIR__ . '/config_loader.php';
 
-if (!$envReady) {
+try {
+    loadAppConfig();
+} catch (AppConfigException) {
     readfile(__DIR__ . '/privacy.html');
     exit;
 }
@@ -42,33 +31,39 @@ $canonicalUrl = $baseUrl . '/privacy.php';
     <h1 class="section-title">Ochrana súkromia</h1>
     <p><strong>Posledná aktualizácia: 28. júla 2026</strong></p>
 
-    <h3>1. Úvod</h3>
+    <h2>1. Úvod</h2>
     <p>Vitajte na stránke <strong>polascin.net</strong>. Rešpektujem vaše súkromie a zaväzujem sa chrániť vaše osobné údaje. Táto politika ochrany súkromia vysvetľuje, ako nakladám s vašimi osobnými údajmi pri návšteve tejto webovej stránky, a popisuje vaše práva na ochranu súkromia a príslušnú právnu ochranu.</p>
 
-    <h3>2. Informácie, ktoré zhromažďujem</h3>
+    <h2>2. Informácie, ktoré zhromažďujem</h2>
     <p>Táto webová stránka má predovšetkým informačný charakter. Nevyžadujem od vás vytvorenie účtu.</p>
     <ul>
-      <li><strong>Technické údaje:</strong> Zahŕňajú adresu internetového protokolu (IP), typ a verziu prehliadača, nastavenie časového pásma, operačný systém a platformu. Tieto údaje sa zhromažďujú automaticky prostredníctvom serverových protokolov na účely zabezpečenia a výkonu.</li>
-      <li><strong>Cookies:</strong> Používam minimálne lokálne úložisko na zapamätanie vašej preferencie témy (tmavý/svetlý režim).
-        <strong>Google Analytics 4 (GA4):</strong> Používam Google Analytics na analýzu návštevnosti webovej stránky a správania používateľov. Implementujem <strong>Google Consent Mode v2</strong>, aby som rešpektoval vaše preferencie ohľadom súkromia. V predvolenom nastavení je súhlas so sledovaním nastavený na <strong>„odmietnutý“</strong>. Skripty sa môžu načítať s cieľom zabezpečiť základnú funkčnosť stránky, no nebudú ukladať cookies ani pristupovať k osobným údajom na účely sledovania, pokiaľ výslovne nekliknete na tlačidlo Prijať v lište súhlasu. Svoje preferencie môžete kedykoľvek spravovať.</li>
+      <li><strong>Technické údaje:</strong> Zahŕňajú adresu internetového protokolu (IP), typ prehliadača, navštívenú adresu, čas požiadavky a základné údaje o odpovedi. Tieto údaje sa používajú na zabezpečenie, diagnostiku a ochranu formulárov pred zneužitím. Citlivé parametre odkazov sa pred uložením odstraňujú.</li>
+      <li><strong>Kontaktný formulár:</strong> Ak odošlete správu, uložím meno, e-mailovú adresu, predmet, text správy a čas odoslania, aby som mohol na správu odpovedať.</li>
+      <li><strong>Newsletter:</strong> Pri prihlásení na odber uložím e-mailovú adresu, čas prihlásenia a kryptografické odtlačky tokenov potrebné na potvrdenie a odhlásenie z odberu.</li>
+      <li><strong>Cookies a lokálne úložisko:</strong> Lokálne ukladám iba preferenciu témy (tmavý/svetlý režim) a vaše rozhodnutie o analytike.
+        <strong>Google Analytics 4 (GA4):</strong> Analytický skript sa nenačíta, kým výslovne nekliknete na tlačidlo Súhlasím v lište súhlasu. Reklamné kategórie súhlasu zostávajú vypnuté. Svoje rozhodnutie môžete kedykoľvek zmeniť cez Nastavenia cookies v pätičke.</li>
     </ul>
 
-    <h3>3. Ako používam vaše informácie</h3>
+    <h2>3. Ako používam vaše informácie</h2>
     <p>Vaše údaje používam na:</p>
     <ul>
       <li>Poskytovanie obsahu webovej stránky.</li>
       <li>Zabezpečenie bezpečnosti webovej stránky.</li>
-      <li>Zapamätanie vašich preferencií (napr. témy).</li>
-      <li>Analýzu návštevnosti a spôsobov používania webovej stránky prostredníctvom Google Analytics 4, avšak iba v prípade, že kliknete na tlačidlo <strong>Prijať</strong> v lište súhlasu s cookies. Právny základ: váš súhlas (článok 6 ods. 1 písm. a) GDPR). Analytické údaje uchováva spoločnosť Google podľa vlastných pravidiel uchovávania (zvyčajne najviac 14 mesiacov). Súhlas môžete kedykoľvek odvolať prostredníctvom tlačidla <strong>Nastavenia cookies</strong> v pätičke a výberom možnosti <strong>Odmietnuť</strong>.</li>
+      <li>Zapamätanie preferencie témy a rozhodnutia o analytike.</li>
+      <li>Spracovanie kontaktných správ a správa odberu newslettera na základe vašej žiadosti.</li>
+      <li>Analýzu návštevnosti a spôsobov používania webovej stránky prostredníctvom Google Analytics 4, avšak iba v prípade, že kliknete na tlačidlo <strong>Súhlasím</strong> v lište súhlasu s cookies. Právny základ: váš súhlas (článok 6 ods. 1 písm. a) GDPR). Analytické údaje uchováva spoločnosť Google podľa vlastných pravidiel uchovávania (zvyčajne najviac 14 mesiacov). Súhlas môžete kedykoľvek odvolať prostredníctvom tlačidla <strong>Nastavenia cookies</strong> v pätičke a výberom možnosti <strong>Odmietnuť</strong>.</li>
     </ul>
 
-    <h3>4. Odkazy tretích strán</h3>
+    <h2>4. Doba uchovávania</h2>
+    <p>Vlastné technické prístupové záznamy sa predvolene automaticky odstraňujú po 90 dňoch; prevádzkovateľ môže túto dobu skrátiť. Krátkodobé záznamy ochrany formulárov sa priebežne odstraňujú po uplynutí ochranného okna. Kontaktné správy uchovávam iba po dobu potrebnú na vybavenie komunikácie. E-mail newslettera uchovávam do odhlásenia z odberu.</p>
+
+    <h2>5. Odkazy tretích strán</h2>
     <p>Táto webová stránka môže obsahovať odkazy na webové stránky, doplnky a aplikácie tretích strán (napr. Amazon, sociálne siete). Kliknutím na tieto odkazy môžu tretie strany zhromažďovať alebo zdieľať údaje o vás. Nemám kontrolu nad týmito webovými stránkami tretích strán a nenesiem zodpovednosť za ich vyhlásenia o ochrane súkromia.</p>
 
-    <h3>5. Vaše zákonné práva (GDPR/CCPA)</h3>
+    <h2>6. Vaše zákonné práva (GDPR/CCPA)</h2>
     <p>Za určitých okolností máte práva vyplývajúce zo zákonov o ochrane osobných údajov vo vzťahu k vašim osobným údajom, vrátane práva požiadať o prístup, opravu, vymazanie alebo obmedzenie spracúvania vašich osobných údajov.</p>
 
-    <h3>6. Kontakt</h3>
+    <h2>7. Kontakt</h2>
     <p>Ak máte akékoľvek otázky týkajúce sa tejto politiky ochrany súkromia, kontaktujte ma na adrese: <a href="mailto:lubomir@polascin.net">lubomir@polascin.net</a>.</p>
   </div>
 </main>

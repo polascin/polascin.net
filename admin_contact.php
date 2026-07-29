@@ -8,14 +8,26 @@ requireAdmin();
 
 /** @var PDO $pdo */
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mark_read']) && isset($_POST['id'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (validateCsrfToken((string) $csrfToken)) {
+    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+    $action = (string) ($_POST['action'] ?? '');
+    if (!validateCsrfToken((string) $csrfToken) || $id < 1) {
+        setFlashMessage('error', 'Akciu sa nepodarilo overiť.');
+    } elseif ($action === 'mark_read') {
         $stmt = $pdo->prepare("UPDATE contact_messages SET is_read = 1 WHERE id = :id LIMIT 1");
-        $stmt->execute([':id' => (int) $_POST['id']]);
-        logAdminAction($pdo, 'contact_mark_read', 'contact_message', (int) $_POST['id']);
+        $stmt->execute([':id' => $id]);
+        logAdminAction($pdo, 'contact_mark_read', 'contact_message', $id);
+        setFlashMessage('success', 'Správa bola označená ako prečítaná.');
+    } elseif ($action === 'delete') {
+        $stmt = $pdo->prepare("DELETE FROM contact_messages WHERE id = :id LIMIT 1");
+        $stmt->execute([':id' => $id]);
+        logAdminAction($pdo, 'contact_delete', 'contact_message', $id);
+        setFlashMessage('success', 'Správa bola odstránená.');
+    } else {
+        setFlashMessage('error', 'Neplatná akcia.');
     }
-    header('Location: admin_contact.php');
+    header('Location: admin_contact.php', true, 303);
     exit;
 }
 
@@ -49,7 +61,7 @@ $canonicalUrl = $baseUrl . '/admin_contact.php';
           <tr>
             <td><?= htmlspecialchars((string) $msg['created_at'], ENT_QUOTES, 'UTF-8') ?></td>
             <td><?= htmlspecialchars((string) $msg['name'], ENT_QUOTES, 'UTF-8') ?></td>
-            <td><a href="mailto:<?= htmlspecialchars(rawurlencode((string) $msg['email']), ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $msg['email'], ENT_QUOTES, 'UTF-8') ?></a></td>
+            <td><a href="mailto:<?= htmlspecialchars((string) $msg['email'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $msg['email'], ENT_QUOTES, 'UTF-8') ?></a></td>
             <td><?= htmlspecialchars((string) ($msg['subject'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
             <td><?= (int) $msg['is_read'] === 1 ? 'Prečítané' : 'Neprečítané' ?></td>
             <td class="actions">
@@ -57,11 +69,17 @@ $canonicalUrl = $baseUrl . '/admin_contact.php';
               <?php if ((int) $msg['is_read'] === 0): ?>
               <form method="post" action="admin_contact.php" class="inline-form">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
-                <input type="hidden" name="mark_read" value="1">
+                <input type="hidden" name="action" value="mark_read">
                 <input type="hidden" name="id" value="<?= (int) $msg['id'] ?>">
                 <button type="submit" class="btn btn-sm btn-primary">Označiť ako prečítané</button>
               </form>
               <?php endif; ?>
+              <form method="post" action="admin_contact.php" class="inline-form" data-confirm="Natrvalo odstrániť túto správu?">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="<?= (int) $msg['id'] ?>">
+                <button type="submit" class="btn btn-sm btn-danger">Odstrániť</button>
+              </form>
             </td>
           </tr>
           <tr id="message-<?= (int) $msg['id'] ?>" class="message-row">

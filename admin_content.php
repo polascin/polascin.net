@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/db_config.php';
+require_once __DIR__ . '/helpers.php';
 requireAdmin();
 
 /** @var PDO $pdo */
@@ -30,16 +31,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = isset($_POST['id']) && is_numeric($_POST['id']) ? (int) $_POST['id'] : null;
             $blockKey = trim((string) ($_POST['block_key'] ?? ''));
             $title = trim((string) ($_POST['title'] ?? ''));
-            $content = sanitizeHtmlContent(trim((string) ($_POST['content'] ?? '')));
+            $rawContent = trim((string) ($_POST['content'] ?? ''));
+            $content = appTextLength($rawContent) <= 100000 ? sanitizeHtmlContent($rawContent) : '';
             $lang = trim((string) ($_POST['lang'] ?? 'sk'));
             $sortOrder = (int) ($_POST['sort_order'] ?? 0);
             $isActive = isset($_POST['is_active']) ? 1 : 0;
 
-            if (!preg_match('/^[a-z0-9_\-]+$/', $blockKey) || mb_strlen($blockKey) > 64) {
+            if (!preg_match('/^[a-z0-9_\-]+$/D', $blockKey) || appTextLength($blockKey) > 64) {
                 $errors[] = 'Kľúč bloku je povinný a musí obsahovať iba malé písmená, čísla, podčiarkovníky a pomlčky.';
             }
-            if ($title === '' || mb_strlen($title) > 255) {
-                $errors[] = 'Názov je povinný (max 255 znakov).';
+            if (appTextLength($title) > 255) {
+                $errors[] = 'Názov môže mať najviac 255 znakov.';
+            }
+            if (!preg_match('/^[a-z]{2}(?:-[A-Z]{2})?$/D', $lang)) {
+                $errors[] = 'Jazyk musí byť vo formáte „sk“ alebo „sk-SK“.';
+            }
+            if (appTextLength($rawContent) > 100000) {
+                $errors[] = 'Obsah je príliš dlhý (max 100 000 znakov).';
             }
 
             if (empty($errors)) {
@@ -121,22 +129,22 @@ $canonicalUrl = $baseUrl . '/admin_content.php';
         </div>
         <div class="form-group">
           <label for="title">Názov</label>
-          <input type="text" id="title" name="title" value="<?= htmlspecialchars((string) ($editing['title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" required maxlength="255">
+          <input type="text" id="title" name="title" value="<?= htmlspecialchars((string) ($editing['title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" maxlength="255">
         </div>
         <div class="form-group">
-          <label for="content">Obsah (HTML povolené)</label>
-          <textarea id="content" name="content" rows="8"><?= htmlspecialchars((string) ($editing['content'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
+          <label for="content">Obsah</label>
+          <textarea id="content" name="content" rows="8" maxlength="100000"><?= htmlspecialchars((string) ($editing['content'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
         <div class="form-group">
           <label for="lang">Jazyk</label>
-          <input type="text" id="lang" name="lang" value="<?= htmlspecialchars((string) ($editing['lang'] ?? 'sk'), ENT_QUOTES, 'UTF-8') ?>" maxlength="5">
+          <input type="text" id="lang" name="lang" value="<?= htmlspecialchars((string) ($editing['lang'] ?? 'sk'), ENT_QUOTES, 'UTF-8') ?>" required maxlength="5" pattern="[a-z]{2}(-[A-Z]{2})?">
         </div>
         <div class="form-group">
           <label for="sort_order">Poradie</label>
           <input type="number" id="sort_order" name="sort_order" value="<?= (int) ($editing['sort_order'] ?? 0) ?>">
         </div>
         <div class="form-checks">
-          <label><input type="checkbox" name="is_active" value="1" <?= (isset($editing['is_active']) && (int) $editing['is_active'] === 1) ? 'checked' : '' ?>> Aktívny</label>
+          <label><input type="checkbox" name="is_active" value="1" <?= !isset($editing['is_active']) || (int) $editing['is_active'] === 1 ? 'checked' : '' ?>> Aktívny</label>
         </div>
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">Uložiť blok</button>

@@ -2,6 +2,11 @@
 <html lang="sk">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; base-uri 'self'; object-src 'none'; form-action 'self'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -9,9 +14,9 @@
     />
     <meta
       name="keywords"
-      content="Lubomir Polascin, Nephrology, Internal Medicine, Dialysis, Hemodialysis, Renal Transplantation, Medical Translation, Books, Programming"
+      content="Ľubomír Polaščín, nefrológia, interná medicína, dialýza, lekársky preklad, programovanie"
     />
-    <meta name="author" content="Lubomir Polascin" />
+    <meta name="author" content="Ľubomír Polaščín" />
     <meta name="theme-color" content="#ffffff" />
     <title>Domov | MUDr. Ľubomír Polaščín</title>
     <link rel="canonical" href="https://polascin.net/" />
@@ -77,37 +82,10 @@
     <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
     <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "MUDr. Ľubomír Polaščín",
-        "url": "https://polascin.net/",
-        "image": "https://polascin.net/images/profile.jpg",
-        "jobTitle": "Nefrológ a internista",
-        "description": "MUDr. Ľubomír Polaščín — nefrológ, internista, prekladateľ medicínskych textov, spisovateľ a samouk-programátor.",
-        "alumniOf": "Univerzita Pavla Jozefa Šafárika",
-        "sameAs": [
-          "https://polascin.com/",
-          "https://polascin.sk/",
-          "https://polascin.org/",
-          "https://books.polascin.net/",
-          "https://nefro.polascin.net/",
-          "https://nephrosite.polascin.net/",
-          "https://www.amazon.com/stores/author/B07PN436VJ/about",
-          "https://www.linkedin.com/in/lubomirpolascin/",
-          "https://x.com/polascin"
-        ]
-      }
-    </script>
-
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://polascin.net/" />
-    <meta
-      property="og:title"
-      content="MUDr. Ľubomír Polaščín | Nefrológia a vnútorné lekárstvo"
-    />
+    <meta property="og:title" content="Domov | MUDr. Ľubomír Polaščín" />
     <meta
       property="og:description"
       content="MUDr. Ľubomír Polaščín — nefrológ, internista, prekladateľ medicínskych textov, spisovateľ a samouk-programátor."
@@ -124,10 +102,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://polascin.net/" />
-    <meta
-      name="twitter:title"
-      content="MUDr. Ľubomír Polaščín | Nefrológia a vnútorné lekárstvo"
-    />
+    <meta name="twitter:title" content="Domov | MUDr. Ľubomír Polaščín" />
     <meta
       name="twitter:description"
       content="MUDr. Ľubomír Polaščín — nefrológ, internista, prekladateľ medicínskych textov, spisovateľ a samouk-programátor."
@@ -156,21 +131,23 @@
     <!-- Consent default must load before any analytics configuration -->
     <script src="js/consent-default.js"></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=20260728" />
-    <script src="js/main.js" defer></script>
+    <link rel="stylesheet" href="css/styles.css?v=20260728-2" />
+    <script src="js/main.js?v=20260728-2" defer></script>
   </head>
 
   <body>
     <a href="#main-content" class="skip-link">Preskočiť na hlavný obsah</a>
 
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Hlavná navigácia">
       <div class="container nav-container">
         <a href="#home" class="nav-brand">Polascin.net</a>
         <button
+          type="button"
           class="nav-toggle"
           id="navToggle"
-          aria-label="Prepnúť navigáciu"
+          aria-label="Otvoriť navigáciu"
+          aria-controls="navMenu"
           aria-expanded="false"
         >
           <span></span>
@@ -178,15 +155,21 @@
           <span></span>
         </button>
         <button
+          type="button"
           class="theme-toggle-btn"
           id="themeToggle"
           aria-label="Prepnúť tmavý režim"
+          aria-pressed="false"
         >
           <i class="fa-solid fa-moon" aria-hidden="true"></i>
         </button>
         <ul class="nav-menu" id="navMenu">
-          <li><a href="#home" class="nav-link">Domov</a></li>
-          <li><a href="#about" class="nav-link">O mne</a></li>
+          <li>
+            <a href="#home" class="nav-link active" aria-current="page"
+              >Domov</a
+            >
+          </li>
+          <li><a href="#about" class="nav-link">Životopis</a></li>
           <li><a href="#nephrology" class="nav-link">Nefrológia</a></li>
           <li><a href="#projects" class="nav-link">Projekty</a></li>
           <li>
@@ -213,11 +196,14 @@
               src="CrystalKidney.png"
               alt="Logo Crystal Kidney"
               class="profile-img"
+              width="200"
+              height="200"
+              fetchpriority="high"
             />
-            <h1 class="hero-title">Za zdravšie obličky</h1>
+            <h1 class="hero-title">Pokrok v zdraví obličiek</h1>
             <p class="hero-subtitle">
-              MUDr. Ľubomír Polaščín — venuje sa dokonalosti v nefrológii,
-              dialýze, starostlivosti o pacientov a medicínskej technológii.
+              MUDr. Ľubomír Polaščín — venovaný excelentnosti v nefrológii,
+              dialýze, starostlivosti o pacientov a medicínskych technológiách.
             </p>
             <div class="hero-buttons">
               <a href="#about" class="btn btn-primary">O mne</a>
@@ -239,6 +225,8 @@
                 src="images/profile.jpg"
                 alt="MUDr. Ľubomír Polaščín"
                 class="profile-img"
+                width="200"
+                height="200"
                 loading="lazy"
               />
             </div>
@@ -254,20 +242,20 @@
               technológií. Medicína zostruje moju klinickú presnosť; písanie mi
               umožňuje skúmať ľudský údel prostredníctvom beletrie a literatúry
               faktu; a technológie mi dávajú silu riešiť zložité problémy. Ako
-              konzultant premosťujem tieto svety a prinášam premyslené,
-              dobre podložené riešenia.
+              konzultant premosťujem tieto svety a prinášam premyslené, dobre
+              podložené riešenia.
             </p>
             <p>
               Ku každej výzve pristupujem so zvedavosťou a dôslednosťou — či už
-              liečim pacientov, ladím kód, prekladám náročný text, alebo
-              skúmam umelú inteligenciu.
+              liečim pacientov, ladím kód, prekladám náročný text, alebo skúmam
+              umelú inteligenciu.
             </p>
 
             <h3>Profesijná identita</h3>
             <p>
-              Som lekár, ktorý absolvoval štúdium všeobecného lekárstva (1995)
-              a špecializoval sa v odbore nefrológia (2009). Mám atestáciu
-              z vnútorného lekárstva (1998) a certifikát pre abdominálnu
+              Som lekár, ktorý absolvoval štúdium všeobecného lekárstva (1995) a
+              špecializoval sa v odbore nefrológia (2009). Mám atestáciu z
+              vnútorného lekárstva (1998) a certifikát pre abdominálnu
               ultrasonografiu u dospelých (2009).
             </p>
             <p><strong>Oblasti odbornosti:</strong></p>
@@ -284,8 +272,8 @@
             <p>
               Mám rozsiahle skúsenosti s vyučovaním a prednášaním v odboroch
               vnútorné lekárstvo, diabetológia, nefrológia a príbuzné oblasti.
-              Zároveň som prekladateľ so špecializáciou na anglicko-slovenský
-              a slovensko-anglický medicínsky preklad a lokalizáciu softvéru.
+              Zároveň som prekladateľ so špecializáciou na anglicko-slovenský a
+              slovensko-anglický medicínsky preklad a lokalizáciu softvéru.
             </p>
 
             <h3>Technológie a programovanie</h3>
@@ -304,16 +292,15 @@
             <h3>Pozadie a cesta</h3>
             <p>
               Moje medicínske vzdelanie sa začalo na Univerzite Pavla Jozefa
-              Šafárika v Košiciach na Slovensku. Od roku 1995 sa venujem
-              dialýze a nefrológii. Od roku 2013 do roku 2022 som pôsobil ako
-              hlavný lekár / primár na dvoch dialyzačných strediskách
-              v Bratislave.
+              Šafárika v Košiciach na Slovensku. Od roku 1995 sa venujem dialýze
+              a nefrológii. Od roku 2013 do roku 2022 som pôsobil ako hlavný
+              lekár / primár na dvoch dialyzačných strediskách v Bratislave.
             </p>
 
             <h3>Osobný pohľad</h3>
             <p>
-              Narodil som sa v roku 1971 v Československu a vyrastal som
-              v Kyjove. Moje rusínske korene formujú môj pohľad na svet. Medzi
+              Narodil som sa v roku 1971 v Československu a vyrastal som v
+              Kyjove. Moje rusínske korene formujú môj pohľad na svet. Medzi
               moje záľuby patrí čítanie, cestovanie, filozofia a poézia.
             </p>
 
@@ -427,9 +414,9 @@
               </div>
               <h3>Nefro-projekt Slovensko</h3>
               <p>
-                Slovenský nefrologický portál s klinickými článkami,
-                aktualitami o dialýze a transplantáciách, kalkulačkami,
-                liekovými referenciami a študijnými poznámkami.
+                Slovenský nefrologický portál s klinickými článkami, aktualitami
+                o dialýze a transplantáciách, kalkulačkami, liekovými
+                referenciami a študijnými poznámkami.
               </p>
               <a
                 href="https://nefro.polascin.net/"
@@ -447,8 +434,8 @@
               <h3>NephroSite</h3>
               <p>
                 Vzdelávacie prednášky a referenčné stránky o nefrológii,
-                dialýze, metódach očisty krvi a vnútornom lekárstve
-                (v slovenčine).
+                dialýze, metódach očisty krvi a vnútornom lekárstve (v
+                slovenčine).
               </p>
               <a
                 href="https://nephrosite.polascin.net/"
@@ -501,8 +488,8 @@
               </div>
               <h3>Arenibus Demo</h3>
               <p>
-                Verejná demo inštancia webového projektu zameraného na
-                udalosti a dopravu.
+                Verejná demo inštancia webového projektu zameraného na udalosti
+                a dopravu.
               </p>
               <a
                 href="https://demo.arenibus.com/"
@@ -603,7 +590,7 @@
               rel="noopener noreferrer"
             >
               <i class="fa-solid fa-book" aria-hidden="true"></i>
-              Vital Algorithm - 2nd ed. (Amazon)
+              Vital Algorithm — 2. vydanie (Amazon)
             </a>
             <a
               href="https://amzn.to/4t4mBNs"
@@ -612,7 +599,7 @@
               rel="noopener noreferrer"
             >
               <i class="fa-solid fa-book" aria-hidden="true"></i>
-              The Vital Algorithm - 1st ed. (Amazon)
+              The Vital Algorithm — 1. vydanie (Amazon)
             </a>
             <a
               href="https://amzn.to/4pYuL7D"
@@ -673,7 +660,7 @@
     <!-- Footer -->
     <footer>
       <div class="container">
-        <h4>Spojte sa so mnou</h4>
+        <h2 class="footer-heading">Spojte sa</h2>
         <div class="social-links">
           <a
             href="https://www.linkedin.com/in/lubomirpolascin/"
@@ -746,7 +733,12 @@
           >
           | <a href="privacy.html">Zásady ochrany osobných údajov</a> |
           <a href="terms.html">Podmienky používania</a> |
-          <button class="cookie-settings-trigger" aria-haspopup="dialog">
+          <button
+            type="button"
+            class="cookie-settings-trigger"
+            aria-haspopup="dialog"
+            aria-controls="cookie-consent-container"
+          >
             Nastavenia cookies
           </button>
         </p>
@@ -754,6 +746,6 @@
     </footer>
 
     <!-- Cookie Consent Container -->
-    <div id="cookie-consent-container"></div>
+    <div id="cookie-consent-container" data-privacy-url="privacy.html"></div>
   </body>
 </html>

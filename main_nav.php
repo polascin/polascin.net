@@ -1,5 +1,18 @@
 <?php
 declare(strict_types=1);
+
+$partialName = basename(__FILE__);
+$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
+if (preg_match('~(?:^|/)' . preg_quote($partialName, '~') . '(?:/|$)~i', $requestedScript) === 1) {
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, "Chyba: {$partialName} je interný súbor a nemožno ho spúšťať priamo.\n");
+        exit(1);
+    }
+    http_response_code(403);
+    exit('Prístup odmietnutý.');
+}
+unset($partialName, $requestedScript);
+
 if (defined('MAIN_NAV_INCLUDED')) {
     return;
 }
@@ -10,8 +23,9 @@ $_onIndex = $_navCurrent === 'index.php';
 
 if (!function_exists('_navA')) {
     function _navA(string $href, string $label, bool $active): string {
-        $class = $active ? 'nav-link active" aria-current="page' : 'nav-link';
-        return '<a href="' . htmlspecialchars($href, ENT_QUOTES, 'UTF-8') . '" class="' . $class . '">' . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '</a>';
+        $class = $active ? 'nav-link active' : 'nav-link';
+        $ariaCurrent = $active ? ' aria-current="page"' : '';
+        return '<a href="' . htmlspecialchars($href, ENT_QUOTES, 'UTF-8') . '" class="' . $class . '"' . $ariaCurrent . '>' . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '</a>';
     }
 }
 ?>
@@ -29,7 +43,7 @@ if (!function_exists('_navA')) {
     <li>
       <form action="logout.php" method="post" class="nav-logout-form">
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
-        <button type="submit" class="nav-link nav-logout-btn">Odhlásiť sa</button>
+      <button type="submit" class="nav-link nav-logout-btn">Odhlásiť sa</button>
       </form>
     </li>
   <?php else: ?>

@@ -40,32 +40,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $title = trim((string) ($_POST['title'] ?? ''));
             $slug = trim((string) ($_POST['slug'] ?? ''));
             $excerpt = strip_tags(trim((string) ($_POST['excerpt'] ?? '')));
-            $content = sanitizeHtmlContent(trim((string) ($_POST['content'] ?? '')));
+            $rawContent = trim((string) ($_POST['content'] ?? ''));
+            $content = appTextLength($rawContent) <= 1000000 ? sanitizeHtmlContent($rawContent) : '';
             $author = trim((string) ($_POST['author'] ?? ''));
             $sortOrder = (int) ($_POST['sort_order'] ?? 0);
             $publishedAt = trim((string) ($_POST['published_at'] ?? ''));
             $isTop = isset($_POST['is_top']) ? 1 : 0;
             $isPublished = ($action === 'publish' || isset($_POST['is_published'])) ? 1 : 0;
 
-            if ($title === '' || mb_strlen($title) > 255) {
+            if ($title === '' || appTextLength($title) > 255) {
                 $errors[] = 'Názov je povinný (max 255 znakov).';
             }
             if ($slug === '') {
                 $slug = slugify($title);
             }
-            if (!preg_match('/^[a-z0-9-]+$/', $slug)) {
+            if (!preg_match('/^[a-z0-9-]+$/D', $slug)) {
                 $errors[] = 'Slug musí obsahovať iba malé písmená, čísla a pomlčky.';
             }
-            if (mb_strlen($slug) > 255) {
+            if (appTextLength($slug) > 255) {
                 $errors[] = 'Slug je príliš dlhý.';
+            }
+            if (appTextLength($excerpt) > 5000) {
+                $errors[] = 'Úryvok môže mať najviac 5 000 znakov.';
+            }
+            if (appTextLength($author) > 255) {
+                $errors[] = 'Meno autora môže mať najviac 255 znakov.';
+            }
+            if (appTextLength($rawContent) > 1000000) {
+                $errors[] = 'Obsah je príliš dlhý (max 1 000 000 znakov).';
             }
             if ($content === '') {
                 $errors[] = 'Obsah je povinný.';
             }
-            if ($publishedAt === '' || !strtotime($publishedAt)) {
+            if ($publishedAt === '') {
                 $publishedAt = date('Y-m-d H:i:s');
             } else {
-                $publishedAt = date('Y-m-d H:i:s', strtotime($publishedAt));
+                $publishedDate = DateTimeImmutable::createFromFormat('!Y-m-d\TH:i', $publishedAt);
+                $dateErrors = DateTimeImmutable::getLastErrors();
+                if (!$publishedDate || (is_array($dateErrors) && ($dateErrors['warning_count'] > 0 || $dateErrors['error_count'] > 0))) {
+                    $errors[] = 'Dátum publikovania nie je platný.';
+                } else {
+                    $publishedAt = $publishedDate->format('Y-m-d H:i:s');
+                }
             }
 
             if (empty($errors)) {
@@ -157,11 +173,11 @@ $canonicalUrl = $baseUrl . '/admin_articles.php';
         </div>
         <div class="form-group">
           <label for="excerpt">Úryvok</label>
-          <textarea id="excerpt" name="excerpt" rows="3"><?= htmlspecialchars((string) ($editing['excerpt'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
+          <textarea id="excerpt" name="excerpt" rows="3" maxlength="5000"><?= htmlspecialchars((string) ($editing['excerpt'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
         <div class="form-group">
           <label for="content">Obsah (HTML povolené)</label>
-          <textarea id="content" name="content" rows="12" required><?= htmlspecialchars((string) ($editing['content'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
+          <textarea id="content" name="content" rows="12" required maxlength="1000000"><?= htmlspecialchars((string) ($editing['content'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
         <div class="form-row">
           <div class="form-group">

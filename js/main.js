@@ -1,212 +1,510 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const navToggle = document.getElementById("navToggle");
-  const navMenu = document.getElementById("navMenu");
-  const navLinks = document.querySelectorAll(".nav-link");
+(() => {
+  "use strict";
 
-  // Navigation toggle for mobile
-  if (navToggle && navMenu) {
-    navToggle.addEventListener("click", () => {
-      const isOpen = navMenu.classList.toggle("active");
-      navToggle.classList.toggle("active", isOpen);
-      navToggle.setAttribute("aria-expanded", String(isOpen));
-    });
-  }
+  const themeStorageKey = "theme";
+  const consentStorageKey = "privacy_consent";
+  const gaMeasurementId = "G-9EMD3BVXCJ";
+  const mobileNavigationQuery = window.matchMedia("(max-width: 1024px)");
+  const reducedMotionQuery = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  );
+  const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-  // Close mobile menu when a link is clicked
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      if (navMenu && navMenu.classList.contains("active")) {
-        navMenu.classList.remove("active");
-        navToggle.classList.remove("active");
-        navToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  });
-
-  // Smooth scrolling for anchor links with fixed header offset
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (event) {
-      const targetId = this.getAttribute("href");
-      if (targetId === "#") return;
-
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        event.preventDefault();
-        const headerOffset = 80;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition =
-          elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
-            .matches
-            ? "auto"
-            : "smooth",
-        });
-      }
-    });
-  });
-
-  // Theme toggle
-  const themeToggle = document.getElementById("themeToggle");
-  const themeIcon = themeToggle ? themeToggle.querySelector("i") : null;
-
-  function setTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-
-    if (themeIcon) {
-      themeIcon.classList.remove("fa-moon", "fa-sun");
-      themeIcon.classList.add(theme === "dark" ? "fa-sun" : "fa-moon");
+  function readStorage(key) {
+    try {
+      return window.localStorage.getItem(key);
+    } catch {
+      return null;
     }
   }
 
-  const savedTheme = localStorage.getItem("theme");
-  const systemPrefersDark = window.matchMedia(
-    "(prefers-color-scheme: dark)",
-  ).matches;
-
-  if (savedTheme) {
-    setTheme(savedTheme);
-  } else if (systemPrefersDark) {
-    setTheme("dark");
+  function writeStorage(key, value) {
+    try {
+      window.localStorage.setItem(key, value);
+      return true;
+    } catch {
+      return false;
+    }
   }
 
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      const currentTheme = document.documentElement.getAttribute("data-theme");
-      setTheme(currentTheme === "dark" ? "light" : "dark");
-    });
+  function addMediaQueryListener(query, listener) {
+    if (typeof query.addEventListener === "function") {
+      query.addEventListener("change", listener);
+    } else if (typeof query.addListener === "function") {
+      query.addListener(listener);
+    }
   }
 
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", (event) => {
-      if (!localStorage.getItem("theme")) {
-        setTheme(event.matches ? "dark" : "light");
-      }
-    });
+  let explicitTheme = readStorage(themeStorageKey);
+  if (explicitTheme !== "dark" && explicitTheme !== "light") {
+    explicitTheme = null;
+  }
 
-  // Scroll-driven fade-in animation (honors reduced motion)
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function updateThemeControls(theme) {
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = themeToggle ? themeToggle.querySelector("i") : null;
+    const isDark = theme === "dark";
 
-  if (!reducedMotion.matches) {
-    const observer = new IntersectionObserver(
-      (entries, observerInstance) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observerInstance.unobserve(entry.target);
+    if (themeToggle) {
+      const label = isDark
+        ? "Prepnúť na svetlý režim"
+        : "Prepnúť na tmavý režim";
+      themeToggle.setAttribute("aria-label", label);
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      themeToggle.setAttribute("title", label);
+    }
+
+    if (themeIcon) {
+      themeIcon.classList.remove("fa-moon", "fa-sun");
+      themeIcon.classList.add(isDark ? "fa-sun" : "fa-moon");
+    }
+
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) {
+      themeColor.setAttribute("content", isDark ? "#1a202c" : "#ffffff");
+    }
+  }
+
+  function applyTheme(theme, persist = false) {
+    const normalizedTheme = theme === "dark" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", normalizedTheme);
+
+    if (persist) {
+      explicitTheme = normalizedTheme;
+      writeStorage(themeStorageKey, normalizedTheme);
+    }
+
+    updateThemeControls(normalizedTheme);
+  }
+
+  applyTheme(
+    explicitTheme || (colorSchemeQuery.matches ? "dark" : "light"),
+    false,
+  );
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const navbar = document.querySelector(".navbar");
+    const navToggle = document.getElementById("navToggle");
+    const navMenu = document.getElementById("navMenu");
+    const themeToggle = document.getElementById("themeToggle");
+    const navLinks = navMenu
+      ? Array.from(navMenu.querySelectorAll(".nav-link"))
+      : [];
+    const originalNavTabIndexes = new Map();
+
+    function navMenuItems() {
+      if (!navMenu) return [];
+      return Array.from(
+        navMenu.querySelectorAll("a[href], button:not([disabled]), [tabindex]"),
+      );
+    }
+
+    function setNavMenuTabOrder(enabled) {
+      navMenuItems().forEach((item) => {
+        if (!originalNavTabIndexes.has(item)) {
+          originalNavTabIndexes.set(item, item.getAttribute("tabindex"));
+        }
+
+        if (enabled) {
+          const originalTabIndex = originalNavTabIndexes.get(item);
+          if (originalTabIndex === null) {
+            item.removeAttribute("tabindex");
+          } else {
+            item.setAttribute("tabindex", originalTabIndex);
           }
+        } else {
+          item.setAttribute("tabindex", "-1");
+        }
+      });
+    }
+
+    function isMobileMenuOpen() {
+      return Boolean(
+        navMenu &&
+        mobileNavigationQuery.matches &&
+        navMenu.classList.contains("active"),
+      );
+    }
+
+    function syncNavigationState() {
+      if (!navToggle || !navMenu) return;
+
+      const isMobile = mobileNavigationQuery.matches;
+      const isOpen = isMobile && navMenu.classList.contains("active");
+
+      navToggle.classList.toggle("active", isOpen);
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+      navToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Zavrieť navigáciu" : "Otvoriť navigáciu",
+      );
+
+      if (isMobile) {
+        navMenu.setAttribute("aria-hidden", String(!isOpen));
+        navMenu.inert = !isOpen;
+        setNavMenuTabOrder(isOpen);
+      } else {
+        navMenu.classList.remove("active");
+        navMenu.removeAttribute("aria-hidden");
+        navMenu.inert = false;
+        setNavMenuTabOrder(true);
+      }
+
+      document.body.classList.toggle("nav-open", isOpen);
+    }
+
+    function openMobileMenu() {
+      if (!navToggle || !navMenu || !mobileNavigationQuery.matches) return;
+
+      navMenu.classList.add("active");
+      syncNavigationState();
+
+      const firstMenuItem = navMenuItems()[0];
+      if (firstMenuItem) {
+        window.requestAnimationFrame(() => firstMenuItem.focus());
+      }
+    }
+
+    function closeMobileMenu(returnFocus = false) {
+      if (!navToggle || !navMenu) return;
+
+      navMenu.classList.remove("active");
+      syncNavigationState();
+
+      if (returnFocus && mobileNavigationQuery.matches) {
+        navToggle.focus();
+      }
+    }
+
+    if (navToggle && navMenu) {
+      syncNavigationState();
+
+      navToggle.addEventListener("click", () => {
+        if (isMobileMenuOpen()) {
+          closeMobileMenu(true);
+        } else {
+          openMobileMenu();
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => closeMobileMenu(false));
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (!isMobileMenuOpen()) return;
+
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeMobileMenu(true);
+          return;
+        }
+
+        if (event.key !== "Tab" || !navbar) return;
+
+        const focusableItems = Array.from(
+          navbar.querySelectorAll(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter((item) => {
+          const styles = window.getComputedStyle(item);
+          return styles.display !== "none" && styles.visibility !== "hidden";
         });
-      },
-      { root: null, rootMargin: "0px", threshold: 0.1 },
-    );
 
-    document.querySelectorAll(".reveal").forEach((el) => {
-      observer.observe(el);
-    });
-  }
+        if (focusableItems.length === 0) return;
 
-  // Google Consent Mode v2 banner and analytics configuration
-  const cookieContainer = document.getElementById("cookie-consent-container");
-  const storageKey = "privacy_consent";
-  const gaMeasurementId = "G-9EMD3BVXCJ";
+        const firstItem = focusableItems[0];
+        const lastItem = focusableItems[focusableItems.length - 1];
 
-  // consent-default.js already defines gtag with default 'denied'.
-  // Ensure the helper exists if that script was cached/blocked.
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    dataLayer.push(arguments);
-  }
+        if (event.shiftKey && document.activeElement === firstItem) {
+          event.preventDefault();
+          lastItem.focus();
+        } else if (!event.shiftKey && document.activeElement === lastItem) {
+          event.preventDefault();
+          firstItem.focus();
+        }
+      });
 
-  // Load GA script and configure it (respects the default denied state)
-  const gaScript = document.createElement("script");
-  gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
-  gaScript.async = true;
-  document.head.appendChild(gaScript);
-  gtag("js", new Date());
-  gtag("config", gaMeasurementId);
+      addMediaQueryListener(mobileNavigationQuery, () => {
+        closeMobileMenu(false);
+        syncNavigationState();
+      });
+    }
 
-  function updateConsent(granted) {
-    const status = granted ? "granted" : "denied";
-    gtag("consent", "update", {
-      ad_storage: status,
-      ad_user_data: status,
-      ad_personalization: status,
-      analytics_storage: status,
-    });
-    localStorage.setItem(storageKey, granted ? "accepted" : "rejected");
-  }
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", (event) => {
+        const hash = anchor.getAttribute("href");
+        if (!hash || hash === "#") return;
 
-  function showCookieBanner() {
-    if (!cookieContainer) return;
+        let targetId;
+        try {
+          targetId = decodeURIComponent(hash.slice(1));
+        } catch {
+          targetId = hash.slice(1);
+        }
 
-    const existing = cookieContainer.querySelector(".cookie-banner");
-    if (existing) return;
+        const target = document.getElementById(targetId);
+        if (!target) return;
 
-    const banner = document.createElement("div");
-    banner.className = "cookie-banner";
-    banner.setAttribute("role", "dialog");
-    banner.setAttribute("aria-label", "Súhlas s cookies");
-    banner.setAttribute("aria-live", "polite");
-    banner.innerHTML = `
-      <div class="cookie-content">
-        <div class="cookie-text">
-          <p>Používame cookies na analýzu návštevnosti. Kliknutím na „Súhlasím" vyjadrujete súhlas s použitím sledovacích cookies (Google Analytics 4). Môžete tiež odmietnuť a pokračovať bez sledovania. Pozrite si naše <a href="privacy.php" class="cookie-link">Zásady ochrany súkromia</a>.</p>
-        </div>
-        <div class="cookie-buttons">
-          <button id="cookieDecline" class="btn-cookie-decline">Odmietnuť</button>
-          <button id="cookieAccept" class="btn-cookie-accept">Súhlasím</button>
-        </div>
-      </div>
-    `;
-
-    cookieContainer.appendChild(banner);
-
-    document.getElementById("cookieAccept").addEventListener("click", () => {
-      updateConsent(true);
-      banner.remove();
-    });
-
-    document.getElementById("cookieDecline").addEventListener("click", () => {
-      updateConsent(false);
-      banner.remove();
-    });
-  }
-
-  const storedConsent = localStorage.getItem(storageKey);
-  if (storedConsent === "accepted") {
-    updateConsent(true);
-  } else if (storedConsent === "rejected") {
-    updateConsent(false);
-  } else {
-    setTimeout(showCookieBanner, 1000);
-  }
-
-  document.querySelectorAll(".cookie-settings-trigger").forEach((trigger) => {
-    trigger.addEventListener("click", (event) => {
-      event.preventDefault();
-      const existing =
-        cookieContainer && cookieContainer.querySelector(".cookie-banner");
-      if (existing) existing.remove();
-      showCookieBanner();
-    });
-  });
-
-  // Dynamic current year
-  const yearSpan = document.getElementById("current-year");
-  if (yearSpan) {
-    yearSpan.textContent = String(new Date().getFullYear());
-  }
-
-  // Confirm before destructive form submissions
-  document.querySelectorAll("form[data-confirm]").forEach((form) => {
-    form.addEventListener("submit", (event) => {
-      if (!window.confirm(form.dataset.confirm)) {
         event.preventDefault();
+
+        const focusTarget =
+          target.matches("main, [tabindex]") ||
+          !target.querySelector("h1, h2, h3, h4, h5, h6")
+            ? target
+            : target.querySelector("h1, h2, h3, h4, h5, h6");
+        const hadTabIndex = focusTarget.hasAttribute("tabindex");
+
+        if (!hadTabIndex) {
+          focusTarget.setAttribute("tabindex", "-1");
+          focusTarget.addEventListener(
+            "blur",
+            () => focusTarget.removeAttribute("tabindex"),
+            { once: true },
+          );
+        }
+
+        if (window.location.hash !== hash) {
+          try {
+            window.history.pushState(null, "", hash);
+          } catch {
+            window.location.hash = hash;
+          }
+        }
+
+        focusTarget.focus({ preventScroll: true });
+        target.scrollIntoView({
+          behavior: reducedMotionQuery.matches ? "auto" : "smooth",
+          block: "start",
+        });
+      });
+    });
+
+    if (themeToggle) {
+      updateThemeControls(
+        document.documentElement.getAttribute("data-theme") || "light",
+      );
+      themeToggle.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme") || "light";
+        applyTheme(currentTheme === "dark" ? "light" : "dark", true);
+      });
+    }
+
+    addMediaQueryListener(colorSchemeQuery, (event) => {
+      if (explicitTheme === null) {
+        applyTheme(event.matches ? "dark" : "light", false);
       }
     });
+
+    const revealElements = Array.from(document.querySelectorAll(".reveal"));
+    if (
+      !reducedMotionQuery.matches &&
+      typeof window.IntersectionObserver === "function"
+    ) {
+      const observer = new IntersectionObserver(
+        (entries, observerInstance) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observerInstance.unobserve(entry.target);
+            }
+          });
+        },
+        { root: null, rootMargin: "0px", threshold: 0.1 },
+      );
+
+      revealElements.forEach((element) => {
+        element.classList.add("reveal-pending");
+        observer.observe(element);
+      });
+    } else {
+      revealElements.forEach((element) => element.classList.add("is-visible"));
+    }
+
+    window.dataLayer = window.dataLayer || [];
+    if (typeof window.gtag !== "function") {
+      window.gtag = function gtag() {
+        window.dataLayer.push(arguments);
+      };
+    }
+
+    window.gtag("consent", "default", {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+      wait_for_update: 500,
+    });
+
+    const cookieContainer = document.getElementById("cookie-consent-container");
+    let consentReturnFocus = null;
+
+    function loadAnalytics() {
+      if (document.getElementById("google-analytics-script")) return;
+
+      window.gtag("js", new Date());
+      window.gtag("config", gaMeasurementId, {
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+      });
+
+      const gaScript = document.createElement("script");
+      gaScript.id = "google-analytics-script";
+      gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
+        gaMeasurementId,
+      )}`;
+      gaScript.async = true;
+      document.head.appendChild(gaScript);
+    }
+
+    function clearAnalyticsCookies() {
+      try {
+        const cookieNames = document.cookie
+          .split(";")
+          .map((cookie) => cookie.trim().split("=")[0])
+          .filter((name) => /^_(?:ga(?:_|$)|gid$|gat(?:_|$))/.test(name));
+        const hostname = window.location.hostname;
+        const registrableHost = hostname.replace(/^www\./, "");
+        const domains = Array.from(
+          new Set([hostname, registrableHost, `.${registrableHost}`]),
+        );
+
+        cookieNames.forEach((name) => {
+          document.cookie = `${name}=; Max-Age=0; Path=/; SameSite=Lax`;
+          domains.forEach((domain) => {
+            document.cookie = `${name}=; Max-Age=0; Path=/; Domain=${domain}; SameSite=Lax`;
+          });
+        });
+      } catch {
+        // Consent still changes to denied even when cookie access is blocked.
+      }
+    }
+
+    function updateAnalyticsConsent(granted, persist = true) {
+      window.gtag("consent", "update", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: granted ? "granted" : "denied",
+      });
+
+      if (persist) {
+        writeStorage(consentStorageKey, granted ? "accepted" : "rejected");
+      }
+
+      if (granted) {
+        loadAnalytics();
+      } else {
+        clearAnalyticsCookies();
+      }
+    }
+
+    function closeCookieBanner() {
+      const banner = cookieContainer
+        ? cookieContainer.querySelector(".cookie-banner")
+        : null;
+      if (banner) {
+        banner.remove();
+      }
+
+      if (
+        consentReturnFocus instanceof HTMLElement &&
+        document.contains(consentReturnFocus)
+      ) {
+        consentReturnFocus.focus();
+      }
+      consentReturnFocus = null;
+    }
+
+    function showCookieBanner(options = {}) {
+      if (!cookieContainer) return;
+
+      const existing = cookieContainer.querySelector(".cookie-banner");
+      if (existing) {
+        consentReturnFocus = options.returnFocus || consentReturnFocus;
+        if (options.focus) {
+          existing.querySelector("button")?.focus();
+        }
+        return;
+      }
+
+      consentReturnFocus = options.returnFocus || null;
+
+      const banner = document.createElement("div");
+      banner.className = "cookie-banner";
+      banner.setAttribute("role", "dialog");
+      banner.setAttribute("aria-modal", "false");
+      banner.setAttribute("aria-labelledby", "cookie-consent-title");
+      banner.setAttribute("aria-describedby", "cookie-consent-description");
+      banner.innerHTML = `
+        <div class="cookie-content">
+          <div class="cookie-text">
+            <h2 id="cookie-consent-title" class="cookie-title">Analytické cookies</h2>
+            <p id="cookie-consent-description">S vaším súhlasom použijeme Google Analytics 4 na meranie návštevnosti. Reklamné úložisko a personalizácia zostávajú vypnuté. Odmietnutie neobmedzí používanie stránky. Podrobnosti nájdete v <a class="cookie-link">zásadách ochrany súkromia</a>.</p>
+          </div>
+          <div class="cookie-buttons">
+            <button type="button" class="btn-cookie-decline">Odmietnuť</button>
+            <button type="button" class="btn-cookie-accept">Súhlasím</button>
+          </div>
+        </div>
+      `;
+
+      const privacyLink = banner.querySelector(".cookie-link");
+      if (privacyLink) {
+        privacyLink.setAttribute(
+          "href",
+          cookieContainer.dataset.privacyUrl || "privacy.php",
+        );
+      }
+
+      banner
+        .querySelector(".btn-cookie-accept")
+        ?.addEventListener("click", () => {
+          updateAnalyticsConsent(true);
+          closeCookieBanner();
+        });
+
+      banner
+        .querySelector(".btn-cookie-decline")
+        ?.addEventListener("click", () => {
+          updateAnalyticsConsent(false);
+          closeCookieBanner();
+        });
+
+      cookieContainer.appendChild(banner);
+
+      if (options.focus) {
+        banner.querySelector("button")?.focus();
+      }
+    }
+
+    const storedConsent = readStorage(consentStorageKey);
+    if (storedConsent === "accepted") {
+      updateAnalyticsConsent(true, false);
+    } else if (storedConsent === "rejected") {
+      updateAnalyticsConsent(false, false);
+    } else {
+      showCookieBanner();
+    }
+
+    document.querySelectorAll(".cookie-settings-trigger").forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        showCookieBanner({ focus: true, returnFocus: trigger });
+      });
+    });
+
+    const yearSpan = document.getElementById("current-year");
+    if (yearSpan) {
+      yearSpan.textContent = String(new Date().getFullYear());
+    }
+
+    document.querySelectorAll("form[data-confirm]").forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        if (!window.confirm(form.dataset.confirm)) {
+          event.preventDefault();
+        }
+      });
+    });
   });
-});
+})();

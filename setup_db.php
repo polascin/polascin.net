@@ -2,36 +2,60 @@
 
 declare(strict_types=1);
 
-if (basename($_SERVER['PHP_SELF']) === basename(__FILE__) && php_sapi_name() !== 'cli') {
+if (PHP_SAPI !== 'cli') {
     http_response_code(403);
     exit("Prístup odmietnutý. Spustite cez príkazový riadok.");
 }
 
 require_once __DIR__ . '/db_config.php';
+require_once __DIR__ . '/helpers.php';
 
 /** @var PDO $pdo */
-
-function tableExists(PDO $pdo, string $table): bool {
-    $stmt = $pdo->prepare(
-        "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES
-         WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table"
-    );
-    $stmt->execute(['table' => $table]);
-    return (int) $stmt->fetchColumn() > 0;
-}
-
-function columnExists(PDO $pdo, string $table, string $column): bool {
-    $stmt = $pdo->prepare(
-        "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
-         WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table AND COLUMN_NAME = :column"
-    );
-    $stmt->execute(['table' => $table, 'column' => $column]);
-    return (int) $stmt->fetchColumn() > 0;
-}
 
 function runSql(PDO $pdo, string $sql): void {
     foreach (array_filter(array_map('trim', explode(';', $sql))) as $statement) {
         $pdo->exec($statement);
+    }
+}
+
+function indexExists(PDO $pdo, string $table, string $index): bool {
+    $stmt = $pdo->prepare(
+        "SELECT COUNT(*)
+         FROM INFORMATION_SCHEMA.STATISTICS
+         WHERE TABLE_SCHEMA = DATABASE()
+           AND TABLE_NAME = :table_name
+           AND INDEX_NAME = :index_name"
+    );
+    $stmt->execute([':table_name' => $table, ':index_name' => $index]);
+    return (int) $stmt->fetchColumn() > 0;
+}
+
+function applySchemaMigrations(PDO $pdo): void {
+    $migrations = [
+        '2026072801_security_indexes' => static function (PDO $pdo): void {
+            $indexes = [
+                ['form_rate_limit', 'idx_action_last_attempt', 'ALTER TABLE form_rate_limit ADD INDEX idx_action_last_attempt (action, last_attempt)'],
+                ['newsletter_subscribers', 'idx_confirm_token', 'ALTER TABLE newsletter_subscribers ADD INDEX idx_confirm_token (confirm_token_hash(64))'],
+                ['newsletter_subscribers', 'idx_unsubscribe_token', 'ALTER TABLE newsletter_subscribers ADD INDEX idx_unsubscribe_token (unsubscribe_token_hash(64))'],
+            ];
+            foreach ($indexes as [$table, $index, $sql]) {
+                if (!indexExists($pdo, $table, $index)) {
+                    $pdo->exec($sql);
+                }
+            }
+        },
+    ];
+
+    $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
+    $appliedLookup = array_fill_keys(array_map('strval', $applied), true);
+    $record = $pdo->prepare("INSERT INTO schema_migrations (version) VALUES (:version)");
+
+    foreach ($migrations as $version => $migration) {
+        if (isset($appliedLookup[$version])) {
+            continue;
+        }
+        $migration($pdo);
+        $record->execute([':version' => $version]);
     }
 }
 
@@ -142,9 +166,15 @@ CREATE TABLE IF NOT EXISTS form_rate_limit (
     UNIQUE KEY unique_ip_action (ip, action),
     INDEX idx_blocked (blocked_until)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS schema_migrations (
+    version VARCHAR(128) PRIMARY KEY,
+    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 SQL;
 
 runSql($pdo, $schema);
+applySchemaMigrations($pdo);
 
 $defaultBlocks = [
     ['hero_title', '', 'Pokrok v zdraví obličiek', 'sk', 0],
@@ -155,9 +185,8 @@ $defaultBlocks = [
 ];
 
 $stmt = $pdo->prepare(
-    "INSERT INTO content_blocks (block_key, title, content, lang, sort_order)
-     VALUES (:block_key, :title, :content, :lang, :sort_order)
-     ON DUPLICATE KEY UPDATE title = VALUES(title), content = VALUES(content), lang = VALUES(lang), sort_order = VALUES(sort_order)"
+    "INSERT IGNORE INTO content_blocks (block_key, title, content, lang, sort_order)
+     VALUES (:block_key, :title, :content, :lang, :sort_order)"
 );
 
 foreach ($defaultBlocks as $block) {
@@ -173,6 +202,11 @@ foreach ($defaultBlocks as $block) {
 $adminEmail = getenv('POLASCIN_ADMIN_EMAIL') ?: 'admin@polascin.net';
 $adminUsername = 'admin';
 
+if (!filter_var($adminEmail, FILTER_VALIDATE_EMAIL) || appTextLength($adminEmail) > 255) {
+    fwrite(STDERR, "Chyba: POLASCIN_ADMIN_EMAIL nie je platná e-mailová adresa.\n");
+    exit(1);
+}
+
 $existing = $pdo->prepare("SELECT id FROM users WHERE username = :username LIMIT 1");
 $existing->execute([':username' => $adminUsername]);
 $quiet = getenv('POLASCIN_SETUP_QUIET') === '1';
@@ -184,9 +218,14 @@ if (!$existing->fetch()) {
             fwrite(STDERR, "Chyba: chýbajúci admin účet a premenná POLASCIN_ADMIN_PASSWORD nie je nastavená.\n");
             exit(1);
         }
-        $password = bin2hex(random_bytes(8));
+        $password = bin2hex(random_bytes(10)) . 'Aa1';
     }
-    $hash = password_hash($password, PASSWORD_DEFAULT);
+    try {
+        $hash = hashAppPassword($password);
+    } catch (\InvalidArgumentException) {
+        fwrite(STDERR, "Chyba: administrátorské heslo musí mať " . APP_PASSWORD_MIN_BYTES . " až " . APP_PASSWORD_MAX_BYTES . " bajtov a obsahovať malé písmeno, veľké písmeno a číslicu.\n");
+        exit(1);
+    }
 
     $stmt = $pdo->prepare(
         "INSERT INTO users (username, email, password_hash, is_admin, is_active)

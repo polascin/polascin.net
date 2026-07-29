@@ -1,5 +1,18 @@
 <?php
 declare(strict_types=1);
+
+$partialName = basename(__FILE__);
+$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
+if (preg_match('~(?:^|/)' . preg_quote($partialName, '~') . '(?:/|$)~i', $requestedScript) === 1) {
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, "Chyba: {$partialName} je interný súbor a nemožno ho spúšťať priamo.\n");
+        exit(1);
+    }
+    http_response_code(403);
+    exit('Prístup odmietnutý.');
+}
+unset($partialName, $requestedScript);
+
 $year = date('Y');
 ?>
 <footer>
@@ -35,8 +48,8 @@ $year = date('Y');
       <a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer">books.polascin.net</a> |
       <a href="privacy.php">Ochrana súkromia</a> |
       <a href="terms.php">Podmienky používania</a> |
-      <button class="cookie-settings-trigger" aria-haspopup="dialog" aria-controls="cookie-consent-container">Nastavenia cookies</button>
+      <button type="button" class="cookie-settings-trigger" aria-haspopup="dialog" aria-controls="cookie-consent-container">Nastavenia cookies</button>
     </p>
   </div>
 </footer>
-<div id="cookie-consent-container"></div>
+<div id="cookie-consent-container" data-privacy-url="privacy.php"></div>

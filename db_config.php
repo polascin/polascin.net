@@ -2,31 +2,51 @@
 
 declare(strict_types=1);
 
-// Ochrana pred priamym prístupom k súboru
-if (basename($_SERVER['PHP_SELF']) === basename(__FILE__)) {
-    header("HTTP/1.1 403 Forbidden");
+// Ochrana pred priamym prístupom vrátane požiadaviek s PATH_INFO.
+$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
+$executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
+if (
+    $executedFile === __FILE__
+    || preg_match('~(?:^|/)db_config\.php(?:/|$)~i', $requestedScript) === 1
+) {
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, "Chyba: db_config.php je interný súbor a nemožno ho spúšťať priamo.\n");
+        exit(1);
+    }
+    http_response_code(403);
     exit("Prístup odmietnutý.");
 }
+unset($requestedScript, $executedFile);
 
 require_once __DIR__ . '/config_loader.php';
-
-date_default_timezone_set('Europe/Bratislava');
 
 try {
     $env = loadAppConfig();
 } catch (\RuntimeException $e) {
     error_log('Konfigurácia DB nebola načítaná: ' . $e->getMessage());
 
-    $isCli = php_sapi_name() === 'cli';
-    $host = strtolower((string) ($_SERVER['SERVER_NAME'] ?? ''));
-    $isLocalHttp = in_array($host, ['localhost', '127.0.0.1', '::1'], true);
-
-    if ($isCli || $isLocalHttp) {
-        exit("Chyba: " . $e->getMessage());
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, "Chyba: " . $e->getMessage() . "\n");
+        exit(1);
     }
 
+    http_response_code(500);
     exit("Chyba: Konfiguračný súbor sa nenašiel alebo je neplatný.");
 }
+
+$appTimezoneName = trim((string) ($env['APP_TIMEZONE'] ?? getenv('APP_TIMEZONE') ?: 'Europe/Bratislava'));
+try {
+    $appTimezone = new DateTimeZone($appTimezoneName);
+} catch (\Throwable) {
+    error_log('Konfigurácia APP_TIMEZONE je neplatná.');
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, "Chyba: APP_TIMEZONE nie je platné časové pásmo.\n");
+        exit(1);
+    }
+    http_response_code(500);
+    exit("Chyba: Konfigurácia časového pásma je neplatná.");
+}
+date_default_timezone_set($appTimezoneName);
 
 $dbHost = (string) ($env['DB_HOST'] ?? '');
 $dbName = (string) ($env['DB_NAME'] ?? '');
@@ -36,6 +56,11 @@ $dbCharset = 'utf8mb4';
 
 if ($dbHost === '' || $dbName === '' || $dbUser === '') {
     error_log('Konfigurácia DB je nekompletná.');
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, "Chyba: Databázová konfigurácia je nekompletná.\n");
+        exit(1);
+    }
+    http_response_code(500);
     exit("Chyba: Databázová konfigurácia je nekompletná.");
 }
 
@@ -49,7 +74,16 @@ $options = [
 try {
     $pdo = new PDO($dsn, $dbUser, $dbPass, $options);
     $pdo->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+    // Číselný offset funguje aj na MariaDB bez nahratých timezone tabuliek.
+    // Každé nové pripojenie ho vypočíta nanovo, takže rešpektuje letný čas.
+    $databaseTimezoneOffset = (new DateTimeImmutable('now', $appTimezone))->format('P');
+    $pdo->exec('SET time_zone = ' . $pdo->quote($databaseTimezoneOffset));
 } catch (\PDOException $e) {
     error_log("Chyba pripojenia k databáze: " . $e->getMessage());
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, "Chyba: Pripojenie k databáze zlyhalo.\n");
+        exit(1);
+    }
+    http_response_code(500);
     exit("Chyba: Pripojenie k databáze zlyhalo.");
 }

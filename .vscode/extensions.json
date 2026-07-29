@@ -1,10 +1,10 @@
 {
-    "recommendations": [
-        "trunk.io",
-        "yandeu.five-server",
-        "github.copilot",
-        "github.copilot-chat",
-        "github.vscode-pull-request-github",
-        "sonarsource.sonarlint-vscode"
-    ]
+  "recommendations": [
+    "trunk.io",
+    "yandeu.five-server",
+    "github.copilot",
+    "github.copilot-chat",
+    "github.vscode-pull-request-github",
+    "sonarsource.sonarlint-vscode"
+  ]
 }

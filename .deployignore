@@ -4,6 +4,9 @@
 .github
 .gitignore
 
+# Samotný ignore súbor nepatrí do web rootu
+.deployignore
+
 # Lokálne konfigurácie a IDE
 .vscode
 .claude
@@ -21,13 +24,27 @@ private
 .env
 *.env
 *.ini
+env.ini.example
+*.pem
+*.key
+*.p12
+*.pfx
 
 # Cache / logy
 *.log
 *.cache
 
+# Lokálne pomocné a systémové súbory
+code.txt
+.DS_Store
+__MACOSX
+
 # Hooky a nástroje (nie sú súčasťou web rootu)
 hooks
+tests
+
+# Historický súbor; už sa negeneruje, na serveri sa iba odstraňuje
+deploy_info.php
 
 # Ostatné nepoužívané adresáre
 scratch

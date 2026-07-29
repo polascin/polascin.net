@@ -1,12 +1,28 @@
 <?php
 declare(strict_types=1);
 
+$partialName = basename(__FILE__);
+$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
+if (preg_match('~(?:^|/)' . preg_quote($partialName, '~') . '(?:/|$)~i', $requestedScript) === 1) {
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, "Chyba: {$partialName} je interný súbor a nemožno ho spúšťať priamo.\n");
+        exit(1);
+    }
+    http_response_code(403);
+    exit('Prístup odmietnutý.');
+}
+unset($partialName, $requestedScript);
+
 $siteName = 'Polascin.net';
 $baseUrl = getAppBaseUrl();
-$allowedHost = parse_url($baseUrl, PHP_URL_HOST) ?: 'polascin.net';
-$scheme = isRequestHttps() ? 'https' : 'http';
 $requestUri = filter_var($_SERVER['REQUEST_URI'] ?? '/', FILTER_SANITIZE_URL) ?: '/';
-$currentUrl = $scheme . '://' . $allowedHost . $requestUri;
+// Kanonická URL nesmie preberať query parametre (utm_*, fbclid…), inak by sa
+// tá istá stránka self-kanonizovala do nekonečna variantov.
+$requestPath = substr($requestUri, 0, strcspn($requestUri, '?#'));
+if ($requestPath === '' || $requestPath[0] !== '/') {
+    $requestPath = '/';
+}
+$currentUrl = rtrim($baseUrl, '/') . '/' . ltrim($requestPath, '/');
 
 $pageTitle = $pageTitle ?? $siteName;
 $seoDescription = $seoDescription ?? 'MUDr. Ľubomír Polaščín — nefrológ, internista, lekársky prekladateľ, spisovateľ a samouk programátor.';
@@ -50,6 +66,7 @@ $jsVersion = is_file(__DIR__ . '/js/main.js') ? (string) filemtime(__DIR__ . '/j
 <meta name="twitter:title" content="<?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="twitter:description" content="<?= htmlspecialchars($seoDescription, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="twitter:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES, 'UTF-8') ?>">
+<meta name="twitter:image:alt" content="<?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?>">
 
 <link rel="icon" href="CrystalKidney.png" type="image/png">
 <link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-57x57.png">
