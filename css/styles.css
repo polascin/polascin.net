@@ -174,12 +174,38 @@ a:focus-visible {
   color: var(--primary-hover);
 }
 
+/* Odkaz vnútri súvislého textu sa nesmie odlišovať iba farbou (WCAG 1.4.1):
+   fialová má voči okolitému textu len ~1,7:1 a modrá v tmavej téme ~1,9:1,
+   čo je hlboko pod hranicou 3:1. Samostatné odkazy (navigácia, tlačidlá,
+   karty, pätička) majú vlastné rozlíšenie a podčiarknutie nepotrebujú. */
+main p a:not(.btn),
+.article-body a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 ::selection {
   background: color-mix(in srgb, var(--flag-violet) 28%, transparent);
 }
 
+[data-theme="dark"] ::selection {
+  background: color-mix(in srgb, var(--flag-blue) 32%, transparent);
+}
+
+/* Na fialových plochách by fialový tint splynul s podkladom a označenie by
+   nebolo vidno — tam sa vyberá mätová s tmavým textom. */
+footer ::selection,
+footer::selection,
+.btn-primary::selection,
+.btn-cookie-accept::selection,
+.skip-link::selection {
+  background: var(--flag-mint);
+  color: #241040;
+}
+
 a:focus-visible,
 button:focus-visible,
+summary:focus-visible,
 .nav-toggle:focus-visible,
 .theme-toggle-btn:focus-visible,
 .btn:focus-visible,
@@ -1045,13 +1071,23 @@ footer {
   padding: var(--spacing-lg) 0;
   text-align: center;
   position: relative;
-  border-top: 3px solid transparent;
-  border-image: var(--flag-stripe) 1;
+}
+
+/* Pruh vlajky leží NAD horným okrajom pätičky, na svetlom pozadí stránky.
+   Ako border-image splýval: gradient končí #3d1a78, teda presne farbou
+   pozadia pätičky, a posledná šestina pruhu opticky zanikala. */
+footer::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -3px;
+  height: 3px;
+  background: var(--flag-stripe);
 }
 
 @media (forced-colors: active) {
-  footer {
-    border-image: none;
+  footer::before {
+    display: none;
   }
 }
 
@@ -1643,12 +1679,12 @@ footer button:focus-visible {
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-  outline: none;
+  /* Polopriehľadný 2px nádych mal voči podkladu len ~1,2:1 a jediným
+     zreteľným znakom fokusu bola zmena 1px rámika — polia preto dostávajú
+     rovnaký prstenec ako ostatné interaktívne prvky stránky. */
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
   border-color: var(--primary-color);
-  /* Prvý riadok je záloha pre prehliadače bez color-mix. */
-  box-shadow: 0 0 0 2px rgba(80, 73, 204, 0.25);
-  box-shadow: 0 0 0 2px
-    color-mix(in srgb, var(--primary-color) 25%, transparent);
 }
 
 .form-row {
@@ -1797,12 +1833,14 @@ footer button:focus-visible {
 .page-link:hover,
 .page-link:focus-visible {
   background-color: var(--primary-color);
-  color: #fff;
+  /* Nie #fff: v tmavej téme je primárna svetlá modrá a biely text by na nej
+     mal ~2,2:1 — --on-primary sa prepína spolu s témou. */
+  color: var(--on-primary);
 }
 
 .page-current {
   background-color: var(--primary-color);
-  color: #fff;
+  color: var(--on-primary);
   border-color: var(--primary-color);
 }
 

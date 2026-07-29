@@ -4,7 +4,10 @@
   const themeStorageKey = "theme";
   const consentStorageKey = "privacy_consent";
   const gaMeasurementId = "G-9EMD3BVXCJ";
-  const mobileNavigationQuery = window.matchMedia("(max-width: 1024px)");
+  // Musí sa zhodovať s breakpointom kompaktnej navigácie v css/styles.css:
+  // pri nezhode openMobileMenu() odmietne otvoriť menu, hoci CSS už zobrazuje
+  // hamburger, a navigácia je v medzipásme úplne nedostupná.
+  const mobileNavigationQuery = window.matchMedia("(max-width: 1100px)");
   const reducedMotionQuery = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   );
@@ -99,6 +102,21 @@
       ? Array.from(navMenu.querySelectorAll(".nav-link"))
       : [];
     const originalNavTabIndexes = new Map();
+
+    // Skutočná výška pevnej navigácie rastie so zväčšením textu (rem odsadenie
+    // aj text značky), pevných 77px v CSS by potom prekrylo obsah a posunulo
+    // mobilné menu. Premenná sa preto priebežne drží nameranej hodnoty;
+    // hodnota v CSS zostáva ako záloha bez JavaScriptu.
+    if (navbar && "ResizeObserver" in window) {
+      const syncNavbarHeight = () => {
+        document.documentElement.style.setProperty(
+          "--navbar-height",
+          `${Math.round(navbar.getBoundingClientRect().height)}px`,
+        );
+      };
+      new ResizeObserver(syncNavbarHeight).observe(navbar);
+      syncNavbarHeight();
+    }
 
     function navMenuItems() {
       if (!navMenu) return [];

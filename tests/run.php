@@ -317,6 +317,40 @@ expectTrue(
     'Kompaktná navigácia musí zabrániť zalomeniu hlavičky aj tesne nad šírkou tabletu'
 );
 
+// Breakpoint mobilnej navigácie musí byť v JavaScripte rovnaký ako v CSS:
+// openMobileMenu() má guard na mobileNavigationQuery, takže pri nezhode CSS
+// zobrazí hamburger, ale kliknutie menu neotvorí a navigácia je v medzipásme
+// šírok úplne nedostupná (regresia z commitu b41d628: CSS 1100px, JS 1024px).
+$navigationScript = (string) file_get_contents(dirname(__DIR__) . '/js/main.js');
+expectTrue(
+    str_contains($navigationScript, 'window.matchMedia("(max-width: 1100px)")'),
+    'js/main.js musí prepínať mobilnú navigáciu na rovnakej šírke ako CSS (1100px)'
+);
+expectTrue(
+    !str_contains($navigationScript, '(max-width: 1024px)'),
+    'js/main.js nesmie používať starý breakpoint navigácie 1024px'
+);
+expectTrue(
+    str_contains($navigationScript, '"ResizeObserver" in window'),
+    'js/main.js musí synchronizovať --navbar-height s nameranou výškou navigácie'
+);
+
+// Prístupnosť: prepínač jazyka (summary) zdieľa fokusový prstenec stránky,
+// formulárové polia majú viditeľný prstenec namiesto outline: none a odkazy
+// v súvislom texte sú podčiarknuté, nie odlíšené iba farbou (WCAG 1.4.1).
+expectTrue(
+    str_contains($siteStyles, 'summary:focus-visible'),
+    'Prepínač jazyka (summary) musí mať rovnaký fokusový prstenec ako ostatné prvky'
+);
+expectTrue(
+    preg_match('~\.form-group select:focus\s*\{[^}]*outline:\s*3px solid~s', $siteStyles) === 1,
+    'Formulárové polia musia mať pri fokuse viditeľný prstenec'
+);
+expectTrue(
+    preg_match('~main p a:not\(\.btn\),\s*\.article-body a\s*\{[^}]*text-decoration:\s*underline~s', $siteStyles) === 1,
+    'Odkazy v súvislom texte musia byť podčiarknuté, nie odlíšené len farbou'
+);
+
 // Transplantácia môže mať u vhodných pacientov lepšie výsledky než dlhodobá
 // dialýza, no nie je univerzálne „najlepšou liečbou“ pre každého.
 expectTrue(

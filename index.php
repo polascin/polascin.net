@@ -49,6 +49,8 @@ $structuredData = [
         'https://nefro.polascin.net/',
         'https://nephrosite.polascin.net/',
         'https://www.amazon.com/stores/author/B07PN436VJ/about',
+        // Autorská stránka literárneho pseudonymu Walter Kyo Csoelle.
+        'https://www.amazon.com/stores/Walter-Kyo-Csoelle/author/B0G2TCCJZZ',
         'https://www.linkedin.com/in/lubomirpolascin/',
         'https://x.com/polascin',
         'https://www.facebook.com/lubomir.polascin',
@@ -153,6 +155,8 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
           <div class="about-actions">
             <a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><?= te('home.books_cta') ?></a>
             <a href="https://www.amazon.com/stores/author/B07PN436VJ/about" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('home.amazon_cta') ?></a>
+            <?php // Pseudonym je vlastné meno, neprekladá sa — kľúč v katalógoch netreba. ?>
+            <a href="https://www.amazon.com/stores/Walter-Kyo-Csoelle/author/B0G2TCCJZZ" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">Walter Kyo Csoelle (Amazon)</a>
           </div>
         </div>
       </div>
@@ -222,6 +226,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
         <a href="https://books.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book-open" aria-hidden="true"></i> books.polascin.net</a>
         <a href="https://alphagrab.de/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-ticket" aria-hidden="true"></i> AlphaGrab</a>
         <a href="https://arenibus.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i> Arenibus</a>
+        <a href="https://www.amazon.com/stores/Walter-Kyo-Csoelle/author/B0G2TCCJZZ" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> Walter Kyo Csoelle (Amazon)</a>
         <a href="https://amzn.to/45y4INd" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_vital_2nd') ?></a>
         <a href="https://amzn.to/4t4mBNs" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_vital_1st') ?></a>
         <a href="https://amzn.to/4pYuL7D" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> Blood Equity (Amazon)</a>
