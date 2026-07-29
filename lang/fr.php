@@ -74,6 +74,8 @@ return [
     'footer.privacy' => 'Confidentialité',
     'footer.terms' => 'Conditions d\'utilisation',
     'footer.cookie_settings' => 'Paramètres des cookies',
+    'footer.updated' => 'Mis à jour :',
+    'footer.beat_title' => 'Swiss Internet Time — 1 jour = 1000 beats',
 
     // Métadonnées des pages
     'meta.default_description' => 'Site personnel et professionnel du Dr Ľubomír Polaščín : néphrologie et dialyse, enseignement et écriture médicale, traduction spécialisée et outils numériques pratiques.',
@@ -181,6 +183,7 @@ return [
     'home.project_books_text' => 'Présentation de mes livres, publications spécialisées, chapitres et autres écrits.',
     'home.project_alphagrab_text' => 'Outil expérimental de recherche d\'événements et de billets utilisant l\'API Ticketmaster Discovery.',
     'home.project_arenibus_text' => 'Un système d’information .NET à un stade avancé de développement pour les cliniques de néphrologie et les centres de dialyse. Son MVP couvre les dossiers des patients et des consultations, les prescriptions de dialyse, la planification, les résultats de laboratoire, les pistes d’audit et l’intégration au système eHealth slovaque ; une démonstration publique utilise des données fictives.',
+    'home.project_gumroad_text' => 'Produits numériques et livres électroniques sur Gumroad — notamment Medical Fasting (en slovaque Medicínsky pôst), un manuel de sécurité sur le jeûne rédigé par un néphrologue avec le protocole Nephro-Safe Neera 2.0.',
     'home.clinics_heading' => 'Établissements cliniques',
     'home.links_heading' => 'Autres sites et liens',
     'home.links_intro' => 'Mes autres sites, mes livres et une sélection d\'outils.',

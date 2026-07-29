@@ -74,6 +74,8 @@ return [
     'footer.privacy' => 'Privacy Policy',
     'footer.terms' => 'Terms of Use',
     'footer.cookie_settings' => 'Cookie settings',
+    'footer.updated' => 'Updated:',
+    'footer.beat_title' => 'Swiss Internet Time — 1 day = 1000 beats',
 
     // Page metadata
     'meta.default_description' => 'The personal and professional website of Ľubomír Polaščín, MD: nephrology and dialysis, medical education and writing, specialist translation, and practical digital tools.',
@@ -181,6 +183,7 @@ return [
     'home.project_books_text' => 'An overview of my books, specialist publications, chapters and other writing.',
     'home.project_alphagrab_text' => 'An experimental event and ticket search tool using the Ticketmaster Discovery API.',
     'home.project_arenibus_text' => 'A .NET information system in advanced development for nephrology clinics and dialysis centres. Its MVP covers patient and visit records, dialysis prescriptions, scheduling, laboratory results, audit trails and integration with Slovakia\'s eHealth system; a public demo uses fictional data.',
+    'home.project_gumroad_text' => 'Digital products and e-books on Gumroad — including Medical Fasting (also in Slovak as Medicínsky pôst), a fasting safety manual by a nephrologist featuring the Nephro-Safe Neera 2.0 protocol.',
     'home.clinics_heading' => 'Clinical facilities',
     'home.links_heading' => 'Other websites and links',
     'home.links_intro' => 'My other websites, books and selected tools.',

@@ -74,6 +74,8 @@ return [
     'footer.privacy' => 'Adatvédelem',
     'footer.terms' => 'Felhasználási feltételek',
     'footer.cookie_settings' => 'Sütibeállítások',
+    'footer.updated' => 'Frissítve:',
+    'footer.beat_title' => 'Swiss Internet Time — 1 nap = 1000 beat',
 
     // Oldalak metaadatai
     'meta.default_description' => 'Dr. Ľubomír Polaščín személyes és szakmai honlapja: nefrológia és dialízis, orvosi oktatás és szakmai szövegírás, orvosi szakfordítás, valamint gyakorlati digitális eszközök.',
@@ -181,6 +183,7 @@ return [
     'home.project_books_text' => 'Könyveim, szakmai kiadványaim, könyvfejezeteim és egyéb írásaim áttekintése.',
     'home.project_alphagrab_text' => 'Kísérleti esemény- és jegykereső eszköz, amely a Ticketmaster Discovery API-t használja.',
     'home.project_arenibus_text' => 'Előrehaladott fejlesztési szakaszban lévő .NET információs rendszer nefrológiai klinikák és dialízisközpontok számára. MVP-je lefedi a betegek és vizitek nyilvántartását, a dialíziselőírásokat, az ütemezést, a laboratóriumi eredményeket, az auditnaplókat, valamint a szlovákiai eHealth rendszerrel való integrációt; a nyilvános demó fiktív adatokat használ.',
+    'home.project_gumroad_text' => 'Digitális termékek és e-könyvek a Gumroad platformon — többek között a Medical Fasting (szlovákul Medicínsky pôst), egy nefrológus böjtölési biztonsági kézikönyve a Nephro-Safe Neera 2.0 protokollal.',
     'home.clinics_heading' => 'Klinikai intézmények',
     'home.links_heading' => 'További weboldalak és hivatkozások',
     'home.links_intro' => 'További weboldalaim, könyveim és válogatott eszközeim.',

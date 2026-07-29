@@ -74,6 +74,8 @@ return [
     'footer.privacy' => 'Datenschutz',
     'footer.terms' => 'Nutzungsbedingungen',
     'footer.cookie_settings' => 'Cookie-Einstellungen',
+    'footer.updated' => 'Aktualisiert:',
+    'footer.beat_title' => 'Swiss Internet Time — 1 Tag = 1000 Beats',
 
     // Seiten-Metadaten
     'meta.default_description' => 'Persönliche und berufliche Website von MUDr. Ľubomír Polaščín: Nephrologie und Dialyse, medizinische Fortbildung und Fachtexte, medizinische Fachübersetzungen sowie praktische digitale Werkzeuge.',
@@ -181,6 +183,7 @@ return [
     'home.project_books_text' => 'Ein Überblick über meine Bücher, Fachpublikationen, Buchkapitel und weiteren Texte.',
     'home.project_alphagrab_text' => 'Ein experimentelles Werkzeug zur Suche nach Veranstaltungen und Tickets, das die Ticketmaster Discovery API nutzt.',
     'home.project_arenibus_text' => 'Ein .NET-Informationssystem in fortgeschrittener Entwicklung für nephrologische Ambulanzen und Dialysezentren. Sein MVP umfasst Patienten- und Besuchsdokumentation, Dialyseverordnungen, Terminplanung, Laborergebnisse, Audit-Trails sowie die Anbindung an das slowakische eHealth-System; eine öffentliche Demo verwendet fiktive Daten.',
+    'home.project_gumroad_text' => 'Digitale Produkte und E-Books auf Gumroad — unter anderem Medical Fasting (auf Slowakisch Medicínsky pôst), ein Sicherheitshandbuch zum Fasten von einem Nephrologen mit dem Nephro-Safe-Protokoll Neera 2.0.',
     'home.clinics_heading' => 'Klinische Einrichtungen',
     'home.links_heading' => 'Weitere Websites und Links',
     'home.links_intro' => 'Meine weiteren Websites, Bücher und ausgewählten Werkzeuge.',

@@ -56,6 +56,7 @@ $structuredData = [
         'https://www.facebook.com/lubomir.polascin',
         'https://www.patreon.com/c/Csoelle',
         'https://github.com/polascin',
+        'https://polascin.gumroad.com/',
     ],
 ];
 
@@ -217,6 +218,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
         <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-hospital-user" aria-hidden="true"></i></div><h3>NephroSite</h3><p><?= te('home.project_nephrosite_text') ?></p><a href="https://nephrosite.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('common.visit', ['target' => 'nephrosite.polascin.net']) ?></a></article>
         <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></div><h3>Bibliotheca Polascini</h3><p><?= te('home.project_books_text') ?></p><a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('common.visit', ['target' => 'books.polascin.net']) ?></a></article>
         <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-ticket" aria-hidden="true"></i></div><h3>AlphaGrab</h3><p><?= te('home.project_alphagrab_text') ?></p><a href="https://alphagrab.de/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('common.visit', ['target' => 'alphagrab.de']) ?></a></article>
+        <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-store" aria-hidden="true"></i></div><h3>Gumroad</h3><p><?= te('home.project_gumroad_text') ?></p><a href="https://polascin.gumroad.com/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('common.visit', ['target' => 'polascin.gumroad.com']) ?></a></article>
         <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i></div><h3>Arenibus</h3><p><?= te('home.project_arenibus_text') ?></p><a href="https://arenibus.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('common.visit', ['target' => 'arenibus.polascin.net']) ?></a></article>
       </div>
     </div>

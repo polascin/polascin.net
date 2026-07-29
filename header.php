@@ -18,28 +18,40 @@ if (!function_exists('isLoggedIn')) {
 }
 
 $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
+
+// Aktuálne počítaný vek — rovnaký výpočet ako na old.polascin.net
+// (narodenie 4. 3. 1971 o 8:30, rok = 365,25 dňa).
+$vekAktualny = (time() - mktime(8, 30, 0, 3, 4, 1971)) / (60 * 60 * 24 * 365.25);
+$vekRoky = (int) floor($vekAktualny);
+$vekZlomok = substr(number_format($vekAktualny, 3, '.', ''), -4);
 ?>
 <a href="#main-content" class="skip-link"><?= te('common.skip_to_content') ?></a>
 
 <nav class="navbar" aria-label="<?= te('common.main_navigation') ?>">
   <div class="container nav-container">
-    <a
-      href="<?= htmlspecialchars(langUrl(currentLang(), 'index.php'), ENT_QUOTES, 'UTF-8') ?>"
-      class="nav-brand"
-      aria-label="<?= te('common.site_name') ?>"
-    >
-      <img
-        src="pix/lpimg001.webp"
-        alt=""
-        class="nav-brand-photo"
-        width="44"
-        height="44"
-        loading="eager"
-        decoding="async"
-        fetchpriority="high"
+    <div class="nav-brand-group">
+      <a
+        href="<?= htmlspecialchars(langUrl(currentLang(), 'index.php'), ENT_QUOTES, 'UTF-8') ?>"
+        class="nav-brand"
+        aria-label="<?= te('common.site_name') ?>"
       >
-      <span class="nav-brand-text"><?= te('common.site_name') ?></span>
-    </a>
+        <img
+          src="pix/lpimg001.webp"
+          alt=""
+          class="nav-brand-photo"
+          width="44"
+          height="44"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        >
+        <span class="nav-brand-text"><?= te('common.site_name') ?></span>
+      </a>
+      <span class="nav-age">
+        <span class="nav-age-years"><?= $vekRoky ?></span>
+        <span class="nav-age-exact">(<?= $vekRoky ?><small><?= $vekZlomok ?></small>)</span>
+      </span>
+    </div>
     <button
       type="button"
       class="nav-toggle"

@@ -74,6 +74,8 @@ return [
     'footer.privacy' => 'Ochrana soukromí',
     'footer.terms' => 'Podmínky používání',
     'footer.cookie_settings' => 'Nastavení cookies',
+    'footer.updated' => 'Aktualizováno:',
+    'footer.beat_title' => 'Swiss Internet Time — 1 den = 1000 beatů',
 
     // Metadata stránek
     'meta.default_description' => 'Osobní a profesní web MUDr. Ľubomíra Polaščína: nefrologie a dialýza, medicínské vzdělávání a odborné psaní, specializované překlady a praktické digitální nástroje.',
@@ -181,6 +183,7 @@ return [
     'home.project_books_text' => 'Přehled mých knih, odborných publikací, kapitol a další autorské tvorby.',
     'home.project_alphagrab_text' => 'Experimentální nástroj pro vyhledávání událostí a vstupenek využívající Ticketmaster Discovery API.',
     'home.project_arenibus_text' => 'Informační systém .NET v pokročilé fázi vývoje pro nefrologické ambulance a dialyzační střediska. Jeho MVP zahrnuje evidenci pacientů a návštěv, předpisy dialyzační léčby, plánování, laboratorní výsledky, auditní záznamy a integraci se slovenským systémem eHealth; veřejná ukázka používá fiktivní data.',
+    'home.project_gumroad_text' => 'Digitální produkty a e-knihy na platformě Gumroad — mimo jiné příručka Medicínsky pôst (anglicky Medical Fasting), bezpečnostní manuál k hladovění od nefrologa s protokolem Nephro-Safe Neera 2.0.',
     'home.clinics_heading' => 'Klinická pracoviště',
     'home.links_heading' => 'Další weby a odkazy',
     'home.links_intro' => 'Mé další weby, knihy a vybrané nástroje.',
