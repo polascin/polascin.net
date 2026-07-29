@@ -27,9 +27,19 @@ $vekoveHodnoty = [
 ];
 
 // Dátum aktualizácie a Swatch @beat ako v pätičke nefro.polascin.net.
-// Web nemá deploy_info.php, preto sa berie čas úpravy zobrazovaného skriptu.
-$footerScript = (string) ($_SERVER['SCRIPT_FILENAME'] ?? '');
-$footerUpdateTs = ($footerScript !== '' && is_file($footerScript)) ? (int) filemtime($footerScript) : time();
+// Presný čas nasadenia nesie deploy_info.php generovaný pri nasadení
+// (workflow aj hooks/deploy.sh); bez neho — napr. pri lokálnom vývoji —
+// sa berie čas úpravy zobrazovaného skriptu.
+$deployInfoFile = __DIR__ . '/deploy_info.php';
+if (is_file($deployInfoFile)) {
+    require_once $deployInfoFile;
+}
+if (defined('DEPLOY_TIMESTAMP')) {
+    $footerUpdateTs = (int) DEPLOY_TIMESTAMP;
+} else {
+    $footerScript = (string) ($_SERVER['SCRIPT_FILENAME'] ?? '');
+    $footerUpdateTs = ($footerScript !== '' && is_file($footerScript)) ? (int) filemtime($footerScript) : time();
+}
 $footerUpdated = date('d.m.Y H:i', $footerUpdateTs);
 $footerTimezone = date('T', $footerUpdateTs) . ' (' . date_default_timezone_get() . ')';
 // Swiss Internet Time: BMT = UTC+1, 1 deň = 1000 beatov.

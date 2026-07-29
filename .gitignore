@@ -21,6 +21,9 @@ private/
 # Lokálne pomocné súbory
 code.txt
 
+# Generuje sa pri nasadení (workflow aj hooks/deploy.sh), do gitu nepatrí
+deploy_info.php
+
 # PHP session / cache
 private/sessions/
 private/cache/

@@ -191,6 +191,22 @@ for required_command in git rsync ssh date base64 tr dirname; do
 		fail "Chýba príkaz: ${required_command}"
 done
 
+COMMIT=$(git rev-parse --short HEAD)
+BRANCH=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || printf 'detached')
+UNIX_TS=$(date '+%s')
+TIMESTAMP=$(date '+%d.%m.%Y %H:%M')
+
+# Presný čas nasadenia pre pätičku — súbor vzniká pred rsyncom, aby sa
+# nasadil spolu s kódom; lokálna kópia je v .gitignore.
+{
+	printf '<?php\n'
+	printf '// Automaticky generované nasadením — neupravovať manuálne.\n'
+	printf "define('DEPLOY_TIME', '%s');\n" "$TIMESTAMP"
+	printf "define('DEPLOY_TIMESTAMP', %s);\n" "$UNIX_TS"
+	printf "define('DEPLOY_COMMIT', '%s');\n" "$COMMIT"
+	printf "define('DEPLOY_BRANCH', '%s');\n" "$BRANCH"
+} >deploy_info.php
+
 echo "[deploy] Overujem vzdialený cieľový adresár..."
 ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "test -d '${REMOTE_PATH}'"
 
@@ -203,11 +219,7 @@ rsync -avz --delete-delay \
 
 echo "[deploy] Odstraňujem staré súbory určené iba pre repozitár..."
 ssh "${SSH_OPTS[@]}" "$SSH_SPEC" \
-	"set -eu; cd '${REMOTE_PATH}'; rm -f -- DEPLOY.md README.md .audit.md .doaudit.md .deployignore .gitignore .gitattributes env.ini.example deploy_info.php hooks/deploy.sh hooks/deploy.env.example tests/run.php .github/workflows/deploy.yml .vscode/settings.json .vscode/tasks.json .vscode/extensions.json .claude/settings.json .trunk/trunk.yaml .trunk/configs/svgo.config.js; rmdir hooks tests .github/workflows .github .vscode .claude .trunk/configs .trunk 2>/dev/null || true"
-
-COMMIT=$(git rev-parse --short HEAD)
-BRANCH=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || printf 'detached')
-TIMESTAMP=$(date '+%d.%m.%Y %H:%M')
+	"set -eu; cd '${REMOTE_PATH}'; rm -f -- DEPLOY.md README.md .audit.md .doaudit.md .deployignore .gitignore .gitattributes env.ini.example hooks/deploy.sh hooks/deploy.env.example tests/run.php .github/workflows/deploy.yml .vscode/settings.json .vscode/tasks.json .vscode/extensions.json .claude/settings.json .trunk/trunk.yaml .trunk/configs/svgo.config.js; rmdir hooks tests .github/workflows .github .vscode .claude .trunk/configs .trunk 2>/dev/null || true"
 
 POLASCIN_ENV_INI=${POLASCIN_ENV_INI:-""}
 if [[ -z $POLASCIN_ENV_INI && -n ${POLASCIN_ENV_INI_FILE:-} && -f $POLASCIN_ENV_INI_FILE ]]; then

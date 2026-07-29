@@ -46,9 +46,6 @@ __MACOSX
 hooks
 tests
 
-# Historický súbor; už sa negeneruje, na serveri sa iba odstraňuje
-deploy_info.php
-
 # Ostatné nepoužívané adresáre
 scratch
 tmp
