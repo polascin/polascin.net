@@ -113,6 +113,12 @@ ini_set('session.cookie_secure', $isHttps ? '1' : '0');
 ini_set('session.cookie_samesite', 'Strict');
 if (session_status() === PHP_SESSION_NONE) {
     session_name('POLASCINSESSID');
+    // Bez tohto pridá session_start() vlastnú sadu `Expires: 1981` a
+    // `Pragma: no-cache`. Tú prvú síce sendSecurityHeaders() prepíše, ale
+    // zvyšné dve v odpovedi ostanú a protirečia `private, max-age=0,
+    // must-revalidate` na verejných stránkach. O cache rozhoduje výhradne
+    // sendSecurityHeaders(), ktorá citlivým stránkam `Pragma` nastaví sama.
+    session_cache_limiter('');
 }
 
 $projectSessionPath = __DIR__ . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'sessions';

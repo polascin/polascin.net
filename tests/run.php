@@ -379,6 +379,15 @@ expectSame('28. Juli 2026', formatLocalizedDate($testDate, 'de'), 'Nemecký dát
 expectSame('28 juillet 2026', formatLocalizedDate($testDate, 'fr'), 'Francúzsky dátum');
 expectSame('28 de julio de 2026', formatLocalizedDate($testDate, 'es'), 'Španielsky dátum používa predložku „de“');
 
+// PHP by inak k odpovedi pridal vlastné `Expires: 1981` a `Pragma: no-cache`,
+// ktoré protirečia `private, max-age=0, must-revalidate` na verejných stránkach.
+// O cache rozhoduje výhradne sendSecurityHeaders() (Beh #5).
+expectSame(
+    '',
+    session_cache_limiter(),
+    'Session nesmie pridávať vlastné cache hlavičky'
+);
+
 $csrf = generateCsrfToken();
 expectTrue(!validateCsrfToken('nespravny-token'), 'Neplatný CSRF token musí byť odmietnutý');
 expectSame($csrf, generateCsrfToken(), 'Neplatný CSRF pokus nesmie zneplatniť platný token');
