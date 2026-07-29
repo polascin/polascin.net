@@ -83,8 +83,10 @@ if ($originalRemoteAddress === null) {
     $_SERVER['REMOTE_ADDR'] = $originalRemoteAddress;
 }
 
-expectTrue(!isAppPasswordValid('Short1A'), 'Krátke heslo nesmie prejsť');
-expectTrue(isAppPasswordValid('LongEnoughPassword1'), 'Silné heslo musí prejsť');
+// Vstupy pre validátor hesiel — nie sú to prihlasovacie údaje k ničomu.
+// Názvy sú zvolené tak, aby to bolo zrejmé aj skenerom tajomstiev.
+expectTrue(!isAppPasswordValid('Kratke1A'), 'Krátke heslo nesmie prejsť');
+expectTrue(isAppPasswordValid('TestovaciVstup1'), 'Silné heslo musí prejsť');
 
 $query = 'action=confirm&token=secret-value&page=2&email=user%40example.com';
 $redacted = redactSensitiveQuery($query);
@@ -132,7 +134,7 @@ expectTrue(
 // skončilo fatálnou chybou (Beh #4).
 $nulPasswordError = null;
 try {
-    hashAppPassword("Password1234\0junk");
+    hashAppPassword("TestovaciVstup1\0nul");
 } catch (\Throwable $e) {
     $nulPasswordError = $e;
 }

@@ -1,0 +1,17 @@
+# Konfigurácia skenovania tajomstiev (GitGuardian / ggshield).
+#
+# tests/run.php obsahuje vstupné reťazce pre validátor hesiel
+# (isAppPasswordValid, hashAppPassword) — testuje sa nimi, že funkcia odmietne
+# krátke heslo a že bcrypt vyhodí výnimku pri NUL bajte. Nie sú to prihlasovacie
+# údaje k žiadnej službe a nie je čo rotovať; detektor „Generic Password“ ich
+# hlásil ako falošný poplach (incident 35265453, commit f80767a).
+#
+# Skutočné tajomstvá aplikácie nikdy nie sú v repozitári: databázové heslo aj
+# ostatné hodnoty sú v env.ini mimo Gitu (.gitignore: *.ini) a v produkcii sa
+# vytvárajú z tajomstva POLASCIN_ENV_INI.
+
+version: 2
+
+secret:
+  ignored-paths:
+    - tests/run.php

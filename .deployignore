@@ -7,6 +7,9 @@
 # Samotný ignore súbor nepatrí do web rootu
 .deployignore
 
+# Konfigurácia skenera tajomstiev (len pre repozitár)
+.gitguardian.yaml
+
 # Lokálne konfigurácie a IDE
 .vscode
 .claude

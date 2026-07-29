@@ -126,6 +126,7 @@ jobs:
         env:
           DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
@@ -142,6 +143,23 @@ jobs:
           echo "SSH_HOST_KEY_CHECK=yes" >>"$GITHUB_ENV"
 
           ssh-keygen -y -f ~/.ssh/deploy_key >/dev/null
+
+          # Pri neštandardnom porte musí byť záznam v tvare `[host]:port`; samotný
+          # `host` sa nespáruje. Bez tejto kontroly to praskne až na prvom ssh
+          # hláškou „No ED25519 host key is known…“, z ktorej nie je zrejmé, že
+          # chyba je v tajomstve. Obnov ho cez:
+          #   ssh-keyscan -p <PORT> <HOST>
+          if [[ "$DEPLOY_PORT_SAFE" == "22" ]]; then
+            KNOWN_HOSTS_TARGET="$DEPLOY_HOST"
+          else
+            KNOWN_HOSTS_TARGET="[${DEPLOY_HOST}]:${DEPLOY_PORT_SAFE}"
+          fi
+          if ! ssh-keygen -F "$KNOWN_HOSTS_TARGET" -f ~/.ssh/known_hosts >/dev/null; then
+            echo "::error::DEPLOY_KNOWN_HOSTS neobsahuje kľúč pre cieľ nasadenia. Obnov tajomstvo cez: ssh-keyscan -p <PORT> <HOST>"
+            exit 1
+          fi
+          echo "Známe typy kľúčov pre cieľ nasadenia:"
+          ssh-keygen -F "$KNOWN_HOSTS_TARGET" -f ~/.ssh/known_hosts | grep -v '^#' | awk '{print "  " $2}'
 
       - name: Deploy via rsync
         env:
