@@ -34,7 +34,9 @@ expectSame(
     buildSeoExcerpt('<p>Krátky&nbsp;text</p>', 50),
     'SEO úryvok musí odstrániť HTML a dekódovať entity'
 );
-expectSame('28. júla 2026', formatArticleDate('2026-07-28 12:00:00'), 'Dátum článku musí používať slovenský názov mesiaca');
+// Jazyk sa uvádza explicitne: bez neho rozhoduje detekcia, ktorá pri neznámom
+// jazyku návštevníka vracia angličtinu (Beh #6).
+expectSame('28. júla 2026', formatArticleDate('2026-07-28 12:00:00', 'sk'), 'Dátum článku musí používať slovenský názov mesiaca');
 
 $unsafeHtml = <<<'HTML'
 <script>alert(1)</script>
@@ -161,7 +163,35 @@ expectSame(null, languageFromAcceptHeader('en;q=0'), 'Váha q=0 znamená odmietn
 expectSame(null, languageFromAcceptHeader('*'), 'Zástupný znak sám o sebe nič neurčuje');
 expectSame(null, languageFromAcceptHeader(null), 'Chýbajúca hlavička nesmie nič vrátiť');
 
+// Návštevník, ktorého jazyk stránka nepozná, dostane angličtinu — nie slovenčinu,
+// ktorá je iba zdrojovým jazykom katalógov (Beh #6).
+$originalDetectGet = $_GET;
+$originalDetectCookie = $_COOKIE;
+$originalAcceptLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? null;
+$_GET = [];
+$_COOKIE = [];
+$_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'ja,ko;q=0.8';
+expectSame('en', detectAppLanguage(), 'Nepodporovaný jazyk prehliadača musí spadnúť na angličtinu');
+unset($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+expectSame('en', detectAppLanguage(), 'Chýbajúca hlavička Accept-Language musí spadnúť na angličtinu');
+$_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'sk-SK,sk;q=0.9';
+expectSame('sk', detectAppLanguage(), 'Podporovaný jazyk prehliadača sa musí zachovať');
+$_GET = ['lang' => 'uk'];
+expectSame('uk', detectAppLanguage(), 'Explicitná voľba v URL má prednosť');
+$_GET = $originalDetectGet;
+$_COOKIE = $originalDetectCookie;
+if ($originalAcceptLanguage === null) {
+    unset($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+} else {
+    $_SERVER['HTTP_ACCEPT_LANGUAGE'] = $originalAcceptLanguage;
+}
+expectTrue(isSupportedLanguage(APP_FALLBACK_LANGUAGE), 'Záložný jazyk musí byť medzi podporovanými');
+
 expectSame('sk', languageFromCountryCode('SK'), 'Slovensko sa musí mapovať na slovenčinu');
+expectSame('pl', languageFromCountryCode('PL'), 'Poľsko sa musí mapovať na poľštinu');
+expectSame('hu', languageFromCountryCode('HU'), 'Maďarsko sa musí mapovať na maďarčinu');
+expectSame('it', languageFromCountryCode('IT'), 'Taliansko sa musí mapovať na taliančinu');
+expectSame('uk', languageFromCountryCode('UA'), 'Ukrajina sa musí mapovať na ukrajinčinu');
 expectSame('es', languageFromCountryCode('mx'), 'Mapovanie krajiny nesmie závisieť od veľkosti písmen');
 expectSame(null, languageFromCountryCode('JP'), 'Nepokrytá krajina nesmie nič vrátiť');
 expectSame(null, languageFromCountryCode('XX'), 'Neplatný kód krajiny nesmie nič vrátiť');
@@ -202,6 +232,33 @@ foreach (array_keys(appLanguages()) as $catalogueLang) {
         }
     }
     expectSame([], $placeholderMismatches, "Katalóg {$catalogueLang} musí zachovať všetky zástupné znaky");
+}
+
+// Katalógy sú text, nie HTML. Väčšina hodnôt sa vypisuje cez te(), ktoré entitu
+// zaescapuje, takže by sa zobrazila doslovne („Vzdelanie a&nbsp;kariéra“).
+// Typografické znaky sa preto píšu priamo ako UTF-8 (Beh #6).
+foreach (array_keys(appLanguages()) as $entityLang) {
+    $entityCatalogue = require dirname(__DIR__) . '/lang/' . $entityLang . '.php';
+    $withEntities = [];
+    foreach ($entityCatalogue as $entityKey => $entityValue) {
+        if (preg_match('/&(?:[a-zA-Z][a-zA-Z0-9]*|#\d+|#x[0-9a-fA-F]+);/', (string) $entityValue) === 1) {
+            $withEntities[] = $entityKey;
+        }
+    }
+    expectSame([], $withEntities, "Katalóg {$entityLang} nesmie obsahovať HTML entity");
+}
+
+// Katalógy smú obsahovať iba latinku a cyriliku. Zachytáva to znak, ktorý sa do
+// prekladu dostane omylom — pri ukrajinčine takto prešli dva čínske znaky (Beh #6).
+foreach (array_keys(appLanguages()) as $scriptLang) {
+    $scriptCatalogue = require dirname(__DIR__) . '/lang/' . $scriptLang . '.php';
+    $foreignScript = [];
+    foreach ($scriptCatalogue as $scriptKey => $scriptValue) {
+        if (preg_match('~[^\p{Latin}\p{Cyrillic}\p{Common}\p{Inherited}]~u', (string) $scriptValue) === 1) {
+            $foreignScript[] = $scriptKey;
+        }
+    }
+    expectSame([], $foreignScript, "Katalóg {$scriptLang} obsahuje znak z cudzieho písma");
 }
 
 // Interné súbory nesmú byť spustiteľné priamo cez web. Produkcia beží na
@@ -380,6 +437,30 @@ expectSame('28. července 2026', formatLocalizedDate($testDate, 'cs'), 'Český 
 expectSame('28. Juli 2026', formatLocalizedDate($testDate, 'de'), 'Nemecký dátum');
 expectSame('28 juillet 2026', formatLocalizedDate($testDate, 'fr'), 'Francúzsky dátum');
 expectSame('28 de julio de 2026', formatLocalizedDate($testDate, 'es'), 'Španielsky dátum používa predložku „de“');
+expectSame('28 lipca 2026', formatLocalizedDate($testDate, 'pl'), 'Poľský dátum používa genitív mesiaca');
+expectSame('2026. július 28.', formatLocalizedDate($testDate, 'hu'), 'Maďarský dátum ide od najväčšej jednotky');
+expectSame('28 luglio 2026', formatLocalizedDate($testDate, 'it'), 'Taliansky dátum');
+expectSame('28 липня 2026', formatLocalizedDate($testDate, 'uk'), 'Ukrajinský dátum používa genitív mesiaca');
+
+// Každý podporovaný jazyk musí mať vlastnú sadu názvov mesiacov, inak by dátum
+// ticho spadol na slovenské názvy.
+foreach (array_keys(appLanguages()) as $monthLang) {
+    $months = localizedMonthNames($monthLang);
+    expectSame(12, count($months), "Jazyk {$monthLang} musí mať 12 názvov mesiacov");
+    expectTrue(
+        $monthLang === APP_DEFAULT_LANGUAGE || $months !== localizedMonthNames(APP_DEFAULT_LANGUAGE),
+        "Jazyk {$monthLang} nesmie ticho používať slovenské názvy mesiacov"
+    );
+}
+
+// hreflang x-default patrí jazyku, ktorý dostane návštevník s nepodporovaným
+// jazykom — musí byť teda odvodený od APP_FALLBACK_LANGUAGE (Beh #6).
+$defaultCluster = languageAlternatesFor('https://polascin.net/');
+expectSame(
+    'https://polascin.net/?lang=en',
+    $defaultCluster[APP_FALLBACK_LANGUAGE],
+    'x-default musí ukazovať na anglickú verziu'
+);
 
 // PHP by inak k odpovedi pridal vlastné `Expires: 1981` a `Pragma: no-cache`,
 // ktoré protirečia `private, max-age=0, must-revalidate` na verejných stránkach.

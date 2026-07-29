@@ -18,6 +18,16 @@ if (
 unset($requestedScript, $executedFile);
 
 const APP_DEFAULT_LANGUAGE = 'sk';
+
+/**
+ * Jazyk pre návštevníka, ktorého jazyk stránka nepodporuje.
+ *
+ * Líši sa od `APP_DEFAULT_LANGUAGE` zámerne: slovenčina zostáva zdrojovým
+ * jazykom katalógov a nesie čistú kanonickú URL, ale návštevníkovi, ktorý o
+ * slovenčinu neprejavil záujem, je zrozumiteľnejšia angličtina. Preto na ňu
+ * ukazuje aj `hreflang="x-default"`.
+ */
+const APP_FALLBACK_LANGUAGE = 'en';
 const APP_LANGUAGE_COOKIE = 'polascin_lang';
 const APP_LANGUAGE_COOKIE_LIFETIME = 31536000;
 
@@ -36,6 +46,10 @@ function appLanguages(): array {
         'de' => ['native' => 'Deutsch', 'locale' => 'de_DE', 'label' => 'Deutsch'],
         'fr' => ['native' => 'Français', 'locale' => 'fr_FR', 'label' => 'Français'],
         'es' => ['native' => 'Español', 'locale' => 'es_ES', 'label' => 'Español'],
+        'pl' => ['native' => 'Polski', 'locale' => 'pl_PL', 'label' => 'Polski'],
+        'hu' => ['native' => 'Magyar', 'locale' => 'hu_HU', 'label' => 'Magyar'],
+        'it' => ['native' => 'Italiano', 'locale' => 'it_IT', 'label' => 'Italiano'],
+        'uk' => ['native' => 'Українська', 'locale' => 'uk_UA', 'label' => 'Українська'],
     ];
     return $languages;
 }
@@ -123,6 +137,10 @@ function languageFromCountryCode(?string $countryCode): ?string {
         'HN' => 'es', 'NI' => 'es', 'SV' => 'es', 'CU' => 'es', 'PR' => 'es',
         'GB' => 'en', 'US' => 'en', 'IE' => 'en', 'CA' => 'en', 'AU' => 'en',
         'NZ' => 'en', 'ZA' => 'en', 'IN' => 'en',
+        'PL' => 'pl',
+        'HU' => 'hu',
+        'IT' => 'it', 'SM' => 'it', 'VA' => 'it',
+        'UA' => 'uk',
     ];
 
     $code = strtoupper(trim($countryCode));
@@ -180,7 +198,9 @@ function detectAppLanguage(): string {
         return $fromCountry;
     }
 
-    return APP_DEFAULT_LANGUAGE;
+    // Návštevník, ktorého jazyk stránka nepozná, dostane angličtinu, nie
+    // slovenčinu — tá je zdrojový jazyk katalógov, nie univerzálna záloha.
+    return isSupportedLanguage(APP_FALLBACK_LANGUAGE) ? APP_FALLBACK_LANGUAGE : APP_DEFAULT_LANGUAGE;
 }
 
 /**
@@ -395,6 +415,11 @@ function localizedMonthNames(string $lang): array {
         'de' => ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
         'fr' => ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
         'es' => ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+        // Poľština a ukrajinčina používajú v dátume genitív, maďarčina a taliančina nominatív.
+        'pl' => ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'],
+        'hu' => ['január', 'február', 'március', 'április', 'május', 'június', 'július', 'augusztus', 'szeptember', 'október', 'november', 'december'],
+        'it' => ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'],
+        'uk' => ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'],
     ];
     return $months[$lang] ?? $months[APP_DEFAULT_LANGUAGE];
 }
@@ -413,6 +438,9 @@ function formatLocalizedDate(DateTimeInterface $date, string $lang): string {
         'fr' => $day . ' ' . $month . ' ' . $year,
         // Španielčina vkladá medzi zložky dátumu predložku „de“.
         'es' => $day . ' de ' . $month . ' de ' . $year,
+        'pl', 'it', 'uk' => $day . ' ' . $month . ' ' . $year,
+        // Maďarčina zapisuje dátum od najväčšej jednotky a za dňom má bodku.
+        'hu' => $year . '. ' . $month . ' ' . $day . '.',
         default => $day . '. ' . $month . ' ' . $year,
     };
 }

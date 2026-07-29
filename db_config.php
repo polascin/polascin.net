@@ -74,6 +74,10 @@ $options = [
 try {
     $pdo = new PDO($dsn, $dbUser, $dbPass, $options);
     $pdo->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+    // Server beží bez STRICT_TRANS_TABLES, takže príliš dlhú hodnotu ticho skráti
+    // namiesto chyby. Dĺžky sa validujú v PHP; toto je obrana do hĺbky pre prípad,
+    // že by niektorá cesta validáciu obišla. Ostatné režimy servera zostávajú.
+    $pdo->exec("SET SESSION sql_mode = CONCAT(@@sql_mode, ',STRICT_TRANS_TABLES')");
     // Číselný offset funguje aj na MariaDB bez nahratých timezone tabuliek.
     // Každé nové pripojenie ho vypočíta nanovo, takže rešpektuje letný čas.
     $databaseTimezoneOffset = (new DateTimeImmutable('now', $appTimezone))->format('P');

@@ -643,6 +643,47 @@ section {
   background-color: var(--bg-body);
 }
 
+/* Bio list — label/value pairs in the About section */
+.bio-list {
+  display: grid;
+  grid-template-columns: minmax(9rem, max-content) 1fr;
+  gap: var(--spacing-xs) var(--spacing-sm);
+  margin: var(--spacing-sm) 0 var(--spacing-md);
+}
+
+.bio-list dt {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.bio-list dd {
+  margin: 0;
+}
+
+/* Odkazy v jednej bunke sa na úzkych displejoch musia zalomiť po položkách. */
+.bio-list dd a {
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .bio-list {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .bio-list dt {
+    margin-top: var(--spacing-xs);
+  }
+}
+
+/* Ikona pri odkaze, ktorý opúšťa stránku. Je dekoratívna — informáciu nesie
+   skrytý text vedľa nej, preto sa pri forced-colors skryť nemusí. */
+.nav-link-external {
+  font-size: 0.7em;
+  margin-inline-start: 0.25em;
+  vertical-align: baseline;
+}
+
 /* Nephrology Section */
 .nephrology {
   background-color: var(--bg-surface);

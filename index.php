@@ -91,8 +91,38 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
       <div class="about-grid">
         <div class="about-text">
           <p><?= nl2br(htmlspecialchars($aboutIntro, ENT_QUOTES, 'UTF-8'), false) ?></p>
+
+          <h3><?= te('home.who_heading') ?></h3>
           <p><?= nl2br(htmlspecialchars($aboutWho, ENT_QUOTES, 'UTF-8'), false) ?></p>
+          <p><?= te('home.who_approach') ?></p>
+
+          <h3><?= te('home.bio_heading') ?></h3>
+          <dl class="bio-list">
+            <dt><?= te('home.bio_name') ?></dt>
+            <dd><?= te('common.author') ?></dd>
+            <dt><?= te('home.bio_pronunciation') ?></dt>
+            <dd><span lang="en">Ljubomeer Polaschtcheen</span></dd>
+            <dt><?= te('home.bio_email') ?></dt>
+            <dd><a href="mailto:lubomir@polascin.net">lubomir@polascin.net</a></dd>
+            <dt><?= te('home.bio_web') ?></dt>
+            <dd>
+              <a href="<?= htmlspecialchars(langUrl($lang, 'index.php'), ENT_QUOTES, 'UTF-8') ?>">polascin.net</a> ·
+              <a href="https://sk.polascin.net/" target="_blank" rel="noopener noreferrer">sk.polascin.net</a> ·
+              <a href="https://polascin.sk/" target="_blank" rel="noopener noreferrer">polascin.sk</a> ·
+              <a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer">books.polascin.net</a>
+            </dd>
+            <dt><?= te('home.bio_social') ?></dt>
+            <dd>
+              <a href="https://www.linkedin.com/in/lubomirpolascin/" target="_blank" rel="noopener noreferrer">LinkedIn</a> ·
+              <a href="https://www.facebook.com/lubomir.polascin" target="_blank" rel="noopener noreferrer">Facebook</a> ·
+              <a href="https://x.com/polascin" target="_blank" rel="noopener noreferrer">X</a> ·
+              <a href="https://www.patreon.com/c/Csoelle" target="_blank" rel="noopener noreferrer">Patreon</a> ·
+              <a href="https://discord.gg/MsGmMZbz" target="_blank" rel="noopener noreferrer">Discord</a>
+            </dd>
+          </dl>
+
           <h3><?= te('home.identity_heading') ?></h3>
+          <p><?= te('home.identity_text') ?></p>
           <ul>
             <li><?= te('home.identity_doctor') ?></li>
             <li><?= te('home.identity_nephrologist') ?></li>
@@ -101,7 +131,18 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
             <li><?= te('home.identity_writer') ?></li>
             <li><?= te('home.identity_programmer') ?></li>
           </ul>
+          <h4><?= te('home.expertise_heading') ?></h4>
+          <ul>
+            <li><?= te('home.expertise_dialysis') ?></li>
+            <li><?= te('home.expertise_vascular') ?></li>
+            <li><?= te('home.expertise_elimination') ?></li>
+            <li><?= te('home.expertise_plasma') ?></li>
+            <li><?= te('home.expertise_transplant') ?></li>
+          </ul>
+          <p><?= te('home.teaching_text') ?></p>
+
           <h3><?= te('home.skills_heading') ?></h3>
+          <p><?= te('home.tech_text') ?></p>
           <ul>
             <li>HTML5 &amp; CSS3</li>
             <li>JavaScript / TypeScript</li>
@@ -110,10 +151,13 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
             <li>Linux / Unix</li>
             <li>AI &amp; FOSS</li>
           </ul>
+
           <h3><?= te('home.education_heading') ?></h3>
           <p><?= te('home.education_text') ?></p>
+
           <h3><?= te('home.personal_heading') ?></h3>
           <p><?= te('home.personal_text') ?></p>
+
           <a href="https://www.amazon.com/stores/author/B07PN436VJ/about" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><?= te('home.amazon_cta') ?></a>
         </div>
       </div>

@@ -121,17 +121,35 @@ if (session_status() === PHP_SESSION_NONE) {
     session_cache_limiter('');
 }
 
-$projectSessionPath = __DIR__ . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'sessions';
-if ((is_dir($projectSessionPath) || @mkdir($projectSessionPath, 0700, true)) && is_writable($projectSessionPath)) {
-    @chmod($projectSessionPath, 0700);
-    session_save_path($projectSessionPath);
-} else {
-    $tempSessionPath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'polascin_sessions';
-    if ((is_dir($tempSessionPath) || @mkdir($tempSessionPath, 0700, true)) && is_writable($tempSessionPath)) {
-        @chmod($tempSessionPath, 0700);
-        session_save_path($tempSessionPath);
+/**
+ * Kandidáti na úložisko relácií, od najbezpečnejšieho.
+ *
+ * Názov súboru relácie je samotné session ID, takže adresár, ktorý by server
+ * dokázal podať, znamená prevzatie relácie. Prvá voľba preto leží **mimo web
+ * rootu** — rovnako ako konfiguračný súbor, ktorý `config_loader.php` hľadá
+ * najprv v nadradenom `private/`. Cesta vnútri web rootu zostáva ako záloha pre
+ * prostredia, kde nadradený adresár zapisovateľný nie je; tam ju chráni
+ * `.htaccess`.
+ */
+function appSessionSavePaths(): array {
+    $appRoot = __DIR__;
+    $parentRoot = dirname($appRoot);
+
+    return [
+        $parentRoot . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'sessions',
+        $appRoot . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'sessions',
+        sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'polascin_sessions',
+    ];
+}
+
+foreach (appSessionSavePaths() as $candidateSessionPath) {
+    if ((is_dir($candidateSessionPath) || @mkdir($candidateSessionPath, 0700, true)) && is_writable($candidateSessionPath)) {
+        @chmod($candidateSessionPath, 0700);
+        session_save_path($candidateSessionPath);
+        break;
     }
 }
+unset($candidateSessionPath);
 
 if (session_status() === PHP_SESSION_NONE && !session_start()) {
     error_log('Nepodarilo sa spustiť PHP session.');

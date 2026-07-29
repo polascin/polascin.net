@@ -76,10 +76,14 @@ $emitAlternates = !str_contains(strtolower($robotsMeta), 'noindex');
 <link rel="alternate" hreflang="<?= htmlspecialchars((string) $alternateLang, ENT_QUOTES, 'UTF-8') ?>" href="<?= htmlspecialchars((string) $alternateUrl, ENT_QUOTES, 'UTF-8') ?>">
 <?php endforeach; ?>
 <?php
-// x-default musí byť rovnaké pre všetky jazykové varianty tej istej stránky.
-// Keď predvolený jazyk v klastri chýba, berie sa prvý podľa poradia v
-// appLanguages(), ktoré je rovnaké nech sa stránka vykresľuje v ktoromkoľvek jazyku.
-$xDefault = $languageAlternates[APP_DEFAULT_LANGUAGE] ?? null;
+// x-default patrí verzii pre návštevníka, ktorého jazyk stránka nepodporuje —
+// teda tej, na ktorú ho pošle aj `detectAppLanguage()`. Musí byť rovnaké pre
+// všetky jazykové varianty tej istej stránky. Keď v klastri chýba, berie sa
+// prvý dostupný podľa poradia v appLanguages(), ktoré je rovnaké nech sa
+// stránka vykresľuje v ktoromkoľvek jazyku.
+$xDefault = $languageAlternates[APP_FALLBACK_LANGUAGE]
+    ?? $languageAlternates[APP_DEFAULT_LANGUAGE]
+    ?? null;
 if ($xDefault === null) {
     foreach (array_keys(appLanguages()) as $preferredLang) {
         if (isset($languageAlternates[$preferredLang])) {

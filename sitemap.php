@@ -109,9 +109,14 @@ foreach ($urls as $url) {
         echo '    <xhtml:link rel="alternate" hreflang="' . htmlspecialchars((string) $alternateLang, ENT_XML1 | ENT_QUOTES, 'UTF-8')
             . '" href="' . htmlspecialchars((string) $alternateUrl, ENT_XML1 | ENT_QUOTES, 'UTF-8') . "\"/>\n";
     }
-    if (isset($url['alternates'][APP_DEFAULT_LANGUAGE])) {
+    // x-default musí ukazovať na tú istú adresu ako v `head_meta.php`, teda na
+    // jazyk, ktorý dostane návštevník s nepodporovaným jazykom.
+    $xDefaultUrl = $url['alternates'][APP_FALLBACK_LANGUAGE]
+        ?? $url['alternates'][APP_DEFAULT_LANGUAGE]
+        ?? null;
+    if ($xDefaultUrl !== null) {
         echo '    <xhtml:link rel="alternate" hreflang="x-default" href="'
-            . htmlspecialchars((string) $url['alternates'][APP_DEFAULT_LANGUAGE], ENT_XML1 | ENT_QUOTES, 'UTF-8') . "\"/>\n";
+            . htmlspecialchars((string) $xDefaultUrl, ENT_XML1 | ENT_QUOTES, 'UTF-8') . "\"/>\n";
     }
     echo '    <lastmod>' . htmlspecialchars((string) $url['lastmod'], ENT_XML1, 'UTF-8') . "</lastmod>\n";
     echo '    <changefreq>' . htmlspecialchars((string) $url['changefreq'], ENT_XML1, 'UTF-8') . "</changefreq>\n";

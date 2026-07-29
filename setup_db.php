@@ -309,8 +309,8 @@ applySchemaMigrations($pdo);
 $defaultBlocks = [
     ['hero_title', '', 'Pokrok v zdraví obličiek', 'sk', 0],
     ['hero_subtitle', '', 'MUDr. Ľubomír Polaščín — venovaný excelentnosti v nefrológii, dialýze, starostlivosti o pacientov a medicínskych technológiách.', 'sk', 1],
-    ['about_intro', '', "Volám sa Ľubomír Polaščín — som lekár, nefrológ a internista povolaním, spisovateľ beletrie a literatúry faktu poslaním a samouk programátor z vášne.", 'sk', 2],
-    ['about_who', '', 'Moja práca spočíva na priesečníku medicíny, rozprávania príbehov a technológií. Medicína cibrí moju klinickú presnosť; písanie mi umožňuje skúmať ľudský údel cez beletriu a literatúru faktu; a technológie ma posúvajú pri riešení zložitých problémov.', 'sk', 3],
+    ['about_intro', '', 'Volám sa Ľubomír Polaščín — som lekár, nefrológ a internista povolaním, spisovateľ beletrie a literatúry faktu poslaním a samouk programátor z vášne.', 'sk', 2],
+    ['about_who', '', 'Moja práca spočíva na priesečníku medicíny, rozprávania príbehov a technológií. Medicína cibrí moju klinickú presnosť; písanie mi umožňuje skúmať ľudský údel cez beletriu a literatúru faktu; a technológie ma posúvajú pri riešení zložitých problémov. Ako konzultant tieto svety prepájam a prinášam premyslené, dobre podložené riešenia.', 'sk', 3],
     ['contact_intro', '', 'Neváhajte ma kontaktovať s otázkami alebo ohľadom spolupráce.', 'sk', 4],
 ];
 

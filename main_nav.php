@@ -23,10 +23,23 @@ $_onIndex = $_navCurrent === 'index.php';
 $_navLang = currentLang();
 
 if (!function_exists('_navA')) {
-    function _navA(string $href, string $label, bool $active): string {
+    /**
+     * `$external` otvorí odkaz v novej karte. `rel` je pri `target="_blank"`
+     * povinné (inak cieľová stránka dostane cez `window.opener` prístup k tejto)
+     * a skrytý dodatok oznámi zmenu kontextu aj čítačke obrazovky — vizuálne
+     * ju naznačuje ikona.
+     */
+    function _navA(string $href, string $label, bool $active, bool $external = false): string {
         $class = $active ? 'nav-link active' : 'nav-link';
         $ariaCurrent = $active ? ' aria-current="page"' : '';
-        return '<a href="' . htmlspecialchars($href, ENT_QUOTES, 'UTF-8') . '" class="' . $class . '"' . $ariaCurrent . '>' . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '</a>';
+        $attributes = $external ? ' target="_blank" rel="noopener noreferrer"' : '';
+        $suffix = $external
+            ? ' <i class="fa-solid fa-arrow-up-right-from-square nav-link-external" aria-hidden="true"></i>'
+                . '<span class="visually-hidden"> (' . htmlspecialchars(t('common.opens_new_tab'), ENT_QUOTES, 'UTF-8') . ')</span>'
+            : '';
+
+        return '<a href="' . htmlspecialchars($href, ENT_QUOTES, 'UTF-8') . '" class="' . $class . '"' . $ariaCurrent . $attributes . '>'
+            . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . $suffix . '</a>';
     }
 }
 
@@ -49,7 +62,7 @@ if (!function_exists('_navHref')) {
   <li><?= _navA(_navHref('index.php', '#about', $_onIndex, $_navLang), t('nav.about'), false) ?></li>
   <li><?= _navA(_navHref('index.php', '#nephrology', $_onIndex, $_navLang), t('nav.nephrology'), false) ?></li>
   <li><?= _navA(_navHref('index.php', '#projects', $_onIndex, $_navLang), t('nav.projects'), false) ?></li>
-  <li><?= _navA('https://books.polascin.net/', t('nav.books'), false) ?></li>
+  <li><?= _navA('https://books.polascin.net/', t('nav.books'), false, true) ?></li>
   <li><?= _navA(_navHref('index.php', '#links', $_onIndex, $_navLang), t('nav.links'), false) ?></li>
   <li><?= _navA(_navHref('index.php', '#contact', $_onIndex, $_navLang), t('nav.contact'), false) ?></li>
   <?php if (function_exists('isLoggedIn') && isLoggedIn() && function_exists('isAdmin') && isAdmin()): ?>
