@@ -1,22 +1,24 @@
 /* Modern Medical Design System */
 :root {
-  /* Base Variables (Light Mode Default) */
-  --primary-color: #0056b3;
-  /* Deep Blue */
-  --secondary-color: #007c91;
-  /* Cyan */
+  /* Základná schéma je odvodená priamo z palety vlajky: fialová #5049CC ako
+     primárna (na bielej 6,6:1), zelená #078D70 ako sekundárna pre ikony a
+     grafiku (4,2:1 — na drobný text sa nepoužíva). */
+  --primary-color: #5049cc;
+  --secondary-color: #078d70;
   --accent-color: #ff6b6b;
   --text-main: #2c3e50;
   --text-muted: #5a6472;
   --bg-body: #ffffff;
-  --bg-surface: #f8f9fa;
+  --bg-surface: #f7f8fc;
   --bg-card: #ffffff;
-  --border-color: #e9ecef;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --border-color: #e7e9f2;
+  --shadow-color: rgba(24, 16, 68, 0.1);
   --on-primary: #ffffff;
-  --primary-hover: #004494;
-  --focus-color: #007c91;
+  --primary-hover: #3d1a78;
+  --focus-color: #3d1a78;
   --focus-on-primary: #ffffff;
+  --footer-bg: #3d1a78;
+  --footer-text: #ffffff;
   --navbar-height: 77px;
   color-scheme: light;
 
@@ -67,21 +69,23 @@
 }
 
 [data-theme="dark"] {
-  --primary-color: #4da3ff;
-  /* Lighter Blue for dark mode contrast */
-  --secondary-color: #33ddff;
+  /* V tmavej téme sa primárnou stáva svetlá modrá vlajky #7BADE2 (6,9:1 na
+     pozadí) a sekundárnou tyrkysová #26CEAA (8,1:1). */
+  --primary-color: #7bade2;
+  --secondary-color: #26ceaa;
   --text-main: #e0e6ed;
   --text-muted: #a0aab5;
-  --bg-body: #1a202c;
-  /* Dark Blue-Grey */
-  --bg-surface: #2d3748;
-  --bg-card: #2d3748;
-  --border-color: #4a5568;
-  --shadow-color: rgba(0, 0, 0, 0.3);
+  --bg-body: #171c28;
+  --bg-surface: #212838;
+  --bg-card: #232b3d;
+  --border-color: #3c4557;
+  --shadow-color: rgba(0, 0, 0, 0.35);
   --on-primary: #0f172a;
-  --primary-hover: #75baff;
+  --primary-hover: #a5c8ec;
   --focus-color: #ffffff;
   --focus-on-primary: #0f172a;
+  --footer-bg: #241040;
+  --footer-text: #f0edf9;
 
   /* Na tmavom podklade sú čitateľné svetlé odtiene vlajky, nie tmavé. */
   --flag-accent-1: #26ceaa;
@@ -165,7 +169,13 @@ a {
 
 a:hover,
 a:focus-visible {
-  color: var(--secondary-color);
+  /* Zelená vlajky má na bielej len 4,2:1, na drobný text nestačí —
+     interaktívny stav preto ostáva vo fialovej vetve palety. */
+  color: var(--primary-hover);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--flag-violet) 28%, transparent);
 }
 
 a:focus-visible,
@@ -217,14 +227,17 @@ h6 {
   line-height: 1.2;
   margin-bottom: var(--spacing-sm);
   color: var(--text-main);
+  text-wrap: balance;
 }
 
+/* Plynulá typografia: veľkosť rastie s viewportom, aby nadpisy na veľkej
+   obrazovke nepôsobili drobno a na malej neroztláčali rozloženie. */
 h1 {
-  font-size: 3rem;
+  font-size: clamp(2.4rem, 1.7rem + 2.2vw, 3.4rem);
 }
 
 h2 {
-  font-size: 2.25rem;
+  font-size: clamp(1.8rem, 1.4rem + 1.2vw, 2.4rem);
   color: var(--primary-color);
 }
 
@@ -268,6 +281,25 @@ section {
   padding: var(--spacing-lg) 0;
 }
 
+/* Na počítači dostávajú sekcie väčší vertikálny rytmus a kontajner širšie
+   vnútorné odsadenie, aby obsah nelipol na okrajoch. Hranica 1025px nadväzuje
+   na mobilnú navigáciu, ktorá platí do 1024px vrátane. */
+@media (min-width: 1025px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+
+  section {
+    padding: 5.5rem 0;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
 /* Navigation */
 .navbar {
   background: var(--bg-card);
@@ -279,6 +311,25 @@ section {
   box-shadow: 0 2px 4px var(--shadow-color);
   padding: var(--spacing-sm) 0;
   border-bottom: 1px solid var(--border-color);
+}
+
+/* „Sklenená“ navigácia — obsah pod ňou jemne presvitá. Priehľadnosť sa
+   zapína len tam, kde je podporené aj rozmazanie, inak by text pod lištou
+   znižoval čitateľnosť. */
+@supports (backdrop-filter: blur(1px)) {
+  .navbar {
+    background: color-mix(in srgb, var(--bg-card) 84%, transparent);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    backdrop-filter: blur(14px) saturate(1.3);
+  }
+}
+
+@media (forced-colors: active) {
+  .navbar {
+    background: Canvas;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 /* Dekoratívny pruh v farbách vlajky. Nenesie žiadnu informáciu, preto sa naň
@@ -497,13 +548,27 @@ section {
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid white;
-  box-shadow: 0 4px 6px var(--shadow-color);
-  transition: transform 0.3s ease;
+  border: 4px solid var(--bg-card);
+  /* Jemná fialovo-zelená žiara v odtieňoch vlajky namiesto šedého tieňa. */
+  box-shadow:
+    0 12px 40px color-mix(in srgb, var(--flag-violet) 22%, transparent),
+    0 4px 14px color-mix(in srgb, var(--flag-green-dark) 14%, transparent);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .profile-img:hover {
-  transform: scale(1.05);
+  transform: scale(1.04);
+  box-shadow:
+    0 18px 52px color-mix(in srgb, var(--flag-violet) 30%, transparent),
+    0 6px 18px color-mix(in srgb, var(--flag-green-dark) 20%, transparent);
+}
+
+@media (forced-colors: active) {
+  .profile-img {
+    box-shadow: none;
+  }
 }
 
 /* Hero Section */
@@ -514,29 +579,97 @@ section {
     var(--bg-surface) 0%,
     var(--bg-body) 100%
   );
-  min-height: 80vh;
+  min-height: min(80vh, 60rem);
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
 }
 
-.hero::before {
+/* Mäkké farebné škvrny v odtieňoch vlajky — čisto dekoratívne. */
+.hero::before,
+.hero::after {
   content: "";
   position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 400px;
-  height: 400px;
-  background: rgba(0, 168, 204, 0.1);
   border-radius: 50%;
+  filter: blur(70px);
   z-index: 0;
+  pointer-events: none;
+}
+
+.hero::before {
+  top: -120px;
+  right: -80px;
+  width: 460px;
+  height: 460px;
+  background: color-mix(in srgb, var(--flag-teal) 22%, transparent);
+}
+
+.hero::after {
+  bottom: -160px;
+  left: -120px;
+  width: 420px;
+  height: 420px;
+  background: color-mix(in srgb, var(--flag-violet) 16%, transparent);
+}
+
+@media (forced-colors: active) {
+  .hero::before,
+  .hero::after {
+    display: none;
+  }
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
   max-width: 800px;
+}
+
+/* Na počítači sa hero rozkladá do dvoch stĺpcov: text vľavo, logo vpravo.
+   Poradie prvkov v HTML zostáva (obrázok, popisok, nadpis, podtitul,
+   tlačidlá) — o rozmiestnenie sa stará grid s pomenovanými oblasťami. */
+@media (min-width: 1025px) {
+  .hero .hero-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "eyebrow img"
+      "title img"
+      "subtitle img"
+      "buttons img";
+    align-items: center;
+    align-content: center;
+    column-gap: clamp(3rem, 6vw, 6rem);
+    max-width: none;
+    width: 100%;
+  }
+
+  .hero .profile-img {
+    grid-area: img;
+    width: clamp(240px, 24vw, 320px);
+    height: clamp(240px, 24vw, 320px);
+  }
+
+  .hero .hero-eyebrow {
+    grid-area: eyebrow;
+    align-self: end;
+  }
+
+  .hero .hero-title {
+    grid-area: title;
+    max-width: 18ch;
+  }
+
+  .hero .hero-subtitle {
+    grid-area: subtitle;
+    max-width: 52ch;
+  }
+
+  .hero .hero-buttons {
+    grid-area: buttons;
+    align-self: start;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -546,7 +679,8 @@ section {
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: clamp(2.4rem, 1.5rem + 2.8vw, 3.8rem);
+  letter-spacing: -0.02em;
   margin-bottom: var(--spacing-md);
   /* Odtiene vlajky, ktoré na svetlom podklade prejdú kontrastom pre veľký text. */
   background: linear-gradient(
@@ -643,12 +777,39 @@ section {
   background-color: var(--bg-body);
 }
 
+/* Súvislý text nesmie na počítači tiecť na plnú šírku kontajnera — riadok
+   dlhší než ~75 znakov sa zle číta. Prózu preto drží úzky stĺpec v strede;
+   mriežky vnútri (oblasti, zručnosti) môžu byť širšie. */
+.about-text {
+  max-width: 76ch;
+  margin-inline: auto;
+}
+
+.about-text > h3 {
+  margin-top: var(--spacing-md);
+}
+
 /* Skupiny oblastí pôsobenia — medicína, jazyk, technológie vedľa seba */
 .area-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: var(--spacing-md);
   margin: var(--spacing-sm) 0 var(--spacing-md);
+}
+
+/* Každá oblasť má tenkú farebnú linku z palety vlajky — dekoratívny
+   rozlišovací prvok, informáciu nesie nadpis. */
+.area {
+  padding-inline-start: var(--spacing-sm);
+  border-inline-start: 3px solid var(--flag-accent-1);
+}
+
+.area-grid > .area:nth-child(2) {
+  border-inline-start-color: var(--flag-accent-2);
+}
+
+.area-grid > .area:nth-child(3) {
+  border-inline-start-color: var(--flag-accent-3);
 }
 
 .area h4 {
@@ -729,7 +890,7 @@ section {
 .card {
   background: var(--bg-card);
   padding: var(--spacing-md);
-  border-radius: 12px;
+  border-radius: 14px;
   box-shadow: 0 2px 4px var(--shadow-color);
   border: 1px solid var(--border-color);
   transition:
@@ -737,11 +898,37 @@ section {
     box-shadow 0.3s ease,
     border-color 0.3s ease;
   height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pri prejdení kurzorom sa nad kartou objaví pruh vlajky. Dekorácia —
+   interaktívny stav signalizuje aj zdvih a zvýraznený okraj. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 3px;
+  background: var(--flag-stripe);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::before,
+.card:focus-within::before {
+  opacity: 1;
+}
+
+@media (forced-colors: active) {
+  .card::before {
+    display: none;
+  }
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px var(--shadow-color);
+  box-shadow: 0 10px 24px var(--shadow-color);
   border-color: var(--primary-color);
 }
 
@@ -820,12 +1007,14 @@ section {
   border-color: var(--primary-color);
   color: var(--primary-color);
   background-color: var(--bg-surface);
+  transform: translateY(-2px);
 }
 
-/* Footer */
+/* Footer — tmavá fialová vlajky v oboch témach; text je vždy svetlý,
+   preto má pätička vlastné premenné nezávislé od --on-primary. */
 footer {
-  background-color: var(--primary-color);
-  color: var(--on-primary);
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
   padding: var(--spacing-lg) 0;
   text-align: center;
   position: relative;
@@ -840,25 +1029,27 @@ footer {
 }
 
 footer a {
-  color: var(--on-primary);
+  color: var(--footer-text);
   text-decoration: underline;
 }
 
 footer a:hover,
 footer a:focus-visible {
-  color: var(--on-primary);
+  color: var(--footer-text);
 }
 
 footer h2,
 footer h3,
 footer h4,
 footer .footer-heading {
-  color: var(--on-primary);
+  color: var(--footer-text);
 }
 
+/* Pätička je v oboch témach tmavá, takže obrys fokusu musí byť svetlý —
+   --focus-on-primary je v tmavej téme tmavý a zanikol by. */
 footer a:focus-visible,
 footer button:focus-visible {
-  outline-color: var(--focus-on-primary);
+  outline-color: var(--footer-text);
 }
 
 .social-links {
@@ -1133,11 +1324,11 @@ footer button:focus-visible {
   }
 }
 
-/* Cookie Settings Trigger */
+/* Cookie Settings Trigger — sedí v pätičke, preto pätičkové farby. */
 .cookie-settings-trigger {
   background: none;
   border: none;
-  color: var(--on-primary);
+  color: var(--footer-text);
   font-size: 0.85em;
   cursor: pointer;
   padding: 8px 12px;
@@ -1152,8 +1343,8 @@ footer button:focus-visible {
 
 .cookie-settings-trigger:hover,
 .cookie-settings-trigger:focus-visible {
-  color: var(--on-primary);
-  outline-color: var(--focus-on-primary);
+  color: var(--footer-text);
+  outline-color: var(--footer-text);
 }
 
 .cookie-link {
@@ -1185,7 +1376,7 @@ footer button:focus-visible {
 
 /* Legal pages (privacy, terms) */
 .page-content {
-  padding-top: 120px;
+  padding-top: calc(var(--navbar-height) + 3rem);
   min-height: 80vh;
 }
 
@@ -1216,11 +1407,15 @@ footer button:focus-visible {
 .section-intro {
   text-align: center;
   margin-bottom: 2rem;
+  max-width: 62ch;
+  margin-inline: auto;
 }
 
 .section-muted {
   text-align: center;
   color: var(--text-muted);
+  max-width: 62ch;
+  margin-inline: auto;
 }
 
 /* Contact section centering */
@@ -1418,7 +1613,10 @@ footer button:focus-visible {
 .form-group select:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+  /* Prvý riadok je záloha pre prehliadače bez color-mix. */
+  box-shadow: 0 0 0 2px rgba(80, 73, 204, 0.25);
+  box-shadow: 0 0 0 2px
+    color-mix(in srgb, var(--primary-color) 25%, transparent);
 }
 
 .form-row {
@@ -1503,7 +1701,9 @@ footer button:focus-visible {
 }
 
 .admin-table th {
-  background-color: rgba(37, 99, 235, 0.08);
+  /* Prvý riadok je záloha pre prehliadače bez color-mix. */
+  background-color: rgba(80, 73, 204, 0.09);
+  background-color: color-mix(in srgb, var(--primary-color) 9%, transparent);
   font-weight: 700;
 }
 
