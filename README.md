@@ -29,8 +29,9 @@ hlavičkám zámerne nedôveruje.
 
 ## Viacjazyčnosť
 
-Stránka beží v šiestich jazykoch: slovenčina (predvolená), angličtina,
-čeština, nemčina, francúzština a španielčina.
+Stránka beží v desiatich jazykoch: slovenčina (predvolená), angličtina,
+čeština, nemčina, francúzština, španielčina, poľština, maďarčina,
+taliančina a ukrajinčina.
 
 Jazyk sa určuje v tomto poradí:
 

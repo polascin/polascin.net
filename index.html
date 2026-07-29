@@ -10,15 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="MUDr. Ľubomír Polaščín — nefrológ, internista, prekladateľ medicínskych textov, spisovateľ a samouk-programátor. Zdravie obličiek, dialýza, medicínske vzdelávanie a technológie."
-    />
-    <meta
-      name="keywords"
-      content="Ľubomír Polaščín, nefrológia, interná medicína, dialýza, lekársky preklad, programovanie"
+      content="Osobný a profesijný web MUDr. Ľubomíra Polaščína: nefrológia a dialýza, medicínske vzdelávanie a písanie, odborné preklady a praktické digitálne nástroje."
     />
     <meta name="author" content="Ľubomír Polaščín" />
     <meta name="theme-color" content="#ffffff" />
-    <title>Domov | MUDr. Ľubomír Polaščín</title>
+    <title>
+      MUDr. Ľubomír Polaščín | Nefrológia, medicínske vzdelávanie a digitálne
+      nástroje
+    </title>
     <link rel="canonical" href="https://polascin.net/" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="alternate" hreflang="sk" href="https://polascin.net/" />
@@ -85,10 +84,13 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://polascin.net/" />
-    <meta property="og:title" content="Domov | MUDr. Ľubomír Polaščín" />
+    <meta
+      property="og:title"
+      content="MUDr. Ľubomír Polaščín | Nefrológia, medicínske vzdelávanie a digitálne nástroje"
+    />
     <meta
       property="og:description"
-      content="MUDr. Ľubomír Polaščín — nefrológ, internista, prekladateľ medicínskych textov, spisovateľ a samouk-programátor."
+      content="Nefrológia a dialýza, medicínske vzdelávanie a písanie, odborné preklady a praktické digitálne nástroje."
     />
     <meta
       property="og:image"
@@ -102,10 +104,13 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://polascin.net/" />
-    <meta name="twitter:title" content="Domov | MUDr. Ľubomír Polaščín" />
+    <meta
+      name="twitter:title"
+      content="MUDr. Ľubomír Polaščín | Nefrológia, medicínske vzdelávanie a digitálne nástroje"
+    />
     <meta
       name="twitter:description"
-      content="MUDr. Ľubomír Polaščín — nefrológ, internista, prekladateľ medicínskych textov, spisovateľ a samouk-programátor."
+      content="Nefrológia a dialýza, medicínske vzdelávanie a písanie, odborné preklady a praktické digitálne nástroje."
     />
     <meta
       name="twitter:image"
@@ -131,8 +136,8 @@
     <!-- Consent default must load before any analytics configuration -->
     <script src="js/consent-default.js"></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=20260728-2" />
-    <script src="js/main.js?v=20260728-2" defer></script>
+    <link rel="stylesheet" href="css/styles.css?v=20260729-2" />
+    <script src="js/main.js?v=20260729-1" defer></script>
   </head>
 
   <body>
@@ -141,7 +146,19 @@
     <!-- Navigation -->
     <nav class="navbar" aria-label="Hlavná navigácia">
       <div class="container nav-container">
-        <a href="#home" class="nav-brand">Polascin.net</a>
+        <a href="#home" class="nav-brand" aria-label="Polascin.net">
+          <img
+            src="pix/lpimg001.webp"
+            alt=""
+            class="nav-brand-photo"
+            width="44"
+            height="44"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <span class="nav-brand-text">Polascin.net</span>
+        </a>
         <button
           type="button"
           class="nav-toggle"
@@ -169,7 +186,7 @@
               >Domov</a
             >
           </li>
-          <li><a href="#about" class="nav-link">Životopis</a></li>
+          <li><a href="#about" class="nav-link">O mne</a></li>
           <li><a href="#nephrology" class="nav-link">Nefrológia</a></li>
           <li><a href="#projects" class="nav-link">Projekty</a></li>
           <li>
@@ -194,21 +211,22 @@
           <div class="hero-content">
             <img
               src="CrystalKidney.png"
-              alt="Logo Crystal Kidney"
+              alt="Crystal Kidney"
               class="profile-img"
               width="200"
               height="200"
               fetchpriority="high"
             />
-            <h1 class="hero-title">Pokrok v zdraví obličiek</h1>
+            <h1 class="hero-title">MUDr. Ľubomír Polaščín</h1>
             <p class="hero-subtitle">
-              MUDr. Ľubomír Polaščín — venovaný excelentnosti v nefrológii,
-              dialýze, starostlivosti o pacientov a medicínskych technológiách.
+              Som nefrológ a internista, medicínsky pedagóg a autor. Dlhoročnú
+              skúsenosť s dialýzou prepájam s odborným písaním, prekladmi a
+              tvorbou praktických digitálnych nástrojov.
             </p>
             <div class="hero-buttons">
-              <a href="#about" class="btn btn-primary">O mne</a>
+              <a href="#about" class="btn btn-primary">Čomu sa venujem</a>
               <a href="#nephrology" class="btn btn-secondary"
-                >Spoznajte nefrológiu</a
+                >Nefrológia v skratke</a
               >
             </div>
           </div>
@@ -231,77 +249,64 @@
               />
             </div>
             <p class="bio-intro">
-              Dobrý deň, som Ľubomír Polaščín — profesiou lekár, nefrológ a
-              internista, poslaním spisovateľ beletrie a literatúry faktu a
-              vášňou samouk-programátor.
+              Som lekár so špecializáciou v nefrológii a vnútornom lekárstve.
+              Moja profesijná práca sa sústreďuje na dialýzu a ochorenia
+              obličiek; viedol som dve dialyzačné pracoviská v Bratislave a
+              pôsobil v medicínskom vzdelávaní.
             </p>
 
-            <h3>Kto som</h3>
+            <h3>Čomu sa venujem</h3>
             <p>
-              Moja práca stojí na priesečníku medicíny, rozprávania príbehov a
-              technológií. Medicína zostruje moju klinickú presnosť; písanie mi
-              umožňuje skúmať ľudský údel prostredníctvom beletrie a literatúry
-              faktu; a technológie mi dávajú silu riešiť zložité problémy. Ako
-              konzultant premosťujem tieto svety a prinášam premyslené, dobre
-              podložené riešenia.
+              Píšem odborné aj literárne texty, prekladám medicínsky obsah medzi
+              slovenčinou a angličtinou a tvorím webové stránky a aplikácie.
+              Technológie a umelú inteligenciu posudzujem podľa praktického
+              prínosu: či sprístupnia poznanie, zjednodušia prácu alebo zvýšia
+              kvalitu výsledku.
             </p>
             <p>
-              Ku každej výzve pristupujem so zvedavosťou a dôslednosťou — či už
-              liečim pacientov, ladím kód, prekladám náročný text, alebo skúmam
-              umelú inteligenciu.
+              V medicíne, jazyku aj kóde postupujem podobne: presne pomenujem
+              problém, overím podstatné fakty, priznám neistotu a vytvorím
+              zrozumiteľný, použiteľný výsledok.
             </p>
 
-            <h3>Profesijná identita</h3>
+            <h3>Nefrológia a vzdelávanie</h3>
             <p>
-              Som lekár, ktorý absolvoval štúdium všeobecného lekárstva (1995) a
-              špecializoval sa v odbore nefrológia (2009). Mám atestáciu z
-              vnútorného lekárstva (1998) a certifikát pre abdominálnu
-              ultrasonografiu u dospelých (2009).
+              Všeobecné lekárstvo som absolvoval na Univerzite Pavla Jozefa
+              Šafárika v Košiciach v roku 1995. Atestáciu z vnútorného lekárstva
+              som získal v roku 1998 a špecializáciu v nefrológii v roku 2009,
+              keď som získal aj certifikát z abdominálnej ultrasonografie u
+              dospelých.
             </p>
-            <p><strong>Oblasti odbornosti:</strong></p>
             <ul>
+              <li>nefrológia, dialýza a vnútorné lekárstvo</li>
+              <li>náhrada funkcie obličiek a akútne eliminačné metódy</li>
+              <li>ultrasonografia a starostlivosť o cievne prístupy</li>
+              <li>odborné prednášky a vzdelávanie</li>
+            </ul>
+
+            <h3>Nástroje a technológie</h3>
+            <ul>
+              <li>HTML, CSS, JavaScript, TypeScript a PHP</li>
+              <li>Python, SQL, databázy a spracovanie dát</li>
+              <li>Linux, Unix a otvorený softvér</li>
               <li>
-                Dialýza a náhrada funkcie obličiek (hemodialýza,
-                hemodiafiltrácia, hemofiltrácia)
+                jazykové modely, automatizácia a kritické hodnotenie ich
+                využitia v medicíne
               </li>
-              <li>Ultrasonografia cievneho prístupu pre dialýzu</li>
-              <li>Mimotelové a vnútrotelové eliminačné metódy</li>
-              <li>Membránová plazmaferéza a súvisiace metódy</li>
-              <li>Transplantácia obličiek</li>
-            </ul>
-            <p>
-              Mám rozsiahle skúsenosti s vyučovaním a prednášaním v odboroch
-              vnútorné lekárstvo, diabetológia, nefrológia a príbuzné oblasti.
-              Zároveň som prekladateľ so špecializáciou na anglicko-slovenský a
-              slovensko-anglický medicínsky preklad a lokalizáciu softvéru.
-            </p>
-
-            <h3>Technológie a programovanie</h3>
-            <p>
-              Hlboko sa venujem informačným technológiám, informatike a
-              programovaniu. Medzi moje záujmy patrí:
-            </p>
-            <ul>
-              <li>HTML / CSS / JS</li>
-              <li>PHP &amp; SQL</li>
-              <li>Python</li>
-              <li>Linux / Unix</li>
-              <li>AI &amp; FOSS</li>
             </ul>
 
-            <h3>Pozadie a cesta</h3>
+            <h3>Profesijná dráha</h3>
             <p>
-              Moje medicínske vzdelanie sa začalo na Univerzite Pavla Jozefa
-              Šafárika v Košiciach na Slovensku. Od roku 1995 sa venujem dialýze
-              a nefrológii. Od roku 2013 do roku 2022 som pôsobil ako hlavný
-              lekár / primár na dvoch dialyzačných strediskách v Bratislave.
+              Dialýze a nefrológii sa venujem od roku 1995. Neskôr som viedol
+              dve dialyzačné pracoviská v Bratislave a pôsobil v medicínskom
+              vzdelávaní.
             </p>
 
-            <h3>Osobný pohľad</h3>
+            <h3>Mimo medicíny</h3>
             <p>
-              Narodil som sa v roku 1971 v Československu a vyrastal som v
-              Kyjove. Moje rusínske korene formujú môj pohľad na svet. Medzi
-              moje záľuby patrí čítanie, cestovanie, filozofia a poézia.
+              Zaujíma ma literatúra, filozofia, poézia a cestovanie. V knihách a
+              ďalších textoch sa vraciam k medicíne, morálnym konfliktom a
+              vzťahu človeka k technológiám.
             </p>
 
             <a
@@ -310,7 +315,7 @@
               rel="noopener noreferrer"
               class="btn btn-primary btn-sm"
             >
-              Zobraziť na Amazon Author Central
+              Profil autora na Amazone
             </a>
           </div>
         </div>
@@ -319,11 +324,11 @@
       <!-- Nephrology Section -->
       <section id="nephrology" class="nephrology">
         <div class="container">
-          <h2 class="section-title reveal">Nefrológia</h2>
+          <h2 class="section-title reveal">Nefrológia v skratke</h2>
           <p class="section-intro">
-            Nefrológia je dôležitý medicínsky odbor zaoberajúci sa obličkami —
-            životne dôležitými orgánmi zodpovednými za rovnováhu tekutín,
-            filtráciu odpadových látok a reguláciu krvného tlaku.
+            Nefrológia nie je iba o dialýze. Spája prevenciu, včasnú diagnostiku
+            a dlhodobú liečbu ochorení obličiek s náhradou ich funkcie vtedy,
+            keď konzervatívny postup už nestačí.
           </p>
 
           <div class="card-grid">
@@ -333,9 +338,10 @@
               </div>
               <h3>Chronické ochorenie obličiek (CKD)</h3>
               <p>
-                Manažment postupnej straty funkcie obličiek v priebehu času
-                spôsobenej cukrovkou, vysokým krvným tlakom alebo inými
-                faktormi.
+                Chronické ochorenie obličiek znamená dlhodobé poškodenie alebo
+                zníženú funkciu obličiek. Často súvisí s cukrovkou či vysokým
+                krvným tlakom a vyžaduje pravidelné sledovanie, liečbu príčin a
+                znižovanie rizika ďalšieho zhoršovania.
               </p>
             </article>
             <article class="card reveal">
@@ -344,8 +350,9 @@
               </div>
               <h3>Akútne poškodenie obličiek (AKI)</h3>
               <p>
-                Liečba náhlej, často dočasnej, straty funkcie obličiek
-                spôsobenej infekciami, dehydratáciou alebo toxínmi.
+                Akútne poškodenie obličiek je náhle zhoršenie ich funkcie. Môže
+                vzniknúť pri závažnom ochorení, nedostatku tekutín, poruche
+                odtoku moču alebo pôsobením niektorých liekov a toxických látok.
               </p>
             </article>
             <article class="card reveal">
@@ -354,9 +361,9 @@
               </div>
               <h3>Hemodialýza</h3>
               <p>
-                Postup, pri ktorom sa dialyzačný prístroj a špeciálny filter
-                nazývaný umelá oblička, čiže dialyzátor, používajú na
-                prečistenie krvi.
+                Pri hemodialýze sa krv vedie cez dialyzátor, ktorý odstraňuje
+                odpadové látky a nadbytočnú tekutinu a pomáha upraviť vnútorné
+                prostredie organizmu.
               </p>
             </article>
             <article class="card reveal">
@@ -365,9 +372,9 @@
               </div>
               <h3>Peritoneálna dialýza</h3>
               <p>
-                Liečba, ktorá využíva výstelku brušnej dutiny nazývanú
-                peritoneum a čistiaci roztok nazývaný dialyzačný roztok na
-                prečistenie krvi.
+                Pri peritoneálnej dialýze slúži pobrušnica ako prirodzená
+                dialyzačná membrána. Dialyzačný roztok sa privádza do brušnej
+                dutiny a po určenom čase vypúšťa.
               </p>
             </article>
             <article class="card reveal">
@@ -379,9 +386,10 @@
               </div>
               <h3>Transplantácia</h3>
               <p>
-                Najlepšia liečba zlyhania obličiek. Zdravá oblička sa vloží do
-                tela, aby vykonávala prácu, ktorú vaše vlastné obličky už
-                nedokážu.
+                Pre vhodných pacientov môže transplantácia obličky priniesť
+                lepšie prežívanie a kvalitu života než dlhodobá dialýza.
+                Vyžaduje dôkladné posúdenie, celoživotné sledovanie a
+                imunosupresívnu liečbu.
               </p>
             </article>
             <article class="card reveal">
@@ -390,21 +398,26 @@
               </div>
               <h3>Diagnostika</h3>
               <p>
-                Využitie ultrazvuku, biopsie obličiek a pokročilých
-                laboratórnych testov na presnú diagnostiku ochorení obličiek.
+                Diagnostika vychádza z anamnézy, fyzikálneho vyšetrenia, analýzy
+                krvi a moču a zobrazovacích metód. V odôvodnených prípadoch sa
+                dopĺňa biopsia obličky.
               </p>
             </article>
           </div>
+          <p class="section-muted nephrology-note">
+            Tieto informácie majú vzdelávací charakter a nenahrádzajú lekárske
+            vyšetrenie ani individuálne odporúčanie.
+          </p>
         </div>
       </section>
 
       <!-- Projects Section -->
       <section id="projects" class="projects-section">
         <div class="container">
-          <h2 class="section-title reveal">Projekty a sieť</h2>
+          <h2 class="section-title reveal">Vybrané projekty</h2>
           <p class="section-intro">
-            Výber webových stránok, nástrojov a zdrojov, ktoré vytváram alebo
-            spravujem v oblasti medicíny, vzdelávania a technológií.
+            Projekty, ktoré vytváram alebo dlhodobo spravujem v oblasti
+            medicíny, vzdelávania a technológií.
           </p>
 
           <div class="card-grid">
@@ -414,9 +427,9 @@
               </div>
               <h3>Nefro-projekt Slovensko</h3>
               <p>
-                Slovenský nefrologický portál s klinickými článkami, aktualitami
-                o dialýze a transplantáciách, kalkulačkami, liekovými
-                referenciami a študijnými poznámkami.
+                Slovenský portál s odbornými článkami, klinickými novinkami,
+                kalkulačkami, liekovými údajmi a študijnými materiálmi z
+                nefrológie.
               </p>
               <a
                 href="https://nefro.polascin.net/"
@@ -433,9 +446,8 @@
               </div>
               <h3>NephroSite</h3>
               <p>
-                Vzdelávacie prednášky a referenčné stránky o nefrológii,
-                dialýze, metódach očisty krvi a vnútornom lekárstve (v
-                slovenčine).
+                Archív slovenských prednášok a referenčných materiálov z
+                nefrológie, dialýzy, eliminačných metód a vnútorného lekárstva.
               </p>
               <a
                 href="https://nephrosite.polascin.net/"
@@ -452,8 +464,8 @@
               </div>
               <h3>Bibliotheca Polascini</h3>
               <p>
-                Centrálny archív kníh, akademických publikácií, kapitol a
-                literárnej tvorby MUDr. Ľubomíra Polaščína.
+                Prehľad mojich kníh, odborných publikácií, kapitol a ďalšej
+                autorskej tvorby.
               </p>
               <a
                 href="https://books.polascin.net/"
@@ -470,8 +482,8 @@
               </div>
               <h3>AlphaGrab</h3>
               <p>
-                Experimentálny projekt na vyhľadávanie vstupeniek, ktorý
-                obohacuje záložné odkazy pomocou Ticketmaster Discovery API.
+                Experimentálny vyhľadávač podujatí a vstupeniek využívajúci
+                Ticketmaster Discovery API.
               </p>
               <a
                 href="https://alphagrab.de/"
@@ -484,19 +496,22 @@
 
             <article class="card project-card">
               <div class="card-icon">
-                <i class="fa-solid fa-bus" aria-hidden="true"></i>
+                <i class="fa-solid fa-laptop-medical" aria-hidden="true"></i>
               </div>
-              <h3>Arenibus Demo</h3>
+              <h3>Arenibus</h3>
               <p>
-                Verejná demo inštancia webového projektu zameraného na udalosti
-                a dopravu.
+                Nefrologický informačný systém v .NET, vo fáze pokročilého
+                vývoja, určený pre ambulanciu a dialyzačné stredisko. MVP zahŕňa
+                evidenciu pacientov a návštev, dialyzačné predpisy, termíny,
+                laboratórne výsledky, audit a integráciu so slovenským
+                ezdravotníctvom; verejné demo používa fiktívne dáta.
               </p>
               <a
-                href="https://demo.arenibus.com/"
+                href="https://arenibus.polascin.net/"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn btn-secondary btn-sm"
-                >Navštíviť demo.arenibus.com</a
+                >Navštíviť arenibus.polascin.net</a
               >
             </article>
           </div>
@@ -506,9 +521,9 @@
       <!-- Links Section -->
       <section id="links" class="links-section">
         <div class="container">
-          <h2 class="section-title reveal">Sieť a zdroje</h2>
+          <h2 class="section-title reveal">Ďalšie stránky a odkazy</h2>
           <p class="section-muted">
-            Preskúmajte ďalšie súvisiace stránky a zdroje.
+            Moje ďalšie weby, knihy a vybrané nástroje.
           </p>
           <div class="link-grid">
             <a
@@ -557,6 +572,24 @@
               Nefro-projekt Slovensko
             </a>
             <a
+              href="https://nefro.polascin.net/dialyza-bratislava.php"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              Dialýza Bratislava: Medimpax
+            </a>
+            <a
+              href="https://www.impax.sk/dialyzacne-strediska/"
+              class="pill-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-hospital" aria-hidden="true"></i>
+              Dialyzačné strediská IMPAX
+            </a>
+            <a
               href="https://books.polascin.net/"
               class="pill-link"
               target="_blank"
@@ -575,13 +608,13 @@
               AlphaGrab
             </a>
             <a
-              href="https://demo.arenibus.com/"
+              href="https://arenibus.polascin.net/"
               class="pill-link"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i class="fa-solid fa-bus" aria-hidden="true"></i>
-              Arenibus Demo
+              <i class="fa-solid fa-laptop-medical" aria-hidden="true"></i>
+              Arenibus
             </a>
             <a
               href="https://amzn.to/45y4INd"
@@ -645,7 +678,11 @@
       <section id="contact">
         <div class="container">
           <h2 class="section-title reveal">Kontakt</h2>
-          <p>Neváhajte ma kontaktovať s otázkami alebo ponukou spolupráce.</p>
+          <p>
+            Pre odbornú spoluprácu, prednášku, medicínsky preklad alebo
+            digitálny projekt mi napíšte. Tento kontakt neslúži na urgentné
+            zdravotné otázky.
+          </p>
           <a
             href="mailto:lubomir@polascin.net"
             class="btn btn-primary btn-contact"
@@ -660,7 +697,7 @@
     <!-- Footer -->
     <footer>
       <div class="container">
-        <h2 class="footer-heading">Spojte sa</h2>
+        <h2 class="footer-heading">Kontakt a profily</h2>
         <div class="social-links">
           <a
             href="https://www.linkedin.com/in/lubomirpolascin/"

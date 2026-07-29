@@ -488,12 +488,12 @@
         title: cookieContainer.dataset.cookieTitle || "Analytické cookies",
         description:
           cookieContainer.dataset.cookieDescription ||
-          "S vaším súhlasom použijeme Google Analytics 4 na meranie návštevnosti. Reklamné úložisko a personalizácia zostávajú vypnuté. Odmietnutie neobmedzí používanie stránky. Podrobnosti nájdete v",
+          "S vaším súhlasom používam Google Analytics 4 na meranie návštevnosti. Bez súhlasu sa analytika nenačíta a reklamné funkcie zostávajú vypnuté. Podrobnosti nájdete v",
         privacyLabel:
           cookieContainer.dataset.cookiePrivacyLabel ||
           "zásadách ochrany súkromia",
         decline: cookieContainer.dataset.cookieDecline || "Odmietnuť",
-        accept: cookieContainer.dataset.cookieAccept || "Súhlasím",
+        accept: cookieContainer.dataset.cookieAccept || "Povoliť analytiku",
       };
 
       banner.innerHTML = `

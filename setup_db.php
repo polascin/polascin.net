@@ -168,6 +168,63 @@ function applySchemaMigrations(PDO $pdo): void {
                 $pdo->exec("ALTER TABLE content_blocks ADD UNIQUE KEY uniq_block_key_lang (block_key, lang)");
             }
         },
+        '2026072902_profile_copy' => static function (PDO $pdo): void {
+            // Tieto slovenské bloky pochádzajú zo seedu a majú prednosť pred
+            // jazykovým katalógom. Migrácia mení iba presnú známu predvolenú
+            // hodnotu. Text upravený cez administráciu preto zostane zachovaný.
+            // Staré aj nové hodnoty sú zámerne nemennou súčasťou migrácie.
+            $changes = [
+                [
+                    'hero_title',
+                    'Presná nefrológia. Ľudská starostlivosť. Zmysluplné technológie.',
+                    'MUDr. Ľubomír Polaščín',
+                ],
+                [
+                    'hero_subtitle',
+                    'Som nefrológ a internista s dlhoročnou praxou v dialýze a liečbe ochorení obličiek. Klinickú skúsenosť prepájam s odborným písaním, vzdelávaním a tvorbou digitálnych riešení pre medicínu.',
+                    'Som nefrológ a internista, medicínsky pedagóg a autor. Dlhoročnú skúsenosť s dialýzou prepájam s odborným písaním, prekladmi a tvorbou praktických digitálnych nástrojov.',
+                ],
+                [
+                    'about_intro',
+                    'Som lekár so špecializáciou v nefrológii a internej medicíne. Väčšinu svojho profesijného života sa venujem ochoreniam obličiek, dialýze a starostlivosti o pacientov, ktorých liečba si vyžaduje nielen odbornú presnosť, ale aj dôveru, zrozumiteľnú komunikáciu a rešpektovanie individuálnych potrieb.',
+                    'Som lekár so špecializáciou v nefrológii a vnútornom lekárstve. Moja profesijná práca sa sústreďuje na dialýzu a ochorenia obličiek; viedol som dve dialyzačné pracoviská v Bratislave a pôsobil v medicínskom vzdelávaní.',
+                ],
+                [
+                    'about_who',
+                    'Popri klinickej práci píšem odborné aj literárne texty, venujem sa medicínskym prekladom a tvorím webové stránky a aplikácie. Programovanie a umelú inteligenciu nevnímam ako samoúčelné novinky. Sú to pre mňa praktické nástroje, ktoré môžu sprístupniť poznanie, zjednodušiť prácu a podporiť kvalitnejšie rozhodovanie v medicíne.',
+                    'Píšem odborné aj literárne texty, prekladám medicínsky obsah medzi slovenčinou a angličtinou a tvorím webové stránky a aplikácie. Technológie a umelú inteligenciu posudzujem podľa praktického prínosu: či sprístupnia poznanie, zjednodušia prácu alebo zvýšia kvalitu výsledku.',
+                ],
+                [
+                    'contact_intro',
+                    'Neváhajte ma kontaktovať s otázkami alebo ohľadom spolupráce.',
+                    'Pre odbornú spoluprácu, prednášku, medicínsky preklad alebo digitálny projekt mi napíšte. Tento kontakt neslúži na urgentné zdravotné otázky.',
+                ],
+            ];
+            $update = $pdo->prepare(
+                "UPDATE content_blocks
+                 SET content = :new_content
+                 WHERE block_key = :block_key
+                   AND lang = 'sk'
+                   AND BINARY content = BINARY :old_content"
+            );
+
+            $pdo->beginTransaction();
+            try {
+                foreach ($changes as [$blockKey, $oldContent, $newContent]) {
+                    $update->execute([
+                        ':new_content' => $newContent,
+                        ':block_key' => $blockKey,
+                        ':old_content' => $oldContent,
+                    ]);
+                }
+                $pdo->commit();
+            } catch (Throwable $e) {
+                if ($pdo->inTransaction()) {
+                    $pdo->rollBack();
+                }
+                throw $e;
+            }
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
@@ -307,11 +364,11 @@ runSql($pdo, $schema);
 applySchemaMigrations($pdo);
 
 $defaultBlocks = [
-    ['hero_title', '', 'Presná nefrológia. Ľudská starostlivosť. Zmysluplné technológie.', 'sk', 0],
-    ['hero_subtitle', '', 'Som nefrológ a internista s dlhoročnou praxou v dialýze a liečbe ochorení obličiek. Klinickú skúsenosť prepájam s odborným písaním, vzdelávaním a tvorbou digitálnych riešení pre medicínu.', 'sk', 1],
-    ['about_intro', '', 'Som lekár so špecializáciou v nefrológii a internej medicíne. Väčšinu svojho profesijného života sa venujem ochoreniam obličiek, dialýze a starostlivosti o pacientov, ktorých liečba si vyžaduje nielen odbornú presnosť, ale aj dôveru, zrozumiteľnú komunikáciu a rešpektovanie individuálnych potrieb.', 'sk', 2],
-    ['about_who', '', 'Popri klinickej práci píšem odborné aj literárne texty, venujem sa medicínskym prekladom a tvorím webové stránky a aplikácie. Programovanie a umelú inteligenciu nevnímam ako samoúčelné novinky. Sú to pre mňa praktické nástroje, ktoré môžu sprístupniť poznanie, zjednodušiť prácu a podporiť kvalitnejšie rozhodovanie v medicíne.', 'sk', 3],
-    ['contact_intro', '', 'Neváhajte ma kontaktovať s otázkami alebo ohľadom spolupráce.', 'sk', 4],
+    ['hero_title', '', 'MUDr. Ľubomír Polaščín', 'sk', 0],
+    ['hero_subtitle', '', 'Som nefrológ a internista, medicínsky pedagóg a autor. Dlhoročnú skúsenosť s dialýzou prepájam s odborným písaním, prekladmi a tvorbou praktických digitálnych nástrojov.', 'sk', 1],
+    ['about_intro', '', 'Som lekár so špecializáciou v nefrológii a vnútornom lekárstve. Moja profesijná práca sa sústreďuje na dialýzu a ochorenia obličiek; viedol som dve dialyzačné pracoviská v Bratislave a pôsobil v medicínskom vzdelávaní.', 'sk', 2],
+    ['about_who', '', 'Píšem odborné aj literárne texty, prekladám medicínsky obsah medzi slovenčinou a angličtinou a tvorím webové stránky a aplikácie. Technológie a umelú inteligenciu posudzujem podľa praktického prínosu: či sprístupnia poznanie, zjednodušia prácu alebo zvýšia kvalitu výsledku.', 'sk', 3],
+    ['contact_intro', '', 'Pre odbornú spoluprácu, prednášku, medicínsky preklad alebo digitálny projekt mi napíšte. Tento kontakt neslúži na urgentné zdravotné otázky.', 'sk', 4],
 ];
 
 $stmt = $pdo->prepare(

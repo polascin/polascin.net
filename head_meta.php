@@ -28,7 +28,6 @@ $metaLang = currentLang();
 
 $pageTitle = $pageTitle ?? $siteName;
 $seoDescription = $seoDescription ?? t('meta.default_description');
-$seoKeywords = $seoKeywords ?? t('meta.keywords');
 $canonicalUrl = $canonicalUrl ?? $currentUrl;
 
 /**
@@ -51,6 +50,7 @@ $ogType = $ogType ?? 'website';
 $ogImage = $ogImage ?? ($baseUrl . '/images/profile.jpg');
 $ogImageWidth = $ogImageWidth ?? 768;
 $ogImageHeight = $ogImageHeight ?? 1024;
+$ogImageAlt = $ogImageAlt ?? t('common.author');
 $themeColor = $themeColor ?? '#ffffff';
 
 $cssVersion = is_file(__DIR__ . '/css/styles.css') ? (string) filemtime(__DIR__ . '/css/styles.css') : '1';
@@ -60,7 +60,6 @@ $jsVersion = is_file(__DIR__ . '/js/main.js') ? (string) filemtime(__DIR__ . '/j
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="<?= htmlspecialchars($seoDescription, ENT_QUOTES, 'UTF-8') ?>">
-<meta name="keywords" content="<?= htmlspecialchars($seoKeywords, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="author" content="Ľubomír Polaščín">
 <meta name="theme-color" content="<?= htmlspecialchars($themeColor, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="robots" content="<?= htmlspecialchars($robotsMeta, ENT_QUOTES, 'UTF-8') ?>">
@@ -112,13 +111,13 @@ if ($xDefault === null) {
 <meta property="og:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:image:width" content="<?= (int) $ogImageWidth ?>">
 <meta property="og:image:height" content="<?= (int) $ogImageHeight ?>">
-<meta property="og:image:alt" content="<?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?>">
+<meta property="og:image:alt" content="<?= htmlspecialchars($ogImageAlt, ENT_QUOTES, 'UTF-8') ?>">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="twitter:description" content="<?= htmlspecialchars($seoDescription, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="twitter:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES, 'UTF-8') ?>">
-<meta name="twitter:image:alt" content="<?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?>">
+<meta name="twitter:image:alt" content="<?= htmlspecialchars($ogImageAlt, ENT_QUOTES, 'UTF-8') ?>">
 
 <link rel="icon" href="CrystalKidney.png" type="image/png">
 <link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-57x57.png">

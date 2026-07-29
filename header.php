@@ -23,7 +23,23 @@ $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
 
 <nav class="navbar" aria-label="<?= te('common.main_navigation') ?>">
   <div class="container nav-container">
-    <a href="<?= htmlspecialchars(langUrl(currentLang(), 'index.php'), ENT_QUOTES, 'UTF-8') ?>" class="nav-brand"><?= te('common.site_name') ?></a>
+    <a
+      href="<?= htmlspecialchars(langUrl(currentLang(), 'index.php'), ENT_QUOTES, 'UTF-8') ?>"
+      class="nav-brand"
+      aria-label="<?= te('common.site_name') ?>"
+    >
+      <img
+        src="pix/lpimg001.webp"
+        alt=""
+        class="nav-brand-photo"
+        width="44"
+        height="44"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      >
+      <span class="nav-brand-text"><?= te('common.site_name') ?></span>
+    </a>
     <button
       type="button"
       class="nav-toggle"

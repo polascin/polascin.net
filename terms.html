@@ -44,8 +44,8 @@
     <!-- Consent default must load before any analytics configuration -->
     <script src="js/consent-default.js"></script>
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=20260728-2" />
-    <script src="js/main.js?v=20260728-2" defer></script>
+    <link rel="stylesheet" href="css/styles.css?v=20260729-2" />
+    <script src="js/main.js?v=20260729-1" defer></script>
   </head>
 
   <body>
@@ -54,7 +54,19 @@
     <!-- Navigation -->
     <nav class="navbar" aria-label="Hlavná navigácia">
       <div class="container nav-container">
-        <a href="index.html" class="nav-brand">Polascin.net</a>
+        <a href="index.html" class="nav-brand" aria-label="Polascin.net">
+          <img
+            src="pix/lpimg001.webp"
+            alt=""
+            class="nav-brand-photo"
+            width="44"
+            height="44"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <span class="nav-brand-text">Polascin.net</span>
+        </a>
         <button
           type="button"
           class="nav-toggle"

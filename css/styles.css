@@ -282,8 +282,8 @@ section {
 }
 
 /* Na počítači dostávajú sekcie väčší vertikálny rytmus a kontajner širšie
-   vnútorné odsadenie, aby obsah nelipol na okrajoch. Hranica 1025px nadväzuje
-   na mobilnú navigáciu, ktorá platí do 1024px vrátane. */
+   vnútorné odsadenie, aby obsah nelipol na okrajoch. Navigácia sa prepína
+   samostatne až nad 1100px, aby sa dlhšie názvy položiek nezalamovali. */
 @media (min-width: 1025px) {
   .container {
     padding: 0 var(--spacing-md);
@@ -356,10 +356,54 @@ section {
 }
 
 .nav-brand {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.65rem;
   font-size: 1.5rem;
   font-weight: 800;
   color: var(--primary-color);
   letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.nav-brand-photo {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  object-fit: cover;
+  object-position: center;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-surface);
+  box-shadow: 0 3px 12px var(--shadow-color);
+}
+
+@supports (color: color-mix(in srgb, black, white)) {
+  .nav-brand-photo {
+    border-color: color-mix(in srgb, var(--primary-color) 52%, var(--bg-card));
+  }
+}
+
+.nav-brand-text {
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .nav-brand {
+    gap: 0;
+  }
+
+  .nav-brand-text {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .nav-brand-photo {
+    border-color: CanvasText;
+    box-shadow: none;
+  }
 }
 
 .nav-menu {
@@ -627,14 +671,13 @@ section {
 }
 
 /* Na počítači sa hero rozkladá do dvoch stĺpcov: text vľavo, logo vpravo.
-   Poradie prvkov v HTML zostáva (obrázok, popisok, nadpis, podtitul,
-   tlačidlá) — o rozmiestnenie sa stará grid s pomenovanými oblasťami. */
+   Poradie prvkov v HTML zostáva (obrázok, nadpis, podtitul, tlačidlá) —
+   o rozmiestnenie sa stará grid s pomenovanými oblasťami. */
 @media (min-width: 1025px) {
   .hero .hero-content {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
-      "eyebrow img"
       "title img"
       "subtitle img"
       "buttons img";
@@ -649,11 +692,6 @@ section {
     grid-area: img;
     width: clamp(240px, 24vw, 320px);
     height: clamp(240px, 24vw, 320px);
-  }
-
-  .hero .hero-eyebrow {
-    grid-area: eyebrow;
-    align-self: end;
   }
 
   .hero .hero-title {
@@ -854,17 +892,6 @@ section {
   flex-wrap: wrap;
   gap: var(--spacing-xs);
   margin-top: var(--spacing-md);
-}
-
-/* Názov loga nad hlavným nadpisom. Je to popisok, nie nadpis — nesmie
-   konkurovať h1 ani pôsobiť ako samostatná úroveň nadpisu. */
-.hero-eyebrow {
-  margin-bottom: var(--spacing-xs);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-muted);
 }
 
 /* Ikona pri odkaze, ktorý opúšťa stránku. Je dekoratívna — informáciu nesie
@@ -1117,7 +1144,7 @@ footer button:focus-visible {
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .nav-menu {
     position: fixed;
     top: var(--navbar-height);
@@ -1416,6 +1443,11 @@ footer button:focus-visible {
   color: var(--text-muted);
   max-width: 62ch;
   margin-inline: auto;
+}
+
+.nephrology-note {
+  margin-top: var(--spacing-md);
+  font-size: 0.95rem;
 }
 
 /* Contact section centering */

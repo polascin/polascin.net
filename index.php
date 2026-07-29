@@ -53,7 +53,6 @@ $structuredData = [
         'https://x.com/polascin',
         'https://www.facebook.com/lubomir.polascin',
         'https://www.patreon.com/c/Csoelle',
-        'https://discord.gg/MsGmMZbz',
         'https://github.com/polascin',
     ],
 ];
@@ -77,7 +76,6 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
     <div class="container">
       <div class="hero-content">
         <img src="CrystalKidney.png" alt="<?= te('home.logo_alt') ?>" class="profile-img" loading="eager">
-        <p class="hero-eyebrow"><?= te('home.hero_eyebrow') ?></p>
         <h1 class="hero-title"><?= htmlspecialchars($heroTitle, ENT_QUOTES, 'UTF-8') ?></h1>
         <p class="hero-subtitle"><?= htmlspecialchars($heroSubtitle, ENT_QUOTES, 'UTF-8') ?></p>
         <div class="hero-buttons">
@@ -173,6 +171,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
         <article class="card reveal"><div class="card-icon"><i class="fa-solid fa-hand-holding-medical" aria-hidden="true"></i></div><h3><?= te('home.transplant_title') ?></h3><p><?= te('home.transplant_text') ?></p></article>
         <article class="card reveal"><div class="card-icon"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></div><h3><?= te('home.diagnostics_title') ?></h3><p><?= te('home.diagnostics_text') ?></p></article>
       </div>
+      <p class="section-muted nephrology-note"><?= te('home.nephrology_note') ?></p>
     </div>
   </section>
 
@@ -203,7 +202,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
         <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-hospital-user" aria-hidden="true"></i></div><h3>NephroSite</h3><p><?= te('home.project_nephrosite_text') ?></p><a href="https://nephrosite.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('common.visit', ['target' => 'nephrosite.polascin.net']) ?></a></article>
         <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></div><h3>Bibliotheca Polascini</h3><p><?= te('home.project_books_text') ?></p><a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('common.visit', ['target' => 'books.polascin.net']) ?></a></article>
         <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-ticket" aria-hidden="true"></i></div><h3>AlphaGrab</h3><p><?= te('home.project_alphagrab_text') ?></p><a href="https://alphagrab.de/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('common.visit', ['target' => 'alphagrab.de']) ?></a></article>
-        <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-bus" aria-hidden="true"></i></div><h3>Arenibus Demo</h3><p><?= te('home.project_arenibus_text') ?></p><a href="https://demo.arenibus.com/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('common.visit', ['target' => 'demo.arenibus.com']) ?></a></article>
+        <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i></div><h3>Arenibus</h3><p><?= te('home.project_arenibus_text') ?></p><a href="https://arenibus.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('common.visit', ['target' => 'arenibus.polascin.net']) ?></a></article>
       </div>
     </div>
   </section>
@@ -218,9 +217,11 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
         <a href="https://polascin.org/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-building" aria-hidden="true"></i> polascin.org</a>
         <a href="https://nephrosite.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-hospital-user" aria-hidden="true"></i> <?= te('home.link_nephrosite') ?></a>
         <a href="https://nefro.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-microscope" aria-hidden="true"></i> Nefro-projekt Slovensko</a>
+        <a href="https://nefro.polascin.net/dialyza-bratislava.php" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <?= te('home.link_dialysis_bratislava') ?></a>
+        <a href="https://www.impax.sk/dialyzacne-strediska/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-hospital" aria-hidden="true"></i> <?= te('home.link_impax_centres') ?></a>
         <a href="https://books.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book-open" aria-hidden="true"></i> books.polascin.net</a>
         <a href="https://alphagrab.de/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-ticket" aria-hidden="true"></i> AlphaGrab</a>
-        <a href="https://demo.arenibus.com/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bus" aria-hidden="true"></i> Arenibus Demo</a>
+        <a href="https://arenibus.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i> Arenibus</a>
         <a href="https://amzn.to/45y4INd" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_vital_2nd') ?></a>
         <a href="https://amzn.to/4t4mBNs" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_vital_1st') ?></a>
         <a href="https://amzn.to/4pYuL7D" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> Blood Equity (Amazon)</a>

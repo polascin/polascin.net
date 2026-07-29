@@ -249,8 +249,8 @@ foreach (array_keys(appLanguages()) as $entityLang) {
 }
 
 // Alt text obrázka je iba názov loga. Slovo „logo“ v ňom čítačka zopakuje
-// navyše („obrázok: Logo Crystal Kidney“) a na stránke to pôsobí ako nadpis.
-// Prekladatelia ho do alt textu opakovane dopĺňali, preto je to poistené (Beh #7).
+// navyše („obrázok: Logo Crystal Kidney“), preto je hodnota rovnaká vo všetkých
+// jazykoch.
 foreach (array_keys(appLanguages()) as $altLang) {
     $altCatalogue = require dirname(__DIR__) . '/lang/' . $altLang . '.php';
     expectSame(
@@ -258,7 +258,158 @@ foreach (array_keys(appLanguages()) as $altLang) {
         (string) ($altCatalogue['home.logo_alt'] ?? ''),
         "Katalóg {$altLang} musí mať alt text bez slova „logo“"
     );
+    expectTrue(
+        !array_key_exists('home.hero_eyebrow', $altCatalogue),
+        "Katalóg {$altLang} nesmie obsahovať viditeľný popis loga"
+    );
 }
+
+// Názov Crystal Kidney patrí iba do alt textu obrázka. Samostatný prvok bol
+// vizuálne vykreslený verzálkami nad h1, hoci nebol súčasťou obsahu.
+$homeTemplate = (string) file_get_contents(dirname(__DIR__) . '/index.php');
+$siteStyles = (string) file_get_contents(dirname(__DIR__) . '/css/styles.css');
+$staticFallback = (string) file_get_contents(dirname(__DIR__) . '/index.html');
+$legacyFallback = (string) file_get_contents(dirname(__DIR__) . '/weblogo/index.html');
+$headerTemplate = (string) file_get_contents(dirname(__DIR__) . '/header.php');
+expectTrue(!str_contains($homeTemplate, 'home.hero_eyebrow'), 'Domovská šablóna nesmie vypisovať názov loga ako text');
+expectTrue(!str_contains($homeTemplate, 'hero-eyebrow'), 'Domovská šablóna nesmie obsahovať prvok hero-eyebrow');
+expectTrue(!str_contains($siteStyles, 'hero-eyebrow'), 'CSS nesmie obsahovať nepoužívané štýly hero-eyebrow');
+expectTrue(str_contains($staticFallback, 'alt="Crystal Kidney"'), 'Statický fallback musí zachovať alt text loga');
+expectTrue(!str_contains($staticFallback, 'alt="Logo Crystal Kidney"'), 'Statický fallback nesmie opakovať slovo logo v alt texte');
+expectSame(1, substr_count($staticFallback, 'Crystal Kidney'), 'Statický fallback smie názov loga obsahovať iba v alt texte');
+expectTrue(str_contains($legacyFallback, 'alt="Crystal Kidney"'), 'Starší fallback musí zachovať alt text loga');
+expectSame(1, substr_count($legacyFallback, 'Crystal Kidney'), 'Starší fallback smie názov loga obsahovať iba v alt texte');
+
+// Štylizovaná fotografia je súčasťou značky v pevnej hlavičke. V odkaze je
+// dekoratívna, preto má prázdny alt; zmysel odkazu oznamuje jeho aria-label.
+$brandPhotoPath = dirname(__DIR__) . '/pix/lpimg001.webp';
+$brandPhotoInfo = is_file($brandPhotoPath) ? getimagesize($brandPhotoPath) : false;
+expectTrue(is_file($brandPhotoPath), 'Zdrojová fotografia hlavičky musí existovať');
+expectTrue(is_array($brandPhotoInfo), 'Fotografia hlavičky musí byť platný obrázok');
+expectSame('image/webp', (string) ($brandPhotoInfo['mime'] ?? ''), 'Fotografia hlavičky musí zostať vo formáte WebP');
+expectSame(300, (int) ($brandPhotoInfo[0] ?? 0), 'Fotografia hlavičky musí zachovať pôvodnú šírku');
+expectSame(300, (int) ($brandPhotoInfo[1] ?? 0), 'Fotografia hlavičky musí zachovať pôvodnú výšku');
+expectSame(1, substr_count($headerTemplate, 'src="pix/lpimg001.webp"'), 'Dynamická hlavička musí obsahovať jednu profilovú fotografiu');
+expectTrue(
+    preg_match('~<img\s+src="pix/lpimg001\.webp"\s+alt=""\s+class="nav-brand-photo"~', $headerTemplate) === 1
+        && str_contains($headerTemplate, 'aria-label="<?= te(\'common.site_name\') ?>"'),
+    'Fotografia v dynamickej hlavičke musí byť dekoratívna a odkaz musí mať prístupný názov'
+);
+foreach (['index.html', 'privacy.html', 'terms.html'] as $staticHeaderFile) {
+    $staticHeader = (string) file_get_contents(dirname(__DIR__) . '/' . $staticHeaderFile);
+    expectSame(
+        1,
+        substr_count($staticHeader, 'src="pix/lpimg001.webp"'),
+        "{$staticHeaderFile} musí obsahovať jednu profilovú fotografiu v hlavičke"
+    );
+}
+expectTrue(
+    str_contains($siteStyles, '.nav-brand-photo')
+        && str_contains($siteStyles, '.nav-brand-text'),
+    'CSS musí obsahovať štýly fotografie a textu značky'
+);
+expectTrue(
+    preg_match('~@media \(max-width: 600px\).*?\.nav-brand-text\s*\{\s*display:\s*none;~s', $siteStyles) === 1,
+    'Na úzkych displejoch sa musí skryť iba text značky, nie fotografia'
+);
+expectTrue(
+    preg_match('~@media \(max-width: 1100px\).*?\.nav-menu\s*\{.*?position:\s*fixed;~s', $siteStyles) === 1,
+    'Kompaktná navigácia musí zabrániť zalomeniu hlavičky aj tesne nad šírkou tabletu'
+);
+
+// Transplantácia môže mať u vhodných pacientov lepšie výsledky než dlhodobá
+// dialýza, no nie je univerzálne „najlepšou liečbou“ pre každého.
+expectTrue(
+    !str_contains((string) $skCatalogue['home.transplant_text'], 'Najlepšia liečba'),
+    'Slovenský text o transplantácii nesmie obsahovať absolútne tvrdenie'
+);
+$enCatalogue = require dirname(__DIR__) . '/lang/en.php';
+expectTrue(
+    !str_contains(strtolower((string) $enCatalogue['home.transplant_text']), 'best treatment'),
+    'Anglický text o transplantácii nesmie obsahovať absolútne tvrdenie'
+);
+expectTrue(
+    !str_contains(strtolower($legacyFallback), 'best treatment'),
+    'Starší fallback nesmie obsahovať absolútne tvrdenie o transplantácii'
+);
+
+// Arenibus je nefrologický informačný systém, nie dopravný projekt. Portfólio
+// odkazuje na jeho oficiálnu projektovú stránku; verejné demo je dostupné až
+// odtiaľ spolu s aktuálnymi informáciami o stave vývoja.
+foreach (array_keys(appLanguages()) as $arenibusLang) {
+    $arenibusCatalogue = require dirname(__DIR__) . '/lang/' . $arenibusLang . '.php';
+    $arenibusDescription = (string) ($arenibusCatalogue['home.project_arenibus_text'] ?? '');
+    expectTrue(
+        str_contains($arenibusDescription, '.NET') && str_contains($arenibusDescription, 'MVP'),
+        "Katalóg {$arenibusLang} musí opisovať technológiu a stav Arenibusu"
+    );
+}
+expectSame(
+    2,
+    substr_count($homeTemplate, 'https://arenibus.polascin.net/'),
+    'Dynamická stránka musí odkazovať na oficiálnu stránku Arenibusu'
+);
+expectTrue(
+    !str_contains($homeTemplate, 'https://demo.arenibus.com/')
+        && !str_contains($homeTemplate, 'Arenibus Demo')
+        && !str_contains($homeTemplate, 'fa-bus'),
+    'Dynamická stránka nesmie prezentovať Arenibus ako dopravné demo'
+);
+expectSame(
+    2,
+    substr_count($staticFallback, 'https://arenibus.polascin.net/'),
+    'Statický fallback musí odkazovať na oficiálnu stránku Arenibusu'
+);
+expectTrue(
+    !str_contains($staticFallback, 'https://demo.arenibus.com/')
+        && !str_contains($staticFallback, 'Arenibus Demo')
+        && !str_contains($staticFallback, 'podujatiach a doprave')
+        && !str_contains($staticFallback, 'fa-bus'),
+    'Statický fallback nesmie prezentovať Arenibus ako dopravné demo'
+);
+
+// Odkazy na dialyzačné informácie vedú na konkrétnu stránku pracoviska v
+// Bratislave a na aktuálny zoznam stredísk IMPAX. Názvy sa prekladajú, cieľové
+// slovenské stránky však zostávajú vo všetkých jazykových verziách rovnaké.
+$dialysisLinks = [
+    'https://nefro.polascin.net/dialyza-bratislava.php',
+    'https://www.impax.sk/dialyzacne-strediska/',
+];
+foreach ($dialysisLinks as $dialysisLink) {
+    expectSame(1, substr_count($homeTemplate, $dialysisLink), "Dynamická stránka musí obsahovať odkaz {$dialysisLink}");
+    expectSame(1, substr_count($staticFallback, $dialysisLink), "Statický fallback musí obsahovať odkaz {$dialysisLink}");
+    expectSame(1, substr_count($legacyFallback, $dialysisLink), "Starší fallback musí obsahovať odkaz {$dialysisLink}");
+}
+foreach (array_keys(appLanguages()) as $dialysisLinkLang) {
+    $dialysisLinkCatalogue = require dirname(__DIR__) . '/lang/' . $dialysisLinkLang . '.php';
+    expectTrue(
+        !empty($dialysisLinkCatalogue['home.link_dialysis_bratislava'])
+            && !empty($dialysisLinkCatalogue['home.link_impax_centres']),
+        "Katalóg {$dialysisLinkLang} musí pomenovať oba dialyzačné odkazy"
+    );
+}
+
+// Profilové bloky môžu byť upravené cez administráciu. Migračný UPDATE preto
+// smie nahradiť iba presne známu starú predvolenú hodnotu, nie ľubovoľný obsah
+// s rovnakým kľúčom a jazykom.
+$setupScript = (string) file_get_contents(dirname(__DIR__) . '/setup_db.php');
+expectTrue(
+    str_contains($setupScript, "'2026072902_profile_copy'"),
+    'Setup musí obsahovať verziovanú migráciu profilových textov'
+);
+expectTrue(
+    str_contains($setupScript, 'AND BINARY content = BINARY :old_content'),
+    'Migrácia profilových textov musí chrániť vlastný redakčný obsah binárne presným porovnaním'
+);
+expectTrue(
+    str_contains($setupScript, 'SET content = :new_content'),
+    'Migrácia profilových textov musí používať oddelenú novú hodnotu'
+);
+expectTrue(
+    str_contains($setupScript, '$pdo->beginTransaction()')
+        && str_contains($setupScript, '$pdo->rollBack()'),
+    'Migrácia profilových textov musí byť transakčná'
+);
 
 // Katalógy smú obsahovať iba latinku a cyriliku. Zachytáva to znak, ktorý sa do
 // prekladu dostane omylom — pri ukrajinčine takto prešli dva čínske znaky (Beh #6).
