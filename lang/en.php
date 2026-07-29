@@ -38,7 +38,10 @@ return [
     'common.main_navigation' => 'Main navigation',
     'common.main_content' => 'Main content',
     'common.open_navigation' => 'Open navigation',
+    'common.close_navigation' => 'Close navigation',
     'common.toggle_dark_mode' => 'Toggle dark mode',
+    'common.switch_to_dark' => 'Switch to dark mode',
+    'common.switch_to_light' => 'Switch to light mode',
     'common.required' => 'required',
     'common.back' => 'Back',
     'common.read_more' => 'Read more',
@@ -225,6 +228,10 @@ return [
     'login.error_rate_limit' => 'Too many login attempts. Please try again later.',
     'login.session_expired' => 'Your session has expired due to inactivity. Please log in again.',
     'login.account_inactive' => 'Your account is no longer active. Please log in again.',
+
+    // Logout (messages are shown on the public site)
+    'logout.success' => 'You have been logged out.',
+    'logout.csrf_failed' => 'The logout could not be verified. Please try again.',
 
     // Common errors
     'error.csrf' => 'Invalid security token. Please refresh the page and try again.',

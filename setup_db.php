@@ -352,7 +352,9 @@ if (!$existing->fetch()) {
     }
     try {
         $hash = hashAppPassword($password);
-    } catch (\InvalidArgumentException) {
+    } catch (\Throwable) {
+        // Okrem pravidiel pre heslo odmieta bcrypt aj NUL bajt, a to cez
+        // \ValueError — užší catch by inicializáciu zhodil fatálnou chybou.
         fwrite(STDERR, "Chyba: administrátorské heslo musí mať " . APP_PASSWORD_MIN_BYTES . " až " . APP_PASSWORD_MAX_BYTES . " bajtov a obsahovať malé písmeno, veľké písmeno a číslicu.\n");
         exit(1);
     }

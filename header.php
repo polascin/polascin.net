@@ -29,6 +29,8 @@ $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
       class="nav-toggle"
       id="navToggle"
       aria-label="<?= te('common.open_navigation') ?>"
+      data-label-open="<?= te('common.open_navigation') ?>"
+      data-label-close="<?= te('common.close_navigation') ?>"
       aria-controls="navMenu"
       aria-expanded="false"
     >
@@ -42,6 +44,8 @@ $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
       class="theme-toggle-btn"
       id="themeToggle"
       aria-label="<?= te('common.toggle_dark_mode') ?>"
+      data-label-dark="<?= te('common.switch_to_dark') ?>"
+      data-label-light="<?= te('common.switch_to_light') ?>"
       aria-pressed="false"
     >
       <i class="fa-solid fa-moon" aria-hidden="true"></i>

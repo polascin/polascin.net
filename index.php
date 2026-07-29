@@ -110,7 +110,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
             <li>Linux / Unix</li>
             <li>AI &amp; FOSS</li>
           </ul>
-          <h3><?= t('home.education_heading') ?></h3>
+          <h3><?= te('home.education_heading') ?></h3>
           <p><?= te('home.education_text') ?></p>
           <h3><?= te('home.personal_heading') ?></h3>
           <p><?= te('home.personal_text') ?></p>
@@ -155,7 +155,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
 
   <section id="projects" class="projects-section">
     <div class="container">
-      <h2 class="section-title reveal"><?= t('home.projects_heading') ?></h2>
+      <h2 class="section-title reveal"><?= te('home.projects_heading') ?></h2>
       <p class="section-intro"><?= te('home.projects_intro') ?></p>
       <div class="card-grid">
         <article class="card project-card"><div class="card-icon"><i class="fa-solid fa-microscope" aria-hidden="true"></i></div><h3>Nefro-projekt Slovensko</h3><p><?= te('home.project_nefro_text') ?></p><a href="https://nefro.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('common.visit', ['target' => 'nefro.polascin.net']) ?></a></article>
@@ -169,7 +169,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
 
   <section id="links" class="links-section">
     <div class="container">
-      <h2 class="section-title reveal"><?= t('home.links_heading') ?></h2>
+      <h2 class="section-title reveal"><?= te('home.links_heading') ?></h2>
       <p class="section-muted"><?= te('home.links_intro') ?></p>
       <div class="link-grid">
         <a href="https://polascin.com/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-staff-snake" aria-hidden="true"></i> polascin.com</a>

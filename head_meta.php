@@ -25,7 +25,6 @@ if ($requestPath === '' || $requestPath[0] !== '/') {
 $currentUrl = rtrim($baseUrl, '/') . '/' . ltrim($requestPath, '/');
 
 $metaLang = currentLang();
-$metaScript = basename($requestPath) !== '' ? basename($requestPath) : 'index.php';
 
 $pageTitle = $pageTitle ?? $siteName;
 $seoDescription = $seoDescription ?? t('meta.default_description');
@@ -41,18 +40,11 @@ $canonicalUrl = $canonicalUrl ?? $currentUrl;
  * sa naň nedalo prepnúť späť.
  */
 if (!isset($languageAlternates) || !is_array($languageAlternates)) {
-    $languageAlternates = [];
-    // Kanonická adresa nesie tie parametre, ktoré určujú obsah stránky
-    // (napr. slug článku), nie sledovacie parametre.
-    $alternateParams = [];
-    foreach (['slug', 'page'] as $meaningfulParam) {
-        if (isset($_GET[$meaningfulParam]) && is_scalar($_GET[$meaningfulParam])) {
-            $alternateParams[$meaningfulParam] = (string) $_GET[$meaningfulParam];
-        }
-    }
-    foreach (array_keys(appLanguages()) as $alternateLang) {
-        $languageAlternates[$alternateLang] = absoluteLangUrl($alternateLang, $metaScript, $alternateParams);
-    }
+    // Parametre klastra sa čítajú z kanonickej URL, ktorú si stránka určila sama.
+    // Stránka, ktorá má pre jednotlivé jazyky iné adresy (alebo preklad nemá
+    // vôbec), si `$languageAlternates` nastaví — vrátane prázdneho poľa, ktoré
+    // znamená „tento obsah existuje len v jednom jazyku“.
+    $languageAlternates = languageAlternatesFor($canonicalUrl);
 }
 $robotsMeta = $robotsMeta ?? 'index, follow, max-image-preview:large';
 $ogType = $ogType ?? 'website';

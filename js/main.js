@@ -40,6 +40,14 @@
     explicitTheme = null;
   }
 
+  // Popisy prichádzajú preložené zo servera cez data atribúty. Bez nich by
+  // stránka v cudzom jazyku ohlásila tlačidlá po slovensky, pretože JavaScript
+  // prepisuje `aria-label` vykreslený PHP šablónou.
+  function elementLabel(element, datasetKey, fallback) {
+    const value = element ? element.dataset[datasetKey] : "";
+    return value || fallback;
+  }
+
   function updateThemeControls(theme) {
     const themeToggle = document.getElementById("themeToggle");
     const themeIcon = themeToggle ? themeToggle.querySelector("i") : null;
@@ -47,8 +55,8 @@
 
     if (themeToggle) {
       const label = isDark
-        ? "Prepnúť na svetlý režim"
-        : "Prepnúť na tmavý režim";
+        ? elementLabel(themeToggle, "labelLight", "Prepnúť na svetlý režim")
+        : elementLabel(themeToggle, "labelDark", "Prepnúť na tmavý režim");
       themeToggle.setAttribute("aria-label", label);
       themeToggle.setAttribute("aria-pressed", String(isDark));
       themeToggle.setAttribute("title", label);
@@ -136,7 +144,9 @@
       navToggle.setAttribute("aria-expanded", String(isOpen));
       navToggle.setAttribute(
         "aria-label",
-        isOpen ? "Zavrieť navigáciu" : "Otvoriť navigáciu",
+        isOpen
+          ? elementLabel(navToggle, "labelClose", "Zavrieť navigáciu")
+          : elementLabel(navToggle, "labelOpen", "Otvoriť navigáciu"),
       );
 
       if (isMobile) {
@@ -228,6 +238,41 @@
       addMediaQueryListener(mobileNavigationQuery, () => {
         closeMobileMenu(false);
         syncNavigationState();
+      });
+    }
+
+    // Natívny <details> nemá „light dismiss“: bez tohto by ponuka jazykov
+    // zostala otvorená aj po kliknutí inam a Escape by ju nezavrel, takže by
+    // trvalo prekrývala obsah pod navigáciou.
+    const langSwitcher = document.querySelector(".lang-switcher");
+    if (langSwitcher) {
+      const closeLangSwitcher = (returnFocus) => {
+        if (!langSwitcher.open) return;
+        langSwitcher.open = false;
+        if (returnFocus) {
+          const summary = langSwitcher.querySelector("summary");
+          if (summary) {
+            summary.focus();
+          }
+        }
+      };
+
+      document.addEventListener("click", (event) => {
+        if (!langSwitcher.contains(event.target)) {
+          closeLangSwitcher(false);
+        }
+      });
+
+      document.addEventListener("focusin", (event) => {
+        if (!langSwitcher.contains(event.target)) {
+          closeLangSwitcher(false);
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeLangSwitcher(true);
+        }
       });
     }
 

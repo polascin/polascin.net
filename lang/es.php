@@ -38,7 +38,10 @@ return [
     'common.main_navigation' => 'Navegación principal',
     'common.main_content' => 'Contenido principal',
     'common.open_navigation' => 'Abrir la navegación',
+    'common.close_navigation' => 'Cerrar la navegación',
     'common.toggle_dark_mode' => 'Alternar el modo oscuro',
+    'common.switch_to_dark' => 'Cambiar al modo oscuro',
+    'common.switch_to_light' => 'Cambiar al modo claro',
     'common.required' => 'obligatorio',
     'common.back' => 'Volver',
     'common.read_more' => 'Leer más',
@@ -225,6 +228,10 @@ return [
     'login.error_rate_limit' => 'Demasiados intentos de inicio de sesión. Inténtelo de nuevo más tarde.',
     'login.session_expired' => 'Su sesión ha caducado por inactividad. Inicie sesión de nuevo.',
     'login.account_inactive' => 'Su cuenta ya no está activa. Inicie sesión de nuevo.',
+
+    // Cierre de sesión (los mensajes se muestran en el sitio público)
+    'logout.success' => 'Ha cerrado la sesión.',
+    'logout.csrf_failed' => 'No se ha podido verificar el cierre de sesión. Inténtelo de nuevo.',
 
     // Errores comunes
     'error.csrf' => 'Token de seguridad no válido. Actualice la página e inténtelo de nuevo.',

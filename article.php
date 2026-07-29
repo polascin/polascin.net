@@ -43,16 +43,27 @@ if ($notFound) {
     $ogType = 'article';
 
     // Jazykové varianty ukazujú na skutočné preklady, nie na tú istú URL.
-    $articleTranslations = getArticleTranslations($pdo, isset($article['translation_group']) ? (int) $article['translation_group'] : null);
-    if ($articleTranslations !== []) {
-        $languageAlternates = [];
-        $languageSwitchTargets = [];
+    $articleTranslations = array_filter(
+        getArticleTranslations($pdo, isset($article['translation_group']) ? (int) $article['translation_group'] : null),
+        static fn(string $translationLang): bool => isSupportedLanguage($translationLang),
+        ARRAY_FILTER_USE_KEY
+    );
+
+    // Prepínač ponúka preložené adresy vždy, keď existujú; pre jazyk bez prekladu
+    // zostáva predvolený cieľ, ktorý prepne jazyk celej stránky.
+    $languageSwitchTargets = [];
+    foreach ($articleTranslations as $translationLang => $translationSlug) {
+        $languageSwitchTargets[$translationLang] = langUrl($translationLang, 'article.php', ['slug' => $translationSlug]);
+    }
+
+    // hreflang má zmysel len pri skutočnom preklade. Bez tohto priradenia by
+    // `head_meta.php` doplnil klaster všetkých šiestich jazykov, hoci každá z tých
+    // adries sa kanonizuje späť na tento článok — rozbitý klaster vyhľadávače
+    // zahodia celý. Rovnaké pravidlo platí v `sitemap.php`.
+    $languageAlternates = [];
+    if (count($articleTranslations) > 1) {
         foreach ($articleTranslations as $translationLang => $translationSlug) {
-            if (isSupportedLanguage($translationLang)) {
-                // hreflang používa kanonickú adresu, prepínač adresu s parametrom jazyka.
-                $languageAlternates[$translationLang] = absoluteLangUrl($translationLang, 'article.php', ['slug' => $translationSlug]);
-                $languageSwitchTargets[$translationLang] = langUrl($translationLang, 'article.php', ['slug' => $translationSlug]);
-            }
+            $languageAlternates[$translationLang] = absoluteLangUrl($translationLang, 'article.php', ['slug' => $translationSlug]);
         }
     }
     $robotsMeta = $isAdminPreview ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
@@ -114,9 +125,7 @@ if ($notFound) {
         <p class="article-translations"><?= te('article.available_in') ?>
           <?php $translationLinks = []; ?>
           <?php foreach ($otherTranslations as $translationLang => $translationSlug): ?>
-            <?php if (isSupportedLanguage($translationLang)): ?>
-              <?php $translationLinks[] = '<a href="' . htmlspecialchars(langUrl($translationLang, 'article.php', ['slug' => $translationSlug]), ENT_QUOTES, 'UTF-8') . '" hreflang="' . htmlspecialchars($translationLang, ENT_QUOTES, 'UTF-8') . '" lang="' . htmlspecialchars($translationLang, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars((string) appLanguages()[$translationLang]['native'], ENT_QUOTES, 'UTF-8') . '</a>'; ?>
-            <?php endif; ?>
+            <?php $translationLinks[] = '<a href="' . htmlspecialchars(langUrl($translationLang, 'article.php', ['slug' => $translationSlug]), ENT_QUOTES, 'UTF-8') . '" hreflang="' . htmlspecialchars($translationLang, ENT_QUOTES, 'UTF-8') . '" lang="' . htmlspecialchars($translationLang, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars((string) appLanguages()[$translationLang]['native'], ENT_QUOTES, 'UTF-8') . '</a>'; ?>
           <?php endforeach; ?>
           <?= implode(', ', $translationLinks) ?>
         </p>

@@ -38,7 +38,10 @@ return [
     'common.main_navigation' => 'Navigation principale',
     'common.main_content' => 'Contenu principal',
     'common.open_navigation' => 'Ouvrir la navigation',
+    'common.close_navigation' => 'Fermer la navigation',
     'common.toggle_dark_mode' => 'Activer ou désactiver le mode sombre',
+    'common.switch_to_dark' => 'Passer en mode sombre',
+    'common.switch_to_light' => 'Passer en mode clair',
     'common.required' => 'obligatoire',
     'common.back' => 'Retour',
     'common.read_more' => 'Lire la suite',
@@ -225,6 +228,10 @@ return [
     'login.error_rate_limit' => 'Trop de tentatives de connexion. Veuillez réessayer plus tard.',
     'login.session_expired' => 'Votre session a expiré pour cause d\'inactivité. Veuillez vous reconnecter.',
     'login.account_inactive' => 'Votre compte n\'est plus actif. Veuillez vous reconnecter.',
+
+    // Déconnexion (les messages apparaissent sur le site public)
+    'logout.success' => 'Vous avez été déconnecté.',
+    'logout.csrf_failed' => 'La déconnexion n\'a pas pu être vérifiée. Veuillez réessayer.',
 
     // Erreurs communes
     'error.csrf' => 'Jeton de sécurité invalide. Actualisez la page et réessayez.',

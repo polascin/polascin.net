@@ -38,7 +38,10 @@ return [
     'common.main_navigation' => 'Hauptnavigation',
     'common.main_content' => 'Hauptinhalt',
     'common.open_navigation' => 'Navigation öffnen',
+    'common.close_navigation' => 'Navigation schließen',
     'common.toggle_dark_mode' => 'Dunkelmodus umschalten',
+    'common.switch_to_dark' => 'Zum dunklen Modus wechseln',
+    'common.switch_to_light' => 'Zum hellen Modus wechseln',
     'common.required' => 'Pflichtfeld',
     'common.back' => 'Zurück',
     'common.read_more' => 'Weiterlesen',
@@ -225,6 +228,10 @@ return [
     'login.error_rate_limit' => 'Zu viele Anmeldeversuche. Bitte versuchen Sie es später erneut.',
     'login.session_expired' => 'Ihre Sitzung ist wegen Inaktivität abgelaufen. Bitte melden Sie sich erneut an.',
     'login.account_inactive' => 'Ihr Konto ist nicht mehr aktiv. Bitte melden Sie sich erneut an.',
+
+    // Abmeldung (Meldungen erscheinen auf der öffentlichen Seite)
+    'logout.success' => 'Sie wurden abgemeldet.',
+    'logout.csrf_failed' => 'Die Abmeldung konnte nicht verifiziert werden. Bitte versuchen Sie es erneut.',
 
     // Allgemeine Fehler
     'error.csrf' => 'Ungültiges Sicherheitstoken. Bitte laden Sie die Seite neu und versuchen Sie es erneut.',

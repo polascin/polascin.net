@@ -38,7 +38,10 @@ return [
     'common.main_navigation' => 'Hlavná navigácia',
     'common.main_content' => 'Hlavný obsah',
     'common.open_navigation' => 'Otvoriť navigáciu',
+    'common.close_navigation' => 'Zavrieť navigáciu',
     'common.toggle_dark_mode' => 'Prepnúť tmavý režim',
+    'common.switch_to_dark' => 'Prepnúť na tmavý režim',
+    'common.switch_to_light' => 'Prepnúť na svetlý režim',
     'common.required' => 'povinné',
     'common.back' => 'Späť',
     'common.read_more' => 'Čítať viac',
@@ -225,6 +228,10 @@ return [
     'login.error_rate_limit' => 'Príliš veľa pokusov o prihlásenie. Skúste to znova neskôr.',
     'login.session_expired' => 'Vaša relácia vypršala z dôvodu nečinnosti. Prihláste sa znova.',
     'login.account_inactive' => 'Váš účet už nie je aktívny. Prihláste sa znova.',
+
+    // Odhlásenie (hlásenia sa zobrazujú na verejnej stránke)
+    'logout.success' => 'Boli ste odhlásení.',
+    'logout.csrf_failed' => 'Odhlásenie sa nepodarilo overiť. Skúste to znova.',
 
     // Spoločné chyby
     'error.csrf' => 'Neplatný bezpečnostný token. Obnovte stránku a skúste to znova.',

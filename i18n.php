@@ -354,6 +354,37 @@ function absoluteLangUrl(string $lang, string $path, array $extraParams = []): s
 }
 
 /**
+ * Jazykové varianty (hreflang) odvodené z kanonickej adresy stránky.
+ *
+ * Zdrojom parametrov je zámerne kanonická URL, nie `$_GET`: kanonická adresa je
+ * jediné miesto, kde stránka rozhodla, ktoré parametre určujú jej obsah. Zo
+ * `$_GET` by sa do klastra dostali aj parametre, ktoré stránka ignoruje
+ * (`articles.php?slug=…`), aj tie, ktoré si sama odstránila (`?page=1`) — a
+ * hreflang by potom odkazoval na adresy s inou kanonickou URL, čo vyhľadávače
+ * vyhodnotia ako rozbitý klaster a celý ho zahodia.
+ */
+function languageAlternatesFor(string $canonicalUrl): array {
+    $path = (string) (parse_url($canonicalUrl, PHP_URL_PATH) ?: '/');
+    $script = basename($path);
+    if ($script === '') {
+        $script = 'index.php';
+    }
+
+    $params = [];
+    $query = (string) (parse_url($canonicalUrl, PHP_URL_QUERY) ?? '');
+    if ($query !== '') {
+        parse_str($query, $params);
+        unset($params['lang']);
+    }
+
+    $alternates = [];
+    foreach (array_keys(appLanguages()) as $lang) {
+        $alternates[$lang] = absoluteLangUrl($lang, $script, $params);
+    }
+    return $alternates;
+}
+
+/**
  * Názvy mesiacov v genitíve/tvare používanom v dátumoch pre jednotlivé jazyky.
  */
 function localizedMonthNames(string $lang): array {

@@ -261,6 +261,116 @@ if ($originalScript === null) {
     $_SERVER['SCRIPT_NAME'] = $originalScript;
 }
 
+// Jazykové varianty (hreflang) sa musia odvodzovať z kanonickej URL, nie zo
+// `$_GET` — inak by klaster odkazoval na adresy s inou kanonickou URL (Beh #5).
+$homeAlternates = languageAlternatesFor('https://polascin.net/');
+expectSame('https://polascin.net/', $homeAlternates['sk'], 'Alternatíva pre predvolený jazyk je čistá adresa');
+expectSame('https://polascin.net/?lang=en', $homeAlternates['en'], 'Alternatíva pre cudzí jazyk nesie parameter lang');
+expectSame(
+    array_keys(appLanguages()),
+    array_keys($homeAlternates),
+    'Klaster musí obsahovať všetky podporované jazyky v pevnom poradí'
+);
+expectSame(
+    'https://polascin.net/article.php?slug=test&lang=de',
+    languageAlternatesFor('https://polascin.net/article.php?slug=test')['de'],
+    'Parametre kanonickej URL sa musia preniesť do alternatív'
+);
+expectSame(
+    'https://polascin.net/articles.php?page=2&lang=fr',
+    languageAlternatesFor('https://polascin.net/articles.php?page=2')['fr'],
+    'Stránkovanie sa musí preniesť do alternatív'
+);
+
+// Regresia: `articles.php?page=1` má kanonickú URL bez parametra `page` a
+// `articles.php?slug=…` parameter `slug` vôbec nepozná. Zo `$_GET` by sa oba
+// dostali do hreflang a rozbili by súlad canonical ↔ hreflang.
+$originalGet = $_GET;
+$_GET = ['page' => '1', 'slug' => 'nepatri-sem', 'utm_source' => 'newsletter'];
+$leakAlternates = languageAlternatesFor('https://polascin.net/articles.php');
+expectSame('https://polascin.net/articles.php', $leakAlternates['sk'], 'Parametre zo $_GET nesmú preniknúť do alternatív');
+expectSame('https://polascin.net/articles.php?lang=es', $leakAlternates['es'], 'Cudzojazyčná alternatíva nesmie niesť parametre zo $_GET');
+$_GET = $originalGet;
+
+// Zástupný jazyk v kanonickej URL sa nesmie zdvojiť.
+expectSame(
+    'https://polascin.net/contact.php?lang=cs',
+    languageAlternatesFor('https://polascin.net/contact.php?lang=de')['cs'],
+    'Pôvodný parameter lang v kanonickej URL sa musí nahradiť cieľovým jazykom'
+);
+
+// Popisy prepínačov idú do JavaScriptu cez data atribúty; bez nich by stránka
+// v cudzom jazyku ohlásila tlačidlá po slovensky (Beh #5).
+$jsLabelKeys = ['common.open_navigation', 'common.close_navigation', 'common.switch_to_dark', 'common.switch_to_light'];
+foreach (array_keys(appLanguages()) as $labelLang) {
+    // Číta sa priamo katalóg, nie `t()`: záloha na predvolený jazyk by chýbajúci
+    // preklad zamaskovala slovenským reťazcom.
+    $labelCatalogue = require dirname(__DIR__) . '/lang/' . $labelLang . '.php';
+    $missingLabels = [];
+    foreach ($jsLabelKeys as $labelKey) {
+        if (!isset($labelCatalogue[$labelKey]) || trim((string) $labelCatalogue[$labelKey]) === '') {
+            $missingLabels[] = $labelKey;
+        }
+    }
+    expectSame([], $missingLabels, "Katalóg {$labelLang} musí mať preložené popisy prepínačov");
+}
+$headerSource = (string) file_get_contents(dirname(__DIR__) . '/header.php');
+foreach (['data-label-open', 'data-label-close', 'data-label-dark', 'data-label-light'] as $dataAttribute) {
+    expectTrue(
+        str_contains($headerSource, $dataAttribute),
+        "header.php musí posielať do JavaScriptu atribút {$dataAttribute}"
+    );
+}
+$mainJsSource = (string) file_get_contents(dirname(__DIR__) . '/js/main.js');
+foreach (['labelOpen', 'labelClose', 'labelDark', 'labelLight'] as $datasetKey) {
+    expectTrue(
+        str_contains($mainJsSource, $datasetKey),
+        "js/main.js musí čítať preložený popis {$datasetKey}"
+    );
+}
+
+// Miesta, kde sa preklad zámerne vypisuje bez escapovania. Hodnoty musia zostať
+// redakčnými reťazcami s bezpečnou značkou, inak by sa z katalógu stal XSS vektor.
+$unescapedKeys = [
+    'privacy.s1_text',
+    'privacy.s2_technical',
+    'privacy.s2_contact',
+    'privacy.s2_newsletter',
+    'privacy.s2_cookies',
+    'privacy.s3_item5',
+    'terms.s1_text',
+    'terms.s2_important',
+];
+$foundUnescaped = [];
+foreach ((array) glob(dirname(__DIR__) . '/*.php') as $templateFile) {
+    if (preg_match_all('/<\?=\s*t\(\s*[\'"]([^\'"]+)[\'"]/', (string) file_get_contents((string) $templateFile), $matches) > 0) {
+        foreach ($matches[1] as $unescapedKey) {
+            $foundUnescaped[$unescapedKey] = true;
+        }
+    }
+}
+expectSame(
+    [],
+    array_keys(array_diff_key($foundUnescaped, array_flip($unescapedKeys))),
+    'Nový neescapovaný t() musí prejsť revíziou a doplniť sa do zoznamu v teste'
+);
+expectSame(
+    [],
+    array_values(array_diff($unescapedKeys, array_keys($foundUnescaped))),
+    'Zoznam neescapovaných kľúčov nesmie obsahovať kľúče, ktoré sa už escapujú'
+);
+foreach (array_keys(appLanguages()) as $markupLang) {
+    $catalogue = require dirname(__DIR__) . '/lang/' . $markupLang . '.php';
+    $unsafeMarkup = [];
+    foreach ($unescapedKeys as $unescapedKey) {
+        $withoutStrong = str_replace(['<strong>', '</strong>'], '', (string) ($catalogue[$unescapedKey] ?? ''));
+        if (str_contains($withoutStrong, '<') || str_contains($withoutStrong, '>')) {
+            $unsafeMarkup[] = $unescapedKey;
+        }
+    }
+    expectSame([], $unsafeMarkup, "Katalóg {$markupLang} smie v neescapovaných kľúčoch používať iba <strong>");
+}
+
 $testDate = new DateTimeImmutable('2026-07-28 12:00:00');
 expectSame('28. júla 2026', formatLocalizedDate($testDate, 'sk'), 'Slovenský dátum');
 expectSame('July 28, 2026', formatLocalizedDate($testDate, 'en'), 'Anglický dátum');
