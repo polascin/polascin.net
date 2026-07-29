@@ -443,6 +443,14 @@ section {
   white-space: nowrap;
 }
 
+/* Živý Swatch Internet Time ako v hlavičke nefro.polascin.net */
+.nav-beat {
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
 @media (max-width: 600px) {
   .nav-brand {
     gap: 0;

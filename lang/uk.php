@@ -68,7 +68,6 @@ return [
     'footer.x' => 'Профіль в X',
     'footer.facebook' => 'Профіль у Facebook',
     'footer.email' => 'Надіслати електронний лист',
-    'footer.patreon' => 'Підтримати на Patreon',
     'footer.discord' => 'Приєднатися в Discord',
     'footer.copyright' => '© 1998 – :year Любомир Полащін. Усі права захищено.',
     'footer.privacy' => 'Конфіденційність',

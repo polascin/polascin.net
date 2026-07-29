@@ -51,9 +51,6 @@ $footerBeat = '@' . number_format((($footerUpdateTs + 3600) % 86400) / 86.4, 2, 
       <a href="mailto:lubomir@polascin.net" aria-label="E-mail" title="<?= te('footer.email') ?>">
         <i class="fa-solid fa-envelope" aria-hidden="true"></i>
       </a>
-      <a href="https://www.patreon.com/c/Csoelle" target="_blank" rel="noopener noreferrer" aria-label="Patreon" title="<?= te('footer.patreon') ?>">
-        <i class="fa-brands fa-patreon" aria-hidden="true"></i>
-      </a>
       <a href="https://discord.gg/MsGmMZbz" target="_blank" rel="noopener noreferrer" aria-label="Discord" title="<?= te('footer.discord') ?>">
         <i class="fa-brands fa-discord" aria-hidden="true"></i>
       </a>

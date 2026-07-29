@@ -583,6 +583,23 @@
       yearSpan.textContent = String(new Date().getFullYear());
     }
 
+    // Swatch Internet Time v hlavičke (BMT = UTC+1, 1 deň = 1000 beatov).
+    const beatClock = document.getElementById("beatClock");
+    if (beatClock) {
+      const updateBeat = () => {
+        const now = new Date();
+        const ms =
+          now.getUTCHours() * 3600000 +
+          now.getUTCMinutes() * 60000 +
+          now.getUTCSeconds() * 1000 +
+          now.getUTCMilliseconds();
+        beatClock.textContent =
+          "@" + (((ms + 3600000) % 86400000) / 86400).toFixed(2) + " .beat";
+      };
+      updateBeat();
+      window.setInterval(updateBeat, 500);
+    }
+
     document.querySelectorAll("form[data-confirm]").forEach((form) => {
       form.addEventListener("submit", (event) => {
         if (!window.confirm(form.dataset.confirm)) {

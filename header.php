@@ -24,6 +24,10 @@ $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
 $vekAktualny = (time() - mktime(8, 30, 0, 3, 4, 1971)) / (60 * 60 * 24 * 365.25);
 $vekRoky = (int) floor($vekAktualny);
 $vekZlomok = substr(number_format($vekAktualny, 3, '.', ''), -4);
+
+// Aktuálny Swatch Internet Time ako v hlavičke nefro.polascin.net
+// (BMT = UTC+1, 1 deň = 1000 beatov); js/main.js ho ďalej aktualizuje naživo.
+$beatAktualny = number_format(((time() + 3600) % 86400) / 86.4, 2, '.', '');
 ?>
 <a href="#main-content" class="skip-link"><?= te('common.skip_to_content') ?></a>
 
@@ -51,6 +55,7 @@ $vekZlomok = substr(number_format($vekAktualny, 3, '.', ''), -4);
         <span class="nav-age-years"><?= $vekRoky ?></span>
         <span class="nav-age-exact">(<?= $vekRoky ?><small><?= $vekZlomok ?></small>)</span>
       </span>
+      <span class="nav-beat" id="beatClock" title="<?= te('footer.beat_title') ?>">@<?= $beatAktualny ?> .beat</span>
     </div>
     <button
       type="button"

@@ -54,7 +54,6 @@ $structuredData = [
         'https://www.linkedin.com/in/lubomirpolascin/',
         'https://x.com/polascin',
         'https://www.facebook.com/lubomir.polascin',
-        'https://www.patreon.com/c/Csoelle',
         'https://github.com/polascin',
         'https://polascin.gumroad.com/',
     ],
