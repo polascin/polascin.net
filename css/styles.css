@@ -1877,7 +1877,10 @@ footer button:focus-visible {
   padding: 3rem 0;
 }
 
-.latest-articles .center-link {
+/* Odsek s tlačidlom pod obsahom sekcie. Globálny reset ruší okraje
+   odsekov, takže bez vlastného odsadenia by tlačidlo lipla na
+   predchádzajúcom prvku (napr. e-mail v kontaktnej sekcii). */
+.center-link {
   text-align: center;
   margin-top: 1.5rem;
 }
