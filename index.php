@@ -144,6 +144,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
           </dl>
 
           <h3><?= te('home.education_heading') ?></h3>
+          <p><?= te('home.education_school') ?></p>
           <p><?= te('home.education_text') ?></p>
           <p><?= te('home.education_path') ?></p>
           <p><?= te('home.education_scope') ?></p>
@@ -176,6 +177,16 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
         <article class="card reveal"><div class="card-icon"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></div><h3><?= te('home.diagnostics_title') ?></h3><p><?= te('home.diagnostics_text') ?></p></article>
       </div>
       <p class="section-muted nephrology-note"><?= te('home.nephrology_note') ?></p>
+    </div>
+  </section>
+
+  <section id="clinics" class="links-section">
+    <div class="container">
+      <h2 class="section-title reveal"><?= te('home.clinics_heading') ?></h2>
+      <div class="link-grid">
+        <a href="https://nefro.polascin.net/dialyza-bratislava.php" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <?= te('home.link_dialysis_bratislava') ?></a>
+        <a href="https://www.impax.sk/dialyzacne-strediska/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-hospital" aria-hidden="true"></i> <?= te('home.link_impax_centres') ?></a>
+      </div>
     </div>
   </section>
 
@@ -221,8 +232,6 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
         <a href="https://polascin.org/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-building" aria-hidden="true"></i> polascin.org</a>
         <a href="https://nephrosite.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-hospital-user" aria-hidden="true"></i> <?= te('home.link_nephrosite') ?></a>
         <a href="https://nefro.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-microscope" aria-hidden="true"></i> Nefro-projekt Slovensko</a>
-        <a href="https://nefro.polascin.net/dialyza-bratislava.php" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <?= te('home.link_dialysis_bratislava') ?></a>
-        <a href="https://www.impax.sk/dialyzacne-strediska/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-hospital" aria-hidden="true"></i> <?= te('home.link_impax_centres') ?></a>
         <a href="https://books.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book-open" aria-hidden="true"></i> books.polascin.net</a>
         <a href="https://alphagrab.de/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-ticket" aria-hidden="true"></i> AlphaGrab</a>
         <a href="https://arenibus.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i> Arenibus</a>
