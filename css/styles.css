@@ -20,6 +20,37 @@
   --navbar-height: 77px;
   color-scheme: light;
 
+  /* Paleta vlajky. Používa sa ako akcent, nie ako základná schéma.
+     Svetlé odtiene neprejdú kontrastom na bielom podklade a tmavé zase na
+     tmavom, preto sú nižšie odvodené premenné --flag-accent-* pre text a ikony
+     a plná sekvencia --flag-stripe len pre dekoratívne pruhy. */
+  --flag-green-dark: #078d70;
+  --flag-teal: #26ceaa;
+  --flag-mint: #98e8c1;
+  --flag-white: #ffffff;
+  --flag-blue: #7bade2;
+  --flag-violet: #5049cc;
+  --flag-purple: #3d1a78;
+
+  /* Akcenty čitateľné na svetlom podklade (4:1 a viac). */
+  --flag-accent-1: #078d70;
+  --flag-accent-2: #5049cc;
+  --flag-accent-3: #3d1a78;
+
+  /* Biely pruh vlajky by na svetlom podklade zmizol a pruh by vyzeral prerušene,
+     preto sa v svetlej téme používa najsvetlejší odtieň, ktorý je ešte viditeľný. */
+  --flag-stripe-white: #eef2f7;
+  --flag-stripe: linear-gradient(
+    90deg,
+    #078d70 0%,
+    #26ceaa 17%,
+    #98e8c1 33%,
+    var(--flag-stripe-white) 50%,
+    #7bade2 67%,
+    #5049cc 83%,
+    #3d1a78 100%
+  );
+
   /* Typography */
   --font-heading:
     "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -51,6 +82,13 @@
   --primary-hover: #75baff;
   --focus-color: #ffffff;
   --focus-on-primary: #0f172a;
+
+  /* Na tmavom podklade sú čitateľné svetlé odtiene vlajky, nie tmavé. */
+  --flag-accent-1: #26ceaa;
+  --flag-accent-2: #98e8c1;
+  --flag-accent-3: #7bade2;
+  /* Na tmavom podklade môže byť biely pruh skutočne biely. */
+  --flag-stripe-white: #ffffff;
   color-scheme: dark;
 }
 
@@ -194,6 +232,23 @@ h2 {
   text-align: center;
 }
 
+/* Krátky farebný podčiarknik pod nadpismi sekcií — čisto dekoratívny. */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 96px;
+  height: 3px;
+  margin: var(--spacing-xs) auto 0;
+  border-radius: 3px;
+  background: var(--flag-stripe);
+}
+
+@media (forced-colors: active) {
+  .section-title::after {
+    display: none;
+  }
+}
+
 h3 {
   font-size: 1.5rem;
 }
@@ -224,6 +279,23 @@ section {
   box-shadow: 0 2px 4px var(--shadow-color);
   padding: var(--spacing-sm) 0;
   border-bottom: 1px solid var(--border-color);
+}
+
+/* Dekoratívny pruh v farbách vlajky. Nenesie žiadnu informáciu, preto sa naň
+   nevzťahuje požiadavka na kontrast a je skrytý pri vynútených farbách. */
+.navbar::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -3px;
+  height: 3px;
+  background: var(--flag-stripe);
+}
+
+@media (forced-colors: active) {
+  .navbar::after {
+    display: none;
+  }
 }
 
 .nav-container {
@@ -328,6 +400,91 @@ section {
   color: var(--primary-color);
 }
 
+/* Prepínač jazyka — postavený na <details>, takže funguje aj bez JavaScriptu. */
+.lang-switcher {
+  position: relative;
+  margin-left: var(--spacing-xs);
+}
+
+.lang-switcher-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  list-style: none;
+  transition: background-color 0.3s;
+}
+
+.lang-switcher-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.lang-switcher-toggle:hover {
+  background-color: var(--bg-surface);
+  color: var(--primary-color);
+}
+
+.lang-switcher-code {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.lang-switcher-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  min-width: 190px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px var(--shadow-color);
+  padding: 6px;
+  z-index: 1200;
+  list-style: none;
+  margin: 0;
+}
+
+.lang-switcher-menu li {
+  list-style: none;
+}
+
+.lang-switcher-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.lang-switcher-link:hover,
+.lang-switcher-link:focus-visible {
+  background-color: var(--bg-surface);
+  color: var(--primary-color);
+}
+
+.lang-switcher-link[aria-current="true"] {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* Aktívny jazyk je označený aj textovou značkou, nielen farbou. */
+.lang-switcher-link[aria-current="true"]::after {
+  content: "✓";
+  font-weight: 700;
+}
+
 /* Profile Image */
 .profile-container {
   display: flex;
@@ -391,19 +548,38 @@ section {
 .hero-title {
   font-size: 3.5rem;
   margin-bottom: var(--spacing-md);
-  background: -webkit-linear-gradient(
-    45deg,
-    var(--primary-color),
-    var(--secondary-color)
+  /* Odtiene vlajky, ktoré na svetlom podklade prejdú kontrastom pre veľký text. */
+  background: linear-gradient(
+    100deg,
+    var(--flag-green-dark) 0%,
+    var(--flag-violet) 55%,
+    var(--flag-purple) 100%
   );
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+[data-theme="dark"] .hero-title {
+  /* Na tmavom podklade sa poradie obracia na svetlé odtiene. */
+  background: linear-gradient(
+    100deg,
+    var(--flag-mint) 0%,
+    var(--flag-teal) 50%,
+    var(--flag-blue) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
 @media (forced-colors: active) {
-  .hero-title {
+  /* Tmavý variant nadpisu má vyššiu špecificitu, preto ho musí reset uviesť
+     výslovne — inak by pri vynútených farbách zostal gradient orezaný do textu. */
+  .hero-title,
+  [data-theme="dark"] .hero-title {
     background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
     color: CanvasText;
     -webkit-text-fill-color: CanvasText;
   }
@@ -504,6 +680,20 @@ section {
   margin-bottom: var(--spacing-sm);
 }
 
+/* Ikony striedajú akcenty vlajky. Ide o grafické prvky, ktoré majú podľa
+   WCAG 1.4.11 spĺňať 3:1 — odvodené premenné to zabezpečujú v oboch témach. */
+.card-grid > *:nth-child(3n + 1) .card-icon {
+  color: var(--flag-accent-1);
+}
+
+.card-grid > *:nth-child(3n + 2) .card-icon {
+  color: var(--flag-accent-2);
+}
+
+.card-grid > *:nth-child(3n + 3) .card-icon {
+  color: var(--flag-accent-3);
+}
+
 .card h3 {
   margin-bottom: var(--spacing-xs);
   font-size: 1.25rem;
@@ -567,6 +757,15 @@ footer {
   color: var(--on-primary);
   padding: var(--spacing-lg) 0;
   text-align: center;
+  position: relative;
+  border-top: 3px solid transparent;
+  border-image: var(--flag-stripe) 1;
+}
+
+@media (forced-colors: active) {
+  footer {
+    border-image: none;
+  }
 }
 
 footer a {
@@ -1072,6 +1271,33 @@ footer button:focus-visible {
   background-color: rgba(239, 68, 68, 0.16);
   color: #fca5a5;
   border-color: rgba(239, 68, 68, 0.45);
+}
+
+/* Neutrálne oznámenie (napr. článok zobrazený v inom jazyku). */
+.alert-info {
+  background-color: rgba(80, 73, 204, 0.1);
+  color: #3d1a78;
+  border: 1px solid rgba(80, 73, 204, 0.35);
+}
+
+[data-theme="dark"] .alert-info {
+  background-color: rgba(123, 173, 226, 0.16);
+  color: #b9d6f5;
+  border-color: rgba(123, 173, 226, 0.45);
+}
+
+/* Odkazy na preklady pod článkom */
+.article-translations {
+  margin-top: var(--spacing-sm);
+  color: var(--text-muted);
+}
+
+/* Vysvetľujúci text pod poľom formulára */
+.form-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
 }
 
 /* Forms */

@@ -24,10 +24,36 @@ if ($requestPath === '' || $requestPath[0] !== '/') {
 }
 $currentUrl = rtrim($baseUrl, '/') . '/' . ltrim($requestPath, '/');
 
+$metaLang = currentLang();
+$metaScript = basename($requestPath) !== '' ? basename($requestPath) : 'index.php';
+
 $pageTitle = $pageTitle ?? $siteName;
-$seoDescription = $seoDescription ?? 'MUDr. Ľubomír Polaščín — nefrológ, internista, lekársky prekladateľ, spisovateľ a samouk programátor.';
-$seoKeywords = $seoKeywords ?? 'Ľubomír Polaščín, nefrológia, interná medicína, dialýza, lekársky preklad, programovanie';
+$seoDescription = $seoDescription ?? t('meta.default_description');
+$seoKeywords = $seoKeywords ?? t('meta.keywords');
 $canonicalUrl = $canonicalUrl ?? $currentUrl;
+
+/**
+ * Jazykové varianty pre hreflang. Sú to kanonické adresy, teda pre predvolený
+ * jazyk bez parametra `lang`.
+ *
+ * Táto premenná je určená výhradne pre SEO. Prepínač jazyka ju zámerne
+ * nepoužíva — potreboval by parameter `lang` aj pre predvolený jazyk, inak by
+ * sa naň nedalo prepnúť späť.
+ */
+if (!isset($languageAlternates) || !is_array($languageAlternates)) {
+    $languageAlternates = [];
+    // Kanonická adresa nesie tie parametre, ktoré určujú obsah stránky
+    // (napr. slug článku), nie sledovacie parametre.
+    $alternateParams = [];
+    foreach (['slug', 'page'] as $meaningfulParam) {
+        if (isset($_GET[$meaningfulParam]) && is_scalar($_GET[$meaningfulParam])) {
+            $alternateParams[$meaningfulParam] = (string) $_GET[$meaningfulParam];
+        }
+    }
+    foreach (array_keys(appLanguages()) as $alternateLang) {
+        $languageAlternates[$alternateLang] = absoluteLangUrl($alternateLang, $metaScript, $alternateParams);
+    }
+}
 $robotsMeta = $robotsMeta ?? 'index, follow, max-image-preview:large';
 $ogType = $ogType ?? 'website';
 $ogImage = $ogImage ?? ($baseUrl . '/images/profile.jpg');
@@ -48,15 +74,45 @@ $jsVersion = is_file(__DIR__ . '/js/main.js') ? (string) filemtime(__DIR__ . '/j
 <meta name="robots" content="<?= htmlspecialchars($robotsMeta, ENT_QUOTES, 'UTF-8') ?>">
 <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
 <link rel="canonical" href="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
-<link rel="alternate" hreflang="sk" href="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
-<link rel="alternate" hreflang="x-default" href="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
+<?php
+// Na neindexovaných stránkach nemá hreflang zmysel — vyhľadávače ho ignorujú
+// a klaster by odkazoval na adresy, ktoré sa nemajú objaviť vo výsledkoch.
+$emitAlternates = !str_contains(strtolower($robotsMeta), 'noindex');
+?>
+<?php if ($emitAlternates): ?>
+<?php foreach ($languageAlternates as $alternateLang => $alternateUrl): ?>
+<link rel="alternate" hreflang="<?= htmlspecialchars((string) $alternateLang, ENT_QUOTES, 'UTF-8') ?>" href="<?= htmlspecialchars((string) $alternateUrl, ENT_QUOTES, 'UTF-8') ?>">
+<?php endforeach; ?>
+<?php
+// x-default musí byť rovnaké pre všetky jazykové varianty tej istej stránky.
+// Keď predvolený jazyk v klastri chýba, berie sa prvý podľa poradia v
+// appLanguages(), ktoré je rovnaké nech sa stránka vykresľuje v ktoromkoľvek jazyku.
+$xDefault = $languageAlternates[APP_DEFAULT_LANGUAGE] ?? null;
+if ($xDefault === null) {
+    foreach (array_keys(appLanguages()) as $preferredLang) {
+        if (isset($languageAlternates[$preferredLang])) {
+            $xDefault = $languageAlternates[$preferredLang];
+            break;
+        }
+    }
+}
+?>
+<?php if ($xDefault !== null): ?>
+<link rel="alternate" hreflang="x-default" href="<?= htmlspecialchars((string) $xDefault, ENT_QUOTES, 'UTF-8') ?>">
+<?php endif; ?>
+<?php endif; ?>
 
 <meta property="og:type" content="<?= htmlspecialchars($ogType, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:title" content="<?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:description" content="<?= htmlspecialchars($seoDescription, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:url" content="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:site_name" content="<?= htmlspecialchars($siteName, ENT_QUOTES, 'UTF-8') ?>">
-<meta property="og:locale" content="sk_SK">
+<meta property="og:locale" content="<?= htmlspecialchars(currentLocale(), ENT_QUOTES, 'UTF-8') ?>">
+<?php foreach (appLanguages() as $ogLang => $ogMeta): ?>
+<?php if ($ogLang !== $metaLang): ?>
+<meta property="og:locale:alternate" content="<?= htmlspecialchars((string) $ogMeta['locale'], ENT_QUOTES, 'UTF-8') ?>">
+<?php endif; ?>
+<?php endforeach; ?>
 <meta property="og:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:image:width" content="<?= (int) $ogImageWidth ?>">
 <meta property="og:image:height" content="<?= (int) $ogImageHeight ?>">

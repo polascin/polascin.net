@@ -1,0 +1,286 @@
+<?php
+
+declare(strict_types=1);
+
+$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
+$executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
+if (
+    $executedFile === __FILE__
+    || preg_match('~(?:^|/)lang/[a-z]{2}\.php(?:/|$)~i', $requestedScript) === 1
+) {
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, "Chyba: katalóg prekladov je interný súbor a nemožno ho spúšťať priamo.\n");
+        exit(1);
+    }
+    http_response_code(403);
+    exit('Prístup odmietnutý.');
+}
+unset($requestedScript, $executedFile);
+
+/**
+ * Catalogue de traductions français.
+ *
+ * Les clés sont des identifiants stables, et non des textes. Les paramètres
+ * substituables s'écrivent sous la forme `:nom`. Ce fichier est dérivé de
+ * `sk.php` ; toute clé manquante ici retombe sur la version slovaque.
+ */
+return [
+    // Sélecteur de langue
+    'lang.switch' => 'Langue',
+    'lang.switch_aria' => 'Choisir la langue du site',
+    'lang.current' => 'Langue actuelle : :language',
+
+    // Éléments communs de l'interface
+    'common.site_name' => 'Polascin.net',
+    'common.author' => 'Dr Ľubomír Polaščín',
+    'common.author_short' => 'Ľubomír Polaščín',
+    'common.skip_to_content' => 'Aller au contenu principal',
+    'common.main_navigation' => 'Navigation principale',
+    'common.main_content' => 'Contenu principal',
+    'common.open_navigation' => 'Ouvrir la navigation',
+    'common.toggle_dark_mode' => 'Activer ou désactiver le mode sombre',
+    'common.required' => 'obligatoire',
+    'common.back' => 'Retour',
+    'common.read_more' => 'Lire la suite',
+    'common.visit' => 'Visiter :target',
+    'common.author_meta_prefix' => 'Auteur',
+
+    // Navigation
+    'nav.home' => 'Accueil',
+    'nav.blog' => 'Blog',
+    'nav.about' => 'Parcours',
+    'nav.nephrology' => 'Néphrologie',
+    'nav.projects' => 'Projets',
+    'nav.books' => 'Livres',
+    'nav.links' => 'Liens',
+    'nav.contact' => 'Contact',
+    'nav.admin' => 'Administration',
+    'nav.logout' => 'Se déconnecter',
+    'nav.login' => 'Connexion',
+
+    // Pied de page
+    'footer.heading' => 'Restons en contact',
+    'footer.linkedin' => 'Profil LinkedIn',
+    'footer.x' => 'Profil X',
+    'footer.facebook' => 'Profil Facebook',
+    'footer.email' => 'Envoyer un e-mail',
+    'footer.patreon' => 'Soutenir sur Patreon',
+    'footer.discord' => 'Rejoindre sur Discord',
+    'footer.copyright' => '© 1998 – :year Ľubomír Polaščín. Tous droits réservés.',
+    'footer.privacy' => 'Confidentialité',
+    'footer.terms' => 'Conditions d\'utilisation',
+    'footer.cookie_settings' => 'Paramètres des cookies',
+
+    // Métadonnées des pages
+    'meta.keywords' => 'Ľubomír Polaščín, néphrologie, médecine interne, dialyse, traduction médicale, programmation',
+    'meta.default_description' => 'Dr Ľubomír Polaščín — néphrologue, interniste, traducteur médical, écrivain et programmeur autodidacte.',
+    'meta.home_title' => 'Accueil',
+    'meta.articles_title' => 'Articles',
+    'meta.articles_description' => 'Les derniers articles et réflexions du Dr Ľubomír Polaščín sur la néphrologie, la médecine interne, les technologies et l\'écriture.',
+    'meta.articles_404_title' => 'Page d\'articles introuvable',
+    'meta.articles_404_description' => 'La page de la liste d\'articles demandée n\'existe pas.',
+    'meta.article_404_title' => 'Introuvable',
+    'meta.article_404_description' => 'Article introuvable.',
+    'meta.contact_title' => 'Contact',
+    'meta.contact_description' => 'Contactez le Dr Ľubomír Polaščín pour toute question professionnelle, proposition de collaboration ou demande de renseignements.',
+    'meta.newsletter_title' => 'Newsletter',
+    'meta.newsletter_description' => 'Abonnez-vous à la newsletter de Polascin.net — actualités sur la néphrologie, la médecine interne, les livres et les technologies.',
+    'meta.login_title' => 'Connexion',
+    'meta.login_description' => 'Connexion administrateur sur Polascin.net.',
+    'meta.privacy_title' => 'Politique de confidentialité',
+    'meta.privacy_description' => 'Politique de confidentialité du site web du Dr Ľubomír Polaščín.',
+    'meta.terms_title' => 'Conditions d\'utilisation',
+    'meta.terms_description' => 'Conditions d\'utilisation du site web du Dr Ľubomír Polaščín.',
+
+    // Page d'accueil — bandeau principal
+    'home.logo_alt' => 'Logo Crystal Kidney',
+    'home.hero_title' => 'Faire progresser la santé rénale',
+    'home.hero_subtitle' => 'Dr Ľubomír Polaščín — engagé pour l\'excellence en néphrologie, en dialyse, dans les soins aux patients et dans les technologies médicales.',
+    'home.cta_about' => 'À propos de moi',
+    'home.cta_articles' => 'Derniers articles',
+
+    // Page d'accueil — parcours
+    'home.about_heading' => 'À propos du Dr Ľubomír Polaščín',
+    'home.about_intro' => 'Je m\'appelle Ľubomír Polaščín — médecin, néphrologue et interniste de profession, auteur de fiction et de non-fiction par vocation, programmeur autodidacte par passion.',
+    'home.about_who' => 'Mon travail se situe au croisement de la médecine, de l\'art du récit et des technologies. La médecine affine ma rigueur clinique ; l\'écriture me permet d\'explorer la condition humaine à travers la fiction et la non-fiction ; et les technologies me poussent à résoudre des problèmes complexes.',
+    'home.identity_heading' => 'Identité professionnelle',
+    'home.identity_doctor' => 'Médecin (Dr)',
+    'home.identity_nephrologist' => 'Néphrologue',
+    'home.identity_internist' => 'Interniste',
+    'home.identity_translator' => 'Traducteur médical',
+    'home.identity_writer' => 'Auteur de fiction et de non-fiction',
+    'home.identity_programmer' => 'Programmeur autodidacte',
+    'home.skills_heading' => 'Compétences techniques',
+    'home.education_heading' => 'Formation et&nbsp;carrière',
+    'home.education_text' => 'J\'ai commencé mes études de médecine à l\'Université Pavol Jozef Šafárik de Košice. Depuis 1995, je me consacre à la dialyse et à la néphrologie. De 2013 à 2022, j\'ai exercé comme médecin-chef de deux centres de dialyse à Bratislava.',
+    'home.personal_heading' => 'Vie personnelle',
+    'home.personal_text' => 'Né en 1971 en Tchécoslovaquie, j\'ai grandi à Kyjov. Mes racines ruthènes façonnent mon regard sur le monde. Mes passions sont la lecture, les voyages, la philosophie et la poésie.',
+    'home.amazon_cta' => 'Voir sur Amazon Author Central',
+
+    // Page d'accueil — néphrologie
+    'home.nephrology_heading' => 'Néphrologie',
+    'home.nephrology_intro' => 'La néphrologie est une spécialité médicale essentielle consacrée aux reins — organes vitaux responsables de l\'équilibre hydrique, de la filtration des déchets et de la régulation de la pression artérielle.',
+    'home.ckd_title' => 'Maladie rénale chronique (MRC)',
+    'home.ckd_text' => 'Prise en charge de la perte progressive de la fonction rénale liée au diabète, à l\'hypertension ou à d\'autres facteurs.',
+    'home.aki_title' => 'Insuffisance rénale aiguë (IRA)',
+    'home.aki_text' => 'Traitement de la défaillance rénale soudaine, souvent transitoire, causée par des infections, une déshydratation ou des toxines.',
+    'home.hemodialysis_title' => 'Hémodialyse',
+    'home.hemodialysis_text' => 'Procédure au cours de laquelle un générateur de dialyse et un filtre spécial appelé rein artificiel sont utilisés pour épurer le sang.',
+    'home.peritoneal_title' => 'Dialyse péritonéale',
+    'home.peritoneal_text' => 'Traitement qui utilise la membrane tapissant la cavité abdominale et une solution d\'épuration appelée dialysat pour purifier le sang.',
+    'home.transplant_title' => 'Transplantation',
+    'home.transplant_text' => 'Le meilleur traitement de l\'insuffisance rénale terminale. Un rein sain est implanté dans l\'organisme afin d\'accomplir le travail que les reins natifs ne parviennent plus à assurer.',
+    'home.diagnostics_title' => 'Diagnostic',
+    'home.diagnostics_text' => 'Recours à l\'échographie, à la biopsie rénale et à des analyses de laboratoire avancées pour un diagnostic précis des maladies rénales.',
+
+    // Page d'accueil — articles, projets, liens, contact
+    'home.latest_heading' => 'Derniers articles',
+    'home.all_articles' => 'Voir tous les articles',
+    'home.projects_heading' => 'Projets et&nbsp;réseau',
+    'home.projects_intro' => 'Une sélection de sites, d\'outils et de ressources que je développe ou que j\'administre dans les domaines de la médecine, de l\'enseignement et des technologies.',
+    'home.project_nefro_text' => 'Portail slovaque de néphrologie proposant des articles cliniques, des actualités sur la dialyse et la transplantation, des calculateurs, des références médicamenteuses et des notes de cours.',
+    'home.project_nephrosite_text' => 'Conférences pédagogiques et pages de référence sur la néphrologie, la dialyse, les méthodes d\'épuration du sang et la médecine interne (en slovaque).',
+    'home.project_books_text' => 'Archive centrale des livres, publications académiques, chapitres et œuvres littéraires du Dr Ľubomír Polaščín.',
+    'home.project_alphagrab_text' => 'Projet expérimental de découverte de billets qui enrichit les liens de repli via Ticketmaster Discovery API.',
+    'home.project_arenibus_text' => 'Instance de démonstration publique d\'un projet web consacré aux événements et aux transports.',
+    'home.links_heading' => 'Réseau et&nbsp;ressources',
+    'home.links_intro' => 'Découvrez d\'autres sites et ressources connexes.',
+    'home.link_nephrosite' => 'NephroSite (en slovaque)',
+    'home.link_vital_2nd' => 'Vital Algorithm — 2e édition (Amazon)',
+    'home.link_vital_1st' => 'The Vital Algorithm — 1re édition (Amazon)',
+    'home.contact_heading' => 'Contact',
+    'home.contact_intro' => 'N\'hésitez pas à me contacter pour toute question ou proposition de collaboration.',
+    'home.contact_cta' => 'Envoyer un message',
+
+    // Liste des articles
+    'articles.heading' => 'Articles',
+    'articles.aria_label' => 'Articles',
+    'articles.empty' => 'Aucun article n\'a encore été publié.',
+    'articles.page_missing' => 'La page demandée n\'existe pas.',
+    'articles.go_first_page' => 'Aller à la première page des articles',
+    'articles.pagination_label' => 'Pagination des articles',
+    'articles.no_translation' => 'Cet article n\'est pas encore disponible dans la langue choisie. La version originale est affichée.',
+
+    // Détail de l'article
+    'article.aria_label' => 'Contenu de l\'article',
+    'article.not_found_aria' => 'Article introuvable',
+    'article.not_found_heading' => 'Article introuvable',
+    'article.not_found_text' => 'L\'article demandé n\'existe pas ou n\'est pas publié.',
+    'article.back_to_list' => 'Retour aux articles',
+    'article.admin_preview' => 'Aperçu administrateur — cet article n\'est pas encore accessible au public.',
+    'article.available_in' => 'Également disponible en :',
+
+    // Formulaire de contact
+    'contact.heading' => 'Contact',
+    'contact.aria_label' => 'Formulaire de contact',
+    'contact.name' => 'Nom',
+    'contact.email' => 'E-mail',
+    'contact.subject' => 'Objet',
+    'contact.message' => 'Message',
+    'contact.submit' => 'Envoyer le message',
+    'contact.success' => 'Merci pour votre message. Je vous répondrai dans les meilleurs délais.',
+    'contact.error_name' => 'Veuillez saisir un nom valide.',
+    'contact.error_email' => 'Veuillez saisir une adresse e-mail valide.',
+    'contact.error_subject' => 'L\'objet est trop long.',
+    'contact.error_message' => 'Veuillez saisir un message (5000 caractères maximum).',
+    'contact.error_rate_limit' => 'Trop de messages envoyés depuis cette adresse. Veuillez réessayer plus tard.',
+    'contact.error_save' => 'L\'envoi du message a échoué. Veuillez réessayer plus tard.',
+
+    // Newsletter
+    'newsletter.heading' => 'Newsletter',
+    'newsletter.aria_label' => 'Inscription à la newsletter',
+    'newsletter.intro' => 'Abonnez-vous pour recevoir les actualités sur les articles, les livres et les projets.',
+    'newsletter.email' => 'Adresse e-mail',
+    'newsletter.subscribe' => 'S\'abonner',
+    'newsletter.confirm_unsubscribe' => 'Confirmer la désinscription',
+    'newsletter.unsubscribe_prompt' => 'Veuillez confirmer que vous souhaitez vous désabonner de la newsletter.',
+    'newsletter.unsubscribe_link_invalid' => 'Le lien de désinscription n\'est pas valide.',
+    'newsletter.unsubscribe_link_used' => 'Le lien de désinscription n\'est pas valide ou a déjà été utilisé.',
+    'newsletter.unsubscribed' => 'Votre désinscription a bien été prise en compte.',
+    'newsletter.confirm_link_used' => 'Le lien de confirmation n\'est pas valide ou a déjà été utilisé.',
+    'newsletter.confirmed' => 'Votre abonnement a été confirmé. Merci !',
+    'newsletter.pending' => 'Si cette adresse peut être inscrite, nous venons de lui envoyer la marche à suivre.',
+    'newsletter.rate_limit_confirm' => 'Trop de tentatives de confirmation. Veuillez réessayer plus tard.',
+    'newsletter.rate_limit_unsubscribe' => 'Trop de tentatives de désinscription. Veuillez réessayer plus tard.',
+    'newsletter.rate_limit_subscribe' => 'Trop de tentatives. Veuillez réessayer plus tard.',
+    'newsletter.error_email' => 'Veuillez saisir une adresse e-mail valide.',
+    'newsletter.error_generic' => 'Une erreur est survenue. Veuillez réessayer plus tard.',
+    'newsletter.error_mail_failed' => 'L\'e-mail de confirmation n\'a pas pu être envoyé. Veuillez réessayer plus tard.',
+    'newsletter.error_domain' => 'Le domaine de l\'adresse e-mail ne semble pas valide.',
+    'newsletter.error_action' => 'Action de formulaire invalide.',
+    'newsletter.unsubscribe_hint' => 'Nous vous avons envoyé le lien de désinscription par e-mail. Par précaution, vous pouvez également l\'enregistrer dès maintenant :',
+    'newsletter.unsubscribe_hint_link' => 'se désabonner de la newsletter',
+    'newsletter.mail_confirm_subject' => 'Confirmez votre abonnement à Polascin.net',
+    'newsletter.mail_confirm_body' => "Merci de l'intérêt que vous portez à la newsletter de Polascin.net.\n\nConfirmez votre abonnement en cliquant sur le lien suivant (valable 48 heures) :\n:url\n\nSi vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail.",
+    'newsletter.mail_welcome_subject' => 'Confirmation de votre abonnement à Polascin.net',
+    'newsletter.mail_welcome_body' => "Votre abonnement à la newsletter de Polascin.net a été confirmé.\n\nSe désabonner :\n:url\n\nSi vous n'avez pas demandé cet abonnement, utilisez le lien de désinscription.",
+
+    // Connexion
+    'login.heading' => 'Connexion administrateur',
+    'login.aria_label' => 'Connexion',
+    'login.username' => 'Nom d\'utilisateur',
+    'login.password' => 'Mot de passe',
+    'login.submit' => 'Se connecter',
+    'login.error_credentials' => 'Nom d\'utilisateur ou mot de passe incorrect.',
+    'login.error_rate_limit' => 'Trop de tentatives de connexion. Veuillez réessayer plus tard.',
+    'login.session_expired' => 'Votre session a expiré pour cause d\'inactivité. Veuillez vous reconnecter.',
+    'login.account_inactive' => 'Votre compte n\'est plus actif. Veuillez vous reconnecter.',
+
+    // Erreurs communes
+    'error.csrf' => 'Jeton de sécurité invalide. Actualisez la page et réessayez.',
+
+    // Cookies (transmis au JavaScript)
+    'cookie.title' => 'Cookies analytiques',
+    'cookie.description' => 'Avec votre consentement, nous utiliserons Google Analytics 4 pour mesurer la fréquentation. Le stockage publicitaire et la personnalisation restent désactivés. Un refus ne limite en rien l\'utilisation du site. Pour en savoir plus, consultez la',
+    'cookie.privacy_link' => 'politique de confidentialité',
+    'cookie.decline' => 'Refuser',
+    'cookie.accept' => 'J\'accepte',
+
+    // Politique de confidentialité
+    'privacy.heading' => 'Politique de confidentialité',
+    'privacy.updated' => 'Dernière mise à jour : 28 juillet 2026',
+    'privacy.s1_heading' => '1. Introduction',
+    'privacy.s1_text' => 'Bienvenue sur <strong>polascin.net</strong>. Je respecte votre vie privée et je m\'engage à protéger vos données personnelles. La présente politique de confidentialité explique comment je traite vos données personnelles lorsque vous visitez ce site web ; elle décrit également vos droits en matière de protection de la vie privée ainsi que la protection juridique correspondante.',
+    'privacy.s2_heading' => '2. Informations que je collecte',
+    'privacy.s2_text' => 'Ce site web a avant tout une vocation informative. Je ne vous demande pas de créer un compte.',
+    'privacy.s2_technical' => '<strong>Données techniques&#8239;:</strong> Elles comprennent l\'adresse IP (protocole Internet), le type de navigateur, l\'adresse consultée, l\'heure de la requête et les données de base relatives à la réponse. Ces données servent à la sécurité, au diagnostic et à la protection des formulaires contre les abus. Les paramètres sensibles des liens sont supprimés avant tout enregistrement.',
+    'privacy.s2_contact' => '<strong>Formulaire de contact&#8239;:</strong> Si vous m\'envoyez un message, j\'enregistre le nom, l\'adresse e-mail, l\'objet, le texte du message et l\'heure d\'envoi afin de pouvoir y répondre.',
+    'privacy.s2_newsletter' => '<strong>Newsletter&#8239;:</strong> Lors de l\'abonnement, j\'enregistre l\'adresse e-mail, l\'horodatage de l\'inscription et les empreintes cryptographiques des jetons nécessaires à la confirmation et à la désinscription.',
+    'privacy.s2_cookies' => '<strong>Cookies et stockage local&#8239;:</strong> Je conserve localement uniquement la préférence de thème (mode sombre ou clair), la langue choisie et votre décision concernant la mesure d\'audience. <strong>Google Analytics 4 (GA4)&#8239;:</strong> Le script d\'analyse n\'est chargé qu\'après un clic explicite de votre part sur le bouton J\'accepte du bandeau de consentement. Les catégories de consentement publicitaires restent désactivées. Vous pouvez modifier votre choix à tout moment via les Paramètres des cookies, dans le pied de page.',
+    'privacy.s3_heading' => '3. Comment j\'utilise vos informations',
+    'privacy.s3_text' => 'J\'utilise vos données pour :',
+    'privacy.s3_item1' => 'Fournir le contenu du site web.',
+    'privacy.s3_item2' => 'Assurer la sécurité du site web.',
+    'privacy.s3_item3' => 'Mémoriser la préférence de thème, la langue et la décision concernant la mesure d\'audience.',
+    'privacy.s3_item4' => 'Traiter les messages de contact et gérer l\'abonnement à la newsletter, à votre demande.',
+    'privacy.s3_item5' => 'Analyser la fréquentation et les modes d\'utilisation du site web au moyen de Google Analytics 4, mais uniquement si vous cliquez sur le bouton <strong>J\'accepte</strong> du bandeau de consentement aux cookies. Base juridique&#8239;: votre consentement au sens de l\'article 6, paragraphe 1, point a), du RGPD. Les données analytiques sont conservées par Google conformément à ses propres règles de conservation (généralement 14 mois au maximum). Vous pouvez retirer votre consentement à tout moment au moyen du bouton <strong>Paramètres des cookies</strong> situé dans le pied de page, en choisissant l\'option <strong>Refuser</strong>.',
+    'privacy.s4_heading' => '4. Durée de conservation',
+    'privacy.s4_text' => 'Les journaux d\'accès techniques internes sont supprimés automatiquement au bout de 90 jours par défaut ; l\'exploitant peut raccourcir cette durée. Les enregistrements de courte durée liés à la protection des formulaires sont effacés au fur et à mesure, dès l\'expiration de la fenêtre de protection. Je ne conserve les messages de contact que le temps nécessaire au traitement de la correspondance. Je conserve l\'adresse e-mail liée à la newsletter jusqu\'à la désinscription.',
+    'privacy.s5_heading' => '5. Liens de tiers',
+    'privacy.s5_text' => 'Ce site web peut contenir des liens vers des sites, des modules complémentaires et des applications de tiers (par exemple Amazon ou des réseaux sociaux). En cliquant sur ces liens, vous permettez éventuellement à des tiers de collecter ou de partager des données vous concernant. Je n\'exerce aucun contrôle sur ces sites tiers et je ne suis pas responsable de leurs déclarations de confidentialité.',
+    'privacy.s6_heading' => '6. Vos droits légaux (RGPD/CCPA)',
+    'privacy.s6_text' => 'Dans certaines circonstances, vous disposez, en vertu de la législation sur la protection des données, de droits relatifs à vos données personnelles, notamment celui d\'en demander l\'accès, la rectification, l\'effacement ou la limitation du traitement.',
+    'privacy.s7_heading' => '7. Contact',
+    'privacy.s7_text' => 'Si vous avez la moindre question concernant la présente politique de confidentialité, vous pouvez me contacter à l\'adresse suivante :',
+
+    // Conditions d'utilisation
+    'terms.heading' => 'Conditions d\'utilisation',
+    'terms.updated' => 'Dernière mise à jour : 28 juillet 2026',
+    'terms.s1_heading' => '1. Acceptation des conditions',
+    'terms.s1_text' => 'En accédant au site web <strong>polascin.net</strong> et en l\'utilisant (ci-après le «&#8239;site web&#8239;»), vous acceptez les conditions générales du présent accord et vous engagez à les respecter.',
+    'terms.s2_heading' => '2. Avertissement médical',
+    'terms.s2_important' => '<strong>IMPORTANT&#8239;:</strong> Le contenu de ce site web est fourni à titre purement informatif. Il <strong>ne remplace pas</strong> un avis, un diagnostic ou un traitement médical professionnel.',
+    'terms.s2_text' => 'Pour toute question relative à votre état de santé, adressez-vous toujours à votre médecin ou à un autre professionnel de santé qualifié. Ne négligez jamais un avis médical professionnel et ne tardez jamais à consulter en raison d\'informations lues sur ce site web.',
+    'terms.s3_heading' => '3. Propriété intellectuelle',
+    'terms.s3_text' => 'Le contenu, la structure, les graphismes, le design, la compilation et les autres éléments liés à ce site web sont protégés par le droit d\'auteur et par les lois applicables en matière de propriété intellectuelle. Toute copie, redistribution, utilisation ou publication de ces éléments, ou de toute partie du site web, par les utilisateurs est strictement interdite.',
+    'terms.s4_heading' => '4. Limitation de responsabilité',
+    'terms.s4_text' => 'Je ne saurais en aucun cas être tenu responsable de dommages accessoires, indirects, consécutifs ou exceptionnels, de quelque nature que ce soit, ni de tout autre dommage, y compris, sans s\'y limiter, les dommages résultant d\'une perte de bénéfices, de contrats, de clientèle, de données, d\'informations, de revenus, d\'économies escomptées ou de relations commerciales, que j\'aie ou non été informé de l\'éventualité de tels dommages, en lien avec l\'utilisation de ce site web ou de tout site web vers lequel il renvoie.',
+    'terms.s5_heading' => '5. Droit applicable',
+    'terms.s5_text' => 'Les présentes conditions générales sont régies et interprétées conformément au droit de la République slovaque, et vous vous soumettez sans réserve à la compétence exclusive des tribunaux de ce ressort.',
+
+    // Administration
+    'admin.language' => 'Langue',
+    'admin.language_hint' => 'Langue dans laquelle le contenu est rédigé.',
+    'admin.translation_group' => 'Groupe de traduction',
+    'admin.translation_group_hint' => 'Un même numéro relie entre elles les traductions d\'un même article dans les différentes langues. Un champ vide crée un nouveau groupe.',
+];

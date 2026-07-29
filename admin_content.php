@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $title = trim((string) ($_POST['title'] ?? ''));
             $rawContent = trim((string) ($_POST['content'] ?? ''));
             $content = appTextLength($rawContent) <= 100000 ? sanitizeHtmlContent($rawContent) : '';
-            $lang = trim((string) ($_POST['lang'] ?? 'sk'));
+            $blockLang = trim((string) ($_POST['lang'] ?? APP_DEFAULT_LANGUAGE));
             $sortOrder = (int) ($_POST['sort_order'] ?? 0);
             $isActive = isset($_POST['is_active']) ? 1 : 0;
 
@@ -43,18 +43,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (appTextLength($title) > 255) {
                 $errors[] = 'Názov môže mať najviac 255 znakov.';
             }
-            if (!preg_match('/^[a-z]{2}(?:-[A-Z]{2})?$/D', $lang)) {
-                $errors[] = 'Jazyk musí byť vo formáte „sk“ alebo „sk-SK“.';
+            if (!isSupportedLanguage($blockLang)) {
+                $errors[] = 'Zvolený jazyk nie je podporovaný.';
             }
             if (appTextLength($rawContent) > 100000) {
                 $errors[] = 'Obsah je príliš dlhý (max 100 000 znakov).';
             }
 
             if (empty($errors)) {
-                $dupStmt = $pdo->prepare("SELECT id FROM content_blocks WHERE block_key = :block_key AND id != :id LIMIT 1");
-                $dupStmt->execute([':block_key' => $blockKey, ':id' => $id ?? 0]);
+                // Ten istý kľúč smie existovať raz pre každý jazyk.
+                $dupStmt = $pdo->prepare("SELECT id FROM content_blocks WHERE block_key = :block_key AND lang = :lang AND id != :id LIMIT 1");
+                $dupStmt->execute([':block_key' => $blockKey, ':lang' => $blockLang, ':id' => $id ?? 0]);
                 if ($dupStmt->fetch()) {
-                    $errors[] = 'Kľúč bloku už existuje.';
+                    $errors[] = 'Kľúč bloku už v tomto jazyku existuje.';
                 } else {
                     if ($id) {
                         $stmt = $pdo->prepare(
@@ -63,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         );
                         $stmt->execute([
                             ':block_key' => $blockKey, ':title' => $title, ':content' => $content,
-                            ':lang' => $lang, ':sort_order' => $sortOrder, ':is_active' => $isActive, ':id' => $id,
+                            ':lang' => $blockLang, ':sort_order' => $sortOrder, ':is_active' => $isActive, ':id' => $id,
                         ]);
                         logAdminAction($pdo, 'content_update', 'content_block', $id);
                     } else {
@@ -73,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         );
                         $stmt->execute([
                             ':block_key' => $blockKey, ':title' => $title, ':content' => $content,
-                            ':lang' => $lang, ':sort_order' => $sortOrder, ':is_active' => $isActive,
+                            ':lang' => $blockLang, ':sort_order' => $sortOrder, ':is_active' => $isActive,
                         ]);
                         $id = (int) $pdo->lastInsertId();
                         logAdminAction($pdo, 'content_create', 'content_block', $id);
@@ -96,7 +97,7 @@ if (isset($_GET['saved']) && $editing) {
     $success = 'Obsahový blok bol úspešne uložený.';
 }
 
-$allBlocks = $pdo->query("SELECT * FROM content_blocks ORDER BY block_key ASC")->fetchAll();
+$allBlocks = $pdo->query("SELECT * FROM content_blocks ORDER BY block_key ASC, lang ASC")->fetchAll();
 
 $baseUrl = getAppBaseUrl();
 $pageTitle = 'Správa obsahu | MUDr. Ľubomír Polaščín';
@@ -136,8 +137,16 @@ $canonicalUrl = $baseUrl . '/admin_content.php';
           <textarea id="content" name="content" rows="8" maxlength="100000"><?= htmlspecialchars((string) ($editing['content'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
         <div class="form-group">
-          <label for="lang">Jazyk</label>
-          <input type="text" id="lang" name="lang" value="<?= htmlspecialchars((string) ($editing['lang'] ?? 'sk'), ENT_QUOTES, 'UTF-8') ?>" required maxlength="5" pattern="[a-z]{2}(-[A-Z]{2})?">
+          <label for="lang"><?= te('admin.language') ?></label>
+          <select id="lang" name="lang" required aria-describedby="lang-hint">
+            <?php $editingBlockLang = (string) ($editing['lang'] ?? APP_DEFAULT_LANGUAGE); ?>
+            <?php foreach (appLanguages() as $code => $meta): ?>
+              <option value="<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>" <?= $code === $editingBlockLang ? 'selected' : '' ?>>
+                <?= htmlspecialchars((string) $meta['native'], ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars($code, ENT_QUOTES, 'UTF-8') ?>)
+              </option>
+            <?php endforeach; ?>
+          </select>
+          <small id="lang-hint" class="form-hint"><?= te('admin.language_hint') ?></small>
         </div>
         <div class="form-group">
           <label for="sort_order">Poradie</label>

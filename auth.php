@@ -86,9 +86,19 @@ function sendSecurityHeaders(): void {
         $csp .= '; upgrade-insecure-requests';
     }
     header('Content-Security-Policy: ' . $csp);
+
+    // Odpoveď sa líši podľa zvoleného jazyka, ktorý pochádza z cookie alebo
+    // z Accept-Language. Bez Vary by zdieľaná cache mohla podať odpoveď
+    // v cudzom jazyku — aj s hlavičkou Set-Cookie, ktorá jazyk pripne.
+    header('Vary: Cookie, Accept-Language', false);
+
     if (requestNeedsNoReferrer()) {
         header('Cache-Control: no-store, private');
         header('Pragma: no-cache');
+    } else {
+        // Verejné stránky sa smú ukladať len v prehliadači návštevníka, nikdy
+        // v zdieľanej cache.
+        header('Cache-Control: private, max-age=0, must-revalidate');
     }
 }
 
@@ -135,7 +145,7 @@ if (!empty($_SESSION['user_id'])) {
             http_response_code(500);
             exit('Chyba: Nepodarilo sa obnoviť reláciu.');
         }
-        setFlashMessage('info', 'Vaša relácia vypršala z dôvodu nečinnosti. Prihláste sa znova.');
+        setFlashMessage('info', t('login.session_expired'));
         $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
         if (!in_array($currentScript, ['login.php'], true)) {
             header('Location: login.php');
@@ -204,7 +214,7 @@ function revalidateSessionAccount(): void {
             http_response_code(500);
             exit('Chyba: Nepodarilo sa obnoviť reláciu.');
         }
-        setFlashMessage('info', 'Váš účet už nie je aktívny. Prihláste sa znova.');
+        setFlashMessage('info', t('login.account_inactive'));
         header('Location: login.php');
         exit;
     }

@@ -30,7 +30,49 @@ function indexExists(PDO $pdo, string $table, string $index): bool {
     return (int) $stmt->fetchColumn() > 0;
 }
 
+function columnExists(PDO $pdo, string $table, string $column): bool {
+    $stmt = $pdo->prepare(
+        "SELECT COUNT(*)
+         FROM INFORMATION_SCHEMA.COLUMNS
+         WHERE TABLE_SCHEMA = DATABASE()
+           AND TABLE_NAME = :table_name
+           AND COLUMN_NAME = :column_name"
+    );
+    $stmt->execute([':table_name' => $table, ':column_name' => $column]);
+    return (int) $stmt->fetchColumn() > 0;
+}
+
+/**
+ * Nájde názov jedinečného indexu postaveného presne nad jedným zadaným stĺpcom.
+ *
+ * Implicitný index z `UNIQUE` v CREATE TABLE sa síce zvyčajne volá rovnako ako
+ * stĺpec, ale spoliehať sa na to nemožno — pri migrácii by sa potom starý index
+ * ticho nezrušil.
+ */
+function findSingleColumnUniqueIndex(PDO $pdo, string $table, string $column, array $ignore = []): ?string {
+    $stmt = $pdo->prepare(
+        "SELECT INDEX_NAME
+         FROM INFORMATION_SCHEMA.STATISTICS
+         WHERE TABLE_SCHEMA = DATABASE()
+           AND TABLE_NAME = :table_name
+           AND NON_UNIQUE = 0
+           AND INDEX_NAME <> 'PRIMARY'
+         GROUP BY INDEX_NAME
+         HAVING COUNT(*) = 1
+            AND MAX(COLUMN_NAME) = :column_name"
+    );
+    $stmt->execute([':table_name' => $table, ':column_name' => $column]);
+
+    foreach ($stmt->fetchAll(PDO::FETCH_COLUMN) as $indexName) {
+        if (!in_array((string) $indexName, $ignore, true)) {
+            return (string) $indexName;
+        }
+    }
+    return null;
+}
+
 function applySchemaMigrations(PDO $pdo): void {
+    // Poradie kľúčov určuje poradie aplikovania — drž ho chronologicky.
     $migrations = [
         '2026072801_security_indexes' => static function (PDO $pdo): void {
             $indexes = [
@@ -42,6 +84,88 @@ function applySchemaMigrations(PDO $pdo): void {
                 if (!indexExists($pdo, $table, $index)) {
                     $pdo->exec($sql);
                 }
+            }
+        },
+        '2026072901_multilingual_content' => static function (PDO $pdo): void {
+            // Články dostávajú jazyk a skupinu prekladov. Existujúci obsah je
+            // slovenský, preto sa dopĺňa 'sk'.
+            if (!columnExists($pdo, 'articles', 'lang')) {
+                $pdo->exec("ALTER TABLE articles ADD COLUMN lang VARCHAR(5) NOT NULL DEFAULT 'sk' AFTER author");
+            }
+            if (!columnExists($pdo, 'articles', 'translation_group')) {
+                $pdo->exec("ALTER TABLE articles ADD COLUMN translation_group INT NULL AFTER lang");
+            }
+            // Doplnenie hodnôt beží mimo guardov, aby prerušená migrácia po opätovnom
+            // spustení dokončila aj to, čo pri páde stihla vynechať.
+            $pdo->exec("UPDATE articles SET lang = 'sk' WHERE lang IS NULL OR TRIM(lang) = ''");
+            // Každý existujúci článok tvorí vlastnú skupinu; preklady sa k nemu
+            // pripoja neskôr nastavením rovnakej hodnoty.
+            $pdo->exec("UPDATE articles SET translation_group = id WHERE translation_group IS NULL");
+
+            // Slug musí byť jedinečný v rámci jazyka, nie globálne — inak by ten istý
+            // článok nemohol mať preklad s rovnakým slugom.
+            $oldSlugIndex = findSingleColumnUniqueIndex($pdo, 'articles', 'slug', ['uniq_slug_lang']);
+            if ($oldSlugIndex !== null) {
+                $pdo->exec('ALTER TABLE articles DROP INDEX `' . str_replace('`', '``', $oldSlugIndex) . '`');
+            }
+            if (!indexExists($pdo, 'articles', 'uniq_slug_lang')) {
+                $pdo->exec("ALTER TABLE articles ADD UNIQUE KEY uniq_slug_lang (slug, lang)");
+            }
+            if (!indexExists($pdo, 'articles', 'idx_lang_published')) {
+                $pdo->exec("ALTER TABLE articles ADD INDEX idx_lang_published (lang, is_published, published_at)");
+            }
+            if (!indexExists($pdo, 'articles', 'idx_translation_group')) {
+                $pdo->exec("ALTER TABLE articles ADD INDEX idx_translation_group (translation_group)");
+            }
+
+            // Obsahové bloky už stĺpec lang majú, ale s predvolenou hodnotou 'en'
+            // a jedinečným kľúčom bez jazyka.
+
+            // Hodnoty sa upratujú ešte pred zavedením NOT NULL, inak by v striktnom
+            // sql_mode ALTER na existujúcich NULL riadkoch zlyhal.
+            $pdo->exec("UPDATE content_blocks SET lang = 'sk' WHERE lang IS NULL OR TRIM(lang) = ''");
+            // Starý stĺpec bol voľný text, takže mohol obsahovať regionálne varianty
+            // („sk-SK“) aj jazyky, ktoré stránka nepodporuje. Bez normalizácie by
+            // taký blok zostal navždy neviditeľný a v novom admine neuložiteľný.
+            $pdo->exec("UPDATE content_blocks SET lang = LOWER(SUBSTRING_INDEX(lang, '-', 1))");
+
+            $supportedLangs = array_keys(appLanguages());
+            $placeholders = implode(', ', array_fill(0, count($supportedLangs), '?'));
+            $normalize = $pdo->prepare(
+                "UPDATE content_blocks SET lang = '" . APP_DEFAULT_LANGUAGE . "' WHERE lang NOT IN ({$placeholders})"
+            );
+            $normalize->execute($supportedLangs);
+
+            // Historicky bola predvolená hodnota 'en', hoci obsah bol slovenský.
+            // Prepíše sa len vtedy, keď pre daný kľúč slovenská verzia ešte neexistuje,
+            // aby sa nezmazal skutočný anglický preklad ani nevznikol konflikt kľúčov.
+            $pdo->exec(
+                "UPDATE content_blocks AS target
+                 LEFT JOIN (SELECT DISTINCT block_key FROM content_blocks WHERE lang = 'sk') AS existing
+                        ON existing.block_key = target.block_key
+                 SET target.lang = 'sk'
+                 WHERE target.lang = 'en' AND existing.block_key IS NULL"
+            );
+
+            // Duplicity, ktoré by novému unikátnemu kľúču bránili, sa musia odstrániť
+            // pred jeho vytvorením. Ponecháva sa najnovšie upravený záznam.
+            $pdo->exec(
+                "DELETE older FROM content_blocks AS older
+                 JOIN content_blocks AS newer
+                   ON older.block_key = newer.block_key
+                  AND older.lang = newer.lang
+                  AND (older.updated_at < newer.updated_at
+                       OR (older.updated_at = newer.updated_at AND older.id < newer.id))"
+            );
+
+            $pdo->exec("ALTER TABLE content_blocks MODIFY COLUMN lang VARCHAR(5) NOT NULL DEFAULT 'sk'");
+
+            $oldBlockKeyIndex = findSingleColumnUniqueIndex($pdo, 'content_blocks', 'block_key', ['uniq_block_key_lang']);
+            if ($oldBlockKeyIndex !== null) {
+                $pdo->exec('ALTER TABLE content_blocks DROP INDEX `' . str_replace('`', '``', $oldBlockKeyIndex) . '`');
+            }
+            if (!indexExists($pdo, 'content_blocks', 'uniq_block_key_lang')) {
+                $pdo->exec("ALTER TABLE content_blocks ADD UNIQUE KEY uniq_block_key_lang (block_key, lang)");
             }
         },
     ];
@@ -74,10 +198,12 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS articles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    slug VARCHAR(255) UNIQUE NOT NULL,
+    slug VARCHAR(255) NOT NULL,
     excerpt TEXT,
     content LONGTEXT,
     author VARCHAR(255),
+    lang VARCHAR(5) NOT NULL DEFAULT 'sk',
+    translation_group INT NULL,
     category ENUM('blog', 'news') DEFAULT 'blog',
     is_published TINYINT(1) DEFAULT 0,
     is_top TINYINT(1) DEFAULT 0,
@@ -85,19 +211,23 @@ CREATE TABLE IF NOT EXISTS articles (
     published_at DATETIME NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uniq_slug_lang (slug, lang),
     INDEX idx_published (is_published, published_at),
+    INDEX idx_lang_published (lang, is_published, published_at),
+    INDEX idx_translation_group (translation_group),
     INDEX idx_slug (slug)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS content_blocks (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    block_key VARCHAR(64) UNIQUE NOT NULL,
+    block_key VARCHAR(64) NOT NULL,
     title VARCHAR(255),
     content LONGTEXT,
-    lang VARCHAR(5) DEFAULT 'en',
+    lang VARCHAR(5) NOT NULL DEFAULT 'sk',
     is_active TINYINT(1) DEFAULT 1,
     sort_order INT DEFAULT 0,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uniq_block_key_lang (block_key, lang),
     INDEX idx_key (block_key)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

@@ -8,10 +8,16 @@ require_once __DIR__ . '/helpers.php';
 
 /** @var PDO $pdo */
 
+$lang = currentLang();
 $slug = isset($_GET['slug']) ? trim((string) $_GET['slug']) : '';
+// Administrátor smie vidieť aj nepublikovaný koncept v požadovanom jazyku;
+// návštevníkovi sa namiesto neho ponúkne publikovaný preklad.
 $article = preg_match('/^[a-z0-9-]{1,255}$/D', $slug) === 1
-    ? getArticleBySlug($pdo, $slug)
+    ? getArticleBySlug($pdo, $slug, $lang, isAdmin())
     : null;
+// Článok sa mohol nájsť len v inom jazyku (staré odkazy, chýbajúci preklad).
+$articleLang = is_array($article) ? (string) ($article['lang'] ?? $lang) : $lang;
+$isTranslationFallback = is_array($article) && $articleLang !== $lang;
 $publishedTimestamp = is_array($article) && !empty($article['published_at'])
     ? strtotime((string) $article['published_at'])
     : false;
@@ -25,15 +31,30 @@ $notFound = !is_array($article) || (!$isPubliclyVisible && !$isAdminPreview);
 $baseUrl = getAppBaseUrl();
 if ($notFound) {
     http_response_code(404);
-    $pageTitle = 'Nenájdené | MUDr. Ľubomír Polaščín';
-    $seoDescription = 'Článok nebol nájdený.';
-    $canonicalUrl = $baseUrl . '/articles.php';
+    $pageTitle = t('meta.article_404_title') . ' | ' . t('common.author');
+    $seoDescription = t('meta.article_404_description');
+    $canonicalUrl = absoluteLangUrl($lang, 'articles.php');
     $robotsMeta = 'noindex, follow';
 } else {
-    $pageTitle = (string) $article['title'] . ' | MUDr. Ľubomír Polaščín';
+    $pageTitle = (string) $article['title'] . ' | ' . t('common.author');
     $seoDescription = buildSeoExcerpt((string) ($article['excerpt'] ?: $article['content'] ?? ''), 170);
-    $canonicalUrl = $baseUrl . '/article.php?slug=' . rawurlencode((string) $article['slug']);
+    // Kanonická URL patrí jazyku, v ktorom je článok skutočne napísaný.
+    $canonicalUrl = absoluteLangUrl($articleLang, 'article.php', ['slug' => (string) $article['slug']]);
     $ogType = 'article';
+
+    // Jazykové varianty ukazujú na skutočné preklady, nie na tú istú URL.
+    $articleTranslations = getArticleTranslations($pdo, isset($article['translation_group']) ? (int) $article['translation_group'] : null);
+    if ($articleTranslations !== []) {
+        $languageAlternates = [];
+        $languageSwitchTargets = [];
+        foreach ($articleTranslations as $translationLang => $translationSlug) {
+            if (isSupportedLanguage($translationLang)) {
+                // hreflang používa kanonickú adresu, prepínač adresu s parametrom jazyka.
+                $languageAlternates[$translationLang] = absoluteLangUrl($translationLang, 'article.php', ['slug' => $translationSlug]);
+                $languageSwitchTargets[$translationLang] = langUrl($translationLang, 'article.php', ['slug' => $translationSlug]);
+            }
+        }
+    }
     $robotsMeta = $isAdminPreview ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
     $modifiedTimestamp = !empty($article['updated_at']) ? strtotime((string) $article['updated_at']) : false;
     if (!$isAdminPreview) {
@@ -54,36 +75,53 @@ if ($notFound) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="<?= htmlspecialchars($lang, ENT_QUOTES, 'UTF-8') ?>">
 <head>
 <?php include __DIR__ . '/head_meta.php'; ?>
 </head>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main-content" tabindex="-1" aria-label="<?= $notFound ? 'Článok nebol nájdený' : 'Obsah článku' ?>">
+<main id="main-content" tabindex="-1" aria-label="<?= $notFound ? te('article.not_found_aria') : te('article.aria_label') ?>">
   <?php if ($notFound): ?>
   <section class="article-detail">
     <div class="container">
-      <h1>Článok nebol nájdený</h1>
-      <p>Požadovaný článok neexistuje alebo nie je publikovaný.</p>
-      <p><a href="articles.php" class="btn btn-secondary">Späť na články</a></p>
+      <h1><?= te('article.not_found_heading') ?></h1>
+      <p><?= te('article.not_found_text') ?></p>
+      <p><a href="<?= htmlspecialchars(langUrl($lang, 'articles.php'), ENT_QUOTES, 'UTF-8') ?>" class="btn btn-secondary"><?= te('article.back_to_list') ?></a></p>
     </div>
   </section>
   <?php else: ?>
   <article class="article-detail">
     <div class="container">
       <?php if ($isAdminPreview): ?>
-        <div class="alert alert-error" role="status"><p>Administrátorský náhľad — tento článok zatiaľ nie je verejne dostupný.</p></div>
+        <div class="alert alert-error" role="status"><p><?= te('article.admin_preview') ?></p></div>
       <?php endif; ?>
-      <h1><?= htmlspecialchars((string) $article['title'], ENT_QUOTES, 'UTF-8') ?></h1>
-      <p class="article-meta"><?= htmlspecialchars(formatArticleDate($article['published_at'] ?? null), ENT_QUOTES, 'UTF-8') ?><?php if (!empty($article['author'])): ?> · <?= htmlspecialchars((string) $article['author'], ENT_QUOTES, 'UTF-8') ?><?php endif; ?></p>
+      <?php if ($isTranslationFallback): ?>
+        <div class="alert alert-info" role="status"><p><?= te('articles.no_translation') ?></p></div>
+      <?php endif; ?>
+      <h1 lang="<?= htmlspecialchars($articleLang, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $article['title'], ENT_QUOTES, 'UTF-8') ?></h1>
+      <p class="article-meta"><?= htmlspecialchars(formatArticleDate($article['published_at'] ?? null, $articleLang), ENT_QUOTES, 'UTF-8') ?><?php if (!empty($article['author'])): ?> · <?= htmlspecialchars((string) $article['author'], ENT_QUOTES, 'UTF-8') ?><?php endif; ?></p>
       <?php if (!empty($article['excerpt'])): ?>
-        <p class="article-excerpt"><?= htmlspecialchars((string) $article['excerpt'], ENT_QUOTES, 'UTF-8') ?></p>
+        <p class="article-excerpt" lang="<?= htmlspecialchars($articleLang, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $article['excerpt'], ENT_QUOTES, 'UTF-8') ?></p>
       <?php endif; ?>
-      <div class="article-body">
+      <div class="article-body" lang="<?= htmlspecialchars($articleLang, ENT_QUOTES, 'UTF-8') ?>">
         <?= sanitizeHtmlContent((string) ($article['content'] ?? '')) ?>
       </div>
-      <p><a href="articles.php" class="btn btn-secondary">Späť na články</a></p>
+      <?php
+      $otherTranslations = array_diff_key($articleTranslations ?? [], [$articleLang => true]);
+      ?>
+      <?php if ($otherTranslations !== []): ?>
+        <p class="article-translations"><?= te('article.available_in') ?>
+          <?php $translationLinks = []; ?>
+          <?php foreach ($otherTranslations as $translationLang => $translationSlug): ?>
+            <?php if (isSupportedLanguage($translationLang)): ?>
+              <?php $translationLinks[] = '<a href="' . htmlspecialchars(langUrl($translationLang, 'article.php', ['slug' => $translationSlug]), ENT_QUOTES, 'UTF-8') . '" hreflang="' . htmlspecialchars($translationLang, ENT_QUOTES, 'UTF-8') . '" lang="' . htmlspecialchars($translationLang, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars((string) appLanguages()[$translationLang]['native'], ENT_QUOTES, 'UTF-8') . '</a>'; ?>
+            <?php endif; ?>
+          <?php endforeach; ?>
+          <?= implode(', ', $translationLinks) ?>
+        </p>
+      <?php endif; ?>
+      <p><a href="<?= htmlspecialchars(langUrl($lang, 'articles.php'), ENT_QUOTES, 'UTF-8') ?>" class="btn btn-secondary"><?= te('article.back_to_list') ?></a></p>
     </div>
   </article>
   <?php endif; ?>

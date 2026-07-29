@@ -19,16 +19,16 @@ if (!function_exists('isLoggedIn')) {
 
 $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
 ?>
-<a href="#main-content" class="skip-link">Preskočiť na hlavný obsah</a>
+<a href="#main-content" class="skip-link"><?= te('common.skip_to_content') ?></a>
 
-<nav class="navbar" aria-label="Hlavná navigácia">
+<nav class="navbar" aria-label="<?= te('common.main_navigation') ?>">
   <div class="container nav-container">
-    <a href="index.php" class="nav-brand">Polascin.net</a>
+    <a href="<?= htmlspecialchars(langUrl(currentLang(), 'index.php'), ENT_QUOTES, 'UTF-8') ?>" class="nav-brand"><?= te('common.site_name') ?></a>
     <button
       type="button"
       class="nav-toggle"
       id="navToggle"
-      aria-label="Otvoriť navigáciu"
+      aria-label="<?= te('common.open_navigation') ?>"
       aria-controls="navMenu"
       aria-expanded="false"
     >
@@ -36,11 +36,12 @@ $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
       <span></span>
       <span></span>
     </button>
+    <?php include __DIR__ . '/lang_switcher.php'; ?>
     <button
       type="button"
       class="theme-toggle-btn"
       id="themeToggle"
-      aria-label="Prepnúť tmavý režim"
+      aria-label="<?= te('common.toggle_dark_mode') ?>"
       aria-pressed="false"
     >
       <i class="fa-solid fa-moon" aria-hidden="true"></i>

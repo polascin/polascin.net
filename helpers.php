@@ -17,6 +17,8 @@ if (
 }
 unset($requestedScript, $executedFile);
 
+require_once __DIR__ . '/i18n.php';
+
 const APP_PASSWORD_MIN_BYTES = 12;
 const APP_PASSWORD_MAX_BYTES = 72;
 
@@ -75,10 +77,23 @@ function appTextSlice(string $value, int $offset, ?int $length = null): string {
     return $length === null ? substr($value, $offset) : substr($value, $offset, $length);
 }
 
-function getContentBlock(PDO $pdo, string $key, string $default = ''): string {
+/**
+ * Obsahový blok v požadovanom jazyku.
+ *
+ * Ak blok pre daný jazyk neexistuje, použije sa `$default` — v šablónach je to
+ * preložený reťazec z katalógu, takže stránka je kompletná aj bez toho, aby bol
+ * každý blok v databáze vyplnený vo všetkých jazykoch.
+ */
+function getContentBlock(PDO $pdo, string $key, string $default = '', ?string $lang = null): string {
+    $lang ??= function_exists('currentLang') ? currentLang() : 'sk';
+
     try {
-        $stmt = $pdo->prepare("SELECT content FROM content_blocks WHERE block_key = :key AND is_active = 1 LIMIT 1");
-        $stmt->execute([':key' => $key]);
+        $stmt = $pdo->prepare(
+            "SELECT content FROM content_blocks
+             WHERE block_key = :key AND lang = :lang AND is_active = 1
+             LIMIT 1"
+        );
+        $stmt->execute([':key' => $key, ':lang' => $lang]);
         $row = $stmt->fetch();
         $content = is_array($row) && !empty($row['content']) ? (string) $row['content'] : $default;
         return html_entity_decode(strip_tags(sanitizeHtmlContent($content)), ENT_QUOTES | ENT_HTML5, 'UTF-8');
@@ -88,15 +103,42 @@ function getContentBlock(PDO $pdo, string $key, string $default = ''): string {
     }
 }
 
-function getPublishedArticles(PDO $pdo, int $limit = 10, int $offset = 0): array {
+/**
+ * Počet publikovaných článkov v danom jazyku.
+ */
+function countPublishedArticles(PDO $pdo, ?string $lang = null): int {
+    $lang ??= function_exists('currentLang') ? currentLang() : 'sk';
+
     try {
         $stmt = $pdo->prepare(
-            "SELECT id, title, slug, excerpt, author, published_at, updated_at
+            "SELECT COUNT(*) FROM articles
+             WHERE is_published = 1 AND published_at IS NOT NULL AND published_at <= NOW()
+               AND lang = :lang"
+        );
+        $stmt->execute([':lang' => $lang]);
+        return (int) $stmt->fetchColumn();
+    } catch (\PDOException $e) {
+        error_log('countPublishedArticles error: ' . $e->getMessage());
+        return 0;
+    }
+}
+
+/**
+ * Publikované články v danom jazyku.
+ */
+function getPublishedArticles(PDO $pdo, int $limit = 10, int $offset = 0, ?string $lang = null): array {
+    $lang ??= function_exists('currentLang') ? currentLang() : 'sk';
+
+    try {
+        $stmt = $pdo->prepare(
+            "SELECT id, title, slug, excerpt, author, lang, translation_group, published_at, updated_at
              FROM articles
              WHERE is_published = 1 AND published_at IS NOT NULL AND published_at <= NOW()
+               AND lang = :lang
              ORDER BY is_top DESC, sort_order ASC, published_at DESC
              LIMIT :limit OFFSET :offset"
         );
+        $stmt->bindValue(':lang', $lang);
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
@@ -107,42 +149,113 @@ function getPublishedArticles(PDO $pdo, int $limit = 10, int $offset = 0): array
     }
 }
 
-function getArticleBySlug(PDO $pdo, string $slug): ?array {
+/**
+ * Zistí, či je riadok článku verejne viditeľný.
+ */
+function isArticleRowPubliclyVisible(array $row): bool {
+    if ((int) ($row['is_published'] ?? 0) !== 1 || empty($row['published_at'])) {
+        return false;
+    }
+    $publishedAt = strtotime((string) $row['published_at']);
+    return $publishedAt !== false && $publishedAt <= time();
+}
+
+/**
+ * Článok podľa slugu.
+ *
+ * Najprv sa hľadá v požadovanom jazyku. Ak tam taký článok nie je — alebo je, ale
+ * nie je verejne viditeľný a volajúci nemá právo vidieť koncepty — hľadá sa rovnaký
+ * slug v inom jazyku, aby staré odkazy nekončili na 404. Volajúci podľa `lang`
+ * v odpovedi zistí, že ide o inú jazykovú verziu.
+ *
+ * `$includeUnpublished` zapína administrátorský náhľad: vtedy má verzia v
+ * požadovanom jazyku prednosť aj vtedy, keď ešte nie je publikovaná.
+ */
+function getArticleBySlug(PDO $pdo, string $slug, ?string $lang = null, bool $includeUnpublished = false): ?array {
+    $lang ??= function_exists('currentLang') ? currentLang() : 'sk';
+
     try {
-        $stmt = $pdo->prepare(
-            "SELECT id, title, slug, excerpt, content, author, is_published, published_at, updated_at
-             FROM articles WHERE slug = :slug LIMIT 1"
-        );
-        $stmt->execute([':slug' => $slug]);
+        $columns = "id, title, slug, excerpt, content, author, lang, translation_group,
+                    is_published, published_at, updated_at";
+
+        $stmt = $pdo->prepare("SELECT {$columns} FROM articles WHERE slug = :slug AND lang = :lang LIMIT 1");
+        $stmt->execute([':slug' => $slug, ':lang' => $lang]);
         $row = $stmt->fetch();
-        return is_array($row) ? $row : null;
+        $requestedRow = is_array($row) ? $row : null;
+
+        if ($requestedRow !== null && ($includeUnpublished || isArticleRowPubliclyVisible($requestedRow))) {
+            return $requestedRow;
+        }
+
+        // Verejne viditeľná verzia má prednosť pred jazykom: inak by nepublikovaný
+        // koncept v požadovanom jazyku prekryl publikovaný preklad a článok by
+        // návštevníkovi skončil na 404.
+        $fallback = $pdo->prepare(
+            "SELECT {$columns} FROM articles
+             WHERE slug = :slug
+               AND is_published = 1
+               AND published_at IS NOT NULL
+               AND published_at <= NOW()
+             ORDER BY (lang = :default_lang) DESC, id ASC
+             LIMIT 1"
+        );
+        $fallback->execute([':slug' => $slug, ':default_lang' => APP_DEFAULT_LANGUAGE]);
+        $row = $fallback->fetch();
+        if (is_array($row)) {
+            return $row;
+        }
+
+        // Nič publikované neexistuje; vracia sa aspoň nájdený koncept, aby si volajúci
+        // mohol rozhodnúť o 404 alebo o administrátorskom náhľade.
+        return $requestedRow;
     } catch (\PDOException $e) {
         error_log('getArticleBySlug error: ' . $e->getMessage());
         return null;
     }
 }
 
-function formatArticleDate(?string $datetime): string {
+/**
+ * Publikované preklady toho istého článku, indexované jazykom.
+ *
+ * Slúži na prepínač jazyka na detaile článku a na hreflang odkazy.
+ */
+function getArticleTranslations(PDO $pdo, ?int $translationGroup): array {
+    if ($translationGroup === null) {
+        return [];
+    }
+
+    try {
+        $stmt = $pdo->prepare(
+            "SELECT slug, lang FROM articles
+             WHERE translation_group = :group
+               AND is_published = 1 AND published_at IS NOT NULL AND published_at <= NOW()"
+        );
+        $stmt->bindValue(':group', $translationGroup, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $translations = [];
+        foreach ($stmt->fetchAll() as $row) {
+            $rowLang = (string) ($row['lang'] ?? '');
+            if ($rowLang !== '') {
+                $translations[$rowLang] = (string) ($row['slug'] ?? '');
+            }
+        }
+        return $translations;
+    } catch (\PDOException $e) {
+        error_log('getArticleTranslations error: ' . $e->getMessage());
+        return [];
+    }
+}
+
+function formatArticleDate(?string $datetime, ?string $lang = null): string {
     if (empty($datetime)) {
         return '';
     }
+    $lang ??= function_exists('currentLang') ? currentLang() : APP_DEFAULT_LANGUAGE;
+
     try {
         $dt = new DateTimeImmutable($datetime, new DateTimeZone(date_default_timezone_get() ?: 'Europe/Bratislava'));
-        $months = [
-            1 => 'januára',
-            2 => 'februára',
-            3 => 'marca',
-            4 => 'apríla',
-            5 => 'mája',
-            6 => 'júna',
-            7 => 'júla',
-            8 => 'augusta',
-            9 => 'septembra',
-            10 => 'októbra',
-            11 => 'novembra',
-            12 => 'decembra',
-        ];
-        return (int) $dt->format('j') . '. ' . $months[(int) $dt->format('n')] . ' ' . $dt->format('Y');
+        return formatLocalizedDate($dt, $lang);
     } catch (\Throwable) {
         return (string) $datetime;
     }

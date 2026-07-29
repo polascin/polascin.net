@@ -17,7 +17,7 @@ if (isLoggedIn()) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
     if (!validateCsrfToken((string) $csrfToken)) {
-        $errors[] = 'Neplatný bezpečnostný token. Obnovte stránku a skúste to znova.';
+        $errors[] = t('error.csrf');
     } else {
         $username = trim((string) ($_POST['username'] ?? ''));
         $password = (string) ($_POST['password'] ?? '');
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             || checkFormRateLimit($pdo, 'login_account', $accountRateKey, 20, 900);
 
         if (!$ipAllowed || !$accountAllowed) {
-            $errors[] = 'Príliš veľa pokusov o prihlásenie. Skúste to znova neskôr.';
+            $errors[] = t('login.error_rate_limit');
         } else {
             $stmt = $pdo->prepare("SELECT id, username, email, password_hash, is_admin, is_active FROM users WHERE username = :username LIMIT 1");
             $stmt->execute([':username' => appTextSlice($username, 0, 255)]);
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $passwordMatches = password_verify($verifiedPassword, $candidateHash);
 
             if (!$credentialsHaveValidLength || !is_array($user) || (int) $user['is_active'] !== 1 || !$passwordMatches) {
-                $errors[] = 'Neplatné prihlasovacie meno alebo heslo.';
+                $errors[] = t('login.error_credentials');
             } else {
                 if (password_needs_rehash((string) $user['password_hash'], PASSWORD_BCRYPT, appPasswordHashOptions())) {
                     try {
@@ -89,36 +89,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Prihlásenie | MUDr. Ľubomír Polaščín';
-$seoDescription = 'Prihlásenie administrátora na Polascin.net.';
+$lang = currentLang();
+$pageTitle = t('meta.login_title') . ' | ' . t('common.author');
+$seoDescription = t('meta.login_description');
 $robotsMeta = 'noindex, nofollow';
-$canonicalUrl = $baseUrl . '/login.php';
+$canonicalUrl = absoluteLangUrl($lang, 'login.php');
 ?>
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="<?= htmlspecialchars($lang, ENT_QUOTES, 'UTF-8') ?>">
 <head>
 <?php include __DIR__ . '/head_meta.php'; ?>
 </head>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main-content" tabindex="-1" aria-label="Prihlásenie">
+<main id="main-content" tabindex="-1" aria-label="<?= te('login.aria_label') ?>">
   <section class="auth-section">
     <div class="container auth-container">
-      <h1>Prihlásenie administrátora</h1>
+      <h1><?= te('login.heading') ?></h1>
       <?php foreach ($errors as $error): ?>
         <div class="alert alert-error"><p><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p></div>
       <?php endforeach; ?>
-      <form method="post" action="login.php" class="login-form" novalidate>
+      <form method="post" action="<?= htmlspecialchars(langUrl($lang, 'login.php'), ENT_QUOTES, 'UTF-8') ?>" class="login-form" novalidate>
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
         <div class="form-group">
-          <label for="username">Prihlasovacie meno</label>
+          <label for="username"><?= te('login.username') ?></label>
           <input type="text" id="username" name="username" required maxlength="255" autocomplete="username" autocapitalize="none" spellcheck="false" autofocus>
         </div>
         <div class="form-group">
-          <label for="password">Heslo</label>
+          <label for="password"><?= te('login.password') ?></label>
           <input type="password" id="password" name="password" required maxlength="<?= APP_PASSWORD_MAX_BYTES ?>" autocomplete="current-password">
         </div>
-        <button type="submit" class="btn btn-primary">Prihlásiť sa</button>
+        <button type="submit" class="btn btn-primary"><?= te('login.submit') ?></button>
       </form>
     </div>
   </section>

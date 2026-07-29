@@ -40,11 +40,11 @@ DirectoryIndex index.php index.html
     RewriteRule ^(index|privacy|terms)\.html$ /$1.php [R=301,L,NE]
     RewriteRule ^weblogo(?:/.*)?$ / [R=301,L,NE]
 
-    RewriteRule ^(\.claude|\.git|\.github|\.trunk|\.vscode|hooks|private|tests)(/.*)?$ - [F,L]
+    RewriteRule ^(\.claude|\.git|\.github|\.trunk|\.vscode|hooks|lang|private|tests)(/.*)?$ - [F,L]
 </IfModule>
 
 # ── Blokovanie interných PHP skriptov a citlivých súborov ───────────────────
-<FilesMatch "^(auth|config_loader|db_config|footer|head_meta|header|helpers|main_nav|setup_db)\.php$">
+<FilesMatch "^(auth|config_loader|db_config|footer|head_meta|header|helpers|i18n|lang_switcher|main_nav|setup_db)\.php$">
     Require all denied
 </FilesMatch>
 

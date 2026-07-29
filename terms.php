@@ -14,40 +14,41 @@ try {
 require_once __DIR__ . '/auth.php';
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Podmienky používania | MUDr. Ľubomír Polaščín';
-$seoDescription = 'Podmienky používania webovej stránky MUDr. Ľubomíra Polaščína.';
+$lang = currentLang();
+$pageTitle = t('meta.terms_title') . ' | ' . t('common.author');
+$seoDescription = t('meta.terms_description');
 $robotsMeta = 'noindex, follow';
-$canonicalUrl = $baseUrl . '/terms.php';
+$canonicalUrl = absoluteLangUrl($lang, 'terms.php');
 ?>
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="<?= htmlspecialchars($lang, ENT_QUOTES, 'UTF-8') ?>">
 <head>
 <?php include __DIR__ . '/head_meta.php'; ?>
 </head>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main-content" class="page-content" tabindex="-1" aria-label="Podmienky používania">
+<main id="main-content" class="page-content" tabindex="-1" aria-label="<?= te('terms.heading') ?>">
   <div class="container">
-    <h1 class="section-title">Podmienky používania</h1>
-    <p><strong>Posledná aktualizácia: 28. júla 2026</strong></p>
+    <h1 class="section-title"><?= te('terms.heading') ?></h1>
+    <p><strong><?= te('terms.updated') ?></strong></p>
 
-    <h2>1. Akceptácia podmienok</h2>
-    <p>Prístupom na webovú stránku a jej používaním <strong>polascin.net</strong> (ďalej len „webová stránka“) akceptujete a súhlasíte, že vás zaväzujú podmienky a ustanovenia tejto dohody.</p>
+    <h2><?= te('terms.s1_heading') ?></h2>
+    <p><?= t('terms.s1_text') ?></p>
 
-    <h2>2. Zdravotné zrieknutie sa zodpovednosti</h2>
+    <h2><?= te('terms.s2_heading') ?></h2>
     <div class="medical-disclaimer">
-      <p><strong>DÔLEŽITÉ:</strong> Obsah poskytovaný na tejto webovej stránke slúži len na informačné účely. <strong>Nenahrádza</strong> odborné lekárske poradenstvo, diagnostiku ani liečbu.</p>
-      <p>V prípade akýchkoľvek otázok týkajúcich sa zdravotného stavu sa vždy obráťte na svojho lekára alebo iného kvalifikovaného zdravotníckeho pracovníka. Nikdy nepodceňujte odborné lekárske odporúčanie ani neodkladajte vyhľadanie lekárskej pomoci z dôvodu informácií, ktoré ste si prečítali na tejto webovej stránke.</p>
+      <p><?= t('terms.s2_important') ?></p>
+      <p><?= te('terms.s2_text') ?></p>
     </div>
 
-    <h2>3. Duševné vlastníctvo</h2>
-    <p>Obsah, štruktúra, grafika, dizajn, kompilácia a iné prvky súvisiace s touto webovou stránkou sú chránené príslušnými autorskými právami a zákonmi o duševnom vlastníctve. Akékoľvek kopírovanie, redistribúcia, použitie alebo publikovanie týchto prvkov alebo akejkoľvek časti webovej stránky používateľom je prísne zakázané.</p>
+    <h2><?= te('terms.s3_heading') ?></h2>
+    <p><?= te('terms.s3_text') ?></p>
 
-    <h2>4. Obmedzenie zodpovednosti</h2>
-    <p>V žiadnom prípade nenesiem zodpovednosť za akékoľvek náhodné, nepriame, následné alebo mimoriadne škody akejkoľvek povahy, ani za akékoľvek iné škody, vrátane, ale nie výhradne, škôd vzniknutých v dôsledku straty zisku, straty zmlúv, goodwillu, údajov, informácií, príjmov, očakávaných úspor alebo obchodných vzťahov, bez ohľadu na to, či som bol upozornený na možnosť takýchto škôd, a to v súvislosti s používaním tejto webovej stránky alebo akýchkoľvek na ňu odkazovaných webových stránok.</p>
+    <h2><?= te('terms.s4_heading') ?></h2>
+    <p><?= te('terms.s4_text') ?></p>
 
-    <h2>5. Rozhodné právo</h2>
-    <p>Tieto podmienky a ustanovenia sa riadia a interpretujú v súlade s právnymi predpismi Slovenskej republiky a bez výhrad sa podriaďujete výlučnej právomoci súdov v tomto mieste.</p>
+    <h2><?= te('terms.s5_heading') ?></h2>
+    <p><?= te('terms.s5_text') ?></p>
   </div>
 </main>
 <?php include __DIR__ . '/footer.php'; ?>

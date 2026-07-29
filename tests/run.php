@@ -142,6 +142,133 @@ expectTrue(
     'Výnimka pri NUL bajte nie je InvalidArgumentException — catch musí byť širší'
 );
 
+// --- Viacjazyčnosť ---
+
+expectSame('sk', normalizeLanguageTag('SK'), 'Jazyková značka sa musí normalizovať na malé písmená');
+expectSame('en', normalizeLanguageTag('en-GB'), 'Regionálny variant sa musí zredukovať na základný jazyk');
+expectSame('de', normalizeLanguageTag('DE_at'), 'Podčiarkovník musí fungovať ako oddeľovač');
+expectSame(null, normalizeLanguageTag('kl'), 'Nepodporovaný jazyk sa nesmie prijať');
+expectSame(null, normalizeLanguageTag('../../etc/passwd'), 'Nezmyselný vstup sa nesmie prijať');
+expectSame(null, normalizeLanguageTag(''), 'Prázdna značka sa nesmie prijať');
+
+expectSame('de', languageFromAcceptHeader('de-DE,de;q=0.9,en;q=0.8'), 'Accept-Language musí rešpektovať poradie');
+expectSame('en', languageFromAcceptHeader('kl;q=1.0,en;q=0.5'), 'Nepodporovaný jazyk s vyššou váhou sa musí preskočiť');
+expectSame('fr', languageFromAcceptHeader('en;q=0.3,fr;q=0.9'), 'Rozhodovať musí váha q, nie poradie');
+expectSame('cs', languageFromAcceptHeader('cs'), 'Hlavička bez váh musí fungovať');
+expectSame(null, languageFromAcceptHeader('en;q=0'), 'Váha q=0 znamená odmietnutie jazyka');
+expectSame(null, languageFromAcceptHeader('*'), 'Zástupný znak sám o sebe nič neurčuje');
+expectSame(null, languageFromAcceptHeader(null), 'Chýbajúca hlavička nesmie nič vrátiť');
+
+expectSame('sk', languageFromCountryCode('SK'), 'Slovensko sa musí mapovať na slovenčinu');
+expectSame('es', languageFromCountryCode('mx'), 'Mapovanie krajiny nesmie závisieť od veľkosti písmen');
+expectSame(null, languageFromCountryCode('JP'), 'Nepokrytá krajina nesmie nič vrátiť');
+expectSame(null, languageFromCountryCode('XX'), 'Neplatný kód krajiny nesmie nič vrátiť');
+
+expectTrue(isSupportedLanguage('sk') && isSupportedLanguage('es'), 'Podporované jazyky musia prejsť');
+expectTrue(!isSupportedLanguage('ru'), 'Nepodporovaný jazyk musí byť odmietnutý');
+
+expectSame('Domov', t('nav.home', [], 'sk'), 'Preklad sa musí načítať z katalógu');
+expectSame('Home', t('nav.home', [], 'en'), 'Anglický katalóg musí byť použitý');
+expectSame('nav.neexistujuci', t('nav.neexistujuci', [], 'en'), 'Chýbajúci kľúč musí vrátiť samotný kľúč');
+expectTrue(str_contains(t('common.visit', ['target' => 'example.com'], 'sk'), 'example.com'), 'Zástupný znak sa musí nahradiť');
+expectTrue(!str_contains(t('footer.copyright', ['year' => '2026'], 'sk'), ':year'), 'Nenahradený zástupný znak nesmie zostať vo výstupe');
+
+// Katalógy musia byť úplné a konzistentné, inak by na stránke chýbal text.
+$skCatalogue = require dirname(__DIR__) . '/lang/sk.php';
+foreach (array_keys(appLanguages()) as $catalogueLang) {
+    $catalogue = require dirname(__DIR__) . '/lang/' . $catalogueLang . '.php';
+    expectSame(
+        [],
+        array_keys(array_diff_key($skCatalogue, $catalogue)),
+        "Katalóg {$catalogueLang} nesmie mať chýbajúce kľúče"
+    );
+    expectSame(
+        [],
+        array_keys(array_diff_key($catalogue, $skCatalogue)),
+        "Katalóg {$catalogueLang} nesmie mať kľúče navyše"
+    );
+
+    // Každý zástupný znak zo slovenčiny musí prežiť aj v preklade.
+    $placeholderMismatches = [];
+    foreach ($skCatalogue as $key => $value) {
+        preg_match_all('/:[a-z_]+/', $value, $skMatches);
+        preg_match_all('/:[a-z_]+/', (string) $catalogue[$key], $translatedMatches);
+        sort($skMatches[0]);
+        sort($translatedMatches[0]);
+        if ($skMatches[0] !== $translatedMatches[0]) {
+            $placeholderMismatches[] = $key;
+        }
+    }
+    expectSame([], $placeholderMismatches, "Katalóg {$catalogueLang} musí zachovať všetky zástupné znaky");
+}
+
+// Interné súbory nesmú byť spustiteľné priamo cez web. Produkcia beží na
+// OpenResty, ktorý `.htaccess` ignoruje, takže guard v PHP je jediná ochrana.
+foreach (array_keys(appLanguages()) as $guardedLang) {
+    $catalogueSource = (string) file_get_contents(dirname(__DIR__) . '/lang/' . $guardedLang . '.php');
+    expectTrue(
+        str_contains($catalogueSource, 'http_response_code(403)'),
+        "Katalóg {$guardedLang} musí odmietnuť priame spustenie"
+    );
+}
+foreach (['i18n.php', 'lang_switcher.php'] as $guardedFile) {
+    $guardedSource = (string) file_get_contents(dirname(__DIR__) . '/' . $guardedFile);
+    expectTrue(
+        str_contains($guardedSource, 'http_response_code(403)'),
+        "{$guardedFile} musí odmietnuť priame spustenie"
+    );
+}
+
+// Kanonická URL: predvolený jazyk bez parametra, ostatné s ním.
+expectSame('https://polascin.net/', absoluteLangUrl('sk', 'index.php'), 'Slovenská domovská stránka má čistú kanonickú URL');
+expectSame('https://polascin.net/?lang=en', absoluteLangUrl('en', 'index.php'), 'Cudzojazyčná domovská stránka nesie parameter lang');
+expectSame('https://polascin.net/contact.php', absoluteLangUrl('sk', 'contact.php'), 'Slovenská podstránka nemá parameter lang');
+expectSame(
+    'https://polascin.net/article.php?slug=test&lang=de',
+    absoluteLangUrl('de', 'article.php', ['slug' => 'test']),
+    'Parametre sa musia skombinovať s jazykom'
+);
+expectSame('https://polascin.net/', absoluteLangUrl('kl', 'index.php'), 'Nepodporovaný jazyk musí spadnúť na predvolený');
+
+// Prepínač jazyka naopak parameter uvádza vždy, inak by sa nedalo prepnúť späť.
+expectSame('index.php?lang=sk', langUrl('sk', 'index.php'), 'Prepínač musí uvádzať jazyk aj pre predvolený jazyk');
+expectSame('articles.php?page=2&lang=fr', langUrl('fr', 'articles.php', ['page' => 2]), 'Prepínač musí zachovať parametre stránky');
+
+// Regresia: prepínač postavený na kanonických adresách by pre predvolený jazyk
+// neniesol parameter `lang` a návštevník by sa už nikdy nevrátil na slovenčinu.
+foreach (array_keys(appLanguages()) as $switcherLang) {
+    expectTrue(
+        str_contains(langUrl($switcherLang, 'index.php'), 'lang=' . $switcherLang),
+        "Cieľ prepínača pre {$switcherLang} musí obsahovať parameter lang"
+    );
+}
+
+// Regresia: prepínač nesmie zahodiť parametre aktuálnej stránky — na
+// newsletter.php by sa tým stratil jednorazový token.
+$originalGet = $_GET;
+$originalScript = $_SERVER['SCRIPT_NAME'] ?? null;
+$_SERVER['SCRIPT_NAME'] = '/newsletter.php';
+$_GET = ['action' => 'unsubscribe', 'token' => 'abc123', 'lang' => 'de'];
+$switcherHref = langUrl('sk');
+expectTrue(str_contains($switcherHref, 'action=unsubscribe'), 'Prepínač musí zachovať parameter action');
+expectTrue(str_contains($switcherHref, 'token=abc123'), 'Prepínač musí zachovať jednorazový token');
+expectTrue(str_contains($switcherHref, 'lang=sk'), 'Prepínač musí prepísať pôvodný jazyk na cieľový');
+expectTrue(!str_contains($switcherHref, 'lang=de'), 'Pôvodný jazyk nesmie v cieli zostať');
+$_GET = $originalGet;
+if ($originalScript === null) {
+    unset($_SERVER['SCRIPT_NAME']);
+} else {
+    $_SERVER['SCRIPT_NAME'] = $originalScript;
+}
+
+$testDate = new DateTimeImmutable('2026-07-28 12:00:00');
+expectSame('28. júla 2026', formatLocalizedDate($testDate, 'sk'), 'Slovenský dátum');
+expectSame('July 28, 2026', formatLocalizedDate($testDate, 'en'), 'Anglický dátum');
+expectSame('28. července 2026', formatLocalizedDate($testDate, 'cs'), 'Český dátum');
+expectSame('28. Juli 2026', formatLocalizedDate($testDate, 'de'), 'Nemecký dátum');
+expectSame('28 juillet 2026', formatLocalizedDate($testDate, 'fr'), 'Francúzsky dátum');
+expectSame('28 de julio de 2026', formatLocalizedDate($testDate, 'es'), 'Španielsky dátum používa predložku „de“');
+
 $csrf = generateCsrfToken();
 expectTrue(!validateCsrfToken('nespravny-token'), 'Neplatný CSRF token musí byť odmietnutý');
 expectSame($csrf, generateCsrfToken(), 'Neplatný CSRF pokus nesmie zneplatniť platný token');

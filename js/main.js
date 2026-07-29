@@ -437,21 +437,42 @@
       banner.setAttribute("aria-modal", "false");
       banner.setAttribute("aria-labelledby", "cookie-consent-title");
       banner.setAttribute("aria-describedby", "cookie-consent-description");
+      // Texty prichádzajú preložené zo servera cez data atribúty. Vkladajú sa
+      // ako textContent, takže sa nikdy neinterpretujú ako HTML.
+      const strings = {
+        title: cookieContainer.dataset.cookieTitle || "Analytické cookies",
+        description:
+          cookieContainer.dataset.cookieDescription ||
+          "S vaším súhlasom použijeme Google Analytics 4 na meranie návštevnosti. Reklamné úložisko a personalizácia zostávajú vypnuté. Odmietnutie neobmedzí používanie stránky. Podrobnosti nájdete v",
+        privacyLabel:
+          cookieContainer.dataset.cookiePrivacyLabel ||
+          "zásadách ochrany súkromia",
+        decline: cookieContainer.dataset.cookieDecline || "Odmietnuť",
+        accept: cookieContainer.dataset.cookieAccept || "Súhlasím",
+      };
+
       banner.innerHTML = `
         <div class="cookie-content">
           <div class="cookie-text">
-            <h2 id="cookie-consent-title" class="cookie-title">Analytické cookies</h2>
-            <p id="cookie-consent-description">S vaším súhlasom použijeme Google Analytics 4 na meranie návštevnosti. Reklamné úložisko a personalizácia zostávajú vypnuté. Odmietnutie neobmedzí používanie stránky. Podrobnosti nájdete v <a class="cookie-link">zásadách ochrany súkromia</a>.</p>
+            <h2 id="cookie-consent-title" class="cookie-title"></h2>
+            <p id="cookie-consent-description"><span class="cookie-description-text"></span> <a class="cookie-link"></a>.</p>
           </div>
           <div class="cookie-buttons">
-            <button type="button" class="btn-cookie-decline">Odmietnuť</button>
-            <button type="button" class="btn-cookie-accept">Súhlasím</button>
+            <button type="button" class="btn-cookie-decline"></button>
+            <button type="button" class="btn-cookie-accept"></button>
           </div>
         </div>
       `;
 
+      banner.querySelector(".cookie-title").textContent = strings.title;
+      banner.querySelector(".cookie-description-text").textContent =
+        strings.description;
+      banner.querySelector(".btn-cookie-decline").textContent = strings.decline;
+      banner.querySelector(".btn-cookie-accept").textContent = strings.accept;
+
       const privacyLink = banner.querySelector(".cookie-link");
       if (privacyLink) {
+        privacyLink.textContent = strings.privacyLabel;
         privacyLink.setAttribute(
           "href",
           cookieContainer.dataset.privacyUrl || "privacy.php",

@@ -27,6 +27,34 @@ Ak aplikácia beží za reverzným proxy, zapnite `TRUST_PROXY_HEADERS=true` iba
 spolu s presným allowlistom `TRUSTED_PROXY_IPS`. Bez allowlistu sa preposlaným
 hlavičkám zámerne nedôveruje.
 
+## Viacjazyčnosť
+
+Stránka beží v šiestich jazykoch: slovenčina (predvolená), angličtina,
+čeština, nemčina, francúzština a španielčina.
+
+Jazyk sa určuje v tomto poradí:
+
+1. parameter `?lang=` v URL (explicitná voľba, uloží sa do cookie `polascin_lang`),
+2. uložená voľba v cookie,
+3. hlavička `Accept-Language` vrátane váh `q=`,
+4. krajina z hlavičky CDN (`CF-IPCountry` a podobné),
+5. predvolený jazyk.
+
+Preklady rozhrania sú v `lang/<kód>.php`; kľúče sú vo všetkých súboroch rovnaké
+a regresná sada to kontroluje. Chýbajúci preklad spadne na slovenčinu, takže na
+stránke nikdy nezostane prázdne miesto.
+
+Redakčný obsah je viacjazyčný v databáze:
+
+- `articles.lang` určuje jazyk článku, `articles.translation_group` spája
+  preklady toho istého článku. Slug musí byť jedinečný v rámci jazyka.
+- `content_blocks` majú kľúč jedinečný v dvojici s jazykom. Ak blok pre daný
+  jazyk neexistuje, použije sa preklad z katalógu.
+
+Kanonické URL a `hreflang` používajú pre slovenčinu čistú adresu bez parametra,
+pre ostatné jazyky adresu s `?lang=`. Prepínač jazyka parameter uvádza vždy,
+inak by sa nedalo prepnúť späť na predvolený jazyk.
+
 ## Kontroly kvality
 
 Základná regresná sada nevyžaduje databázu:
