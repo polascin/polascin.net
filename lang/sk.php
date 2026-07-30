@@ -42,6 +42,7 @@ return [
     'common.toggle_dark_mode' => 'Prepnúť tmavý režim',
     'common.switch_to_dark' => 'Prepnúť na tmavý režim',
     'common.switch_to_light' => 'Prepnúť na svetlý režim',
+    'common.age_title' => 'Aktuálny vek',
     'common.required' => 'povinné',
     'common.back' => 'Späť',
     'common.read_more' => 'Čítať viac',

@@ -199,16 +199,34 @@ jobs:
         run: |
           set -euo pipefail
           COMMIT=$(git rev-parse --short HEAD)
+          # Iba bezpečné znaky — apostrof alebo backslash vo vetve by rozbili
+          # generovaný PHP reťazec (php -l by to síce zachytil, ale beh by padol).
+          BRANCH=$(printf '%s' "$GITHUB_REF_NAME" | tr -cd 'A-Za-z0-9._/-')
           UNIX_TS=$(date -u '+%s')
           TIMESTAMP=$(TZ=Europe/Bratislava date -d "@${UNIX_TS}" '+%d.%m.%Y %H:%M')
+          # Guard proti priamemu spusteniu cez web (aj cez PATH_INFO) — rovnaký
+          # vzor ako v lang/*.php; include z footer.php guard nespustí.
+          cat > deploy_info.php <<'GUARD'
+          <?php
+          // Automaticky generované nasadením — neupravovať manuálne.
+          $requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
+          $executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
+          if (
+              PHP_SAPI !== 'cli'
+              && ($executedFile === __FILE__
+                  || preg_match('~(?:^|/)deploy_info\.php(?:/|$)~i', $requestedScript) === 1)
+          ) {
+              http_response_code(403);
+              exit('Prístup odmietnutý.');
+          }
+          unset($requestedScript, $executedFile);
+          GUARD
           {
-            printf '<?php\n'
-            printf '// Automaticky generované nasadením — neupravovať manuálne.\n'
             printf "define('DEPLOY_TIME', '%s');\n" "$TIMESTAMP"
             printf "define('DEPLOY_TIMESTAMP', %s);\n" "$UNIX_TS"
             printf "define('DEPLOY_COMMIT', '%s');\n" "$COMMIT"
-            printf "define('DEPLOY_BRANCH', '%s');\n" "$GITHUB_REF_NAME"
-          } > deploy_info.php
+            printf "define('DEPLOY_BRANCH', '%s');\n" "$BRANCH"
+          } >> deploy_info.php
           php -l deploy_info.php
 
       - name: Deploy via rsync
@@ -326,7 +344,7 @@ jobs:
           done
 
           # Interné súbory nesmú byť po nasadení dostupné.
-          for PATH_SUFFIX in "/i18n.php" "/lang/sk.php" "/helpers.php"; do
+          for PATH_SUFFIX in "/i18n.php" "/lang/sk.php" "/helpers.php" "/deploy_info.php"; do
             URL="${SMOKE_BASE_URL%/}${PATH_SUFFIX}"
             CODE=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "$URL" || echo "000")
             if [[ "$CODE" == "403" || "$CODE" == "404" ]]; then

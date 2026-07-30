@@ -42,6 +42,7 @@ return [
     'common.toggle_dark_mode' => 'Sötét mód váltása',
     'common.switch_to_dark' => 'Váltás sötét módra',
     'common.switch_to_light' => 'Váltás világos módra',
+    'common.age_title' => 'Jelenlegi életkor',
     'common.required' => 'kötelező',
     'common.back' => 'Vissza',
     'common.read_more' => 'Tovább olvasom',

@@ -465,6 +465,21 @@ section {
   }
 }
 
+/* Na úzkych obrazovkách sa beat a presný vek postupne skryjú — spolu s
+   prepínačmi jazyka a témy a hamburgerom by sa lišta do 320 px nezmestila
+   (prvky majú white-space: nowrap, takže by pretiekli mimo viewport). */
+@media (max-width: 480px) {
+  .nav-beat {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .nav-age-exact {
+    display: none;
+  }
+}
+
 @media (forced-colors: active) {
   .nav-brand-photo {
     border-color: CanvasText;

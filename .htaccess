@@ -44,7 +44,7 @@ DirectoryIndex index.php index.html
 </IfModule>
 
 # ── Blokovanie interných PHP skriptov a citlivých súborov ───────────────────
-<FilesMatch "^(auth|config_loader|db_config|footer|head_meta|header|helpers|i18n|lang_switcher|main_nav|setup_db)\.php$">
+<FilesMatch "^(auth|config_loader|db_config|deploy_info|footer|head_meta|header|helpers|i18n|lang_switcher|main_nav|setup_db)\.php$">
     Require all denied
 </FilesMatch>
 

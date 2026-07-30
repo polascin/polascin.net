@@ -192,20 +192,38 @@ for required_command in git rsync ssh date base64 tr dirname; do
 done
 
 COMMIT=$(git rev-parse --short HEAD)
-BRANCH=$(git symbolic-ref --quiet --short HEAD 2>/dev/null || printf 'detached')
+# Iba bezpečné znaky — apostrof alebo backslash vo vetve by rozbili generovaný
+# PHP reťazec a footer.php by potom zhodil každú stránku fatálnou chybou.
+BRANCH=$( (git symbolic-ref --quiet --short HEAD 2>/dev/null || printf 'detached') | tr -cd 'A-Za-z0-9._/-')
+[[ -n $BRANCH ]] || BRANCH='detached'
 UNIX_TS=$(date '+%s')
 TIMESTAMP=$(date '+%d.%m.%Y %H:%M')
 
 # Presný čas nasadenia pre pätičku — súbor vzniká pred rsyncom, aby sa
-# nasadil spolu s kódom; lokálna kópia je v .gitignore.
+# nasadil spolu s kódom; lokálna kópia je v .gitignore. Guard proti priamemu
+# spusteniu cez web (aj cez PATH_INFO) — rovnaký vzor ako v lang/*.php;
+# include z footer.php guard nespustí.
+cat >deploy_info.php <<'GUARD'
+<?php
+// Automaticky generované nasadením — neupravovať manuálne.
+$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
+$executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
+if (
+    PHP_SAPI !== 'cli'
+    && ($executedFile === __FILE__
+        || preg_match('~(?:^|/)deploy_info\.php(?:/|$)~i', $requestedScript) === 1)
+) {
+    http_response_code(403);
+    exit('Prístup odmietnutý.');
+}
+unset($requestedScript, $executedFile);
+GUARD
 {
-	printf '<?php\n'
-	printf '// Automaticky generované nasadením — neupravovať manuálne.\n'
 	printf "define('DEPLOY_TIME', '%s');\n" "$TIMESTAMP"
 	printf "define('DEPLOY_TIMESTAMP', %s);\n" "$UNIX_TS"
 	printf "define('DEPLOY_COMMIT', '%s');\n" "$COMMIT"
 	printf "define('DEPLOY_BRANCH', '%s');\n" "$BRANCH"
-} >deploy_info.php
+} >>deploy_info.php
 
 echo "[deploy] Overujem vzdialený cieľový adresár..."
 ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "test -d '${REMOTE_PATH}'"

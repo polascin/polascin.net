@@ -42,6 +42,7 @@ return [
     'common.toggle_dark_mode' => 'Toggle dark mode',
     'common.switch_to_dark' => 'Switch to dark mode',
     'common.switch_to_light' => 'Switch to light mode',
+    'common.age_title' => 'Current age',
     'common.required' => 'required',
     'common.back' => 'Back',
     'common.read_more' => 'Read more',

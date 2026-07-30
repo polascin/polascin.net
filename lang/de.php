@@ -42,6 +42,7 @@ return [
     'common.toggle_dark_mode' => 'Dunkelmodus umschalten',
     'common.switch_to_dark' => 'Zum dunklen Modus wechseln',
     'common.switch_to_light' => 'Zum hellen Modus wechseln',
+    'common.age_title' => 'Aktuelles Alter',
     'common.required' => 'Pflichtfeld',
     'common.back' => 'Zurück',
     'common.read_more' => 'Weiterlesen',

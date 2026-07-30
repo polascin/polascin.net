@@ -42,6 +42,7 @@ return [
     'common.toggle_dark_mode' => 'Attiva o disattiva la modalità scura',
     'common.switch_to_dark' => 'Passa alla modalità scura',
     'common.switch_to_light' => 'Passa alla modalità chiara',
+    'common.age_title' => 'Età attuale',
     'common.required' => 'obbligatorio',
     'common.back' => 'Indietro',
     'common.read_more' => 'Continua a leggere',

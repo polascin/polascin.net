@@ -42,6 +42,7 @@ return [
     'common.toggle_dark_mode' => 'Alternar el modo oscuro',
     'common.switch_to_dark' => 'Cambiar al modo oscuro',
     'common.switch_to_light' => 'Cambiar al modo claro',
+    'common.age_title' => 'Edad actual',
     'common.required' => 'obligatorio',
     'common.back' => 'Volver',
     'common.read_more' => 'Leer más',

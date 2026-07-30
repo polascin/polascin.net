@@ -27,7 +27,7 @@ $vekZlomok = substr(number_format($vekAktualny, 3, '.', ''), -4);
 
 // Aktuálny Swatch Internet Time ako v hlavičke nefro.polascin.net
 // (BMT = UTC+1, 1 deň = 1000 beatov); js/main.js ho ďalej aktualizuje naživo.
-$beatAktualny = number_format(((time() + 3600) % 86400) / 86.4, 2, '.', '');
+$beatAktualny = appSwatchBeat(time());
 ?>
 <a href="#main-content" class="skip-link"><?= te('common.skip_to_content') ?></a>
 
@@ -51,11 +51,12 @@ $beatAktualny = number_format(((time() + 3600) % 86400) / 86.4, 2, '.', '');
         >
         <span class="nav-brand-text"><?= te('common.site_name') ?></span>
       </a>
-      <span class="nav-age">
+      <span class="nav-age" title="<?= te('common.age_title') ?>">
+        <span class="visually-hidden"><?= te('common.age_title') ?>:</span>
         <span class="nav-age-years"><?= $vekRoky ?></span>
         <span class="nav-age-exact">(<?= $vekRoky ?><small><?= $vekZlomok ?></small>)</span>
       </span>
-      <a class="nav-beat" id="beatClock" href="https://www.swatch.com/en-us/internet-time.html" target="_blank" rel="noopener noreferrer" title="<?= te('footer.beat_title') ?>">@<?= $beatAktualny ?></a>
+      <a class="nav-beat" id="beatClock" href="https://www.swatch.com/en-us/internet-time.html" target="_blank" rel="noopener noreferrer" title="<?= te('footer.beat_title') ?>"><?= $beatAktualny ?></a>
     </div>
     <button
       type="button"

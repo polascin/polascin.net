@@ -584,6 +584,9 @@
     }
 
     // Swatch Internet Time v hlavičke (BMT = UTC+1, 1 deň = 1000 beatov).
+    // Stotiny sa orezávajú nadol (0,01 beatu = 864 ms) — toFixed by posledné
+    // milisekundy dňa zaokrúhlilo na neplatné @1000.00. Rovnakú aritmetiku
+    // používa appSwatchBeat() v helpers.php.
     const beatClock = document.getElementById("beatClock");
     if (beatClock) {
       const updateBeat = () => {
@@ -594,7 +597,8 @@
           now.getUTCSeconds() * 1000 +
           now.getUTCMilliseconds();
         beatClock.textContent =
-          "@" + (((ms + 3600000) % 86400000) / 86400).toFixed(2);
+          "@" +
+          (Math.floor(((ms + 3600000) % 86400000) / 864) / 100).toFixed(2);
       };
       updateBeat();
       window.setInterval(updateBeat, 500);

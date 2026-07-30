@@ -335,6 +335,68 @@ expectTrue(
     'js/main.js musí synchronizovať --navbar-height s nameranou výškou navigácie'
 );
 
+// Swatch Internet Time: stotiny sa orezávajú nadol — zaokrúhlenie by na konci
+// dňa zobrazilo neplatné @1000.00 (beaty bežia od 0.00 po 999.99).
+expectSame('@41.66', appSwatchBeat(0), 'appSwatchBeat musí orezávať stotiny nadol');
+expectSame('@999.98', appSwatchBeat(82799), 'Posledná sekunda BMT dňa nesmie byť @1000.00');
+expectSame('@0.00', appSwatchBeat(82800), 'Polnoc BMT musí byť @0.00');
+expectSame('@999.98', appSwatchBeat(-3601), 'appSwatchBeat musí zvládnuť aj záporný unix čas');
+expectTrue(
+    str_contains($navigationScript, '/ 864) / 100'),
+    'js/main.js musí beat orezávať nadol rovnakou aritmetikou ako appSwatchBeat'
+);
+expectTrue(
+    !str_contains($navigationScript, '/ 86400).toFixed'),
+    'js/main.js nesmie beat zaokrúhľovať cez toFixed nad surovou hodnotou'
+);
+$footerTemplate = (string) file_get_contents(dirname(__DIR__) . '/footer.php');
+expectTrue(
+    str_contains($headerTemplate, 'appSwatchBeat(') && str_contains($footerTemplate, 'appSwatchBeat('),
+    'Hlavička aj pätička musia beat počítať cez spoločný appSwatchBeat'
+);
+
+// Vek v hlavičke: title + skrytý popis dávajú číslam kontext (aj pre čítačky)
+// a na úzkych obrazovkách sa beat a presný vek skryjú, aby sa lišta zmestila
+// do 320 px (prvky majú white-space: nowrap a pretiekli by mimo viewport).
+expectTrue(
+    str_contains($headerTemplate, '<span class="visually-hidden"><?= te(\'common.age_title\') ?>')
+        && str_contains($headerTemplate, 'title="<?= te(\'common.age_title\') ?>"'),
+    'Vek v hlavičke musí mať prístupný popis common.age_title'
+);
+expectTrue(
+    preg_match('~@media \(max-width: 480px\)\s*\{\s*\.nav-beat\s*\{\s*display:\s*none;~s', $siteStyles) === 1,
+    'Beat v hlavičke sa musí skryť na obrazovkách do 480 px'
+);
+expectTrue(
+    preg_match('~@media \(max-width: 400px\)\s*\{\s*\.nav-age-exact\s*\{\s*display:\s*none;~s', $siteStyles) === 1,
+    'Presný vek v hlavičke sa musí skryť na obrazovkách do 400 px'
+);
+
+// deploy_info.php je interný súbor: generátory mu musia vkladať guard proti
+// priamemu spusteniu, .htaccess ho musí blokovať a smoke check to overuje.
+$deployWorkflow = (string) file_get_contents(dirname(__DIR__) . '/.github/workflows/deploy.yml');
+$deployScript = (string) file_get_contents(dirname(__DIR__) . '/hooks/deploy.sh');
+$htaccessRules = (string) file_get_contents(dirname(__DIR__) . '/.htaccess');
+foreach ([['deploy.yml', $deployWorkflow], ['hooks/deploy.sh', $deployScript]] as [$generatorName, $generatorSource]) {
+    expectTrue(
+        str_contains($generatorSource, "preg_match('~(?:^|/)deploy_info\\.php(?:/|\$)~i'")
+            && str_contains($generatorSource, "exit('Prístup odmietnutý.');"),
+        "{$generatorName} musí do deploy_info.php vkladať guard proti priamemu spusteniu"
+    );
+    expectTrue(
+        str_contains($generatorSource, "tr -cd 'A-Za-z0-9._/-'"),
+        "{$generatorName} musí sanitizovať názov vetvy pred vložením do PHP reťazca"
+    );
+}
+expectTrue(
+    preg_match('~<FilesMatch "[^"]*\|deploy_info\|[^"]*"~', $htaccessRules) === 1,
+    '.htaccess musí blokovať priamy prístup na deploy_info.php'
+);
+expectTrue(
+    str_contains($deployWorkflow, '"/deploy_info.php"'),
+    'Smoke check po nasadení musí overiť nedostupnosť deploy_info.php'
+);
+
 // Prístupnosť: prepínač jazyka (summary) zdieľa fokusový prstenec stránky,
 // formulárové polia majú viditeľný prstenec namiesto outline: none a odkazy
 // v súvislom texte sú podčiarknuté, nie odlíšené iba farbou (WCAG 1.4.1).

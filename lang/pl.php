@@ -42,6 +42,7 @@ return [
     'common.toggle_dark_mode' => 'Przełącz tryb ciemny',
     'common.switch_to_dark' => 'Przełącz na tryb ciemny',
     'common.switch_to_light' => 'Przełącz na tryb jasny',
+    'common.age_title' => 'Obecny wiek',
     'common.required' => 'wymagane',
     'common.back' => 'Wstecz',
     'common.read_more' => 'Czytaj więcej',

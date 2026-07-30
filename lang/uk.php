@@ -42,6 +42,7 @@ return [
     'common.toggle_dark_mode' => 'Перемкнути темний режим',
     'common.switch_to_dark' => 'Перемкнути на темний режим',
     'common.switch_to_light' => 'Перемкнути на світлий режим',
+    'common.age_title' => 'Поточний вік',
     'common.required' => 'обовʼязково',
     'common.back' => 'Назад',
     'common.read_more' => 'Читати далі',

@@ -41,9 +41,10 @@ if (defined('DEPLOY_TIMESTAMP')) {
     $footerUpdateTs = ($footerScript !== '' && is_file($footerScript)) ? (int) filemtime($footerScript) : time();
 }
 $footerUpdated = date('d.m.Y H:i', $footerUpdateTs);
-$footerTimezone = date('T', $footerUpdateTs) . ' (' . date_default_timezone_get() . ')';
+// Bez vnorených zátvoriek — hodnota sa vypisuje v zátvorkách za dátumom.
+$footerTimezone = date('T', $footerUpdateTs) . ', ' . date_default_timezone_get();
 // Swiss Internet Time: BMT = UTC+1, 1 deň = 1000 beatov.
-$footerBeat = '@' . number_format((($footerUpdateTs + 3600) % 86400) / 86.4, 2, '.', '');
+$footerBeat = appSwatchBeat($footerUpdateTs);
 ?>
 <footer>
   <div class="container">

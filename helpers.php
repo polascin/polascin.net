@@ -47,6 +47,19 @@ function hashAppPassword(string $password): string {
     return password_hash($password, PASSWORD_BCRYPT, appPasswordHashOptions());
 }
 
+/**
+ * Swatch Internet Time (BMT = UTC+1, 1 deň = 1000 beatov) pre daný unix čas.
+ *
+ * Stotiny sa orezávajú nadol celočíselnou aritmetikou (1 beat = 86,4 s, teda
+ * 0,01 beatu = 864 ms) — zaokrúhlenie nahor by na konci dňa zobrazilo
+ * neplatné @1000.00. Rovnakú aritmetiku používa živý prepočet v js/main.js.
+ */
+function appSwatchBeat(int $timestamp): string {
+    $bmtSeconds = ((($timestamp + 3600) % 86400) + 86400) % 86400;
+    $beatHundredths = intdiv($bmtSeconds * 1000, 864);
+    return sprintf('@%d.%02d', intdiv($beatHundredths, 100), $beatHundredths % 100);
+}
+
 function appTextLength(string $value): int {
     if (function_exists('mb_strlen')) {
         return mb_strlen($value, 'UTF-8');
