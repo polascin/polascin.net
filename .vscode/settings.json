@@ -8,16 +8,29 @@
   "notebook.output.wordWrap": true,
   "chat.editor.wordWrap": "on",
   "html.format.wrapLineLength": 80,
-  "editor.defaultFormatter": null,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "diffEditor.wordWrap": "on",
-  "bladeFormatter.format.wrapAttributes": "auto",
-  "bladeFormatter.format.wrapLineLength": 120,
   "git.autofetch": true,
-  "git.autofetchPeriod": 180,
+  "git.autofetchPeriod": 300,
   "git.autoStash": true,
   "git.enableSmartCommit": true,
   "git.postCommitCommand": "none",
-  "fiveServer.php.executable": "C:\\laragon\\bin\\php\\php-8.3.30-Win32-vs16-x64\\php.exe",
-  "phpserver.phpPath": "C:\\laragon\\bin\\php\\php-8.3.30-Win32-vs16-x64\\php.exe",
-  "php.validate.executablePath": "C:\\laragon\\bin\\php\\php-8.3.30-Win32-vs16-x64\\php.exe"
+  "php.validate.executablePath": "C:\\laragon\\bin\\php\\php-8.3.30-Win32-vs16-x64\\php.exe",
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/fontawesome-free-*/**": true,
+    "**/.trunk/**": true,
+    "**/pix/**": true,
+    "**/weblogo/**": true,
+    "**/websupport*/**": true
+  },
+  "search.exclude": {
+    "**/fontawesome-free-*/**": true,
+    "**/.trunk/**": true,
+    "**/pix/**": true,
+    "**/weblogo/**": true,
+    "**/websupport*/**": true,
+    "**/*.min.css": true,
+    "**/*.min.js": true
+  }
 }

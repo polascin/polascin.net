@@ -1,10 +1,19 @@
 {
   "recommendations": [
-    "trunk.io",
-    "yandeu.five-server",
-    "github.copilot",
-    "github.copilot-chat",
+    "esbenp.prettier-vscode",
+    "zobo.php-intellisense",
+    "mtxr.sqltools",
+    "mtxr.sqltools-driver-mysql",
     "github.vscode-pull-request-github",
-    "sonarsource.sonarlint-vscode"
+    "trunk.io"
+  ],
+  "unwantedRecommendations": [
+    "ritwickdey.liveserver",
+    "angular.ng-template",
+    "vue.volar",
+    "laravel.vscode-laravel",
+    "bradlc.vscode-tailwindcss",
+    "ms-python.python",
+    "ms-vscode.powershell"
   ]
 }
