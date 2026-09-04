@@ -393,8 +393,40 @@ expectTrue(
     '.htaccess musí blokovať priamy prístup na deploy_info.php'
 );
 expectTrue(
+    preg_match('~RewriteRule \^weblogo\(\?:/\.\*\)\?\$ / \[R=301,L,NE\]~', $htaccessRules) === 1,
+    '.htaccess musí 301-presmerovať starý weblogo fallback na koreň'
+);
+expectTrue(
+    preg_match('~RewriteRule \^portfolio\(\?:/\.\*\)\?\$ - \[F,L\]~', $htaccessRules) === 1,
+    '.htaccess musí zakázať náhodne nasadený adresár portfolio/'
+);
+expectTrue(
+    preg_match('~<FilesMatch "[^"]*\|txt\)\$"~', $htaccessRules) === 1,
+    '.htaccess musí blokovať priamy prístup na .txt súbory'
+);
+expectTrue(
+    str_contains($htaccessRules, '<Files "robots.txt">')
+        && str_contains($htaccessRules, 'Require all granted'),
+    'robots.txt musí zostať verejne dostupný napriek zákazu .txt'
+);
+expectTrue(
     str_contains($deployWorkflow, '"/deploy_info.php"'),
     'Smoke check po nasadení musí overiť nedostupnosť deploy_info.php'
+);
+$robotsTxt = (string) file_get_contents(dirname(__DIR__) . '/robots.txt');
+expectTrue(
+    str_contains($robotsTxt, 'Disallow: /portfolio/'),
+    'robots.txt musí zakazovať crawlovanie adresára portfolio/'
+);
+$gitignoreRules = (string) file_get_contents(dirname(__DIR__) . '/.gitignore');
+$deployIgnoreRules = (string) file_get_contents(dirname(__DIR__) . '/.deployignore');
+expectTrue(
+    preg_match('~(^|\r?\n)portfolio/(\r?\n|$)~', $gitignoreRules) === 1,
+    '.gitignore musí vylúčiť nested adresár portfolio/'
+);
+expectTrue(
+    preg_match('~(^|\r?\n)portfolio(\r?\n|$)~', $deployIgnoreRules) === 1,
+    '.deployignore musí vylúčiť portfolio z nasadenia'
 );
 
 // Prístupnosť: prepínač jazyka (summary) zdieľa fokusový prstenec stránky,

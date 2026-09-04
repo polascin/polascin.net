@@ -50,3 +50,6 @@ tests
 scratch
 tmp
 *.ps1
+
+# Nested klon iného projektu — nesmie ísť do web rootu
+portfolio

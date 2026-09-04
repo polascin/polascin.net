@@ -38,7 +38,11 @@ DirectoryIndex index.php index.html
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteRule ^(index|privacy|terms)\.html$ /$1.php [R=301,L,NE]
+    # Starý weblogo fallback nie je súčasťou produkčného webu — duplicitný
+    # obsah a zastarané CSP/inline štýly; robots.txt ho aj tak zakazuje.
     RewriteRule ^weblogo(?:/.*)?$ / [R=301,L,NE]
+    # Cudzí nested projekt (polascin.com) nesmie byť náhodou nasadený pod root.
+    RewriteRule ^portfolio(?:/.*)?$ - [F,L]
 
     RewriteRule ^(\.claude|\.git|\.github|\.trunk|\.vscode|hooks|lang|private|tests)(/.*)?$ - [F,L]
 </IfModule>
@@ -54,9 +58,14 @@ DirectoryIndex index.php index.html
 </FilesMatch>
 
 # ── Blokovanie citlivých typov súborov ───────────────────────────────────────
-<FilesMatch "\.(env|ini|log|sql|bak|tgz|tar\.gz|bz2|7z|key|pem|p12|pfx|md|ya?ml|sh)$">
+<FilesMatch "\.(env|ini|log|sql|bak|tgz|tar\.gz|bz2|7z|key|pem|p12|pfx|md|ya?ml|sh|txt)$">
     Require all denied
 </FilesMatch>
+
+# robots.txt musí zostať verejný napriek všeobecnému zákazu .txt vyššie.
+<Files "robots.txt">
+    Require all granted
+</Files>
 
 <FilesMatch "^(\.deployignore|env\.ini\.example)$">
     Require all denied

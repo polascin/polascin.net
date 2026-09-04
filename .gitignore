@@ -21,6 +21,9 @@ private/
 # Lokálne pomocné súbory
 code.txt
 
+# Nested klon polascin.com (vlastný git, logy kontaktov) — nie súčasť tohto webu
+portfolio/
+
 # Generuje sa pri nasadení (workflow aj hooks/deploy.sh), do gitu nepatrí
 deploy_info.php
 
