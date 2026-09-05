@@ -393,6 +393,10 @@ expectTrue(
     '.htaccess musí blokovať priamy prístup na deploy_info.php'
 );
 expectTrue(
+    preg_match('~RewriteRule \^\(privacy\|terms\)/\?\$ /\$1\.php \[R=301,L,NE\]~', $htaccessRules) === 1,
+    '.htaccess musí 301-presmerovať aliasy /privacy a /terms na .php'
+);
+expectTrue(
     preg_match('~RewriteRule \^weblogo\(\?:/\.\*\)\?\$ / \[R=301,L,NE\]~', $htaccessRules) === 1,
     '.htaccess musí 301-presmerovať starý weblogo fallback na koreň'
 );

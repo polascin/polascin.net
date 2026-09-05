@@ -37,6 +37,8 @@ DirectoryIndex index.php index.html
 # ── Presmerovanie starých statických .html adries na .php ─────────────────────
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    # Alias bez prípony: /privacy a /terms (často v cookie banneroch a externých odkazoch)
+    RewriteRule ^(privacy|terms)/?$ /$1.php [R=301,L,NE]
     RewriteRule ^(index|privacy|terms)\.html$ /$1.php [R=301,L,NE]
     # Starý weblogo fallback nie je súčasťou produkčného webu — duplicitný
     # obsah a zastarané CSP/inline štýly; robots.txt ho aj tak zakazuje.
