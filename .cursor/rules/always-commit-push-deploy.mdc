@@ -1,0 +1,17 @@
+---
+description: Po zmenách vždy commit, push na main a overenie WebSupport deployu
+alwaysApply: true
+---
+
+# Deploy workflow (povinné)
+
+Po dokončení akýchkoľvek relevantných zmien v tomto repozitári **vždy bez ďalšieho pokynu**:
+
+1. Commitni všetky relevantné súbory (nie tajomstvá: `private/`, `.env`, `*.ini` okrem `env.ini.example`).
+2. Pushni na `main` (bez force push, bez `--no-verify`).
+3. Počkaj na success GitHub Actions workflow **„Deploy to polascin.net“** vrátane smoke check.
+4. Over produkciu: kľúčové URL (`/`, articles, contact, newsletter, sitemap, login) HTTP 200; interné cesty (napr. `/deploy_info.php`, `/i18n.php`) 403; bezpečnostné hlavičky a CSP s nonce; spot-check zmeneného obsahu.
+
+Toto má prednosť pred všeobecným pravidlom „commituj len na vyžiadanie“.
+
+Čisto dokumentačné doplnky po už overenom deployi môžu ísť so `[skip deploy]`. Pri `.doaudit.md` doplň aj zápis overenia do `.audit.md`.
