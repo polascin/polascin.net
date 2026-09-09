@@ -258,7 +258,7 @@ jobs:
 
           echo "Removing previously deployed repository-only files..."
           ssh "${SSH_OPTS[@]}" "$TARGET" \
-            "set -eu; cd '${DEPLOY_REMOTE_PATH_SAFE}'; rm -f -- DEPLOY.md README.md .audit.md .doaudit.md .deployignore .gitignore .gitattributes env.ini.example hooks/deploy.sh hooks/deploy.env.example tests/run.php .github/workflows/deploy.yml .vscode/settings.json .vscode/tasks.json .vscode/extensions.json .claude/settings.json .trunk/trunk.yaml .trunk/configs/svgo.config.js; rmdir hooks tests .github/workflows .github .vscode .claude .trunk/configs .trunk 2>/dev/null || true"
+            "set -eu; cd '${DEPLOY_REMOTE_PATH_SAFE}'; rm -f -- DEPLOY.md README.md .audit.md .doaudit.md .deployignore .gitignore .gitattributes env.ini.example hooks/deploy.sh hooks/deploy.env.example tests/run.php .github/workflows/deploy.yml .vscode/settings.json .vscode/tasks.json .vscode/extensions.json .claude/settings.json .trunk/trunk.yaml .trunk/configs/svgo.config.js .cursor/settings.json .cursor/rules/always-commit-push-deploy.mdc; rmdir hooks tests .github/workflows .github .vscode .claude .trunk/configs .trunk .cursor/rules .cursor 2>/dev/null || true"
 
       - name: Create remote environment config
         env:
@@ -344,7 +344,7 @@ jobs:
           done
 
           # Interné súbory nesmú byť po nasadení dostupné.
-          for PATH_SUFFIX in "/i18n.php" "/lang/sk.php" "/helpers.php" "/deploy_info.php"; do
+          for PATH_SUFFIX in "/i18n.php" "/lang/sk.php" "/helpers.php" "/deploy_info.php" "/.cursor/rules/always-commit-push-deploy.mdc"; do
             URL="${SMOKE_BASE_URL%/}${PATH_SUFFIX}"
             CODE=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "$URL" || echo "000")
             if [[ "$CODE" == "403" || "$CODE" == "404" ]]; then

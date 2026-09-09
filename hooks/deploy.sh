@@ -237,7 +237,7 @@ rsync -avz --delete-delay \
 
 echo "[deploy] Odstraňujem staré súbory určené iba pre repozitár..."
 ssh "${SSH_OPTS[@]}" "$SSH_SPEC" \
-	"set -eu; cd '${REMOTE_PATH}'; rm -f -- DEPLOY.md README.md .audit.md .doaudit.md .deployignore .gitignore .gitattributes env.ini.example hooks/deploy.sh hooks/deploy.env.example tests/run.php .github/workflows/deploy.yml .vscode/settings.json .vscode/tasks.json .vscode/extensions.json .claude/settings.json .trunk/trunk.yaml .trunk/configs/svgo.config.js; rmdir hooks tests .github/workflows .github .vscode .claude .trunk/configs .trunk 2>/dev/null || true"
+	"set -eu; cd '${REMOTE_PATH}'; rm -f -- DEPLOY.md README.md .audit.md .doaudit.md .deployignore .gitignore .gitattributes env.ini.example hooks/deploy.sh hooks/deploy.env.example tests/run.php .github/workflows/deploy.yml .vscode/settings.json .vscode/tasks.json .vscode/extensions.json .claude/settings.json .trunk/trunk.yaml .trunk/configs/svgo.config.js .cursor/settings.json .cursor/rules/always-commit-push-deploy.mdc; rmdir hooks tests .github/workflows .github .vscode .claude .trunk/configs .trunk .cursor/rules .cursor 2>/dev/null || true"
 
 POLASCIN_ENV_INI=${POLASCIN_ENV_INI:-""}
 if [[ -z $POLASCIN_ENV_INI && -n ${POLASCIN_ENV_INI_FILE:-} && -f $POLASCIN_ENV_INI_FILE ]]; then

@@ -433,6 +433,24 @@ expectTrue(
     '.deployignore musí vylúčiť portfolio z nasadenia'
 );
 
+// Lokálne konfigurácie editorov a nástrojov nesmú skončiť vo verejnom web roote.
+foreach (['.vscode', '.claude', '.trunk', '.cursor', '.idea'] as $localToolDir) {
+    expectTrue(
+        preg_match('~(^|\r?\n)' . preg_quote($localToolDir, '~') . '(\r?\n|$)~', $deployIgnoreRules) === 1,
+        ".deployignore musí vylúčiť {$localToolDir} z nasadenia"
+    );
+}
+
+// Súbory, ktoré sa kedysi nasadili, musia deploy skripty aj aktívne zmazať —
+// rsync --exclude ich na cieli pred --delete chráni, sám ich nezmaže.
+$deployShSource = (string) file_get_contents(dirname(__DIR__) . '/hooks/deploy.sh');
+foreach (['deploy.yml' => $deployWorkflow, 'hooks/deploy.sh' => $deployShSource] as $cleanupName => $cleanupSource) {
+    expectTrue(
+        str_contains($cleanupSource, '.cursor/rules/always-commit-push-deploy.mdc'),
+        "{$cleanupName} musí zmazať už nasadené .cursor/rules/ z web rootu"
+    );
+}
+
 // Prístupnosť: prepínač jazyka (summary) zdieľa fokusový prstenec stránky,
 // formulárové polia majú viditeľný prstenec namiesto outline: none a odkazy
 // v súvislom texte sú podčiarknuté, nie odlíšené iba farbou (WCAG 1.4.1).
