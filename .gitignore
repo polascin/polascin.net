@@ -7,6 +7,13 @@
 # Claude Code — celý adresár je lokálny (rovnaká logika ako nefro)
 .claude/
 
+# Trunk linter cache — celý adresár je lokálny
+.trunk/
+
+# Cursor: pravidlá zdieľame v gite, lokálne nastavenia nie
+.cursor/*
+!.cursor/rules/
+
 # Citlivé súbory — nikdy do gitu
 .env
 *.env
