@@ -854,6 +854,10 @@ expectTrue(
     'Referer z rovnakej HTTPS domény musí mať zhodný pôvod'
 );
 expectTrue(
+    isTrustedApplicationOrigin('https://www.polascin.net/contact.php'),
+    'Verejný www alias aplikácie musí zostať povoleným pôvodom'
+);
+expectTrue(
     !httpOriginsMatch('https://polascin.net.attacker.example', 'https://polascin.net'),
     'Doména s dôveryhodným prefixom nesmie mať zhodný pôvod'
 );

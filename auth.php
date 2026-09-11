@@ -449,6 +449,29 @@ function httpOriginsMatch(string $sourceUrl, string $targetUrl): bool {
     return $source !== null && $target !== null && hash_equals($target, $source);
 }
 
+/** Hlavná doména a jej verejný www alias sú jediné povolené pôvody aplikácie. */
+function isTrustedApplicationOrigin(string $sourceUrl): bool {
+    $baseUrl = getAppBaseUrl();
+    if (httpOriginsMatch($sourceUrl, $baseUrl)) {
+        return true;
+    }
+
+    $parts = parse_url($baseUrl);
+    if (!is_array($parts) || empty($parts['scheme']) || empty($parts['host'])) {
+        return false;
+    }
+    $host = strtolower((string) $parts['host']);
+    if (filter_var($host, FILTER_VALIDATE_IP) || !str_contains($host, '.')) {
+        return false;
+    }
+    $aliasHost = str_starts_with($host, 'www.') ? substr($host, 4) : 'www.' . $host;
+    $aliasUrl = (string) $parts['scheme'] . '://' . $aliasHost;
+    if (isset($parts['port'])) {
+        $aliasUrl .= ':' . (int) $parts['port'];
+    }
+    return httpOriginsMatch($sourceUrl, $aliasUrl);
+}
+
 /**
  * Fetch Metadata a Origin/Referer sú ďalšia vrstva nad povinným CSRF tokenom.
  * Staršie alebo súkromné klienty bez týchto hlavičiek ostávajú kompatibilné.
@@ -463,7 +486,7 @@ function isTrustedStateChangingRequest(): bool {
     if ($sourceUrl === '') {
         $sourceUrl = trim((string) ($_SERVER['HTTP_REFERER'] ?? ''));
     }
-    return $sourceUrl === '' || httpOriginsMatch($sourceUrl, getAppBaseUrl());
+    return $sourceUrl === '' || isTrustedApplicationOrigin($sourceUrl);
 }
 
 function containsDisallowedControlCharacters(string $value): bool {
