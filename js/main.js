@@ -608,6 +608,12 @@
       form.addEventListener("submit", (event) => {
         if (!window.confirm(form.dataset.confirm)) {
           event.preventDefault();
+          return;
+        }
+
+        const confirmationInput = form.querySelector("[data-confirmation-value]");
+        if (confirmationInput) {
+          confirmationInput.value = confirmationInput.dataset.confirmationValue;
         }
       });
     });

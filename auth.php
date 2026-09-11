@@ -652,9 +652,9 @@ function clearFormRateLimit(PDO $pdo, string $action, string $ip): void {
     }
 }
 
-function logAdminAction(PDO $pdo, string $action, ?string $targetType = null, ?int $targetId = null, array $details = []): void {
+function logAdminAction(PDO $pdo, string $action, ?string $targetType = null, ?int $targetId = null, array $details = []): bool {
     if (!isLoggedIn() || empty($_SESSION['user_id'])) {
-        return;
+        return false;
     }
     try {
         $stmt = $pdo->prepare(
@@ -671,11 +671,19 @@ function logAdminAction(PDO $pdo, string $action, ?string $targetType = null, ?i
             ':client_ip' => getClientIpAddress(),
             ':user_agent' => appTextSlice((string) ($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 500),
         ]);
+    } catch (\Throwable $e) {
+        error_log('logAdminAction failed: ' . $e->getMessage());
+        return false;
+    }
+
+    try {
         $cleanup = $pdo->prepare("DELETE FROM admin_audit_log WHERE created_at < :cutoff");
         $cleanup->execute([':cutoff' => date('Y-m-d H:i:s', time() - 31536000)]);
     } catch (\Throwable $e) {
-        error_log('logAdminAction failed: ' . $e->getMessage());
+        // Retenčné čistenie nesmie zneplatniť už úspešne zapísanú auditnú udalosť.
+        error_log('Admin audit cleanup failed: ' . $e->getMessage());
     }
+    return true;
 }
 
 registerAccessLogger();

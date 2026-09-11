@@ -12,8 +12,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
     $action = (string) ($_POST['action'] ?? '');
-    if (!validateCsrfToken((string) $csrfToken) || $id < 1) {
+    if (!validateCsrfToken((string) $csrfToken)) {
         setFlashMessage('error', 'Akciu sa nepodarilo overiť.');
+    } elseif ($action === 'delete_all') {
+        $confirmation = (string) ($_POST['confirmation'] ?? '');
+        if (!hash_equals('delete_all_contact_messages', $confirmation)) {
+            setFlashMessage('error', 'Hromadné odstránenie nebolo potvrdené.');
+        } else {
+            try {
+                $pdo->beginTransaction();
+                $stmt = $pdo->prepare('DELETE FROM contact_messages');
+                $stmt->execute();
+                $deletedCount = $stmt->rowCount();
+                if (!logAdminAction(
+                    $pdo,
+                    'contact_delete_all',
+                    'contact_message',
+                    null,
+                    ['deleted_count' => $deletedCount]
+                )) {
+                    throw new \RuntimeException('Auditný záznam hromadného odstránenia sa nepodarilo uložiť.');
+                }
+                $pdo->commit();
+                if ($deletedCount === 1) {
+                    $successMessage = 'Bola odstránená 1 správa.';
+                } elseif ($deletedCount >= 2 && $deletedCount <= 4) {
+                    $successMessage = "Boli odstránené {$deletedCount} správy.";
+                } else {
+                    $successMessage = "Bolo odstránených {$deletedCount} správ.";
+                }
+                setFlashMessage('success', $successMessage);
+            } catch (\Throwable $e) {
+                if ($pdo->inTransaction()) {
+                    $pdo->rollBack();
+                }
+                error_log('Hromadné odstránenie kontaktných správ zlyhalo: ' . $e->getMessage());
+                setFlashMessage('error', 'Správy sa nepodarilo odstrániť. Skúste to znova.');
+            }
+        }
+    } elseif ($id < 1) {
+        setFlashMessage('error', 'Neplatná správa.');
     } elseif ($action === 'mark_read') {
         $stmt = $pdo->prepare("UPDATE contact_messages SET is_read = 1 WHERE id = :id LIMIT 1");
         $stmt->execute([':id' => $id]);
@@ -31,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
+$messageCount = (int) $pdo->query('SELECT COUNT(*) FROM contact_messages')->fetchColumn();
 $messages = $pdo->query("SELECT * FROM contact_messages ORDER BY created_at DESC LIMIT 500")->fetchAll();
 
 $baseUrl = getAppBaseUrl();
@@ -50,7 +89,22 @@ $canonicalUrl = $baseUrl . '/admin_contact.php';
   <section class="admin-section">
     <div class="container">
       <h1>Kontaktné správy</h1>
-      <p><a href="admin.php" class="btn btn-secondary btn-sm">Späť na panel</a></p>
+      <div class="form-actions">
+        <a href="admin.php" class="btn btn-secondary btn-sm">Späť na panel</a>
+        <?php if ($messageCount > 0): ?>
+        <form
+          method="post"
+          action="admin_contact.php"
+          class="inline-form"
+          data-confirm="Natrvalo odstrániť všetky kontaktné správy (<?= $messageCount ?>)? Túto akciu nemožno vrátiť späť."
+        >
+          <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
+          <input type="hidden" name="action" value="delete_all">
+          <input type="hidden" name="confirmation" value="" data-confirmation-value="delete_all_contact_messages">
+          <button type="submit" class="btn btn-sm btn-danger">Vymazať všetky správy (<?= $messageCount ?>)</button>
+        </form>
+        <?php endif; ?>
+      </div>
       <?php if (empty($messages)): ?>
         <p>Zatiaľ žiadne správy.</p>
       <?php else: ?>

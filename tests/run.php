@@ -951,6 +951,28 @@ expectTrue(
     str_contains($logoutSource, "logAdminAction(\$pdo, 'logout', 'session')"),
     'Odhlásenie musí zostať v administrátorskom audite'
 );
+$adminContactSource = (string) file_get_contents(dirname(__DIR__) . '/admin_contact.php');
+expectTrue(
+    str_contains($adminContactSource, "\$action === 'delete_all'")
+        && str_contains($adminContactSource, "DELETE FROM contact_messages"),
+    'Administrácia správ musí podporovať hromadné odstránenie'
+);
+expectTrue(
+    str_contains($adminContactSource, 'name="csrf_token"')
+        && str_contains($adminContactSource, 'name="confirmation" value="" data-confirmation-value="delete_all_contact_messages"')
+        && str_contains($adminContactSource, 'data-confirm="Natrvalo odstrániť všetky kontaktné správy'),
+    'Hromadné odstránenie správ musí vyžadovať CSRF aj výslovné potvrdenie'
+);
+expectTrue(
+    str_contains($adminContactSource, "'contact_delete_all'")
+        && str_contains($adminContactSource, "['deleted_count' => \$deletedCount]"),
+    'Hromadné odstránenie správ musí zapísať počet zmazaných správ do auditu'
+);
+$mainJsSource = (string) file_get_contents(dirname(__DIR__) . '/js/main.js');
+expectTrue(
+    str_contains($mainJsSource, 'confirmationInput.dataset.confirmationValue'),
+    'Serverové potvrdenie hromadného odstránenia sa smie aktivovať až po potvrdení dialógu'
+);
 expectTrue(
     preg_match('~DELETE FROM form_rate_limit\s+WHERE\s+\(blocked_until~', $authSource) === 1,
     'Čistenie form_rate_limit musí prerezávať všetky akcie, nie len tú práve vykonávanú'
