@@ -387,7 +387,7 @@ foreach ($defaultBlocks as $block) {
 }
 
 $adminEmail = getenv('POLASCIN_ADMIN_EMAIL') ?: 'admin@polascin.net';
-$adminUsername = 'admin';
+$adminUsername = 'admin@polascin.net';
 
 if (!filter_var($adminEmail, FILTER_VALIDATE_EMAIL) || appTextLength($adminEmail) > 255) {
     fwrite(STDERR, "Chyba: POLASCIN_ADMIN_EMAIL nie je platná e-mailová adresa.\n");
