@@ -20,7 +20,9 @@ unset($requestedScript, $executedFile);
 require_once __DIR__ . '/config_loader.php';
 require_once __DIR__ . '/helpers.php';
 
-const SESSION_IDLE_TIMEOUT = 3600;
+const SESSION_IDLE_TIMEOUT = 1800;
+const SESSION_ABSOLUTE_TIMEOUT = 28800;
+const SESSION_RENEWAL_INTERVAL = 900;
 const SESSION_ACCOUNT_RECHECK_INTERVAL = 60;
 const APP_DUMMY_PASSWORD_HASH = '$2y$12$1tNSCTWlgcAYigjqkJKc4uj2t22PGxoKeDa2ajFJz1Bxb.I5bYPQy';
 
@@ -61,7 +63,8 @@ function sendSecurityHeaders(): void {
         return;
     }
     header_remove('X-Powered-By');
-    header('X-Frame-Options: SAMEORIGIN');
+    $sensitiveRequest = requestNeedsNoReferrer();
+    header('X-Frame-Options: ' . ($sensitiveRequest ? 'DENY' : 'SAMEORIGIN'));
     header('X-XSS-Protection: 0');
     header('X-Content-Type-Options: nosniff');
     if (isRequestHttps()) {
@@ -70,6 +73,7 @@ function sendSecurityHeaders(): void {
     header('Referrer-Policy: ' . getRequestReferrerPolicy());
     header('Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()');
     header('Cross-Origin-Opener-Policy: same-origin');
+    header('Cross-Origin-Resource-Policy: same-origin');
     header('X-Permitted-Cross-Domain-Policies: none');
 
     $nonce = getScriptNonce();
@@ -81,7 +85,8 @@ function sendSecurityHeaders(): void {
         "script-src 'self' 'nonce-{$nonce}' https://www.googletagmanager.com https://www.google-analytics.com; " .
         "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com " .
             "https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; " .
-        "frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self'";
+        'frame-ancestors ' . ($sensitiveRequest ? "'none'" : "'self'") . "; " .
+        "base-uri 'self'; object-src 'none'; form-action 'self'";
     if (isRequestHttps()) {
         $csp .= '; upgrade-insecure-requests';
     }
@@ -103,7 +108,10 @@ function sendSecurityHeaders(): void {
 }
 
 ini_set('session.cookie_httponly', '1');
+ini_set('session.cookie_domain', '');
+ini_set('session.cookie_lifetime', '0');
 ini_set('session.cookie_path', '/');
+ini_set('session.use_trans_sid', '0');
 ini_set('session.use_only_cookies', '1');
 ini_set('session.use_strict_mode', '1');
 ini_set('session.gc_maxlifetime', (string) SESSION_IDLE_TIMEOUT);
@@ -112,7 +120,9 @@ $isHttps = isRequestHttps();
 ini_set('session.cookie_secure', $isHttps ? '1' : '0');
 ini_set('session.cookie_samesite', 'Strict');
 if (session_status() === PHP_SESSION_NONE) {
-    session_name('POLASCINSESSID');
+    // Prefix __Host- na HTTPS bráni podvrhnutiu cookie zo subdomény: prehliadač
+    // ju prijme iba so Secure, cestou / a bez atribútu Domain.
+    session_name($isHttps ? '__Host-POLASCINSESSID' : 'POLASCINSESSID');
     // Bez tohto pridá session_start() vlastnú sadu `Expires: 1981` a
     // `Pragma: no-cache`. Tú prvú síce sendSecurityHeaders() prepíše, ale
     // zvyšné dve v odpovedi ostanú a protirečia `private, max-age=0,
@@ -163,12 +173,8 @@ sendSecurityHeaders();
 
 if (!empty($_SESSION['user_id'])) {
     $now = time();
-    if (isset($_SESSION['_last_activity']) && ($now - $_SESSION['_last_activity']) > SESSION_IDLE_TIMEOUT) {
-        clearUserSession();
-        if (!session_start()) {
-            http_response_code(500);
-            exit('Chyba: Nepodarilo sa obnoviť reláciu.');
-        }
+    if (authenticatedSessionExpiryReason($_SESSION, $now) !== null) {
+        restartAnonymousSession();
         setFlashMessage('info', t('login.session_expired'));
         $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
         if (!in_array($currentScript, ['login.php'], true)) {
@@ -176,7 +182,26 @@ if (!empty($_SESSION['user_id'])) {
             exit;
         }
     } else {
+        if (empty($_SESSION['_session_started_at'])) {
+            $_SESSION['_session_started_at'] = $now;
+        }
         $_SESSION['_last_activity'] = $now;
+        $rotatedAt = isset($_SESSION['_session_rotated_at']) ? (int) $_SESSION['_session_rotated_at'] : 0;
+        if ($rotatedAt <= 0) {
+            $_SESSION['_session_rotated_at'] = $now;
+        } elseif (($now - $rotatedAt) >= SESSION_RENEWAL_INTERVAL) {
+            if (!regenerateSession()) {
+                restartAnonymousSession();
+                setFlashMessage('info', t('login.session_expired'));
+                $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
+                if ($currentScript !== 'login.php') {
+                    header('Location: login.php');
+                    exit;
+                }
+            } else {
+                $_SESSION['_session_rotated_at'] = $now;
+            }
+        }
     }
 }
 
@@ -196,6 +221,32 @@ function isLoggedIn(): bool {
 
 function isAdmin(): bool {
     return !empty($_SESSION['is_admin']) && (int) $_SESSION['is_admin'] === 1;
+}
+
+function authenticatedSessionExpiryReason(array $session, int $now): ?string {
+    $lastActivity = isset($session['_last_activity']) ? (int) $session['_last_activity'] : 0;
+    if ($lastActivity > 0 && ($now - $lastActivity) >= SESSION_IDLE_TIMEOUT) {
+        return 'idle';
+    }
+
+    $startedAt = isset($session['_session_started_at']) ? (int) $session['_session_started_at'] : 0;
+    if ($startedAt > 0 && ($now - $startedAt) >= SESSION_ABSOLUTE_TIMEOUT) {
+        return 'absolute';
+    }
+
+    return null;
+}
+
+function passwordHashFingerprint(string $passwordHash): string {
+    return hash('sha256', $passwordHash);
+}
+
+function restartAnonymousSession(): void {
+    clearUserSession();
+    if (!session_start()) {
+        http_response_code(500);
+        exit('Chyba: Nepodarilo sa obnoviť reláciu.');
+    }
 }
 
 /**
@@ -220,31 +271,64 @@ function revalidateSessionAccount(): void {
 
     $pdo = getAccessLogPdo();
     if (!$pdo instanceof PDO) {
-        return;
+        error_log('Stav účtu sa nepodarilo overiť: databázové spojenie nie je dostupné.');
+        restartAnonymousSession();
+        setFlashMessage('info', t('login.session_expired'));
+        header('Location: login.php');
+        exit;
     }
 
     try {
-        $stmt = $pdo->prepare("SELECT is_admin, is_active FROM users WHERE id = :id LIMIT 1");
+        $stmt = $pdo->prepare(
+            "SELECT username, email, password_hash, is_admin, is_active
+             FROM users
+             WHERE id = :id
+             LIMIT 1"
+        );
         $stmt->execute([':id' => (int) $_SESSION['user_id']]);
         $account = $stmt->fetch();
     } catch (\Throwable $e) {
         error_log('Nepodarilo sa overiť stav účtu: ' . $e->getMessage());
-        return;
+        restartAnonymousSession();
+        setFlashMessage('info', t('login.session_expired'));
+        header('Location: login.php');
+        exit;
     }
 
     if (!is_array($account) || (int) $account['is_active'] !== 1) {
-        clearUserSession();
-        if (!session_start()) {
-            http_response_code(500);
-            exit('Chyba: Nepodarilo sa obnoviť reláciu.');
-        }
+        restartAnonymousSession();
         setFlashMessage('info', t('login.account_inactive'));
         header('Location: login.php');
         exit;
     }
 
+    $currentCredentialFingerprint = passwordHashFingerprint((string) $account['password_hash']);
+    $sessionCredentialFingerprint = (string) ($_SESSION['_credential_fingerprint'] ?? '');
+    if (
+        $sessionCredentialFingerprint !== ''
+        && !hash_equals($sessionCredentialFingerprint, $currentCredentialFingerprint)
+    ) {
+        restartAnonymousSession();
+        setFlashMessage('info', t('login.session_expired'));
+        header('Location: login.php');
+        exit;
+    }
+
+    $privilegesChanged = (int) ($_SESSION['is_admin'] ?? 0) !== (int) $account['is_admin'];
+    $_SESSION['username'] = (string) $account['username'];
+    $_SESSION['email'] = (string) $account['email'];
     $_SESSION['is_admin'] = (int) $account['is_admin'];
+    $_SESSION['_credential_fingerprint'] = $currentCredentialFingerprint;
     $_SESSION['_account_checked'] = $now;
+    if ($privilegesChanged) {
+        if (!regenerateSession()) {
+            restartAnonymousSession();
+            setFlashMessage('info', t('login.session_expired'));
+            header('Location: login.php');
+            exit;
+        }
+        $_SESSION['_session_rotated_at'] = $now;
+    }
 }
 
 function requireLogin(): void {
@@ -281,8 +365,8 @@ function validateCsrfToken(mixed $token): bool {
     return $valid;
 }
 
-function regenerateSession(): void {
-    session_regenerate_id(true);
+function regenerateSession(): bool {
+    return session_regenerate_id(true);
 }
 
 function clearUserSession(): void {

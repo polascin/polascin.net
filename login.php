@@ -17,6 +17,7 @@ if (isLoggedIn()) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
     if (!validateCsrfToken((string) $csrfToken)) {
+        http_response_code(400);
         $errors[] = t('error.csrf');
     } else {
         $username = trim((string) ($_POST['username'] ?? ''));
@@ -40,6 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             || checkFormRateLimit($pdo, 'login_account', $accountRateKey, 20, 900);
 
         if (!$ipAllowed || !$accountAllowed) {
+            http_response_code(429);
+            header('Retry-After: 900');
             $errors[] = t('login.error_rate_limit');
         } else {
             $stmt = $pdo->prepare("SELECT id, username, email, password_hash, is_admin, is_active FROM users WHERE username = :username LIMIT 1");
@@ -55,14 +58,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $passwordMatches = password_verify($verifiedPassword, $candidateHash);
 
             if (!$credentialsHaveValidLength || !is_array($user) || (int) $user['is_active'] !== 1 || !$passwordMatches) {
+                http_response_code(401);
                 $errors[] = t('login.error_credentials');
             } else {
+                $authenticatedPasswordHash = (string) $user['password_hash'];
                 if (password_needs_rehash((string) $user['password_hash'], PASSWORD_BCRYPT, appPasswordHashOptions())) {
                     try {
                         // Hashuje sa presne tá hodnota, ktorá prešla overením.
                         $newHash = hashAppPassword($verifiedPassword);
                         $rehash = $pdo->prepare("UPDATE users SET password_hash = :password_hash WHERE id = :id");
                         $rehash->execute([':password_hash' => $newHash, ':id' => (int) $user['id']]);
+                        $authenticatedPasswordHash = $newHash;
                     } catch (\Throwable $rehashError) {
                         // Rehash je best-effort. Staré heslo nemusí spĺňať dnešné pravidlá
                         // a bcrypt odmieta napríklad NUL bajt (\ValueError), no prihlásenie
@@ -74,15 +80,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($accountRateKey !== null) {
                     clearFormRateLimit($pdo, 'login_account', $accountRateKey);
                 }
-                regenerateSession();
-                $_SESSION['user_id'] = (int) $user['id'];
-                $_SESSION['username'] = (string) $user['username'];
-                $_SESSION['email'] = (string) $user['email'];
-                $_SESSION['is_admin'] = (int) $user['is_admin'];
-                $_SESSION['_last_activity'] = time();
-                $_SESSION['_account_checked'] = time();
-                header('Location: admin.php');
-                exit;
+                if (!regenerateSession()) {
+                    http_response_code(503);
+                    error_log('Po úspešnom overení hesla sa nepodarilo obnoviť ID relácie.');
+                    $errors[] = t('login.error_credentials');
+                } else {
+                    $now = time();
+                    $_SESSION['user_id'] = (int) $user['id'];
+                    $_SESSION['username'] = (string) $user['username'];
+                    $_SESSION['email'] = (string) $user['email'];
+                    $_SESSION['is_admin'] = (int) $user['is_admin'];
+                    $_SESSION['_credential_fingerprint'] = passwordHashFingerprint($authenticatedPasswordHash);
+                    $_SESSION['_session_started_at'] = $now;
+                    $_SESSION['_session_rotated_at'] = $now;
+                    $_SESSION['_last_activity'] = $now;
+                    $_SESSION['_account_checked'] = $now;
+                    logAdminAction($pdo, 'login_success', 'session');
+                    header('Location: admin.php', true, 303);
+                    exit;
+                }
             }
         }
     }

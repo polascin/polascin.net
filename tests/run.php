@@ -131,6 +131,39 @@ expectTrue(
     'APP_DUMMY_PASSWORD_HASH musí mať rovnakú cenu ako hashe z hashAppPassword()'
 );
 
+$sessionNow = 100000;
+expectSame(
+    null,
+    authenticatedSessionExpiryReason([
+        '_last_activity' => $sessionNow - SESSION_IDLE_TIMEOUT + 1,
+        '_session_started_at' => $sessionNow - SESSION_ABSOLUTE_TIMEOUT + 1,
+    ], $sessionNow),
+    'Aktívna relácia pred limitmi nesmie vypršať'
+);
+expectSame(
+    'idle',
+    authenticatedSessionExpiryReason([
+        '_last_activity' => $sessionNow - SESSION_IDLE_TIMEOUT,
+        '_session_started_at' => $sessionNow - 60,
+    ], $sessionNow),
+    'Relácia musí vypršať presne po dosiahnutí idle limitu'
+);
+expectSame(
+    'absolute',
+    authenticatedSessionExpiryReason([
+        '_last_activity' => $sessionNow - 60,
+        '_session_started_at' => $sessionNow - SESSION_ABSOLUTE_TIMEOUT,
+    ], $sessionNow),
+    'Aktivita nesmie predĺžiť reláciu za absolútny limit'
+);
+$fixtureHashA = '$2y$12$aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+$fixtureHashB = '$2y$12$bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
+expectSame(64, strlen(passwordHashFingerprint($fixtureHashA)), 'Odtlačok hash-u hesla musí byť SHA-256');
+expectTrue(
+    !hash_equals(passwordHashFingerprint($fixtureHashA), passwordHashFingerprint($fixtureHashB)),
+    'Zmena hash-u hesla musí zmeniť odtlačok relácie'
+);
+
 // bcrypt odmieta NUL bajt cez \ValueError, nie \InvalidArgumentException.
 // Rehash v login.php preto musí chytať \Throwable, inak by úspešné prihlásenie
 // skončilo fatálnou chybou (Beh #4).
@@ -889,6 +922,35 @@ expectTrue(
 // prerezávalo len práve vykonávanú akciu, takže riadky zriedka používaných
 // akcií držali IP adresy 44 dní (Beh #20, nález z nočnej kontroly DB).
 $authSource = (string) file_get_contents(dirname(__DIR__) . '/auth.php');
+expectTrue(
+    str_contains($authSource, "session_name(\$isHttps ? '__Host-POLASCINSESSID' : 'POLASCINSESSID')"),
+    'Produkčná session cookie musí používať prefix __Host-'
+);
+expectTrue(
+    str_contains($authSource, 'SESSION_ABSOLUTE_TIMEOUT')
+        && str_contains($authSource, 'SESSION_RENEWAL_INTERVAL'),
+    'Autentifikovaná relácia musí mať absolútny aj obnovovací časový limit'
+);
+expectTrue(
+    str_contains($authSource, "SELECT username, email, password_hash, is_admin, is_active"),
+    'Priebežné overenie účtu musí kontrolovať aj zmenu hash-u hesla'
+);
+$loginSource = (string) file_get_contents(dirname(__DIR__) . '/login.php');
+expectTrue(
+    str_contains($loginSource, "http_response_code(401)")
+        && str_contains($loginSource, "http_response_code(429)")
+        && str_contains($loginSource, "header('Retry-After: 900')"),
+    'Neúspešné prihlásenia musia mať rozlíšiteľné bezpečnostné HTTP stavy a Retry-After'
+);
+expectTrue(
+    str_contains($loginSource, "logAdminAction(\$pdo, 'login_success', 'session')"),
+    'Úspešné prihlásenie musí zostať v administrátorskom audite'
+);
+$logoutSource = (string) file_get_contents(dirname(__DIR__) . '/logout.php');
+expectTrue(
+    str_contains($logoutSource, "logAdminAction(\$pdo, 'logout', 'session')"),
+    'Odhlásenie musí zostať v administrátorskom audite'
+);
 expectTrue(
     preg_match('~DELETE FROM form_rate_limit\s+WHERE\s+\(blocked_until~', $authSource) === 1,
     'Čistenie form_rate_limit musí prerezávať všetky akcie, nie len tú práve vykonávanú'

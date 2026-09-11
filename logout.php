@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/db_config.php';
+
+/** @var PDO $pdo */
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Allow: POST');
@@ -18,6 +21,7 @@ if (!validateCsrfToken((string) $csrfToken)) {
     exit;
 }
 
+logAdminAction($pdo, 'logout', 'session');
 clearUserSession();
 if (!session_start()) {
     http_response_code(500);
