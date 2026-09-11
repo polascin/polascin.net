@@ -1,12 +1,11 @@
 # Kontrola produkčnej databázy — polascin.net
 
-Generované: 2026-09-11 19:30:36 CEST  
+Generované: 2026-09-11 19:36:51 CEST  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
 Názov databázy a presná verzia servera sa do reportu zámerne nepíšu —
-repozitár je verejný. Pôvodná verzia tohto reportu ich obsahovala; viď
-`.audit.md`, Beh #20.
+repozitár je verejný.
 
 STATUS: NÁLEZY
 NALEZOV: 1
@@ -19,7 +18,7 @@ NALEZOV: 1
 
 | Tabuľka | Engine | Collation | Riadkov (presne) |
 | --- | --- | --- | --- |
-| `access_logs` | InnoDB | utf8mb4_unicode_ci | 20103 |
+| `access_logs` | InnoDB | utf8mb4_unicode_ci | 20106 |
 | `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `articles` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `contact_messages` | InnoDB | utf8mb4_unicode_ci | 191 |
@@ -60,8 +59,10 @@ Nastavená retencia access logov: **90 dní** (`ACCESS_LOG_RETENTION_DAYS`).
 
 | Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |
 | --- | --- | --- | --- |
-| `access_logs` | 20103 | 2026-07-28 12:20:55 | 45 |
+| `access_logs` | 20106 | 2026-07-28 12:20:55 | 45 |
 | `contact_messages` | 191 | 2026-07-29 02:43:39 | 44 |
+
+Kontaktné správy: **0** vybavených, **191** nevybavených.
 | `newsletter_subscribers` | 0 | — | — |
 | `form_rate_limit` | 13 | 2026-07-29 16:32:16 | 44 |
 
