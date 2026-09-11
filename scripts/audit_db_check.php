@@ -104,16 +104,27 @@ function fetchOne(PDO $pdo, string $sql, array $params = []): mixed {
 // odmietne namiesto toho, aby ho ticho vykonal.
 $pdo->exec('START TRANSACTION READ ONLY');
 
-$dbName = (string) fetchOne($pdo, 'SELECT DATABASE()');
-$serverVersion = (string) fetchOne($pdo, 'SELECT VERSION()');
 $generatedAt = (new DateTimeImmutable('now'))->format('Y-m-d H:i:s T');
+
+// Report sa commituje do **verejného** repozitára, takže názov databázy ani
+// presná verzia servera doň nepatria: sú to práve tie údaje, ktoré útočníkovi
+// chýbajú k platnému prihláseniu, resp. k namierenému exploitu na konkrétnu
+// patch verziu. Do reportu ide len to, čo treba na posúdenie stavu —
+// hlavné číslo verzie a či server hlási MariaDB alebo MySQL.
+$rawVersion = (string) fetchOne($pdo, 'SELECT VERSION()');
+$serverFamily = stripos($rawVersion, 'mariadb') !== false ? 'MariaDB' : 'MySQL';
+$serverMajorMinor = preg_match('~^(\d+\.\d+)~', $rawVersion, $versionMatch) === 1
+    ? $versionMatch[1] . '.x'
+    : 'neznáma';
 
 head('# Kontrola produkčnej databázy — polascin.net');
 head();
 head('Generované: ' . $generatedAt . '  ');
-head('Databáza: `' . $dbName . '`  ');
-head('Server: `' . $serverVersion . '`  ');
+head('Server: `' . $serverFamily . ' ' . $serverMajorMinor . '`  ');
 head('Režim: read-only transakcia, iba `SELECT`/`SHOW`');
+head();
+head('Názov databázy a presná verzia servera sa do reportu zámerne nepíšu —');
+head('repozitár je verejný.');
 head();
 
 // ── Tabuľky, engine, charset ────────────────────────────────────────────────
@@ -331,6 +342,29 @@ foreach (PII_TABLES as $piiTable => $timestampColumn) {
             "V `access_logs` sú záznamy staré {$ageDays} dní, hoci retencia je {$retentionDays} dní — "
             . 'čistenie logov sa nevykonáva a IP adresy sa držia dlhšie, než sľubuje zásada ochrany údajov.'
         );
+    }
+    // Zásada ochrany údajov sľubuje: „Kontaktné správy uchovávam iba po dobu
+    // potrebnú na vybavenie komunikácie.“ Mazanie je ručné (`admin_contact.php`),
+    // takže sľub drží len to, či sa vybavené správy naozaj mažú. Bez pevnej
+    // lhoty v zásade je pol roka najmiernejší obhájiteľný prah.
+    if ($piiTable === 'contact_messages') {
+        $handled = (int) fetchOne($pdo, 'SELECT COUNT(*) FROM contact_messages WHERE is_read = 1');
+        $pending = (int) fetchOne($pdo, 'SELECT COUNT(*) FROM contact_messages WHERE is_read = 0');
+        $staleHandled = (int) fetchOne(
+            $pdo,
+            'SELECT COUNT(*) FROM contact_messages WHERE is_read = 1 AND created_at < (NOW() - INTERVAL 180 DAY)'
+        );
+        out();
+        out('Kontaktné správy: **' . $handled . '** vybavených, **' . $pending . '** nevybavených.');
+
+        if ($staleHandled > 0) {
+            finding(
+                'STREDNÉ',
+                "{$staleHandled} vybavených kontaktných správ je starších ako 180 dní. Zásada ochrany údajov "
+                . 'sľubuje uchovanie „iba po dobu potrebnú na vybavenie komunikácie“ — vybavené správy '
+                . 'treba zmazať v `admin_contact.php` alebo do zásady doplniť konkrétnu lhotu.'
+            );
+        }
     }
     if ($piiTable === 'form_rate_limit' && $ageDays > 7) {
         finding(

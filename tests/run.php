@@ -874,6 +874,44 @@ expectTrue(
     'audit_db_check.php musí čítať v read-only transakcii'
 );
 
+// Report sa commituje do verejného repozitára. Názov databázy a presná verzia
+// servera doň nepatria — sú to práve tie údaje, ktoré útočníkovi chýbajú
+// k platnému prihláseniu, resp. k exploitu na konkrétnu patch verziu.
+expectTrue(
+    !str_contains($dbCheckSource, 'SELECT DATABASE()'),
+    'audit_db_check.php nesmie čítať názov databázy — report je vo verejnom repozitári'
+);
+expectTrue(
+    str_contains($dbCheckSource, '$serverMajorMinor') && !str_contains($dbCheckSource, '$rawVersion . '),
+    'audit_db_check.php musí verziu servera skrátiť na hlavné číslo, nie ju vypísať celú'
+);
+// Čistenie `form_rate_limit` nesmie byť obmedzené na jednu akciu: predtým
+// prerezávalo len práve vykonávanú akciu, takže riadky zriedka používaných
+// akcií držali IP adresy 44 dní (Beh #20, nález z nočnej kontroly DB).
+$authSource = (string) file_get_contents(dirname(__DIR__) . '/auth.php');
+expectTrue(
+    preg_match('~DELETE FROM form_rate_limit\s+WHERE\s+\(blocked_until~', $authSource) === 1,
+    'Čistenie form_rate_limit musí prerezávať všetky akcie, nie len tú práve vykonávanú'
+);
+expectTrue(
+    !str_contains($authSource, "DELETE FROM form_rate_limit
+                     WHERE action = :action"),
+    'Čistenie form_rate_limit sa nesmie vrátiť k obmedzeniu na jednu akciu'
+);
+
+$reportPath = dirname(__DIR__) . '/audit-reports/db-latest.md';
+if (is_file($reportPath)) {
+    $lastReport = (string) file_get_contents($reportPath);
+    expectTrue(
+        preg_match('~Databáza: `~', $lastReport) !== 1,
+        'Commitnutý report nesmie obsahovať názov databázy'
+    );
+    expectTrue(
+        preg_match('~\d+\.\d+\.\d+-MariaDB~', $lastReport) !== 1,
+        'Commitnutý report nesmie obsahovať presnú verziu servera'
+    );
+}
+
 // `POLASCIN_ENV_PATH` nie je nastavené ako tajomstvo, takže oba workflowy si
 // cestu k env.ini odvodzujú rovnakým defaultom. Keby sa odvodenie rozišlo,
 // nočná kontrola by čítala inú konfiguráciu než tá, s ktorou beží aplikácia.

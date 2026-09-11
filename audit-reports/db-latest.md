@@ -1,9 +1,12 @@
 # Kontrola produkčnej databázy — polascin.net
 
 Generované: 2026-09-11 19:30:36 CEST  
-Databáza: `Z5oV9wRn`  
-Server: `11.4.13-MariaDB-ubu2204-log`  
+Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
+
+Názov databázy a presná verzia servera sa do reportu zámerne nepíšu —
+repozitár je verejný. Pôvodná verzia tohto reportu ich obsahovala; viď
+`.audit.md`, Beh #20.
 
 STATUS: NÁLEZY
 NALEZOV: 1

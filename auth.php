@@ -484,17 +484,22 @@ function checkFormRateLimit(PDO $pdo, string $action, string $ip, int $maxAttemp
     try {
         // Housekeeping nie je súčasťou kritickej transakcie a beží iba občas.
         // Index (action, last_attempt) pridáva verzovaná migrácia.
+        //
+        // Čistenie zámerne NIE JE obmedzené na `action` volajúceho (Beh #20):
+        // predtým prerezávalo len tú akciu, ktorá sa práve vykonávala, takže
+        // riadky zriedka používaných akcií (`newsletter_confirm`,
+        // `newsletter_unsubscribe`) sa nezmazali nikdy a tabuľka držala IP
+        // adresy 44 dní. Vekový limit je najmenej 24 h, kým najdlhšie okno
+        // rate-limitu je 1 h, takže globálne prerezanie nemôže vynulovať
+        // žiadne živé počítadlo.
         if (random_int(1, 100) === 1) {
             $cleanupBefore = date('Y-m-d H:i:s', time() - max($windowSeconds * 2, 86400));
             try {
                 $pdo->prepare(
                     "DELETE FROM form_rate_limit
-                     WHERE action = :action
-                       AND (
-                           (blocked_until IS NOT NULL AND blocked_until < NOW())
-                           OR last_attempt < :cleanup_before
-                       )"
-                )->execute(['action' => $action, 'cleanup_before' => $cleanupBefore]);
+                     WHERE (blocked_until IS NOT NULL AND blocked_until < NOW())
+                        OR last_attempt < :cleanup_before"
+                )->execute(['cleanup_before' => $cleanupBefore]);
             } catch (\Throwable $cleanupError) {
                 error_log('Rate-limit cleanup chyba (' . $action . '): ' . $cleanupError->getMessage());
             }
