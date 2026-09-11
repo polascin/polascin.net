@@ -1,6 +1,6 @@
 # Kontrola produkčnej databázy — polascin.net
 
-Generované: 2026-09-11 19:36:51 CEST  
+Generované: 2026-09-11 19:38:35 CEST  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
