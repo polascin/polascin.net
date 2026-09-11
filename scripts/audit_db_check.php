@@ -354,8 +354,15 @@ foreach (PII_TABLES as $piiTable => $timestampColumn) {
             $pdo,
             'SELECT COUNT(*) FROM contact_messages WHERE is_read = 1 AND created_at < (NOW() - INTERVAL 180 DAY)'
         );
+        $staleUnhandled = (int) fetchOne(
+            $pdo,
+            'SELECT COUNT(*) FROM contact_messages WHERE is_read = 0 AND created_at < (NOW() - INTERVAL 30 DAY)'
+        );
+
         out();
-        out('Kontaktné správy: **' . $handled . '** vybavených, **' . $pending . '** nevybavených.');
+        out('Kontaktné správy: **' . $handled . '** vybavených, **' . $pending . '** nevybavených');
+        out('(z toho **' . $staleUnhandled . '** nevybavených dlhšie ako 30 dní, **'
+            . $staleHandled . '** vybavených starších ako 180 dní).');
 
         if ($staleHandled > 0) {
             finding(
@@ -370,10 +377,6 @@ foreach (PII_TABLES as $piiTable => $timestampColumn) {
         // nikdy sa nepreklopia do `is_read = 1` a nahromadené osobné údaje by
         // žiadny nález neohlásil. Nevybavená pošta je zároveň signál, že sa
         // kontaktný formulár zaplavuje spamom.
-        $staleUnhandled = (int) fetchOne(
-            $pdo,
-            'SELECT COUNT(*) FROM contact_messages WHERE is_read = 0 AND created_at < (NOW() - INTERVAL 30 DAY)'
-        );
         if ($staleUnhandled >= 50) {
             finding(
                 'STREDNÉ',
