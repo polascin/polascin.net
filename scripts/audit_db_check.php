@@ -365,6 +365,23 @@ foreach (PII_TABLES as $piiTable => $timestampColumn) {
                 . 'treba zmazať v `admin_contact.php` alebo do zásady doplniť konkrétnu lhotu.'
             );
         }
+
+        // Prah na vybavené správy sám nestačí: keď sa správy nevybavujú vôbec,
+        // nikdy sa nepreklopia do `is_read = 1` a nahromadené osobné údaje by
+        // žiadny nález neohlásil. Nevybavená pošta je zároveň signál, že sa
+        // kontaktný formulár zaplavuje spamom.
+        $staleUnhandled = (int) fetchOne(
+            $pdo,
+            'SELECT COUNT(*) FROM contact_messages WHERE is_read = 0 AND created_at < (NOW() - INTERVAL 30 DAY)'
+        );
+        if ($staleUnhandled >= 50) {
+            finding(
+                'STREDNÉ',
+                "{$staleUnhandled} kontaktných správ je nevybavených dlhšie ako 30 dní. Buď sa pošta "
+                . 'neprezerá, alebo formulár zbiera spam; v oboch prípadoch sa v DB hromadia osobné údaje, '
+                . 'ktoré zásada ochrany údajov sľubuje držať len po dobu potrebnú na vybavenie.'
+            );
+        }
     }
     if ($piiTable === 'form_rate_limit' && $ageDays > 7) {
         finding(
