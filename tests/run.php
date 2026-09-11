@@ -790,6 +790,38 @@ expectSame($csrf, generateCsrfToken(), 'Neplatný CSRF pokus nesmie zneplatniť 
 expectTrue(validateCsrfToken($csrf), 'Platný CSRF token musí prejsť');
 expectTrue(generateCsrfToken() !== $csrf, 'Platný CSRF token sa musí po použití otočiť');
 
+// Prehľad projektu v `.audit.md` sa v Behu #19 rozišiel so skutočnosťou: uvádzal
+// šesť jazykov, hoci `lang/` má desať katalógov. Dokumentácia je vstupom ďalších
+// auditných behov, takže nesmie zaostávať za kódom.
+$auditDoc = (string) file_get_contents(dirname(__DIR__) . '/.audit.md');
+$missingFromDoc = [];
+$missingFromDisk = [];
+foreach (array_keys(appLanguages()) as $docLang) {
+    if (!is_file(dirname(__DIR__) . '/lang/' . $docLang . '.php')) {
+        $missingFromDisk[] = $docLang;
+    }
+    if (!str_contains($auditDoc, '`lang/' . $docLang . '.php`')) {
+        $missingFromDoc[] = $docLang;
+    }
+}
+expectSame([], $missingFromDisk, 'Každý podporovaný jazyk musí mať katalóg v lang/');
+expectSame([], $missingFromDoc, 'Prehľad projektu v .audit.md musí uvádzať katalóg každého podporovaného jazyka');
+
+foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $cataloguePath) {
+    $catalogueCode = basename($cataloguePath, '.php');
+    expectTrue(
+        isSupportedLanguage($catalogueCode),
+        "Katalóg lang/{$catalogueCode}.php musí patriť podporovanému jazyku, inak je mŕtvy kód"
+    );
+}
+
+// Statický `sitemap.xml` je len záložný index; nesmie sa vrátiť k zoznamu adries,
+// ktorý by na produkcii prekryl dynamický `sitemap.php` (Beh #5, nález 6).
+$sitemapIndex = (string) file_get_contents(dirname(__DIR__) . '/sitemap.xml');
+expectTrue(str_contains($sitemapIndex, '<sitemapindex'), 'sitemap.xml musí zostať sitemap index');
+expectTrue(str_contains($sitemapIndex, 'https://polascin.net/sitemap.php'), 'sitemap.xml musí odkazovať na sitemap.php');
+expectTrue(!str_contains($sitemapIndex, '<urlset'), 'sitemap.xml nesmie obsahovať vlastný zoznam adries');
+
 if ($failures !== []) {
     fwrite(STDERR, "Zlyhané kontroly:\n- " . implode("\n- ", $failures) . "\n");
     exit(1);
