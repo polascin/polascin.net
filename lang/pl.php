@@ -226,7 +226,7 @@ return [
     'contact.error_name' => 'Podaj prawidłowe imię i nazwisko.',
     'contact.error_email' => 'Podaj prawidłowy adres e-mail.',
     'contact.error_subject' => 'Temat jest za długi.',
-    'contact.error_message' => 'Wpisz wiadomość (maks. 5000 znaków).',
+    'contact.error_message' => 'Wpisz wiadomość (od 20 do 5000 znaków).',
     'contact.error_rate_limit' => 'Zbyt wiele wiadomości z tego adresu. Spróbuj ponownie później.',
     'contact.error_save' => 'Nie udało się wysłać wiadomości. Spróbuj ponownie później.',
 

@@ -226,7 +226,7 @@ return [
     'contact.error_name' => 'Inserisci un nome valido.',
     'contact.error_email' => 'Inserisci un indirizzo e-mail valido.',
     'contact.error_subject' => 'L\'oggetto è troppo lungo.',
-    'contact.error_message' => 'Inserisci un messaggio (max 5000 caratteri).',
+    'contact.error_message' => 'Inserisci un messaggio (da 20 a 5000 caratteri).',
     'contact.error_rate_limit' => 'Troppi messaggi da questo indirizzo. Riprova più tardi.',
     'contact.error_save' => 'Non è stato possibile inviare il messaggio. Riprova più tardi.',
 

@@ -617,5 +617,18 @@
         }
       });
     });
+
+    document.querySelectorAll("form[data-submit-once]").forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        if (event.defaultPrevented) {
+          return;
+        }
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.setAttribute("aria-disabled", "true");
+        }
+      });
+    });
   });
 })();

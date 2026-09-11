@@ -226,7 +226,7 @@ return [
     'contact.error_name' => 'Adjon meg érvényes nevet.',
     'contact.error_email' => 'Adjon meg érvényes e-mail-címet.',
     'contact.error_subject' => 'A tárgy túl hosszú.',
-    'contact.error_message' => 'Írjon üzenetet (legfeljebb 5000 karakter).',
+    'contact.error_message' => 'Írjon üzenetet (20–5000 karakter).',
     'contact.error_rate_limit' => 'Túl sok üzenet érkezett erről a címről. Próbálja meg később.',
     'contact.error_save' => 'Az üzenetet nem sikerült elküldeni. Próbálja meg később.',
 

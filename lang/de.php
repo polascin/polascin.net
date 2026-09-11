@@ -226,7 +226,7 @@ return [
     'contact.error_name' => 'Bitte geben Sie einen gültigen Namen ein.',
     'contact.error_email' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
     'contact.error_subject' => 'Der Betreff ist zu lang.',
-    'contact.error_message' => 'Bitte geben Sie eine Nachricht ein (max. 5000 Zeichen).',
+    'contact.error_message' => 'Bitte geben Sie eine Nachricht ein (20 bis 5000 Zeichen).',
     'contact.error_rate_limit' => 'Zu viele Nachrichten von dieser Adresse. Bitte versuchen Sie es später erneut.',
     'contact.error_save' => 'Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.',
 

@@ -823,6 +823,50 @@ expectSame($csrf, generateCsrfToken(), 'Neplatný CSRF pokus nesmie zneplatniť 
 expectTrue(validateCsrfToken($csrf), 'Platný CSRF token musí prejsť');
 expectTrue(generateCsrfToken() !== $csrf, 'Platný CSRF token sa musí po použití otočiť');
 
+$originalFormProofs = $_SESSION['_form_proofs'] ?? null;
+$formProof = generateTimedFormProof('contact');
+$_SESSION['_form_proofs']['contact'][$formProof] = time() - 3;
+expectTrue(
+    consumeTimedFormProof('contact', $formProof, 2, 7200),
+    'Dostatočne starý formulárový dôkaz musí prejsť'
+);
+expectTrue(
+    !consumeTimedFormProof('contact', $formProof, 2, 7200),
+    'Formulárový dôkaz musí byť jednorazový'
+);
+$tooFastProof = generateTimedFormProof('contact');
+expectTrue(
+    !consumeTimedFormProof('contact', $tooFastProof, 2, 7200),
+    'Okamžite odoslaný formulár musí byť označený ako automatizovaný'
+);
+expectTrue(
+    !consumeTimedFormProof('contact', "not-a-proof\n", 2, 7200),
+    'Neplatný formát formulárového dôkazu nesmie prejsť'
+);
+if ($originalFormProofs === null) {
+    unset($_SESSION['_form_proofs']);
+} else {
+    $_SESSION['_form_proofs'] = $originalFormProofs;
+}
+
+expectTrue(
+    httpOriginsMatch('https://polascin.net/contact.php', 'https://polascin.net'),
+    'Referer z rovnakej HTTPS domény musí mať zhodný pôvod'
+);
+expectTrue(
+    !httpOriginsMatch('https://polascin.net.attacker.example', 'https://polascin.net'),
+    'Doména s dôveryhodným prefixom nesmie mať zhodný pôvod'
+);
+expectTrue(
+    !httpOriginsMatch('http://polascin.net', 'https://polascin.net'),
+    'Odlišná schéma nesmie mať zhodný pôvod'
+);
+expectTrue(
+    containsDisallowedControlCharacters("text\0payload")
+        && !containsDisallowedControlCharacters("Bežný text\nna dvoch riadkoch"),
+    'Validácia musí odmietnuť riadiace znaky, ale povoliť nový riadok'
+);
+
 // Prehľad projektu v `.audit.md` sa v Behu #19 rozišiel so skutočnosťou: uvádzal
 // šesť jazykov, hoci `lang/` má desať katalógov. Dokumentácia je vstupom ďalších
 // auditných behov, takže nesmie zaostávať za kódom.
@@ -972,6 +1016,36 @@ $mainJsSource = (string) file_get_contents(dirname(__DIR__) . '/js/main.js');
 expectTrue(
     str_contains($mainJsSource, 'confirmationInput.dataset.confirmationValue'),
     'Serverové potvrdenie hromadného odstránenia sa smie aktivovať až po potvrdení dialógu'
+);
+$contactSource = (string) file_get_contents(dirname(__DIR__) . '/contact.php');
+expectTrue(
+    str_contains($contactSource, 'isTrustedStateChangingRequest()')
+        && str_contains($contactSource, "consumeTimedFormProof('contact'")
+        && str_contains($contactSource, 'name="website"'),
+    'Kontaktný formulár musí kontrolovať pôvod, časovaný dôkaz aj honeypot'
+);
+expectTrue(
+    str_contains($contactSource, "'contact_global'")
+        && str_contains($contactSource, "'contact_sender'")
+        && str_contains($contactSource, "'contact_duplicate'")
+        && str_contains($contactSource, 'isEmailDomainValid($email)'),
+    'Kontaktný formulár musí obmedzovať distribuovaný spam, odosielateľa aj duplicity'
+);
+expectTrue(
+    str_contains($contactSource, 'minlength="20"')
+        && str_contains($contactSource, "clearFormRateLimit(\$pdo, 'contact_duplicate', \$duplicateKey)"),
+    'Správa musí mať minimálnu dĺžku a neúspešný zápis musí uvoľniť deduplikačný limit'
+);
+expectTrue(
+    str_contains($mainJsSource, 'form[data-submit-once]')
+        && str_contains($mainJsSource, 'submitButton.disabled = true'),
+    'Klient musí zabrániť opakovanému odoslaniu dvojklikom'
+);
+$stylesSource = (string) file_get_contents(dirname(__DIR__) . '/css/styles.css');
+expectTrue(
+    str_contains($stylesSource, '.contact-form-trap')
+        && preg_match('/\.contact-form-trap\s*\{[^}]*display\s*:\s*none/is', $stylesSource) !== 1,
+    'Honeypot musí zostať v DOM a nesmie používať display:none'
 );
 expectTrue(
     preg_match('~DELETE FROM form_rate_limit\s+WHERE\s+\(blocked_until~', $authSource) === 1,

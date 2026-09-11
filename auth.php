@@ -95,7 +95,7 @@ function sendSecurityHeaders(): void {
     // Odpoveď sa líši podľa zvoleného jazyka, ktorý pochádza z cookie alebo
     // z Accept-Language. Bez Vary by zdieľaná cache mohla podať odpoveď
     // v cudzom jazyku — aj s hlavičkou Set-Cookie, ktorá jazyk pripne.
-    header('Vary: Cookie, Accept-Language', false);
+    header('Vary: Cookie, Accept-Language, Sec-Fetch-Site, Origin', false);
 
     if (requestNeedsNoReferrer()) {
         header('Cache-Control: no-store, private');
@@ -363,6 +363,111 @@ function validateCsrfToken(mixed $token): bool {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     }
     return $valid;
+}
+
+/**
+ * Vytvorí krátkodobý jednorazový dôkaz, že formulár bol najprv načítaný.
+ * Viac tokenov umožňuje mať formulár otvorený vo viacerých kartách.
+ */
+function generateTimedFormProof(string $scope): string {
+    if (preg_match('/^[a-z0-9_-]{1,40}$/D', $scope) !== 1) {
+        throw new InvalidArgumentException('Neplatný rozsah formulárového dôkazu.');
+    }
+
+    $now = time();
+    $proofs = isset($_SESSION['_form_proofs'][$scope]) && is_array($_SESSION['_form_proofs'][$scope])
+        ? $_SESSION['_form_proofs'][$scope]
+        : [];
+    foreach ($proofs as $nonce => $createdAt) {
+        if (!is_int($createdAt) || ($now - $createdAt) > 7200) {
+            unset($proofs[$nonce]);
+        }
+    }
+    while (count($proofs) >= 8) {
+        array_shift($proofs);
+    }
+
+    $nonce = bin2hex(random_bytes(16));
+    $proofs[$nonce] = $now;
+    $_SESSION['_form_proofs'][$scope] = $proofs;
+    return $nonce;
+}
+
+/** Dôkaz sa spotrebuje aj pri neplatnom alebo prirýchlom odoslaní. */
+function consumeTimedFormProof(
+    string $scope,
+    mixed $token,
+    int $minimumAgeSeconds = 2,
+    int $maximumAgeSeconds = 7200
+): bool {
+    if (
+        preg_match('/^[a-z0-9_-]{1,40}$/D', $scope) !== 1
+        || !is_string($token)
+        || preg_match('/^[a-f0-9]{32}$/D', $token) !== 1
+        || !isset($_SESSION['_form_proofs'][$scope][$token])
+    ) {
+        return false;
+    }
+
+    $createdAt = $_SESSION['_form_proofs'][$scope][$token];
+    unset($_SESSION['_form_proofs'][$scope][$token]);
+    if ($_SESSION['_form_proofs'][$scope] === []) {
+        unset($_SESSION['_form_proofs'][$scope]);
+    }
+
+    if (!is_int($createdAt)) {
+        return false;
+    }
+    $age = time() - $createdAt;
+    return $age >= $minimumAgeSeconds && $age <= $maximumAgeSeconds;
+}
+
+/** Vráti kanonický scheme://host:port pre Origin aj plnú Referer URL. */
+function normalizeHttpOrigin(string $url): ?string {
+    $parts = parse_url(trim($url));
+    if (!is_array($parts) || empty($parts['scheme']) || empty($parts['host'])) {
+        return null;
+    }
+    $scheme = strtolower((string) $parts['scheme']);
+    if (!in_array($scheme, ['http', 'https'], true)) {
+        return null;
+    }
+    if (isset($parts['user']) || isset($parts['pass'])) {
+        return null;
+    }
+    $host = strtolower(rtrim((string) $parts['host'], '.'));
+    if ($host === '') {
+        return null;
+    }
+    $port = isset($parts['port']) ? (int) $parts['port'] : ($scheme === 'https' ? 443 : 80);
+    return $scheme . '://' . $host . ':' . $port;
+}
+
+function httpOriginsMatch(string $sourceUrl, string $targetUrl): bool {
+    $source = normalizeHttpOrigin($sourceUrl);
+    $target = normalizeHttpOrigin($targetUrl);
+    return $source !== null && $target !== null && hash_equals($target, $source);
+}
+
+/**
+ * Fetch Metadata a Origin/Referer sú ďalšia vrstva nad povinným CSRF tokenom.
+ * Staršie alebo súkromné klienty bez týchto hlavičiek ostávajú kompatibilné.
+ */
+function isTrustedStateChangingRequest(): bool {
+    $fetchSite = strtolower(trim((string) ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? '')));
+    if ($fetchSite !== '' && !in_array($fetchSite, ['same-origin', 'none'], true)) {
+        return false;
+    }
+
+    $sourceUrl = trim((string) ($_SERVER['HTTP_ORIGIN'] ?? ''));
+    if ($sourceUrl === '') {
+        $sourceUrl = trim((string) ($_SERVER['HTTP_REFERER'] ?? ''));
+    }
+    return $sourceUrl === '' || httpOriginsMatch($sourceUrl, getAppBaseUrl());
+}
+
+function containsDisallowedControlCharacters(string $value): bool {
+    return preg_match('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', $value) === 1;
 }
 
 function regenerateSession(): bool {

@@ -226,7 +226,7 @@ return [
     'contact.error_name' => 'Por favor, introduzca un nombre válido.',
     'contact.error_email' => 'Por favor, introduzca una dirección de correo electrónico válida.',
     'contact.error_subject' => 'El asunto es demasiado largo.',
-    'contact.error_message' => 'Por favor, escriba un mensaje (máximo 5000 caracteres).',
+    'contact.error_message' => 'Por favor, escriba un mensaje (entre 20 y 5000 caracteres).',
     'contact.error_rate_limit' => 'Demasiados mensajes desde esta dirección. Inténtelo de nuevo más tarde.',
     'contact.error_save' => 'No se ha podido enviar el mensaje. Inténtelo de nuevo más tarde.',
 

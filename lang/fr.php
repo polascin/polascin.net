@@ -226,7 +226,7 @@ return [
     'contact.error_name' => 'Veuillez saisir un nom valide.',
     'contact.error_email' => 'Veuillez saisir une adresse e-mail valide.',
     'contact.error_subject' => 'L\'objet est trop long.',
-    'contact.error_message' => 'Veuillez saisir un message (5000 caractères maximum).',
+    'contact.error_message' => 'Veuillez saisir un message (de 20 à 5000 caractères).',
     'contact.error_rate_limit' => 'Trop de messages envoyés depuis cette adresse. Veuillez réessayer plus tard.',
     'contact.error_save' => 'L\'envoi du message a échoué. Veuillez réessayer plus tard.',
 

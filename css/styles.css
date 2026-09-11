@@ -1740,6 +1740,16 @@ footer button:focus-visible {
   gap: 0.35rem;
 }
 
+/* Bežnému návštevníkovi neviditeľná pasca pre automatizované odosielanie.
+   Pole ostáva v DOM; display:none by ho jednoduché boty vedeli ľahko preskočiť. */
+.contact-form-trap {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
 .form-group label {
   font-weight: 600;
   font-size: 0.95rem;

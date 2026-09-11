@@ -226,7 +226,7 @@ return [
     'contact.error_name' => 'Zadejte prosím platné jméno.',
     'contact.error_email' => 'Zadejte prosím platnou e-mailovou adresu.',
     'contact.error_subject' => 'Předmět je příliš dlouhý.',
-    'contact.error_message' => 'Zadejte prosím zprávu (max. 5000 znaků).',
+    'contact.error_message' => 'Zadejte prosím zprávu (20 až 5000 znaků).',
     'contact.error_rate_limit' => 'Příliš mnoho zpráv z této adresy. Zkuste to znovu později.',
     'contact.error_save' => 'Zprávu se nepodařilo odeslat. Zkuste to znovu později.',
 
