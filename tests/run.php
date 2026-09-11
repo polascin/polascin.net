@@ -1021,6 +1021,50 @@ expectTrue(
     str_contains($mainJsSource, 'confirmationInput.dataset.confirmationValue'),
     'Serverové potvrdenie hromadného odstránenia sa smie aktivovať až po potvrdení dialógu'
 );
+$adminUsersSource = (string) file_get_contents(dirname(__DIR__) . '/admin_users.php');
+expectTrue(
+    str_contains($adminUsersSource, 'requireAdmin()')
+        && str_contains($adminUsersSource, 'isTrustedStateChangingRequest()')
+        && str_contains($adminUsersSource, 'validateCsrfToken('),
+    'Správa administrátorov musí vyžadovať admin oprávnenie, dôveryhodný pôvod a CSRF'
+);
+expectTrue(
+    str_contains($adminUsersSource, "password_verify(\$currentPassword, \$currentHash)")
+        && str_contains($adminUsersSource, 'SET password_hash = :new_hash, must_change_password = 0')
+        && str_contains($adminUsersSource, 'password_hash = :current_hash'),
+    'Zmena hesla musí znovu overiť aktuálne heslo a použiť podmienenú aktualizáciu hash-u'
+);
+expectTrue(
+    str_contains($adminUsersSource, 'hashAppPassword($newPassword)')
+        && str_contains($adminUsersSource, "'admin_password_change'")
+        && str_contains($adminUsersSource, "logAdminAction(\$pdo, 'admin_password_change'"),
+    'Zmena hesla musí použiť spoločnú hashovaciu politiku, limit a audit'
+);
+expectTrue(
+    str_contains($adminUsersSource, 'must_change_password)')
+        && str_contains($adminUsersSource, 'VALUES (:username, :email, :password_hash, 1, 1, 1)')
+        && str_contains($adminUsersSource, "password_verify(\$authorizingPassword, \$currentHash)"),
+    'Nový administrátor musí dostať iba hash dočasného hesla a povinnú prvú zmenu po opätovnom overení správcu'
+);
+expectTrue(
+    str_contains($adminUsersSource, "logAdminAction(\$pdo, 'admin_user_create'")
+        && str_contains($adminUsersSource, '$pdo->beginTransaction()')
+        && str_contains($adminUsersSource, '$pdo->rollBack()'),
+    'Vytvorenie administrátora musí byť transakčné a auditované'
+);
+expectTrue(
+    str_contains($authSource, 'must_change_password')
+        && str_contains($authSource, "admin_users.php?change_required=1")
+        && str_contains($loginSource, "'admin_users.php?change_required=1'"),
+    'Prihlásenie s dočasným heslom musí vynútiť prechod na zmenu hesla'
+);
+$adminDashboardSource = (string) file_get_contents(dirname(__DIR__) . '/admin.php');
+$mainNavSource = (string) file_get_contents(dirname(__DIR__) . '/main_nav.php');
+expectTrue(
+    str_contains($adminDashboardSource, 'href="admin_users.php"')
+        && str_contains($mainNavSource, "'admin_users.php'"),
+    'Správa administrátorov musí byť dostupná z panela aj admin navigácie'
+);
 $contactSource = (string) file_get_contents(dirname(__DIR__) . '/contact.php');
 expectTrue(
     str_contains($contactSource, 'isTrustedStateChangingRequest()')

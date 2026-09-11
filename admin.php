@@ -13,6 +13,7 @@ $publishedCount = (int) $pdo->query("SELECT COUNT(*) FROM articles WHERE is_publ
 $messageCount = (int) $pdo->query("SELECT COUNT(*) FROM contact_messages")->fetchColumn();
 $unreadCount = (int) $pdo->query("SELECT COUNT(*) FROM contact_messages WHERE is_read = 0")->fetchColumn();
 $subscriberCount = (int) $pdo->query("SELECT COUNT(*) FROM newsletter_subscribers WHERE is_confirmed = 1")->fetchColumn();
+$adminCount = (int) $pdo->query("SELECT COUNT(*) FROM users WHERE is_admin = 1 AND is_active = 1")->fetchColumn();
 
 $baseUrl = getAppBaseUrl();
 $pageTitle = 'Administrácia | MUDr. Ľubomír Polaščín';
@@ -36,6 +37,7 @@ $canonicalUrl = $baseUrl . '/admin.php';
         <div class="card"><h2>Obsahové bloky</h2><p>Spravovať sekcie a texty na hlavnej stránke.</p><a href="admin_content.php" class="btn btn-primary">Spravovať obsah</a></div>
         <div class="card"><h2>Správy</h2><p><strong><?= $unreadCount ?></strong> neprečítaných / <?= $messageCount ?> celkovo</p><a href="admin_contact.php" class="btn btn-primary">Zobraziť správy</a></div>
         <div class="card"><h2>Newsletter</h2><p><strong><?= $subscriberCount ?></strong> potvrdených odberateľov</p><a href="admin_newsletter.php" class="btn btn-primary">Zobraziť odberateľov</a></div>
+        <div class="card"><h2>Administrátori</h2><p><strong><?= $adminCount ?></strong> aktívnych správcov</p><a href="admin_users.php" class="btn btn-primary">Spravovať administrátorov</a></div>
       </div>
     </div>
   </section>

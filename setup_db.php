@@ -225,6 +225,14 @@ function applySchemaMigrations(PDO $pdo): void {
                 throw $e;
             }
         },
+        '2026091101_admin_password_rotation' => static function (PDO $pdo): void {
+            if (!columnExists($pdo, 'users', 'must_change_password')) {
+                $pdo->exec(
+                    "ALTER TABLE users
+                     ADD COLUMN must_change_password TINYINT(1) NOT NULL DEFAULT 0 AFTER is_active"
+                );
+            }
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
@@ -248,6 +256,7 @@ CREATE TABLE IF NOT EXISTS users (
     password_hash VARCHAR(255) NOT NULL,
     is_admin TINYINT(1) DEFAULT 0,
     is_active TINYINT(1) DEFAULT 1,
+    must_change_password TINYINT(1) NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

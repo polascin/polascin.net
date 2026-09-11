@@ -1851,6 +1851,12 @@ footer button:focus-visible {
   font-size: 0.95rem;
 }
 
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
 .admin-table th,
 .admin-table td {
   border: 1px solid var(--border-color);

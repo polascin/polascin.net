@@ -40,6 +40,7 @@ const EXPECTED_MIGRATIONS = [
     '2026072801_security_indexes',
     '2026072901_multilingual_content',
     '2026072902_profile_copy',
+    '2026091101_admin_password_rotation',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

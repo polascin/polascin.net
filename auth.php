@@ -43,6 +43,7 @@ function requestNeedsNoReferrer(): bool {
         'admin_content.php',
         'admin_contact.php',
         'admin_newsletter.php',
+        'admin_users.php',
         'logout.php',
         'newsletter.php',
     ];
@@ -280,7 +281,7 @@ function revalidateSessionAccount(): void {
 
     try {
         $stmt = $pdo->prepare(
-            "SELECT username, email, password_hash, is_admin, is_active
+            "SELECT username, email, password_hash, is_admin, is_active, must_change_password
              FROM users
              WHERE id = :id
              LIMIT 1"
@@ -318,6 +319,7 @@ function revalidateSessionAccount(): void {
     $_SESSION['username'] = (string) $account['username'];
     $_SESSION['email'] = (string) $account['email'];
     $_SESSION['is_admin'] = (int) $account['is_admin'];
+    $_SESSION['must_change_password'] = (int) ($account['must_change_password'] ?? 0);
     $_SESSION['_credential_fingerprint'] = $currentCredentialFingerprint;
     $_SESSION['_account_checked'] = $now;
     if ($privilegesChanged) {
@@ -344,6 +346,13 @@ function requireAdmin(): void {
     if (!isAdmin()) {
         header('HTTP/1.1 403 Forbidden');
         exit('Prístup len pre administrátora.');
+    }
+    if (
+        !empty($_SESSION['must_change_password'])
+        && basename((string) ($_SERVER['SCRIPT_NAME'] ?? '')) !== 'admin_users.php'
+    ) {
+        header('Location: admin_users.php?change_required=1', true, 303);
+        exit;
     }
 }
 

@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Retry-After: 900');
             $errors[] = t('login.error_rate_limit');
         } else {
-            $stmt = $pdo->prepare("SELECT id, username, email, password_hash, is_admin, is_active FROM users WHERE username = :username LIMIT 1");
+            $stmt = $pdo->prepare("SELECT id, username, email, password_hash, is_admin, is_active, must_change_password FROM users WHERE username = :username LIMIT 1");
             $stmt->execute([':username' => appTextSlice($username, 0, 255)]);
             $user = $stmt->fetch();
 
@@ -90,13 +90,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['username'] = (string) $user['username'];
                     $_SESSION['email'] = (string) $user['email'];
                     $_SESSION['is_admin'] = (int) $user['is_admin'];
+                    $_SESSION['must_change_password'] = (int) ($user['must_change_password'] ?? 0);
                     $_SESSION['_credential_fingerprint'] = passwordHashFingerprint($authenticatedPasswordHash);
                     $_SESSION['_session_started_at'] = $now;
                     $_SESSION['_session_rotated_at'] = $now;
                     $_SESSION['_last_activity'] = $now;
                     $_SESSION['_account_checked'] = $now;
                     logAdminAction($pdo, 'login_success', 'session');
-                    header('Location: admin.php', true, 303);
+                    $destination = !empty($_SESSION['must_change_password'])
+                        ? 'admin_users.php?change_required=1'
+                        : 'admin.php';
+                    header('Location: ' . $destination, true, 303);
                     exit;
                 }
             }

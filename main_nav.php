@@ -66,7 +66,7 @@ if (!function_exists('_navHref')) {
   <li><?= _navA(_navHref('index.php', '#links', $_onIndex, $_navLang), t('nav.links'), false) ?></li>
   <li><?= _navA(_navHref('index.php', '#contact', $_onIndex, $_navLang), t('nav.contact'), false) ?></li>
   <?php if (function_exists('isLoggedIn') && isLoggedIn() && function_exists('isAdmin') && isAdmin()): ?>
-    <li><?= _navA(langUrl($_navLang, 'admin.php'), t('nav.admin'), in_array($_navCurrent, ['admin.php', 'admin_articles.php', 'admin_content.php', 'admin_contact.php', 'admin_newsletter.php'], true)) ?></li>
+    <li><?= _navA(langUrl($_navLang, 'admin.php'), t('nav.admin'), in_array($_navCurrent, ['admin.php', 'admin_articles.php', 'admin_content.php', 'admin_contact.php', 'admin_newsletter.php', 'admin_users.php'], true)) ?></li>
     <li>
       <form action="logout.php" method="post" class="nav-logout-form">
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
