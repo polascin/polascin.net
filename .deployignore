@@ -46,6 +46,10 @@ __MACOSX
 # Hooky a nástroje (nie sú súčasťou web rootu)
 hooks
 tests
+scripts
+
+# Auditné reporty z nočnej kontroly DB (patria do repozitára, nie na web)
+audit-reports
 
 # Ostatné nepoužívané adresáre
 scratch

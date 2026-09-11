@@ -822,6 +822,89 @@ expectTrue(str_contains($sitemapIndex, '<sitemapindex'), 'sitemap.xml musí zost
 expectTrue(str_contains($sitemapIndex, 'https://polascin.net/sitemap.php'), 'sitemap.xml musí odkazovať na sitemap.php');
 expectTrue(!str_contains($sitemapIndex, '<urlset'), 'sitemap.xml nesmie obsahovať vlastný zoznam adries');
 
+// Read-only kontrola DB (`scripts/audit_db_check.php`) beží na produkčnom
+// serveri, kde ju nikto neuvidí zlyhať na drobnosti. Jej zabudované zoznamy sa
+// preto porovnávajú so schémou a s `appLanguages()` tu, lokálne: keby sa
+// rozišli, kontrola by ticho hlásila „OK" na schéme, ktorú vôbec nepozná.
+$dbCheckSource = (string) file_get_contents(dirname(__DIR__) . '/scripts/audit_db_check.php');
+$setupDbSource = (string) file_get_contents(dirname(__DIR__) . '/setup_db.php');
+
+/** Vytiahne prvky z `const NAZOV = [...]` v kontrolnom skripte. */
+$dbCheckConstant = static function (string $constantName) use ($dbCheckSource): array {
+    if (preg_match('~const\s+' . preg_quote($constantName, '~') . '\s*=\s*\[(.*?)\];~s', $dbCheckSource, $match) !== 1) {
+        return [];
+    }
+    // Všetky tri sledované konštanty sú ploché zoznamy reťazcov, takže stačí
+    // vyzbierať uvodzovkované hodnoty; delimiter za poslednou položkou chýba.
+    preg_match_all("~'([^']+)'~", $match[1], $items);
+
+    return $items[1];
+};
+
+preg_match_all("~^\s{8}'(\d{10}_[a-z0-9_]+)'\s*=>~m", $setupDbSource, $migrationMatches);
+expectTrue($migrationMatches[1] !== [], 'V setup_db.php sa musia dať nájsť kľúče migrácií');
+expectSame(
+    $migrationMatches[1],
+    $dbCheckConstant('EXPECTED_MIGRATIONS'),
+    'EXPECTED_MIGRATIONS v audit_db_check.php musí zodpovedať migráciám v setup_db.php'
+);
+
+preg_match_all('~CREATE TABLE IF NOT EXISTS (\w+)~', $setupDbSource, $tableMatches);
+expectTrue($tableMatches[1] !== [], 'V setup_db.php sa musia dať nájsť názvy tabuliek');
+$expectedTablesInCheck = $dbCheckConstant('EXPECTED_TABLES');
+expectSame([], array_values(array_diff($tableMatches[1], $expectedTablesInCheck)), 'EXPECTED_TABLES v audit_db_check.php nesmie vynechať tabuľku zo setup_db.php');
+expectSame([], array_values(array_diff($expectedTablesInCheck, $tableMatches[1])), 'EXPECTED_TABLES v audit_db_check.php nesmie uvádzať tabuľku, ktorú setup_db.php nevytvára');
+
+expectSame(
+    array_keys(appLanguages()),
+    $dbCheckConstant('EXPECTED_LANGUAGES'),
+    'EXPECTED_LANGUAGES v audit_db_check.php musí zodpovedať appLanguages()'
+);
+
+// Kontrola musí zostať read-only. Toto je hrubé sito nad zdrojom, nie dôkaz —
+// skutočnú ochranu nesie `START TRANSACTION READ ONLY` a odporúčaný DB grant.
+foreach (['INSERT ', 'UPDATE ', 'DELETE ', 'DROP ', 'TRUNCATE ', 'ALTER ', 'REPLACE INTO'] as $writeKeyword) {
+    expectTrue(
+        !str_contains($dbCheckSource, "'" . $writeKeyword) && !str_contains($dbCheckSource, '"' . $writeKeyword),
+        "audit_db_check.php nesmie obsahovať zápisové SQL ({$writeKeyword})"
+    );
+}
+expectTrue(
+    str_contains($dbCheckSource, 'START TRANSACTION READ ONLY'),
+    'audit_db_check.php musí čítať v read-only transakcii'
+);
+
+// `POLASCIN_ENV_PATH` nie je nastavené ako tajomstvo, takže oba workflowy si
+// cestu k env.ini odvodzujú rovnakým defaultom. Keby sa odvodenie rozišlo,
+// nočná kontrola by čítala inú konfiguráciu než tá, s ktorou beží aplikácia.
+$verifyWorkflow = (string) file_get_contents(dirname(__DIR__) . '/.github/workflows/verify-db.yml');
+$envPathDerivation = 'REMOTE_ENV_PATH="${POLASCIN_ENV_PATH:-${REMOTE_PARENT%/}/private/polascin.env.ini}"';
+foreach (['deploy.yml' => $deployWorkflow, 'verify-db.yml' => $verifyWorkflow] as $workflowName => $workflowSource) {
+    expectTrue(
+        str_contains($workflowSource, $envPathDerivation),
+        "{$workflowName} musí odvodzovať cestu k env.ini rovnakým defaultom"
+    );
+}
+
+// Kontrolný skript ani reporty nesmú skončiť vo verejnom web roote.
+foreach (['scripts', 'audit-reports'] as $auditOnlyDir) {
+    expectTrue(
+        preg_match('~(^|\r?\n)' . preg_quote($auditOnlyDir, '~') . '(\r?\n|$)~', $deployIgnoreRules) === 1,
+        ".deployignore musí vylúčiť {$auditOnlyDir} z nasadenia"
+    );
+}
+
+// Nočná kontrola sa musí spustiť pred behom auditnej rutiny (02:02 CEST),
+// inak by rutina čítala report z predchádzajúceho dňa.
+expectTrue(
+    str_contains($verifyWorkflow, 'cron: "50 23 * * *"'),
+    'verify-db.yml musí bežať o 23:50 UTC, teda pred nočnou auditnou rutinou'
+);
+expectTrue(
+    str_contains($verifyWorkflow, 'group: polascin-production-deploy'),
+    'verify-db.yml musí zdieľať concurrency skupinu s nasadením, aby sa nikdy neprekryli'
+);
+
 if ($failures !== []) {
     fwrite(STDERR, "Zlyhané kontroly:\n- " . implode("\n- ", $failures) . "\n");
     exit(1);

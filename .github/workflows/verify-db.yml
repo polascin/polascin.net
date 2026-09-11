@@ -1,0 +1,224 @@
+name: Verify production database
+
+# Nočný audit beží v izolovanom cloudovom prostredí bez prístupu k produkčnej
+# databáze (`DB_HOST=localhost`) a bez SSH na hosting. Namiesto toho, aby sa
+# deploy kľúč a DB heslo kopírovali do cloudu, kontroly robí tento workflow —
+# tajomstvá už má a na server už SSH-uje — a výsledok commitne do repozitára,
+# odkiaľ si ho rutina prečíta z checkoutu. Do cloudu sa tak nedostane žiadny
+# credential. Podrobnosti: `.doaudit.md`, sekcia „Automatizovaný nočný beh“.
+
+on:
+  schedule:
+    # 23:50 UTC = 01:50 CEST / 00:50 CET, teda pred behom nočnej rutiny (02:02 CEST).
+    - cron: "50 23 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+# Rovnaká skupina ako deploy workflow: kontrola a nasadenie sa nikdy neprekryjú,
+# takže report nikdy nevznikne nad rozostavanou verziou web rootu.
+concurrency:
+  group: polascin-production-deploy
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  verify:
+    name: Read-only database verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Validate deploy configuration
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_REMOTE_PATH: ${{ secrets.DEPLOY_REMOTE_PATH }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          POLASCIN_ENV_PATH: ${{ secrets.POLASCIN_ENV_PATH }}
+        run: |
+          set -euo pipefail
+
+          # Validácia je zámerne zhodná s krokom „Validate deploy configuration“
+          # v `deploy.yml`, vrátane odvodenia cesty k env.ini: `POLASCIN_ENV_PATH`
+          # nie je nastavené ako tajomstvo a nasadenie sa spolieha na rovnaký
+          # default. Keby sa tieto dve odvodenia rozišli, kontrola by čítala inú
+          # konfiguráciu než tú, s ktorou beží aplikácia. Zhodu stráži test
+          # v `tests/run.php`.
+          fail() {
+            echo "::error::$1" >&2
+            exit 1
+          }
+
+          validate_absolute_path() {
+            local path="$1"
+            local component
+            local -a components=()
+
+            [[ -n "$path" && "$path" == /* && ! "$path" =~ ^/+$ ]] || return 1
+            [[ "$path" =~ ^/[A-Za-z0-9._/-]+$ && "$path" != *"//"* ]] || return 1
+
+            IFS='/' read -r -a components <<<"$path"
+            for component in "${components[@]}"; do
+              [[ "$component" != "." && "$component" != ".." ]] || return 1
+            done
+          }
+
+          [[ -n "$DEPLOY_HOST" ]] || fail "Missing DEPLOY_HOST secret."
+          [[ -n "$DEPLOY_USER" ]] || fail "Missing DEPLOY_USER secret."
+          [[ -n "$DEPLOY_SSH_KEY" ]] || fail "Missing DEPLOY_SSH_KEY secret."
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z0-9._-]+$ ]] || fail "DEPLOY_USER contains unsupported characters."
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]] || fail "DEPLOY_HOST contains unsupported characters."
+
+          PORT="${DEPLOY_PORT:-22}"
+          [[ "$PORT" =~ ^[0-9]{1,5}$ ]] || fail "DEPLOY_PORT must be a number from 1 to 65535."
+          ((10#$PORT >= 1 && 10#$PORT <= 65535)) || fail "DEPLOY_PORT must be a number from 1 to 65535."
+
+          REMOTE_PATH="$DEPLOY_REMOTE_PATH"
+          while [[ "$REMOTE_PATH" == */ && "$REMOTE_PATH" != "/" ]]; do
+            REMOTE_PATH="${REMOTE_PATH%/}"
+          done
+          validate_absolute_path "$REMOTE_PATH" || fail "DEPLOY_REMOTE_PATH must be a safe absolute non-root path."
+
+          REMOTE_PARENT="${REMOTE_PATH%/*}"
+          [[ -n "$REMOTE_PARENT" ]] || REMOTE_PARENT="/"
+          REMOTE_ENV_PATH="${POLASCIN_ENV_PATH:-${REMOTE_PARENT%/}/private/polascin.env.ini}"
+          validate_absolute_path "$REMOTE_ENV_PATH" || fail "POLASCIN_ENV_PATH must be a safe absolute non-root path."
+          case "$REMOTE_ENV_PATH" in
+            "$REMOTE_PATH" | "$REMOTE_PATH"/*)
+              fail "POLASCIN_ENV_PATH must be outside DEPLOY_REMOTE_PATH."
+              ;;
+          esac
+
+          printf 'DEPLOY_PORT_SAFE=%s\n' "$PORT" >>"$GITHUB_ENV"
+          printf 'DEPLOY_REMOTE_PATH_SAFE=%s\n' "$REMOTE_PATH" >>"$GITHUB_ENV"
+          printf 'POLASCIN_ENV_PATH_SAFE=%s\n' "$REMOTE_ENV_PATH" >>"$GITHUB_ENV"
+
+      - name: Setup SSH
+        env:
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          set -euo pipefail
+
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" | tr -d '\r' >~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          if [[ -z "$DEPLOY_KNOWN_HOSTS" ]]; then
+            echo "::error::DEPLOY_KNOWN_HOSTS is required for an ephemeral GitHub runner."
+            exit 1
+          fi
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" | tr -d '\r' >~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+          ssh-keygen -y -f ~/.ssh/deploy_key >/dev/null
+
+          # Pri neštandardnom porte `ssh` hľadá záznam v tvare `[host]:port`.
+          if [[ "$DEPLOY_PORT_SAFE" == "22" ]]; then
+            KNOWN_HOSTS_TARGET="$DEPLOY_HOST"
+          else
+            KNOWN_HOSTS_TARGET="[${DEPLOY_HOST}]:${DEPLOY_PORT_SAFE}"
+          fi
+          if ! ssh-keygen -F "$KNOWN_HOSTS_TARGET" -f ~/.ssh/known_hosts >/dev/null; then
+            echo "::error::DEPLOY_KNOWN_HOSTS neobsahuje kľúč pre cieľ. Obnov tajomstvo cez: ssh-keyscan -p <PORT> <HOST>"
+            exit 1
+          fi
+
+      - name: Run read-only database checks over SSH
+        id: checks
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          set -euo pipefail
+
+          TARGET="${DEPLOY_USER}@${DEPLOY_HOST}"
+          SSH_OPTS=(
+            -p "$DEPLOY_PORT_SAFE"
+            -i "$HOME/.ssh/deploy_key"
+            -o BatchMode=yes
+            -o ConnectTimeout=30
+            -o StrictHostKeyChecking=yes
+          )
+
+          mkdir -p audit-reports
+
+          # Skript ide na server po štandardnom vstupe, nie ako súbor: na hostingu
+          # tak nikdy nevznikne auditný súbor, ktorý by bol — hoci len počas behu —
+          # dosiahnuteľný z webu. `php` bez argumentov číta kód zo stdin.
+          if ! ssh "${SSH_OPTS[@]}" "$TARGET" \
+              "cd '${DEPLOY_REMOTE_PATH_SAFE}' && POLASCIN_ENV_PATH='${POLASCIN_ENV_PATH_SAFE}' php" \
+              <scripts/audit_db_check.php >audit-reports/db-latest.md 2>audit-reports/db-stderr.log; then
+            {
+              echo "# Kontrola produkčnej databázy — polascin.net"
+              echo
+              echo "STATUS: ZLYHANIE"
+              echo "NALEZOV: neznáme"
+              echo
+              echo '## Súhrn'
+              echo
+              echo "Kontrolu nebolo možné dokončiť — SSH spojenie alebo samotný skript zlyhal."
+              echo "Nejde o vyjadrenie o stave databázy: tá nebola overená."
+              echo
+              echo '### Chybový výstup'
+              echo
+              echo '```'
+              sed -e "s~${DEPLOY_REMOTE_PATH_SAFE}~<REMOTE_PATH>~g" \
+                  -e "s~${POLASCIN_ENV_PATH_SAFE}~<ENV_PATH>~g" \
+                  audit-reports/db-stderr.log | tail -30
+              echo '```'
+            } >audit-reports/db-latest.md
+          fi
+
+          rm -f audit-reports/db-stderr.log
+
+          STATUS=$(grep -m1 '^STATUS: ' audit-reports/db-latest.md | cut -d' ' -f2- || echo "ZLYHANIE")
+          printf 'status=%s\n' "$STATUS" >>"$GITHUB_OUTPUT"
+          {
+            printf '## Stav kontroly DB: %s\n\n' "$STATUS"
+            cat audit-reports/db-latest.md
+          } >>"$GITHUB_STEP_SUMMARY"
+
+      - name: Commit report
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # `git add` musí ísť pred kontrolou zmeny: pri prvom behu je report
+          # nesledovaný, takže `git diff` nad pracovným stromom by nič neukázal
+          # a krok by report nikdy nescommitol.
+          git add audit-reports/db-latest.md
+          if git diff --cached --quiet -- audit-reports/db-latest.md; then
+            echo "Report sa nezmenil; commit nie je potrebný."
+            exit 0
+          fi
+
+          # Push cez GITHUB_TOKEN nespúšťa ďalšie workflowy, takže deploy sa
+          # nerozbehne ani tak; `[skip deploy]` je tu pre čitateľa histórie
+          # a pre prípad ručného rebasu tohto commitu.
+          git commit -m "chore(audit): nočná kontrola produkčnej DB — ${{ steps.checks.outputs.status }} [skip deploy]"
+
+          # Auditná rutina pushuje do `main` krátko po tomto behu. Ak medzitým
+          # niečo pribudlo, rebase je bezpečný: report je jediný súbor v commite
+          # a nikto iný ho nemení.
+          git pull --rebase --autostash origin main
+          git push origin HEAD:main
+
+      - name: Fail the run when the check reported findings
+        if: steps.checks.outputs.status != 'OK'
+        run: |
+          echo "::error::Kontrola DB skončila so stavom '${{ steps.checks.outputs.status }}'. Report je commitnutý v audit-reports/db-latest.md."
+          exit 1
