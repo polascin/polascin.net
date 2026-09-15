@@ -1,6 +1,6 @@
 # Kontrola produkčnej databázy — polascin.net
 
-Generované: 2026-09-14 03:45:27 CEST  
+Generované: 2026-09-15 02:09:43 CEST  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
@@ -12,13 +12,13 @@ NALEZOV: 1
 
 ## Súhrn
 
-- **STREDNÉ** — `form_rate_limit` drží záznamy staré 46 dní; tabuľka je prevádzková a mala by sa priebežne prerezávať.
+- **STREDNÉ** — `form_rate_limit` drží záznamy staré 47 dní; tabuľka je prevádzková a mala by sa priebežne prerezávať.
 
 ## Tabuľky
 
 | Tabuľka | Engine | Collation | Riadkov (presne) |
 | --- | --- | --- | --- |
-| `access_logs` | InnoDB | utf8mb4_unicode_ci | 21148 |
+| `access_logs` | InnoDB | utf8mb4_unicode_ci | 21582 |
 | `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 18 |
 | `articles` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `contact_messages` | InnoDB | utf8mb4_unicode_ci | 0 |
@@ -60,8 +60,8 @@ Nastavená retencia access logov: **90 dní** (`ACCESS_LOG_RETENTION_DAYS`).
 
 | Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |
 | --- | --- | --- | --- |
-| `access_logs` | 21148 | 2026-07-28 12:20:55 | 47 |
+| `access_logs` | 21582 | 2026-07-28 12:20:55 | 48 |
 | `contact_messages` | 0 | — | — |
 | `newsletter_subscribers` | 0 | — | — |
-| `form_rate_limit` | 13 | 2026-07-29 16:32:16 | 46 |
+| `form_rate_limit` | 13 | 2026-07-29 16:32:16 | 47 |
 
