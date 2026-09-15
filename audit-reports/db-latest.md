@@ -1,29 +1,29 @@
 # Kontrola produkčnej databázy — polascin.net
 
-Generované: 2026-09-15 02:09:43 CEST  
+Generované: 2026-09-16 01:08:25 CEST  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
 Názov databázy a presná verzia servera sa do reportu zámerne nepíšu —
 repozitár je verejný.
 
-STATUS: NÁLEZY
-NALEZOV: 1
+STATUS: OK
+NALEZOV: 0
 
 ## Súhrn
 
-- **STREDNÉ** — `form_rate_limit` drží záznamy staré 47 dní; tabuľka je prevádzková a mala by sa priebežne prerezávať.
+Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávanom stave.
 
 ## Tabuľky
 
 | Tabuľka | Engine | Collation | Riadkov (presne) |
 | --- | --- | --- | --- |
-| `access_logs` | InnoDB | utf8mb4_unicode_ci | 21582 |
+| `access_logs` | InnoDB | utf8mb4_unicode_ci | 22099 |
 | `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 18 |
 | `articles` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `contact_messages` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `content_blocks` | InnoDB | utf8mb4_unicode_ci | 5 |
-| `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 13 |
+| `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `newsletter_subscribers` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 4 |
 | `users` | InnoDB | utf8mb4_unicode_ci | 1 |
@@ -60,8 +60,8 @@ Nastavená retencia access logov: **90 dní** (`ACCESS_LOG_RETENTION_DAYS`).
 
 | Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |
 | --- | --- | --- | --- |
-| `access_logs` | 21582 | 2026-07-28 12:20:55 | 48 |
+| `access_logs` | 22099 | 2026-07-28 12:20:55 | 49 |
 | `contact_messages` | 0 | — | — |
 | `newsletter_subscribers` | 0 | — | — |
-| `form_rate_limit` | 13 | 2026-07-29 16:32:16 | 47 |
+| `form_rate_limit` | 0 | — | — |
 
