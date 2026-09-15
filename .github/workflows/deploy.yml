@@ -332,7 +332,11 @@ jobs:
           # konfiguráciu na serveri a produkcia vracala 500 na všetkých stránkach;
           # z hlásenia workflow to zrejmé nebolo.
           FAILED=0
-          for PATH_SUFFIX in "/" "/contact.php" "/articles.php" "/sitemap.php"; do
+          # Zoznam zodpovedá bodu 5 sekcie „Dokončenie“ v `.doaudit.md`. Overuje
+          # ho deploy, nie nočná rutina: jej sieťová politika `polascin.net`
+          # blokuje (CONNECT → 403), takže `newsletter.php` ani `login.php`
+          # by po nasadení neskontroloval nikto (Beh #24).
+          for PATH_SUFFIX in "/" "/contact.php" "/articles.php" "/sitemap.php" "/newsletter.php" "/login.php"; do
             URL="${SMOKE_BASE_URL%/}${PATH_SUFFIX}"
             CODE=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 5 "$URL" || echo "000")
             if [[ "$CODE" == "200" ]]; then

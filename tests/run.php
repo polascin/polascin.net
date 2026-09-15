@@ -474,6 +474,14 @@ expectTrue(
     str_contains($deployWorkflow, 'CSP na produkcii neobsahuje nonce-'),
     'Smoke check po nasadení musí overiť, že CSP na produkcii nesie nonce'
 );
+// Bod 5 sekcie „Dokončenie“ v `.doaudit.md` vymenúva kľúčové URL; keďže ich
+// nočná rutina overiť nemôže, musia byť v smoke checku (Beh #24).
+foreach (['"/"', '"/articles.php"', '"/contact.php"', '"/newsletter.php"', '"/sitemap.php"', '"/login.php"'] as $smokeUrl) {
+    expectTrue(
+        str_contains($deployWorkflow, $smokeUrl),
+        'Smoke check po nasadení musí overiť URL ' . trim($smokeUrl, '"')
+    );
+}
 $robotsTxt = (string) file_get_contents(dirname(__DIR__) . '/robots.txt');
 expectTrue(
     str_contains($robotsTxt, 'Disallow: /portfolio/'),
