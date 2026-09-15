@@ -450,6 +450,30 @@ expectTrue(
     str_contains($deployWorkflow, '"/deploy_info.php"'),
     'Smoke check po nasadení musí overiť nedostupnosť deploy_info.php'
 );
+// Sieťová politika cloudového prostredia nočnej rutiny `polascin.net` blokuje
+// (CONNECT → 403), takže hlavičky z nej overiť nemožno. Kontrolu preto robí
+// smoke check v deploy workflowe, ktorý na produkciu dosiahne (Beh #24).
+foreach (
+    [
+        'strict-transport-security',
+        'x-content-type-options',
+        'x-frame-options',
+        'referrer-policy',
+        'permissions-policy',
+        'cross-origin-opener-policy',
+        'x-permitted-cross-domain-policies',
+        'content-security-policy',
+    ] as $smokeHeader
+) {
+    expectTrue(
+        str_contains($deployWorkflow, '"' . $smokeHeader . '"'),
+        'Smoke check po nasadení musí overiť hlavičku ' . $smokeHeader
+    );
+}
+expectTrue(
+    str_contains($deployWorkflow, 'CSP na produkcii neobsahuje nonce-'),
+    'Smoke check po nasadení musí overiť, že CSP na produkcii nesie nonce'
+);
 $robotsTxt = (string) file_get_contents(dirname(__DIR__) . '/robots.txt');
 expectTrue(
     str_contains($robotsTxt, 'Disallow: /portfolio/'),
@@ -1104,6 +1128,45 @@ expectTrue(
                      WHERE action = :action"),
     'Čistenie form_rate_limit sa nesmie vrátiť k obmedzeniu na jednu akciu'
 );
+// Prerezanie viazané len na `checkFormRateLimit()` sa na stránke s nulovou
+// prevádzkou formulárov nespustí nikdy — produkčná DB držala IP adresy 47 dní
+// (Beh #24, nález z nočnej kontroly DB). Zápis access logu beží pri každej
+// požiadavke, takže housekeeping musí visieť aj na ňom.
+expectTrue(
+    preg_match(
+        '~DELETE FROM access_logs WHERE created_at < :cutoff.*?pruneFormRateLimit\(\$pdo\)~s',
+        $authSource
+    ) === 1,
+    'Prerezanie form_rate_limit musí bežať aj v housekeepingu zápisu access logu'
+);
+expectTrue(
+    preg_match('~const FORM_RATE_LIMIT_MAX_AGE_SECONDS = (\d+);~', $authSource, $rateLimitAgeMatch) === 1
+        && (int) $rateLimitAgeMatch[1] >= 2 * 86400,
+    'Vek prerezania form_rate_limit musí byť aspoň dvojnásobok najdlhšieho okna (86 400 s)'
+);
+// Prerezanie nesmie zhodiť zápis access logu: chybu si rieši samo.
+expectTrue(
+    preg_match(
+        '~function pruneFormRateLimit\(PDO \$pdo.*?catch \(\\\\Throwable \$cleanupError\)~s',
+        $authSource
+    ) === 1,
+    'pruneFormRateLimit musí odchytávať vlastné chyby'
+);
+$longestRateLimitWindow = 0;
+foreach (['contact.php', 'newsletter.php', 'login.php', 'admin_users.php'] as $rateLimitCaller) {
+    preg_match_all(
+        '~checkFormRateLimit\(\$pdo,[^)]*?,\s*(\d+)\)~',
+        (string) file_get_contents(dirname(__DIR__) . '/' . $rateLimitCaller),
+        $windowMatches
+    );
+    foreach ($windowMatches[1] as $window) {
+        $longestRateLimitWindow = max($longestRateLimitWindow, (int) $window);
+    }
+}
+expectTrue(
+    $longestRateLimitWindow > 0 && (int) $rateLimitAgeMatch[1] >= 2 * $longestRateLimitWindow,
+    'FORM_RATE_LIMIT_MAX_AGE_SECONDS musí pokryť dvojnásobok skutočne najdlhšieho okna v kóde'
+);
 
 $reportPath = dirname(__DIR__) . '/audit-reports/db-latest.md';
 if (is_file($reportPath)) {
@@ -1138,11 +1201,18 @@ foreach (['scripts', 'audit-reports'] as $auditOnlyDir) {
     );
 }
 
-// Nočná kontrola sa musí spustiť pred behom auditnej rutiny (02:02 CEST),
-// inak by rutina čítala report z predchádzajúceho dňa.
+// Nočná kontrola sa musí spustiť pred behom auditnej rutiny (00:00 UTC), inak
+// rutina číta report z predchádzajúceho dňa. Samotné „pred polnocou“ nestačí:
+// GitHub plánované behy odkladá aj o ~2 h (behy #5–#7 štartovali 01:27–01:45
+// UTC namiesto 23:50), preto sa vyžaduje rezerva aspoň 2 hodiny (Beh #24).
 expectTrue(
-    str_contains($verifyWorkflow, 'cron: "50 23 * * *"'),
-    'verify-db.yml musí bežať o 23:50 UTC, teda pred nočnou auditnou rutinou'
+    preg_match('~cron: "(\d{1,2}) (\d{1,2}) \* \* \*"~', $verifyWorkflow, $cronMatch) === 1
+        && (24 - (int) $cronMatch[2]) * 60 - (int) $cronMatch[1] >= 120,
+    'verify-db.yml musí bežať aspoň 2 h pred 00:00 UTC, aby stihol report pred nočnou rutinou'
+);
+expectTrue(
+    isset($cronMatch[1]) && (int) $cronMatch[1] !== 0,
+    'cron verify-db.yml nesmie sedieť na celej hodine, kde je fronta plánovaných behov najdlhšia'
 );
 expectTrue(
     str_contains($verifyWorkflow, 'group: polascin-production-deploy'),

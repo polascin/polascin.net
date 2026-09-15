@@ -9,8 +9,12 @@ name: Verify production database
 
 on:
   schedule:
-    # 23:50 UTC = 01:50 CEST / 00:50 CET, teda pred behom nočnej rutiny (02:02 CEST).
-    - cron: "50 23 * * *"
+    # Nočná rutina štartuje o 00:00 UTC a report musí byť v repozitári pred ňou.
+    # Pôvodných 23:50 UTC nestačilo: GitHub plánované behy odkladá a behy #5–#7
+    # reálne štartovali 01:27–01:45 UTC, teda až PO rutine — tá potom čítala
+    # report starý ~22 h (Beh #24). 20:37 UTC = 22:37 CEST dáva ~3,4 h rezervu
+    # a nesedí na celú hodinu, kde je fronta plánovaných behov najdlhšia.
+    - cron: "37 20 * * *"
   workflow_dispatch: {}
 
 permissions:

@@ -611,7 +611,9 @@
           return;
         }
 
-        const confirmationInput = form.querySelector("[data-confirmation-value]");
+        const confirmationInput = form.querySelector(
+          "[data-confirmation-value]",
+        );
         if (confirmationInput) {
           confirmationInput.value = confirmationInput.dataset.confirmationValue;
         }

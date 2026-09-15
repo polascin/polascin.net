@@ -24,6 +24,9 @@ const SESSION_IDLE_TIMEOUT = 1800;
 const SESSION_ABSOLUTE_TIMEOUT = 28800;
 const SESSION_RENEWAL_INTERVAL = 900;
 const SESSION_ACCOUNT_RECHECK_INTERVAL = 60;
+// Dvojnásobok najdlhšieho okna rate-limitu (86 400 s pre `contact_sender`
+// a `contact_duplicate`), aby prerezanie nikdy nezrušilo živé počítadlo.
+const FORM_RATE_LIMIT_MAX_AGE_SECONDS = 172800;
 const APP_DUMMY_PASSWORD_HASH = '$2y$12$1tNSCTWlgcAYigjqkJKc4uj2t22PGxoKeDa2ajFJz1Bxb.I5bYPQy';
 
 function getScriptNonce(): string {
@@ -576,6 +579,13 @@ function saveAccessLog(array $record, PDO $pdo): bool {
             $cutoff = date('Y-m-d H:i:s', time() - (getAccessLogRetentionDays() * 86400));
             $cleanup = $pdo->prepare("DELETE FROM access_logs WHERE created_at < :cutoff");
             $cleanup->execute([':cutoff' => $cutoff]);
+
+            // Prerezanie `form_rate_limit` beží tu, nie len vo `checkFormRateLimit()`
+            // (Beh #24): tamojšie housekeeping sa spúšťa iba pri odoslaní formulára,
+            // a keďže kontaktný formulár aj newsletter majú nulovú prevádzku, riadky
+            // s IP adresami sa reálne nezmazali 46 dní. Zápis access logu beží pri
+            // každej požiadavke, takže prerezanie tu naozaj dostane príležitosť.
+            pruneFormRateLimit($pdo);
         }
         return true;
     } catch (\Throwable $e) {
@@ -701,29 +711,38 @@ function isEmailDomainValid(string $email): bool {
     return $domain !== '' && (checkdnsrr($domain, 'MX') || checkdnsrr($domain, 'A'));
 }
 
+/**
+ * Prereže prevádzkovú tabuľku `form_rate_limit`.
+ *
+ * Čistenie zámerne NIE JE obmedzené na jednu `action` (Beh #20): predtým
+ * prerezávalo len tú akciu, ktorá sa práve vykonávala, takže riadky zriedka
+ * používaných akcií (`newsletter_confirm`, `newsletter_unsubscribe`) sa
+ * nezmazali nikdy a tabuľka držala IP adresy 44 dní.
+ *
+ * Vekový limit nesmie klesnúť pod dvojnásobok najdlhšieho okna rate-limitu
+ * (`contact_sender` a `contact_duplicate` používajú 86 400 s), inak by globálne
+ * prerezanie mohlo vynulovať živé počítadlo alebo zrušiť aktívnu blokáciu.
+ * Housekeeping nie je súčasťou kritickej transakcie; index
+ * (action, last_attempt) pridáva verzovaná migrácia.
+ */
+function pruneFormRateLimit(PDO $pdo, int $maxAgeSeconds = FORM_RATE_LIMIT_MAX_AGE_SECONDS): void {
+    $maxAgeSeconds = max($maxAgeSeconds, FORM_RATE_LIMIT_MAX_AGE_SECONDS);
+    $cleanupBefore = date('Y-m-d H:i:s', time() - $maxAgeSeconds);
+    try {
+        $pdo->prepare(
+            "DELETE FROM form_rate_limit
+             WHERE (blocked_until IS NOT NULL AND blocked_until < NOW())
+                OR last_attempt < :cleanup_before"
+        )->execute(['cleanup_before' => $cleanupBefore]);
+    } catch (\Throwable $cleanupError) {
+        error_log('Rate-limit cleanup chyba: ' . $cleanupError->getMessage());
+    }
+}
+
 function checkFormRateLimit(PDO $pdo, string $action, string $ip, int $maxAttempts, int $windowSeconds): bool {
     try {
-        // Housekeeping nie je súčasťou kritickej transakcie a beží iba občas.
-        // Index (action, last_attempt) pridáva verzovaná migrácia.
-        //
-        // Čistenie zámerne NIE JE obmedzené na `action` volajúceho (Beh #20):
-        // predtým prerezávalo len tú akciu, ktorá sa práve vykonávala, takže
-        // riadky zriedka používaných akcií (`newsletter_confirm`,
-        // `newsletter_unsubscribe`) sa nezmazali nikdy a tabuľka držala IP
-        // adresy 44 dní. Vekový limit je najmenej 24 h, kým najdlhšie okno
-        // rate-limitu je 1 h, takže globálne prerezanie nemôže vynulovať
-        // žiadne živé počítadlo.
         if (random_int(1, 100) === 1) {
-            $cleanupBefore = date('Y-m-d H:i:s', time() - max($windowSeconds * 2, 86400));
-            try {
-                $pdo->prepare(
-                    "DELETE FROM form_rate_limit
-                     WHERE (blocked_until IS NOT NULL AND blocked_until < NOW())
-                        OR last_attempt < :cleanup_before"
-                )->execute(['cleanup_before' => $cleanupBefore]);
-            } catch (\Throwable $cleanupError) {
-                error_log('Rate-limit cleanup chyba (' . $action . '): ' . $cleanupError->getMessage());
-            }
+            pruneFormRateLimit($pdo, $windowSeconds * 2);
         }
 
         $pdo->beginTransaction();
