@@ -9,6 +9,7 @@ Disallow: /admin_articles.php
 Disallow: /admin_content.php
 Disallow: /admin_contact.php
 Disallow: /admin_newsletter.php
+Disallow: /admin_users.php
 Disallow: /auth.php
 Disallow: /config_loader.php
 Disallow: /db_config.php

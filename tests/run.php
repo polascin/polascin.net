@@ -336,6 +336,24 @@ foreach (['index.html', 'privacy.html', 'terms.html'] as $staticHeaderFile) {
         "{$staticHeaderFile} musí obsahovať jednu profilovú fotografiu v hlavičke"
     );
 }
+
+// Dynamické stránky odvodzujú `?v=` z `filemtime()` v `head_meta.php`, statické
+// fallbacky ho majú napísaný ručne — a ten sa rozišiel s obsahom (Beh #25):
+// `css/styles.css` aj `js/main.js` niesli pin z 2026-07-29, hoci sa medzitým
+// zmenili, a `js/consent-default.js` nemal `?v=` vôbec. Fallback sa podáva práve
+// pri výpadku databázy, takže vtedy by vracajúci sa návštevník dostal týždne
+// starý CSS a JS z vlastnej cache — pri consent skripte s dopadom na GDPR.
+// Pin je preto skrátený hash obsahu a drží ho tento test.
+foreach (['css/styles.css', 'js/main.js', 'js/consent-default.js'] as $staticAsset) {
+    $expectedAssetVersion = substr(hash_file('sha256', dirname(__DIR__) . '/' . $staticAsset), 0, 8);
+    foreach (['index.html', 'privacy.html', 'terms.html'] as $staticAssetFile) {
+        $staticAssetMarkup = (string) file_get_contents(dirname(__DIR__) . '/' . $staticAssetFile);
+        expectTrue(
+            str_contains($staticAssetMarkup, $staticAsset . '?v=' . $expectedAssetVersion),
+            "{$staticAssetFile} musí odkazovať na {$staticAsset} s aktuálnym cache-busting pinom ?v={$expectedAssetVersion}"
+        );
+    }
+}
 expectTrue(
     str_contains($siteStyles, '.nav-brand-photo')
         && str_contains($siteStyles, '.nav-brand-text'),
@@ -486,6 +504,47 @@ $robotsTxt = (string) file_get_contents(dirname(__DIR__) . '/robots.txt');
 expectTrue(
     str_contains($robotsTxt, 'Disallow: /portfolio/'),
     'robots.txt musí zakazovať crawlovanie adresára portfolio/'
+);
+
+// `robots.txt` vymenúva administrátorské stránky po jednej a zoznam sa pri
+// pribudnutí `admin_users.php` (Beh #23) neaktualizoval — všimol si to až
+// Beh #25. Indexovaná nebola, lebo `Disallow: /admin` ju pokryl prefixom,
+// ale stránka nazvaná inak by takto prepadla bez povšimnutia. Kontrola preto
+// nevychádza z názvu súboru, ale z toho, ktoré stránky žiadajú `requireAdmin()`,
+// a overuje skutočnú sémantiku robots.txt, teda zhodu prefixu.
+// Pravidlá sa berú výhradne zo skupiny `User-agent: *`. Skupiny pre scrapery
+// a AI crawlery majú `Disallow: /`, takže zbieranie všetkých riadkov naraz by
+// kontrolu urobilo vždy zelenou.
+$robotsDisallowedPaths = [];
+$robotsInWildcardGroup = false;
+foreach (preg_split('~\r?\n~', $robotsTxt) ?: [] as $robotsLine) {
+    if (preg_match('~^\s*User-agent:\s*(\S+)~i', $robotsLine, $robotsAgentMatch) === 1) {
+        $robotsInWildcardGroup = $robotsAgentMatch[1] === '*';
+        continue;
+    }
+    if ($robotsInWildcardGroup && preg_match('~^\s*Disallow:\s*(\S+)~i', $robotsLine, $robotsMatch) === 1) {
+        $robotsDisallowedPaths[] = $robotsMatch[1];
+    }
+}
+expectTrue($robotsDisallowedPaths !== [], 'Skupina User-agent: * v robots.txt musí obsahovať pravidlá Disallow');
+$uncoveredAdminPages = [];
+foreach (glob(dirname(__DIR__) . '/*.php') ?: [] as $rootPagePath) {
+    $rootPageSource = (string) file_get_contents($rootPagePath);
+    if (!str_contains($rootPageSource, 'requireAdmin()')) {
+        continue;
+    }
+    $rootPageUrl = '/' . basename($rootPagePath);
+    foreach ($robotsDisallowedPaths as $disallowedPath) {
+        if (str_starts_with($rootPageUrl, $disallowedPath)) {
+            continue 2;
+        }
+    }
+    $uncoveredAdminPages[] = basename($rootPagePath);
+}
+expectSame(
+    [],
+    $uncoveredAdminPages,
+    'robots.txt musí zakazovať každú stránku, ktorá vyžaduje requireAdmin()'
 );
 $gitignoreRules = (string) file_get_contents(dirname(__DIR__) . '/.gitignore');
 $deployIgnoreRules = (string) file_get_contents(dirname(__DIR__) . '/.deployignore');
@@ -919,6 +978,37 @@ foreach (array_keys(appLanguages()) as $docLang) {
 }
 expectSame([], $missingFromDisk, 'Každý podporovaný jazyk musí mať katalóg v lang/');
 expectSame([], $missingFromDoc, 'Prehľad projektu v .audit.md musí uvádzať katalóg každého podporovaného jazyka');
+
+// Kontrola vyššie porovnáva zoznam katalógov, nie počty vypísané slovom. Bod
+// o `hreflang` v kontrolnom zozname preto prežil Beh #19 s tvrdením „šesť
+// jazykov“ až do Behu #25, hoci ich je desať — a kontrolný zoznam je zadaním
+// ďalších behov, takže by budúci beh šesť odkazov pokladal za správny stav.
+// Kontroluje sa iba kontrolný zoznam: staršie „Beh #X“ sú záznamom toho, čo
+// v danom čase platilo, a prepisovať sa nesmú — vtedy jazykov naozaj bolo šesť.
+$checklistSection = '';
+if (preg_match('~\n## Kontrolný zoznam auditu\n(.*?)\n## ~s', $auditDoc, $checklistMatch) === 1) {
+    $checklistSection = $checklistMatch[1];
+}
+expectTrue($checklistSection !== '', '.audit.md musí obsahovať sekciu „Kontrolný zoznam auditu“');
+
+$languageWordForms = [
+    6 => 'šesť',
+    10 => 'desať',
+];
+$staleLanguageWords = [];
+foreach ($languageWordForms as $wordCount => $languageWord) {
+    if ($wordCount === count(appLanguages())) {
+        continue;
+    }
+    if (preg_match('~' . $languageWord . '\s+jazykov~ui', $checklistSection) === 1) {
+        $staleLanguageWords[] = $languageWord;
+    }
+}
+expectSame(
+    [],
+    $staleLanguageWords,
+    'Kontrolný zoznam v .audit.md nesmie uvádzať iný počet jazykov, než má appLanguages()'
+);
 
 foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $cataloguePath) {
     $catalogueCode = basename($cataloguePath, '.php');
