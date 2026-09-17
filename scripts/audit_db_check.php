@@ -44,6 +44,7 @@ const EXPECTED_MIGRATIONS = [
     '2026091701_glp1_steroid_food_noise_article',
     '2026091702_arenibus_ai_security_audit_article',
     '2026091703_via_practica_vld_algorithm_article',
+    '2026091704_ai_model_freedom_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
