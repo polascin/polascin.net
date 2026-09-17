@@ -71,6 +71,89 @@ function findSingleColumnUniqueIndex(PDO $pdo, string $table, string $column, ar
     return null;
 }
 
+/**
+ * Vloží publikovaný článok zo súboru v `content/articles/`, ak daný slug
+ * v jazyku ešte neexistuje. Úpravy v administrácii sa tým neprepisujú.
+ */
+function seedPublishedArticleFromFile(PDO $pdo, string $articlePath): void {
+    if (!is_file($articlePath)) {
+        throw new RuntimeException('Chýba súbor článku ' . $articlePath);
+    }
+    $article = require $articlePath;
+    if (!is_array($article) || !isset($article['slug'], $article['translations']) || !is_array($article['translations'])) {
+        throw new RuntimeException('Súbor článku má neplatný tvar.');
+    }
+
+    $slug = (string) $article['slug'];
+    $author = trim((string) ($article['author'] ?? ''));
+    $category = (string) ($article['category'] ?? 'blog');
+    $isTop = !empty($article['is_top']) ? 1 : 0;
+    $publishedAt = (string) ($article['published_at'] ?? date('Y-m-d H:i:s'));
+    if (!in_array($category, ['blog', 'news'], true)) {
+        $category = 'blog';
+    }
+
+    $existingStmt = $pdo->prepare(
+        'SELECT id, lang, translation_group FROM articles WHERE slug = :slug'
+    );
+    $existingStmt->execute([':slug' => $slug]);
+    $byLang = [];
+    $group = null;
+    foreach ($existingStmt->fetchAll() as $row) {
+        $byLang[(string) $row['lang']] = $row;
+        if ($row['translation_group'] !== null) {
+            $group = (int) $row['translation_group'];
+        }
+    }
+
+    $insert = $pdo->prepare(
+        'INSERT INTO articles (
+            title, slug, excerpt, content, author, lang, translation_group,
+            category, is_published, is_top, sort_order, published_at
+         ) VALUES (
+            :title, :slug, :excerpt, :content, :author, :lang, :translation_group,
+            :category, 1, :is_top, 0, :published_at
+         )'
+    );
+
+    foreach ($article['translations'] as $lang => $payload) {
+        if (!is_string($lang) || !isSupportedLanguage($lang) || !is_array($payload)) {
+            continue;
+        }
+        if (isset($byLang[$lang])) {
+            continue;
+        }
+
+        $title = trim((string) ($payload['title'] ?? ''));
+        $excerpt = strip_tags(trim((string) ($payload['excerpt'] ?? '')));
+        $content = sanitizeHtmlContent((string) ($payload['content'] ?? ''));
+        if ($title === '' || $content === '') {
+            throw new RuntimeException("Článok {$slug} ({$lang}) nemá názov alebo obsah.");
+        }
+
+        $insert->execute([
+            ':title' => $title,
+            ':slug' => $slug,
+            ':excerpt' => $excerpt,
+            ':content' => $content,
+            ':author' => $author,
+            ':lang' => $lang,
+            ':translation_group' => $group,
+            ':category' => $category,
+            ':is_top' => $isTop,
+            ':published_at' => $publishedAt,
+        ]);
+        $id = (int) $pdo->lastInsertId();
+        if ($group === null) {
+            $group = $id;
+            $assignGroup = $pdo->prepare(
+                'UPDATE articles SET translation_group = :group WHERE id = :id'
+            );
+            $assignGroup->execute([':group' => $group, ':id' => $id]);
+        }
+    }
+}
+
 function applySchemaMigrations(PDO $pdo): void {
     // Poradie kľúčov určuje poradie aplikovania — drž ho chronologicky.
     $migrations = [
@@ -234,83 +317,16 @@ function applySchemaMigrations(PDO $pdo): void {
             }
         },
         '2026091701_glp1_steroid_food_noise_article' => static function (PDO $pdo): void {
-            $articlePath = __DIR__ . '/content/articles/lekar-ako-pacient-glp1-a-kortikosteroidy.php';
-            if (!is_file($articlePath)) {
-                throw new RuntimeException('Chýba súbor článku ' . $articlePath);
-            }
-            $article = require $articlePath;
-            if (!is_array($article) || !isset($article['slug'], $article['translations']) || !is_array($article['translations'])) {
-                throw new RuntimeException('Súbor článku má neplatný tvar.');
-            }
-
-            $slug = (string) $article['slug'];
-            $author = trim((string) ($article['author'] ?? ''));
-            $category = (string) ($article['category'] ?? 'blog');
-            $isTop = !empty($article['is_top']) ? 1 : 0;
-            $publishedAt = (string) ($article['published_at'] ?? date('Y-m-d H:i:s'));
-            if (!in_array($category, ['blog', 'news'], true)) {
-                $category = 'blog';
-            }
-
-            $existingStmt = $pdo->prepare(
-                'SELECT id, lang, translation_group FROM articles WHERE slug = :slug'
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/lekar-ako-pacient-glp1-a-kortikosteroidy.php'
             );
-            $existingStmt->execute([':slug' => $slug]);
-            $byLang = [];
-            $group = null;
-            foreach ($existingStmt->fetchAll() as $row) {
-                $byLang[(string) $row['lang']] = $row;
-                if ($row['translation_group'] !== null) {
-                    $group = (int) $row['translation_group'];
-                }
-            }
-
-            $insert = $pdo->prepare(
-                'INSERT INTO articles (
-                    title, slug, excerpt, content, author, lang, translation_group,
-                    category, is_published, is_top, sort_order, published_at
-                 ) VALUES (
-                    :title, :slug, :excerpt, :content, :author, :lang, :translation_group,
-                    :category, 1, :is_top, 0, :published_at
-                 )'
+        },
+        '2026091702_arenibus_ai_security_audit_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/ai-agent-bezpecnostny-audit-arenibus.php'
             );
-
-            foreach ($article['translations'] as $lang => $payload) {
-                if (!is_string($lang) || !isSupportedLanguage($lang) || !is_array($payload)) {
-                    continue;
-                }
-                if (isset($byLang[$lang])) {
-                    continue;
-                }
-
-                $title = trim((string) ($payload['title'] ?? ''));
-                $excerpt = strip_tags(trim((string) ($payload['excerpt'] ?? '')));
-                $content = sanitizeHtmlContent((string) ($payload['content'] ?? ''));
-                if ($title === '' || $content === '') {
-                    throw new RuntimeException("Článok {$slug} ({$lang}) nemá názov alebo obsah.");
-                }
-
-                $insert->execute([
-                    ':title' => $title,
-                    ':slug' => $slug,
-                    ':excerpt' => $excerpt,
-                    ':content' => $content,
-                    ':author' => $author,
-                    ':lang' => $lang,
-                    ':translation_group' => $group,
-                    ':category' => $category,
-                    ':is_top' => $isTop,
-                    ':published_at' => $publishedAt,
-                ]);
-                $id = (int) $pdo->lastInsertId();
-                if ($group === null) {
-                    $group = $id;
-                    $assignGroup = $pdo->prepare(
-                        'UPDATE articles SET translation_group = :group WHERE id = :id'
-                    );
-                    $assignGroup->execute([':group' => $group, ':id' => $id]);
-                }
-            }
         },
     ];
 

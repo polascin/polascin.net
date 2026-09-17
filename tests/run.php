@@ -1396,40 +1396,40 @@ expectTrue(
     'verify-db.yml musí SSH kontrolu DB zopakovať po prechodnom dropnutí'
 );
 
-$articleSeedPath = dirname(__DIR__) . '/content/articles/lekar-ako-pacient-glp1-a-kortikosteroidy.php';
-expectTrue(is_file($articleSeedPath), 'Súbor prvého blogového príspevku musí existovať');
-$articleSeed = require $articleSeedPath;
-expectTrue(
-    is_array($articleSeed)
-        && ($articleSeed['slug'] ?? '') === 'lekar-ako-pacient-glp1-a-kortikosteroidy'
-        && isset($articleSeed['translations']['sk'], $articleSeed['translations']['en']),
-    'Blogový príspevok musí mať slug a slovensku aj anglickú verziu'
-);
-foreach (['sk', 'en'] as $articleLang) {
-    $payload = $articleSeed['translations'][$articleLang];
-    $clean = sanitizeHtmlContent((string) ($payload['content'] ?? ''));
+$articleSeedFiles = glob(dirname(__DIR__) . '/content/articles/*.php') ?: [];
+expectTrue($articleSeedFiles !== [], 'Adresár content/articles musí obsahovať aspoň jeden blogový príspevok');
+foreach ($articleSeedFiles as $articleSeedPath) {
+    $articleSeed = require $articleSeedPath;
+    $articleFile = basename($articleSeedPath);
     expectTrue(
-        trim((string) ($payload['title'] ?? '')) !== ''
-            && trim((string) ($payload['excerpt'] ?? '')) !== ''
-            && $clean !== '',
-        "Verzia {$articleLang} musí mať názov, úryvok aj bezpečný HTML obsah"
+        is_array($articleSeed)
+            && preg_match('/^[a-z0-9-]+$/', (string) ($articleSeed['slug'] ?? '')) === 1
+            && isset($articleSeed['translations']['sk'], $articleSeed['translations']['en']),
+        "{$articleFile} musí mať slug a slovenskú aj anglickú verziu"
     );
+    foreach (['sk', 'en'] as $articleLang) {
+        $payload = $articleSeed['translations'][$articleLang];
+        $clean = sanitizeHtmlContent((string) ($payload['content'] ?? ''));
+        expectTrue(
+            trim((string) ($payload['title'] ?? '')) !== ''
+                && trim((string) ($payload['excerpt'] ?? '')) !== ''
+                && $clean !== '',
+            "{$articleFile} ({$articleLang}) musí mať názov, úryvok aj bezpečný HTML obsah"
+        );
+        expectTrue(
+            !str_contains(strtolower($clean), '<script')
+                && str_contains($clean, 'contact.php'),
+            "{$articleFile} ({$articleLang}) musí po sanitizácii zachovať odkaz na kontakt a nesmie obsahovať skript"
+        );
+    }
     expectTrue(
-        !str_contains(strtolower($clean), '<script')
-            && str_contains($clean, 'contact.php'),
-        "Verzia {$articleLang} musí po sanitizácii zachovať odkaz na kontakt a nesmie obsahovať skript"
+        str_contains($setupDbSource, $articleFile),
+        "setup_db.php musí {$articleFile} vložiť idempotentnou migráciou"
     );
 }
 expectTrue(
-    str_contains($articleSeed['translations']['sk']['content'], 'tirzepatid')
-        && str_contains($articleSeed['translations']['sk']['content'], 'Medrol')
-        && str_contains($articleSeed['translations']['en']['content'], 'tirzepatide'),
-    'Príspevok musí obsahovať konkrétne liečivá zo zdrojového textu'
-);
-expectTrue(
-    str_contains($setupDbSource, '2026091701_glp1_steroid_food_noise_article')
-        && str_contains($setupDbSource, 'lekar-ako-pacient-glp1-a-kortikosteroidy.php'),
-    'setup_db.php musí článok vložiť idempotentnou migráciou zo súboru v content/'
+    str_contains($setupDbSource, 'function seedPublishedArticleFromFile'),
+    'setup_db.php musí články vkladať spoločnou funkciou, nie kopírovať INSERT do každej migrácie'
 );
 
 if ($failures !== []) {

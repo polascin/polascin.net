@@ -42,6 +42,7 @@ const EXPECTED_MIGRATIONS = [
     '2026072902_profile_copy',
     '2026091101_admin_password_rotation',
     '2026091701_glp1_steroid_food_noise_article',
+    '2026091702_arenibus_ai_security_audit_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
