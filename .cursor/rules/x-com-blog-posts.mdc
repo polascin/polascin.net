@@ -1,0 +1,20 @@
+---
+description: Po novom blogovom článku vždy zverejni príspevok na X @polascin
+alwaysApply: true
+---
+
+# X.com príspevky k blogu
+
+Po **novom zverejnenom** článku na polascin.net **vždy bez ďalšieho pokynu** pridaj príspevok na X. Až **po** úspešnom deployi a overení produkčnej URL (OG karta). Čisto dokumentačné zmeny nie.
+
+Účet: **@polascin** (`https://x.com/polascin`). Nie `@LPolascin99873` (Gmail SSO ide sem). Overenie: menu účtu „Odhlásiť používateľa @polascin“ a na profile „Upraviť profil“. Chránený účet je v poriadku.
+
+Ak nie si prihlásený ako @polascin: `https://x.com/home` → username `polascin`. Heslo/passkey nehádaj; nechaj dialóg otvorený a požiadaj používateľa. Po „Prihlásený.“ pokračuj.
+
+Text: slovenčina, úderný hook z SK title/excerpt, kanonická URL `https://polascin.net/article.php?slug=SLUG` (bez `lang=`). Pod 280 znakov (URL = 23). Jedno uverejnenie na článok; pred ďalším skontroluj profil, či slug už nie je.
+
+Postup: `https://x.com/home` → pole „Text príspevku“ → počkaj kým „Uverejniť“ v compose (nie sidebar) nie je disabled → klik. Potom profil, zozbieraj `https://x.com/polascin/status/…`.
+
+Už zverejnené (neopakovať): `lekar-ako-pacient-glp1-a-kortikosteroidy`, `ai-agent-bezpecnostny-audit-arenibus`, `hypertenzia-oblicky-algoritmus-pre-vld`, `ai-modely-ako-nastroje-nie-operacny-system`.
+
+Článok na webe nenechávaj čakať na X. Ak X zlyhá, nahlás to; článok ostane live.

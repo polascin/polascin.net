@@ -587,8 +587,8 @@ foreach (['.vscode', '.claude', '.trunk', '.cursor', '.idea'] as $localToolDir) 
 $deployShSource = (string) file_get_contents(dirname(__DIR__) . '/hooks/deploy.sh');
 foreach (['deploy.yml' => $deployWorkflow, 'hooks/deploy.sh' => $deployShSource] as $cleanupName => $cleanupSource) {
     expectTrue(
-        str_contains($cleanupSource, '.cursor/rules/always-commit-push-deploy.mdc'),
-        "{$cleanupName} musí zmazať už nasadené .cursor/rules/ z web rootu"
+        str_contains($cleanupSource, '.cursor/rules/*.mdc'),
+        "{$cleanupName} musí zmazať už nasadené .cursor/rules/*.mdc z web rootu"
     );
 }
 
