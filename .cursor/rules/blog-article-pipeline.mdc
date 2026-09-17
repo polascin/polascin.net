@@ -1,0 +1,47 @@
+---
+description: Štandardný postup nového blogového článku (korektúra, obálka, Disk, preklady, X)
+alwaysApply: true
+---
+
+# Pipeline blogového článku
+
+Keď používateľ dodá text na blog, **bez ďalšieho pokynu** urob kroky 1–5. Ak slug už existuje, nedej duplikát článku ani tweety. Čisto dokumentačné zmeny nie. Článok na webe nenechávaj čakať na Disk ani X.
+
+Poradie vykonania: korektúra a seed (1+4) → obálka WebP (2, seeder ju vyžaduje) → PNG na Disk (3, môže ísť súbežne) → testy, commit, push, deploy, overenie produkcie → tweet (5).
+
+Jazyky stránky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk`. Autor: `MUDr. Ľubomír Polaščín`. DB sa plní len cez `setup_db.php` (`seedPublishedArticleFromFile`); neseeduj z notebooku.
+
+## 1. Korektúra a zverejnenie
+
+- Jazyková korektúra dodaného textu (sk/en), fakty over Tavily (názvy, URL, dátumy). Nevyhlasuj rukopis za uverejnený, kým to text nepovie.
+- `content/articles/{slug}.php`: 403 guard ako existujúce seed súbory; `slug` `[a-z0-9-]+`; `category` `blog`; `published_at` teraz; `image` `images/articles/{slug}.webp`.
+- Každý jazyk: `title` (≤255), `excerpt`, `image_alt` (≤255), HTML `content` cez `sanitizeHtmlContent` (žiadny `<script>`, CTA `contact.php` kde sedí, disclaimer ak ide o osobnú/medicínsku skúsenosť).
+- Migrácia `YYYYMMDDNN_short_name` v `setup_db.php` + ten istý názov v `scripts/audit_db_check.php` `EXPECTED_MIGRATIONS`. Seeder **nevypisuje** existujúce `(slug, lang)` (len doplní chýbajúce a aktualizuje obálku).
+- `php tests/run.php`. Potom commit/push/deploy podľa deploy pravidla.
+
+## 2. Ilustračný obrázok
+
+- `GenerateImage`, 16:9, cinematic, **bez textu/log** na obrázku, farby značky fialová `#3d1a78` / tyrkys `#078d70`.
+- Ak nástroj uloží JPEG s príponou `.png`, načítaj `imagecreatefromjpeg` (nie png). Konverzia: `images/articles/{slug}.webp`, q82, **≥1200×675**, ideálne 1280×720.
+- `image` + `image_alt` vo všetkých prekladoch. Verejný SELECT obálku neťahá; súbor podľa slugu musí existovať pred migráciou.
+
+## 3. PNG na Google Disk
+
+- Z WebP urob skutočné PNG (GD `imagepng`, mime `image/png`).
+- Priečinok [polascin.net – obálky blogu](https://drive.google.com/drive/folders/1MOa4l69tswsLmQB3ZmYAdoZd9gZ5aVas) (`1MOa4l69tswsLmQB3ZmYAdoZd9gZ5aVas`). Kopíruj na `G:\Môj disk\polascin.net – obálky blogu\` (účet polascin@gmail.com), over `mimeType = image/png`.
+- PNG **necommituj** do repa. Lokálne tmp zmaž.
+
+## 4. Jazykové mutácie
+
+- Seed musí mať **všetky** kľúče `appLanguages()` už pri prvom deployi. Prekladaj celý článok (title, excerpt, alt, HTML), nie strojový kalk.
+- CS: slovenské reálie (SOLEN/Via practica) podľa existujúcich článkov. Po deployi spot-check aspoň SK, EN a jeden ďalší jazyk + hreflang v sitemape.
+
+## 5. X.com @polascin
+
+Až **po** success deployi a HTTP 200 kanonickej URL (OG karta). Účet **@polascin** (`https://x.com/polascin`), nie `@LPolascin99873` a nie preklep `@polacin`. Overenie: „Odhlásiť používateľa @polascin“, na profile „Upraviť profil“. Chránený účet je OK.
+
+Prihlásenie: `https://x.com/home`; ak treba username `polascin`. Heslo/passkey nehádaj — dialóg nechaj otvorený. Po „Prihlásený.“ pokračuj.
+
+Tweet: slovenčina, hook z SK title/excerpt, URL `https://polascin.net/article.php?slug=SLUG` (bez `lang=`), pod 280 znakov (URL = 23). Pole „Text príspevku“ → „Uverejniť“ v compose (nie sidebar). Pred ďalším článkom skontroluj, či slug na profile už nie je. Zober `https://x.com/polascin/status/…`. Ak X zlyhá, nahlás to; web ostane live.
+
+Už na X (neopakovať): `lekar-ako-pacient-glp1-a-kortikosteroidy`, `ai-agent-bezpecnostny-audit-arenibus`, `hypertenzia-oblicky-algoritmus-pre-vld`, `ai-modely-ako-nastroje-nie-operacny-system`.

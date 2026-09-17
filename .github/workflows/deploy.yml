@@ -370,7 +370,7 @@ jobs:
           done
 
           # Interné súbory nesmú byť po nasadení dostupné.
-          for PATH_SUFFIX in "/i18n.php" "/lang/sk.php" "/helpers.php" "/deploy_info.php" "/content/" "/.cursor/rules/always-commit-push-deploy.mdc" "/.cursor/rules/x-com-blog-posts.mdc"; do
+          for PATH_SUFFIX in "/i18n.php" "/lang/sk.php" "/helpers.php" "/deploy_info.php" "/content/" "/.cursor/rules/always-commit-push-deploy.mdc" "/.cursor/rules/x-com-blog-posts.mdc" "/.cursor/rules/blog-article-pipeline.mdc"; do
             URL="${SMOKE_BASE_URL%/}${PATH_SUFFIX}"
             CODE=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "$URL" || echo "000")
             if [[ "$CODE" == "403" || "$CODE" == "404" ]]; then
