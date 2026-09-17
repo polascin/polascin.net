@@ -153,6 +153,9 @@ jobs:
             -i "$HOME/.ssh/deploy_key"
             -o BatchMode=yes
             -o ConnectTimeout=30
+            -o ConnectionAttempts=3
+            -o ServerAliveInterval=15
+            -o ServerAliveCountMax=4
             -o StrictHostKeyChecking=yes
           )
 
@@ -161,9 +164,24 @@ jobs:
           # Skript ide na server po štandardnom vstupe, nie ako súbor: na hostingu
           # tak nikdy nevznikne auditný súbor, ktorý by bol — hoci len počas behu —
           # dosiahnuteľný z webu. `php` bez argumentov číta kód zo stdin.
-          if ! ssh "${SSH_OPTS[@]}" "$TARGET" \
-              "cd '${DEPLOY_REMOTE_PATH_SAFE}' && POLASCIN_ENV_PATH='${POLASCIN_ENV_PATH_SAFE}' php" \
-              <scripts/audit_db_check.php >audit-reports/db-latest.md 2>audit-reports/db-stderr.log; then
+          # SSH keepalive + tri pokusy: rovnaký prechodný drop ako v Behu #24
+          # by inak nechal rutinou čítať včerajší report.
+          attempts=0
+          ssh_ok=0
+          while (( attempts < 3 )); do
+            if ssh "${SSH_OPTS[@]}" "$TARGET" \
+                "cd '${DEPLOY_REMOTE_PATH_SAFE}' && POLASCIN_ENV_PATH='${POLASCIN_ENV_PATH_SAFE}' php" \
+                <scripts/audit_db_check.php >audit-reports/db-latest.md 2>audit-reports/db-stderr.log; then
+              ssh_ok=1
+              break
+            fi
+            attempts=$((attempts + 1))
+            if (( attempts < 3 )); then
+              echo "SSH pokus ${attempts} zlyhal; opakujem o 8 s..."
+              sleep 8
+            fi
+          done
+          if (( ssh_ok == 0 )); then
             {
               echo "# Kontrola produkčnej databázy — polascin.net"
               echo

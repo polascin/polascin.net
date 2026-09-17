@@ -242,6 +242,9 @@ jobs:
             -i "$HOME/.ssh/deploy_key"
             -o BatchMode=yes
             -o ConnectTimeout=30
+            -o ConnectionAttempts=3
+            -o ServerAliveInterval=15
+            -o ServerAliveCountMax=4
             -o "StrictHostKeyChecking=${SSH_HOST_KEY_CHECK}"
           )
           printf -v RSYNC_RSH '%q ' ssh "${SSH_OPTS[@]}"
@@ -279,13 +282,27 @@ jobs:
             -i "$HOME/.ssh/deploy_key"
             -o BatchMode=yes
             -o ConnectTimeout=30
+            -o ConnectionAttempts=3
+            -o ServerAliveInterval=15
+            -o ServerAliveCountMax=4
             -o "StrictHostKeyChecking=${SSH_HOST_KEY_CHECK}"
           )
           REMOTE_ENV_DIR=$(dirname -- "$POLASCIN_ENV_PATH_SAFE")
 
           echo "Creating protected remote environment config..."
-          printf '%s\n' "$POLASCIN_ENV_INI" | ssh "${SSH_OPTS[@]}" "$TARGET" \
-            "umask 077 && mkdir -p '${REMOTE_ENV_DIR}' && cat > '${POLASCIN_ENV_PATH_SAFE}' && chmod 600 '${POLASCIN_ENV_PATH_SAFE}'"
+          # Beh #24: tento krok raz padol na `Connection closed by <host>` (exit 255)
+          # bez zmeny kódu; SSH keepalive nestačí na prechodný drop pri handshake.
+          attempts=0
+          until printf '%s\n' "$POLASCIN_ENV_INI" | ssh "${SSH_OPTS[@]}" "$TARGET" \
+            "umask 077 && mkdir -p '${REMOTE_ENV_DIR}' && cat > '${POLASCIN_ENV_PATH_SAFE}' && chmod 600 '${POLASCIN_ENV_PATH_SAFE}'"; do
+            attempts=$((attempts + 1))
+            if (( attempts >= 3 )); then
+              echo "::error::SSH zlyhalo po ${attempts} pokusoch pri zápise vzdialenej konfigurácie."
+              exit 1
+            fi
+            echo "SSH pokus ${attempts} zlyhal; opakujem o 8 s..."
+            sleep 8
+          done
 
       - name: Run database migrations
         env:
@@ -301,6 +318,9 @@ jobs:
             -i "$HOME/.ssh/deploy_key"
             -o BatchMode=yes
             -o ConnectTimeout=30
+            -o ConnectionAttempts=3
+            -o ServerAliveInterval=15
+            -o ServerAliveCountMax=4
             -o "StrictHostKeyChecking=${SSH_HOST_KEY_CHECK}"
           )
           REMOTE_ENV_ABSOLUTE="$POLASCIN_ENV_PATH_SAFE"
@@ -335,8 +355,10 @@ jobs:
           # Zoznam zodpovedá bodu 5 sekcie „Dokončenie“ v `.doaudit.md`. Overuje
           # ho deploy, nie nočná rutina: jej sieťová politika `polascin.net`
           # blokuje (CONNECT → 403), takže `newsletter.php` ani `login.php`
-          # by po nasadení neskontroloval nikto (Beh #24).
-          for PATH_SUFFIX in "/" "/contact.php" "/articles.php" "/sitemap.php" "/newsletter.php" "/login.php"; do
+          # by po nasadení neskontroloval nikto (Beh #24). `privacy.php` a
+          # `terms.php` pribudli v Behu #26 — sú to GDPR stránky, ktorých 500
+          # by smoke check inak prehliadol.
+          for PATH_SUFFIX in "/" "/contact.php" "/articles.php" "/sitemap.php" "/newsletter.php" "/login.php" "/privacy.php" "/terms.php"; do
             URL="${SMOKE_BASE_URL%/}${PATH_SUFFIX}"
             CODE=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 5 "$URL" || echo "000")
             if [[ "$CODE" == "200" ]]; then
@@ -374,6 +396,7 @@ jobs:
               "referrer-policy" \
               "permissions-policy" \
               "cross-origin-opener-policy" \
+              "cross-origin-resource-policy" \
               "x-permitted-cross-domain-policies" \
               "content-security-policy"; do
             if grep -qi "^${HEADER}:" "$HEADERS_FILE"; then

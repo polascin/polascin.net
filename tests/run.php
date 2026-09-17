@@ -460,6 +460,10 @@ expectTrue(
     '.htaccess musí blokovať priamy prístup na .txt súbory'
 );
 expectTrue(
+    str_contains($htaccessRules, 'Header always set Cross-Origin-Resource-Policy "same-origin"'),
+    '.htaccess musí posielať CORP aj na statické súbory, nielen PHP odpovede'
+);
+expectTrue(
     str_contains($htaccessRules, '<Files "robots.txt">')
         && str_contains($htaccessRules, 'Require all granted'),
     'robots.txt musí zostať verejne dostupný napriek zákazu .txt'
@@ -479,6 +483,7 @@ foreach (
         'referrer-policy',
         'permissions-policy',
         'cross-origin-opener-policy',
+        'cross-origin-resource-policy',
         'x-permitted-cross-domain-policies',
         'content-security-policy',
     ] as $smokeHeader
@@ -494,7 +499,7 @@ expectTrue(
 );
 // Bod 5 sekcie „Dokončenie“ v `.doaudit.md` vymenúva kľúčové URL; keďže ich
 // nočná rutina overiť nemôže, musia byť v smoke checku (Beh #24).
-foreach (['"/"', '"/articles.php"', '"/contact.php"', '"/newsletter.php"', '"/sitemap.php"', '"/login.php"'] as $smokeUrl) {
+foreach (['"/"', '"/articles.php"', '"/contact.php"', '"/newsletter.php"', '"/sitemap.php"', '"/login.php"', '"/privacy.php"', '"/terms.php"'] as $smokeUrl) {
     expectTrue(
         str_contains($deployWorkflow, $smokeUrl),
         'Smoke check po nasadení musí overiť URL ' . trim($smokeUrl, '"')
@@ -1010,6 +1015,41 @@ expectSame(
     'Kontrolný zoznam v .audit.md nesmie uvádzať iný počet jazykov, než má appLanguages()'
 );
 
+// Beh #21 skrátil idle timeout na 30 minút, ale kontrolný zoznam ešte v Behu #26
+// tvrdil „1 hodina“. Ďalší beh by to pokladal za správny stav.
+$idleMinutes = (int) (SESSION_IDLE_TIMEOUT / 60);
+$absoluteHours = (int) (SESSION_ABSOLUTE_TIMEOUT / 3600);
+expectTrue(
+    $idleMinutes > 0
+        && preg_match('~Idle timeout relácie \(' . $idleMinutes . ' minút\)~u', $checklistSection) === 1,
+    'Kontrolný zoznam musí uvádzať aktuálny idle timeout relácie odvodený z SESSION_IDLE_TIMEOUT'
+);
+expectTrue(
+    $absoluteHours > 0 && str_contains($checklistSection, (string) $absoluteHours . ' hodín'),
+    'Kontrolný zoznam musí uvádzať aktuálny absolútny limit relácie'
+);
+
+$headMetaSource = (string) file_get_contents(dirname(__DIR__) . '/head_meta.php');
+expectTrue(
+    str_contains($headMetaSource, 'name="description"')
+        && str_contains($headMetaSource, 'name="author"')
+        && str_contains($headMetaSource, 'name="robots"')
+        && str_contains($headMetaSource, 'name="theme-color"')
+        && !str_contains($headMetaSource, 'name="keywords"'),
+    'head_meta.php musí emitovať description/author/robots/theme-color a nesmie emitovať zastaraný keywords'
+);
+expectTrue(
+    !preg_match('~Meta tagy: `description`, `keywords`~', $checklistSection),
+    'Kontrolný zoznam nesmie vyžadovať zastaraný meta keywords ako povinný tag'
+);
+
+$doAuditDoc = (string) file_get_contents(dirname(__DIR__) . '/.doaudit.md');
+expectTrue(
+    str_contains($auditDoc, '## Recursive self-improvement (povinné)')
+        && str_contains($doAuditDoc, '## Recursive self-improvement (povinné)'),
+    '.audit.md aj .doaudit.md musia obsahovať povinnú sekciu recursive self-improvement'
+);
+
 foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $cataloguePath) {
     $catalogueCode = basename($cataloguePath, '.php');
     expectTrue(
@@ -1315,6 +1355,33 @@ expectTrue(
 expectTrue(
     str_contains($verifyWorkflow, 'group: polascin-production-deploy'),
     'verify-db.yml musí zdieľať concurrency skupinu s nasadením, aby sa nikdy neprekryli'
+);
+
+// Beh #24: SSH krok „Create remote environment config“ raz padol na
+// `Connection closed by <host>` bez zmeny kódu. Keepalive a opakovaný pokus
+// musia byť vo všetkých SSH cestách, inak sa prechodný výpadok hostingu vráti.
+foreach (
+    [
+        'deploy.yml' => $deployWorkflow,
+        'verify-db.yml' => $verifyWorkflow,
+        'hooks/deploy.sh' => $deployScript,
+    ] as $sshSourceName => $sshSource
+) {
+    expectTrue(
+        str_contains($sshSource, 'ServerAliveInterval=15')
+            && str_contains($sshSource, 'ServerAliveCountMax=4')
+            && str_contains($sshSource, 'ConnectionAttempts=3'),
+        "{$sshSourceName} musí na SSH používať keepalive a opakované pripojenie"
+    );
+}
+expectTrue(
+    str_contains($deployWorkflow, 'SSH zlyhalo po ${attempts} pokusoch pri zápise vzdialenej konfigurácie.'),
+    'deploy.yml musí pri zápise env.ini zopakovať SSH po prechodnom dropnutí'
+);
+expectTrue(
+    str_contains($verifyWorkflow, 'ssh_ok=0')
+        && str_contains($verifyWorkflow, 'while (( attempts < 3 )); do'),
+    'verify-db.yml musí SSH kontrolu DB zopakovať po prechodnom dropnutí'
 );
 
 if ($failures !== []) {

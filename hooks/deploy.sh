@@ -154,6 +154,9 @@ fi
 SSH_OPTS=(
 	-o BatchMode=yes
 	-o ConnectTimeout=30
+	-o ConnectionAttempts=3
+	-o ServerAliveInterval=15
+	-o ServerAliveCountMax=4
 	-o "StrictHostKeyChecking=${HOST_KEY_CHECK}"
 )
 
