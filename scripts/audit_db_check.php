@@ -46,6 +46,7 @@ const EXPECTED_MIGRATIONS = [
     '2026091703_via_practica_vld_algorithm_article',
     '2026091704_ai_model_freedom_article',
     '2026091705_article_cover_images',
+    '2026091706_article_all_language_translations',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

@@ -398,6 +398,16 @@ function applySchemaMigrations(PDO $pdo): void {
                 seedPublishedArticleFromFile($pdo, __DIR__ . '/content/articles/' . $articleFile);
             }
         },
+        '2026091706_article_all_language_translations' => static function (PDO $pdo): void {
+            foreach ([
+                'lekar-ako-pacient-glp1-a-kortikosteroidy.php',
+                'ai-agent-bezpecnostny-audit-arenibus.php',
+                'hypertenzia-oblicky-algoritmus-pre-vld.php',
+                'ai-modely-ako-nastroje-nie-operacny-system.php',
+            ] as $articleFile) {
+                seedPublishedArticleFromFile($pdo, __DIR__ . '/content/articles/' . $articleFile);
+            }
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

@@ -1404,14 +1404,15 @@ foreach ($articleSeedFiles as $articleSeedPath) {
     expectTrue(
         is_array($articleSeed)
             && preg_match('/^[a-z0-9-]+$/', (string) ($articleSeed['slug'] ?? '')) === 1
-            && isset($articleSeed['translations']['sk'], $articleSeed['translations']['en']),
-        "{$articleFile} musí mať slug a slovenskú aj anglickú verziu"
+            && array_diff(array_keys(appLanguages()), array_keys($articleSeed['translations'] ?? [])) === [],
+        "{$articleFile} musí mať slug a preklad v každom jazyku stránky"
     );
-    foreach (['sk', 'en'] as $articleLang) {
+    foreach (array_keys(appLanguages()) as $articleLang) {
         $payload = $articleSeed['translations'][$articleLang];
         $clean = sanitizeHtmlContent((string) ($payload['content'] ?? ''));
         expectTrue(
             trim((string) ($payload['title'] ?? '')) !== ''
+                && appTextLength((string) ($payload['title'] ?? '')) <= 255
                 && trim((string) ($payload['excerpt'] ?? '')) !== ''
                 && $clean !== '',
             "{$articleFile} ({$articleLang}) musí mať názov, úryvok aj bezpečný HTML obsah"
@@ -1452,8 +1453,8 @@ expectTrue(
     'setup_db.php musí články vkladať spoločnou funkciou, nie kopírovať INSERT do každej migrácie'
 );
 expectTrue(
-    str_contains($setupDbSource, '2026091705_article_cover_images'),
-    'setup_db.php musí obálky článkov doplniť migráciou'
+    str_contains($setupDbSource, '2026091706_article_all_language_translations'),
+    'setup_db.php musí jazykové mutácie článkov vložiť migráciou'
 );
 expectTrue(
     normalizeArticleCoverPath('../etc/passwd') === null
