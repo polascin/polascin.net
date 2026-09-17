@@ -456,6 +456,10 @@ expectTrue(
     '.htaccess musí zakázať náhodne nasadený adresár portfolio/'
 );
 expectTrue(
+    preg_match('~RewriteRule \^\([^)]*\|content\|[^)]*\)\(/\\.\\*\)\\?\$ - \[F,L\]~', $htaccessRules) === 1,
+    '.htaccess musí zakázať priamy prístup na interný adresár content/'
+);
+expectTrue(
     preg_match('~<FilesMatch "[^"]*\|txt\)\$"~', $htaccessRules) === 1,
     '.htaccess musí blokovať priamy prístup na .txt súbory'
 );
@@ -471,6 +475,10 @@ expectTrue(
 expectTrue(
     str_contains($deployWorkflow, '"/deploy_info.php"'),
     'Smoke check po nasadení musí overiť nedostupnosť deploy_info.php'
+);
+expectTrue(
+    str_contains($deployWorkflow, '"/content/"'),
+    'Smoke check po nasadení musí overiť nedostupnosť adresára content/'
 );
 // Sieťová politika cloudového prostredia nočnej rutiny `polascin.net` blokuje
 // (CONNECT → 403), takže hlavičky z nej overiť nemožno. Kontrolu preto robí
@@ -509,6 +517,10 @@ $robotsTxt = (string) file_get_contents(dirname(__DIR__) . '/robots.txt');
 expectTrue(
     str_contains($robotsTxt, 'Disallow: /portfolio/'),
     'robots.txt musí zakazovať crawlovanie adresára portfolio/'
+);
+expectTrue(
+    str_contains($robotsTxt, 'Disallow: /content/'),
+    'robots.txt musí zakazovať crawlovanie interného adresára content/'
 );
 
 // `robots.txt` vymenúva administrátorské stránky po jednej a zoznam sa pri
@@ -1382,6 +1394,42 @@ expectTrue(
     str_contains($verifyWorkflow, 'ssh_ok=0')
         && str_contains($verifyWorkflow, 'while (( attempts < 3 )); do'),
     'verify-db.yml musí SSH kontrolu DB zopakovať po prechodnom dropnutí'
+);
+
+$articleSeedPath = dirname(__DIR__) . '/content/articles/lekar-ako-pacient-glp1-a-kortikosteroidy.php';
+expectTrue(is_file($articleSeedPath), 'Súbor prvého blogového príspevku musí existovať');
+$articleSeed = require $articleSeedPath;
+expectTrue(
+    is_array($articleSeed)
+        && ($articleSeed['slug'] ?? '') === 'lekar-ako-pacient-glp1-a-kortikosteroidy'
+        && isset($articleSeed['translations']['sk'], $articleSeed['translations']['en']),
+    'Blogový príspevok musí mať slug a slovensku aj anglickú verziu'
+);
+foreach (['sk', 'en'] as $articleLang) {
+    $payload = $articleSeed['translations'][$articleLang];
+    $clean = sanitizeHtmlContent((string) ($payload['content'] ?? ''));
+    expectTrue(
+        trim((string) ($payload['title'] ?? '')) !== ''
+            && trim((string) ($payload['excerpt'] ?? '')) !== ''
+            && $clean !== '',
+        "Verzia {$articleLang} musí mať názov, úryvok aj bezpečný HTML obsah"
+    );
+    expectTrue(
+        !str_contains(strtolower($clean), '<script')
+            && str_contains($clean, 'contact.php'),
+        "Verzia {$articleLang} musí po sanitizácii zachovať odkaz na kontakt a nesmie obsahovať skript"
+    );
+}
+expectTrue(
+    str_contains($articleSeed['translations']['sk']['content'], 'tirzepatid')
+        && str_contains($articleSeed['translations']['sk']['content'], 'Medrol')
+        && str_contains($articleSeed['translations']['en']['content'], 'tirzepatide'),
+    'Príspevok musí obsahovať konkrétne liečivá zo zdrojového textu'
+);
+expectTrue(
+    str_contains($setupDbSource, '2026091701_glp1_steroid_food_noise_article')
+        && str_contains($setupDbSource, 'lekar-ako-pacient-glp1-a-kortikosteroidy.php'),
+    'setup_db.php musí článok vložiť idempotentnou migráciou zo súboru v content/'
 );
 
 if ($failures !== []) {

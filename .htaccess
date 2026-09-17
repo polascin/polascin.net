@@ -47,7 +47,7 @@ DirectoryIndex index.php index.html
     # Cudzí nested projekt (polascin.com) nesmie byť náhodou nasadený pod root.
     RewriteRule ^portfolio(?:/.*)?$ - [F,L]
 
-    RewriteRule ^(\.claude|\.git|\.github|\.trunk|\.vscode|hooks|lang|private|tests)(/.*)?$ - [F,L]
+    RewriteRule ^(\.claude|\.git|\.github|\.trunk|\.vscode|content|hooks|lang|private|tests)(/.*)?$ - [F,L]
 </IfModule>
 
 # ── Blokovanie interných PHP skriptov a citlivých súborov ───────────────────

@@ -18,6 +18,7 @@ Disallow: /login.php
 Disallow: /logout.php
 Disallow: /newsletter.php
 Disallow: /private/
+Disallow: /content/
 Disallow: /portfolio/
 Disallow: /setup_db.php
 Disallow: /weblogo/
