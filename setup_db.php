@@ -73,7 +73,8 @@ function findSingleColumnUniqueIndex(PDO $pdo, string $table, string $column, ar
 
 /**
  * Vloží publikovaný článok zo súboru v `content/articles/`, ak daný slug
- * v jazyku ešte neexistuje. Úpravy v administrácii sa tým neprepisujú.
+ * v jazyku ešte neexistuje. Text v administrácii sa neprepisuje; obalový
+ * obrázok sa na existujúcich riadkoch obnoví zo súboru.
  */
 function seedPublishedArticleFromFile(PDO $pdo, string $articlePath): void {
     if (!is_file($articlePath)) {
@@ -92,6 +93,10 @@ function seedPublishedArticleFromFile(PDO $pdo, string $articlePath): void {
     if (!in_array($category, ['blog', 'news'], true)) {
         $category = 'blog';
     }
+    $image = normalizeArticleCoverPath((string) ($article['image'] ?? ''));
+    if ($image === null || !is_file(__DIR__ . '/' . $image)) {
+        throw new RuntimeException("Článok {$slug} nemá platný obalový obrázok.");
+    }
 
     $existingStmt = $pdo->prepare(
         'SELECT id, lang, translation_group FROM articles WHERE slug = :slug'
@@ -106,32 +111,64 @@ function seedPublishedArticleFromFile(PDO $pdo, string $articlePath): void {
         }
     }
 
-    $insert = $pdo->prepare(
-        'INSERT INTO articles (
-            title, slug, excerpt, content, author, lang, translation_group,
-            category, is_published, is_top, sort_order, published_at
-         ) VALUES (
-            :title, :slug, :excerpt, :content, :author, :lang, :translation_group,
-            :category, 1, :is_top, 0, :published_at
-         )'
-    );
+    $hasCoverColumns = columnExists($pdo, 'articles', 'image') && columnExists($pdo, 'articles', 'image_alt');
+    $insert = $hasCoverColumns
+        ? $pdo->prepare(
+            'INSERT INTO articles (
+                title, slug, excerpt, image, image_alt, content, author, lang, translation_group,
+                category, is_published, is_top, sort_order, published_at
+             ) VALUES (
+                :title, :slug, :excerpt, :image, :image_alt, :content, :author, :lang, :translation_group,
+                :category, 1, :is_top, 0, :published_at
+             )'
+        )
+        : $pdo->prepare(
+            'INSERT INTO articles (
+                title, slug, excerpt, content, author, lang, translation_group,
+                category, is_published, is_top, sort_order, published_at
+             ) VALUES (
+                :title, :slug, :excerpt, :content, :author, :lang, :translation_group,
+                :category, 1, :is_top, 0, :published_at
+             )'
+        );
+    $updateCover = $hasCoverColumns
+        ? $pdo->prepare(
+            'UPDATE articles SET image = :image, image_alt = :image_alt WHERE slug = :slug AND lang = :lang'
+        )
+        : null;
 
     foreach ($article['translations'] as $lang => $payload) {
         if (!is_string($lang) || !isSupportedLanguage($lang) || !is_array($payload)) {
-            continue;
-        }
-        if (isset($byLang[$lang])) {
             continue;
         }
 
         $title = trim((string) ($payload['title'] ?? ''));
         $excerpt = strip_tags(trim((string) ($payload['excerpt'] ?? '')));
         $content = sanitizeHtmlContent((string) ($payload['content'] ?? ''));
+        $imageAlt = trim((string) ($payload['image_alt'] ?? ''));
+        if ($imageAlt === '') {
+            $imageAlt = $title;
+        }
+        if (appTextLength($imageAlt) > 255) {
+            $imageAlt = rtrim(appTextSlice($imageAlt, 0, 255));
+        }
         if ($title === '' || $content === '') {
             throw new RuntimeException("Článok {$slug} ({$lang}) nemá názov alebo obsah.");
         }
 
-        $insert->execute([
+        if (isset($byLang[$lang])) {
+            if ($updateCover !== null) {
+                $updateCover->execute([
+                    ':image' => $image,
+                    ':image_alt' => $imageAlt,
+                    ':slug' => $slug,
+                    ':lang' => $lang,
+                ]);
+            }
+            continue;
+        }
+
+        $insertValues = [
             ':title' => $title,
             ':slug' => $slug,
             ':excerpt' => $excerpt,
@@ -142,7 +179,12 @@ function seedPublishedArticleFromFile(PDO $pdo, string $articlePath): void {
             ':category' => $category,
             ':is_top' => $isTop,
             ':published_at' => $publishedAt,
-        ]);
+        ];
+        if ($hasCoverColumns) {
+            $insertValues[':image'] = $image;
+            $insertValues[':image_alt'] = $imageAlt;
+        }
+        $insert->execute($insertValues);
         $id = (int) $pdo->lastInsertId();
         if ($group === null) {
             $group = $id;
@@ -340,6 +382,22 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/ai-modely-ako-nastroje-nie-operacny-system.php'
             );
         },
+        '2026091705_article_cover_images' => static function (PDO $pdo): void {
+            if (!columnExists($pdo, 'articles', 'image')) {
+                $pdo->exec("ALTER TABLE articles ADD COLUMN image VARCHAR(255) NULL AFTER excerpt");
+            }
+            if (!columnExists($pdo, 'articles', 'image_alt')) {
+                $pdo->exec("ALTER TABLE articles ADD COLUMN image_alt VARCHAR(255) NULL AFTER image");
+            }
+            foreach ([
+                'lekar-ako-pacient-glp1-a-kortikosteroidy.php',
+                'ai-agent-bezpecnostny-audit-arenibus.php',
+                'hypertenzia-oblicky-algoritmus-pre-vld.php',
+                'ai-modely-ako-nastroje-nie-operacny-system.php',
+            ] as $articleFile) {
+                seedPublishedArticleFromFile($pdo, __DIR__ . '/content/articles/' . $articleFile);
+            }
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
@@ -373,6 +431,8 @@ CREATE TABLE IF NOT EXISTS articles (
     title VARCHAR(255) NOT NULL,
     slug VARCHAR(255) NOT NULL,
     excerpt TEXT,
+    image VARCHAR(255) NULL,
+    image_alt VARCHAR(255) NULL,
     content LONGTEXT,
     author VARCHAR(255),
     lang VARCHAR(5) NOT NULL DEFAULT 'sk',

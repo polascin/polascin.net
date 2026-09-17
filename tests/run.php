@@ -1421,7 +1421,27 @@ foreach ($articleSeedFiles as $articleSeedPath) {
                 && str_contains($clean, 'contact.php'),
             "{$articleFile} ({$articleLang}) musí po sanitizácii zachovať odkaz na kontakt a nesmie obsahovať skript"
         );
+        expectTrue(
+            trim((string) ($payload['image_alt'] ?? '')) !== ''
+                && appTextLength((string) $payload['image_alt']) <= 255,
+            "{$articleFile} ({$articleLang}) musí mať alt text obálky do 255 znakov"
+        );
     }
+    $coverPath = normalizeArticleCoverPath((string) ($articleSeed['image'] ?? ''));
+    $slug = (string) $articleSeed['slug'];
+    expectTrue(
+        $coverPath === 'images/articles/' . $slug . '.webp'
+            && is_file(dirname(__DIR__) . '/' . $coverPath),
+        "{$articleFile} musí mať obálku images/articles/{$slug}.webp"
+    );
+    $coverInfo = getimagesize(dirname(__DIR__) . '/' . $coverPath);
+    expectTrue(
+        is_array($coverInfo)
+            && (string) ($coverInfo['mime'] ?? '') === 'image/webp'
+            && (int) $coverInfo[0] >= 1200
+            && (int) $coverInfo[1] >= 675,
+        "{$articleFile} musí mať širokú WebP obálku"
+    );
     expectTrue(
         str_contains($setupDbSource, $articleFile),
         "setup_db.php musí {$articleFile} vložiť idempotentnou migráciou"
@@ -1430,6 +1450,37 @@ foreach ($articleSeedFiles as $articleSeedPath) {
 expectTrue(
     str_contains($setupDbSource, 'function seedPublishedArticleFromFile'),
     'setup_db.php musí články vkladať spoločnou funkciou, nie kopírovať INSERT do každej migrácie'
+);
+expectTrue(
+    str_contains($setupDbSource, '2026091705_article_cover_images'),
+    'setup_db.php musí obálky článkov doplniť migráciou'
+);
+expectTrue(
+    normalizeArticleCoverPath('../etc/passwd') === null
+        && normalizeArticleCoverPath('https://evil.example/x.webp') === null
+        && normalizeArticleCoverPath('images/articles/not-a-slug.webp') === 'images/articles/not-a-slug.webp',
+    'Cesta obálky smie byť len súbor v images/articles/'
+);
+expectTrue(
+    articleCoverSrc(null, 'lekar-ako-pacient-glp1-a-kortikosteroidy')
+        === 'images/articles/lekar-ako-pacient-glp1-a-kortikosteroidy.webp',
+    'Obálka sa musí dať nájsť podľa slugu, aj keď stĺpec image ešte nie je v SELECT'
+);
+$articleTemplate = (string) file_get_contents(dirname(__DIR__) . '/article.php');
+$articlesTemplate = (string) file_get_contents(dirname(__DIR__) . '/articles.php');
+$homeTemplate = (string) file_get_contents(dirname(__DIR__) . '/index.php');
+$articleCss = (string) file_get_contents(dirname(__DIR__) . '/css/styles.css');
+expectTrue(
+    str_contains($articleTemplate, 'articleCoverHtml(')
+        && str_contains($articleTemplate, 'class="article-cover"')
+        && str_contains($articlesTemplate, 'articleCoverHtml(')
+        && str_contains($homeTemplate, 'articleCoverHtml('),
+    'Detail, zoznam aj homepage musia vykresliť obálku článku'
+);
+expectTrue(
+    str_contains($articleCss, '.article-cover')
+        && str_contains($articleCss, '.card-cover'),
+    'CSS musí mať štýly pre obálku v detaile aj na kartách'
 );
 
 if ($failures !== []) {

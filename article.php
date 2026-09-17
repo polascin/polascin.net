@@ -68,6 +68,17 @@ if ($notFound) {
     }
     $robotsMeta = $isAdminPreview ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
     $modifiedTimestamp = !empty($article['updated_at']) ? strtotime((string) $article['updated_at']) : false;
+    $coverSrc = articleCoverSrc(
+        isset($article['image']) ? (string) $article['image'] : null,
+        (string) ($article['slug'] ?? '')
+    );
+    if ($coverSrc !== null) {
+        $ogImage = $baseUrl . '/' . $coverSrc;
+        $coverInfo = @getimagesize(__DIR__ . '/' . $coverSrc);
+        $ogImageWidth = is_array($coverInfo) ? (int) $coverInfo[0] : 1280;
+        $ogImageHeight = is_array($coverInfo) ? (int) $coverInfo[1] : 720;
+        $ogImageAlt = trim((string) ($article['image_alt'] ?? '')) ?: (string) $article['title'];
+    }
     if (!$isAdminPreview) {
         $structuredData = [
             '@context' => 'https://schema.org',
@@ -82,6 +93,14 @@ if ($notFound) {
                 'name' => (string) ($article['author'] ?: 'Ľubomír Polaščín'),
             ],
         ];
+        if ($coverSrc !== null) {
+            $structuredData['image'] = [
+                '@type' => 'ImageObject',
+                'url' => $ogImage,
+                'width' => $ogImageWidth,
+                'height' => $ogImageHeight,
+            ];
+        }
     }
 }
 ?>
@@ -114,6 +133,10 @@ if ($notFound) {
       <p class="article-meta"><?= htmlspecialchars(formatArticleDate($article['published_at'] ?? null, $articleLang), ENT_QUOTES, 'UTF-8') ?><?php if (!empty($article['author'])): ?> · <?= htmlspecialchars((string) $article['author'], ENT_QUOTES, 'UTF-8') ?><?php endif; ?></p>
       <?php if (!empty($article['excerpt'])): ?>
         <p class="article-excerpt" lang="<?= htmlspecialchars($articleLang, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $article['excerpt'], ENT_QUOTES, 'UTF-8') ?></p>
+      <?php endif; ?>
+      <?php $coverHtml = articleCoverHtml($article, 'article-cover-img', false); ?>
+      <?php if ($coverHtml !== ''): ?>
+        <figure class="article-cover"><?= $coverHtml ?></figure>
       <?php endif; ?>
       <div class="article-body" lang="<?= htmlspecialchars($articleLang, ENT_QUOTES, 'UTF-8') ?>">
         <?= sanitizeHtmlContent((string) ($article['content'] ?? '')) ?>

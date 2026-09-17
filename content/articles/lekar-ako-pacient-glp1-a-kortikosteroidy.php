@@ -27,9 +27,11 @@ return [
     'category' => 'blog',
     'is_top' => 1,
     'published_at' => '2026-09-17 18:45:00',
+    'image' => 'images/articles/lekar-ako-pacient-glp1-a-kortikosteroidy.webp',
     'translations' => [
         'sk' => [
             'title' => 'Lekári sú najpozornejší pacienti',
+            'image_alt' => 'Lekár sedí na vyšetrovacom lôžku ako pacient: v jednej ruke pero GLP-1, v druhej kortikosteroidy.',
             'excerpt' => 'Čo som sa naučil pri prechode medzi tromi molekulami GLP-1, kým som zároveň užíval Medrol. Glykémie 16–18 mmol/l, návrat potravinového šumu a pohľad lekára, ktorý je zároveň pacientom.',
             'content' => <<<'HTML'
 <p>Minulý týždeň som prešiel zo semaglutidu na tirzepatid (Mounjaro 5&nbsp;mg). Dôvod bol prostý: zároveň užívam Medrol a hyperglykémia vyvolaná kortikosteroidmi je brutálna. Glykémie 16–18&nbsp;mmol/l. Dávky inzulínu NovoMix, ktoré som mesiace nepotreboval.</p>
@@ -44,6 +46,7 @@ HTML,
         ],
         'en' => [
             'title' => 'Doctors make the most observant patients',
+            'image_alt' => 'A physician sits on an exam table as a patient, holding a GLP-1 injection pen and corticosteroid tablets.',
             'excerpt' => 'What I learned switching between three GLP-1 molecules while on Medrol. Glucose spikes of 16–18 mmol/L, the return of food noise, and the view from a physician who is also the patient.',
             'content' => <<<'HTML'
 <p>Last week I moved from semaglutide to tirzepatide (Mounjaro 5&nbsp;mg). The reason was straightforward: I am also on Medrol, and corticosteroid-induced hyperglycemia is brutal. Glucose spikes of 16–18&nbsp;mmol/L. NovoMix insulin doses I had not needed in months.</p>

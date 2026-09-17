@@ -260,6 +260,53 @@ function getArticleTranslations(PDO $pdo, ?int $translationGroup): array {
     }
 }
 
+/**
+ * Relatívna cesta obalového obrázka článku. Povolené sú len súbory
+ * v `images/articles/` s bezpečným názvom — žiadne `../` ani cudzie schémy.
+ */
+function normalizeArticleCoverPath(string $path): ?string {
+    $path = str_replace('\\', '/', trim($path));
+    if (preg_match('#^images/articles/[a-z0-9-]+\.(webp|png|jpe?g)$#D', $path) !== 1) {
+        return null;
+    }
+    return $path;
+}
+
+function articleCoverSrc(?string $image, ?string $slug = null): ?string {
+    $path = normalizeArticleCoverPath((string) $image);
+    if ($path !== null && is_file(__DIR__ . '/' . $path)) {
+        return $path;
+    }
+    $slug = (string) $slug;
+    if (preg_match('/^[a-z0-9-]+$/', $slug) === 1) {
+        $fallback = 'images/articles/' . $slug . '.webp';
+        if (is_file(__DIR__ . '/' . $fallback)) {
+            return $fallback;
+        }
+    }
+    return null;
+}
+
+function articleCoverHtml(array $article, string $class, bool $lazy = true, bool $decorative = false): string {
+    $src = articleCoverSrc(
+        isset($article['image']) ? (string) $article['image'] : null,
+        isset($article['slug']) ? (string) $article['slug'] : null
+    );
+    if ($src === null) {
+        return '';
+    }
+    $info = @getimagesize(__DIR__ . '/' . $src);
+    $width = is_array($info) ? (int) $info[0] : 1280;
+    $height = is_array($info) ? (int) $info[1] : 720;
+    $alt = $decorative ? '' : trim((string) ($article['image_alt'] ?? $article['title'] ?? ''));
+    $loading = $lazy ? 'lazy' : 'eager';
+    return '<img class="' . htmlspecialchars($class, ENT_QUOTES, 'UTF-8')
+        . '" src="' . htmlspecialchars($src, ENT_QUOTES, 'UTF-8')
+        . '" alt="' . htmlspecialchars($alt, ENT_QUOTES, 'UTF-8')
+        . '" width="' . $width . '" height="' . $height
+        . '" loading="' . $loading . '" decoding="async">';
+}
+
 function formatArticleDate(?string $datetime, ?string $lang = null): string {
     if (empty($datetime)) {
         return '';

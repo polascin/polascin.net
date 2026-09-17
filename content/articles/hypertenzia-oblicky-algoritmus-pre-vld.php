@@ -27,9 +27,11 @@ return [
     'category' => 'blog',
     'is_top' => 0,
     'published_at' => '2026-09-17 18:55:00',
+    'image' => 'images/articles/hypertenzia-oblicky-algoritmus-pre-vld.webp',
     'translations' => [
         'sk' => [
             'title' => 'Ochorenie obličiek zachytíme neskoro, lebo odporúčania sa nedostanú k lekárom, ktorí pacienta vidia ako prví.',
+            'image_alt' => 'Ambulancia všeobecného lekára: meranie tlaku v popredí, v presýpacích hodinách sa míňa čas obličiek.',
             'excerpt' => 'S redaktorkou Michaelou Malovou zo SOLEN sme dokončili rukopis pre Via practica: algoritmus pre VLD, ako z KDIGO a ESH urobiť rozhodnutie v bežnej ambulancii — kedy skríning, kedy odoslať, kedy začať liečbu ešte pred odoslaním.',
             'content' => <<<'HTML'
 <p>Väčšinu ochorení obličiek zachytíme neskoro, lebo guidelines sa nedostanú k lekárom, ktorí pacienta vidia ako prví.</p>
@@ -44,6 +46,7 @@ HTML,
         ],
         'en' => [
             'title' => 'Most kidney disease is caught too late because the guidelines never reach the doctors who see patients first.',
+            'image_alt' => 'A primary-care consult: blood pressure in the foreground while a kidney-shaped hourglass runs out of time.',
             'excerpt' => 'With Michaela Malová at SOLEN I finished a Via practica manuscript: an algorithm for Slovak primary-care physicians that turns KDIGO and ESH guidance into a routine consult — when to screen, when to refer, when to start treatment before the referral.',
             'content' => <<<'HTML'
 <p>Most kidney disease is caught too late because the guidelines never reach the doctors who see patients first.</p>

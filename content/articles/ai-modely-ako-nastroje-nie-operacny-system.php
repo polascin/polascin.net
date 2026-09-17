@@ -27,9 +27,11 @@ return [
     'category' => 'blog',
     'is_top' => 0,
     'published_at' => '2026-09-17 19:00:00',
+    'image' => 'images/articles/ai-modely-ako-nastroje-nie-operacny-system.webp',
     'translations' => [
         'sk' => [
             'title' => 'Ak celý workflow visí na jednom AI modeli, nemáte workflow. Máte predplatné.',
+            'image_alt' => 'Otvorená taška s nástrojmi namiesto zamknutého operačného systému — každý AI model ako iný nástroj.',
             'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra a nástroje ako OpenRouter a Kilo Code ukazujú, že model treba voliť podľa úlohy. Kto si workflow postaví okolo jedného modelu, pri ďalšej aktualizácii ostane stáť.',
             'content' => <<<'HTML'
 <p>Ak celý workflow visí na jednom AI modeli, nemáte workflow. Máte predplatné.</p>
@@ -45,6 +47,7 @@ HTML,
         ],
         'en' => [
             'title' => 'If your entire workflow depends on one AI model, you do not have a workflow. You have a subscription.',
+            'image_alt' => 'An open tool bag instead of a locked operating system — each AI model as a different instrument.',
             'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra, and tools like OpenRouter and Kilo Code make the point: pick the model for the task. Build around one vendor’s quirks and the next update will stall you.',
             'content' => <<<'HTML'
 <p>If your entire workflow depends on one AI model, you do not have a workflow. You have a subscription.</p>

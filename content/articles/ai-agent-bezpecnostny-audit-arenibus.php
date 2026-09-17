@@ -27,9 +27,11 @@ return [
     'category' => 'blog',
     'is_top' => 0,
     'published_at' => '2026-09-17 18:50:00',
+    'image' => 'images/articles/ai-agent-bezpecnostny-audit-arenibus.webp',
     'translations' => [
         'sk' => [
             'title' => 'AI agent našiel 3 závažné bezpečnostné nálezy. Opravu som nasadil ešte pred ránom.',
+            'image_alt' => 'Nočný audit klinického softvéru: svetelný AI agent ukazuje tri závažné zraniteľnosti na obrazovkách.',
             'excerpt' => 'Ako sólový lekár-vývojár používam Claude Opus 5 a Cursor na bezpečnostný audit Arenibusu. Včera agent nahlásil 14 nálezov, tri z nich s vysokou prioritou, napísal záplaty a pred spaním odišla verzia v0.17.128.',
             'content' => <<<'HTML'
 <p>Včera v noci našiel AI agent v mojej aplikácii tri závažné bezpečnostné zraniteľnosti, napísal záplaty a pomohol mi ich dostať do produkcie ešte pred ránom.</p>
@@ -44,6 +46,7 @@ HTML,
         ],
         'en' => [
             'title' => 'Last night an AI agent found 3 high-priority vulnerabilities. We shipped the fix before morning.',
+            'image_alt' => 'A night-time clinical-software audit: an AI agent flags three high-priority vulnerabilities on the screens.',
             'excerpt' => 'As a solo physician-developer I use Claude Opus 5 and Cursor to security-audit Arenibus. Yesterday the agent flagged 14 findings, three of them high priority, wrote the patches, and v0.17.128 went out before I slept.',
             'content' => <<<'HTML'
 <p>Last night an AI agent found three high-priority security vulnerabilities in my app, wrote the patches, and helped me ship the fix before morning.</p>

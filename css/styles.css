@@ -1010,6 +1010,17 @@ section {
   overflow: hidden;
 }
 
+.card-cover {
+  display: block;
+  width: calc(100% + (2 * var(--spacing-md)));
+  max-width: none;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  margin: calc(-1 * var(--spacing-md)) calc(-1 * var(--spacing-md)) var(--spacing-md);
+  background: var(--bg-surface);
+}
+
 /* Pri prejdení kurzorom sa nad kartou objaví pruh vlajky. Dekorácia —
    interaktívny stav signalizuje aj zdvih a zvýraznený okraj. */
 .card::before {
@@ -1020,6 +1031,7 @@ section {
   height: 3px;
   background: var(--flag-stripe);
   opacity: 0;
+  z-index: 1;
   transition: opacity 0.3s ease;
 }
 
@@ -1957,6 +1969,21 @@ footer button:focus-visible {
   font-style: italic;
   color: var(--text-muted);
   margin-bottom: 1.5rem;
+}
+
+.article-cover {
+  margin: 0 0 1.5rem;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+
+.article-cover-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 .article-body {
