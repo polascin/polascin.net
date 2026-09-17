@@ -328,6 +328,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/ai-agent-bezpecnostny-audit-arenibus.php'
             );
         },
+        '2026091703_via_practica_vld_algorithm_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/hypertenzia-oblicky-algoritmus-pre-vld.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
