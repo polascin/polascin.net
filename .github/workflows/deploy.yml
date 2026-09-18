@@ -381,6 +381,38 @@ jobs:
             fi
           done
 
+          # Detail článku je najviac menený typ stránky (obálky, preklady,
+          # JSON-LD) a doteraz ho smoke check nepokrýval — 500 na
+          # `article.php` by prešlo, lebo `/articles.php` sa renderuje z iného
+          # dotazu. Slug sa berie zo sitemapy, aby sa zoznam nemusel
+          # udržiavať ručne.
+          ARTICLE_URL=$(curl -sS --max-time 30 --retry 2 --retry-delay 5 "${SMOKE_BASE_URL%/}/sitemap.php" \
+            | grep -o 'https://[^<]*article\.php?slug=[^<&]*' | head -n 1 || true)
+          if [[ -n "$ARTICLE_URL" ]]; then
+            CODE=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 5 "$ARTICLE_URL" || echo "000")
+            if [[ "$CODE" == "200" ]]; then
+              echo "  OK   $CODE  $ARTICLE_URL"
+            else
+              echo "::error::Detail článku vracia $CODE na $ARTICLE_URL"
+              FAILED=1
+            fi
+          else
+            echo "::error::V sitemape nie je ani jeden článok — detail článku sa neoveril"
+            FAILED=1
+          fi
+
+          # Statické prostriedky musia chodiť s Cache-Control (.htaccess).
+          # Bez neho ich hosting podáva bez cache a každá návšteva ťahá CSS,
+          # JS aj obálky článkov znova.
+          CSS_CACHE=$(curl -sS -D - -o /dev/null --max-time 30 "${SMOKE_BASE_URL%/}/css/styles.css" \
+            | grep -i '^cache-control:' || true)
+          if [[ -n "$CSS_CACHE" ]]; then
+            echo "  OK   css/styles.css: ${CSS_CACHE%$'\r'}"
+          else
+            echo "::error::css/styles.css sa podáva bez hlavičky Cache-Control"
+            FAILED=1
+          fi
+
           # Bezpečnostné hlavičky overuje deploy, nie nočná auditná rutina:
           # tá beží v cloudovom prostredí, ktorého sieťová politika `polascin.net`
           # blokuje (CONNECT → 403), takže `curl` na produkciu z nej nefunguje

@@ -1017,7 +1017,8 @@ section {
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  margin: calc(-1 * var(--spacing-md)) calc(-1 * var(--spacing-md)) var(--spacing-md);
+  margin: calc(-1 * var(--spacing-md)) calc(-1 * var(--spacing-md))
+    var(--spacing-md);
   background: var(--bg-surface);
 }
 

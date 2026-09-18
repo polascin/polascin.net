@@ -29,6 +29,20 @@ DirectoryIndex index.php index.html
     </FilesMatch>
 </IfModule>
 
+# ── Cache statických prostriedkov ────────────────────────────────────────────
+# CSS a JS sa podávajú s `?v=<filemtime>` (head_meta.php) a v statických
+# fallbackoch s pinom, ktorý stráži test v `tests/run.php` — obsah za danou URL
+# sa teda nikdy nemení a smie sa cachovať natrvalo. Obrázky a fonty verziované
+# nie sú, preto dostávajú konzervatívnych 30 dní.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(css|js)$">
+        Header always set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    <FilesMatch "\.(webp|avif|png|jpe?g|gif|svg|ico|woff2?|ttf|otf|eot)$">
+        Header always set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+</IfModule>
+
 # ── Presmerovanie sitemap.xml na dynamický sitemap.php ─────────────────────────
 <IfModule mod_rewrite.c>
     RewriteEngine On

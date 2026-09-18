@@ -1484,6 +1484,75 @@ expectTrue(
     'CSS musí mať štýly pre obálku v detaile aj na kartách'
 );
 
+// ── Beh #27: obálky článkov, cache statických prostriedkov, kotva `$` ────────
+// Migrácia `2026091705_article_cover_images` pridala stĺpce `image`
+// a `image_alt` a seeder ich plní vo všetkých desiatich jazykoch, ale čítacia
+// cesta ich nevyberala. Obálka sa preto našla len vďaka tomu, že sa súbor volá
+// rovnako ako slug, a jazykovo špecifický alt text (aj `og:image:alt`) sa nikdy
+// nepoužil — namiesto neho sa opakoval titulok článku. Rovnaký vzor drift ako
+// „stĺpec je v schéme, ale nie v SELECTe“ stráži tento test v oboch smeroch.
+$helpersSource = (string) file_get_contents(dirname(__DIR__) . '/helpers.php');
+expectTrue(
+    preg_match('~SELECT id, title, slug, excerpt, image, image_alt, author, lang~', $helpersSource) === 1,
+    'getPublishedArticles() musí vyberať aj stĺpce image a image_alt'
+);
+expectTrue(
+    preg_match('~\$columns = "id, title, slug, excerpt, image, image_alt, content, author~', $helpersSource) === 1,
+    'getArticleBySlug() musí vyberať aj stĺpce image a image_alt'
+);
+expectTrue(
+    str_contains($setupDbSource, 'image VARCHAR(255) NULL')
+        && str_contains($setupDbSource, 'image_alt VARCHAR(255) NULL'),
+    'setup_db.php musí mať stĺpce obálky aj v CREATE TABLE pre čistú inštaláciu'
+);
+expectTrue(
+    articleCoverSrc('images/articles/lekar-ako-pacient-glp1-a-kortikosteroidy.webp', null)
+        === 'images/articles/lekar-ako-pacient-glp1-a-kortikosteroidy.webp',
+    'Obálka sa musí dať nájsť podľa stĺpca image aj bez slugu'
+);
+
+// Kotva `$` bez modifikátora `D` prepúšťa vstup zakončený novým riadkom.
+// Tu to nebolo zneužiteľné (is_file, prepared statements), ale validácia má
+// platiť presne tak, ako je napísaná.
+expectTrue(
+    articleCoverSrc(null, "lekar-ako-pacient-glp1-a-kortikosteroidy\n") === null,
+    'Slug zakončený novým riadkom nesmie prejsť validáciou obálky'
+);
+$newsletterSource = (string) file_get_contents(dirname(__DIR__) . '/newsletter.php');
+expectSame(
+    0,
+    preg_match_all('~preg_match\(\'/\^\[a-f0-9\]\{48\}\$/\'~', $newsletterSource),
+    'Kontroly newsletterových tokenov musia mať modifikátor D'
+);
+expectSame(
+    4,
+    preg_match_all('~preg_match\(\'/\^\[a-f0-9\]\{48\}\$/D\'~', $newsletterSource),
+    'Všetky štyri kontroly newsletterových tokenov musia byť ukotvené s D'
+);
+
+// Statické prostriedky sa podávali bez Cache-Control, takže každá návšteva
+// ťahala CSS, JS aj obálky článkov znova. CSS a JS sú verziované cez
+// `?v=<filemtime>` (a v statických fallbackoch pinom, ktorý stráži test vyššie),
+// takže smú byť immutable; obrázky a fonty verziované nie sú.
+expectTrue(
+    preg_match('~<FilesMatch "\\\\\.\(css\|js\)\$">\s*\n\s*Header always set Cache-Control "public, max-age=31536000, immutable"~', $htaccessRules) === 1,
+    '.htaccess musí verziované CSS a JS cachovať natrvalo'
+);
+expectTrue(
+    preg_match('~<FilesMatch "\\\\\.\(webp\|avif\|png\|jpe\?g\|gif\|svg\|ico\|woff2\?\|ttf\|otf\|eot\)\$">\s*\n\s*Header always set Cache-Control "public, max-age=2592000"~', $htaccessRules) === 1,
+    '.htaccess musí neverziované obrázky a fonty cachovať konzervatívne (30 dní)'
+);
+expectTrue(
+    str_contains($deployWorkflow, 'article\.php?slug=')
+        && str_contains($deployWorkflow, 'Detail článku vracia'),
+    'Smoke check musí overiť aj detail článku, nielen zoznam'
+);
+expectTrue(
+    str_contains($deployWorkflow, '/css/styles.css')
+        && str_contains($deployWorkflow, 'bez hlavičky Cache-Control'),
+    'Smoke check musí overiť Cache-Control na statickom prostriedku'
+);
+
 if ($failures !== []) {
     fwrite(STDERR, "Zlyhané kontroly:\n- " . implode("\n- ", $failures) . "\n");
     exit(1);

@@ -144,7 +144,8 @@ function getPublishedArticles(PDO $pdo, int $limit = 10, int $offset = 0, ?strin
 
     try {
         $stmt = $pdo->prepare(
-            "SELECT id, title, slug, excerpt, author, lang, translation_group, published_at, updated_at
+            "SELECT id, title, slug, excerpt, image, image_alt, author, lang, translation_group,
+                    published_at, updated_at
              FROM articles
              WHERE is_published = 1 AND published_at IS NOT NULL AND published_at <= NOW()
                AND lang = :lang
@@ -188,7 +189,10 @@ function getArticleBySlug(PDO $pdo, string $slug, ?string $lang = null, bool $in
     $lang ??= function_exists('currentLang') ? currentLang() : 'sk';
 
     try {
-        $columns = "id, title, slug, excerpt, content, author, lang, translation_group,
+        // `image` a `image_alt` musia byť v SELECTe: bez nich sa obálka hľadá len
+        // podľa názvu súboru zhodného so slugom a jazykovo špecifický alt text
+        // uložený migráciou `2026091705_article_cover_images` sa nikdy nepoužije.
+        $columns = "id, title, slug, excerpt, image, image_alt, content, author, lang, translation_group,
                     is_published, published_at, updated_at";
 
         $stmt = $pdo->prepare("SELECT {$columns} FROM articles WHERE slug = :slug AND lang = :lang LIMIT 1");
@@ -278,7 +282,7 @@ function articleCoverSrc(?string $image, ?string $slug = null): ?string {
         return $path;
     }
     $slug = (string) $slug;
-    if (preg_match('/^[a-z0-9-]+$/', $slug) === 1) {
+    if (preg_match('/^[a-z0-9-]+$/D', $slug) === 1) {
         $fallback = 'images/articles/' . $slug . '.webp';
         if (is_file(__DIR__ . '/' . $fallback)) {
             return $fallback;

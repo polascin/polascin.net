@@ -74,7 +74,7 @@ function sendNewsletterEmail(string $recipient, string $subject, string $body): 
 $ip = getClientIpAddress();
 
 if ($action === 'confirm' && $token !== '') {
-    if (preg_match('/^[a-f0-9]{48}$/', $token) !== 1) {
+    if (preg_match('/^[a-f0-9]{48}$/D', $token) !== 1) {
         $message = t('newsletter.confirm_link_used');
         $messageType = 'error';
     } elseif (!checkFormRateLimit($pdo, 'newsletter_confirm', $ip, 10, 3600)) {
@@ -139,7 +139,7 @@ if ($action === 'confirm' && $token !== '') {
         }
     }
 } elseif ($action === 'unsubscribe' && $token !== '') {
-    if (preg_match('/^[a-f0-9]{48}$/', $token) !== 1) {
+    if (preg_match('/^[a-f0-9]{48}$/D', $token) !== 1) {
         $message = t('newsletter.unsubscribe_link_invalid');
         $messageType = 'error';
     } else {
@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($formAction === 'unsubscribe') {
         $action = 'unsubscribe';
         $token = trim((string) ($_POST['token'] ?? ''));
-        $showUnsubscribeConfirmation = preg_match('/^[a-f0-9]{48}$/', $token) === 1;
+        $showUnsubscribeConfirmation = preg_match('/^[a-f0-9]{48}$/D', $token) === 1;
     }
     $csrfToken = $_POST['csrf_token'] ?? '';
     if (!validateCsrfToken((string) $csrfToken)) {
@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $unsubscribeToken = $token;
         $action = 'unsubscribe';
         $showUnsubscribeConfirmation = false;
-        if (preg_match('/^[a-f0-9]{48}$/', $unsubscribeToken) !== 1) {
+        if (preg_match('/^[a-f0-9]{48}$/D', $unsubscribeToken) !== 1) {
             $errors[] = t('newsletter.unsubscribe_link_used');
         } elseif (!checkFormRateLimit($pdo, 'newsletter_unsubscribe', $ip, 10, 3600)) {
             $errors[] = t('newsletter.rate_limit_unsubscribe');
