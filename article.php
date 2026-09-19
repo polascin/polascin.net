@@ -73,10 +73,17 @@ if ($notFound) {
         (string) ($article['slug'] ?? '')
     );
     if ($coverSrc !== null) {
-        $ogImage = $baseUrl . '/' . $coverSrc;
-        $coverInfo = @getimagesize(__DIR__ . '/' . $coverSrc);
+        // Na stránke ostáva WebP, do Open Graphu ide JPEG odvodenina — WebP
+        // náhľad niektoré siete (LinkedIn) nezobrazia vôbec.
+        $coverSocialSrc = articleCoverSocialSrc(
+            isset($article['image']) ? (string) $article['image'] : null,
+            (string) ($article['slug'] ?? '')
+        ) ?? $coverSrc;
+        $ogImage = $baseUrl . '/' . $coverSocialSrc;
+        $coverInfo = @getimagesize(__DIR__ . '/' . $coverSocialSrc);
         $ogImageWidth = is_array($coverInfo) ? (int) $coverInfo[0] : 1280;
         $ogImageHeight = is_array($coverInfo) ? (int) $coverInfo[1] : 720;
+        $ogImageType = is_array($coverInfo) ? (string) $coverInfo['mime'] : 'image/jpeg';
         $ogImageAlt = trim((string) ($article['image_alt'] ?? '')) ?: (string) $article['title'];
     }
     if (!$isAdminPreview) {

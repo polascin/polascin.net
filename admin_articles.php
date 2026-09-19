@@ -15,7 +15,7 @@ $success = '';
 $editing = null;
 
 $allArticles = (function () use ($pdo): array {
-    $stmt = $pdo->query("SELECT id, title, slug, author, lang, translation_group, is_published, is_top, sort_order, published_at, updated_at FROM articles ORDER BY lang ASC, updated_at DESC");
+    $stmt = $pdo->query("SELECT id, title, slug, image, author, lang, translation_group, is_published, is_top, sort_order, published_at, updated_at FROM articles ORDER BY lang ASC, updated_at DESC");
     return $stmt->fetchAll();
 })();
 
@@ -43,6 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $rawContent = trim((string) ($_POST['content'] ?? ''));
             $content = appTextLength($rawContent) <= 1000000 ? sanitizeHtmlContent($rawContent) : '';
             $author = trim((string) ($_POST['author'] ?? ''));
+            $image = trim((string) ($_POST['image'] ?? ''));
+            $imageAlt = trim((string) ($_POST['image_alt'] ?? ''));
             $articleLang = trim((string) ($_POST['lang'] ?? APP_DEFAULT_LANGUAGE));
             $rawTranslationGroup = trim((string) ($_POST['translation_group'] ?? ''));
             $translationGroup = $rawTranslationGroup === '' ? null : (int) $rawTranslationGroup;
@@ -68,6 +70,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             if (appTextLength($author) > 255) {
                 $errors[] = 'Meno autora môže mať najviac 255 znakov.';
+            }
+            // Obálka sa vyberá zo súborov na disku, takže do stĺpca `image` sa
+            // nedá dostať cesta, ktorú by `normalizeArticleCoverPath()` odmietla.
+            if ($image === '') {
+                $image = null;
+            } else {
+                $image = normalizeArticleCoverPath($image);
+                if ($image === null || !is_file(__DIR__ . '/' . $image)) {
+                    $errors[] = 'Zvolená obálka neexistuje v images/articles/.';
+                    $image = null;
+                }
+            }
+            // Prázdny alt text pri nastavenej obálke padá na názov článku —
+            // rovnako ako v seederi. Obrázok bez alternatívneho textu by inak
+            // zostal pre čítačku obrazovky nemý.
+            if ($image !== null && $imageAlt === '') {
+                $imageAlt = $title;
+            }
+            if ($image === null) {
+                $imageAlt = '';
+            }
+            if (appTextLength($imageAlt) > 255) {
+                $errors[] = 'Alternatívny text obálky môže mať najviac 255 znakov.';
             }
             if (!isSupportedLanguage($articleLang)) {
                 $errors[] = 'Zvolený jazyk nie je podporovaný.';
@@ -118,13 +143,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     if ($id) {
                         $stmt = $pdo->prepare(
-                            "UPDATE articles SET title = :title, slug = :slug, excerpt = :excerpt, content = :content,
+                            "UPDATE articles SET title = :title, slug = :slug, excerpt = :excerpt,
+                             image = :image, image_alt = :image_alt, content = :content,
                              author = :author, lang = :lang, translation_group = :translation_group,
                              sort_order = :sort_order, is_published = :is_published, is_top = :is_top,
                              published_at = :published_at WHERE id = :id"
                         );
                         $stmt->execute([
-                            ':title' => $title, ':slug' => $slug, ':excerpt' => $excerpt, ':content' => $content,
+                            ':title' => $title, ':slug' => $slug, ':excerpt' => $excerpt,
+                            ':image' => $image, ':image_alt' => $image === null ? null : $imageAlt,
+                            ':content' => $content,
                             ':author' => $author, ':lang' => $articleLang,
                             ':translation_group' => $translationGroup ?? $id,
                             ':sort_order' => $sortOrder, ':is_published' => $isPublished,
@@ -133,11 +161,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         logAdminAction($pdo, 'article_update', 'article', $id);
                     } else {
                         $stmt = $pdo->prepare(
-                            "INSERT INTO articles (title, slug, excerpt, content, author, lang, translation_group, sort_order, is_published, is_top, published_at)
-                             VALUES (:title, :slug, :excerpt, :content, :author, :lang, :translation_group, :sort_order, :is_published, :is_top, :published_at)"
+                            "INSERT INTO articles (title, slug, excerpt, image, image_alt, content, author, lang, translation_group, sort_order, is_published, is_top, published_at)
+                             VALUES (:title, :slug, :excerpt, :image, :image_alt, :content, :author, :lang, :translation_group, :sort_order, :is_published, :is_top, :published_at)"
                         );
                         $stmt->execute([
-                            ':title' => $title, ':slug' => $slug, ':excerpt' => $excerpt, ':content' => $content,
+                            ':title' => $title, ':slug' => $slug, ':excerpt' => $excerpt,
+                            ':image' => $image, ':image_alt' => $image === null ? null : $imageAlt,
+                            ':content' => $content,
                             ':author' => $author, ':lang' => $articleLang, ':translation_group' => $translationGroup,
                             ':sort_order' => $sortOrder, ':is_published' => $isPublished,
                             ':is_top' => $isTop, ':published_at' => $publishedAt,
@@ -206,6 +236,42 @@ $canonicalUrl = $baseUrl . '/admin_articles.php';
           <label for="author">Autor</label>
           <input type="text" id="author" name="author" value="<?= htmlspecialchars((string) ($editing['author'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" maxlength="255">
         </div>
+        <?php
+        $editingImage = trim((string) ($editing['image'] ?? ''));
+        $coverChoices = availableArticleCovers();
+        // Uloženú hodnotu treba v ponuke nechať aj vtedy, keď súbor na disku
+        // chýba — inak by uloženie formulára obálku ticho zmazalo.
+        $coverMissing = $editingImage !== '' && !in_array($editingImage, $coverChoices, true);
+        ?>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="image">Obálka</label>
+            <select id="image" name="image" aria-describedby="image-hint">
+              <option value="">— bez obálky —</option>
+              <?php if ($coverMissing): ?>
+                <option value="<?= htmlspecialchars($editingImage, ENT_QUOTES, 'UTF-8') ?>" selected>
+                  <?= htmlspecialchars(basename($editingImage), ENT_QUOTES, 'UTF-8') ?> (súbor chýba)
+                </option>
+              <?php endif; ?>
+              <?php foreach ($coverChoices as $coverChoice): ?>
+                <option value="<?= htmlspecialchars($coverChoice, ENT_QUOTES, 'UTF-8') ?>" <?= $coverChoice === $editingImage ? 'selected' : '' ?>>
+                  <?= htmlspecialchars(basename($coverChoice), ENT_QUOTES, 'UTF-8') ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+            <small id="image-hint" class="form-hint">Súbory z <code>images/articles/</code>. Nový obrázok sa pridáva do repozitára, nie cez formulár.</small>
+          </div>
+          <div class="form-group">
+            <label for="image_alt">Alternatívny text obálky</label>
+            <input type="text" id="image_alt" name="image_alt" maxlength="255"
+                   value="<?= htmlspecialchars((string) ($editing['image_alt'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
+                   aria-describedby="image-alt-hint">
+            <small id="image-alt-hint" class="form-hint">Popis obrázka pre čítačky obrazovky a <code>og:image:alt</code>. Ak zostane prázdny, použije sa názov článku.</small>
+          </div>
+        </div>
+        <?php if ($coverMissing): ?>
+          <div class="alert alert-error"><p>Obálka <code><?= htmlspecialchars($editingImage, ENT_QUOTES, 'UTF-8') ?></code> nie je na disku. Doplň súbor do repozitára alebo vyber inú.</p></div>
+        <?php endif; ?>
         <div class="form-row">
           <div class="form-group">
             <label for="lang"><?= te('admin.language') ?></label>
@@ -262,7 +328,7 @@ $canonicalUrl = $baseUrl . '/admin_articles.php';
       <?php else: ?>
       <table class="admin-table">
         <thead>
-          <tr><th>Názov</th><th>Slug</th><th>Jazyk</th><th>Skupina</th><th>Stav</th><th>Aktualizované</th><th>Akcie</th></tr>
+          <tr><th>Názov</th><th>Slug</th><th>Jazyk</th><th>Obálka</th><th>Skupina</th><th>Stav</th><th>Aktualizované</th><th>Akcie</th></tr>
         </thead>
         <tbody>
           <?php foreach ($allArticles as $article): ?>
@@ -270,6 +336,7 @@ $canonicalUrl = $baseUrl . '/admin_articles.php';
             <td><?= htmlspecialchars((string) $article['title'], ENT_QUOTES, 'UTF-8') ?></td>
             <td><?= htmlspecialchars((string) $article['slug'], ENT_QUOTES, 'UTF-8') ?></td>
             <td><?= htmlspecialchars(strtoupper((string) ($article['lang'] ?? '')), ENT_QUOTES, 'UTF-8') ?></td>
+            <td><?= articleCoverSrc(isset($article['image']) ? (string) $article['image'] : null, (string) ($article['slug'] ?? '')) !== null ? 'áno' : '—' ?></td>
             <td><?= $article['translation_group'] !== null ? (int) $article['translation_group'] : '—' ?></td>
             <td><?= (int) $article['is_published'] === 1 ? 'Publikovaný' : 'Koncept' ?><?= (int) $article['is_top'] === 1 ? ' · Top' : '' ?></td>
             <td><?= htmlspecialchars((string) $article['updated_at'], ENT_QUOTES, 'UTF-8') ?></td>

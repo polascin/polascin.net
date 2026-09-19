@@ -406,6 +406,28 @@ jobs:
             FAILED=1
           fi
 
+          # `og:image` je JPEG odvodenina WebP obálky (WebP náhľad LinkedIn
+          # nezobrazí). Overuje sa cez samotnú stránku, nie cez uhádnutý názov
+          # súboru — obálka sa nemusí volať rovnako ako slug.
+          if [[ -n "$ARTICLE_URL" ]]; then
+            ARTICLE_HTML=$(mktemp)
+            curl -sS -o "$ARTICLE_HTML" --max-time 30 --retry 2 --retry-delay 5 "$ARTICLE_URL" || true
+            OG_IMAGE=$(grep -o 'property="og:image" content="[^"]*"' "$ARTICLE_HTML" | head -n 1 | sed 's/.*content="//; s/"$//')
+            rm -f "$ARTICLE_HTML"
+            if [[ -n "$OG_IMAGE" ]]; then
+              OG_TYPE=$(curl -sS -o /dev/null -w '%{http_code} %{content_type}' --max-time 30 "$OG_IMAGE" || echo "000 -")
+              if [[ "$OG_TYPE" == "200 image/"* ]]; then
+                echo "  OK   og:image $OG_TYPE  $OG_IMAGE"
+              else
+                echo "::error::og:image nie je dostupný ako obrázok ($OG_TYPE): $OG_IMAGE"
+                FAILED=1
+              fi
+            else
+              echo "::error::Detail článku neobsahuje og:image"
+              FAILED=1
+            fi
+          fi
+
           # Statické prostriedky musia chodiť s Cache-Control (.htaccess).
           # Bez neho ich hosting podáva bez cache a každá návšteva ťahá CSS,
           # JS aj obálky článkov znova.

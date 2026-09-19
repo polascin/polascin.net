@@ -51,6 +51,9 @@ $ogImage = $ogImage ?? ($baseUrl . '/images/profile.jpg');
 $ogImageWidth = $ogImageWidth ?? 768;
 $ogImageHeight = $ogImageHeight ?? 1024;
 $ogImageAlt = $ogImageAlt ?? t('common.author');
+// Typ obrázka pomáha sieťam rozhodnúť, či náhľad vôbec vykreslia. Predvolený
+// profilový obrázok je JPEG; obálky článkov si typ nastavujú samy.
+$ogImageType = $ogImageType ?? 'image/jpeg';
 $themeColor = $themeColor ?? '#ffffff';
 
 $cssVersion = is_file(__DIR__ . '/css/styles.css') ? (string) filemtime(__DIR__ . '/css/styles.css') : '1';
@@ -111,6 +114,7 @@ if ($xDefault === null) {
 <meta property="og:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:image:width" content="<?= (int) $ogImageWidth ?>">
 <meta property="og:image:height" content="<?= (int) $ogImageHeight ?>">
+<meta property="og:image:type" content="<?= htmlspecialchars($ogImageType, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:image:alt" content="<?= htmlspecialchars($ogImageAlt, ENT_QUOTES, 'UTF-8') ?>">
 
 <meta name="twitter:card" content="summary_large_image">

@@ -1553,6 +1553,100 @@ expectTrue(
     'Smoke check musí overiť Cache-Control na statickom prostriedku'
 );
 
+// ── Obálka v admin rozhraní a JPEG variant pre Open Graph ────────────────────
+// Beh #27 nechal obe veci ako odporúčanie: obálku nebolo možné nastaviť
+// z admina (stĺpce boli len v seederi) a `og:image` bol WebP, ktorý LinkedIn
+// nezobrazí. Testy držia obe doplnenia na mieste.
+$adminArticles = (string) file_get_contents(dirname(__DIR__) . '/admin_articles.php');
+expectTrue(
+    str_contains($adminArticles, 'image = :image, image_alt = :image_alt')
+        && str_contains($adminArticles, 'INSERT INTO articles (title, slug, excerpt, image, image_alt, content'),
+    'Admin musí obálku zapisovať pri úprave aj pri vytvorení článku'
+);
+expectTrue(
+    str_contains($adminArticles, 'name="image"')
+        && str_contains($adminArticles, 'name="image_alt"')
+        && str_contains($adminArticles, 'availableArticleCovers()'),
+    'Admin formulár musí mať pole obálky aj alternatívneho textu z ponuky súborov'
+);
+expectTrue(
+    str_contains($adminArticles, 'normalizeArticleCoverPath($image)')
+        && str_contains($adminArticles, "!is_file(__DIR__ . '/' . \$image)"),
+    'Admin musí zvolenú obálku validovať cestou aj existenciou súboru'
+);
+expectTrue(
+    str_contains($adminArticles, '$coverMissing'),
+    'Admin musí uloženú obálku ponechať v ponuke aj keď súbor na disku chýba'
+);
+// Ponuka sa berie z disku, takže do stĺpca `image` sa nedá dostať nič,
+// čo by `normalizeArticleCoverPath()` odmietla.
+foreach (availableArticleCovers() as $offeredCover) {
+    expectTrue(
+        normalizeArticleCoverPath($offeredCover) === $offeredCover
+            && is_file(dirname(__DIR__) . '/' . $offeredCover),
+        "Ponúkaná obálka {$offeredCover} musí prejsť validáciou aj existovať"
+    );
+}
+expectTrue(
+    !in_array('images/articles/og', availableArticleCovers(), true)
+        && array_filter(availableArticleCovers(), static fn(string $c): bool => str_contains($c, '/og/')) === [],
+    'JPEG odvodeniny z podadresára og/ sa nesmú ponúkať ako obálka'
+);
+
+// Každá WebP obálka musí mať JPEG dvojičku pre Open Graph, inak by nový článok
+// prišiel o náhľad na sieťach, ktoré WebP nevykreslia.
+$coverSources = glob(dirname(__DIR__) . '/images/articles/*.webp') ?: [];
+expectTrue($coverSources !== [], 'V images/articles/ musí byť aspoň jedna obálka');
+foreach ($coverSources as $coverSource) {
+    $coverName = basename($coverSource, '.webp');
+    $ogTwin = dirname(__DIR__) . '/images/articles/og/' . $coverName . '.jpg';
+    expectTrue(
+        is_file($ogTwin),
+        "Obálka {$coverName}.webp musí mať JPEG dvojičku v images/articles/og/ (php scripts/make_og_covers.php)"
+    );
+    if (is_file($ogTwin)) {
+        $ogInfo = getimagesize($ogTwin);
+        expectTrue(
+            is_array($ogInfo) && $ogInfo['mime'] === 'image/jpeg' && $ogInfo[0] >= 1200 && $ogInfo[1] >= 630,
+            "JPEG dvojička {$coverName}.jpg musí byť skutočný JPEG s rozmermi aspoň 1200×630"
+        );
+    }
+    expectTrue(
+        articleCoverSocialSrc('images/articles/' . $coverName . '.webp', null)
+            === 'images/articles/og/' . $coverName . '.jpg',
+        "Open Graph musí pre {$coverName} podsunúť JPEG, nie WebP"
+    );
+}
+expectTrue(
+    articleCoverSocialSrc(null, 'neexistujuci-slug') === null,
+    'Bez obálky nesmie articleCoverSocialSrc() nič vymyslieť'
+);
+$headMetaSource = (string) file_get_contents(dirname(__DIR__) . '/head_meta.php');
+expectTrue(
+    str_contains($headMetaSource, 'property="og:image:type"')
+        && str_contains($headMetaSource, "\$ogImageType = \$ogImageType ?? 'image/jpeg'"),
+    'head_meta.php musí emitovať og:image:type s JPEG predvoľbou'
+);
+expectTrue(
+    str_contains((string) file_get_contents(dirname(__DIR__) . '/article.php'), 'articleCoverSocialSrc('),
+    'Detail článku musí do og:image posielať sociálny variant obálky'
+);
+$ogGenerator = (string) file_get_contents(dirname(__DIR__) . '/scripts/make_og_covers.php');
+expectTrue(
+    str_contains($ogGenerator, "PHP_SAPI !== 'cli'"),
+    'Generátor OG obálok musí odmietnuť spustenie cez web'
+);
+expectTrue(
+    str_contains($deployWorkflow, 'property="og:image" content=')
+        && str_contains($deployWorkflow, 'og:image nie je dostupný ako obrázok'),
+    'Smoke check musí overiť, že og:image z detailu článku je na produkcii dostupný'
+);
+$pipelineRule = (string) file_get_contents(dirname(__DIR__) . '/.cursor/rules/blog-article-pipeline.mdc');
+expectTrue(
+    str_contains($pipelineRule, 'scripts/make_og_covers.php'),
+    'Pipeline blogu musí generovanie OG obálky spomínať, inak ju ďalší článok vynechá'
+);
+
 if ($failures !== []) {
     fwrite(STDERR, "Zlyhané kontroly:\n- " . implode("\n- ", $failures) . "\n");
     exit(1);

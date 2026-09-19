@@ -7,7 +7,7 @@ alwaysApply: true
 
 Keď používateľ dodá text na blog, **bez ďalšieho pokynu** urob kroky 1–5. Ak slug už existuje, nedej duplikát článku ani tweety. Čisto dokumentačné zmeny nie. Článok na webe nenechávaj čakať na Disk ani X.
 
-Poradie vykonania: korektúra a seed (1+4) → obálka WebP (2, seeder ju vyžaduje) → PNG na Disk (3, môže ísť súbežne) → testy, commit, push, deploy, overenie produkcie → tweet (5).
+Poradie vykonania: korektúra a seed (1+4) → obálka WebP + JPEG pre OG (2, seeder ju vyžaduje) → PNG na Disk (3, môže ísť súbežne) → testy, commit, push, deploy, overenie produkcie → tweet (5).
 
 Jazyky stránky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk`. Autor: `MUDr. Ľubomír Polaščín`. DB sa plní len cez `setup_db.php` (`seedPublishedArticleFromFile`); neseeduj z notebooku.
 
@@ -23,7 +23,8 @@ Jazyky stránky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `
 
 - `GenerateImage`, 16:9, cinematic, **bez textu/log** na obrázku, farby značky fialová `#3d1a78` / tyrkys `#078d70`.
 - Ak nástroj uloží JPEG s príponou `.png`, načítaj `imagecreatefromjpeg` (nie png). Konverzia: `images/articles/{slug}.webp`, q82, **≥1200×675**, ideálne 1280×720.
-- `image` + `image_alt` vo všetkých prekladoch. Verejný SELECT obálku neťahá; súbor podľa slugu musí existovať pred migráciou.
+- `image` + `image_alt` vo všetkých prekladoch. Verejný SELECT oba stĺpce ťahá (Beh #27), takže `image_alt` je to, čo skončí v `alt` aj v `og:image:alt` — píš ho ako popis obrázka, nie ako druhý titulok.
+- Po konverzii spusti `php scripts/make_og_covers.php`. Vyrobí JPEG dvojičku v `images/articles/og/{slug}.jpg` pre `og:image` — WebP náhľad LinkedIn nezobrazí. JPEG **commitni**; test v `tests/run.php` chýbajúcu dvojičku zhodí.
 
 ## 3. PNG na Google Disk
 

@@ -291,6 +291,55 @@ function articleCoverSrc(?string $image, ?string $slug = null): ?string {
     return null;
 }
 
+/**
+ * Obálky dostupné na disku — ponuka pre admin formulár. Zoznam sa berie zo
+ * súborov, nie od používateľa, takže do stĺpca `image` sa nedá zapísať cesta,
+ * ktorú by `normalizeArticleCoverPath()` odmietla.
+ *
+ * @return list<string>
+ */
+function availableArticleCovers(): array {
+    // Zámerne bez `GLOB_BRACE` — nie je všade dostupné. Filtruje sa tým istým
+    // pravidlom, aké platí pre stĺpec `image`, takže ponuka a validácia
+    // nemôžu povedať niečo iné.
+    $found = glob(__DIR__ . '/images/articles/*');
+    if ($found === false) {
+        return [];
+    }
+    $covers = [];
+    foreach ($found as $file) {
+        if (!is_file($file)) {
+            continue;
+        }
+        $path = normalizeArticleCoverPath('images/articles/' . basename($file));
+        if ($path !== null) {
+            $covers[] = $path;
+        }
+    }
+    sort($covers);
+    return $covers;
+}
+
+/**
+ * Obálka pre Open Graph a Twitter Card.
+ *
+ * Na stránke sa podáva WebP, lebo je menší, ale zdieľanie ho nezvládne všade —
+ * LinkedIn WebP náhľad historicky nezobrazí vôbec. Ak teda ku WebP existuje
+ * JPEG odvodenina z `scripts/make_og_covers.php`, do `og:image` ide ona.
+ * Inak sa vracia pôvodná cesta, takže absencia JPEGu nič nerozbije.
+ */
+function articleCoverSocialSrc(?string $image, ?string $slug = null): ?string {
+    $src = articleCoverSrc($image, $slug);
+    if ($src === null) {
+        return null;
+    }
+    if (!str_ends_with($src, '.webp')) {
+        return $src;
+    }
+    $jpeg = 'images/articles/og/' . basename($src, '.webp') . '.jpg';
+    return is_file(__DIR__ . '/' . $jpeg) ? $jpeg : $src;
+}
+
 function articleCoverHtml(array $article, string $class, bool $lazy = true, bool $decorative = false): string {
     $src = articleCoverSrc(
         isset($article['image']) ? (string) $article['image'] : null,
