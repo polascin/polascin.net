@@ -1636,6 +1636,29 @@ expectTrue(
     str_contains($ogGenerator, "PHP_SAPI !== 'cli'"),
     'Generátor OG obálok musí odmietnuť spustenie cez web'
 );
+// Rúra do `head` zavrie predchádzajúcemu príkazu výstup a zelený smoke check
+// potom hlási `curl: (23)` alebo „Broken pipe“ — vyzerá to ako chyba nasadenia.
+// Stalo sa to dvakrát (Beh #27 pri sitemape, Beh #28 pri og:image), preto
+// vzor v smoke checku stráži test. Namiesto rúry: `grep -m 1` a expanzia.
+$deployHeadPipes = [];
+foreach (explode("\n", $deployWorkflow) as $lineNumber => $deployLine) {
+    $trimmed = ltrim($deployLine);
+    if ($trimmed === '' || str_starts_with($trimmed, '#')) {
+        continue;
+    }
+    if (preg_match('~\|\s*head\b~', $deployLine) === 1) {
+        $deployHeadPipes[] = $lineNumber + 1;
+    }
+}
+expectSame(
+    [],
+    $deployHeadPipes,
+    'deploy.yml nesmie rúrou posielať výstup do head (Broken pipe v zelenom behu)'
+);
+expectTrue(
+    str_contains($deployWorkflow, 'grep -m 1 -o'),
+    'Smoke check musí prvý výskyt brať cez grep -m 1, nie cez head'
+);
 expectTrue(
     str_contains($deployWorkflow, 'property="og:image" content=')
         && str_contains($deployWorkflow, 'og:image nie je dostupný ako obrázok'),

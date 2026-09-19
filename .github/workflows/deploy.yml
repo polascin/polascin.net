@@ -391,7 +391,8 @@ jobs:
           # a `grep: write error: Broken pipe` — šum, ktorý vyzerá ako chyba.
           SITEMAP_FILE=$(mktemp)
           curl -sS -o "$SITEMAP_FILE" --max-time 30 --retry 2 --retry-delay 5 "${SMOKE_BASE_URL%/}/sitemap.php" || true
-          ARTICLE_URL=$(grep -o 'https://[^<]*article\.php?slug=[^<&]*' "$SITEMAP_FILE" | head -n 1 || true)
+          ARTICLE_MATCH=$(grep -m 1 -o 'https://[^<]*article\.php?slug=[^<&]*' "$SITEMAP_FILE" || true)
+          ARTICLE_URL=${ARTICLE_MATCH%%$'\n'*}
           rm -f "$SITEMAP_FILE"
           if [[ -n "$ARTICLE_URL" ]]; then
             CODE=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 5 "$ARTICLE_URL" || echo "000")
@@ -412,7 +413,12 @@ jobs:
           if [[ -n "$ARTICLE_URL" ]]; then
             ARTICLE_HTML=$(mktemp)
             curl -sS -o "$ARTICLE_HTML" --max-time 30 --retry 2 --retry-delay 5 "$ARTICLE_URL" || true
-            OG_IMAGE=$(grep -o 'property="og:image" content="[^"]*"' "$ARTICLE_HTML" | head -n 1 | sed 's/.*content="//; s/"$//')
+            # `grep -m 1` namiesto `| head -n 1`: rúra do head zavrie grepu
+            # výstup a zelený beh potom hlási „Broken pipe“. Hodnota sa
+            # vystrihne expanziou premennej, takže tu nie je rúra vôbec.
+            OG_META=$(grep -m 1 -o 'property="og:image" content="[^"]*"' "$ARTICLE_HTML" || true)
+            OG_IMAGE=${OG_META#*content=\"}
+            OG_IMAGE=${OG_IMAGE%\"}
             rm -f "$ARTICLE_HTML"
             if [[ -n "$OG_IMAGE" ]]; then
               OG_TYPE=$(curl -sS -o /dev/null -w '%{http_code} %{content_type}' --max-time 30 "$OG_IMAGE" || echo "000 -")
