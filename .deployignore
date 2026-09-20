@@ -9,6 +9,7 @@
 
 # Konfigurácia skenera tajomstiev (len pre repozitár)
 .gitguardian.yaml
+.pre-commit-config.yaml
 
 # Lokálne konfigurácie a IDE
 .vscode
