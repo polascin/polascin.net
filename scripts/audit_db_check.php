@@ -47,6 +47,7 @@ const EXPECTED_MIGRATIONS = [
     '2026091704_ai_model_freedom_article',
     '2026091705_article_cover_images',
     '2026091706_article_all_language_translations',
+    '2026092001_ai_author_phishing_email_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
