@@ -732,6 +732,35 @@ foreach (['i18n.php', 'lang_switcher.php'] as $guardedFile) {
     );
 }
 
+// Seedy článkov sa na server nasadzujú — `setup_db.php` ich tam potrebuje —
+// takže sú to jediné interné PHP súbory vo web roote, ktoré pribúdajú pri
+// každom novom článku. Guard v nich zatiaľ držala len ruka autora: `.htaccess`
+// ho na OpenResty nezachráni a nový článok bez guardu by sa dal spustiť priamo.
+$guardedArticleSeeds = glob(dirname(__DIR__) . '/content/articles/*.php') ?: [];
+expectTrue($guardedArticleSeeds !== [], 'Adresár content/articles musí obsahovať aspoň jeden seed na kontrolu guardu');
+foreach ($guardedArticleSeeds as $guardedSeedPath) {
+    $guardedSeedSource = (string) file_get_contents($guardedSeedPath);
+    expectTrue(
+        str_contains($guardedSeedSource, 'http_response_code(403)')
+            && str_contains($guardedSeedSource, 'content/articles/'),
+        basename($guardedSeedPath) . ' musí odmietnuť priame spustenie cez web'
+    );
+}
+
+// To isté pre pomocné skripty: nie sú nasadené, ale guard je aj tu jediná
+// vrstva, ktorá funguje bez `.htaccess`. Kontrola ide cez glob, aby ju nový
+// skript získal automaticky — doteraz bol testovaný len generátor OG obálok.
+$guardedScripts = glob(dirname(__DIR__) . '/scripts/*.php') ?: [];
+expectTrue($guardedScripts !== [], 'Adresár scripts musí obsahovať aspoň jeden skript na kontrolu guardu');
+foreach ($guardedScripts as $guardedScriptPath) {
+    $guardedScriptSource = (string) file_get_contents($guardedScriptPath);
+    expectTrue(
+        str_contains($guardedScriptSource, "PHP_SAPI !== 'cli'")
+            && str_contains($guardedScriptSource, 'http_response_code(403)'),
+        basename($guardedScriptPath) . ' musí odmietnuť spustenie cez web'
+    );
+}
+
 // Kanonická URL: predvolený jazyk bez parametra, ostatné s ním.
 expectSame('https://polascin.net/', absoluteLangUrl('sk', 'index.php'), 'Slovenská domovská stránka má čistú kanonickú URL');
 expectSame('https://polascin.net/?lang=en', absoluteLangUrl('en', 'index.php'), 'Cudzojazyčná domovská stránka nesie parameter lang');
@@ -1348,6 +1377,68 @@ foreach (['scripts', 'audit-reports'] as $auditOnlyDir) {
     expectTrue(
         preg_match('~(^|\r?\n)' . preg_quote($auditOnlyDir, '~') . '(\r?\n|$)~', $deployIgnoreRules) === 1,
         ".deployignore musí vylúčiť {$auditOnlyDir} z nasadenia"
+    );
+}
+
+// `.deployignore` a aktívne mazanie v deploy skriptoch sú len jedna vrstva.
+// `.cursor/rules/*.mdc` sa raz nasadiť podarilo (Beh #18), takže predpoklad
+// „v web roote to nikdy nebude“ už raz neplatil. `.htaccess` preto musí každý
+// interný adresár blokovať aj vtedy, keď tam súbory sú — inak smoke check
+// hlási 404 z neprítomnosti, nie 403 zo zákazu. Zoznam v `.htaccess` sa nesmie
+// rozísť s tým, čo je interné (Beh #29).
+$internalWebRootDirs = [
+    '.claude',
+    '.cursor',
+    '.idea',
+    '.trunk',
+    '.vscode',
+    'audit-reports',
+    'content',
+    'hooks',
+    'lang',
+    'private',
+    'scripts',
+    'tests',
+];
+$blockedDirs = [];
+if (preg_match('~RewriteRule \^\(([^)]*)\)\(/\.\*\)\?\$ - \[F,L\]~', $htaccessRules, $blockedDirMatch) === 1) {
+    $blockedDirs = array_map(
+        static fn(string $dir): string => stripslashes($dir),
+        explode('|', $blockedDirMatch[1])
+    );
+}
+expectTrue(
+    $blockedDirs !== [],
+    '.htaccess musí mať RewriteRule so zoznamom zakázaných interných adresárov'
+);
+expectSame(
+    [],
+    array_values(array_diff($internalWebRootDirs, $blockedDirs)),
+    '.htaccess musí zakázať priamy prístup na každý interný adresár'
+);
+
+// Pravidlá Cursoru majú príponu `.mdc`, ktorú zákaz končiaci na `md$`
+// nepokrýval. Zákaz musí platiť pre `.md` aj `.mdc`, kdekoľvek súbor pristane.
+expectTrue(
+    preg_match('~<FilesMatch "\\\.\([^"]*\|mdc\?\|[^"]*\)\$">~', $htaccessRules) === 1,
+    '.htaccess musí blokovať .md aj .mdc súbory'
+);
+
+// Interné cesty, ktoré vznikli až pre nočný audit, musí smoke check overovať
+// rovnako ako `.cursor/rules/*.mdc` — inak by ich nasadenie nikto nezachytil.
+foreach (['/scripts/audit_db_check.php', '/audit-reports/db-latest.md'] as $auditOnlyPath) {
+    expectTrue(
+        str_contains($deployWorkflow, '"' . $auditOnlyPath . '"'),
+        "Smoke check po nasadení musí overiť neprístupnosť {$auditOnlyPath}"
+    );
+}
+
+// robots.txt má interné adresáre zakazovať rovnako ako content/ a private/ —
+// nie je to bezpečnostná vrstva, ale zoznam sa nemá rozchádzať s realitou.
+foreach (['/scripts/', '/audit-reports/', '/.cursor/'] as $robotsPath) {
+    expectTrue(
+        in_array($robotsPath, $robotsDisallowedPaths, true),
+        "robots.txt musí v skupine User-agent: * zakazovať {$robotsPath}"
     );
 }
 

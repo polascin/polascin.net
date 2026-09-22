@@ -61,7 +61,12 @@ DirectoryIndex index.php index.html
     # Cudzí nested projekt (polascin.com) nesmie byť náhodou nasadený pod root.
     RewriteRule ^portfolio(?:/.*)?$ - [F,L]
 
-    RewriteRule ^(\.claude|\.git|\.github|\.trunk|\.vscode|content|hooks|lang|private|tests)(/.*)?$ - [F,L]
+    # Interné adresáre, ktoré nepatria do web rootu. `.deployignore` ich z
+    # nasadenia vylučuje a deploy už nasadené aktívne maže, ale to je jediná
+    # vrstva — `.cursor/rules/*.mdc` sa raz nasadiť podarilo (Beh #18). Zákaz
+    # tu je druhá vrstva: keby exclude alebo mazanie zlyhalo, súbory zostanú
+    # neprístupné. Zhodu tohto zoznamu s `.deployignore` stráži test.
+    RewriteRule ^(\.claude|\.cursor|\.git|\.github|\.idea|\.trunk|\.vscode|audit-reports|content|hooks|lang|private|scripts|tests)(/.*)?$ - [F,L]
 </IfModule>
 
 # ── Blokovanie interných PHP skriptov a citlivých súborov ───────────────────
@@ -75,7 +80,7 @@ DirectoryIndex index.php index.html
 </FilesMatch>
 
 # ── Blokovanie citlivých typov súborov ───────────────────────────────────────
-<FilesMatch "\.(env|ini|log|sql|bak|tgz|tar\.gz|bz2|7z|key|pem|p12|pfx|md|ya?ml|sh|txt)$">
+<FilesMatch "\.(env|ini|log|sql|bak|tgz|tar\.gz|bz2|7z|key|pem|p12|pfx|mdc?|ya?ml|sh|txt)$">
     Require all denied
 </FilesMatch>
 
