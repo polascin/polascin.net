@@ -446,6 +446,14 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/arenibus-v-google-4177-testov.php'
             );
         },
+        '2026092406_arenibus_article_published_at_fix' => static function (PDO $pdo): void {
+            $stmt = $pdo->prepare(
+                "UPDATE articles
+                 SET published_at = '2026-09-24 17:40:00', is_published = 1
+                 WHERE slug = 'arenibus-v-google-4177-testov'"
+            );
+            $stmt->execute();
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

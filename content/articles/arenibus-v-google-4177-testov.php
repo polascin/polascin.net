@@ -30,7 +30,7 @@ return [
     'author' => 'MUDr. Ľubomír Polaščín',
     'category' => 'blog',
     'is_top' => 0,
-    'published_at' => '2026-09-24 18:30:00',
+    'published_at' => '2026-09-24 17:40:00',
     'image' => 'images/articles/arenibus-v-google-4177-testov.webp',
     'translations' => [
         'sk' => [
