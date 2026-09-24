@@ -49,7 +49,7 @@ Prihlásenie: `https://x.com/home`; ak treba username `polascin`. Po „Prihlás
 
 Tweet: slovenčina, hook z SK title/excerpt, URL (počíta sa ako 23 znakov), pod 280 znakov. Pole „Text príspevku“ → prilož obrázok → „Uverejniť“ v compose (nie sidebar). Zober `https://x.com/polascin/status/…`.
 
-Už na X (neopakovať): `lekar-ako-pacient-glp1-a-kortikosteroidy`, `ai-agent-bezpecnostny-audit-arenibus`, `hypertenzia-oblicky-algoritmus-pre-vld`, `ai-modely-ako-nastroje-nie-operacny-system`, `ai-recepcna-dvanast-otazok`, `cloudflare-zakaz-ai-trenovania`, `skener-tajomstiev-shell-historia`.
+Už na X (neopakovať): `lekar-ako-pacient-glp1-a-kortikosteroidy`, `ai-agent-bezpecnostny-audit-arenibus`, `hypertenzia-oblicky-algoritmus-pre-vld`, `ai-modely-ako-nastroje-nie-operacny-system`, `ai-recepcna-dvanast-otazok`, `cloudflare-zakaz-ai-trenovania`, `skener-tajomstiev-shell-historia`, `arenibus-v-google-4177-testov`.
 
 ### 5b. Facebook, LinkedIn, Threads, Substack, Medium
 
@@ -58,8 +58,8 @@ Na každej sieti uverejni krátky slovenský príspevok s obrázkom a kanonickou
 | Sieť | Účet / vstup | Poznámky |
 |------|----------------|----------|
 | Facebook | `https://www.facebook.com/lubomir.polascin` | Compose „What's on your mind“ → Post. OG karta z URL často stiahne JPEG; priama príloha cez CDP `DOM.setFileInputFiles` je v browseri **zakázaná**. Text píš **raz** (`browser_fill` po `Ctrl+A`+Backspace, nie `slowly` type) — dvojité vyplnenie zduplikuje text. |
-| LinkedIn | `https://www.linkedin.com/in/lubomirpolascin/` alebo feed → Start a post (`/sharing/compose`) | Post to Anyone → Post. Náhľad OG = JPEG. Activity URN: `https://www.linkedin.com/feed/update/urn:li:activity:…` |
-| Threads | `https://www.threads.com/@lubomirpolascin` | Vyžaduje prihlásenie (viditeľné „Log in“); heslo/passkey nehádaj. Cookie banner: Decline/Allow. Ak je session live, compose „New thread“; Lexical editor často ignoruje fill/type — pomáha `ClipboardEvent` paste. |
+| LinkedIn | `https://www.linkedin.com/in/lubomirpolascin/` alebo feed → Start a post (`/sharing/compose`) | Post to Anyone → Post. Náhľad OG = JPEG. Activity URN: `https://www.linkedin.com/feed/update/urn:li:activity:…`. Ak je Post disabled po fill, spusti React input (medzera/backspace) pred klikom. |
+| Threads | `https://www.threads.com/@lubomirpolascin` | Vyžaduje prihlásenie (viditeľné „Log in“); heslo/passkey nehádaj. Cookie banner: Decline/Allow. Ak je session live, compose „New thread“. Lexical: `browser_type slowly` aj `InputEvent insertText` často **zduplikujú** text — pred Post over `innerText` (jeden výskyt hooku); pri zdvojení nepublikuj, dialóg nechaj používateľovi. Clipboard paste z hostu do Electron webview často zlyhá. |
 | Substack | `https://polascin.substack.com/publish/posts/published` | Pri neprihlásení redirect na `substack.com/sign-in` — dialóg nechaj otvorený. |
 | Medium | `https://medium.com/@lubomir` | Cloudflare „Attention Required!“ môže zablokovať automatizáciu — nechaj stránku otvorenú pre používateľa. |
 
