@@ -440,6 +440,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/skener-tajomstiev-shell-historia.php'
             );
         },
+        '2026092405_arenibus_google_4177_tests_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/arenibus-v-google-4177-testov.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
