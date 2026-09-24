@@ -28,7 +28,7 @@ return [
     'author' => 'MUDr. Ľubomír Polaščín',
     'category' => 'blog',
     'is_top' => 0,
-    'published_at' => '2026-09-24 17:30:00',
+    'published_at' => '2026-09-24 17:15:00',
     'image' => 'images/articles/cloudflare-zakaz-ai-trenovania.webp',
     'translations' => [
         'sk' => [

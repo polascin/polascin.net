@@ -426,6 +426,14 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/cloudflare-zakaz-ai-trenovania.php'
             );
         },
+        '2026092403_cloudflare_article_published_at_fix' => static function (PDO $pdo): void {
+            $stmt = $pdo->prepare(
+                "UPDATE articles
+                 SET published_at = '2026-09-24 17:15:00', is_published = 1
+                 WHERE slug = 'cloudflare-zakaz-ai-trenovania'"
+            );
+            $stmt->execute();
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
