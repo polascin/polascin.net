@@ -49,7 +49,7 @@ Prihlásenie: `https://x.com/home`; ak treba username `polascin`. Po „Prihlás
 
 Tweet: slovenčina, hook z SK title/excerpt, URL (počíta sa ako 23 znakov), pod 280 znakov. Pole „Text príspevku“ → prilož obrázok → „Uverejniť“ v compose (nie sidebar). Zober `https://x.com/polascin/status/…`.
 
-Už na X (neopakovať): `lekar-ako-pacient-glp1-a-kortikosteroidy`, `ai-agent-bezpecnostny-audit-arenibus`, `hypertenzia-oblicky-algoritmus-pre-vld`, `ai-modely-ako-nastroje-nie-operacny-system`.
+Už na X (neopakovať): `lekar-ako-pacient-glp1-a-kortikosteroidy`, `ai-agent-bezpecnostny-audit-arenibus`, `hypertenzia-oblicky-algoritmus-pre-vld`, `ai-modely-ako-nastroje-nie-operacny-system`, `ai-recepcna-dvanast-otazok`.
 
 ### 5b. Facebook, LinkedIn, Threads, Substack, Medium
 
@@ -57,10 +57,12 @@ Na každej sieti uverejni krátky slovenský príspevok s obrázkom a kanonickou
 
 | Sieť | Účet / vstup | Poznámky |
 |------|----------------|----------|
-| Facebook | `https://www.facebook.com/lubomir.polascin` | Príspevok s obrázkom |
-| LinkedIn | `https://www.linkedin.com/in/lubomirpolascin/` | Príspevok s obrázkom; náhľad OG = JPEG |
-| Threads | `https://www.threads.com/@lubomirpolascin` | Príspevok s obrázkom |
-| Substack | `https://polascin.substack.com/publish/posts/published` | Krátka SK poznámka + obrázok + odkaz na článok (alebo plný post podľa doterajšieho štýlu Substacku) |
-| Medium | `https://medium.com/@lubomir` | Príspevok s obrázkom + odkaz na článok |
+| Facebook | `https://www.facebook.com/lubomir.polascin` | Compose „What's on your mind“ → Post. OG karta z URL často stiahne JPEG; priama príloha cez CDP `DOM.setFileInputFiles` je v browseri **zakázaná**. Text píš raz (`browser_type` slowly) — dvojité vyplnenie zduplikuje text. |
+| LinkedIn | `https://www.linkedin.com/in/lubomirpolascin/` alebo feed → Start a post (`/sharing/compose`) | Post to Anyone → Post. Náhľad OG = JPEG. Activity URN: `https://www.linkedin.com/feed/update/urn:li:activity:…` |
+| Threads | `https://www.threads.com/@lubomirpolascin` | Vyžaduje prihlásenie (viditeľné „Log in“); heslo/passkey nehádaj. Cookie banner: Decline/Allow. |
+| Substack | `https://polascin.substack.com/publish/posts/published` | Pri neprihlásení redirect na `substack.com/sign-in` — dialóg nechaj otvorený. |
+| Medium | `https://medium.com/@lubomir` | Cloudflare „Attention Required!“ môže zablokovať automatizáciu — nechaj stránku otvorenú pre používateľa. |
 
-Ak login/passkey/2FA zablokuje agentovú automatizáciu, nechaj dialóg použiteľný pre používateľa a v reporte uveď blocker; požiadavku na príspevok v rule nemeň.
+**Príloha obrázka:** CDP `DOM.setFileInputFiles` nie je v `cursor-ide-browser` povolené. Ak sa nepodarí nahrať súbor inak, uverejni text + kanonickú URL (OG JPEG z webu) a v reporte uveď, že lokálna príloha zlyhala. Požiadavku na ilustráciu v rule nemeň.
+
+Ak login/passkey/2FA/Cloudflare zablokuje agentovú automatizáciu, nechaj dialóg použiteľný pre používateľa a v reporte uveď blocker; požiadavku na príspevok v rule nemeň.
