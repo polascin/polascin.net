@@ -57,9 +57,9 @@ Na každej sieti uverejni krátky slovenský príspevok s obrázkom a kanonickou
 
 | Sieť | Účet / vstup | Poznámky |
 |------|----------------|----------|
-| Facebook | `https://www.facebook.com/lubomir.polascin` | Compose „What's on your mind“ → Post. OG karta z URL často stiahne JPEG; priama príloha cez CDP `DOM.setFileInputFiles` je v browseri **zakázaná**. Text píš raz (`browser_type` slowly) — dvojité vyplnenie zduplikuje text. |
+| Facebook | `https://www.facebook.com/lubomir.polascin` | Compose „What's on your mind“ → Post. OG karta z URL často stiahne JPEG; priama príloha cez CDP `DOM.setFileInputFiles` je v browseri **zakázaná**. Text píš **raz** (`browser_fill` po `Ctrl+A`+Backspace, nie `slowly` type) — dvojité vyplnenie zduplikuje text. |
 | LinkedIn | `https://www.linkedin.com/in/lubomirpolascin/` alebo feed → Start a post (`/sharing/compose`) | Post to Anyone → Post. Náhľad OG = JPEG. Activity URN: `https://www.linkedin.com/feed/update/urn:li:activity:…` |
-| Threads | `https://www.threads.com/@lubomirpolascin` | Vyžaduje prihlásenie (viditeľné „Log in“); heslo/passkey nehádaj. Cookie banner: Decline/Allow. |
+| Threads | `https://www.threads.com/@lubomirpolascin` | Vyžaduje prihlásenie (viditeľné „Log in“); heslo/passkey nehádaj. Cookie banner: Decline/Allow. Ak je session live, compose „New thread“; Lexical editor často ignoruje fill/type — pomáha `ClipboardEvent` paste. |
 | Substack | `https://polascin.substack.com/publish/posts/published` | Pri neprihlásení redirect na `substack.com/sign-in` — dialóg nechaj otvorený. |
 | Medium | `https://medium.com/@lubomir` | Cloudflare „Attention Required!“ môže zablokovať automatizáciu — nechaj stránku otvorenú pre používateľa. |
 
