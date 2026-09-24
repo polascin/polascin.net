@@ -420,6 +420,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/ai-recepcna-dvanast-otazok.php'
             );
         },
+        '2026092402_cloudflare_disallow_ai_training_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/cloudflare-zakaz-ai-trenovania.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
