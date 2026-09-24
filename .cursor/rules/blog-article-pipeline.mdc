@@ -1,13 +1,13 @@
 ---
-description: Štandardný postup nového blogového článku (korektúra, obálka, Disk, preklady, X)
+description: Štandardný postup nového blogového článku (korektúra, obálka, Disk, preklady, sociálne siete)
 alwaysApply: true
 ---
 
 # Pipeline blogového článku
 
-Keď používateľ dodá text na blog, **bez ďalšieho pokynu** urob kroky 1–5. Ak slug už existuje, nedej duplikát článku ani tweety. Čisto dokumentačné zmeny nie. Článok na webe nenechávaj čakať na Disk ani X.
+Keď používateľ dodá text na blog, **bez ďalšieho pokynu** urob kroky 1–5. Ak slug už existuje, nedej duplikát článku ani sociálne príspevky. Čisto dokumentačné zmeny nie. Článok na webe nenechávaj čakať na Disk ani sociálne siete.
 
-Poradie vykonania: korektúra a seed (1+4) → obálka WebP + JPEG pre OG (2, seeder ju vyžaduje) → PNG na Disk (3, môže ísť súbežne) → testy, commit, push, deploy, overenie produkcie → tweet (5).
+Poradie vykonania: korektúra a seed (1+4) → obálka WebP + JPEG pre OG (2, seeder ju vyžaduje) → PNG na Disk (3, môže ísť súbežne) → testy, commit, push, deploy, overenie produkcie → sociálne siete (5).
 
 Jazyky stránky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk`. Autor: `MUDr. Ľubomír Polaščín`. DB sa plní len cez `setup_db.php` (`seedPublishedArticleFromFile`); neseeduj z notebooku.
 
@@ -37,12 +37,30 @@ Jazyky stránky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `
 - Seed musí mať **všetky** kľúče `appLanguages()` už pri prvom deployi. Prekladaj celý článok (title, excerpt, alt, HTML), nie strojový kalk.
 - CS: slovenské reálie (SOLEN/Via practica) podľa existujúcich článkov. Po deployi spot-check aspoň SK, EN a jeden ďalší jazyk + hreflang v sitemape.
 
-## 5. X.com @polascin
+## 5. Sociálne siete (až po success deployi)
 
-Až **po** success deployi a HTTP 200 kanonickej URL (OG karta). Účet **@polascin** (`https://x.com/polascin`), nie `@LPolascin99873` a nie preklep `@polacin`. Overenie: „Odhlásiť používateľa @polascin“, na profile „Upraviť profil“. Chránený účet je OK.
+Až **po** success deployi a HTTP 200 kanonickej URL (OG karta s JPEG). Príspevok vždy **so slovenským textom**, kanonickou URL `https://polascin.net/article.php?slug=SLUG` (bez `lang=`) a **s ilustráciou** (WebP/JPEG súbor podľa platformy; LinkedIn OG preferuje JPEG). Heslo/passkey/2FA **nehádaj** — dialóg nechaj otvorený, na danej sieti zastav a pokračuj ostatnými. Ak sieť zlyhá, nahlás to; web ostane live. Pred ďalším článkom skontroluj, či slug na profile už nie je.
 
-Prihlásenie: `https://x.com/home`; ak treba username `polascin`. Heslo/passkey nehádaj — dialóg nechaj otvorený. Po „Prihlásený.“ pokračuj.
+### 5a. X.com @polascin
 
-Tweet: slovenčina, hook z SK title/excerpt, URL `https://polascin.net/article.php?slug=SLUG` (bez `lang=`), pod 280 znakov (URL = 23). Pole „Text príspevku“ → „Uverejniť“ v compose (nie sidebar). Pred ďalším článkom skontroluj, či slug na profile už nie je. Zober `https://x.com/polascin/status/…`. Ak X zlyhá, nahlás to; web ostane live.
+Účet **@polascin** (`https://x.com/polascin`), nie `@LPolascin99873` a nie preklep `@polacin`. Overenie: „Odhlásiť používateľa @polascin“, na profile „Upraviť profil“. Chránený účet je OK.
+
+Prihlásenie: `https://x.com/home`; ak treba username `polascin`. Po „Prihlásený.“ pokračuj.
+
+Tweet: slovenčina, hook z SK title/excerpt, URL (počíta sa ako 23 znakov), pod 280 znakov. Pole „Text príspevku“ → prilož obrázok → „Uverejniť“ v compose (nie sidebar). Zober `https://x.com/polascin/status/…`.
 
 Už na X (neopakovať): `lekar-ako-pacient-glp1-a-kortikosteroidy`, `ai-agent-bezpecnostny-audit-arenibus`, `hypertenzia-oblicky-algoritmus-pre-vld`, `ai-modely-ako-nastroje-nie-operacny-system`.
+
+### 5b. Facebook, LinkedIn, Threads, Substack, Medium
+
+Na každej sieti uverejni krátky slovenský príspevok s obrázkom a kanonickou URL. Použi `cursor-ide-browser` (tabs → navigate → lock → interact → unlock). Zober verejnú URL príspevku.
+
+| Sieť | Účet / vstup | Poznámky |
+|------|----------------|----------|
+| Facebook | `https://www.facebook.com/lubomir.polascin` | Príspevok s obrázkom |
+| LinkedIn | `https://www.linkedin.com/in/lubomirpolascin/` | Príspevok s obrázkom; náhľad OG = JPEG |
+| Threads | `https://www.threads.com/@lubomirpolascin` | Príspevok s obrázkom |
+| Substack | `https://polascin.substack.com/publish/posts/published` | Krátka SK poznámka + obrázok + odkaz na článok (alebo plný post podľa doterajšieho štýlu Substacku) |
+| Medium | `https://medium.com/@lubomir` | Príspevok s obrázkom + odkaz na článok |
+
+Ak login/passkey/2FA zablokuje agentovú automatizáciu, nechaj dialóg použiteľný pre používateľa a v reporte uveď blocker; požiadavku na príspevok v rule nemeň.

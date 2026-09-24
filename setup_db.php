@@ -414,6 +414,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/ai-generovany-email-o-knihe-je-scam.php'
             );
         },
+        '2026092401_ai_receptionist_twelve_questions_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/ai-recepcna-dvanast-otazok.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
