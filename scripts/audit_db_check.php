@@ -51,6 +51,7 @@ const EXPECTED_MIGRATIONS = [
     '2026092401_ai_receptionist_twelve_questions_article',
     '2026092402_cloudflare_disallow_ai_training_article',
     '2026092403_cloudflare_article_published_at_fix',
+    '2026092404_secret_scanner_shell_history_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

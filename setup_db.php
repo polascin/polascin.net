@@ -434,6 +434,12 @@ function applySchemaMigrations(PDO $pdo): void {
             );
             $stmt->execute();
         },
+        '2026092404_secret_scanner_shell_history_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/skener-tajomstiev-shell-historia.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
