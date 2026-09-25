@@ -57,6 +57,7 @@ const EXPECTED_MIGRATIONS = [
     '2026092501_anonymize_blog_personal_names',
     '2026092502_ai_book_trailer_scam_article',
     '2026092503_atlas_agents_cold_email_article',
+    '2026092504_awai_two_page_story_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
