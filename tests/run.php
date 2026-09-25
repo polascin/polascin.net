@@ -1618,6 +1618,11 @@ expectTrue(
     'getPublishedArticles() musí vyberať aj stĺpce image a image_alt'
 );
 expectTrue(
+    preg_match('~ORDER BY published_at DESC, id DESC~', $helpersSource) === 1
+        && !str_contains($helpersSource, 'ORDER BY is_top DESC, sort_order ASC'),
+    'getPublishedArticles() musí radiť od najnovšieho dátumu publikovania'
+);
+expectTrue(
     preg_match('~\$columns = "id, title, slug, excerpt, image, image_alt, content, author~', $helpersSource) === 1,
     'getArticleBySlug() musí vyberať aj stĺpce image a image_alt'
 );
