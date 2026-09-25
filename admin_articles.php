@@ -15,7 +15,11 @@ $success = '';
 $editing = null;
 
 $allArticles = (function () use ($pdo): array {
-    $stmt = $pdo->query("SELECT id, title, slug, image, author, lang, translation_group, is_published, is_top, sort_order, published_at, updated_at FROM articles ORDER BY lang ASC, updated_at DESC");
+    $stmt = $pdo->query(
+        "SELECT id, title, slug, image, author, lang, translation_group, is_published, is_top, sort_order, published_at, updated_at
+         FROM articles
+         ORDER BY published_at DESC, id DESC"
+    );
     return $stmt->fetchAll();
 })();
 
@@ -25,6 +29,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Neplatný bezpečnostný token.';
     } else {
         $action = $_POST['action'] ?? '';
+
+        if ($action === 'toggle_top') {
+            $groupId = isset($_POST['translation_group']) && is_numeric($_POST['translation_group'])
+                ? (int) $_POST['translation_group']
+                : 0;
+            if ($groupId < 1) {
+                $errors[] = 'Skupina prekladov nie je platná.';
+            } else {
+                $current = $pdo->prepare(
+                    "SELECT MAX(is_top) FROM articles WHERE translation_group = :group"
+                );
+                $current->execute([':group' => $groupId]);
+                $nextTop = ((int) $current->fetchColumn()) === 1 ? 0 : 1;
+                $update = $pdo->prepare(
+                    "UPDATE articles SET is_top = :is_top WHERE translation_group = :group"
+                );
+                $update->execute([':is_top' => $nextTop, ':group' => $groupId]);
+                logAdminAction($pdo, $nextTop === 1 ? 'article_top_on' : 'article_top_off', 'article_group', $groupId);
+                header('Location: admin_articles.php?top=1');
+                exit;
+            }
+        }
+
+        if ($action === 'delete_group') {
+            $groupId = isset($_POST['translation_group']) && is_numeric($_POST['translation_group'])
+                ? (int) $_POST['translation_group']
+                : 0;
+            if ($groupId < 1) {
+                $errors[] = 'Skupina prekladov nie je platná.';
+            } else {
+                $stmt = $pdo->prepare("DELETE FROM articles WHERE translation_group = :group");
+                $stmt->execute([':group' => $groupId]);
+                logAdminAction($pdo, 'article_group_delete', 'article_group', $groupId);
+                header('Location: admin_articles.php');
+                exit;
+            }
+        }
 
         if ($action === 'delete' && isset($_POST['id'])) {
             $id = (int) $_POST['id'];
@@ -180,6 +221,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                         logAdminAction($pdo, 'article_create', 'article', $id);
                     }
+                    $groupId = $translationGroup ?? $id;
+                    $topStmt = $pdo->prepare(
+                        "UPDATE articles SET is_top = :is_top WHERE translation_group = :group"
+                    );
+                    $topStmt->execute([':is_top' => $isTop, ':group' => $groupId]);
                     header('Location: admin_articles.php?edit=' . $id . '&saved=1');
                     exit;
                 }
@@ -197,6 +243,52 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
 if (isset($_GET['saved']) && $editing) {
     $success = 'Článok bol úspešne uložený.';
 }
+if (isset($_GET['top'])) {
+    $success = 'Označenie Top (Navrchu) bolo uložené pre všetky jazykové verzie.';
+}
+
+$articleGroups = [];
+foreach ($allArticles as $articleRow) {
+    $groupKey = $articleRow['translation_group'] !== null
+        ? 'g' . (int) $articleRow['translation_group']
+        : 'id' . (int) $articleRow['id'];
+    $articleGroups[$groupKey][] = $articleRow;
+}
+$articleGroups = array_map(static function (array $members): array {
+    $byLang = [];
+    $isTop = 0;
+    $publishedCount = 0;
+    $publishedAt = '';
+    foreach ($members as $member) {
+        $byLang[(string) $member['lang']] = $member;
+        if ((int) $member['is_top'] === 1) {
+            $isTop = 1;
+        }
+        if ((int) $member['is_published'] === 1) {
+            $publishedCount++;
+        }
+        $stamp = (string) ($member['published_at'] ?? '');
+        if ($stamp > $publishedAt) {
+            $publishedAt = $stamp;
+        }
+    }
+    $primary = $byLang[APP_DEFAULT_LANGUAGE] ?? reset($byLang);
+    return [
+        'primary' => $primary,
+        'by_lang' => $byLang,
+        'is_top' => $isTop,
+        'published_count' => $publishedCount,
+        'total' => count($members),
+        'published_at' => $publishedAt,
+        'group' => $primary['translation_group'] !== null ? (int) $primary['translation_group'] : null,
+    ];
+}, $articleGroups);
+usort($articleGroups, static function (array $a, array $b): int {
+    if ($a['is_top'] !== $b['is_top']) {
+        return $b['is_top'] <=> $a['is_top'];
+    }
+    return strcmp((string) $b['published_at'], (string) $a['published_at']);
+});
 
 $baseUrl = getAppBaseUrl();
 $pageTitle = 'Správa článkov | MUDr. Ľubomír Polaščín';
@@ -313,7 +405,7 @@ $canonicalUrl = $baseUrl . '/admin_articles.php';
         </div>
         <div class="form-checks">
           <label><input type="checkbox" name="is_published" value="1" <?= (isset($editing['is_published']) && (int) $editing['is_published'] === 1) ? 'checked' : '' ?>> Publikovaný</label>
-          <label><input type="checkbox" name="is_top" value="1" <?= (isset($editing['is_top']) && (int) $editing['is_top'] === 1) ? 'checked' : '' ?>> Odporúčaný (top)</label>
+          <label><input type="checkbox" name="is_top" value="1" <?= (isset($editing['is_top']) && (int) $editing['is_top'] === 1) ? 'checked' : '' ?>> Top (Navrchu)</label>
         </div>
         <div class="form-actions">
           <button type="submit" name="action" value="save" class="btn btn-secondary">Uložiť koncept</button>
@@ -322,38 +414,61 @@ $canonicalUrl = $baseUrl . '/admin_articles.php';
         </div>
       </form>
 
-      <h2>Existujúce články</h2>
-      <?php if (empty($allArticles)): ?>
+      <h2>Články podľa jazykových skupín</h2>
+      <p class="form-hint">Jeden riadok je jeden článok vo všetkých jazykoch. Klik na skratku jazyka otvorí tú verziu. Top (Navrchu) platí pre celú skupinu a na webe ju zaradí pred ostatné; v rámci Top aj mimo neho ostáva poradie od najnovšieho.</p>
+      <?php if ($articleGroups === []): ?>
         <p>Zatiaľ žiadne články.</p>
       <?php else: ?>
+      <div class="table-responsive">
       <table class="admin-table">
         <thead>
-          <tr><th>Názov</th><th>Slug</th><th>Jazyk</th><th>Obálka</th><th>Skupina</th><th>Stav</th><th>Aktualizované</th><th>Akcie</th></tr>
+          <tr><th>Názov</th><th>Jazyky</th><th>Stav</th><th>Publikované</th><th>Akcie</th></tr>
         </thead>
         <tbody>
-          <?php foreach ($allArticles as $article): ?>
+          <?php foreach ($articleGroups as $group): ?>
+          <?php $primary = $group['primary']; ?>
           <tr>
-            <td><?= htmlspecialchars((string) $article['title'], ENT_QUOTES, 'UTF-8') ?></td>
-            <td><?= htmlspecialchars((string) $article['slug'], ENT_QUOTES, 'UTF-8') ?></td>
-            <td><?= htmlspecialchars(strtoupper((string) ($article['lang'] ?? '')), ENT_QUOTES, 'UTF-8') ?></td>
-            <td><?= articleCoverSrc(isset($article['image']) ? (string) $article['image'] : null, (string) ($article['slug'] ?? '')) !== null ? 'áno' : '—' ?></td>
-            <td><?= $article['translation_group'] !== null ? (int) $article['translation_group'] : '—' ?></td>
-            <td><?= (int) $article['is_published'] === 1 ? 'Publikovaný' : 'Koncept' ?><?= (int) $article['is_top'] === 1 ? ' · Top' : '' ?></td>
-            <td><?= htmlspecialchars((string) $article['updated_at'], ENT_QUOTES, 'UTF-8') ?></td>
+            <td>
+              <?= htmlspecialchars((string) $primary['title'], ENT_QUOTES, 'UTF-8') ?>
+              <?php if ((int) $group['is_top'] === 1): ?> <strong>Top</strong><?php endif; ?>
+              <br><small><?= htmlspecialchars((string) $primary['slug'], ENT_QUOTES, 'UTF-8') ?></small>
+            </td>
+            <td>
+              <div class="lang-chips">
+                <?php foreach (appLanguages() as $code => $meta): ?>
+                  <?php if (isset($group['by_lang'][$code])): ?>
+                    <a class="lang-chip" href="admin_articles.php?edit=<?= (int) $group['by_lang'][$code]['id'] ?>" title="<?= htmlspecialchars((string) $meta['native'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars(strtoupper($code), ENT_QUOTES, 'UTF-8') ?></a>
+                  <?php else: ?>
+                    <span class="lang-chip is-missing" title="<?= htmlspecialchars((string) $meta['native'], ENT_QUOTES, 'UTF-8') ?> chýba"><?= htmlspecialchars(strtoupper($code), ENT_QUOTES, 'UTF-8') ?></span>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </div>
+            </td>
+            <td><?= (int) $group['published_count'] ?>/<?= (int) $group['total'] ?> publikovaných</td>
+            <td><?= htmlspecialchars((string) $group['published_at'], ENT_QUOTES, 'UTF-8') ?></td>
             <td class="actions">
-              <a href="admin_articles.php?edit=<?= (int) $article['id'] ?>" class="btn btn-sm btn-secondary">Upraviť</a>
-              <a href="<?= htmlspecialchars(langUrl((string) ($article['lang'] ?? APP_DEFAULT_LANGUAGE), 'article.php', ['slug' => (string) $article['slug']]), ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">Zobraziť</a>
-              <form method="post" action="admin_articles.php" class="inline-form" data-confirm="Odstrániť tento článok?">
+              <a href="admin_articles.php?edit=<?= (int) $primary['id'] ?>" class="btn btn-sm btn-secondary">Upraviť</a>
+              <a href="<?= htmlspecialchars(langUrl((string) ($primary['lang'] ?? APP_DEFAULT_LANGUAGE), 'article.php', ['slug' => (string) $primary['slug']]), ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">Zobraziť</a>
+              <?php if ($group['group'] !== null): ?>
+              <form method="post" action="admin_articles.php" class="inline-form">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
-                <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="id" value="<?= (int) $article['id'] ?>">
-                <button type="submit" class="btn btn-sm btn-danger">Odstrániť</button>
+                <input type="hidden" name="action" value="toggle_top">
+                <input type="hidden" name="translation_group" value="<?= (int) $group['group'] ?>">
+                <button type="submit" class="btn btn-sm <?= (int) $group['is_top'] === 1 ? 'btn-primary' : 'btn-secondary' ?>"><?= (int) $group['is_top'] === 1 ? 'Zrušiť Top' : 'Top (Navrchu)' ?></button>
               </form>
+              <form method="post" action="admin_articles.php" class="inline-form" data-confirm="Odstrániť všetky jazykové verzie tohto článku?">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
+                <input type="hidden" name="action" value="delete_group">
+                <input type="hidden" name="translation_group" value="<?= (int) $group['group'] ?>">
+                <button type="submit" class="btn btn-sm btn-danger">Odstrániť skupinu</button>
+              </form>
+              <?php endif; ?>
             </td>
           </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
+      </div>
       <?php endif; ?>
     </div>
   </section>

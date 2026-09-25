@@ -1618,9 +1618,8 @@ expectTrue(
     'getPublishedArticles() musí vyberať aj stĺpce image a image_alt'
 );
 expectTrue(
-    preg_match('~ORDER BY published_at DESC, id DESC~', $helpersSource) === 1
-        && !str_contains($helpersSource, 'ORDER BY is_top DESC, sort_order ASC'),
-    'getPublishedArticles() musí radiť od najnovšieho dátumu publikovania'
+    preg_match('~ORDER BY is_top DESC, published_at DESC, id DESC~', $helpersSource) === 1,
+    'getPublishedArticles() musí dať Top navrch a zvyšok radiť od najnovšieho'
 );
 expectTrue(
     preg_match('~\$columns = "id, title, slug, excerpt, image, image_alt, content, author~', $helpersSource) === 1,
@@ -1688,6 +1687,13 @@ expectTrue(
     str_contains($adminArticles, 'image = :image, image_alt = :image_alt')
         && str_contains($adminArticles, 'INSERT INTO articles (title, slug, excerpt, image, image_alt, content'),
     'Admin musí obálku zapisovať pri úprave aj pri vytvorení článku'
+);
+expectTrue(
+    str_contains($adminArticles, "action === 'toggle_top'")
+        && str_contains($adminArticles, 'Top (Navrchu)')
+        && str_contains($adminArticles, 'translation_group = :group')
+        && str_contains($adminArticles, 'lang-chips'),
+    'Admin musí spravovať článok ako skupinu jazykov a vedieť ju označiť ako Top (Navrchu)'
 );
 expectTrue(
     str_contains($adminArticles, 'name="image"')

@@ -149,7 +149,7 @@ function getPublishedArticles(PDO $pdo, int $limit = 10, int $offset = 0, ?strin
              FROM articles
              WHERE is_published = 1 AND published_at IS NOT NULL AND published_at <= NOW()
                AND lang = :lang
-             ORDER BY published_at DESC, id DESC
+             ORDER BY is_top DESC, published_at DESC, id DESC
              LIMIT :limit OFFSET :offset"
         );
         $stmt->bindValue(':lang', $lang);
