@@ -333,6 +333,7 @@ out();
 out('| Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |');
 out('| --- | --- | --- | --- |');
 
+$contactSummary = [];
 foreach (PII_TABLES as $piiTable => $timestampColumn) {
     if (!in_array($piiTable, $presentTables, true)) {
         continue;
@@ -373,10 +374,13 @@ foreach (PII_TABLES as $piiTable => $timestampColumn) {
             'SELECT COUNT(*) FROM contact_messages WHERE is_read = 0 AND created_at < (NOW() - INTERVAL 30 DAY)'
         );
 
-        out();
-        out('Kontaktné správy: **' . $handled . '** vybavených, **' . $pending . '** nevybavených');
-        out('(z toho **' . $staleUnhandled . '** nevybavených dlhšie ako 30 dní, **'
-            . $staleHandled . '** vybavených starších ako 180 dní).');
+        // Súhrn ide až pod tabuľku: odsek vložený medzi jej riadky by Markdown
+        // tabuľku ukončil a zvyšné tabuľky by v reporte vypadli ako voľný text.
+        $contactSummary = [
+            'Kontaktné správy: **' . $handled . '** vybavených, **' . $pending . '** nevybavených',
+            '(z toho **' . $staleUnhandled . '** nevybavených dlhšie ako 30 dní, **'
+                . $staleHandled . '** vybavených starších ako 180 dní).',
+        ];
 
         if ($staleHandled > 0) {
             finding(
@@ -408,6 +412,12 @@ foreach (PII_TABLES as $piiTable => $timestampColumn) {
     }
 }
 out();
+if ($contactSummary !== []) {
+    foreach ($contactSummary as $line) {
+        out($line);
+    }
+    out();
+}
 
 // ── Súhrn ──────────────────────────────────────────────────────────────────
 $pdo->exec('COMMIT');

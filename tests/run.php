@@ -1169,6 +1169,22 @@ expectTrue(
     str_contains($dbCheckSource, '$serverMajorMinor') && !str_contains($dbCheckSource, '$rawVersion . '),
     'audit_db_check.php musí verziu servera skrátiť na hlavné číslo, nie ju vypísať celú'
 );
+// Retenčná tabuľka reportu sa kreslí v cykle nad PII_TABLES. Akýkoľvek iný
+// výstup v tom cykle (napr. súhrn kontaktných správ) Markdown tabuľku ukončí
+// a zvyšné riadky v reporte vypadnú ako voľný text (Beh #30).
+$piiLoopBody = '';
+if (preg_match('~\nforeach \(PII_TABLES as .*?\n\}\n~s', $dbCheckSource, $piiLoopMatch) === 1) {
+    $piiLoopBody = $piiLoopMatch[0];
+}
+expectTrue($piiLoopBody !== '', 'audit_db_check.php musí mať cyklus nad PII_TABLES');
+preg_match_all('~\bout\((.{0,4})~', $piiLoopBody, $piiLoopOutputs);
+expectTrue($piiLoopOutputs[1] !== [], 'cyklus nad PII_TABLES musí vypisovať riadky tabuľky');
+foreach ($piiLoopOutputs[1] as $piiLoopOutputStart) {
+    expectTrue(
+        str_starts_with($piiLoopOutputStart, "'| "),
+        'cyklus nad PII_TABLES smie vypisovať len riadky tabuľky, nie odseky medzi nimi'
+    );
+}
 // Čistenie `form_rate_limit` nesmie byť obmedzené na jednu akciu: predtým
 // prerezávalo len práve vykonávanú akciu, takže riadky zriedka používaných
 // akcií držali IP adresy 44 dní (Beh #20, nález z nočnej kontroly DB).
@@ -1537,6 +1553,20 @@ foreach ($articleSeedFiles as $articleSeedPath) {
     expectTrue(
         str_contains($setupDbSource, $articleFile),
         "setup_db.php musí {$articleFile} vložiť idempotentnou migráciou"
+    );
+    // Seed sa vkladá pri nasadení a verejné dotazy filtrujú `published_at <= NOW()`.
+    // Čas v budúcnosti teda článok po nasadení skryje a doteraz si zakaždým
+    // vyžiadal samostatnú opravnú migráciu (2026092403, 2026092406). Pipeline
+    // článkov predpisuje „teraz“; tento test beží v deploy.yml ešte pred nasadením.
+    $seedPublishedAt = DateTimeImmutable::createFromFormat(
+        'Y-m-d H:i:s',
+        (string) ($articleSeed['published_at'] ?? ''),
+        new DateTimeZone('Europe/Bratislava')
+    );
+    expectTrue(
+        $seedPublishedAt instanceof DateTimeImmutable
+            && $seedPublishedAt <= new DateTimeImmutable('now', new DateTimeZone('Europe/Bratislava')),
+        "{$articleFile} musí mať published_at vo formáte Y-m-d H:i:s a nie v budúcnosti — inak ho verejné stránky po nasadení skryjú"
     );
 }
 expectTrue(
