@@ -49,7 +49,7 @@ return [
 <li><strong>„Dvojstranový príbeh.“</strong> Je to case study, prípadová štúdia pre firmu. Kostra problém, riešenie, výsledok je verejne opísaná desiatky rokov. Žiadna tajná štruktúra.</li>
 <li><strong>„V priemere 1 500 dolárov.“</strong> Ich vlastný <a href="https://www.awai.com/inside-awai/blueprint-for-becoming-well-paid-copywriter">prehľad honorárov</a>, ktorý som čítal v ten istý deň, uvádza case study v rozpätí 1 200 až 2 000 dolárov. To je horná liga človeka, ktorý už má klientov. Začiatočník z toho vidí zlomok. Číslo v predmete správy je ich marketing, nie audit trhu.</li>
 <li><strong>„Tajná štruktúra.“</strong> Predajná fráza. Tú istú kostru nájdete v učebniciach aj v textoch, ktoré AWAI samo zverejňuje.</li>
-<li><strong>Bezplatný sprievodca „9 Ways to Make a Real Living as a Writer“.</strong> Lead magnet. Po zadaní e-mailu začne predajná sekvencia na kurz. Súbor nie je fízel. Je to návnada.</li>
+<li><strong>Bezplatný sprievodca „9 Ways to Make a Real Living as a Writer“.</strong> Lead magnet. Po zadaní e-mailu začne predajná sekvencia na kurz. Súbor nie je fígel. Je to návnada.</li>
 <li><strong>„Hi, Friend“ a „To your success“.</strong> Celý list je ukážka copywritingu, ktorý predávajú. „Friend“ v direct response neznamená, že vás niekto pozná.</li>
 </ul>
 <h2>Prečo to prišlo mne</h2>

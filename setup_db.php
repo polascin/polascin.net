@@ -521,6 +521,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/awai-dvojstranovy-pribeh-za-1500.php'
             );
         },
+        '2026092505_awai_figel_wording' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/awai-dvojstranovy-pribeh-za-1500.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
