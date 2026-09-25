@@ -1959,6 +1959,18 @@ footer button:focus-visible {
   padding: calc(var(--navbar-height) + 3rem) 0 4rem;
 }
 
+/* Titulky článkov sú celé vety. Globálne h1/h2 by ich na karte aj v detaile
+   roztiahli cez niekoľko riadkov. */
+.article-detail h1 {
+  font-size: clamp(1.65rem, 1.25rem + 1vw, 2.1rem);
+}
+
+.articles-list .card h2,
+.latest-articles .card h3 {
+  font-size: 1.125rem;
+  line-height: 1.35;
+}
+
 .article-meta {
   color: var(--text-muted);
   font-size: 0.95rem;
