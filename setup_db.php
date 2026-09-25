@@ -196,6 +196,43 @@ function seedPublishedArticleFromFile(PDO $pdo, string $articlePath): void {
     }
 }
 
+/** Prepíše title, excerpt a content existujúcich jazykových riadkov zo seed súboru. */
+function refreshPublishedArticleTextFromFile(PDO $pdo, string $articlePath): void {
+    if (!is_file($articlePath)) {
+        throw new RuntimeException('Chýba súbor článku ' . $articlePath);
+    }
+    $article = require $articlePath;
+    if (!is_array($article) || !isset($article['slug'], $article['translations']) || !is_array($article['translations'])) {
+        throw new RuntimeException('Súbor článku má neplatný tvar.');
+    }
+
+    $slug = (string) $article['slug'];
+    $update = $pdo->prepare(
+        'UPDATE articles
+         SET title = :title, excerpt = :excerpt, content = :content
+         WHERE slug = :slug AND lang = :lang'
+    );
+
+    foreach ($article['translations'] as $lang => $payload) {
+        if (!is_string($lang) || !isSupportedLanguage($lang) || !is_array($payload)) {
+            continue;
+        }
+        $title = trim((string) ($payload['title'] ?? ''));
+        $excerpt = strip_tags(trim((string) ($payload['excerpt'] ?? '')));
+        $content = sanitizeHtmlContent((string) ($payload['content'] ?? ''));
+        if ($title === '' || $content === '') {
+            throw new RuntimeException("Článok {$slug} ({$lang}) nemá názov alebo obsah.");
+        }
+        $update->execute([
+            ':title' => $title,
+            ':excerpt' => $excerpt,
+            ':content' => $content,
+            ':slug' => $slug,
+            ':lang' => $lang,
+        ]);
+    }
+}
+
 function applySchemaMigrations(PDO $pdo): void {
     // Poradie kľúčov určuje poradie aplikovania — drž ho chronologicky.
     $migrations = [
@@ -453,6 +490,18 @@ function applySchemaMigrations(PDO $pdo): void {
                  WHERE slug = 'arenibus-v-google-4177-testov'"
             );
             $stmt->execute();
+        },
+        '2026092501_anonymize_blog_personal_names' => static function (PDO $pdo): void {
+            foreach ([
+                'hypertenzia-oblicky-algoritmus-pre-vld.php',
+                'ai-recepcna-dvanast-otazok.php',
+                'ai-generovany-email-o-knihe-je-scam.php',
+            ] as $articleFile) {
+                refreshPublishedArticleTextFromFile(
+                    $pdo,
+                    __DIR__ . '/content/articles/' . $articleFile
+                );
+            }
         },
     ];
 
