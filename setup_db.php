@@ -509,6 +509,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/ai-book-trailer-ponuka-je-scam.php'
             );
         },
+        '2026092503_atlas_agents_cold_email_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/atlas-agents-studeny-email-z-icloud.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
