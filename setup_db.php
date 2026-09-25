@@ -503,6 +503,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 );
             }
         },
+        '2026092502_ai_book_trailer_scam_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/ai-book-trailer-ponuka-je-scam.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
