@@ -527,6 +527,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/awai-dvojstranovy-pribeh-za-1500.php'
             );
         },
+        '2026092506_good_sceptic_probabilia_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/dobry-skeptik-viac-nez-pochybnost.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
