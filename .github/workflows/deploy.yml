@@ -358,7 +358,7 @@ jobs:
           # by po nasadení neskontroloval nikto (Beh #24). `privacy.php` a
           # `terms.php` pribudli v Behu #26 — sú to GDPR stránky, ktorých 500
           # by smoke check inak prehliadol.
-          for PATH_SUFFIX in "/" "/contact.php" "/articles.php" "/sitemap.php" "/newsletter.php" "/login.php" "/privacy.php" "/terms.php"; do
+          for PATH_SUFFIX in "/" "/contact.php" "/articles.php" "/library.php" "/sitemap.php" "/newsletter.php" "/login.php" "/privacy.php" "/terms.php"; do
             URL="${SMOKE_BASE_URL%/}${PATH_SUFFIX}"
             CODE=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 5 "$URL" || echo "000")
             if [[ "$CODE" == "200" ]]; then

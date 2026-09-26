@@ -14,6 +14,7 @@ $messageCount = (int) $pdo->query("SELECT COUNT(*) FROM contact_messages")->fetc
 $unreadCount = (int) $pdo->query("SELECT COUNT(*) FROM contact_messages WHERE is_read = 0")->fetchColumn();
 $subscriberCount = (int) $pdo->query("SELECT COUNT(*) FROM newsletter_subscribers WHERE is_confirmed = 1")->fetchColumn();
 $adminCount = (int) $pdo->query("SELECT COUNT(*) FROM users WHERE is_admin = 1 AND is_active = 1")->fetchColumn();
+$libraryCount = count(libraryList());
 
 $baseUrl = getAppBaseUrl();
 $pageTitle = 'Administrácia | MUDr. Ľubomír Polaščín';
@@ -34,6 +35,7 @@ $canonicalUrl = $baseUrl . '/admin.php';
       <h1>Administračný panel</h1>
       <div class="admin-cards">
         <div class="card"><h2>Články</h2><p><strong><?= $publishedCount ?></strong> publikovaných / <?= $articleCount ?> celkovo</p><a href="admin_articles.php" class="btn btn-primary">Spravovať články</a></div>
+        <div class="card"><h2>Knižnica</h2><p><strong><?= $libraryCount ?></strong> textov na čítanie, stiahnutie a tlač.</p><a href="admin_library.php" class="btn btn-primary">Spravovať knižnicu</a></div>
         <div class="card"><h2>Obsahové bloky</h2><p>Spravovať sekcie a texty na hlavnej stránke.</p><a href="admin_content.php" class="btn btn-primary">Spravovať obsah</a></div>
         <div class="card"><h2>Správy</h2><p><strong><?= $unreadCount ?></strong> neprečítaných / <?= $messageCount ?> celkovo</p><a href="admin_contact.php" class="btn btn-primary">Zobraziť správy</a></div>
         <div class="card"><h2>Newsletter</h2><p><strong><?= $subscriberCount ?></strong> potvrdených odberateľov</p><a href="admin_newsletter.php" class="btn btn-primary">Zobraziť odberateľov</a></div>

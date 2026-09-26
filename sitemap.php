@@ -28,6 +28,7 @@ $languages = array_keys(appLanguages());
 $staticPages = [
     ['path' => 'index.php', 'changefreq' => 'weekly', 'priority' => '1.0'],
     ['path' => 'articles.php', 'changefreq' => 'weekly', 'priority' => '0.8'],
+    ['path' => 'library.php', 'changefreq' => 'weekly', 'priority' => '0.7'],
     ['path' => 'contact.php', 'changefreq' => 'monthly', 'priority' => '0.6'],
 ];
 
@@ -44,6 +45,27 @@ foreach ($staticPages as $page) {
             'changefreq' => $page['changefreq'],
             'priority' => $page['priority'],
             'alternates' => $alternates,
+        ];
+    }
+}
+
+foreach (libraryList() as $libraryWork) {
+    $librarySlug = (string) ($libraryWork['slug'] ?? '');
+    if ($librarySlug === '') {
+        continue;
+    }
+    $libraryFile = (string) ($libraryWork['path'] ?? '');
+    $libraryAlternates = [];
+    foreach ($languages as $language) {
+        $libraryAlternates[$language] = absoluteLangUrl($language, 'library.php', ['slug' => $librarySlug]);
+    }
+    foreach ($languages as $language) {
+        $urls[] = [
+            'loc' => $libraryAlternates[$language],
+            'lastmod' => sitemapLastModified($libraryFile),
+            'changefreq' => 'monthly',
+            'priority' => '0.6',
+            'alternates' => $libraryAlternates,
         ];
     }
 }

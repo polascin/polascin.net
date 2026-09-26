@@ -558,3 +558,669 @@ function slugify(string $text): string {
     $text = preg_replace('/-+/', '-', $text) ?? $text;
     return trim($text, '-');
 }
+
+const LIBRARY_UPLOAD_MAX_BYTES = 41943040;
+const LIBRARY_TEXT_RENDER_MAX_BYTES = 1572864;
+
+/**
+ * Koreňové priečinky knižnice.
+ *
+ * `shipped` ide s repozitárom a nasadením. `uploads` je v `private/`, ktorý
+ * rsync pri nasadení nemaže, takže text pridaný v administrácii na serveri
+ * zostane.
+ *
+ * @return array{shipped: string, uploads: string}
+ */
+function libraryRoots(): array {
+    $override = $GLOBALS['__library_roots_override'] ?? null;
+    if (is_array($override)) {
+        /** @var array{shipped: string, uploads: string} $override */
+        return $override;
+    }
+
+    return [
+        'shipped' => __DIR__ . '/content/library',
+        'uploads' => __DIR__ . '/private/library',
+    ];
+}
+
+/**
+ * @param array{shipped: string, uploads: string}|null $roots
+ */
+function libraryUseRoots(?array $roots): void {
+    if ($roots === null) {
+        unset($GLOBALS['__library_roots_override']);
+        return;
+    }
+    $GLOBALS['__library_roots_override'] = $roots;
+}
+
+/**
+ * @return array<string, array{mime: string, kind: string}>
+ */
+function libraryFileTypes(): array {
+    return [
+        'pdf' => ['mime' => 'application/pdf', 'kind' => 'pdf'],
+        'txt' => ['mime' => 'text/plain; charset=UTF-8', 'kind' => 'text'],
+        'md' => ['mime' => 'text/plain; charset=UTF-8', 'kind' => 'text'],
+        'markdown' => ['mime' => 'text/plain; charset=UTF-8', 'kind' => 'text'],
+        'html' => ['mime' => 'text/html; charset=UTF-8', 'kind' => 'html'],
+        'htm' => ['mime' => 'text/html; charset=UTF-8', 'kind' => 'html'],
+        'epub' => ['mime' => 'application/epub+zip', 'kind' => 'epub'],
+    ];
+}
+
+function libraryIsSlug(string $slug): bool {
+    return preg_match('/^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$/D', $slug) === 1;
+}
+
+function libraryPathIsInside(string $rootReal, string $pathReal): bool {
+    $rootReal = rtrim(str_replace('\\', '/', $rootReal), '/');
+    $pathReal = str_replace('\\', '/', $pathReal);
+    if (DIRECTORY_SEPARATOR === '\\') {
+        $rootReal = strtolower($rootReal);
+        $pathReal = strtolower($pathReal);
+    }
+
+    return $pathReal === $rootReal || str_starts_with($pathReal, $rootReal . '/');
+}
+
+function libraryIniBytes(string $value): int {
+    $value = trim($value);
+    if ($value === '' || preg_match('/^(\d+)([KMG])?$/i', $value, $matches) !== 1) {
+        return 0;
+    }
+    $bytes = (int) $matches[1];
+    $unit = strtoupper($matches[2] ?? '');
+    if ($unit === 'G') {
+        return $bytes * 1073741824;
+    }
+    if ($unit === 'M') {
+        return $bytes * 1048576;
+    }
+    if ($unit === 'K') {
+        return $bytes * 1024;
+    }
+
+    return $bytes;
+}
+
+function libraryUploadLimitBytes(): int {
+    $limit = LIBRARY_UPLOAD_MAX_BYTES;
+    foreach (['upload_max_filesize', 'post_max_size'] as $iniKey) {
+        $iniBytes = libraryIniBytes((string) ini_get($iniKey));
+        if ($iniBytes > 0 && $iniBytes < $limit) {
+            $limit = $iniBytes;
+        }
+    }
+
+    return $limit;
+}
+
+function libraryFormatSize(int $bytes): string {
+    if ($bytes < 1024) {
+        return $bytes . ' B';
+    }
+    if ($bytes < 1048576) {
+        return number_format($bytes / 1024, 0, '.', ' ') . ' kB';
+    }
+
+    return number_format($bytes / 1048576, 1, '.', ' ') . ' MB';
+}
+
+function libraryIsUtf8(string $value): bool {
+    return preg_match('//u', $value) === 1;
+}
+
+function libraryToUtf8(string $raw): string {
+    if (str_starts_with($raw, "\xEF\xBB\xBF")) {
+        $raw = substr($raw, 3);
+    }
+    if (libraryIsUtf8($raw)) {
+        return $raw;
+    }
+    $converted = function_exists('iconv')
+        ? @iconv('Windows-1250', 'UTF-8//IGNORE', $raw)
+        : false;
+
+    return is_string($converted) && $converted !== '' ? $converted : $raw;
+}
+
+function librarySampleLooksValid(string $sample, string $extension): bool {
+    if ($sample === '') {
+        return false;
+    }
+    $extension = strtolower($extension);
+    if ($extension === 'pdf') {
+        return str_starts_with($sample, '%PDF-');
+    }
+    if ($extension === 'epub') {
+        return str_starts_with($sample, "PK\x03\x04");
+    }
+    if (!isset(libraryFileTypes()[$extension])) {
+        return false;
+    }
+
+    return !str_contains($sample, "\0");
+}
+
+function libraryFileLooksValid(string $path, string $extension): bool {
+    $handle = @fopen($path, 'rb');
+    if ($handle === false) {
+        return false;
+    }
+    $sample = fread($handle, 8192);
+    fclose($handle);
+
+    return is_string($sample) && librarySampleLooksValid($sample, $extension);
+}
+
+/**
+ * @return array<string, mixed>|null
+ */
+function libraryLoadWork(string $directory, string $source): ?array {
+    $slug = basename(str_replace('\\', '/', $directory));
+    if (!libraryIsSlug($slug) || ($source !== 'shipped' && $source !== 'uploads')) {
+        return null;
+    }
+
+    $metaPath = $directory . DIRECTORY_SEPARATOR . 'work.json';
+    if (!is_file($metaPath) || is_link($metaPath)) {
+        return null;
+    }
+    $rawMeta = file_get_contents($metaPath);
+    if (!is_string($rawMeta) || trim($rawMeta) === '') {
+        return null;
+    }
+    try {
+        $meta = json_decode($rawMeta, true, 16, JSON_THROW_ON_ERROR);
+    } catch (JsonException) {
+        return null;
+    }
+    if (!is_array($meta)) {
+        return null;
+    }
+
+    $title = trim(str_replace(["\0", "\r"], '', (string) ($meta['title'] ?? '')));
+    if ($title === '' || appTextLength($title) > 255 || !libraryIsUtf8($title)) {
+        return null;
+    }
+    $author = trim(str_replace(["\0", "\r"], '', (string) ($meta['author'] ?? '')));
+    $description = trim(str_replace(["\0", "\r"], '', (string) ($meta['description'] ?? '')));
+    if (
+        appTextLength($author) > 255
+        || appTextLength($description) > 4000
+        || !libraryIsUtf8($author)
+        || !libraryIsUtf8($description)
+    ) {
+        return null;
+    }
+
+    $filename = (string) ($meta['filename'] ?? '');
+    if ($filename === '' || basename(str_replace('\\', '/', $filename)) !== $filename || str_contains($filename, "\0")) {
+        return null;
+    }
+    $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+    $types = libraryFileTypes();
+    if (!isset($types[$extension])) {
+        return null;
+    }
+
+    $filePath = $directory . DIRECTORY_SEPARATOR . $filename;
+    if (!is_file($filePath) || is_link($filePath)) {
+        return null;
+    }
+    $rootReal = realpath(dirname($directory));
+    $directoryReal = realpath($directory);
+    $fileReal = realpath($filePath);
+    if (
+        $rootReal === false
+        || $directoryReal === false
+        || $fileReal === false
+        || !libraryPathIsInside($rootReal, $directoryReal)
+        || !libraryPathIsInside($directoryReal, $fileReal)
+    ) {
+        return null;
+    }
+
+    $bytes = filesize($fileReal);
+    if ($bytes === false || $bytes < 1) {
+        return null;
+    }
+    if (!libraryFileLooksValid($fileReal, $extension)) {
+        return null;
+    }
+
+    $addedAt = (string) ($meta['added_at'] ?? '');
+    if (preg_match('/^\d{4}-\d{2}-\d{2}$/D', $addedAt) !== 1) {
+        $addedAt = date('Y-m-d', (int) filemtime($fileReal));
+    }
+
+    $originalName = trim(str_replace(["\0", "\r", "\n", '"', '\\', '/'], '', (string) ($meta['original_name'] ?? '')));
+
+    return [
+        'slug' => $slug,
+        'title' => $title,
+        'author' => $author,
+        'description' => $description,
+        'added_at' => $addedAt,
+        'filename' => $filename,
+        'original_name' => $originalName,
+        'extension' => $extension,
+        'kind' => $types[$extension]['kind'],
+        'mime' => $types[$extension]['mime'],
+        'bytes' => (int) $bytes,
+        'path' => $fileReal,
+        'source' => $source,
+    ];
+}
+
+function librarySlugTaken(string $slug): bool {
+    if (!libraryIsSlug($slug)) {
+        return true;
+    }
+    foreach (libraryRoots() as $root) {
+        if (file_exists($root . DIRECTORY_SEPARATOR . $slug)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function libraryUniqueSlug(string $title): string {
+    $base = trim(substr(slugify($title), 0, 60), '-');
+    if (!libraryIsSlug($base)) {
+        $base = 'text';
+    }
+    if (!librarySlugTaken($base)) {
+        return $base;
+    }
+
+    for ($number = 2; $number <= 999; $number++) {
+        $suffix = '-' . $number;
+        $trimmed = trim(substr($base, 0, 64 - strlen($suffix)), '-');
+        if (!libraryIsSlug($trimmed)) {
+            $trimmed = 'text';
+        }
+        $candidate = $trimmed . $suffix;
+        if (libraryIsSlug($candidate) && !librarySlugTaken($candidate)) {
+            return $candidate;
+        }
+    }
+
+    return 'text-' . bin2hex(random_bytes(3));
+}
+
+/**
+ * @return list<array<string, mixed>>
+ */
+function libraryList(): array {
+    $bySlug = [];
+    foreach (libraryRoots() as $source => $root) {
+        if (!is_dir($root)) {
+            continue;
+        }
+        $entries = scandir($root);
+        if (!is_array($entries)) {
+            continue;
+        }
+        foreach ($entries as $entry) {
+            if ($entry === '.' || $entry === '..' || str_starts_with($entry, '.')) {
+                continue;
+            }
+            $directory = $root . DIRECTORY_SEPARATOR . $entry;
+            if (!is_dir($directory) || is_link($directory)) {
+                continue;
+            }
+            $work = libraryLoadWork($directory, $source);
+            if ($work === null) {
+                continue;
+            }
+            if (!isset($bySlug[$work['slug']]) || $source === 'uploads') {
+                $bySlug[$work['slug']] = $work;
+            }
+        }
+    }
+
+    $items = array_values($bySlug);
+    usort($items, static function (array $left, array $right): int {
+        $byDate = strcmp((string) $right['added_at'], (string) $left['added_at']);
+        if ($byDate !== 0) {
+            return $byDate;
+        }
+
+        return strcasecmp((string) $left['title'], (string) $right['title']);
+    });
+
+    return $items;
+}
+
+/**
+ * @return array<string, mixed>|null
+ */
+function libraryFind(string $slug): ?array {
+    if (!libraryIsSlug($slug)) {
+        return null;
+    }
+    foreach (['uploads', 'shipped'] as $source) {
+        $roots = libraryRoots();
+        if (!isset($roots[$source])) {
+            continue;
+        }
+        $directory = $roots[$source] . DIRECTORY_SEPARATOR . $slug;
+        if (!is_dir($directory) || is_link($directory)) {
+            continue;
+        }
+        $work = libraryLoadWork($directory, $source);
+        if ($work !== null) {
+            return $work;
+        }
+    }
+
+    return null;
+}
+
+function libraryDownloadName(array $work): string {
+    $extension = (string) ($work['extension'] ?? '');
+    $fallback = (string) ($work['slug'] ?? 'text') . ($extension !== '' ? '.' . $extension : '');
+    $candidate = (string) ($work['original_name'] ?? '');
+    if (
+        $candidate === ''
+        || preg_match('/\.php/i', $candidate) === 1
+        || strtolower(pathinfo($candidate, PATHINFO_EXTENSION)) !== $extension
+        || preg_match('/^[\p{L}\p{N}._ ()-]{1,180}$/u', $candidate) !== 1
+    ) {
+        return $fallback;
+    }
+
+    return $candidate;
+}
+
+function libraryContentDisposition(bool $inline, string $downloadName): string {
+    $downloadName = str_replace(["\0", "\r", "\n", '"', '\\', '/'], '', $downloadName);
+    if ($downloadName === '' || $downloadName === '.' || $downloadName === '..') {
+        $downloadName = 'text.bin';
+    }
+    $ascii = preg_replace('/[^A-Za-z0-9._-]+/', '_', $downloadName) ?? 'file';
+    $ascii = trim($ascii, '._');
+    if ($ascii === '') {
+        $ascii = 'file';
+    }
+    $type = $inline ? 'inline' : 'attachment';
+
+    return $type . '; filename="' . $ascii . '"; filename*=UTF-8\'\'' . rawurlencode($downloadName);
+}
+
+function libraryFileUrl(string $slug, bool $download): string {
+    $params = ['slug' => $slug];
+    if ($download) {
+        $params['download'] = '1';
+    }
+
+    return 'library_file.php?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
+}
+
+function libraryMarkdownInline(string $escaped): string {
+    $withLinks = preg_replace_callback(
+        '~\[([^\]\n]+)\]\((https?://[^\s)]+)\)~',
+        static function (array $matches): string {
+            return '<a href="' . $matches[2] . '" rel="noopener noreferrer">' . $matches[1] . '</a>';
+        },
+        $escaped
+    );
+    $escaped = is_string($withLinks) ? $withLinks : $escaped;
+    $withStrong = preg_replace('~\*\*([^*\n]+)\*\*~', '<strong>$1</strong>', $escaped);
+    $escaped = is_string($withStrong) ? $withStrong : $escaped;
+    $withEm = preg_replace('~(?<!\*)\*([^*\n]+)\*(?!\*)~', '<em>$1</em>', $escaped);
+
+    return is_string($withEm) ? $withEm : $escaped;
+}
+
+function libraryRenderMarkdown(string $text): string {
+    $text = str_replace(["\r\n", "\r"], "\n", libraryToUtf8($text));
+    $escaped = htmlspecialchars($text, ENT_QUOTES | ENT_HTML5 | ENT_SUBSTITUTE, 'UTF-8');
+    $lines = explode("\n", $escaped);
+    $html = '';
+    $inList = false;
+    $paragraph = [];
+    $flushParagraph = static function () use (&$html, &$paragraph): void {
+        if ($paragraph === []) {
+            return;
+        }
+        $html .= '<p>' . libraryMarkdownInline(implode(' ', $paragraph)) . '</p>';
+        $paragraph = [];
+    };
+
+    foreach ($lines as $line) {
+        if (preg_match('/^(#{1,3}) (.+)$/', $line, $heading) === 1) {
+            $flushParagraph();
+            if ($inList) {
+                $html .= '</ul>';
+                $inList = false;
+            }
+            $level = strlen($heading[1]) + 1;
+            $html .= '<h' . $level . '>' . libraryMarkdownInline($heading[2]) . '</h' . $level . '>';
+            continue;
+        }
+        if (preg_match('/^[-*] (.+)$/', $line, $item) === 1) {
+            $flushParagraph();
+            if (!$inList) {
+                $html .= '<ul>';
+                $inList = true;
+            }
+            $html .= '<li>' . libraryMarkdownInline($item[1]) . '</li>';
+            continue;
+        }
+        if (trim($line) === '') {
+            $flushParagraph();
+            if ($inList) {
+                $html .= '</ul>';
+                $inList = false;
+            }
+            continue;
+        }
+        if ($inList) {
+            $html .= '</ul>';
+            $inList = false;
+        }
+        $paragraph[] = $line;
+    }
+    $flushParagraph();
+    if ($inList) {
+        $html .= '</ul>';
+    }
+
+    return $html;
+}
+
+function libraryRenderPlainText(string $text): string {
+    $text = libraryToUtf8($text);
+
+    return nl2br(htmlspecialchars($text, ENT_QUOTES | ENT_HTML5 | ENT_SUBSTITUTE, 'UTF-8'), false);
+}
+
+/**
+ * @param array<string, mixed> $work
+ */
+function libraryReadableHtml(array $work): ?string {
+    $kind = (string) ($work['kind'] ?? '');
+    if ($kind !== 'text' && $kind !== 'html') {
+        return null;
+    }
+    if ((int) ($work['bytes'] ?? 0) > LIBRARY_TEXT_RENDER_MAX_BYTES) {
+        return null;
+    }
+    $path = (string) ($work['path'] ?? '');
+    if ($path === '' || !is_file($path) || is_link($path)) {
+        return null;
+    }
+    $raw = file_get_contents($path);
+    if (!is_string($raw)) {
+        return null;
+    }
+    if ($kind === 'html') {
+        return sanitizeHtmlContent(libraryToUtf8($raw));
+    }
+    $extension = (string) ($work['extension'] ?? '');
+    if ($extension === 'md' || $extension === 'markdown') {
+        return libraryRenderMarkdown($raw);
+    }
+
+    return libraryRenderPlainText($raw);
+}
+
+/**
+ * @param array<string, mixed> $meta
+ * @return array{ok: bool, error: string, slug: string}
+ */
+function libraryInstallWork(string $rootKey, string $title, string $extension, string $contents, array $meta = []): array {
+    $failed = static fn(string $error): array => ['ok' => false, 'error' => $error, 'slug' => ''];
+    if ($rootKey !== 'shipped' && $rootKey !== 'uploads') {
+        return $failed('Neplatné umiestnenie.');
+    }
+    $extension = strtolower($extension);
+    if (!isset(libraryFileTypes()[$extension]) || !librarySampleLooksValid($contents, $extension)) {
+        return $failed('Súbor nie je podporovaný alebo jeho obsah nezodpovedá typu.');
+    }
+    $title = trim(str_replace(["\0", "\r"], '', $title));
+    $author = trim(str_replace(["\0", "\r"], '', (string) ($meta['author'] ?? '')));
+    $description = trim(str_replace(["\0", "\r"], '', (string) ($meta['description'] ?? '')));
+    if ($title === '' || appTextLength($title) > 255 || !libraryIsUtf8($title)) {
+        return $failed('Názov musí mať 1 až 255 znakov.');
+    }
+    if (appTextLength($author) > 255 || appTextLength($description) > 4000 || !libraryIsUtf8($author) || !libraryIsUtf8($description)) {
+        return $failed('Autor alebo popis je príliš dlhý.');
+    }
+
+    $roots = libraryRoots();
+    $root = $roots[$rootKey];
+    if (!is_dir($root) && !@mkdir($root, 0755, true) && !is_dir($root)) {
+        return $failed('Priečinok knižnice sa nepodarilo vytvoriť.');
+    }
+    $slug = libraryUniqueSlug($title);
+    $directory = $root . DIRECTORY_SEPARATOR . $slug;
+    if (file_exists($directory) || !@mkdir($directory, 0755)) {
+        return $failed('Položku sa nepodarilo uložiť.');
+    }
+    $stored = $slug . '.' . $extension;
+    $destination = $directory . DIRECTORY_SEPARATOR . $stored;
+    if (file_put_contents($destination, $contents, LOCK_EX) === false) {
+        @rmdir($directory);
+        return $failed('Súbor sa nepodarilo uložiť.');
+    }
+
+    $addedAt = (string) ($meta['added_at'] ?? date('Y-m-d'));
+    if (preg_match('/^\d{4}-\d{2}-\d{2}$/D', $addedAt) !== 1) {
+        $addedAt = date('Y-m-d');
+    }
+    $originalName = trim(str_replace(["\0", "\r", "\n", '"', '\\', '/'], '', (string) ($meta['original_name'] ?? '')));
+    $record = [
+        'title' => $title,
+        'author' => $author,
+        'description' => $description,
+        'added_at' => $addedAt,
+        'filename' => $stored,
+        'original_name' => $originalName,
+    ];
+    try {
+        $json = json_encode($record, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR);
+    } catch (JsonException) {
+        @unlink($destination);
+        @rmdir($directory);
+        return $failed('Údaje o texte sa nepodarilo uložiť.');
+    }
+    if (file_put_contents($directory . DIRECTORY_SEPARATOR . 'work.json', $json . "\n", LOCK_EX) === false) {
+        @unlink($destination);
+        @rmdir($directory);
+        return $failed('Údaje o texte sa nepodarilo uložiť.');
+    }
+
+    return ['ok' => true, 'error' => '', 'slug' => $slug];
+}
+
+/**
+ * @param array<string, mixed> $file
+ * @return array{ok: bool, error: string, slug: string}
+ */
+function librarySaveUpload(string $title, string $author, string $description, array $file): array {
+    $failed = static fn(string $error): array => ['ok' => false, 'error' => $error, 'slug' => ''];
+    $uploadError = (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE);
+    if ($uploadError === UPLOAD_ERR_INI_SIZE || $uploadError === UPLOAD_ERR_FORM_SIZE) {
+        return $failed('Súbor je väčší, než dovoľuje server (' . libraryFormatSize(libraryUploadLimitBytes()) . ').');
+    }
+    if ($uploadError === UPLOAD_ERR_NO_FILE) {
+        return $failed('Vyberte súbor.');
+    }
+    if ($uploadError !== UPLOAD_ERR_OK) {
+        return $failed('Nahrávanie sa nepodarilo.');
+    }
+
+    $size = (int) ($file['size'] ?? 0);
+    $limit = libraryUploadLimitBytes();
+    if ($size < 1 || $size > $limit) {
+        return $failed('Súbor je prázdny alebo väčší ako ' . libraryFormatSize($limit) . '.');
+    }
+    $temporary = (string) ($file['tmp_name'] ?? '');
+    if ($temporary === '' || !is_uploaded_file($temporary)) {
+        return $failed('Nahrávanie sa nepodarilo.');
+    }
+
+    $original = basename(str_replace('\\', '/', (string) ($file['name'] ?? '')));
+    $extension = strtolower(pathinfo($original, PATHINFO_EXTENSION));
+    if (!isset(libraryFileTypes()[$extension])) {
+        return $failed('Povolené sú súbory PDF, TXT, Markdown, HTML a EPUB.');
+    }
+    if (!libraryFileLooksValid($temporary, $extension)) {
+        return $failed('Obsah súboru nezodpovedá jeho typu.');
+    }
+    $contents = file_get_contents($temporary);
+    if (!is_string($contents)) {
+        return $failed('Súbor sa nepodarilo prečítať.');
+    }
+
+    return libraryInstallWork('uploads', $title, $extension, $contents, [
+        'author' => $author,
+        'description' => $description,
+        'original_name' => $original,
+        'added_at' => date('Y-m-d'),
+    ]);
+}
+
+function libraryDeleteUpload(string $slug): bool {
+    if (!libraryIsSlug($slug)) {
+        return false;
+    }
+    $roots = libraryRoots();
+    $root = $roots['uploads'] ?? '';
+    if ($root === '' || !is_dir($root)) {
+        return false;
+    }
+    $directory = $root . DIRECTORY_SEPARATOR . $slug;
+    $rootReal = realpath($root);
+    $directoryReal = realpath($directory);
+    if (
+        $rootReal === false
+        || $directoryReal === false
+        || is_link($directory)
+        || !libraryPathIsInside($rootReal, $directoryReal)
+    ) {
+        return false;
+    }
+
+    $entries = scandir($directoryReal);
+    if (!is_array($entries)) {
+        return false;
+    }
+    foreach ($entries as $entry) {
+        if ($entry === '.' || $entry === '..') {
+            continue;
+        }
+        $path = $directoryReal . DIRECTORY_SEPARATOR . $entry;
+        if (is_link($path) || !is_file($path) || !unlink($path)) {
+            return false;
+        }
+    }
+
+    return rmdir($directoryReal);
+}

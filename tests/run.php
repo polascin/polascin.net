@@ -507,7 +507,7 @@ expectTrue(
 );
 // Bod 5 sekcie „Dokončenie“ v `.doaudit.md` vymenúva kľúčové URL; keďže ich
 // nočná rutina overiť nemôže, musia byť v smoke checku (Beh #24).
-foreach (['"/"', '"/articles.php"', '"/contact.php"', '"/newsletter.php"', '"/sitemap.php"', '"/login.php"', '"/privacy.php"', '"/terms.php"'] as $smokeUrl) {
+foreach (['"/"', '"/articles.php"', '"/library.php"', '"/contact.php"', '"/newsletter.php"', '"/sitemap.php"', '"/login.php"', '"/privacy.php"', '"/terms.php"'] as $smokeUrl) {
     expectTrue(
         str_contains($deployWorkflow, $smokeUrl),
         'Smoke check po nasadení musí overiť URL ' . trim($smokeUrl, '"')
@@ -1800,6 +1800,131 @@ $pipelineRule = (string) file_get_contents(dirname(__DIR__) . '/.cursor/rules/bl
 expectTrue(
     str_contains($pipelineRule, 'scripts/make_og_covers.php'),
     'Pipeline blogu musí generovanie OG obálky spomínať, inak ju ďalší článok vynechá'
+);
+
+function libraryTestRemoveTree(string $dir): void {
+    if (!is_dir($dir)) {
+        return;
+    }
+    $items = scandir($dir);
+    if (!is_array($items)) {
+        return;
+    }
+    foreach ($items as $item) {
+        if ($item === '.' || $item === '..') {
+            continue;
+        }
+        $path = $dir . DIRECTORY_SEPARATOR . $item;
+        if (is_dir($path) && !is_link($path)) {
+            libraryTestRemoveTree($path);
+            continue;
+        }
+        unlink($path);
+    }
+    rmdir($dir);
+}
+
+$libraryTestRoot = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'polascin-library-' . bin2hex(random_bytes(4));
+$libraryShipped = $libraryTestRoot . DIRECTORY_SEPARATOR . 'shipped';
+$libraryUploads = $libraryTestRoot . DIRECTORY_SEPARATOR . 'uploads';
+try {
+    libraryUseRoots([
+        'shipped' => $libraryShipped,
+        'uploads' => $libraryUploads,
+    ]);
+
+    expectSame(null, libraryFind('..'), 'Knižnica nesmie načítať slug s cestou nahor');
+    expectSame(null, libraryFind('Nie'), 'Knižnica nesmie načítať slug s veľkými písmenami');
+
+    $libraryText = libraryInstallWork('shipped', 'Poznámka', 'md', "# Nadpis\n\nAhoj <script>alert(1)</script> a [web](https://polascin.net/).\n");
+    expectTrue($libraryText['ok'], 'Markdown sa musí dať uložiť');
+    $libraryTextWork = libraryFind((string) $libraryText['slug']);
+    expectTrue(is_array($libraryTextWork), 'Uložený markdown sa musí nájsť');
+    $libraryRendered = is_array($libraryTextWork) ? (string) libraryReadableHtml($libraryTextWork) : '';
+    expectTrue(str_contains($libraryRendered, '<h2>Nadpis</h2>'), 'Markdown nadpis sa musí vykresliť');
+    expectTrue(str_contains($libraryRendered, 'https://polascin.net/'), 'Markdown odkaz musí zostať');
+    expectTrue(!str_contains($libraryRendered, '<script>'), 'Markdown nesmie prepustiť HTML zo súboru');
+    expectTrue(str_contains($libraryRendered, '&lt;script&gt;'), 'Markdown musí HTML escapovať');
+
+    $libraryHtml = libraryInstallWork('uploads', 'Stránka', 'html', '<p>Ahoj</p><script>alert(1)</script>');
+    expectTrue($libraryHtml['ok'], 'HTML sa musí dať uložiť');
+    $libraryHtmlWork = libraryFind((string) $libraryHtml['slug']);
+    $libraryHtmlRendered = is_array($libraryHtmlWork) ? (string) libraryReadableHtml($libraryHtmlWork) : '';
+    expectTrue(str_contains($libraryHtmlRendered, 'Ahoj'), 'Sanitizované HTML musí ponechať text');
+    expectTrue(!str_contains($libraryHtmlRendered, '<script'), 'Sanitizované HTML nesmie obsahovať script');
+    expectTrue(!str_contains($libraryHtmlRendered, 'alert'), 'Sanitizované HTML nesmie ponechať obsah scriptu');
+
+    $libraryPdf = libraryInstallWork('shipped', 'Dokument', 'pdf', "%PDF-1.4\n1 0 obj\n");
+    expectTrue($libraryPdf['ok'], 'PDF sa musí dať uložiť');
+    $libraryPdfWork = libraryFind((string) $libraryPdf['slug']);
+    expectSame('pdf', is_array($libraryPdfWork) ? (string) $libraryPdfWork['kind'] : '', 'PDF musí mať druh pdf');
+    expectSame(null, is_array($libraryPdfWork) ? libraryReadableHtml($libraryPdfWork) : 'x', 'PDF sa nesmie vykresliť ako HTML');
+
+    expectTrue(!libraryInstallWork('shipped', 'Binárka', 'txt', "text\0skryty")['ok'], 'Text s nulovým bajtom sa nesmie uložiť');
+    expectTrue(!libraryInstallWork('shipped', 'Falošné PDF', 'pdf', '<html>nie pdf</html>')['ok'], 'Súbor bez PDF hlavičky sa nesmie uložiť ako PDF');
+
+    $librarySecretDir = $libraryShipped . DIRECTORY_SEPARATOR . 'tajne';
+    mkdir($librarySecretDir, 0755, true);
+    file_put_contents($libraryShipped . DIRECTORY_SEPARATOR . 'secret.txt', 'TAJOMSTVO');
+    file_put_contents(
+        $librarySecretDir . DIRECTORY_SEPARATOR . 'work.json',
+        json_encode([
+            'title' => 'Únik',
+            'filename' => '../secret.txt',
+            'added_at' => '2026-09-26',
+        ], JSON_THROW_ON_ERROR)
+    );
+    expectSame(null, libraryFind('tajne'), 'Knižnica nesmie čítať súbor mimo priečinka diela');
+    expectSame([], array_values(array_filter(
+        libraryList(),
+        static fn(array $item): bool => (string) $item['slug'] === 'tajne'
+    )), 'Neplatné dielo nesmie byť v zozname');
+
+    $libraryUpload = libraryInstallWork('uploads', 'Nahraté', 'txt', "Riadok\n");
+    expectTrue($libraryUpload['ok'] && libraryDeleteUpload((string) $libraryUpload['slug']), 'Nahratý text sa musí dať zmazať');
+    expectSame(null, libraryFind((string) $libraryUpload['slug']), 'Zmazaný text sa už nesmie nájsť');
+    expectTrue(!libraryDeleteUpload((string) $libraryText['slug']), 'Text nasadený s webom sa z administrácie nesmie zmazať');
+    expectTrue(is_array(libraryFind((string) $libraryText['slug'])), 'Text nasadený s webom musí po pokuse o zmazanie zostať');
+
+    $libraryDisposition = libraryContentDisposition(false, "zly\r\nX-Injected: 1.pdf");
+    expectTrue(!str_contains($libraryDisposition, "\r") && !str_contains($libraryDisposition, "\n"), 'Content-Disposition nesmie obsahovať nový riadok');
+    expectTrue(str_contains($libraryDisposition, 'attachment;'), 'Sťahovanie musí byť príloha');
+    expectSame(
+        'bezpecne.pdf',
+        libraryDownloadName([
+            'slug' => 'bezpecne',
+            'extension' => 'pdf',
+            'original_name' => 'evil.php.pdf',
+        ]),
+        'Názov na stiahnutie nesmie obsahovať .php'
+    );
+    expectTrue(str_contains(libraryFileUrl('poznamka', true), 'download=1'), 'Odkaz na stiahnutie musí žiadať prílohu');
+} finally {
+    libraryUseRoots(null);
+    libraryTestRemoveTree($libraryTestRoot);
+}
+
+$libraryPage = (string) file_get_contents(dirname(__DIR__) . '/library.php');
+$libraryFilePage = (string) file_get_contents(dirname(__DIR__) . '/library_file.php');
+$libraryAdminPage = (string) file_get_contents(dirname(__DIR__) . '/admin_library.php');
+expectTrue(str_contains($libraryPage, 'data-print'), 'Čítacia stránka musí mať tlačidlo tlače');
+expectTrue(str_contains($libraryPage, 'libraryReadableHtml'), 'Čítacia stránka musí text vykresliť sanitizovane');
+expectTrue(
+    str_contains($libraryFilePage, 'X-Content-Type-Options: nosniff')
+        && str_contains($libraryFilePage, 'libraryContentDisposition')
+        && str_contains($libraryFilePage, "\$kind === 'html'")
+        && str_contains($libraryFilePage, 'text/plain; charset=UTF-8'),
+    'Súbor knižnice sa musí podávať s nosniff a HTML nie ako stránka'
+);
+expectTrue(str_contains($libraryAdminPage, 'requireAdmin()'), 'Správa knižnice musí byť len pre administrátora');
+expectTrue(str_contains($libraryAdminPage, 'validateCsrfToken'), 'Správa knižnice musí overovať CSRF');
+expectTrue(
+    str_contains((string) file_get_contents(dirname(__DIR__) . '/sitemap.php'), 'libraryList()'),
+    'Sitemap musí uvádzať diela knižnice'
+);
+expectTrue(
+    str_contains((string) file_get_contents(dirname(__DIR__) . '/main_nav.php'), "t('nav.library')"),
+    'Navigácia musí obsahovať knižnicu'
 );
 
 if ($failures !== []) {

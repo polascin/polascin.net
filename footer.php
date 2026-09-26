@@ -79,6 +79,7 @@ $footerBeat = appSwatchBeat($footerUpdateTs);
     <p><?= te('footer.copyright', ['year' => $year]) ?></p>
     <p class="footer-meta">
       <a href="<?= htmlspecialchars(langUrl($footerLang, 'index.php'), ENT_QUOTES, 'UTF-8') ?>">polascin.net</a> |
+      <a href="<?= htmlspecialchars(langUrl($footerLang, 'library.php'), ENT_QUOTES, 'UTF-8') ?>"><?= te('home.link_library') ?></a> |
       <a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer">books.polascin.net</a> |
       <a href="<?= htmlspecialchars(langUrl($footerLang, '/privacy'), ENT_QUOTES, 'UTF-8') ?>"><?= te('footer.privacy') ?></a> |
       <a href="<?= htmlspecialchars(langUrl($footerLang, '/terms'), ENT_QUOTES, 'UTF-8') ?>"><?= te('footer.terms') ?></a> |

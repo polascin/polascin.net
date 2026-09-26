@@ -230,6 +230,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
         <a href="https://polascin.sk/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe" aria-hidden="true"></i> polascin.sk</a>
         <a href="https://nephrosite.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-hospital-user" aria-hidden="true"></i> <?= te('home.link_nephrosite') ?></a>
         <a href="https://nefro.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-microscope" aria-hidden="true"></i> Nefro-projekt Slovensko</a>
+        <a href="<?= htmlspecialchars(langUrl($lang, 'library.php'), ENT_QUOTES, 'UTF-8') ?>" class="pill-link"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_library') ?></a>
         <a href="https://books.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book-open" aria-hidden="true"></i> books.polascin.net</a>
         <a href="https://alphagrab.de/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-ticket" aria-hidden="true"></i> AlphaGrab</a>
         <a href="https://arenibus.polascin.net/" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i> Arenibus</a>
