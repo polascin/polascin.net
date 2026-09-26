@@ -21,6 +21,7 @@ DirectoryIndex index.php index.html
     Header always set X-Permitted-Cross-Domain-Policies "none"
     # Výhrada proti použitiu obsahu na tréning AI (W3C TDM Reservation).
     Header always set TDM-Reservation "1"
+    Header always set X-Robots-Tag "noai, noimageai"
     Header always unset X-Powered-By
     Header unset X-Powered-By
 

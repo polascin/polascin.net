@@ -14,7 +14,7 @@ if (!is_array($work)) {
     http_response_code(404);
     header('Content-Type: text/plain; charset=UTF-8');
     header('X-Content-Type-Options: nosniff');
-    header('X-Robots-Tag: noindex');
+    header('X-Robots-Tag: noindex, noai, noimageai');
     echo 'Not found';
     exit;
 }
@@ -24,7 +24,7 @@ if ($handle === false) {
     http_response_code(404);
     header('Content-Type: text/plain; charset=UTF-8');
     header('X-Content-Type-Options: nosniff');
-    header('X-Robots-Tag: noindex');
+    header('X-Robots-Tag: noindex, noai, noimageai');
     echo 'Not found';
     exit;
 }
@@ -44,7 +44,9 @@ while (ob_get_level() > 0) {
 
 header('Content-Type: ' . $mime);
 header('X-Content-Type-Options: nosniff');
-header('X-Robots-Tag: noindex');
+// Súbor knižnice nie je samostatná stránka vo výsledkoch; zároveň nesmie ísť
+// do tréningu (noai / noimageai dopĺňa TDM-Reservation z auth.php).
+header('X-Robots-Tag: noindex, noai, noimageai');
 header('Content-Disposition: ' . libraryContentDisposition($inlinePdf, libraryDownloadName($work)));
 header('Content-Length: ' . (string) $work['bytes']);
 header('Cache-Control: private, max-age=3600');

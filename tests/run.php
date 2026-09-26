@@ -495,6 +495,7 @@ foreach (
         'x-permitted-cross-domain-policies',
         'content-security-policy',
         'tdm-reservation',
+        'x-robots-tag',
     ] as $smokeHeader
 ) {
     expectTrue(
@@ -1470,6 +1471,7 @@ $aiTrainingAgents = [
     'Applebot-Extended',
     'Bytespider',
     'Meta-ExternalAgent',
+    'FacebookBot',
     'Amazonbot',
     'cohere-ai',
     'Diffbot',
@@ -1493,26 +1495,31 @@ expectTrue(
     'robots.txt nesmie zakázať vyhľadávací Googlebot'
 );
 expectTrue(
-    str_contains($authSource, "header('TDM-Reservation: 1');"),
-    'Každá PHP odpoveď musí niesť výhradu TDM Reservation'
+    str_contains($authSource, "header('TDM-Reservation: 1');")
+        && str_contains($authSource, "header('X-Robots-Tag: noai, noimageai');"),
+    'Každá PHP odpoveď musí niesť výhradu TDM Reservation a noai'
 );
 expectTrue(
-    str_contains((string) file_get_contents(dirname(__DIR__) . '/head_meta.php'), 'name="tdm-reservation" content="1"'),
-    'HTML hlavička musí niesť meta tdm-reservation'
+    str_contains((string) file_get_contents(dirname(__DIR__) . '/head_meta.php'), 'name="tdm-reservation" content="1"')
+        && str_contains((string) file_get_contents(dirname(__DIR__) . '/head_meta.php'), 'content="noai, noimageai"'),
+    'HTML hlavička musí niesť meta tdm-reservation aj noai'
 );
 expectTrue(
-    str_contains($htaccessRules, 'Header always set TDM-Reservation "1"'),
-    '.htaccess musí výhradu TDM posielať aj na statické súbory'
+    str_contains($htaccessRules, 'Header always set TDM-Reservation "1"')
+        && str_contains($htaccessRules, 'Header always set X-Robots-Tag "noai, noimageai"'),
+    '.htaccess musí výhradu TDM a noai posielať aj na statické súbory'
 );
 foreach (['index.html', 'privacy.html', 'terms.html'] as $tdmFallback) {
     expectTrue(
-        str_contains((string) file_get_contents(dirname(__DIR__) . '/' . $tdmFallback), 'name="tdm-reservation" content="1"'),
-        "{$tdmFallback} musí niesť meta tdm-reservation"
+        str_contains((string) file_get_contents(dirname(__DIR__) . '/' . $tdmFallback), 'name="tdm-reservation" content="1"')
+            && str_contains((string) file_get_contents(dirname(__DIR__) . '/' . $tdmFallback), 'content="noai, noimageai"'),
+        "{$tdmFallback} musí niesť meta tdm-reservation aj noai"
     );
 }
 expectTrue(
-    str_contains((string) file_get_contents(dirname(__DIR__) . '/library_file.php'), "require_once __DIR__ . '/auth.php';"),
-    'Súbor knižnice musí prejsť cez auth.php, aby niesol výhradu TDM'
+    str_contains((string) file_get_contents(dirname(__DIR__) . '/library_file.php'), "require_once __DIR__ . '/auth.php';")
+        && str_contains((string) file_get_contents(dirname(__DIR__) . '/library_file.php'), 'noindex, noai, noimageai'),
+    'Súbor knižnice musí niesť TDM cez auth.php a noindex/noai na X-Robots-Tag'
 );
 
 // Nočná kontrola sa musí spustiť pred behom auditnej rutiny (00:00 UTC), inak

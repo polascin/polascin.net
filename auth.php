@@ -82,6 +82,10 @@ function sendSecurityHeaders(): void {
     // Výhrada práv k textovému a dátovému dolovaniu (W3C TDM Reservation).
     // Platí pre stránky aj pre súbory knižnice. Bežné vyhľadávanie nemení.
     header('TDM-Reservation: 1');
+    // Komunitný signál proti tréningu modelov (noai / noimageai).
+    // Google Search ostáva na Googlebot; tréning Gemini rieši Google-Extended
+    // v robots.txt. Tu sa dopĺňa to, čo TDM Reservation hovorí HTTP hlavičkou.
+    header('X-Robots-Tag: noai, noimageai');
 
     $nonce = getScriptNonce();
     $csp =

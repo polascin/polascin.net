@@ -67,6 +67,7 @@ $jsVersion = is_file(__DIR__ . '/js/main.js') ? (string) filemtime(__DIR__ . '/j
 <meta name="theme-color" content="<?= htmlspecialchars($themeColor, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="robots" content="<?= htmlspecialchars($robotsMeta, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="tdm-reservation" content="1">
+<meta name="robots" content="noai, noimageai">
 <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
 <link rel="canonical" href="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
 <?php

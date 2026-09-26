@@ -464,7 +464,8 @@ jobs:
               "cross-origin-resource-policy" \
               "x-permitted-cross-domain-policies" \
               "content-security-policy" \
-              "tdm-reservation"; do
+              "tdm-reservation" \
+              "x-robots-tag"; do
             if grep -qi "^${HEADER}:" "$HEADERS_FILE"; then
               echo "  OK   hlavička ${HEADER}"
             else
