@@ -79,6 +79,9 @@ function sendSecurityHeaders(): void {
     header('Cross-Origin-Opener-Policy: same-origin');
     header('Cross-Origin-Resource-Policy: same-origin');
     header('X-Permitted-Cross-Domain-Policies: none');
+    // Výhrada práv k textovému a dátovému dolovaniu (W3C TDM Reservation).
+    // Platí pre stránky aj pre súbory knižnice. Bežné vyhľadávanie nemení.
+    header('TDM-Reservation: 1');
 
     $nonce = getScriptNonce();
     $csp =

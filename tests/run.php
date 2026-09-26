@@ -494,6 +494,7 @@ foreach (
         'cross-origin-resource-policy',
         'x-permitted-cross-domain-policies',
         'content-security-policy',
+        'tdm-reservation',
     ] as $smokeHeader
 ) {
     expectTrue(
@@ -1457,6 +1458,62 @@ foreach (['/scripts/', '/audit-reports/', '/.cursor/'] as $robotsPath) {
         "robots.txt musí v skupine User-agent: * zakazovať {$robotsPath}"
     );
 }
+
+// Tréningové crawlery majú vlastnú skupinu s Disallow: /. Nesmú spadnúť pod
+// User-agent: *, lebo tá web povoľuje. Vyhľadávacie boty v zozname nie sú.
+$aiTrainingAgents = [
+    'GPTBot',
+    'ClaudeBot',
+    'anthropic-ai',
+    'CCBot',
+    'Google-Extended',
+    'Applebot-Extended',
+    'Bytespider',
+    'Meta-ExternalAgent',
+    'Amazonbot',
+    'cohere-ai',
+    'Diffbot',
+    'ImagesiftBot',
+    'AI2Bot',
+    'Omgilibot',
+    'GoogleOther',
+    'CommonCrawl',
+];
+foreach ($aiTrainingAgents as $aiTrainingAgent) {
+    expectTrue(
+        preg_match(
+            '~User-agent:\s*' . preg_quote($aiTrainingAgent, '~') . '\r?\nDisallow:\s*/\s*\r?\n~',
+            $robotsTxt
+        ) === 1,
+        "robots.txt musí tréningovému crawleru {$aiTrainingAgent} zakázať celý web"
+    );
+}
+expectTrue(
+    !preg_match('~User-agent:\s*Googlebot\s*\r?\nDisallow:\s*/~', $robotsTxt),
+    'robots.txt nesmie zakázať vyhľadávací Googlebot'
+);
+expectTrue(
+    str_contains($authSource, "header('TDM-Reservation: 1');"),
+    'Každá PHP odpoveď musí niesť výhradu TDM Reservation'
+);
+expectTrue(
+    str_contains((string) file_get_contents(dirname(__DIR__) . '/head_meta.php'), 'name="tdm-reservation" content="1"'),
+    'HTML hlavička musí niesť meta tdm-reservation'
+);
+expectTrue(
+    str_contains($htaccessRules, 'Header always set TDM-Reservation "1"'),
+    '.htaccess musí výhradu TDM posielať aj na statické súbory'
+);
+foreach (['index.html', 'privacy.html', 'terms.html'] as $tdmFallback) {
+    expectTrue(
+        str_contains((string) file_get_contents(dirname(__DIR__) . '/' . $tdmFallback), 'name="tdm-reservation" content="1"'),
+        "{$tdmFallback} musí niesť meta tdm-reservation"
+    );
+}
+expectTrue(
+    str_contains((string) file_get_contents(dirname(__DIR__) . '/library_file.php'), "require_once __DIR__ . '/auth.php';"),
+    'Súbor knižnice musí prejsť cez auth.php, aby niesol výhradu TDM'
+);
 
 // Nočná kontrola sa musí spustiť pred behom auditnej rutiny (00:00 UTC), inak
 // rutina číta report z predchádzajúceho dňa. Samotné „pred polnocou“ nestačí:
