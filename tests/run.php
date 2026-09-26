@@ -1518,8 +1518,9 @@ foreach (['index.html', 'privacy.html', 'terms.html'] as $tdmFallback) {
 }
 expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/library_file.php'), "require_once __DIR__ . '/auth.php';")
+        && str_contains((string) file_get_contents(dirname(__DIR__) . '/library_file.php'), 'header_remove(\'X-Robots-Tag\')')
         && str_contains((string) file_get_contents(dirname(__DIR__) . '/library_file.php'), 'noindex, noai, noimageai'),
-    'Súbor knižnice musí niesť TDM cez auth.php a noindex/noai na X-Robots-Tag'
+    'Súbor knižnice musí niesť TDM cez auth.php a nahradiť X-Robots-Tag na noindex/noai'
 );
 
 // Nočná kontrola sa musí spustiť pred behom auditnej rutiny (00:00 UTC), inak
