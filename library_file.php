@@ -14,7 +14,6 @@ if (!is_array($work)) {
     http_response_code(404);
     header('Content-Type: text/plain; charset=UTF-8');
     header('X-Content-Type-Options: nosniff');
-    header_remove('X-Robots-Tag');
     header('X-Robots-Tag: noindex, noai, noimageai');
     echo 'Not found';
     exit;
@@ -25,7 +24,6 @@ if ($handle === false) {
     http_response_code(404);
     header('Content-Type: text/plain; charset=UTF-8');
     header('X-Content-Type-Options: nosniff');
-    header_remove('X-Robots-Tag');
     header('X-Robots-Tag: noindex, noai, noimageai');
     echo 'Not found';
     exit;
@@ -46,9 +44,6 @@ while (ob_get_level() > 0) {
 
 header('Content-Type: ' . $mime);
 header('X-Content-Type-Options: nosniff');
-// auth.php už poslal noai; tu treba nahradiť celú hodnotu, aby PDF
-// nezostalo indexovateľné ako samostatná URL.
-header_remove('X-Robots-Tag');
 header('X-Robots-Tag: noindex, noai, noimageai');
 header('Content-Disposition: ' . libraryContentDisposition($inlinePdf, libraryDownloadName($work)));
 header('Content-Length: ' . (string) $work['bytes']);

@@ -84,8 +84,12 @@ function sendSecurityHeaders(): void {
     header('TDM-Reservation: 1');
     // Komunitný signál proti tréningu modelov (noai / noimageai).
     // Google Search ostáva na Googlebot; tréning Gemini rieši Google-Extended
-    // v robots.txt. Tu sa dopĺňa to, čo TDM Reservation hovorí HTTP hlavičkou.
-    header('X-Robots-Tag: noai, noimageai');
+    // v robots.txt. Súbory knižnice si X-Robots-Tag nastavia samy — inak by
+    // noai z tejto odpovede prekrylo ich noindex.
+    $robotsTagScript = basename((string) ($_SERVER['SCRIPT_NAME'] ?? ''));
+    if ($robotsTagScript !== 'library_file.php') {
+        header('X-Robots-Tag: noai, noimageai');
+    }
 
     $nonce = getScriptNonce();
     $csp =

@@ -1496,8 +1496,9 @@ expectTrue(
 );
 expectTrue(
     str_contains($authSource, "header('TDM-Reservation: 1');")
-        && str_contains($authSource, "header('X-Robots-Tag: noai, noimageai');"),
-    'Každá PHP odpoveď musí niesť výhradu TDM Reservation a noai'
+        && str_contains($authSource, "header('X-Robots-Tag: noai, noimageai');")
+        && str_contains($authSource, "library_file.php"),
+    'Každá PHP odpoveď musí niesť TDM Reservation a noai, okrem súboru knižnice'
 );
 expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/head_meta.php'), 'name="tdm-reservation" content="1"')
@@ -1518,9 +1519,8 @@ foreach (['index.html', 'privacy.html', 'terms.html'] as $tdmFallback) {
 }
 expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/library_file.php'), "require_once __DIR__ . '/auth.php';")
-        && str_contains((string) file_get_contents(dirname(__DIR__) . '/library_file.php'), 'header_remove(\'X-Robots-Tag\')')
         && str_contains((string) file_get_contents(dirname(__DIR__) . '/library_file.php'), 'noindex, noai, noimageai'),
-    'Súbor knižnice musí niesť TDM cez auth.php a nahradiť X-Robots-Tag na noindex/noai'
+    'Súbor knižnice musí niesť TDM cez auth.php a vlastný X-Robots-Tag noindex/noai'
 );
 
 // Nočná kontrola sa musí spustiť pred behom auditnej rutiny (00:00 UTC), inak
