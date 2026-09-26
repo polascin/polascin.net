@@ -546,6 +546,10 @@ foreach (preg_split('~\r?\n~', $robotsTxt) ?: [] as $robotsLine) {
     }
 }
 expectTrue($robotsDisallowedPaths !== [], 'Skupina User-agent: * v robots.txt musí obsahovať pravidlá Disallow');
+expectTrue(
+    in_array('/library_file.php', $robotsDisallowedPaths, true),
+    'robots.txt musí zakazovať priame sťahovanie knižnice crawlermi'
+);
 $uncoveredAdminPages = [];
 foreach (glob(dirname(__DIR__) . '/*.php') ?: [] as $rootPagePath) {
     $rootPageSource = (string) file_get_contents($rootPagePath);

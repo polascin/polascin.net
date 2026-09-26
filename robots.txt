@@ -17,6 +17,7 @@ Disallow: /helpers.php
 Disallow: /login.php
 Disallow: /logout.php
 Disallow: /newsletter.php
+Disallow: /library_file.php
 Disallow: /private/
 Disallow: /content/
 Disallow: /scripts/
