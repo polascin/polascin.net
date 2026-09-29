@@ -1448,6 +1448,22 @@ expectTrue(
 
 // Interné cesty, ktoré vznikli až pre nočný audit, musí smoke check overovať
 // rovnako ako `.cursor/rules/*.mdc` — inak by ich nasadenie nikto nezachytil.
+// Beh #31: knižnica textov ukladá nahraté súbory do `private/library/`
+// a nasadené do `content/library/`. Čítať sa smú len cez `library_file.php`;
+// priamy prístup by HTML súbor podal ako stránku v pôvode webu. Sonda na
+// existujúci súbor (nie len adresár) dokazuje zákaz, nie iba neexistenciu.
+foreach (['/private/', '/content/library/fosfatovy-roztok/work.json', '/content/library/fosfatovy-roztok/fosfatovy-roztok.pdf'] as $libraryProbePath) {
+    expectTrue(
+        str_contains($deployWorkflow, '"' . $libraryProbePath . '"'),
+        "Smoke check po nasadení musí overiť neprístupnosť {$libraryProbePath}"
+    );
+}
+expectTrue(
+    is_file(dirname(__DIR__) . '/content/library/fosfatovy-roztok/work.json')
+        && is_file(dirname(__DIR__) . '/content/library/fosfatovy-roztok/fosfatovy-roztok.pdf'),
+    'Sonda smoke checku na content/library musí mieriť na existujúci súbor'
+);
+
 foreach (['/scripts/audit_db_check.php', '/audit-reports/db-latest.md'] as $auditOnlyPath) {
     expectTrue(
         str_contains($deployWorkflow, '"' . $auditOnlyPath . '"'),
@@ -1914,6 +1930,11 @@ try {
     expectTrue(str_contains($libraryRendered, 'https://polascin.net/'), 'Markdown odkaz musí zostať');
     expectTrue(!str_contains($libraryRendered, '<script>'), 'Markdown nesmie prepustiť HTML zo súboru');
     expectTrue(str_contains($libraryRendered, '&lt;script&gt;'), 'Markdown musí HTML escapovať');
+    // Beh #31: `*` v URL sa menila na `<em>` vnútri atribútu `href`.
+    $libraryStarLink = libraryRenderMarkdown("Pozri [**zdroj**](https://example.com/a*b*c) a *kurzíva*.\n");
+    expectTrue(str_contains($libraryStarLink, 'href="https://example.com/a*b*c"'), 'Markdown nesmie meniť hviezdičky v URL odkazu');
+    expectTrue(str_contains($libraryStarLink, '<strong>zdroj</strong></a>'), 'Markdown musí zvýrazniť popis odkazu');
+    expectTrue(str_contains($libraryStarLink, '<em>kurzíva</em>'), 'Markdown musí zvýrazniť text mimo odkazu');
 
     $libraryHtml = libraryInstallWork('uploads', 'Stránka', 'html', '<p>Ahoj</p><script>alert(1)</script>');
     expectTrue($libraryHtml['ok'], 'HTML sa musí dať uložiť');

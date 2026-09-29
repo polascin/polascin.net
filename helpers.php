@@ -961,20 +961,37 @@ function libraryFileUrl(string $slug, bool $download): string {
     return 'library_file.php?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
 }
 
-function libraryMarkdownInline(string $escaped): string {
-    $withLinks = preg_replace_callback(
-        '~\[([^\]\n]+)\]\((https?://[^\s)]+)\)~',
-        static function (array $matches): string {
-            return '<a href="' . $matches[2] . '" rel="noopener noreferrer">' . $matches[1] . '</a>';
-        },
-        $escaped
-    );
-    $escaped = is_string($withLinks) ? $withLinks : $escaped;
+function libraryMarkdownEmphasis(string $escaped): string {
     $withStrong = preg_replace('~\*\*([^*\n]+)\*\*~', '<strong>$1</strong>', $escaped);
     $escaped = is_string($withStrong) ? $withStrong : $escaped;
     $withEm = preg_replace('~(?<!\*)\*([^*\n]+)\*(?!\*)~', '<em>$1</em>', $escaped);
 
     return is_string($withEm) ? $withEm : $escaped;
+}
+
+function libraryMarkdownInline(string $escaped): string {
+    // Zvýraznenie sa uplatní len na text a popis odkazu, nikdy na URL —
+    // inak by `*` v adrese vložila `<em>` do atribútu `href` (Beh #31).
+    $parts = preg_split(
+        '~(\[[^\]\n]+\]\(https?://[^\s)]+\))~',
+        $escaped,
+        -1,
+        PREG_SPLIT_DELIM_CAPTURE
+    );
+    if (!is_array($parts)) {
+        return libraryMarkdownEmphasis($escaped);
+    }
+
+    $html = '';
+    foreach ($parts as $index => $part) {
+        if ($index % 2 === 1 && preg_match('~^\[([^\]\n]+)\]\((https?://[^\s)]+)\)$~D', $part, $link) === 1) {
+            $html .= '<a href="' . $link[2] . '" rel="noopener noreferrer">' . libraryMarkdownEmphasis($link[1]) . '</a>';
+            continue;
+        }
+        $html .= libraryMarkdownEmphasis($part);
+    }
+
+    return $html;
 }
 
 function libraryRenderMarkdown(string $text): string {
