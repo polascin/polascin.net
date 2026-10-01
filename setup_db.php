@@ -533,6 +533,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/dobry-skeptik-viac-nez-pochybnost.php'
             );
         },
+        '2026100101_ceresare_kyjov_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/ceresare-z-kyjova.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
