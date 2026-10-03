@@ -563,6 +563,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/pipeline-ktory-podpisujem.php'
             );
         },
+        '2026100305_three_unsolicited_offers_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/tri-ponuky-za-tyzden-nikto-necital.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

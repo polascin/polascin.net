@@ -65,6 +65,7 @@ const EXPECTED_MIGRATIONS = [
     '2026100302_efficiency_refilled_article',
     '2026100303_incremental_hd_odds_ratio_article',
     '2026100304_pipeline_i_sign_article',
+    '2026100305_three_unsolicited_offers_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
