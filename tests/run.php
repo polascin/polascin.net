@@ -687,18 +687,21 @@ foreach (array_keys(appLanguages()) as $dialysisLinkLang) {
 }
 
 // Predávané publikácie: katalóg z 2026-10-03 (nefro.polascin.net/publikacie.php
-// a profil polascin.gumroad.com). Pri audite sa zoznam porovná so živou ponukou
-// a pri zmene sa aktualizuje tu aj na stránke — viď .audit.md, sekcia 7.
+// a profil polascin.gumroad.com, pole products v Inertia JSON). Pri audite sa
+// zoznam porovná so živou ponukou a pri zmene sa aktualizuje tu aj na stránke
+// — viď .audit.md, sekcia 7.
 $soldPublicationLinks = [
     'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1',
     'https://polascin.gumroad.com/l/sk-nefro-baza-1',
+    'https://polascin.gumroad.com/l/sk-nefro-baza-1-en',
     'https://polascin.gumroad.com/l/hcilux',
     'https://polascin.gumroad.com/l/veszhk',
 ];
 foreach ($soldPublicationLinks as $soldPublicationLink) {
-    expectSame(1, substr_count($homeTemplate, $soldPublicationLink), "Dynamická stránka musí obsahovať odkaz {$soldPublicationLink}");
-    expectSame(1, substr_count($staticFallback, $soldPublicationLink), "Statický fallback musí obsahovať odkaz {$soldPublicationLink}");
-    expectSame(1, substr_count($legacyFallback, $soldPublicationLink), "Starší fallback musí obsahovať odkaz {$soldPublicationLink}");
+    $soldPublicationHref = 'href="' . $soldPublicationLink . '"';
+    expectSame(1, substr_count($homeTemplate, $soldPublicationHref), "Dynamická stránka musí obsahovať odkaz {$soldPublicationLink}");
+    expectSame(1, substr_count($staticFallback, $soldPublicationHref), "Statický fallback musí obsahovať odkaz {$soldPublicationLink}");
+    expectSame(1, substr_count($legacyFallback, $soldPublicationHref), "Starší fallback musí obsahovať odkaz {$soldPublicationLink}");
 }
 expectTrue(
     !str_contains($homeTemplate, '_gl=')
@@ -711,6 +714,7 @@ $soldPublicationKeys = [
     'home.publications_intro',
     'home.link_pub_nefro_baza',
     'home.link_pub_gumroad_baza',
+    'home.link_pub_gumroad_baza_en',
     'home.link_pub_medicinsky_post',
     'home.link_pub_medical_fasting',
 ];
