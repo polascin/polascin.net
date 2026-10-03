@@ -557,6 +557,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/inkrementalna-hemodialyza-nie-je-skratka.php'
             );
         },
+        '2026100304_pipeline_i_sign_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/pipeline-ktory-podpisujem.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
