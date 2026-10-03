@@ -686,6 +686,45 @@ foreach (array_keys(appLanguages()) as $dialysisLinkLang) {
     );
 }
 
+// Predávané publikácie: katalóg z 2026-10-03 (nefro.polascin.net/publikacie.php
+// a profil polascin.gumroad.com). Pri audite sa zoznam porovná so živou ponukou
+// a pri zmene sa aktualizuje tu aj na stránke — viď .audit.md, sekcia 7.
+$soldPublicationLinks = [
+    'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1',
+    'https://polascin.gumroad.com/l/sk-nefro-baza-1',
+    'https://polascin.gumroad.com/l/hcilux',
+    'https://polascin.gumroad.com/l/veszhk',
+];
+foreach ($soldPublicationLinks as $soldPublicationLink) {
+    expectSame(1, substr_count($homeTemplate, $soldPublicationLink), "Dynamická stránka musí obsahovať odkaz {$soldPublicationLink}");
+    expectSame(1, substr_count($staticFallback, $soldPublicationLink), "Statický fallback musí obsahovať odkaz {$soldPublicationLink}");
+    expectSame(1, substr_count($legacyFallback, $soldPublicationLink), "Starší fallback musí obsahovať odkaz {$soldPublicationLink}");
+}
+expectTrue(
+    !str_contains($homeTemplate, '_gl=')
+        && !str_contains($staticFallback, '_gl=')
+        && !str_contains($legacyFallback, '_gl='),
+    'Odkazy na predávané publikácie nesmú niesť sledovací parameter _gl'
+);
+$soldPublicationKeys = [
+    'home.publications_heading',
+    'home.publications_intro',
+    'home.link_pub_nefro_baza',
+    'home.link_pub_gumroad_baza',
+    'home.link_pub_medicinsky_post',
+    'home.link_pub_medical_fasting',
+];
+foreach (array_keys(appLanguages()) as $soldPublicationLang) {
+    $soldPublicationCatalogue = require dirname(__DIR__) . '/lang/' . $soldPublicationLang . '.php';
+    $missingPublicationKeys = [];
+    foreach ($soldPublicationKeys as $soldPublicationKey) {
+        if (!isset($soldPublicationCatalogue[$soldPublicationKey]) || trim((string) $soldPublicationCatalogue[$soldPublicationKey]) === '') {
+            $missingPublicationKeys[] = $soldPublicationKey;
+        }
+    }
+    expectSame([], $missingPublicationKeys, "Katalóg {$soldPublicationLang} musí pomenovať predávané publikácie");
+}
+
 // Profilové bloky môžu byť upravené cez administráciu. Migračný UPDATE preto
 // smie nahradiť iba presne známu starú predvolenú hodnotu, nie ľubovoľný obsah
 // s rovnakým kľúčom a jazykom.
