@@ -63,6 +63,7 @@ const EXPECTED_MIGRATIONS = [
     '2026100101_ceresare_kyjov_article',
     '2026100301_web_guard_own_ai_article',
     '2026100302_efficiency_refilled_article',
+    '2026100303_incremental_hd_odds_ratio_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

@@ -551,6 +551,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/efektivita-sa-doplni.php'
             );
         },
+        '2026100303_incremental_hd_odds_ratio_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/inkrementalna-hemodialyza-nie-je-skratka.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
