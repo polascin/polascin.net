@@ -575,6 +575,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/co-jestvuje-ked-nic-nezjestvuje.php'
             );
         },
+        '2026100402_experience_starting_point_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/prezivanie-je-vychodisko-nie-odpoved.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
