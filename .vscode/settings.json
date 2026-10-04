@@ -1,5 +1,6 @@
 {
   "files.autoSave": "onFocusChange",
+  "files.eol": "\n",
   "editor.wordWrap": "on",
   "editor.wrapOnEscapedLineFeeds": true,
   "editor.wrappingIndent": "same",
