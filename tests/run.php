@@ -686,14 +686,20 @@ foreach (array_keys(appLanguages()) as $dialysisLinkLang) {
     );
 }
 
-// Predávané publikácie: katalóg z 2026-10-03 (nefro.polascin.net/publikacie.php
+// Predávané publikácie: katalóg z 2026-10-04 (nefro.polascin.net/publikacie.php
 // a profil polascin.gumroad.com, pole products v Inertia JSON). Pri audite sa
 // zoznam porovná so živou ponukou a pri zmene sa aktualizuje tu aj na stránke
-// — viď .audit.md, sekcia 7.
+// — viď .audit.md, sekcia 7. Kontrola hľadá celý href, lebo kratší permalink
+// je prefixom dlhšieho (sk-nefro-baza-1 vs -en a -kompendium).
 $soldPublicationLinks = [
     'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1',
     'https://polascin.gumroad.com/l/sk-nefro-baza-1',
+    'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-en',
     'https://polascin.gumroad.com/l/sk-nefro-baza-1-en',
+    'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-kompendium',
+    'https://polascin.gumroad.com/l/sk-nefro-baza-1-kompendium',
+    'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-kompendium-en',
+    'https://polascin.gumroad.com/l/sk-nefro-baza-1-kompendium-en',
     'https://polascin.gumroad.com/l/hcilux',
     'https://polascin.gumroad.com/l/veszhk',
 ];
@@ -714,7 +720,12 @@ $soldPublicationKeys = [
     'home.publications_intro',
     'home.link_pub_nefro_baza',
     'home.link_pub_gumroad_baza',
+    'home.link_pub_nefro_baza_en',
     'home.link_pub_gumroad_baza_en',
+    'home.link_pub_nefro_kompendium',
+    'home.link_pub_gumroad_kompendium',
+    'home.link_pub_nefro_kompendium_en',
+    'home.link_pub_gumroad_kompendium_en',
     'home.link_pub_medicinsky_post',
     'home.link_pub_medical_fasting',
 ];

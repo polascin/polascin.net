@@ -229,7 +229,12 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
       <div class="link-grid">
         <a href="https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_pub_nefro_baza') ?></a>
         <a href="https://polascin.gumroad.com/l/sk-nefro-baza-1" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_pub_gumroad_baza') ?></a>
+        <a href="https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-en" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_pub_nefro_baza_en') ?></a>
         <a href="https://polascin.gumroad.com/l/sk-nefro-baza-1-en" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_pub_gumroad_baza_en') ?></a>
+        <a href="https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-kompendium" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_pub_nefro_kompendium') ?></a>
+        <a href="https://polascin.gumroad.com/l/sk-nefro-baza-1-kompendium" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_pub_gumroad_kompendium') ?></a>
+        <a href="https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-kompendium-en" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_pub_nefro_kompendium_en') ?></a>
+        <a href="https://polascin.gumroad.com/l/sk-nefro-baza-1-kompendium-en" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_pub_gumroad_kompendium_en') ?></a>
         <a href="https://polascin.gumroad.com/l/hcilux" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_pub_medicinsky_post') ?></a>
         <a href="https://polascin.gumroad.com/l/veszhk" class="pill-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> <?= te('home.link_pub_medical_fasting') ?></a>
       </div>
