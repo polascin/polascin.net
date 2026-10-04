@@ -13,7 +13,7 @@ Jazyky stránky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `
 
 ## 1. Korektúra a zverejnenie
 
-- Jazyková korektúra dodaného textu (sk/en), fakty over Tavily (názvy, URL, dátumy). Nevyhlasuj rukopis za uverejnený, kým to text nepovie.
+- Jazyková korektúra dodaného textu (sk/en), fakty over Tavily (názvy, URL, dátumy). Nevyhlasuj rukopis za uverejnený, kým to text nepovie. Cesta k PDF alebo knihe je zdroj textu: článok je esej z neho, nie prepis celku. Plný text, ak už je v knižnici, prepoj cez `library.php?slug=`.
 - `content/articles/{slug}.php`: 403 guard ako existujúce seed súbory; `slug` `[a-z0-9-]+`; `category` `blog`; `published_at` teraz; `image` `images/articles/{slug}.webp`.
 - Každý jazyk: `title` (≤255), `excerpt`, `image_alt` (≤255), HTML `content` cez `sanitizeHtmlContent` (žiadny `<script>`, CTA `contact.php` kde sedí, disclaimer ak ide o osobnú/medicínsku skúsenosť).
 - Migrácia `YYYYMMDDNN_short_name` v `setup_db.php` + ten istý názov v `scripts/audit_db_check.php` `EXPECTED_MIGRATIONS`. Seeder **nevypisuje** existujúce `(slug, lang)` (len doplní chýbajúce a aktualizuje obálku).
@@ -21,7 +21,7 @@ Jazyky stránky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `
 
 ## 2. Ilustračný obrázok
 
-- `GenerateImage`, 16:9, cinematic, **bez textu/log** na obrázku, farby značky fialová `#3d1a78` / tyrkys `#078d70`.
+- `GenerateImage`, 16:9, cinematic, **bez textu/log** na obrázku, farby značky fialová `#3d1a78` / tyrkys `#078d70`. Aj keď požiadavka hovorí 16:10, obálka ostáva 16:9 (ideálne 1280×720): testy aj generátor držia tento pomer.
 - Ak nástroj uloží JPEG s príponou `.png`, načítaj `imagecreatefromjpeg` (nie png). Konverzia: `images/articles/{slug}.webp`, q82, **≥1200×675**, ideálne 1280×720.
 - `image` + `image_alt` vo všetkých prekladoch. Verejný SELECT oba stĺpce ťahá (Beh #27), takže `image_alt` je to, čo skončí v `alt` aj v `og:image:alt` — píš ho ako popis obrázka, nie ako druhý titulok.
 - Po konverzii spusti `php scripts/make_og_covers.php`. Vyrobí JPEG dvojičku v `images/articles/og/{slug}.jpg` pre `og:image` — WebP náhľad LinkedIn nezobrazí. JPEG **commitni**; test v `tests/run.php` chýbajúcu dvojičku zhodí.
