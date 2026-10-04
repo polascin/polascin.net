@@ -1,6 +1,6 @@
 # Kontrola produkčnej databázy — polascin.net
 
-Generované: 2026-10-03 23:40:06 CEST  
+Generované: 2026-10-04 23:15:37 CEST  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
@@ -18,14 +18,14 @@ Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávan
 
 | Tabuľka | Engine | Collation | Riadkov (presne) |
 | --- | --- | --- | --- |
-| `access_logs` | InnoDB | utf8mb4_unicode_ci | 37390 |
-| `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 33 |
-| `articles` | InnoDB | utf8mb4_unicode_ci | 190 |
+| `access_logs` | InnoDB | utf8mb4_unicode_ci | 38594 |
+| `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 35 |
+| `articles` | InnoDB | utf8mb4_unicode_ci | 210 |
 | `contact_messages` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `content_blocks` | InnoDB | utf8mb4_unicode_ci | 5 |
 | `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `newsletter_subscribers` | InnoDB | utf8mb4_unicode_ci | 0 |
-| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 29 |
+| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 31 |
 | `users` | InnoDB | utf8mb4_unicode_ci | 1 |
 
 ## Migrácie schémy
@@ -59,6 +59,8 @@ Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávan
 - ✅ `2026100303_incremental_hd_odds_ratio_article` — 2026-10-03 21:58:56
 - ✅ `2026100304_pipeline_i_sign_article` — 2026-10-03 22:20:01
 - ✅ `2026100305_three_unsolicited_offers_article` — 2026-10-03 22:21:04
+- ✅ `2026100401_what_exists_sunday_article` — 2026-10-04 16:43:57
+- ✅ `2026100402_experience_starting_point_article` — 2026-10-04 16:52:55
 
 ## Indexy strážené migráciou
 
@@ -74,18 +76,18 @@ Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávan
 
 ## Obsah a jazyky
 
-- Publikovaných článkov: 190
+- Publikovaných článkov: 210
 - Články podľa jazyka:
-  - `cs`: 19
-  - `de`: 19
-  - `en`: 19
-  - `es`: 19
-  - `fr`: 19
-  - `hu`: 19
-  - `it`: 19
-  - `pl`: 19
-  - `sk`: 19
-  - `uk`: 19
+  - `cs`: 21
+  - `de`: 21
+  - `en`: 21
+  - `es`: 21
+  - `fr`: 21
+  - `hu`: 21
+  - `it`: 21
+  - `pl`: 21
+  - `sk`: 21
+  - `uk`: 21
 - Obsahové bloky podľa jazyka:
   - `sk`: 5
 
@@ -95,7 +97,7 @@ Nastavená retencia access logov: **90 dní** (`ACCESS_LOG_RETENTION_DAYS`).
 
 | Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |
 | --- | --- | --- | --- |
-| `access_logs` | 37390 | 2026-07-28 12:20:55 | 67 |
+| `access_logs` | 38594 | 2026-07-28 12:20:55 | 68 |
 | `contact_messages` | 0 | — | — |
 | `newsletter_subscribers` | 0 | — | — |
 | `form_rate_limit` | 0 | — | — |
