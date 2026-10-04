@@ -1729,6 +1729,10 @@ expectTrue(
 );
 $articleTemplate = (string) file_get_contents(dirname(__DIR__) . '/article.php');
 $articlesTemplate = (string) file_get_contents(dirname(__DIR__) . '/articles.php');
+expectTrue(
+    preg_match('/\$perPage\s*=\s*21\s*;/', $articlesTemplate) === 1,
+    'Blog musí stránkovať zoznam po 21 článkoch'
+);
 $homeTemplate = (string) file_get_contents(dirname(__DIR__) . '/index.php');
 $articleCss = (string) file_get_contents(dirname(__DIR__) . '/css/styles.css');
 expectTrue(

@@ -9,7 +9,7 @@ require_once __DIR__ . '/helpers.php';
 /** @var PDO $pdo */
 
 $lang = currentLang();
-$perPage = 10;
+$perPage = 21;
 $total = countPublishedArticles($pdo, $lang);
 $totalPages = max(1, (int) ceil($total / $perPage));
 $rawPage = $_GET['page'] ?? '1';
