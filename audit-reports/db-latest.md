@@ -1,6 +1,6 @@
 # Kontrola produkčnej databázy — polascin.net
 
-Generované: 2026-10-04 23:15:37 CEST  
+Generované: 2026-10-05 22:52:31 CEST  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
@@ -18,12 +18,12 @@ Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávan
 
 | Tabuľka | Engine | Collation | Riadkov (presne) |
 | --- | --- | --- | --- |
-| `access_logs` | InnoDB | utf8mb4_unicode_ci | 38594 |
+| `access_logs` | InnoDB | utf8mb4_unicode_ci | 39174 |
 | `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 35 |
 | `articles` | InnoDB | utf8mb4_unicode_ci | 210 |
-| `contact_messages` | InnoDB | utf8mb4_unicode_ci | 0 |
+| `contact_messages` | InnoDB | utf8mb4_unicode_ci | 1 |
 | `content_blocks` | InnoDB | utf8mb4_unicode_ci | 5 |
-| `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 0 |
+| `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 4 |
 | `newsletter_subscribers` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 31 |
 | `users` | InnoDB | utf8mb4_unicode_ci | 1 |
@@ -97,8 +97,11 @@ Nastavená retencia access logov: **90 dní** (`ACCESS_LOG_RETENTION_DAYS`).
 
 | Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |
 | --- | --- | --- | --- |
-| `access_logs` | 38594 | 2026-07-28 12:20:55 | 68 |
-| `contact_messages` | 0 | — | — |
+| `access_logs` | 39174 | 2026-07-28 12:20:55 | 69 |
+| `contact_messages` | 1 | 2026-10-05 15:05:03 | 0 |
 | `newsletter_subscribers` | 0 | — | — |
-| `form_rate_limit` | 0 | — | — |
+| `form_rate_limit` | 4 | 2026-10-05 15:05:03 | 0 |
+
+Kontaktné správy: **0** vybavených, **1** nevybavených
+(z toho **0** nevybavených dlhšie ako 30 dní, **0** vybavených starších ako 180 dní).
 
