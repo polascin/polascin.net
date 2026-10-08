@@ -4,7 +4,7 @@
     {
       "label": "Git Sync on Open",
       "type": "shell",
-      "command": "git pull --rebase origin main",
+      "command": "git fetch --no-write-fetch-head origin main && git rebase origin/main",
       "runOptions": {
         "runOn": "folderOpen"
       },
