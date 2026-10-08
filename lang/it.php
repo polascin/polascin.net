@@ -365,4 +365,10 @@ return [
     'library.pdf_label' => 'Anteprima del documento PDF',
     'library.epub_note' => 'Scarica il file EPUB e aprilo in un lettore di libri digitali.',
     'library.too_large' => 'Questo file è troppo grande per essere letto nella pagina. Puoi scaricarlo.',
+    'library.topic.nefrologia' => 'Nefrologia',
+    'library.topic.magistraliter' => 'Preparazioni magistrali',
+    'library.topic.vyziva' => 'Nutrizione',
+    'library.topic.metafyzika' => 'Metafisica',
+    'library.topic.etnografia' => 'Etnografia',
+    'library.topic.other' => 'Altri',
 ];

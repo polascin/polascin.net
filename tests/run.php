@@ -2070,6 +2070,34 @@ expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/sitemap.php'), 'libraryList()'),
     'Sitemap musí uvádzať diela knižnice'
 );
+expectTrue(str_contains($libraryPage, 'libraryGroups'), 'Katalóg knižnice musí diela radiť po témach');
+$libraryGroups = libraryGroups();
+expectSame(
+    ['nefrologia', 'magistraliter', 'vyziva', 'metafyzika', 'etnografia'],
+    array_map(static fn(array $group): string => (string) $group['topic'], $libraryGroups),
+    'Katalóg knižnice musí mať témy v pevnom poradí'
+);
+$libraryByTopic = [];
+foreach ($libraryGroups as $libraryGroup) {
+    $libraryByTopic[(string) $libraryGroup['topic']] = array_map(
+        static fn(array $work): string => (string) $work['slug'],
+        $libraryGroup['works']
+    );
+}
+expectSame(
+    [
+        'sk-nefro-dokazane-pravdepodobne-otvorene',
+        'sk-nefro-proven-probable-open',
+        'sk-nefro-belegt-wahrscheinlich-offen',
+    ],
+    $libraryByTopic['nefrologia'] ?? [],
+    'Nefrologické vydania musia ísť slovenské, anglické, nemecké'
+);
+expectSame(
+    ['metafyzika', 'metafyzika-2'],
+    $libraryByTopic['metafyzika'] ?? [],
+    'Metafyzika musí ísť od prvého dielu k druhému'
+);
 expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/main_nav.php'), "t('nav.library')"),
     'Navigácia musí obsahovať knižnicu'

@@ -15,6 +15,7 @@ $form = [
     'title' => '',
     'author' => 'MUDr. Ľubomír Polaščín',
     'description' => '',
+    'topic' => '',
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -37,8 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $form['title'] = isset($_POST['title']) && is_string($_POST['title']) ? trim($_POST['title']) : '';
             $form['author'] = isset($_POST['author']) && is_string($_POST['author']) ? trim($_POST['author']) : '';
             $form['description'] = isset($_POST['description']) && is_string($_POST['description']) ? trim($_POST['description']) : '';
+            $form['topic'] = isset($_POST['topic']) && is_string($_POST['topic']) ? trim($_POST['topic']) : '';
             $file = isset($_FILES['file']) && is_array($_FILES['file']) ? $_FILES['file'] : [];
-            $saved = librarySaveUpload($form['title'], $form['author'], $form['description'], $file);
+            $saved = librarySaveUpload($form['title'], $form['author'], $form['description'], $file, $form['topic']);
             if (!$saved['ok']) {
                 $errors[] = $saved['error'];
             } else {
@@ -93,6 +95,16 @@ $canonicalUrl = $baseUrl . '/admin_library.php';
           <textarea id="library-description" name="description" maxlength="4000" rows="4"><?= htmlspecialchars($form['description'], ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
         <div class="form-group">
+          <label for="library-topic">Téma</label>
+          <select id="library-topic" name="topic">
+            <option value=""<?= $form['topic'] === '' ? ' selected' : '' ?>>Bez témy</option>
+            <?php foreach (libraryTopics() as $topic): ?>
+              <?php if ($topic === 'other') { continue; } ?>
+              <option value="<?= htmlspecialchars($topic, ENT_QUOTES, 'UTF-8') ?>"<?= $form['topic'] === $topic ? ' selected' : '' ?>><?= te('library.topic.' . $topic) ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <div class="form-group">
           <label for="library-file">Súbor</label>
           <input id="library-file" name="file" type="file" required accept=".pdf,.txt,.md,.markdown,.html,.htm,.epub,application/pdf,text/plain,text/html,text/markdown">
         </div>
@@ -107,6 +119,7 @@ $canonicalUrl = $baseUrl . '/admin_library.php';
             <thead>
               <tr>
                 <th>Názov</th>
+                <th>Téma</th>
                 <th>Formát</th>
                 <th>Veľkosť</th>
                 <th>Pôvod</th>
@@ -117,6 +130,7 @@ $canonicalUrl = $baseUrl . '/admin_library.php';
               <?php foreach ($works as $work): ?>
               <tr>
                 <td><?= htmlspecialchars((string) $work['title'], ENT_QUOTES, 'UTF-8') ?></td>
+                <td><?= te('library.topic.' . libraryTopicId($work)) ?></td>
                 <td><?= htmlspecialchars(strtoupper((string) $work['extension']), ENT_QUOTES, 'UTF-8') ?></td>
                 <td><?= htmlspecialchars(libraryFormatSize((int) $work['bytes']), ENT_QUOTES, 'UTF-8') ?></td>
                 <td><?= (string) $work['source'] === 'uploads' ? 'nahraté' : 'súčasť webu' ?></td>

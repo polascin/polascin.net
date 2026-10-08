@@ -51,7 +51,13 @@ if ($notFound) {
         ],
     ];
 } else {
-    $works = libraryList();
+    $groups = libraryGroups();
+    $works = [];
+    foreach ($groups as $group) {
+        foreach ($group['works'] as $item) {
+            $works[] = $item;
+        }
+    }
     $pageTitle = t('meta.library_title') . ' | ' . t('common.author');
     $seoDescription = t('meta.library_description');
     $canonicalUrl = absoluteLangUrl($lang, 'library.php');
@@ -134,30 +140,35 @@ $printOnPage = is_array($work) && (string) $work['kind'] !== 'pdf';
     <div class="container">
       <h1 class="section-title reveal"><?= te('library.heading') ?></h1>
       <p class="section-intro"><?= te('library.intro') ?></p>
-      <?php if ($works === []): ?>
+      <?php if ($groups === []): ?>
         <p class="section-muted"><?= te('library.empty') ?></p>
       <?php else: ?>
-        <div class="card-grid">
-          <?php foreach ($works as $item): ?>
-          <article class="card reveal">
-            <h2><a href="<?= htmlspecialchars(langUrl($lang, 'library.php', ['slug' => (string) $item['slug']]), ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $item['title'], ENT_QUOTES, 'UTF-8') ?></a></h2>
-            <p class="article-meta">
-              <?php if ((string) $item['author'] !== ''): ?>
-                <?= htmlspecialchars((string) $item['author'], ENT_QUOTES, 'UTF-8') ?> ·
+        <?php foreach ($groups as $group): ?>
+        <section class="library-topic-section" aria-labelledby="library-topic-<?= htmlspecialchars((string) $group['topic'], ENT_QUOTES, 'UTF-8') ?>">
+          <h2 id="library-topic-<?= htmlspecialchars((string) $group['topic'], ENT_QUOTES, 'UTF-8') ?>" class="library-topic"><?= te('library.topic.' . (string) $group['topic']) ?></h2>
+          <div class="card-grid">
+            <?php foreach ($group['works'] as $item): ?>
+            <article class="card reveal">
+              <h3><a href="<?= htmlspecialchars(langUrl($lang, 'library.php', ['slug' => (string) $item['slug']]), ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $item['title'], ENT_QUOTES, 'UTF-8') ?></a></h3>
+              <p class="article-meta">
+                <?php if ((string) $item['author'] !== ''): ?>
+                  <?= htmlspecialchars((string) $item['author'], ENT_QUOTES, 'UTF-8') ?> ·
+                <?php endif; ?>
+                <?= htmlspecialchars(strtoupper((string) $item['extension']), ENT_QUOTES, 'UTF-8') ?>
+                · <?= htmlspecialchars(libraryFormatSize((int) $item['bytes']), ENT_QUOTES, 'UTF-8') ?>
+              </p>
+              <?php if ((string) $item['description'] !== ''): ?>
+                <p><?= htmlspecialchars(buildSeoExcerpt((string) $item['description']), ENT_QUOTES, 'UTF-8') ?></p>
               <?php endif; ?>
-              <?= htmlspecialchars(strtoupper((string) $item['extension']), ENT_QUOTES, 'UTF-8') ?>
-              · <?= htmlspecialchars(libraryFormatSize((int) $item['bytes']), ENT_QUOTES, 'UTF-8') ?>
-            </p>
-            <?php if ((string) $item['description'] !== ''): ?>
-              <p><?= htmlspecialchars(buildSeoExcerpt((string) $item['description']), ENT_QUOTES, 'UTF-8') ?></p>
-            <?php endif; ?>
-            <p class="library-card-actions">
-              <a class="btn btn-primary btn-sm" href="<?= htmlspecialchars(langUrl($lang, 'library.php', ['slug' => (string) $item['slug']]), ENT_QUOTES, 'UTF-8') ?>"><?= te('library.read') ?></a>
-              <a class="btn btn-secondary btn-sm" href="<?= htmlspecialchars(libraryFileUrl((string) $item['slug'], true), ENT_QUOTES, 'UTF-8') ?>"><?= te('library.download') ?></a>
-            </p>
-          </article>
-          <?php endforeach; ?>
-        </div>
+              <p class="library-card-actions">
+                <a class="btn btn-primary btn-sm" href="<?= htmlspecialchars(langUrl($lang, 'library.php', ['slug' => (string) $item['slug']]), ENT_QUOTES, 'UTF-8') ?>"><?= te('library.read') ?></a>
+                <a class="btn btn-secondary btn-sm" href="<?= htmlspecialchars(libraryFileUrl((string) $item['slug'], true), ENT_QUOTES, 'UTF-8') ?>"><?= te('library.download') ?></a>
+              </p>
+            </article>
+            <?php endforeach; ?>
+          </div>
+        </section>
+        <?php endforeach; ?>
       <?php endif; ?>
     </div>
   </section>

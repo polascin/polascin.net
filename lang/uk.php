@@ -365,4 +365,10 @@ return [
     'library.pdf_label' => 'Попередній перегляд PDF',
     'library.epub_note' => 'Завантажте файл EPUB і відкрийте його в читалці електронних книжок.',
     'library.too_large' => 'Цей файл завеликий, щоб читати його на сторінці. Його можна завантажити.',
+    'library.topic.nefrologia' => 'Нефрологія',
+    'library.topic.magistraliter' => 'Магістральні препарати',
+    'library.topic.vyziva' => 'Харчування',
+    'library.topic.metafyzika' => 'Метафізика',
+    'library.topic.etnografia' => 'Етнографія',
+    'library.topic.other' => 'Інше',
 ];

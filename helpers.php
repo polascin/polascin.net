@@ -797,12 +797,19 @@ function libraryLoadWork(string $directory, string $source): ?array {
     }
 
     $originalName = trim(str_replace(["\0", "\r", "\n", '"', '\\', '/'], '', (string) ($meta['original_name'] ?? '')));
+    $topic = libraryNormalizeTopic((string) ($meta['topic'] ?? ''));
+    $position = (int) ($meta['position'] ?? 0);
+    if ($position < 1 || $position > 999) {
+        $position = 0;
+    }
 
     return [
         'slug' => $slug,
         'title' => $title,
         'author' => $author,
         'description' => $description,
+        'topic' => $topic,
+        'position' => $position,
         'added_at' => $addedAt,
         'filename' => $filename,
         'original_name' => $originalName,
@@ -850,6 +857,67 @@ function libraryUniqueSlug(string $title): string {
     }
 
     return 'text-' . bin2hex(random_bytes(3));
+}
+
+/**
+ * Poradie tém v katalógu. `other` je len pre text bez priradenej témy.
+ *
+ * @return list<string>
+ */
+function libraryTopics(): array {
+    return ['nefrologia', 'magistraliter', 'vyziva', 'metafyzika', 'etnografia', 'other'];
+}
+
+function libraryNormalizeTopic(string $topic): string {
+    $topic = strtolower(trim($topic));
+    if ($topic === 'other' || !in_array($topic, libraryTopics(), true)) {
+        return '';
+    }
+
+    return $topic;
+}
+
+function libraryTopicId(array $work): string {
+    $topic = libraryNormalizeTopic((string) ($work['topic'] ?? ''));
+
+    return $topic === '' ? 'other' : $topic;
+}
+
+/**
+ * @return list<array{topic: string, works: list<array<string, mixed>>}>
+ */
+function libraryGroups(): array {
+    $buckets = [];
+    foreach (libraryList() as $work) {
+        $buckets[libraryTopicId($work)][] = $work;
+    }
+    foreach ($buckets as &$items) {
+        usort($items, static function (array $left, array $right): int {
+            $leftPosition = (int) ($left['position'] ?? 0);
+            $rightPosition = (int) ($right['position'] ?? 0);
+            $leftPosition = $leftPosition > 0 ? $leftPosition : 1000;
+            $rightPosition = $rightPosition > 0 ? $rightPosition : 1000;
+            if ($leftPosition !== $rightPosition) {
+                return $leftPosition <=> $rightPosition;
+            }
+
+            return strcasecmp((string) $left['title'], (string) $right['title']);
+        });
+    }
+    unset($items);
+
+    $groups = [];
+    foreach (libraryTopics() as $topic) {
+        if (!isset($buckets[$topic]) || $buckets[$topic] === []) {
+            continue;
+        }
+        $groups[] = [
+            'topic' => $topic,
+            'works' => $buckets[$topic],
+        ];
+    }
+
+    return $groups;
 }
 
 /**
@@ -1132,6 +1200,8 @@ function libraryInstallWork(string $rootKey, string $title, string $extension, s
         $addedAt = date('Y-m-d');
     }
     $originalName = trim(str_replace(["\0", "\r", "\n", '"', '\\', '/'], '', (string) ($meta['original_name'] ?? '')));
+    $topic = libraryNormalizeTopic((string) ($meta['topic'] ?? ''));
+    $position = (int) ($meta['position'] ?? 0);
     $record = [
         'title' => $title,
         'author' => $author,
@@ -1140,6 +1210,12 @@ function libraryInstallWork(string $rootKey, string $title, string $extension, s
         'filename' => $stored,
         'original_name' => $originalName,
     ];
+    if ($topic !== '') {
+        $record['topic'] = $topic;
+    }
+    if ($position >= 1 && $position <= 999) {
+        $record['position'] = $position;
+    }
     try {
         $json = json_encode($record, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR);
     } catch (JsonException) {
@@ -1160,7 +1236,7 @@ function libraryInstallWork(string $rootKey, string $title, string $extension, s
  * @param array<string, mixed> $file
  * @return array{ok: bool, error: string, slug: string}
  */
-function librarySaveUpload(string $title, string $author, string $description, array $file): array {
+function librarySaveUpload(string $title, string $author, string $description, array $file, string $topic = ''): array {
     $failed = static fn(string $error): array => ['ok' => false, 'error' => $error, 'slug' => ''];
     $uploadError = (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE);
     if ($uploadError === UPLOAD_ERR_INI_SIZE || $uploadError === UPLOAD_ERR_FORM_SIZE) {
@@ -1201,6 +1277,7 @@ function librarySaveUpload(string $title, string $author, string $description, a
         'description' => $description,
         'original_name' => $original,
         'added_at' => date('Y-m-d'),
+        'topic' => $topic,
     ]);
 }
 

@@ -1993,6 +1993,7 @@ a.lang-chip {
 }
 
 .articles-list .card h2,
+.articles-list .card h3,
 .latest-articles .card h3 {
   font-size: 1.125rem;
   line-height: 1.35;
@@ -2034,6 +2035,17 @@ a.lang-chip {
 .article-body h3 {
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
+}
+
+.library-topic {
+  margin-top: var(--spacing-lg);
+  margin-bottom: 0;
+  font-size: clamp(1.35rem, 1.15rem + 0.5vw, 1.7rem);
+  text-align: start;
+}
+
+.library-topic-section:first-of-type .library-topic {
+  margin-top: var(--spacing-md);
 }
 
 .library-back {

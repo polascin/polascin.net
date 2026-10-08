@@ -365,4 +365,10 @@ return [
     'library.pdf_label' => 'PDF document preview',
     'library.epub_note' => 'Download the EPUB file and open it in an e-book reader.',
     'library.too_large' => 'This file is too large to read on the page. You can download it.',
+    'library.topic.nefrologia' => 'Nephrology',
+    'library.topic.magistraliter' => 'Compounded preparations',
+    'library.topic.vyziva' => 'Nutrition',
+    'library.topic.metafyzika' => 'Metaphysics',
+    'library.topic.etnografia' => 'Ethnography',
+    'library.topic.other' => 'Other',
 ];

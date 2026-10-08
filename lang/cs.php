@@ -365,4 +365,10 @@ return [
     'library.pdf_label' => 'Náhled dokumentu PDF',
     'library.epub_note' => 'Soubor EPUB si stáhnete a otevřete ve čtečce elektronických knih.',
     'library.too_large' => 'Tento soubor je příliš velký na čtení přímo na stránce. Můžete si jej stáhnout.',
+    'library.topic.nefrologia' => 'Nefrologie',
+    'library.topic.magistraliter' => 'Magistraliter',
+    'library.topic.vyziva' => 'Výživa',
+    'library.topic.metafyzika' => 'Metafyzika',
+    'library.topic.etnografia' => 'Etnografie',
+    'library.topic.other' => 'Ostatní',
 ];

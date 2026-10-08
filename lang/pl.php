@@ -365,4 +365,10 @@ return [
     'library.pdf_label' => 'Podgląd dokumentu PDF',
     'library.epub_note' => 'Pobierz plik EPUB i otwórz go w czytniku książek elektronicznych.',
     'library.too_large' => 'Ten plik jest zbyt duży, aby czytać go na stronie. Można go pobrać.',
+    'library.topic.nefrologia' => 'Nefrologia',
+    'library.topic.magistraliter' => 'Leki recepturowe',
+    'library.topic.vyziva' => 'Żywienie',
+    'library.topic.metafyzika' => 'Metafizyka',
+    'library.topic.etnografia' => 'Etnografia',
+    'library.topic.other' => 'Inne',
 ];

@@ -365,4 +365,10 @@ return [
     'library.pdf_label' => 'PDF-dokumentum előnézete',
     'library.epub_note' => 'Töltse le az EPUB-fájlt, és nyissa meg egy e-könyv-olvasóban.',
     'library.too_large' => 'Ez a fájl túl nagy ahhoz, hogy az oldalon lehessen olvasni. Letöltheti.',
+    'library.topic.nefrologia' => 'Nefrológia',
+    'library.topic.magistraliter' => 'Magisztrális készítmények',
+    'library.topic.vyziva' => 'Táplálkozás',
+    'library.topic.metafyzika' => 'Metafizika',
+    'library.topic.etnografia' => 'Néprajz',
+    'library.topic.other' => 'Egyéb',
 ];
