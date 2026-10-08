@@ -13,6 +13,7 @@
 # Cursor: pravidlá zdieľame v gite, lokálne nastavenia nie
 .cursor/*
 !.cursor/rules/
+!.cursor/skills/
 
 # Citlivé súbory — nikdy do gitu
 .env
