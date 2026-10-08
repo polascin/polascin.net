@@ -20,7 +20,7 @@ Jazyky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk` (`app
 
 - Jazyková korektúra dodaného textu, fakty over Tavily (názvy, URL, dátumy). Nevyhlasuj rukopis za uverejnený, kým to text nepovie. PDF alebo kniha je zdroj: článok je esej, nie prepis celku. Plný text v knižnici prepoj cez `library.php?slug=`.
 - `content/articles/{slug}.php`: 403 guard ako existujúce seed súbory; `slug` `[a-z0-9-]+`; `category` `blog`; `published_at` teraz v Europe/Bratislava (test odmieta budúcnosť); `image` `images/articles/{slug}.webp`.
-- Každý jazyk: `title` ≤255, `excerpt`, `image_alt` ≤255, HTML `content`. Žiadny `<script>`. CTA `contact.php`, kde sedí. Disclaimer pri osobnej alebo medicínskej skúsenosti. Úvod neopakuje titulok.
+- Každý jazyk: `title` ≤255, `excerpt`, `image_alt` ≤255, HTML `content`. Žiadny `<script>` a žiadna výzva na kontakt (`contact.php`). Disclaimer pri osobnej alebo medicínskej skúsenosti. Úvod neopakuje titulok.
 - `image_alt` opisuje obrázok. Nesmie to byť druhý titulok. Verejný výpis ho dáva do `alt` aj `og:image:alt`.
 - CS: slovenské reálie (SOLEN/Via practica, dýchavica → dušnosť, rajón → spád) podľa existujúcich článkov. `skill.md` nechaj ako názov súboru.
 - Migrácia `YYYYMMDDNN_short_name` v `setup_db.php` a ten istý kľúč v `scripts/audit_db_check.php` `EXPECTED_MIGRATIONS`. Seeder existujúce `(slug, lang)` nevypisuje; doplní chýbajúce a aktualizuje obálku.

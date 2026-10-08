@@ -42,7 +42,7 @@ return [
 <p>Pasca je postaviť si postup okolo zvlášností jedného modelu. Keď sa zmení — a zmení sa — workflow sa zlomí. Vidím to pri tímoch, ktoré sa preučia na konkrétnu štruktúru promptu alebo správanie API a potom stratia dni, keď poskytovateľ nasadí aktualizáciu.</p>
 <p>Princíp: berte modely ako náradie v taške, nie ako operačný systém. Voľne ich vymeňte. Merajte výstupy, nie vernosť značke.</p>
 <p>Tímy, ktoré si teraz postavia modelovo nezávislý workflow, sa prispôsobia rýchlejšie ako tie, ktoré si vyberú stranu. Viac o tomto prístupe píše aj Kilo pod heslom <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Smerujete medzi modelmi, alebo ste oddaní jednému? Napíšte mi cez <a href="contact.php">kontakt</a>.</p>
+<p>Smerujete medzi modelmi, alebo ste oddaní jednému?</p>
 HTML,
         ],
         'en' => [
@@ -58,7 +58,7 @@ HTML,
 <p>The trap is building your process around one model’s quirks. When it changes — and it will — your workflow breaks. I have seen this with teams that overfit to a specific prompt structure or API behavior, then lose days when the provider ships an update.</p>
 <p>The principle: treat models like tools in a bag, not like an operating system. Swap freely. Measure outputs, not brand loyalty.</p>
 <p>The teams that build model-agnostic workflows now will adapt faster than the ones picking a side. Kilo frames the same idea as <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Are you routing between models, or are you committed to one? Write to me via the <a href="contact.php">contact form</a>.</p>
+<p>Are you routing between models, or are you committed to one?</p>
 HTML,
         ],
         'cs' => [
@@ -74,7 +74,7 @@ HTML,
 <p>Pastí je postavit si postup kolem zvláštností jednoho modelu. Když se změní — a změní se — workflow se zlomí. Vidím to u týmů, které se přeučí na konkrétní strukturu promptu nebo chování API a pak ztratí dny, když poskytovatel nasadí aktualizaci.</p>
 <p>Princip: berte modely jako nářadí v brašně, ne jako operační systém. Volně je vyměňujte. Měřte výstupy, ne věrnost značce.</p>
 <p>Týmy, které si teď postaví modelově nezávislý workflow, se přizpůsobí rychleji než ty, které si vyberou stranu. Více o tomto přístupu píše i Kilo pod heslem <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Směřujete mezi modely, nebo jste oddáni jednomu? Napište mi přes <a href="contact.php">kontakt</a>.</p>
+<p>Směřujete mezi modely, nebo jste oddáni jednomu?</p>
 HTML,
         ],
         'de' => [
@@ -90,7 +90,7 @@ HTML,
 <p>Die Falle ist, den Ablauf um die Eigenheiten eines Modells herum zu bauen. Wenn es sich ändert — und das wird es — bricht der Workflow. Ich sehe das bei Teams, die sich auf eine bestimmte Promptstruktur oder ein API-Verhalten überfitten und dann Tage verlieren, wenn der Anbieter ein Update ausliefert.</p>
 <p>Das Prinzip: Behandeln Sie Modelle wie Werkzeuge in einer Tasche, nicht wie ein Betriebssystem. Tauschen Sie frei. Messen Sie Ergebnisse, nicht Markentreue.</p>
 <p>Teams, die sich jetzt modellunabhängige Workflows bauen, passen sich schneller an als die, die eine Seite wählen. Mehr zu diesem Ansatz schreibt Kilo unter dem Stichwort <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Routen Sie zwischen Modellen, oder sind Sie einem verpflichtet? Schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>.</p>
+<p>Routen Sie zwischen Modellen, oder sind Sie einem verpflichtet?</p>
 HTML,
         ],
         'fr' => [
@@ -106,7 +106,7 @@ HTML,
 <p>Le piège est de construire son processus autour des particularités d'un modèle. Quand il change — et il changera — le workflow casse. Je le vois chez des équipes qui se suradaptent à une structure de prompt ou à un comportement d'API, puis perdent des jours quand le fournisseur livre une mise à jour.</p>
 <p>Le principe : traitez les modèles comme des outils dans une sacoche, pas comme un système d'exploitation. Échangez librement. Mesurez les sorties, pas la fidélité à une marque.</p>
 <p>Les équipes qui se construisent maintenant des workflows indépendants du modèle s'adapteront plus vite que celles qui choisissent un camp. Kilo décrit la même idée sous le nom de <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Acheminez-vous entre les modèles, ou êtes-vous lié à un seul ? Écrivez-moi via le <a href="contact.php">formulaire de contact</a>.</p>
+<p>Acheminez-vous entre les modèles, ou êtes-vous lié à un seul ?</p>
 HTML,
         ],
         'es' => [
@@ -122,7 +122,7 @@ HTML,
 <p>La trampa es construir el proceso alrededor de las rarezas de un modelo. Cuando cambie — y cambiará — el flujo se rompe. Lo veo en equipos que se sobreajustan a una estructura de prompt o a un comportamiento de API y luego pierden días cuando el proveedor publica una actualización.</p>
 <p>El principio: trate los modelos como herramientas en un maletín, no como un sistema operativo. Cámbielos con libertad. Mida resultados, no lealtad de marca.</p>
 <p>Los equipos que ahora construyan flujos independientes del modelo se adaptarán más rápido que los que elijan bando. Kilo formula la misma idea como <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>¿Enruta entre modelos o está comprometido con uno? Escríbame a través del <a href="contact.php">formulario de contacto</a>.</p>
+<p>¿Enruta entre modelos o está comprometido con uno?</p>
 HTML,
         ],
         'pl' => [
@@ -138,7 +138,7 @@ HTML,
 <p>Pułapką jest zbudować proces wokół osobliwości jednego modelu. Gdy się zmieni — a zmieni się — workflow pęka. Widzę to u zespołów, które przeuczają się na konkretną strukturę promptu albo zachowanie API, a potem tracą dni, gdy dostawca wdraża aktualizację.</p>
 <p>Zasada: traktujcie modele jak narzędzia w torbie, nie jak system operacyjny. Wymieniajcie je swobodnie. Mierzcie wyniki, nie lojalność wobec marki.</p>
 <p>Zespoły, które teraz zbudują workflow niezależny od modelu, dostosują się szybciej niż te, które wybiorą stronę. Więcej o tym podejściu pisze Kilo pod hasłem <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Kierujecie między modelami, czy jesteście oddani jednemu? Napiszcie do mnie przez <a href="contact.php">kontakt</a>.</p>
+<p>Kierujecie między modelami, czy jesteście oddani jednemu?</p>
 HTML,
         ],
         'hu' => [
@@ -154,7 +154,7 @@ HTML,
 <p>A csapda az, ha a folyamatot egy modell sajátosságaira építjük. Ha változik — és változni fog — a workflow eltörik. Látom ezt azoknál a csapatoknál, amelyek egy adott promptstruktúrára vagy API-viselkedésre túlilleszkednek, majd napokat veszítenek, amikor a szolgáltató frissítést ad ki.</p>
 <p>Az elv: kezeljék a modelleket szerszámként a táskában, ne operációs rendszerként. Cseréljék szabadon. A kimenetet mérjék, ne a márkahűséget.</p>
 <p>A csapatok, amelyek most modellfüggetlen workflow-t építenek, gyorsabban alkalmazkodnak, mint azok, amelyek oldalt választanak. Erről a megközelítésről a Kilo a <a href="https://kilo.ai/model-freedom">model freedom</a> címszó alatt ír.</p>
-<p>Modellek között irányít, vagy egyhez hű? Írjon nekem a <a href="contact.php">kapcsolati űrlapon</a>.</p>
+<p>Modellek között irányít, vagy egyhez hű?</p>
 HTML,
         ],
         'it' => [
@@ -170,7 +170,7 @@ HTML,
 <p>La trappola è costruire il processo intorno alle idiosincrasie di un modello. Quando cambia — e cambierà — il flusso si spezza. Lo vedo in team che si sovraadattano a una struttura di prompt o a un comportamento delle API e poi perdono giorni quando il fornitore rilascia un aggiornamento.</p>
 <p>Il principio: trattate i modelli come attrezzi in una borsa, non come un sistema operativo. Scambiateli liberamente. Misurate gli output, non la fedeltà al marchio.</p>
 <p>I team che ora costruiscono flussi indipendenti dal modello si adatteranno più in fretta di quelli che scelgono una parte. Kilo formula la stessa idea come <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Instradate tra modelli o siete legati a uno solo? Scrivetemi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+<p>Instradate tra modelli o siete legati a uno solo?</p>
 HTML,
         ],
         'uk' => [
@@ -186,7 +186,7 @@ HTML,
 <p>Пастка — збудувати процес навколо особливостей однієї моделі. Коли вона зміниться — а зміниться — workflow ламається. Я бачу це в командах, які перенавчаються на конкретну структуру промпту чи поведінку API, а потім втрачають дні, коли постачальник випускає оновлення.</p>
 <p>Принцип: ставтеся до моделей як до інструментів у сумці, а не як до операційної системи. Міняйте вільно. Міряйте виходи, не вірність бренду.</p>
 <p>Команди, які зараз збудують незалежний від моделі workflow, адаптуються швидше за тих, хто обирає сторону. Більше про цей підхід Kilo пише під гаслом <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Ви спрямовуєте між моделями чи віддані одній? Напишіть мені через <a href="contact.php">контакт</a>.</p>
+<p>Ви спрямовуєте між моделями чи віддані одній?</p>
 HTML,
         ],
     ],

@@ -101,7 +101,7 @@ return [
 <p>Pacient nepotrebuje vyhrať spor o rajón. Potrebuje, aby niekto pochopil, prečo sa mu zhoršuje stav.</p>
 <p>A inteligencia sa neprejavuje iba tým, ako rýchlo nájdeme správny skript.</p>
 <p>Prejavuje sa aj tým, že si všimneme, keď práve beží nesprávny.</p>
-<p>Ak vo svojej práci poznáte okamih, keď správne bežiaci postup prestane vidieť človeka, napíšte mi cez <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Ide o anonymizovanú klinickú skúsenosť z dialyzačného strediska, nie o opis konkrétneho pracoviska ani o liečebné odporúčanie. Dôvody pacienta zámerne neuvádzam. Rozhodnutie o vyšetrení a liečbe patrí do rozhovoru s ošetrujúcim lekárom.</em></p>
 HTML,
         ],
@@ -172,7 +172,7 @@ HTML,
 <p>The patient does not need to win an argument about catchment. He needs someone to understand why he is getting worse.</p>
 <p>Intelligence does not show itself only in how quickly we find the right script.</p>
 <p>It also shows itself when we notice that the wrong one is running.</p>
-<p>If, in your own work, you know the moment when a procedure that is running correctly stops seeing the person, write to me through the <a href="contact.php">contact form</a>.</p>
+
 <p><em>This is an anonymised clinical experience from a dialysis centre, not a description of a named unit and not treatment advice. The patient’s reasons are deliberately left out. Decisions about investigation and treatment belong in a conversation with the treating physician.</em></p>
 HTML,
         ],
@@ -243,7 +243,7 @@ HTML,
 <p>Pacient nepotřebuje vyhrát spor o spád. Potřebuje, aby někdo pochopil, proč se mu zhoršuje stav.</p>
 <p>A inteligence se neprojevuje jen tím, jak rychle najdeme správný skript.</p>
 <p>Projevuje se i tím, že si všimneme, když právě běží nesprávný.</p>
-<p>Pokud ve své práci znáte okamžik, kdy správně běžící postup přestane vidět člověka, napište mi přes <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Jde o anonymizovanou klinickou zkušenost z dialyzačního střediska, nikoli o popis konkrétního pracoviště ani o léčebné doporučení. Důvody pacienta záměrně neuvádím. Rozhodnutí o vyšetření a léčbě patří do rozhovoru s ošetřujícím lékařem.</em></p>
 HTML,
         ],
@@ -314,7 +314,7 @@ HTML,
 <p>Der Patient muss keinen Streit um das Einzugsgebiet gewinnen. Er braucht jemanden, der versteht, warum sich sein Zustand verschlechtert.</p>
 <p>Intelligenz zeigt sich nicht nur darin, wie schnell wir das richtige Skript finden.</p>
 <p>Sie zeigt sich auch darin, dass wir bemerken, wenn gerade das falsche läuft.</p>
-<p>Wenn Sie in Ihrer Arbeit den Augenblick kennen, in dem ein korrekt laufendes Verfahren den Menschen nicht mehr sieht, schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>.</p>
+
 <p><em>Dies ist eine anonymisierte klinische Erfahrung aus einem Dialysezentrum, keine Beschreibung einer bestimmten Station und keine Behandlungsempfehlung. Die Gründe des Patienten lasse ich absichtlich aus. Entscheidungen über Untersuchung und Behandlung gehören in das Gespräch mit der behandelnden Ärztin oder dem behandelnden Arzt.</em></p>
 HTML,
         ],
@@ -385,7 +385,7 @@ HTML,
 <p>Le patient n’a pas besoin de gagner un débat sur le secteur. Il a besoin que quelqu’un comprenne pourquoi son état s’aggrave.</p>
 <p>L’intelligence ne se montre pas seulement dans la rapidité avec laquelle nous trouvons le bon script.</p>
 <p>Elle se montre aussi lorsque nous remarquons que le mauvais est en train de tourner.</p>
-<p>Si, dans votre travail, vous connaissez l’instant où une procédure qui tourne correctement cesse de voir la personne, écrivez-moi par le <a href="contact.php">formulaire de contact</a>.</p>
+
 <p><em>Il s’agit d’une expérience clinique anonymisée dans un centre de dialyse, non de la description d’un service nommé et non d’un conseil de traitement. Les raisons du patient sont volontairement omises. Les décisions d’examen et de traitement appartiennent à l’entretien avec le médecin traitant.</em></p>
 HTML,
         ],
@@ -456,7 +456,7 @@ HTML,
 <p>El paciente no necesita ganar una discusión sobre la zona de adscripción. Necesita que alguien entienda por qué empeora.</p>
 <p>La inteligencia no se manifiesta solo en lo rápido que encontramos el guion correcto.</p>
 <p>También se manifiesta cuando advertimos que está corriendo el equivocado.</p>
-<p>Si en su trabajo conoce el instante en que un procedimiento que funciona correctamente deja de ver a la persona, escríbame a través del <a href="contact.php">formulario de contacto</a>.</p>
+
 <p><em>Se trata de una experiencia clínica anonimizada en un centro de diálisis, no de la descripción de una unidad concreta ni de un consejo terapéutico. Las razones del paciente se omiten a propósito. Las decisiones sobre el estudio y el tratamiento pertenecen a la conversación con el médico que lo atiende.</em></p>
 HTML,
         ],
@@ -527,7 +527,7 @@ HTML,
 <p>Pacjent nie potrzebuje wygrać sporu o rejon. Potrzebuje, żeby ktoś zrozumiał, dlaczego jego stan się pogarsza.</p>
 <p>Inteligencja nie objawia się tylko tym, jak szybko znajdziemy właściwy skrypt.</p>
 <p>Objawia się też tym, że zauważymy, gdy właśnie działa niewłaściwy.</p>
-<p>Jeśli w swojej pracy znacie chwilę, w której prawidłowo biegnąca procedura przestaje widzieć człowieka, napiszcie do mnie przez <a href="contact.php">kontakt</a>.</p>
+
 <p><em>To zanonimizowane doświadczenie kliniczne ze stacji dializ, nie opis konkretnego oddziału i nie zalecenie leczenia. Powodów pacjenta celowo nie podaję. Decyzja o badaniu i leczeniu należy do rozmowy z lekarzem prowadzącym.</em></p>
 HTML,
         ],
@@ -598,7 +598,7 @@ HTML,
 <p>A betegnek nem arra van szüksége, hogy megnyerje az ellátási körzetről szóló vitát. Arra, hogy valaki megértse, miért romlik az állapota.</p>
 <p>Az intelligencia nem csak abban mutatkozik meg, milyen gyorsan találjuk meg a helyes szkriptet.</p>
 <p>Abban is, hogy észrevesszük, amikor éppen a helytelen fut.</p>
-<p>Ha a saját munkájában ismeri azt a pillanatot, amikor a helyesen futó eljárás már nem látja az embert, írjon nekem a <a href="contact.php">kapcsolat</a> űrlapon.</p>
+
 <p><em>Anonimizált klinikai tapasztalat egy dialízisközpontból, nem egy megnevezett osztály leírása és nem kezelési tanács. A beteg indokait szándékosan nem írom le. A kivizsgálásról és a kezelésről a kezelőorvossal folytatott beszélgetésben kell dönteni.</em></p>
 HTML,
         ],
@@ -669,7 +669,7 @@ HTML,
 <p>Il paziente non ha bisogno di vincere una disputa sul bacino di utenza. Ha bisogno che qualcuno capisca perché peggiora.</p>
 <p>L’intelligenza non si mostra solo nella rapidità con cui troviamo lo script giusto.</p>
 <p>Si mostra anche quando ci accorgiamo che sta girando quello sbagliato.</p>
-<p>Se nel suo lavoro conosce l’istante in cui una procedura che gira correttamente smette di vedere la persona, mi scriva tramite il <a href="contact.php">modulo di contatto</a>.</p>
+
 <p><em>È un’esperienza clinica anonimizzata in un centro dialisi, non la descrizione di un’unità nominata e non un consiglio di cura. Le ragioni del paziente sono omesse di proposito. Le decisioni su accertamenti e trattamento spettano al colloquio con il medico curante.</em></p>
 HTML,
         ],
@@ -740,7 +740,7 @@ HTML,
 <p>Пацієнтові не потрібно виграти суперечку про район. Йому потрібно, щоб хтось зрозумів, чому стан погіршується.</p>
 <p>Інтелект виявляється не лише тим, як швидко ми знаходимо правильний скрипт.</p>
 <p>Він виявляється і тим, що ми помічаємо, коли саме працює неправильний.</p>
-<p>Якщо у своїй роботі ви знаєте мить, коли правильно запуснена процедура перестає бачити людину, напишіть мені через <a href="contact.php">контакт</a>.</p>
+
 <p><em>Це анонімізований клінічний досвід із діалізного центру, не опис конкретного відділення і не лікувальна порада. Причини пацієнта навмисно не наводжу. Рішення про обстеження і лікування належить розмові з лікарем, який лікує.</em></p>
 HTML,
         ],

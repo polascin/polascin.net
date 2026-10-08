@@ -40,7 +40,7 @@ return [
 <p>Kým sa ku mne dostane, eGFR už často klesol pod 60&nbsp;ml/min/1,73&nbsp;m². Okno na zásah — inhibítory SGLT2, blokáda RAAS, úprava životosprávy — bolo o mesiace alebo roky skôr.</p>
 <p>Preto sme aktuálne odporúčania KDIGO a ESH stiahli do jedného algoritmu, ktorý vie všeobecný lekár použiť počas bežnej konzultácie. Kedy skrínovať. Kedy odoslať. Kedy začať farmakoterapiu ešte pred odoslaním.</p>
 <p>Algoritmus nie je prelomový. To je zámer. Poznanie existuje. Medzera je v doručení — dostať ho k ľuďom, ktorí stoja na začiatku cesty starostlivosti, nie na jej konci.</p>
-<p>Ak pracujete v špecializovanom odbore: ktorý jeden kúsok vášho poznania by zajtra najviac zmenil prax, keby sa dostal k všeobecným lekárom? Napíšte mi cez <a href="contact.php">kontakt</a>.</p>
+<p>Ak pracujete v špecializovanom odbore: ktorý jeden kúsok vášho poznania by zajtra najviac zmenil prax, keby sa dostal k všeobecným lekárom?</p>
 <p><em>Ide o sprievodný text k rukopisu, nie o náhradu originálnych odporúčaní KDIGO a ESH ani o liečebné rozhodnutie pre konkrétneho pacienta.</em></p>
 HTML,
         ],
@@ -55,7 +55,7 @@ HTML,
 <p>By the time they reach me, the eGFR has often already dropped below 60&nbsp;ml/min/1.73&nbsp;m². The window for intervention — SGLT2 inhibitors, RAAS blockade, lifestyle modification — was months or years earlier.</p>
 <p>So we distilled the current KDIGO and ESH recommendations into a single algorithm a primary-care physician can follow during a routine consult. When to screen. When to refer. When to start pharmacotherapy before the referral even happens.</p>
 <p>The algorithm is not groundbreaking. That is the point. The knowledge exists. The gap is in delivery — getting it to the people who stand at the entrance of the care pathway, not the end.</p>
-<p>If you work in a specialist field, what is one piece of your knowledge that would have the most impact if it reached primary care tomorrow? Write to me via the <a href="contact.php">contact form</a>.</p>
+<p>If you work in a specialist field, what is one piece of your knowledge that would have the most impact if it reached primary care tomorrow?</p>
 <p><em>This is a companion note to a manuscript, not a substitute for the original KDIGO and ESH recommendations, and not treatment advice for an individual patient.</em></p>
 HTML,
         ],
@@ -70,7 +70,7 @@ HTML,
 <p>Než se ke mně dostane, eGFR už často klesl pod 60&nbsp;ml/min/1,73&nbsp;m². Okno na zásah — inhibitory SGLT2, blokáda RAAS, úprava životosprávy — bylo o měsíce nebo roky dříve.</p>
 <p>Proto jsme aktuální doporučení KDIGO a ESH stáhli do jednoho algoritmu, který umí praktický lékař použít během běžné konzultace. Kdy screeningovat. Kdy odeslat. Kdy začít farmakoterapii ještě před odesláním.</p>
 <p>Algoritmus není převratný. To je záměr. Poznání existuje. Mezera je v doručení — dostat ho k lidem, kteří stojí na začátku cesty péče, ne na jejím konci.</p>
-<p>Pokud pracujete ve specializovaném oboru: který jeden kousek vašeho poznání by zítra nejvíc změnil praxi, kdyby se dostal k praktickým lékařům? Napište mi přes <a href="contact.php">kontakt</a>.</p>
+<p>Pokud pracujete ve specializovaném oboru: který jeden kousek vašeho poznání by zítra nejvíc změnil praxi, kdyby se dostal k praktickým lékařům?</p>
 <p><em>Jde o doprovodný text k rukopisu, nikoli o náhradu původních doporučení KDIGO a ESH ani o léčebné rozhodnutí pro konkrétního pacienta.</em></p>
 HTML,
         ],
@@ -85,7 +85,7 @@ HTML,
 <p>Bis er bei mir ist, ist die eGFR oft schon unter 60&nbsp;ml/min/1,73&nbsp;m² gefallen. Das Fenster für den Eingriff — SGLT2-Hemmer, RAAS-Blockade, Lebensstiländerung — lag Monate oder Jahre früher.</p>
 <p>Deshalb haben wir die aktuellen Empfehlungen von KDIGO und ESH in einen Algorithmus verdichtet, den die Hausarztpraxis in einer Routinekonsultation nutzen kann. Wann screenen. Wann überweisen. Wann Pharmakotherapie noch vor der Überweisung beginnen.</p>
 <p>Der Algorithmus ist nicht bahnbrechend. Das ist Absicht. Das Wissen existiert. Die Lücke liegt in der Zustellung — es zu den Menschen zu bringen, die am Anfang des Versorgungspfads stehen, nicht am Ende.</p>
-<p>Wenn Sie in einem Fachgebiet arbeiten: Welches eine Stück Ihres Wissens würde die Praxis morgen am stärksten verändern, wenn es die Hausärztinnen und Hausärzte erreichte? Schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>.</p>
+<p>Wenn Sie in einem Fachgebiet arbeiten: Welches eine Stück Ihres Wissens würde die Praxis morgen am stärksten verändern, wenn es die Hausärztinnen und Hausärzte erreichte?</p>
 <p><em>Das ist ein Begleittext zu einem Manuskript, kein Ersatz der Originalempfehlungen von KDIGO und ESH und keine Behandlungsentscheidung für einen einzelnen Patienten.</em></p>
 HTML,
         ],
@@ -100,7 +100,7 @@ HTML,
 <p>Quand il arrive jusqu'à moi, le DFGe est souvent déjà tombé sous 60&nbsp;ml/min/1,73&nbsp;m². La fenêtre d'intervention — inhibiteurs SGLT2, blocage du SRAA, modification du mode de vie — était des mois ou des années plus tôt.</p>
 <p>Nous avons donc condensé les recommandations actuelles KDIGO et ESH en un algorithme qu'un médecin de premier recours peut suivre pendant une consultation de routine. Quand dépister. Quand adresser. Quand commencer une pharmacothérapie avant même l'adressage.</p>
 <p>L'algorithme n'est pas révolutionnaire. C'est voulu. La connaissance existe. L'écart est dans la livraison — l'amener aux personnes qui se tiennent à l'entrée du parcours de soins, pas à la fin.</p>
-<p>Si vous travaillez dans une spécialité : quel unique morceau de votre savoir changerait le plus la pratique demain, s'il parvenait aux médecins de premier recours ? Écrivez-moi via le <a href="contact.php">formulaire de contact</a>.</p>
+<p>Si vous travaillez dans une spécialité : quel unique morceau de votre savoir changerait le plus la pratique demain, s'il parvenait aux médecins de premier recours ?</p>
 <p><em>Il s'agit d'un texte d'accompagnement d'un manuscrit, non d'un substitut aux recommandations originales KDIGO et ESH, ni d'une décision thérapeutique pour un patient donné.</em></p>
 HTML,
         ],
@@ -115,7 +115,7 @@ HTML,
 <p>Cuando llega a mí, el TFGe a menudo ya ha bajado de 60&nbsp;ml/min/1,73&nbsp;m². La ventana de intervención — inhibidores SGLT2, bloqueo del SRAA, cambio de estilo de vida — estaba meses o años antes.</p>
 <p>Por eso condensamos las recomendaciones actuales de KDIGO y ESH en un algoritmo que un médico de familia puede seguir en una consulta rutinaria. Cuándo cribar. Cuándo derivar. Cuándo iniciar farmacoterapia antes incluso de la derivación.</p>
 <p>El algoritmo no es revolucionario. Esa es la intención. El conocimiento existe. La brecha está en la entrega: llevarlo a quienes están a la entrada del itinerario asistencial, no al final.</p>
-<p>Si trabaja en una especialidad: ¿qué único fragmento de su conocimiento cambiaría más la práctica mañana si llegara a atención primaria? Escríbame a través del <a href="contact.php">formulario de contacto</a>.</p>
+<p>Si trabaja en una especialidad: ¿qué único fragmento de su conocimiento cambiaría más la práctica mañana si llegara a atención primaria?</p>
 <p><em>Es un texto acompañante de un manuscrito, no un sustituto de las recomendaciones originales de KDIGO y ESH ni una decisión terapéutica para un paciente concreto.</em></p>
 HTML,
         ],
@@ -130,7 +130,7 @@ HTML,
 <p>Zanim dotrze do mnie, eGFR często już spadł poniżej 60&nbsp;ml/min/1,73&nbsp;m². Okno na interwencję — inhibitory SGLT2, blokada RAAS, zmiana stylu życia — było miesiącami lub latami wcześniej.</p>
 <p>Dlatego aktualne zalecenia KDIGO i ESH ściągnęliśmy do jednego algorytmu, którego lekarz rodzinny może użyć podczas zwykłej konsultacji. Kiedy przesiewać. Kiedy kierować. Kiedy zacząć farmakoterapię jeszcze przed skierowaniem.</p>
 <p>Algorytm nie jest przełomowy. Taki jest zamysł. Wiedza istnieje. Luka jest w dostarczeniu — w tym, by trafiła do ludzi, którzy stoją na początku ścieżki opieki, nie na jej końcu.</p>
-<p>Jeśli pracujecie w dziedzinie specjalistycznej: który jeden kawałek waszej wiedzy najbardziej zmieniłby praktykę jutro, gdyby trafił do lekarzy rodzinnych? Napiszcie do mnie przez <a href="contact.php">kontakt</a>.</p>
+<p>Jeśli pracujecie w dziedzinie specjalistycznej: który jeden kawałek waszej wiedzy najbardziej zmieniłby praktykę jutro, gdyby trafił do lekarzy rodzinnych?</p>
 <p><em>To tekst towarzyszący rękopisowi, nie zastępstwo oryginalnych zaleceń KDIGO i ESH ani decyzja lecznicza wobec konkretnego pacjenta.</em></p>
 HTML,
         ],
@@ -145,7 +145,7 @@ HTML,
 <p>Mire hozzám eljut, az eGFR gyakran már 60&nbsp;ml/min/1,73&nbsp;m² alá esett. A beavatkozás ablaka — SGLT2-gátlók, RAAS-blokád, életmódváltás — hónapokkal vagy évekkel korábban volt.</p>
 <p>Ezért a jelenlegi KDIGO- és ESH-ajánlásokat egyetlen algoritmusba sűrítettük, amelyet a háziorvos egy rutinkonzultáció alatt követhet. Mikor szűrjön. Mikor utaljon. Mikor kezdjen gyógyszeres kezelést még az utalás előtt.</p>
 <p>Az algoritmus nem áttörő. Ez a szándék. A tudás megvan. A rés a kézbesítésben van: eljuttatni azokhoz, akik a gondozási út elején állnak, nem a végén.</p>
-<p>Ha szakorvosi területen dolgozik: tudásának melyik egy darabja változtatná meg holnap a gyakorlatot a legjobban, ha eljutna a háziorvosokhoz? Írjon nekem a <a href="contact.php">kapcsolati űrlapon</a>.</p>
+<p>Ha szakorvosi területen dolgozik: tudásának melyik egy darabja változtatná meg holnap a gyakorlatot a legjobban, ha eljutna a háziorvosokhoz?</p>
 <p><em>Kéziratot kísérő szöveg, nem a KDIGO és az ESH eredeti ajánlásainak helyettesítője, és nem kezelési döntés egy adott beteg számára.</em></p>
 HTML,
         ],
@@ -160,7 +160,7 @@ HTML,
 <p>Quando arriva da me, l'eGFR è spesso già sceso sotto 60&nbsp;ml/min/1,73&nbsp;m². La finestra di intervento — inibitori SGLT2, blocco del RAAS, modifica dello stile di vita — era mesi o anni prima.</p>
 <p>Perciò abbiamo condensato le raccomandazioni attuali KDIGO ed ESH in un unico algoritmo che il medico di famiglia può seguire durante una visita di routine. Quando fare screening. Quando inviare. Quando iniziare la farmacoterapia ancora prima dell'invio.</p>
 <p>L'algoritmo non è rivoluzionario. Questo è lo scopo. La conoscenza esiste. Il vuoto è nella consegna: farla arrivare alle persone che stanno all'ingresso del percorso di cura, non alla fine.</p>
-<p>Se lavorate in una specialità: quale unico pezzo del vostro sapere cambierebbe di più la pratica domani, se arrivasse ai medici di famiglia? Scrivetemi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+<p>Se lavorate in una specialità: quale unico pezzo del vostro sapere cambierebbe di più la pratica domani, se arrivasse ai medici di famiglia?</p>
 <p><em>È un testo di accompagnamento a un manoscritto, non un sostituto delle raccomandazioni originali KDIGO ed ESH né una decisione terapeutica per un paziente concreto.</em></p>
 HTML,
         ],
@@ -175,7 +175,7 @@ HTML,
 <p>Поки він доходить до мене, eGFR часто вже впав нижче 60&nbsp;мл/хв/1,73&nbsp;м². Вікно для втручання — інгібітори SGLT2, блокада RAAS, зміна способу життя — було місяцями чи роками раніше.</p>
 <p>Тому чинні настанови KDIGO та ESH ми стягнули в один алгоритм, яким сімейний лікар може скористатися під час звичайної консультації. Коли скринінг. Коли скерувати. Коли почати фармакотерапію ще до скерування.</p>
 <p>Алгоритм не проривний. Такий задум. Знання існує. Прогалина в доставці — донести його до людей, які стоять на початку шляху допомоги, а не в його кінці.</p>
-<p>Якщо ви працюєте в спеціалізованій галузі: який один шмат вашого знання завтра найбільше змінив би практику, якби дійшов до сімейних лікарів? Напишіть мені через <a href="contact.php">контакт</a>.</p>
+<p>Якщо ви працюєте в спеціалізованій галузі: який один шмат вашого знання завтра найбільше змінив би практику, якби дійшов до сімейних лікарів?</p>
 <p><em>Це супровідний текст до рукопису, а не заміна оригінальних настанов KDIGO та ESH і не лікувальне рішення щодо конкретного пацієнта.</em></p>
 HTML,
         ],

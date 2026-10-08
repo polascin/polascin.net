@@ -69,7 +69,7 @@ return [
 <p>Pigliucci píše aj o Catilinovom sprisahaní v roku 63 pred naším letopočtom, keď bol Cicero konzulom, a o popravách, ktoré Senát schválil a ktoré ho neskôr stáli vyhnanstvo. Zámerne nehovorí, že Cicero mal pravdu. Hovorí, že konal podľa úsudku, o ktorom vedel, že môže byť chybný, nepredstieral istotu, ktorú nemal, a rozhodnutie potom obhajoval aj s jeho cenou. To je užitočné. Nie je to oslobodenie od následkov.</p>
 <p>O posledných slovách pred vraždou 7. decembra 43 pred naším letopočtom esej podáva dramatickú repliku. Antické správy, medzi nimi Plutarchos, sú triezvejšie: Cicero vystrčil krk z nosidiel. Hlavu a ruky, ktoré písali <em>Filipiky</em>, dal Marcus Antonius vystaviť. Presné znenie poslednej vety nepotrebujem. Potrebujem metódu, nie legendu.</p>
 <p>Republika aj tak padla. Cicero podľa eseje ďalej konal, akoby sa dala zachrániť, lebo to bol najlepší dostupný názor a stálo za to podľa neho konať. Odkaz ostal v knihách. Záverečná veta Pigliucciho je aj názov na stránke: pravdepodobne mal pravdu.</p>
-<p>Ak podobnú dieru medzi pochybnosťou a istotou riešite v ambulancii, v redakcii alebo pri nástroji, ktorý sľubuje istotu, napíšte mi cez <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Ide o čítanie eseje Massima Pigliucciho z 21. septembra 2026 a o to, ako ju používam vo vlastnej práci. Nie je to lekárska rada ani výklad rímskych dejín. Historické body, ktoré uvádzam ako overené, sú dátum smrti 7. decembra 43 pred naším letopočtom a Plutarchovo podanie popravy. Ostatné datovanie preberám z eseje a označujem ho ako jej čítanie.</em></p>
 HTML,
         ],
@@ -110,7 +110,7 @@ HTML,
 <p>Pigliucci also writes about the Catiline conspiracy in 63 BCE, when Cicero was consul, and about the executions the Senate approved, which later cost him exile. He deliberately does not say Cicero was right. He says Cicero acted on a judgment he knew might be wrong, claimed no certainty he did not have, and then defended the decision together with its cost. That is useful. It is not a release from consequences.</p>
 <p>On the last words before the murder of 7 December 43 BCE, the essay offers a dramatic line. The ancient reports, Plutarch among them, are plainer: Cicero thrust his neck from the litter. Mark Antony had the head displayed, and the hands that wrote the <em>Philippics</em>. I do not need the exact last sentence. I need the method, not the legend.</p>
 <p>The Republic fell anyway. According to the essay, Cicero went on acting as though it could be saved, because that was the best available view and it was worth acting on. The legacy remained in the books. Pigliucci’s closing sentence is also the title on the page: he was probably right.</p>
-<p>If you are working through a similar gap between doubt and certainty in a clinic, a newsroom, or with a tool that promises certainty, write to me via the <a href="contact.php">contact form</a>.</p>
+
 <p><em>This is a reading of Massimo Pigliucci’s essay of 21 September 2026, and of how I use it in my own work. It is not medical advice and not a history of Rome. The historical points I treat as checked are the date of death, 7 December 43 BCE, and Plutarch’s account of the execution. The other dating I take from the essay and mark as its reading.</em></p>
 HTML,
         ],
@@ -151,7 +151,7 @@ HTML,
 <p>Pigliucci píše i o Catilinově spiknutí v roce 63 před naším letopočtem, kdy byl Cicero konzulem, a o popravách, které Senát schválil a které ho později stály vyhnanství. Záměrně neříká, že Cicero měl pravdu. Říká, že jednal podle úsudku, o kterém věděl, že může být chybný, nepředstíral jistotu, kterou neměl, a rozhodnutí potom obhajoval i s jeho cenou. To je užitečné. Není to osvobození od následků.</p>
 <p>O posledních slovech před vraždou 7. prosince 43 před naším letopočtem esej podává dramatickou repliku. Antické zprávy, mezi nimi Plútarchos, jsou střízlivější: Cicero vystrčil krk z nosítek. Hlavu a ruce, které psaly <em>Filipiky</em>, dal Marcus Antonius vystavit. Přesné znění poslední věty nepotřebuji. Potřebuji metodu, ne legendu.</p>
 <p>Republika stejně padla. Cicero podle eseje dál jednal, jako by se dala zachránit, protože to byl nejlepší dostupný názor a stálo za to podle něj jednat. Odkaz zůstal v knihách. Závěrečná věta Pigliucciho je i název na stránce: pravděpodobně měl pravdu.</p>
-<p>Pokud podobnou mezeru mezi pochybností a jistotou řešíte v ambulanci, v redakci nebo u nástroje, který slibuje jistotu, napište mi přes <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Jde o čtení eseje Massima Pigliucciho z 21. září 2026 a o to, jak ji používám ve vlastní práci. Není to lékařská rada ani výklad římských dějin. Historické body, které uvádím jako ověřené, jsou datum smrti 7. prosince 43 před naším letopočtem a Plútarchovo podání popravy. Ostatní datování přebírám z eseje a označuji je jako její čtení.</em></p>
 HTML,
         ],
@@ -192,7 +192,7 @@ HTML,
 <p>Pigliucci schreibt auch über die Verschwörung Catilinas im Jahr 63 vor unserer Zeitrechnung, als Cicero Konsul war, und über die Hinrichtungen, die der Senat billigte und die ihn später das Exil kosteten. Er sagt absichtlich nicht, Cicero habe recht gehabt. Er sagt, Cicero habe nach einem Urteil gehandelt, von dem er wusste, dass es falsch sein könne, keine Gewissheit vorgetäuscht, die er nicht hatte, und die Entscheidung danach samt ihrem Preis verteidigt. Das ist nützlich. Es ist keine Entlastung von den Folgen.</p>
 <p>Zu den letzten Worten vor dem Mord am 7. Dezember 43 vor unserer Zeitrechnung bietet der Essay eine dramatische Replik. Die antiken Berichte, darunter Plutarch, sind nüchterner: Cicero streckte den Hals aus der Sänfte. Kopf und Hände, die die <em>Philippischen Reden</em> geschrieben hatten, ließ Marcus Antonius ausstellen. Den genauen Wortlaut des letzten Satzes brauche ich nicht. Ich brauche die Methode, nicht die Legende.</p>
 <p>Die Republik fiel trotzdem. Cicero handelte dem Essay zufolge weiter, als ließe sie sich retten, weil das die beste verfügbare Ansicht war und es sich lohnte, danach zu handeln. Das Erbe blieb in den Büchern. Pigliuccis Schlusssatz ist auch der Titel auf der Seite: wahrscheinlich hatte er recht.</p>
-<p>Wenn Sie eine ähnliche Lücke zwischen Zweifel und Gewissheit in der Sprechstunde, in einer Redaktion oder bei einem Werkzeug bearbeiten, das Gewissheit verspricht, schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>.</p>
+
 <p><em>Das ist eine Lektüre des Essays von Massimo Pigliucci vom 21. September 2026 und davon, wie ich sie in der eigenen Arbeit verwende. Es ist kein ärztlicher Rat und keine Darstellung der römischen Geschichte. Die historischen Punkte, die ich als geprüft angebe, sind das Todesdatum, der 7. Dezember 43 vor unserer Zeitrechnung, und Plutarchs Bericht von der Hinrichtung. Die übrige Datierung übernehme ich aus dem Essay und kennzeichne sie als dessen Lektüre.</em></p>
 HTML,
         ],
@@ -233,7 +233,7 @@ HTML,
 <p>Pigliucci écrit aussi sur la conjuration de Catilina en 63 avant notre ère, quand Cicéron était consul, et sur les exécutions que le Sénat a approuvées et qui lui ont plus tard coûté l’exil. Il ne dit pas, à dessein, que Cicéron avait raison. Il dit que Cicéron a agi selon un jugement dont il savait qu’il pouvait être faux, n’a pas feint une certitude qu’il n’avait pas, puis a défendu la décision avec son prix. C’est utile. Ce n’est pas une dispense des conséquences.</p>
 <p>Sur les derniers mots avant le meurtre du 7 décembre 43 avant notre ère, l’essai donne une réplique dramatique. Les récits antiques, Plutarque parmi eux, sont plus sobres : Cicéron a tendu le cou hors de la litière. Marc Antoine a fait exposer la tête et les mains qui avaient écrit les <em>Philippiques</em>. Je n’ai pas besoin du libellé exact de la dernière phrase. J’ai besoin de la méthode, pas de la légende.</p>
 <p>La République est tombée quand même. Selon l’essai, Cicéron a continué d’agir comme si on pouvait la sauver, parce que c’était la meilleure vue disponible et qu’il valait la peine d’agir d’après elle. L’héritage est resté dans les livres. La phrase finale de Pigliucci est aussi le titre de la page : il avait probablement raison.</p>
-<p>Si vous traversez un trou semblable entre le doute et la certitude au cabinet, dans une rédaction ou devant un outil qui promet la certitude, écrivez-moi par le <a href="contact.php">formulaire de contact</a>.</p>
+
 <p><em>Il s’agit d’une lecture de l’essai de Massimo Pigliucci du 21 septembre 2026, et de l’usage que j’en fais dans mon travail. Ce n’est pas un avis médical ni un exposé d’histoire romaine. Les points historiques que je donne comme vérifiés sont la date de la mort, le 7 décembre 43 avant notre ère, et le récit de Plutarque sur l’exécution. Le reste des dates, je le prends à l’essai et je le marque comme sa lecture.</em></p>
 HTML,
         ],
@@ -274,7 +274,7 @@ HTML,
 <p>Pigliucci escribe también sobre la conjura de Catilina en el 63 antes de nuestra era, cuando Cicerón era cónsul, y sobre las ejecuciones que el Senado aprobó y que más tarde le costaron el exilio. A propósito no dice que Cicerón tuviera razón. Dice que actuó según un juicio que sabía que podía estar equivocado, no fingió una certeza que no tenía y después defendió la decisión junto con su precio. Eso es útil. No es una dispensa de las consecuencias.</p>
 <p>Sobre las últimas palabras antes del asesinato del 7 de diciembre del 43 antes de nuestra era, el ensayo ofrece una réplica dramática. Los relatos antiguos, Plutarco entre ellos, son más sobrios: Cicerón sacó el cuello de la litera. Marco Antonio hizo exponer la cabeza y las manos que escribieron las <em>Filípicas</em>. No necesito el texto exacto de la última frase. Necesito el método, no la leyenda.</p>
 <p>La República cayó de todos modos. Según el ensayo, Cicerón siguió actuando como si se pudiera salvar, porque esa era la mejor opinión disponible y valía la pena actuar según ella. El legado quedó en los libros. La frase final de Pigliucci es también el título de la página: probablemente tenía razón.</p>
-<p>Si trabaja un hueco parecido entre la duda y la certeza en una consulta, en una redacción o ante una herramienta que promete certeza, escríbame por el <a href="contact.php">formulario de contacto</a>.</p>
+
 <p><em>Esto es una lectura del ensayo de Massimo Pigliucci del 21 de septiembre de 2026 y de cómo lo uso en mi trabajo. No es un consejo médico ni una exposición de historia romana. Los puntos históricos que doy como comprobados son la fecha de la muerte, el 7 de diciembre del 43 antes de nuestra era, y el relato de Plutarco sobre la ejecución. El resto de las fechas lo tomo del ensayo y lo marco como su lectura.</em></p>
 HTML,
         ],
@@ -315,7 +315,7 @@ HTML,
 <p>Pigliucci pisze też o spisku Katyliny w 63 roku przed naszą erą, gdy Cyceron był konsulem, i o egzekucjach, które Senat zatwierdził, a które później kosztowały go wygnanie. Celowo nie mówi, że Cyceron miał rację. Mówi, że działał według sądu, o którym wiedział, że może być błędny, nie udawał pewności, której nie miał, i potem bronił decyzji razem z jej ceną. To jest pożyteczne. To nie jest zwolnienie ze skutków.</p>
 <p>O ostatnich słowach przed zabójstwem 7 grudnia 43 roku przed naszą erą esej podaje dramatyczną replikę. Starożytne relacje, wśród nich Plutarch, są trzeźwiejsze: Cyceron wysunął szyję z lektyki. Głowę i ręce, które pisały <em>Filipiki</em>, kazał wystawić Marek Antoniusz. Dokładnego brzmienia ostatniego zdania nie potrzebuję. Potrzebuję metody, nie legendy.</p>
 <p>Republika i tak upadła. Cyceron według eseju dalej działał, jakby dało się ją ocalić, bo to był najlepszy dostępny pogląd i warto było według niego działać. Dziedzictwo zostało w książkach. Zdanie końcowe Pigliucciego jest też tytułem na stronie: prawdopodobnie miał rację.</p>
-<p>Jeśli podobną lukę między wątpliwością a pewnością rozwiązujecie w gabinecie, w redakcji albo przy narzędziu, które obiecuje pewność, napiszcie do mnie przez <a href="contact.php">kontakt</a>.</p>
+
 <p><em>To lektura eseju Massima Pigliucciego z 21 września 2026 roku i tego, jak używam jej we własnej pracy. To nie jest porada lekarska ani wykład dziejów Rzymu. Punkty historyczne, które podaję jako sprawdzone, to data śmierci, 7 grudnia 43 roku przed naszą erą, i relacja Plutarcha o egzekucji. Pozostałe datowanie biorę z eseju i oznaczam je jako jego lekturę.</em></p>
 HTML,
         ],
@@ -356,7 +356,7 @@ HTML,
 <p>Pigliucci Catilina i. e. 63-as összeesküvéséről is ír, amikor Cicero consul volt, és a kivégzésekről, amelyeket a senatus jóváhagyott, és amelyek később a száműzetésébe kerültek. Szándékosan nem mondja, hogy Cicerónak igaza volt. Azt mondja, olyan ítélet szerint cselekedett, amelyről tudta, hogy téves lehet, nem színlelt bizonyosságot, amely nem volt meg neki, és utána a döntést az árával együtt védte. Ez hasznos. Nem felmentés a következmények alól.</p>
 <p>Az i. e. 43. december 7-i gyilkosság előtti utolsó szavakról az esszé drámai replikát ad. Az antik beszámolók, köztük Plutarkhoszé, józanabbak: Cicero kidugta a nyakát a hordszékből. A fejet és a kezeket, amelyek a <em>Philippikát</em> írták, Marcus Antonius kiteettette. Az utolsó mondat pontos szövegére nincs szükségem. A módszer kell, nem a legenda.</p>
 <p>A köztársaság így is elesett. Cicero az esszé szerint tovább úgy cselekedett, mintha meg lehetne menteni, mert ez volt a legjobb elérhető nézet, és érdemes volt eszerint cselekedni. Az örökség a könyvekben maradt. Pigliucci zárómondata egyben az oldal címe is: valószínűleg igaza volt.</p>
-<p>Ha hasonló rést dolgoz fel kétely és bizonyosság között a rendelőben, egy szerkesztőségben vagy egy eszközzel, amely bizonyosságot ígér, írjon nekem a <a href="contact.php">kapcsolatfelvételen</a>.</p>
+
 <p><em>Ez Massimo Pigliucci 2026. szeptember 21-i esszéjének olvasata, és annak, hogyan használom a saját munkámban. Nem orvosi tanács, és nem római történelem. A történelmi pontok, amelyeket ellenőrzöttként adok meg, a halál dátuma, i. e. 43. december 7., és Plutarkhosz beszámolója a kivégzésről. A többi datálást az esszéből veszem, és az ő olvasataként jelölöm.</em></p>
 HTML,
         ],
@@ -397,7 +397,7 @@ HTML,
 <p>Pigliucci scrive anche della congiura di Catilina nel 63 avanti la nostra era, quando Cicerone era console, e delle esecuzioni che il Senato approvò e che più tardi gli costarono l’esilio. Di proposito non dice che Cicerone avesse ragione. Dice che agì secondo un giudizio che sapeva poter essere sbagliato, non finse una certezza che non aveva, e poi difese la decisione insieme al suo prezzo. Questo è utile. Non è un’esenzione dalle conseguenze.</p>
 <p>Sulle ultime parole prima dell’uccisione del 7 dicembre 43 avanti la nostra era, il saggio offre una replica drammatica. I resoconti antichi, Plutarco fra essi, sono più sobri: Cicerone sporse il collo dalla lettiga. Marco Antonio fece esporre la testa e le mani che avevano scritto le <em>Filippiche</em>. Non mi serve il testo esatto dell’ultima frase. Mi serve il metodo, non la leggenda.</p>
 <p>La Repubblica cadde comunque. Secondo il saggio, Cicerone continuò ad agire come se si potesse salvarla, perché quella era la migliore opinione disponibile e valeva la pena di agire secondo essa. L’eredità restò nei libri. La frase finale di Pigliucci è anche il titolo della pagina: probabilmente aveva ragione.</p>
-<p>Se state attraversando un vuoto simile tra dubbio e certezza in un ambulatorio, in una redazione o davanti a uno strumento che promette certezza, scrivetemi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+
 <p><em>Questa è una lettura del saggio di Massimo Pigliucci del 21 settembre 2026 e di come lo uso nel mio lavoro. Non è un consiglio medico né un’esposizione di storia romana. I punti storici che do come verificati sono la data della morte, il 7 dicembre 43 avanti la nostra era, e il resoconto di Plutarco sull’esecuzione. Il resto delle date lo prendo dal saggio e lo marco come la sua lettura.</em></p>
 HTML,
         ],
@@ -438,7 +438,7 @@ HTML,
 <p>Пільюччі пише і про змову Катіліни 63 року до нашої ери, коли Цицерон був консулом, і про страти, які Сенат схвалив і які пізніше коштували йому вигнання. Він навмисно не каже, що Цицерон мав рацію. Він каже, що той діяв за судженням, про яке знав, що воно може бути хибним, не вдавав певності, якої не мав, і потім обстоював рішення разом із його ціною. Це корисно. Це не звільнення від наслідків.</p>
 <p>Про останні слова перед убивством 7 грудня 43 року до нашої ери есей подає драматичну репліку. Античні звістки, серед них Плутархова, тверезіші: Цицерон висунув шию з нош. Голову і руки, що писали <em>Філіппіки</em>, Марк Антоній звелів виставити. Точного формулювання останнього речення мені не треба. Мені треба метод, не легенда.</p>
 <p>Республіка все одно впала. Цицерон, за есеєм, далі діяв так, ніби її можна врятувати, бо це був найкращий доступний погляд і за ним варто було діяти. Спадщина лишилася в книжках. Заключне речення Пільюччі є й назвою на сторінці: ймовірно, він мав рацію.</p>
-<p>Якщо подібну щілину між сумнівом і певністю ви розбираєте в кабінеті, у редакції чи біля інструмента, що обіцяє певність, напишіть мені через <a href="contact.php">контакт</a>.</p>
+
 <p><em>Це читання есею Массімо Пільюччі від 21 вересня 2026 року і того, як я користуюся ним у власній роботі. Це не лікарська порада і не виклад римської історії. Історичні пункти, які подаю як перевірені, — це дата смерті, 7 грудня 43 року до нашої ери, і Плутархів виклад страти. Решту датування беру з есею і позначаю як його читання.</em></p>
 HTML,
         ],

@@ -65,7 +65,7 @@ return [
 <li>Ak by ste predsa overovali: firemný e-mail na vlastnej doméne, portfólio, ktoré si otvoríte vy (nie odkaz z ich správy), a referencie autorov, ktorým zavoláte. Skutočný filmár to pošle. Podvodník zmizne.</li>
 </ul>
 <p>Bell ten istý vzorec opísal v auguste 2025 a Strauss 28. augusta 2026 napísala, že vlna sa ďalej mení: produkčné spoločnosti, agenti, cudzie jazyky. Objemový obchod. Stačí, keď sa chytí zlomok autorov.</p>
-<p>Túto správu som zahodil. Ak vám prišla podobná, napíšte mi cez <a href="contact.php">kontakt</a>. Nie odosielateľovi.</p>
+<p>Túto správu som zahodil. Ak vám prišla podobná, neodpovedajte odosielateľovi.</p>
 <p><em>Ide o osobnú skúsenosť, nie o právnu radu. Podozrivú správu nahláste poskytovateľovi e-mailu. Meno v podpise je to, čo stálo v e-maile, nie preukázaná totožnosť konkrétneho človeka.</em></p>
 HTML,
         ],
@@ -104,7 +104,7 @@ HTML,
 <li>If you still want to check: a company email on its own domain, a portfolio you open yourself (not a link from their message), and author references you can call. A real filmmaker will send that. A scammer disappears.</li>
 </ul>
 <p>Bell described the same pattern in August 2025, and on 28 August 2026 Strauss wrote that the wave keeps morphing: production companies, agents, foreign languages. A business built on volume. A fraction of authors is enough.</p>
-<p>I discarded this message. If a similar one reached you, write to me via the <a href="contact.php">contact form</a>. Not to the sender.</p>
+<p>I discarded this message. If a similar one reached you, do not reply to the sender.</p>
 <p><em>This is a personal account, not legal advice. Report a suspicious message to your email provider. The name in the signature is what stood in the email, not a proven identity of a specific person.</em></p>
 HTML,
         ],
@@ -143,7 +143,7 @@ HTML,
 <li>Pokud byste přesto ověřovali: firemní e-mail na vlastní doméně, portfolio, které si otevřete sami (ne odkaz z jejich zprávy), a reference autorů, kterým zavoláte. Skutečný filmař to pošle. Podvodník zmizí.</li>
 </ul>
 <p>Bell stejný vzorec popsal v srpnu 2025 a Strauss 28. srpna 2026 napsala, že vlna se dál mění: produkční společnosti, agenti, cizí jazyky. Obchod postavený na objemu. Stačí, když se chytí zlomek autorů.</p>
-<p>Tuto zprávu jsem zahodil. Pokud vám přišla podobná, napište mi přes <a href="contact.php">kontakt</a>. Ne odesílateli.</p>
+<p>Tuto zprávu jsem zahodil. Pokud vám přišla podobná, neodpovídejte odesílateli.</p>
 <p><em>Jde o osobní zkušenost, ne o právní radu. Podezřelou zprávu nahlaste poskytovateli e-mailu. Jméno v podpisu je to, co stálo v e-mailu, ne prokázaná totožnost konkrétního člověka.</em></p>
 HTML,
         ],
@@ -182,7 +182,7 @@ HTML,
 <li>Wenn Sie dennoch prüfen: eine Firmenmail auf eigener Domain, ein Portfolio, das Sie selbst öffnen (kein Link aus ihrer Nachricht), und Autorenreferenzen, die Sie anrufen. Ein echter Filmemacher schickt das. Ein Betrüger verschwindet.</li>
 </ul>
 <p>Bell beschrieb dasselbe Muster im August 2025, und am 28. August 2026 schrieb Strauss, die Welle wandle sich weiter: Produktionsfirmen, Agenten, Fremdsprachen. Ein Geschäft auf Volumen. Ein Bruchteil der Autoren genügt.</p>
-<p>Diese Nachricht habe ich verworfen. Wenn eine ähnliche bei Ihnen ankam, schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>. Nicht dem Absender.</p>
+<p>Diese Nachricht habe ich verworfen. Wenn eine ähnliche bei Ihnen ankam, antworten Sie dem Absender nicht.</p>
 <p><em>Das ist ein persönlicher Bericht, keine Rechtsberatung. Melden Sie eine verdächtige Nachricht Ihrem E-Mail-Anbieter. Der Name in der Signatur ist das, was in der E-Mail stand, keine nachgewiesene Identität einer bestimmten Person.</em></p>
 HTML,
         ],
@@ -221,7 +221,7 @@ HTML,
 <li>Si vous vérifiez quand même : un e-mail d’entreprise sur son propre domaine, un portfolio que vous ouvrez vous-même (pas un lien de leur message), et des références d’auteurs que vous appelez. Un vrai cinéaste enverra cela. Un arnaqueur disparaît.</li>
 </ul>
 <p>Bell a décrit le même schéma en août 2025, et le 28 août 2026 Strauss a écrit que la vague continue de muter : sociétés de production, agents, langues étrangères. Un commerce de volume. Une fraction d’auteurs suffit.</p>
-<p>J’ai jeté ce message. Si un message semblable vous est arrivé, écrivez-moi via le <a href="contact.php">formulaire de contact</a>. Pas à l’expéditeur.</p>
+<p>J’ai jeté ce message. Si un message semblable vous est arrivé, ne répondez pas à l’expéditeur.</p>
 <p><em>Il s’agit d’un récit personnel, pas d’un avis juridique. Signalez un message suspect à votre fournisseur de messagerie. Le nom dans la signature est celui qui figurait dans l’e-mail, pas une identité prouvée.</em></p>
 HTML,
         ],
@@ -260,7 +260,7 @@ HTML,
 <li>Si aun así quiere comprobar: un correo de empresa en su propio dominio, un portafolio que abra usted (no un enlace de su mensaje) y referencias de autores a los que llame. Un cineasta real lo enviará. Un estafador desaparece.</li>
 </ul>
 <p>Bell describió el mismo patrón en agosto de 2025, y el 28 de agosto de 2026 Strauss escribió que la ola sigue mutando: productoras, agentes, idiomas extranjeros. Un negocio de volumen. Basta una fracción de autores.</p>
-<p>Descarté este mensaje. Si le llegó uno parecido, escríbame por el <a href="contact.php">formulario de contacto</a>. No al remitente.</p>
+<p>Descarté este mensaje. Si le llegó uno parecido, no responda al remitente.</p>
 <p><em>Es un relato personal, no asesoramiento legal. Denuncie un mensaje sospechoso a su proveedor de correo. El nombre de la firma es el que figuraba en el correo, no una identidad demostrada.</em></p>
 HTML,
         ],
@@ -299,7 +299,7 @@ HTML,
 <li>Jeśli mimo to sprawdzacie: firmowy e-mail na własnej domenie, portfolio, które otworzycie sami (nie link z ich wiadomości), i referencje autorów, do których zadzwonicie. Prawdziwy filmowiec to przyśle. Oszust zniknie.</li>
 </ul>
 <p>Bell opisał ten sam wzorzec w sierpniu 2025, a 28 sierpnia 2026 Strauss napisała, że fala dalej się zmienia: firmy produkcyjne, agenci, obce języki. Biznes na wolumenie. Wystarczy ułamek autorów.</p>
-<p>Tę wiadomość wyrzuciłem. Jeśli podobna do Was dotarła, napiszcie przez <a href="contact.php">kontakt</a>. Nie do nadawcy.</p>
+<p>Tę wiadomość wyrzuciłem. Jeśli podobna do Was dotarła, nie odpowiadajcie nadawcy.</p>
 <p><em>To osobiste doświadczenie, nie porada prawna. Podejrzaną wiadomość zgłoście dostawcy poczty. Imię w podpisie jest tym, co stało w e-mailu, nie udowodnioną tożsamością konkretnej osoby.</em></p>
 HTML,
         ],
@@ -338,7 +338,7 @@ HTML,
 <li>Ha mégis ellenőriz: céges e-mail a saját domainjén, portfólió, amelyet ön nyit meg (nem az ő levelük linkje), és szerzői referenciák, akiket felhív. Egy igazi filmes elküldi. A csaló eltűnik.</li>
 </ul>
 <p>Bell 2025 augusztusában írta le ugyanezt a mintát, Strauss pedig 2026. augusztus 28-án azt, hogy a hullám tovább alakul: gyártók, ügynökök, idegen nyelvek. Volumenre épülő üzlet. Elég a szerzők töredéke.</p>
-<p>Ezt az üzenetet eldobtam. Ha hasonló érkezett, írjon a <a href="contact.php">kapcsolati űrlapon</a>. Ne a feladónak.</p>
+<p>Ezt az üzenetet eldobtam. Ha hasonló érkezett, ne válaszoljon a feladónak.</p>
 <p><em>Személyes beszámoló, nem jogi tanács. A gyanús levelet jelentse az e-mail-szolgáltatónak. Az aláírásban álló név az, ami a levélben állt, nem egy konkrét személy bizonyított kiléte.</em></p>
 HTML,
         ],
@@ -377,7 +377,7 @@ HTML,
 <li>Se volete comunque verificare: un’email aziendale sul proprio dominio, un portfolio che aprite voi (non un link del loro messaggio) e riferimenti di autori che chiamate. Un vero cineasta lo manderà. Un truffatore sparisce.</li>
 </ul>
 <p>Bell ha descritto lo stesso schema nell’agosto 2025, e il 28 agosto 2026 Strauss ha scritto che l’ondata continua a mutare: case di produzione, agenti, lingue straniere. Un affare di volume. Basta una frazione di autori.</p>
-<p>Ho cestinato questo messaggio. Se ne è arrivato uno simile, scrivetemi tramite il <a href="contact.php">modulo di contatto</a>. Non al mittente.</p>
+<p>Ho cestinato questo messaggio. Se ne è arrivato uno simile, non rispondete al mittente.</p>
 <p><em>È un resoconto personale, non un parere legale. Segnalate un messaggio sospetto al fornitore di posta. Il nome nella firma è quello che stava nell’email, non un’identità dimostrata.</em></p>
 HTML,
         ],
@@ -416,7 +416,7 @@ HTML,
 <li>Якщо все ж перевіряєте: корпоративна пошта на власному домені, портфоліо, яке відкриваєте ви самі (не посилання з їхнього листа), і рекомендації авторів, яким телефонуєте. Справжній кінематографіст це надішле. Шахрай зникне.</li>
 </ul>
 <p>Bell описав той самий шаблон у серпні 2025, а 28 серпня 2026 Strauss написала, що хвиля далі змінюється: продакшен-компанії, агенти, чужі мови. Бізнес на обсязі. Досить частки авторів.</p>
-<p>Цей лист я викинув. Якщо подібний надійшов вам, напишіть через <a href="contact.php">контакт</a>. Не відправнику.</p>
+<p>Цей лист я викинув. Якщо подібний надійшов вам, не відповідайте відправнику.</p>
 <p><em>Це особистий досвід, не юридична порада. Підозрілий лист повідомте поштовому провайдеру. Ім’я в підписі — те, що стояло в листі, а не доведена особа конкретної людини.</em></p>
 HTML,
         ],

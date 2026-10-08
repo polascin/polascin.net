@@ -52,7 +52,7 @@ return [
 <p>Čo changelog nepovie: každé z tých vydaní najprv prešlo AI-asistovaným auditom. AI píše boilerplate. Ja prečítam každý riadok a rozhodnem klinickú biznis logiku. Tá delba práce je celý produkt.</p>
 <p>Stavať klinický softvér sólo kedysi znamenalo voliť medzi rýchlosťou a bezpečnosťou. Keď AI zvládne opakujúcu sa prácu — testy, záplaty, bezpečnostné skeny — ten kompromis sa zužuje.</p>
 <p>Produkt je nájditeľný. Testovacia sada je dôvod, prečo je bezpečné ho nájsť.</p>
-<p>Ak staviaťe niečo podobné sami — čo by ste AI odovzdali ako prvé? Napíšte mi cez <a href="contact.php">kontakt</a>.</p>
+<p>Ak staviaťe niečo podobné sami — čo by ste AI odovzdali ako prvé?</p>
 HTML,
         ],
         'en' => [
@@ -74,7 +74,7 @@ HTML,
 <p>The part that does not make the changelog: every one of those releases went through an AI-assisted audit first. The AI writes the boilerplate. I review every line and make the clinical business-logic decisions. That division of labour is the whole product.</p>
 <p>Building clinical software solo used to mean choosing between speed and safety. With AI handling the repetitive work — tests, patches, security scans — the trade-off narrows.</p>
 <p>The product is findable now. The test suite is the reason it is safe to find.</p>
-<p>If you are building something similar alone — what would you hand to AI first? Write to me via the <a href="contact.php">contact form</a>.</p>
+<p>If you are building something similar alone — what would you hand to AI first?</p>
 HTML,
         ],
         'cs' => [
@@ -96,7 +96,7 @@ HTML,
 <p>Co changelog neřekne: každé z těch vydání nejprve prošlo AI-asistovaným auditem. AI píše boilerplate. Já přečtu každý řádek a rozhodnu klinickou business logiku. Ta dělba práce je celý produkt.</p>
 <p>Stavět klinický software sólo kdysi znamenalo volit mezi rychlostí a bezpečností. Když AI zvládne opakující se práci — testy, záplaty, bezpečnostní skeny — ten kompromis se zužuje.</p>
 <p>Produkt je dohledatelný. Testovací sada je důvod, proč je bezpečné ho najít.</p>
-<p>Pokud stavíte něco podobného sami — co byste AI předali jako první? Napište mi přes <a href="contact.php">kontakt</a>.</p>
+<p>Pokud stavíte něco podobného sami — co byste AI předali jako první?</p>
 HTML,
         ],
         'de' => [
@@ -118,7 +118,7 @@ HTML,
 <p>Was das Changelog nicht sagt: jedes dieser Releases ging zuerst durch ein KI-gestütztes Audit. Die KI schreibt Boilerplate. Ich lese jede Zeile und treffe die klinischen Business-Logic-Entscheidungen. Diese Arbeitsteilung ist das ganze Produkt.</p>
 <p>Klinische Software allein zu bauen hieß früher, zwischen Geschwindigkeit und Sicherheit zu wählen. Wenn KI die repetitive Arbeit übernimmt — Tests, Patches, Security-Scans — verengt sich dieser Kompromiss.</p>
 <p>Das Produkt ist auffindbar. Die Testsuite ist der Grund, warum es sicher ist, es zu finden.</p>
-<p>Wenn Sie etwas Ähnliches allein bauen — was würden Sie der KI zuerst übergeben? Schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>.</p>
+<p>Wenn Sie etwas Ähnliches allein bauen — was würden Sie der KI zuerst übergeben?</p>
 HTML,
         ],
         'fr' => [
@@ -140,7 +140,7 @@ HTML,
 <p>Ce que le changelog ne dit pas&nbsp;: chacune de ces versions est d’abord passée par un audit assisté par l’IA. L’IA écrit le boilerplate. Je relis chaque ligne et je décide la logique métier clinique. Cette division du travail, c’est tout le produit.</p>
 <p>Construire un logiciel clinique en solo, c’était autrefois choisir entre vitesse et sécurité. Quand l’IA prend le travail répétitif — tests, correctifs, scans de sécurité — le compromis se resserre.</p>
 <p>Le produit est trouvable. La suite de tests est la raison pour laquelle il est sûr de le trouver.</p>
-<p>Si vous construisez quelque chose de similaire seul — que confieriez-vous d’abord à l’IA&nbsp;? Écrivez-moi via le <a href="contact.php">formulaire de contact</a>.</p>
+<p>Si vous construisez quelque chose de similaire seul — que confieriez-vous d’abord à l’IA&nbsp;?</p>
 HTML,
         ],
         'es' => [
@@ -162,7 +162,7 @@ HTML,
 <p>Lo que el changelog no cuenta: cada una de esas versiones pasó primero por una auditoría asistida por IA. La IA escribe el boilerplate. Yo leo cada línea y decido la lógica de negocio clínica. Esa división del trabajo es todo el producto.</p>
 <p>Construir software clínico en solitario antes significaba elegir entre velocidad y seguridad. Cuando la IA asume el trabajo repetitivo — tests, parches, análisis de seguridad — el compromiso se estrecha.</p>
 <p>El producto es encontrable. La suite de tests es la razón por la que es seguro encontrarlo.</p>
-<p>Si construyes algo similar solo — ¿qué le entregarías primero a la IA? Escríbeme por el <a href="contact.php">formulario de contacto</a>.</p>
+<p>Si construyes algo similar solo — ¿qué le entregarías primero a la IA?</p>
 HTML,
         ],
         'pl' => [
@@ -184,7 +184,7 @@ HTML,
 <p>Czego changelog nie powie: każde z tych wydań najpierw przeszło audyt wspomagany AI. AI pisze boilerplate. Ja czytam każdą linię i decyduję o klinicznej logice biznesowej. Ten podział pracy to cały produkt.</p>
 <p>Budowanie klinicznego softu solo kiedyś oznaczało wybór między szybkością a bezpieczeństwem. Gdy AI bierze powtarzalną pracę — testy, łatki, skany bezpieczeństwa — ten kompromis się zawęża.</p>
 <p>Produkt jest znajdowalny. Zestaw testów jest powodem, dla którego bezpiecznie go znaleźć.</p>
-<p>Jeśli budujecie coś podobnego sami — co oddalibyście AI jako pierwsze? Napiszcie przez <a href="contact.php">kontakt</a>.</p>
+<p>Jeśli budujecie coś podobnego sami — co oddalibyście AI jako pierwsze?</p>
 HTML,
         ],
         'hu' => [
@@ -206,7 +206,7 @@ HTML,
 <p>Amit a changelog nem mond: ezek a kiadások mind előbb AI-segített auditon mentek át. Az AI írja a boilerplate-et. Én minden sort átolvasok, és a klinikai üzleti logikát döntöm el. Ez a munkamegosztás az egész termék.</p>
 <p>Klinikai szoftvert egyedül építeni régen sebesség és biztonság közötti választást jelentett. Ha az AI végzi az ismétlődő munkát — tesztek, javítások, biztonsági vizsgálatok — a kompromisszum szűkül.</p>
 <p>A termék megtalálható. A tesztsorozat az oka, hogy biztonságos megtalálni.</p>
-<p>Ha hasonlót építettek egyedül — mit adnának át először az AI-nak? Írjanak a <a href="contact.php">kapcsolati űrlapon</a>.</p>
+<p>Ha hasonlót építettek egyedül — mit adnának át először az AI-nak?</p>
 HTML,
         ],
         'it' => [
@@ -228,7 +228,7 @@ HTML,
 <p>Quello che il changelog non dice: ognuna di quelle versioni è prima passata da un audit assistito dall’IA. L’IA scrive il boilerplate. Io leggo ogni riga e decido la logica di business clinica. Quella divisione del lavoro è tutto il prodotto.</p>
 <p>Costruire software clinico da soli un tempo significava scegliere tra velocità e sicurezza. Quando l’IA gestisce il lavoro ripetitivo — test, patch, scansioni di sicurezza — il compromesso si restringe.</p>
 <p>Il prodotto è trovabile. La suite di test è il motivo per cui è sicuro trovarlo.</p>
-<p>Se costruite qualcosa di simile da soli — cosa dareste per primi all’IA? Scrivetemi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+<p>Se costruite qualcosa di simile da soli — cosa dareste per primi all’IA?</p>
 HTML,
         ],
         'uk' => [
@@ -250,7 +250,7 @@ HTML,
 <p>Чого changelog не скаже: кожен із тих релізів спочатку пройшов AI-асистований аудит. AI пише boilerplate. Я читаю кожен рядок і вирішую клінічну бізнес-логіку. Цей поділ праці — весь продукт.</p>
 <p>Будувати клінічний софт наодинці колись означало обирати між швидкістю й безпекою. Коли AI бере повторювану роботу — тести, латки, сканування безпеки — цей компроміс звужується.</p>
 <p>Продукт можна знайти. Тестовий набір — причина, чому його безпечно знаходити.</p>
-<p>Якщо будуєте щось подібне самі — що б ви віддали AI першим? Напишіть мені через <a href="contact.php">контакт</a>.</p>
+<p>Якщо будуєте щось подібне самі — що б ви віддали AI першим?</p>
 HTML,
         ],
     ],

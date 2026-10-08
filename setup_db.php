@@ -587,6 +587,11 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/aj-clovek-ma-svoj-skill-md.php'
             );
         },
+        '2026100802_remove_blog_contact_ctas' => static function (PDO $pdo): void {
+            foreach (glob(__DIR__ . '/content/articles/*.php') ?: [] as $articlePath) {
+                refreshPublishedArticleTextFromFile($pdo, $articlePath);
+            }
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

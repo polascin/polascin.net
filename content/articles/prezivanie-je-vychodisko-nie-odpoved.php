@@ -97,7 +97,7 @@ return [
 <li><strong>Zapíš primeraný záver.</strong> Rozlišuj: viem, mám dobrý dôvod myslieť si, prikláňam sa k, zatiaľ neviem. Nechaj jednu otvorenú otázku.</li>
 </ol>
 <p>V rozhovore najprv zopakuj stanovisko druhého tak, aby ho uznal za presné. Potom oddeľ zhodu na opise od nesúhlasu s vysvetlením. Jedna dobre sformulovaná námietka býva užitočnejšia než desať rýchlych protiargumentov. A na záver otázka, ktorú si diel necháva na dnes: čo by sa v každodennom živote skutočne zmenilo, keby bola moja obľúbená metafyzická teória nesprávna?</p>
-<p>Ak podobnú hranicu medzi skúsenosťou a výkladom riešite v čítaní, v rozhovore alebo vo vlastnej práci, napíšte mi cez <a href="contact.php">kontakt</a>. Príbuznú úvahu o presvedčení, ktoré unesie čin a predsa ostane opraviteľné, som zapísal v texte <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Dobrý skeptik má viac než pochybnosť a menej než istotu</a>.</p>
+<p>Príbuznú úvahu o presvedčení, ktoré unesie čin a predsa ostane opraviteľné, som zapísal v texte <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Dobrý skeptik má viac než pochybnosť a menej než istotu</a>.</p>
 <p><em>Ide o filozofické čítanie druhého dielu nedeľnej metafyziky zo 4. októbra 2026, nie o lekársku radu ani o klinický výklad vedomia, anestézie alebo slobodnej vôle. Neurovedecké a historické odkazy uvádzam ako orientáciu v literatúre, ktorú diel používa: Chalmers 1995, Levine 1983, Jackson 1982, James 1902, Parfit 1984 a Libet so spolupracovníkmi 1983. Nenahrádzajú posúdenie konkrétneho človeka.</em></p>
 HTML,
         ],
@@ -162,7 +162,7 @@ HTML,
 <li><strong>Write a proportionate conclusion.</strong> Distinguish: I know, I have good reason to think, I incline to, I do not yet know. Leave one question open.</li>
 </ol>
 <p>In conversation, first restate the other person’s view so that he recognises it as accurate. Then separate agreement about the description from disagreement about the explanation. One well-formed objection is usually more useful than ten quick counter-arguments. And the question the volume leaves for today: what in ordinary life would actually change if my favourite metaphysical theory were wrong?</p>
-<p>If you are working a similar boundary between experience and interpretation, in reading, in conversation or in your own work, write to me through the <a href="contact.php">contact form</a>. A related reflection on a conviction firm enough to act on and still open to revision is in <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">A good sceptic has more than doubt and less than certainty</a>.</p>
+<p>A related reflection on a conviction firm enough to act on and still open to revision is in <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">A good sceptic has more than doubt and less than certainty</a>.</p>
 <p><em>This is a philosophical reading of the second volume of Sunday metaphysics, dated 4 October 2026. It is not medical advice and not a clinical account of consciousness, anaesthesia or free will. The neuroscientific and historical references are a guide to the literature the volume uses: Chalmers 1995, Levine 1983, Jackson 1982, James 1902, Parfit 1984, and Libet and colleagues 1983. They do not replace a judgement about a particular person.</em></p>
 HTML,
         ],
@@ -227,7 +227,7 @@ HTML,
 <li><strong>Zapiš přiměřený závěr.</strong> Rozlišuj: vím, mám dobrý důvod si myslet, přikláním se k, zatím nevím. Nech jednu otázku otevřenou.</li>
 </ol>
 <p>V rozhovoru nejdřív zopakuj stanovisko druhého tak, aby je uznal za přesné. Pak odděl shodu na popisu od nesouhlasu s vysvětlením. Jedna dobře formulovaná námitka bývá užitečnější než deset rychlých protiargumentů. A na závěr otázka, kterou si díl nechává na dnešek: co by se v každodenním životě skutečně změnilo, kdyby byla má oblíbená metafyzická teorie nesprávná?</p>
-<p>Pokud podobnou hranici mezi zkušeností a výkladem řešíte ve čtení, v rozhovoru nebo ve vlastní práci, napište mi přes <a href="contact.php">kontakt</a>. Příbuznou úvahu o přesvědčení, které unese čin a přesto zůstane opravitelné, jsem zapsal v textu <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Dobrý skeptik má víc než pochybnost a méně než jistotu</a>.</p>
+<p>Příbuznou úvahu o přesvědčení, které unese čin a přesto zůstane opravitelné, jsem zapsal v textu <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Dobrý skeptik má víc než pochybnost a méně než jistotu</a>.</p>
 <p><em>Jde o filozofické čtení druhého dílu nedělní metafyziky ze 4. října 2026, ne o lékařskou radu ani o klinický výklad vědomí, anestezie nebo svobodné vůle. Neurovědecké a historické odkazy uvádím jako orientaci v literatuře, kterou díl používá: Chalmers 1995, Levine 1983, Jackson 1982, James 1902, Parfit 1984 a Libet se spolupracovníky 1983. Nenahrazují posouzení konkrétního člověka.</em></p>
 HTML,
         ],
@@ -292,7 +292,7 @@ HTML,
 <li><strong>Schreiben Sie einen angemessenen Schluss.</strong> Unterscheiden Sie: Ich weiß, ich habe guten Grund zu denken, ich neige zu, ich weiß noch nicht. Lassen Sie eine Frage offen.</li>
 </ol>
 <p>Im Gespräch geben Sie zuerst die Ansicht des anderen so wieder, dass er sie als genau erkennt. Dann trennen Sie die Einigkeit über die Beschreibung von der Uneinigkeit über die Erklärung. Ein gut geformter Einwand ist gewöhnlich nützlicher als zehn schnelle Gegenargumente. Und die Frage, die der Band für heute lässt: Was würde sich im gewöhnlichen Leben tatsächlich ändern, wenn meine liebste metaphysische Theorie falsch wäre?</p>
-<p>Wenn Sie eine ähnliche Grenze zwischen Erleben und Deutung bearbeiten, in der Lektüre, im Gespräch oder in der eigenen Arbeit, schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>. Eine verwandte Überlegung zu einer Überzeugung, die fest genug zum Handeln und doch offen für die Korrektur ist, steht in <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Ein guter Skeptiker hat mehr als Zweifel und weniger als Gewissheit</a>.</p>
+<p>Eine verwandte Überlegung zu einer Überzeugung, die fest genug zum Handeln und doch offen für die Korrektur ist, steht in <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Ein guter Skeptiker hat mehr als Zweifel und weniger als Gewissheit</a>.</p>
 <p><em>Dies ist eine philosophische Lektüre des zweiten Bandes der „Sonntagsmetaphysik“, datiert auf den 4. Oktober 2026. Sie ist kein ärztlicher Rat und keine klinische Darstellung von Bewusstsein, Anästhesie oder freiem Willen. Die neurowissenschaftlichen und historischen Verweise sind ein Wegweiser zur Literatur, die der Band verwendet: Chalmers 1995, Levine 1983, Jackson 1982, James 1902, Parfit 1984 und Libet und Kollegen 1983. Sie ersetzen kein Urteil über einen bestimmten Menschen.</em></p>
 HTML,
     ],
@@ -357,7 +357,7 @@ HTML,
 <li><strong>Écrivez une conclusion proportionnée.</strong> Distinguez : je sais, j’ai de bonnes raisons de penser, je penche vers, je ne sais pas encore. Laissez une question ouverte.</li>
 </ol>
 <p>Dans la conversation, reformulez d’abord la vue de l’autre de sorte qu’il la reconnaisse comme exacte. Puis séparez l’accord sur la description du désaccord sur l’explication. Une objection bien formée est d’ordinaire plus utile que dix contre-arguments rapides. Et la question que le volume laisse pour aujourd’hui : qu’est-ce qui, dans la vie ordinaire, changerait réellement si ma théorie métaphysique préférée était fausse ?</p>
-<p>Si vous travaillez une frontière semblable entre vécu et interprétation, dans la lecture, dans la conversation ou dans votre propre travail, écrivez-moi par le <a href="contact.php">formulaire de contact</a>. Une réflexion apparentée, sur une conviction assez ferme pour qu’on agisse selon elle et encore ouverte à la révision, se trouve dans <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Un bon sceptique a plus que le doute et moins que la certitude</a>.</p>
+<p>Une réflexion apparentée, sur une conviction assez ferme pour qu’on agisse selon elle et encore ouverte à la révision, se trouve dans <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Un bon sceptique a plus que le doute et moins que la certitude</a>.</p>
 <p><em>Ceci est une lecture philosophique du deuxième volume de la « métaphysique du dimanche », daté du 4 octobre 2026. Ce n’est pas un conseil médical et ce n’est pas un compte rendu clinique de la conscience, de l’anesthésie ou du libre arbitre. Les références neuroscientifiques et historiques sont un guide vers la littérature que le volume utilise : Chalmers 1995, Levine 1983, Jackson 1982, James 1902, Parfit 1984, et Libet et ses collègues 1983. Elles ne remplacent pas un jugement sur une personne particulière.</em></p>
 HTML,
     ],
@@ -422,7 +422,7 @@ HTML,
 <li><strong>Escriba una conclusión proporcionada.</strong> Distinga: sé, tengo buenas razones para pensar, me inclino a, todavía no sé. Deje una pregunta abierta.</li>
 </ol>
 <p>En la conversación, reformule primero la opinión de la otra persona de modo que la reconozca como exacta. Luego separe el acuerdo sobre la descripción del desacuerdo sobre la explicación. Una objeción bien formada suele ser más útil que diez contraargumentos rápidos. Y la pregunta que el volumen deja para hoy: ¿qué cambiaría de verdad en la vida ordinaria si mi teoría metafísica preferida fuera falsa?</p>
-<p>Si trabaja una frontera semejante entre experiencia vivida e interpretación, en la lectura, en la conversación o en su propio trabajo, escríbame por el <a href="contact.php">formulario de contacto</a>. Una reflexión afín, sobre una convicción bastante firme para actuar según ella y aun abierta a la revisión, está en <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Un buen escéptico tiene más que la duda y menos que la certeza</a>.</p>
+<p>Una reflexión afín, sobre una convicción bastante firme para actuar según ella y aun abierta a la revisión, está en <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Un buen escéptico tiene más que la duda y menos que la certeza</a>.</p>
 <p><em>Esto es una lectura filosófica del segundo volumen de la « metafísica del domingo », fechada el 4 de octubre de 2026. No es un consejo médico ni un relato clínico de la conciencia, la anestesia o el libre albedrío. Las referencias neurocientíficas e históricas son una guía a la literatura que el volumen usa: Chalmers 1995, Levine 1983, Jackson 1982, James 1902, Parfit 1984, y Libet y sus colegas 1983. No sustituyen un juicio sobre una persona particular.</em></p>
 HTML,
     ],
@@ -487,7 +487,7 @@ HTML,
 <li><strong>Napiszcie współmierny wniosek.</strong> Rozróżniajcie: wiem, mam dobry powód, by sądzić, skłaniam się ku, jeszcze nie wiem. Zostawcie jedno pytanie otwarte.</li>
 </ol>
 <p>W rozmowie najpierw powtórzcie pogląd drugiej osoby tak, by uznała go za trafny. Potem oddzielcie zgodę co do opisu od niezgody co do wyjaśnienia. Jedno dobrze sformułowane zastrzeżenie zwykle więcej daje niż dziesięć szybkich kontrargumentów. I pytanie, które tom zostawia na dziś: co w zwykłym życiu naprawdę by się zmieniło, gdyby moja ulubiona teoria metafizyczna była błędna?</p>
-<p>Jeśli podobną granicę między doświadczeniem a interpretacją opracowujecie w lekturze, w rozmowie albo we własnej pracy, napiszcie do mnie przez <a href="contact.php">kontakt</a>. Pokrewna refleksja o przekonaniu dość mocnym, by według niego działać, a jednak otwartym na rewizję, jest w tekście <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Dobry sceptyk ma więcej niż wątpliwość i mniej niż pewność</a>.</p>
+<p>Pokrewna refleksja o przekonaniu dość mocnym, by według niego działać, a jednak otwartym na rewizję, jest w tekście <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Dobry sceptyk ma więcej niż wątpliwość i mniej niż pewność</a>.</p>
 <p><em>To filozoficzna lektura drugiego tomu metafizyki niedzielnej z 4 października 2026 roku. Nie jest poradą lekarską ani klinicznym ujęciem świadomości, znieczulenia czy wolnej woli. Odniesienia neuronaukowe i historyczne są przewodnikiem po literaturze, z której korzysta tom: Chalmers 1995, Levine 1983, Jackson 1982, James 1902, Parfit 1984 oraz Libet i współpracownicy 1983. Nie zastępują osądu o konkretnej osobie.</em></p>
 HTML,
     ],
@@ -552,7 +552,7 @@ HTML,
 <li><strong>Írjon arányos következtetést.</strong> Különböztessen: tudom, jó okom van így gondolni, hajlom rá, még nem tudom. Hagyjon nyitva egy kérdést.</li>
 </ol>
 <p>A beszélgetésben először fogalmazza újra a másik nézetét úgy, hogy az pontosnak ismerje fel. Azután válassza el a leírásról szóló egyetértést a magyarázatról szóló egyet nem értéstől. Egy jól formált ellenvetés többnyire hasznosabb, mint tíz gyors ellenérv. És a kérdés, amelyet a kötet mára hagy: mi változna meg valójában a mindennapi életben, ha a kedvenc metafizikai elméletem téves volna?</p>
-<p>Ha a tapasztalat és az értelmezés hasonló határán dolgozik, olvasásban, beszélgetésben vagy a saját munkájában, írjon nekem a <a href="contact.php">kapcsolati űrlapon</a>. Egy rokon töprengés arról a meggyőződésről, amely elég szilárd a cselekvéshez, és mégis nyitott a felülvizsgálatra, ebben a szövegben olvasható: <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">A jó szkeptikusnak többje van a kételynél, és kevesebbje a bizonyosságnál</a>.</p>
+<p>Egy rokon töprengés arról a meggyőződésről, amely elég szilárd a cselekvéshez, és mégis nyitott a felülvizsgálatra, ebben a szövegben olvasható: <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">A jó szkeptikusnak többje van a kételynél, és kevesebbje a bizonyosságnál</a>.</p>
 <p><em>Ez a vasárnapi metafizika 2026. október 4-i második kötetének filozófiai olvasata. Nem orvosi tanács, és nem klinikai beszámoló a tudatról, az anesztéziáról vagy a szabad akaratról. Az idegtudományi és történeti hivatkozások útmutatók ahhoz az irodalomhoz, amelyet a kötet használ: Chalmers 1995, Levine 1983, Jackson 1982, James 1902, Parfit 1984, valamint Libet és munkatársai 1983. Nem helyettesítik egy adott személy megítélését.</em></p>
 HTML,
     ],
@@ -617,7 +617,7 @@ HTML,
 <li><strong>Scrivete una conclusione proporzionata.</strong> Distinguete: so, ho buona ragione di pensare, propendo per, non so ancora. Lasciate aperta una domanda.</li>
 </ol>
 <p>Nella conversazione, riformulate prima la tesi dell’altra persona così che la riconosca come accurata. Poi separate l’accordo sulla descrizione dal disaccordo sulla spiegazione. Un’obiezione ben formata di solito è più utile di dieci controargomenti rapidi. E la domanda che il volume lascia per oggi: che cosa, nella vita ordinaria, cambierebbe davvero se la mia teoria metafisica preferita fosse sbagliata?</p>
-<p>Se state lavorando un confine simile tra esperienza e interpretazione, nella lettura, nella conversazione o nel vostro lavoro, scrivetemi tramite il <a href="contact.php">modulo di contatto</a>. Una riflessione affine, su una convinzione abbastanza ferma per agire e tuttavia aperta alla revisione, è in <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Un buon scettico ha più del dubbio e meno della certezza</a>.</p>
+<p>Una riflessione affine, su una convinzione abbastanza ferma per agire e tuttavia aperta alla revisione, è in <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Un buon scettico ha più del dubbio e meno della certezza</a>.</p>
 <p><em>Questa è una lettura filosofica del secondo volume, datato 4 ottobre 2026, della metafisica della domenica. Non è un consiglio medico e non è un resoconto clinico della coscienza, dell’anestesia o del libero arbitrio. I riferimenti neuroscientifici e storici sono una guida alla letteratura di cui il volume si serve: Chalmers 1995, Levine 1983, Jackson 1982, James 1902, Parfit 1984, e Libet e colleghi 1983. Non sostituiscono un giudizio su una persona particolare.</em></p>
 HTML,
     ],
@@ -682,7 +682,7 @@ HTML,
 <li><strong>Напишіть співмірний висновок.</strong> Розрізняйте: знаю, маю добру підставу думати, схиляюся до, ще не знаю. Залиште одне питання відкритим.</li>
 </ol>
 <p>У розмові спершу перекажіть погляд іншої людини так, щоб вона впізнала його як точний. Потім відокремте згоду щодо опису від незгоди щодо пояснення. Одне добре сформульоване заперечення зазвичай корисніше за десять швидких контраргументів. І питання, яке том лишає на сьогодні: що в звичайному житті справді змінилося б, якби моя улюблена метафізична теорія була хибною?</p>
-<p>Якщо ви опрацьовуєте подібну межу між досвідом і тлумаченням — у читанні, в розмові чи у власній праці — напишіть мені через <a href="contact.php">контакт</a>. Споріднений роздум про переконання, досить тверде, щоб за ним діяти, і все ж відкрите до перегляду, є в тексті <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Добрий скептик має більше, ніж сумнів, і менше, ніж певність</a>.</p>
+<p>Споріднений роздум про переконання, досить тверде, щоб за ним діяти, і все ж відкрите до перегляду, є в тексті <a href="article.php?slug=dobry-skeptik-viac-nez-pochybnost">Добрий скептик має більше, ніж сумнів, і менше, ніж певність</a>.</p>
 <p><em>Це філософське прочитання другого тому недільної метафізики від 4 жовтня 2026 року. Це не лікарська порада і не клінічний виклад свідомості, анестезії чи свободи волі. Нейронаукові та історичні посилання — орієнтир у літературі, якою користується том: Chalmers 1995, Levine 1983, Jackson 1982, James 1902, Parfit 1984 і Libet та колеги 1983. Вони не замінюють судження про конкретну людину.</em></p>
 HTML,
     ],

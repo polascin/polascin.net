@@ -58,7 +58,7 @@ return [
 <p>Nie vypnúť ochranu. Doplniť chýbajúce dvere.</p>
 <p>Zatiaľ mám aspoň overené, že môj digitálny vrátnik neberie ohľad na známosti.</p>
 <p>Ani keď príde majiteľ.</p>
-<p>Ak riešite podobné napätie medzi ochranou obsahu a vlastnými AI nástrojmi, napíšte cez <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Osobná skúsenosť autora s hardeningom vlastného portálu. Nie je to návod na obchádzanie ochran ani na hromadné sťahovanie cudzích webov.</em></p>
 HTML,
         ],
@@ -91,7 +91,7 @@ HTML,
 <p>Not switch the protection off. Add the missing door.</p>
 <p>For now I at least have confirmation that my digital doorman does not care about acquaintances.</p>
 <p>Even when the owner arrives.</p>
-<p>If you face a similar tension between content protection and your own AI tools, write via the <a href="contact.php">contact form</a>.</p>
+
 <p><em>Personal experience hardening the author’s own portal. Not a guide to bypassing protections or bulk-downloading other people’s sites.</em></p>
 HTML,
         ],
@@ -124,7 +124,7 @@ HTML,
 <p>Ne vypnout ochranu. Doplnit chybějící dveře.</p>
 <p>Zatím mám aspoň ověřené, že můj digitální vrátný nebere ohled na známosti.</p>
 <p>Ani když přijde majitel.</p>
-<p>Pokud řešíte podobné napětí mezi ochranou obsahu a vlastními AI nástroji, napište přes <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Osobní zkušenost autora s hardeningem vlastního portálu. Není to návod na obcházení ochran ani na hromadné stahování cizích webů.</em></p>
 HTML,
         ],
@@ -157,7 +157,7 @@ HTML,
 <p>Nicht den Schutz abschalten. Die fehlende Tür ergänzen.</p>
 <p>Vorerst habe ich zumindest bestätigt, dass mein digitaler Türsteher keine Bekanntschaften kennt.</p>
 <p>Auch wenn der Besitzer kommt.</p>
-<p>Wenn Sie ein ähnliches Spannungsfeld zwischen Inhaltsschutz und eigenen KI-Werkzeugen lösen, schreiben Sie über das <a href="contact.php">Kontaktformular</a>.</p>
+
 <p><em>Persönliche Erfahrung des Autors mit dem Hardening des eigenen Portals. Keine Anleitung zum Umgehen von Schutzmechanismen oder zum Massen-Download fremder Websites.</em></p>
 HTML,
         ],
@@ -190,7 +190,7 @@ HTML,
 <p>Pas couper la protection. Ajouter la porte manquante.</p>
 <p>Pour l’instant j’ai au moins vérifié que mon portier numérique ne tient pas compte des connaissances.</p>
 <p>Même quand le propriétaire arrive.</p>
-<p>Si vous gérez une tension semblable entre protection du contenu et vos propres outils d’IA, écrivez via le <a href="contact.php">formulaire de contact</a>.</p>
+
 <p><em>Expérience personnelle de l’auteur sur le durcissement de son propre portail. Ce n’est pas un guide pour contourner les protections ni pour télécharger en masse les sites d’autrui.</em></p>
 HTML,
         ],
@@ -223,7 +223,7 @@ HTML,
 <p>No apagar la protección. Añadir la puerta que falta.</p>
 <p>Por ahora al menos he verificado que mi portero digital no hace favores por amistad.</p>
 <p>Ni cuando llega el dueño.</p>
-<p>Si afronta una tensión parecida entre protección de contenido y sus propias herramientas de IA, escriba por el <a href="contact.php">formulario de contacto</a>.</p>
+
 <p><em>Experiencia personal del autor endureciendo su propio portal. No es una guía para eludir protecciones ni para descargar en masa webs ajenas.</em></p>
 HTML,
         ],
@@ -256,7 +256,7 @@ HTML,
 <p>Nie wyłączać ochrony. Dodać brakujące drzwi.</p>
 <p>Na razie mam przynajmniej potwierdzenie, że mój cyfrowy portier nie bierze pod uwagę znajomości.</p>
 <p>Nawet gdy przychodzi właściciel.</p>
-<p>Jeśli rozwiążesz podobne napięcie między ochroną treści a własnymi narzędziami AI, napisz przez <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Osobiste doświadczenie autora z hardeningiem własnego portalu. To nie jest przewodnik po omijaniu zabezpieczeń ani po masowym pobieraniu cudzych stron.</em></p>
 HTML,
         ],
@@ -289,7 +289,7 @@ HTML,
 <p>Nem kikapcsolni a védelmet. Pótolni a hiányzó ajtót.</p>
 <p>Egyelőre legalább igazoltam, hogy a digitális kapusom nem nézi az ismeretséget.</p>
 <p>Még akkor sem, ha a tulajdonos jön.</p>
-<p>Ha hasonló feszültséget oldasz meg a tartalomvédelem és a saját AI-eszközök között, írj a <a href="contact.php">kapcsolati űrlapon</a>.</p>
+
 <p><em>A szerző személyes tapasztalata a saját portáljának megerősítéséről. Nem útmutató védelmek megkerüléséhez vagy idegen webek tömeges letöltéséhez.</em></p>
 HTML,
         ],
@@ -322,7 +322,7 @@ HTML,
 <p>Non spegnere la protezione. Aggiungere la porta mancante.</p>
 <p>Per ora ho almeno verificato che il mio portiere digitale non tiene conto delle conoscenze.</p>
 <p>Nemmeno quando arriva il proprietario.</p>
-<p>Se affronti una tensione simile tra protezione dei contenuti e i tuoi strumenti IA, scrivi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+
 <p><em>Esperienza personale dell’autore sull’hardening del proprio portale. Non è una guida per aggirare le protezioni né per scaricare in massa siti altrui.</em></p>
 HTML,
         ],
@@ -355,7 +355,7 @@ HTML,
 <p>Не вимикати захист. Додати відсутні двері.</p>
 <p>Поки що маю принаймні підтвердження, що мій цифровий швейцар не зважає на знайомства.</p>
 <p>Навіть коли приходить власник.</p>
-<p>Якщо вирішуєте подібну напругу між захистом контенту та власними AI-інструментами, напишіть через <a href="contact.php">контакт</a>.</p>
+
 <p><em>Особистий досвід автора з hardening власного порталу. Це не інструкція з обходу захистів і не з масового звантаження чужих сайтів.</em></p>
 HTML,
         ],

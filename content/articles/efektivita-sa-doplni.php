@@ -45,7 +45,7 @@ return [
 <p>Ak nerozhodnete, samo od seba príde viac tej istej práce, len rýchlejšie. Ten čas sa nikomu nevráti.</p>
 <p>Preto som sa o tom začal rozhodovať zámerne. Časť ide do hĺbky, časť do oddychu a časť do práce, ktorú by som predtým odmietol. Nie je to výkaz hodín. Je to pravidlo. Inak sa prázdno doplní samo.</p>
 <p>Vedúci: ak vám zamestnanec povie, že mu AI ušetrila desať hodín týždenne, aký je váš úprimný ďalší krok?</p>
-<p>Napíšte mi cez <a href="contact.php">kontakt</a>.</p>
+
 HTML,
         ],
         'en' => [
@@ -63,7 +63,7 @@ HTML,
 <p>If you do not decide, the default is more of the same work, only faster. Nobody gets that time back.</p>
 <p>So I have started deciding on purpose. Some of it goes to depth, some to rest, and some to work I would have declined before. This is not a timesheet. It is a rule. Otherwise the empty space refills itself.</p>
 <p>Leaders: if an employee tells you AI saved them ten hours a week, what is your honest next move?</p>
-<p>Write to me via the <a href="contact.php">contact form</a>.</p>
+
 HTML,
         ],
         'cs' => [
@@ -81,7 +81,7 @@ HTML,
 <p>Když nerozhodnete, samo od sebe přijde víc téže práce, jen rychleji. Ten čas se nikomu nevrátí.</p>
 <p>Proto jsem se o tom začal rozhodovat záměrně. Část jde do hloubky, část do odpočinku a část do práce, kterou bych dřív odmítl. Není to výkaz hodin. Je to pravidlo. Jinak se prázdno zaplní samo.</p>
 <p>Vedoucí: když vám zaměstnanec řekne, že mu AI ušetřila deset hodin týdně, jaký je váš upřímný další krok?</p>
-<p>Napište mi přes <a href="contact.php">kontakt</a>.</p>
+
 HTML,
         ],
         'de' => [
@@ -99,7 +99,7 @@ HTML,
 <p>Wenn Sie nicht entscheiden, kommt standardmäßig mehr von derselben Arbeit, nur schneller. Diese Zeit bekommt niemand zurück.</p>
 <p>Deshalb habe ich angefangen, das bewusst zu entscheiden. Ein Teil geht in die Tiefe, ein Teil in die Ruhe und ein Teil in Arbeit, die ich früher abgelehnt hätte. Das ist keine Stundenzählung. Es ist eine Regel. Sonst füllt sich die Leere von selbst.</p>
 <p>Führungskräfte: Wenn ein Mitarbeiter Ihnen sagt, dass KI ihm zehn Stunden pro Woche gespart hat, was ist Ihr ehrlicher nächster Schritt?</p>
-<p>Schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>.</p>
+
 HTML,
         ],
         'fr' => [
@@ -117,7 +117,7 @@ HTML,
 <p>Si vous ne décidez pas, la valeur par défaut est davantage du même travail, plus vite. Personne ne récupère ce temps.</p>
 <p>J’ai donc commencé à en décider exprès. Une part va à la profondeur, une part au repos, une part au travail que j’aurais refusé avant. Ce n’est pas un relevé d’heures. C’est une règle. Sinon, le vide se remplit tout seul.</p>
 <p>Responsables : si un employé vous dit que l’IA lui a fait gagner dix heures par semaine, quel est votre prochain geste honnête ?</p>
-<p>Écrivez-moi via le <a href="contact.php">formulaire de contact</a>.</p>
+
 HTML,
         ],
         'es' => [
@@ -135,7 +135,7 @@ HTML,
 <p>Si usted no decide, lo predeterminado es más del mismo trabajo, más rápido. Nadie recupera ese tiempo.</p>
 <p>Por eso he empezado a decidirlo a propósito. Una parte va a la profundidad, una al descanso y una al trabajo que antes habría rechazado. No es un parte de horas. Es una regla. Si no, el vacío se llena solo.</p>
 <p>Directivos: si un empleado les dice que la IA le ahorró diez horas a la semana, ¿cuál es su siguiente paso honesto?</p>
-<p>Escríbame a través del <a href="contact.php">formulario de contacto</a>.</p>
+
 HTML,
         ],
         'pl' => [
@@ -153,7 +153,7 @@ HTML,
 <p>Jeśli nie zdecydujesz, domyślnie przyjdzie więcej tej samej pracy, tylko szybciej. Tego czasu nikt nie dostanie z powrotem.</p>
 <p>Dlatego zacząłem decydować o tym świadomie. Część idzie w głąb, część na odpoczynek, a część na pracę, którą wcześniej bym odmówił. To nie jest ewidencja godzin. To reguła. Inaczej pustka zapełni się sama.</p>
 <p>Jeśli pracownik powie ci, że AI zaoszczędziło mu dziesięć godzin tygodniowo, jaki jest twój uczciwy następny krok?</p>
-<p>Napisz przez <a href="contact.php">kontakt</a>.</p>
+
 HTML,
         ],
         'hu' => [
@@ -171,7 +171,7 @@ HTML,
 <p>Ha nem döntesz, az alapértelmezés ugyanabból a munkából több, csak gyorsabban. Azt az időt senki nem kapja vissza.</p>
 <p>Ezért kezdtem szándékosan dönteni róla. Egy része mélységre megy, egy része pihenésre, egy része olyan munkára, amelyet korábban visszautasítottam volna. Ez nem óraelszámolás. Szabály. Különben az üres hely magától megtelik.</p>
 <p>Ha egy munkatárs azt mondja, hogy az AI heti tíz órát spórolt neki, mi a következő őszinte lépésed?</p>
-<p>Írj a <a href="contact.php">kapcsolati űrlapon</a>.</p>
+
 HTML,
         ],
         'it' => [
@@ -189,7 +189,7 @@ HTML,
 <p>Se non decidi, il valore predefinito è più dello stesso lavoro, più in fretta. Quel tempo non torna a nessuno.</p>
 <p>Per questo ho cominciato a deciderlo apposta. Una parte va in profondità, una al riposo e una al lavoro che prima avrei rifiutato. Non è un consuntivo ore. È una regola. Altrimenti il vuoto si riempie da solo.</p>
 <p>Responsabili: se un collaboratore ti dice che l’IA gli ha fatto risparmiare dieci ore a settimana, qual è la tua prossima mossa onesta?</p>
-<p>Scrivi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+
 HTML,
         ],
         'uk' => [
@@ -207,7 +207,7 @@ HTML,
 <p>Якщо не вирішите, типово прийде більше тієї самої роботи, лише швидше. Той час ніхто не отримає назад.</p>
 <p>Тому я почав вирішувати це навмисно. Частина йде в глибину, частина на відпочинок, частина на роботу, від якої я раніше відмовився б. Це не табель годин. Це правило. Інакше порожнеча заповниться сама.</p>
 <p>Керівники: якщо працівник скаже вам, що ШІ заощадив йому десять годин на тиждень, який ваш чесний наступний крок?</p>
-<p>Напишіть через <a href="contact.php">контакт</a>.</p>
+
 HTML,
         ],
     ],

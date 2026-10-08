@@ -59,7 +59,7 @@ return [
 <h2>Čo s tým</h2>
 <p>Neodpovedajte. Ani „nie, ďakujem“. Odpoveď potvrdí, že adresa žije. Potom si zapíšte, čo v správe bolo. Netvrďte, že viete, kto ten človek je. Viete len to, čo správa povedala. Rozbor, ktorý dáte von, trvá asi dvadsať minút a ďalší človek má čo vyhľadať.</p>
 <p>Na aký signál sa spoliehate najviac, keď príde „dokonalá príležitosť“?</p>
-<p>Napíšte mi cez <a href="contact.php">kontakt</a>.</p>
+
 HTML,
         ],
         'en' => [
@@ -87,7 +87,7 @@ HTML,
 <h2>What to do</h2>
 <p>Do not reply. Not even “no, thank you.” A reply confirms that the address is live. Then write down what was in the message. Do not claim to know who the person is. You only know what the message said. Putting that analysis where someone can find it takes about twenty minutes, and the next person has something to search for.</p>
 <p>What’s the tell you rely on most when a “perfect opportunity” lands?</p>
-<p>Write to me via the <a href="contact.php">contact form</a>.</p>
+
 HTML,
         ],
         'cs' => [
@@ -115,7 +115,7 @@ HTML,
 <h2>Co s tím</h2>
 <p>Neodpovídejte. Ani „ne, děkuji“. Odpověď potvrdí, že adresa žije. Pak si zapište, co ve zprávě bylo. Netvrďte, že víte, kdo ten člověk je. Víte jen to, co zpráva řekla. Rozbor, který dáte ven, trvá asi dvacet minut a další člověk má co vyhledat.</p>
 <p>Na jaké znamení spoléháte nejvíc, když přijde „dokonalá příležitost“?</p>
-<p>Napište mi přes <a href="contact.php">kontakt</a>.</p>
+
 HTML,
         ],
         'de' => [
@@ -143,7 +143,7 @@ HTML,
 <h2>Was tun</h2>
 <p>Antworten Sie nicht. Auch nicht mit „nein, danke“. Eine Antwort bestätigt, dass die Adresse lebt. Schreiben Sie danach auf, was in der Nachricht stand. Behaupten Sie nicht, zu wissen, wer die Person ist. Sie wissen nur, was die Nachricht gesagt hat. Die Analyse, die Sie veröffentlichen, dauert etwa zwanzig Minuten, und der nächste Mensch hat etwas zu suchen.</p>
 <p>Woran erkennen Sie ein „perfektes Angebot“ am sichersten, wenn es bei Ihnen landet?</p>
-<p>Schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>.</p>
+
 HTML,
         ],
         'fr' => [
@@ -171,7 +171,7 @@ HTML,
 <h2>Quoi faire</h2>
 <p>Ne répondez pas. Même pas « non, merci ». Une réponse confirme que l’adresse est active. Notez ensuite ce que le message disait. Ne prétendez pas savoir qui est la personne. Vous ne savez que ce que le message a dit. Publier cette analyse prend environ vingt minutes, et la personne suivante a quelque chose à chercher.</p>
 <p>Quel indice vous sert le plus quand une « opportunité parfaite » arrive ?</p>
-<p>Écrivez-moi via le <a href="contact.php">formulaire de contact</a>.</p>
+
 HTML,
         ],
         'es' => [
@@ -199,7 +199,7 @@ HTML,
 <h2>Qué hacer</h2>
 <p>No responda. Ni siquiera «no, gracias». Una respuesta confirma que la dirección está viva. Después anote lo que decía el mensaje. No afirme saber quién es la persona. Usted solo sabe lo que el mensaje dijo. Publicar ese análisis lleva unos veinte minutos, y la siguiente persona tiene algo que buscar.</p>
 <p>¿En qué señal confía usted más cuando llega una «oportunidad perfecta»?</p>
-<p>Escríbame a través del <a href="contact.php">formulario de contacto</a>.</p>
+
 HTML,
         ],
         'pl' => [
@@ -227,7 +227,7 @@ HTML,
 <h2>Co z tym zrobić</h2>
 <p>Nie odpowiadaj. Nawet „nie, dziękuję”. Odpowiedź potwierdza, że adres żyje. Potem zapisz, co było w wiadomości. Nie twierdź, że wiesz, kim jest ta osoba. Wiesz tylko to, co wiadomość powiedziała. Analiza, którą opublikujesz, zajmuje około dwudziestu minut, a następna osoba ma czego szukać.</p>
 <p>Na jaki sygnał liczysz najbardziej, kiedy wpada „idealna okazja”?</p>
-<p>Napisz przez <a href="contact.php">kontakt</a>.</p>
+
 HTML,
         ],
         'hu' => [
@@ -255,7 +255,7 @@ HTML,
 <h2>Mi legyen vele</h2>
 <p>Ne válaszolj. Még „nem, köszönöm”-mel sem. A válasz megerősíti, hogy a cím él. Utána írd le, mi volt az üzenetben. Ne állítsd, hogy tudod, ki az az ember. Csak azt tudod, amit az üzenet mondott. A nyilvános elemzés körülbelül húsz perc, és a következő embernek van mit keresnie.</p>
 <p>Melyik jelre hagyatkozol a leginkább, amikor egy „tökéletes lehetőség” érkezik?</p>
-<p>Írj a <a href="contact.php">kapcsolaton</a> keresztül.</p>
+
 HTML,
         ],
         'it' => [
@@ -283,7 +283,7 @@ HTML,
 <h2>Cosa farne</h2>
 <p>Non rispondere. Nemmeno con «no, grazie». Una risposta conferma che l’indirizzo è vivo. Poi annota che cosa c’era nel messaggio. Non sostenere di sapere chi sia la persona. Sai solo ciò che il messaggio ha detto. Pubblicare quell’analisi richiede circa venti minuti, e la persona dopo ha qualcosa da cercare.</p>
 <p>Qual è il segnale a cui ti affidi di più quando arriva un’«opportunità perfetta»?</p>
-<p>Scrivimi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+
 HTML,
         ],
         'uk' => [
@@ -311,7 +311,7 @@ HTML,
 <h2>Що з цим робити</h2>
 <p>Не відповідайте. Навіть «ні, дякую». Відповідь підтверджує, що адреса жива. Потім запишіть, що було в листі. Не стверджуйте, що знаєте, хто ця людина. Ви знаєте лише те, що сказав лист. Аналіз, який ви опублікуєте, триває близько двадцяти хвилин, і наступна людина має що шукати.</p>
 <p>На яку ознаку ви покладаєтеся найбільше, коли приходить «ідеальна нагода»?</p>
-<p>Напишіть мені через <a href="contact.php">контакт</a>.</p>
+
 HTML,
         ],
     ],

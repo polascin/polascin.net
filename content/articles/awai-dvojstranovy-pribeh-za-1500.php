@@ -62,7 +62,7 @@ return [
 <li><strong>Prečítajte si, ako je list napísaný.</strong> Otázka v predmete, kurzíva, „secret“, „free“. Keď budete predávať vlastnú vec, tento direct-response text je učebnica zadarmo. Kurz za 507 dolárov by som nekupoval. Verejne dostupný materiál o copywritingu pokrýva väčšinu toho istého.</li>
 </ol>
 <p>V tejto sérii sú tri rôzne veci. Book trailer je podvod. Atlas Agents je legálny web bez zrelosti a bez dôvodu dávať mu kľúče. AWAI cez Winning Writers je legitímna reklama. Prvé dve patria do hlásenia spamu. Tretia patrí do odhlásenia, ak vás súťaže už nezaujímajú.</p>
-<p>Ak vám prišla podobná správa a neviete, do ktorej priehradky patrí, napíšte mi cez <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Ide o osobnú skúsenosť, nie o právnu ani investičnú radu. Názvy, adresy a ceny sú to, čo 25. septembra 2026 stálo na weboch Winning Writers a AWAI a v e-maile, ktorý mi prišiel. Honorár za normostranu je môj vlastný cenník, nie ponuka pre čitateľa.</em></p>
 HTML,
         ],
@@ -94,7 +94,7 @@ HTML,
 <li><strong>Read how the letter is built.</strong> A question in the subject, italics, “secret,” “free.” When you sell something of your own, this direct-response copy is a free textbook. I would not buy the $507 course. Publicly available material on copywriting covers most of the same ground.</li>
 </ol>
 <p>This series holds three different things. The book trailer is a scam. Atlas Agents is a lawful site without maturity, and without a reason to hand over keys. AWAI through Winning Writers is a legitimate ad. The first two belong in a spam report. The third belongs in an unsubscribe, if the contests no longer interest you.</p>
-<p>If a similar message reached you and you cannot tell which tray it belongs in, write to me via the <a href="contact.php">contact form</a>.</p>
+
 <p><em>This is a personal account, not legal or investment advice. The names, addresses, and prices are what stood on the Winning Writers and AWAI sites, and in the email I received, on 25 September 2026. The fee per standard page is my own price list, not an offer to the reader.</em></p>
 HTML,
         ],
@@ -126,7 +126,7 @@ HTML,
 <li><strong>Přečtěte si, jak je dopis napsaný.</strong> Otázka v předmětu, kurzíva, „secret“, „free“. Až budete prodávat vlastní věc, tenhle direct-response text je učebnice zdarma. Kurz za 507 dolarů bych nekupoval. Veřejně dostupný materiál o copywritingu pokrývá většinu téhož.</li>
 </ol>
 <p>V této sérii jsou tři různé věci. Book trailer je podvod. Atlas Agents je legální web bez zralosti a bez důvodu dávat mu klíče. AWAI přes Winning Writers je legitimní reklama. První dvě patří do hlášení spamu. Třetí patří do odhlášení, pokud vás soutěže už nezajímají.</p>
-<p>Pokud vám přišla podobná zpráva a nevíte, do které přihrádky patří, napište mi přes <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Jde o osobní zkušenost, ne o právní ani investiční radu. Názvy, adresy a ceny jsou to, co 25. září 2026 stálo na webech Winning Writers a AWAI a v e-mailu, který mi přišel. Honorář za normostranu je můj vlastní ceník, ne nabídka pro čtenáře.</em></p>
 HTML,
         ],
@@ -158,7 +158,7 @@ HTML,
 <li><strong>Lesen Sie, wie der Brief gebaut ist.</strong> Eine Frage im Betreff, Kursiv, „secret“, „free“. Wenn Sie etwas Eigenes verkaufen, ist dieser Direct-Response-Text ein kostenloses Lehrbuch. Den Kurs für 507 Dollar würde ich nicht kaufen. Öffentlich zugängliches Material über Copywriting deckt das meiste davon ab.</li>
 </ol>
 <p>In dieser Reihe stehen drei verschiedene Dinge. Der Book Trailer ist Betrug. Atlas Agents ist eine rechtmäßige Seite ohne Reife und ohne Grund, ihr Schlüssel zu geben. AWAI über Winning Writers ist eine legitime Anzeige. Die ersten beiden gehören in eine Spam-Meldung. Die dritte gehört in eine Abmeldung, wenn die Wettbewerbe Sie nicht mehr interessieren.</p>
-<p>Wenn eine ähnliche Nachricht bei Ihnen ankam und Sie nicht wissen, in welches Fach sie gehört, schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>.</p>
+
 <p><em>Das ist ein persönlicher Bericht, keine Rechts- und keine Anlageberatung. Namen, Adressen und Preise sind das, was am 25. September 2026 auf den Seiten von Winning Writers und AWAI und in der E-Mail stand, die mich erreichte. Das Honorar je Normseite ist meine eigene Preisliste, kein Angebot an die Leserin oder den Leser.</em></p>
 HTML,
         ],
@@ -190,7 +190,7 @@ HTML,
 <li><strong>Lisez comment la lettre est construite.</strong> Une question dans l’objet, de l’italique, « secret », « free ». Quand vous vendrez quelque chose à vous, ce texte de réponse directe est un manuel gratuit. Je n’achèterais pas le cours à 507 dollars. Le matériau public sur le copywriting couvre l’essentiel de la même matière.</li>
 </ol>
 <p>Cette série tient trois choses différentes. Le book trailer est une arnaque. Atlas Agents est un site licite, sans maturité, et sans raison de lui confier des clés. AWAI via Winning Writers est une publicité légitime. Les deux premiers vont dans un signalement de spam. Le troisième va dans un désabonnement, si les concours ne vous intéressent plus.</p>
-<p>Si un message semblable vous est arrivé et que vous ne savez pas dans quel bac le ranger, écrivez-moi via le <a href="contact.php">formulaire de contact</a>.</p>
+
 <p><em>Il s’agit d’un récit personnel, pas d’un conseil juridique ni d’un conseil en investissement. Les noms, les adresses et les prix sont ce qui figurait sur les sites de Winning Writers et d’AWAI, et dans l’e-mail reçu, le 25 septembre 2026. Le tarif à la page normalisée est mon propre barème, pas une offre au lecteur.</em></p>
 HTML,
         ],
@@ -222,7 +222,7 @@ HTML,
 <li><strong>Lea cómo está escrita la carta.</strong> Una pregunta en el asunto, cursiva, «secret», «free». Cuando venda algo propio, este texto de respuesta directa es un manual gratuito. Yo no compraría el curso de 507 dólares. El material público sobre copywriting cubre la mayor parte de lo mismo.</li>
 </ol>
 <p>En esta serie hay tres cosas distintas. El book trailer es una estafa. Atlas Agents es un sitio lícito, sin madurez y sin motivo para entregarle claves. AWAI a través de Winning Writers es un anuncio legítimo. Los dos primeros van a un aviso de spam. El tercero va a una baja, si los concursos ya no le interesan.</p>
-<p>Si le llegó un mensaje parecido y no sabe en qué bandeja ponerlo, escríbame por el <a href="contact.php">formulario de contacto</a>.</p>
+
 <p><em>Es un relato personal, no un consejo jurídico ni de inversión. Los nombres, las direcciones y los precios son lo que figuraba en las webs de Winning Writers y AWAI, y en el correo que recibí, el 25 de septiembre de 2026. La tarifa por página normalizada es mi propia lista, no una oferta al lector.</em></p>
 HTML,
         ],
@@ -254,7 +254,7 @@ HTML,
 <li><strong>Przeczytaj, jak list jest zbudowany.</strong> Pytanie w temacie, kursywa, „secret”, „free”. Kiedy będziesz sprzedawać coś własnego, ten tekst direct response jest darmowym podręcznikiem. Kursu za 507 dolarów bym nie kupił. Publicznie dostępny materiał o copywritingu pokrywa większość tego samego.</li>
 </ol>
 <p>W tej serii są trzy różne rzeczy. Book trailer to oszustwo. Atlas Agents to legalna strona bez dojrzałości i bez powodu, by oddawać jej klucze. AWAI przez Winning Writers to legalna reklama. Dwie pierwsze należą do zgłoszenia spamu. Trzecia należy do wypisania, jeśli konkursy już cię nie obchodzą.</p>
-<p>Jeśli przyszła do ciebie podobna wiadomość i nie wiesz, do której przegródki należy, napisz przez <a href="contact.php">kontakt</a>.</p>
+
 <p><em>To osobiste doświadczenie, nie porada prawna ani inwestycyjna. Nazwy, adresy i ceny są tym, co 25 września 2026 stało na stronach Winning Writers i AWAI oraz w e-mailu, który do mnie przyszedł. Stawka za normostronę to mój własny cennik, nie oferta dla czytelnika.</em></p>
 HTML,
         ],
@@ -286,7 +286,7 @@ HTML,
 <li><strong>Olvassa el, hogyan van megírva a levél.</strong> Kérdés a tárgyban, dőlt betű, „secret”, „free”. Ha saját dolgot ad el, ez a direct-response szöveg ingyenes tankönyv. Az 507 dolláros tanfolyamot nem venném meg. A szövegírásról nyilvánosan elérhető anyag a java részét lefedi.</li>
 </ol>
 <p>Ebben a sorozatban három különböző dolog van. A book trailer átverés. Az Atlas Agents jogszerű oldal, érettség nélkül, és ok nélkül adni neki kulcsokat. Az AWAI a Winning Writersen keresztül törvényes hirdetés. Az első kettő spambejelentésbe való. A harmadik leiratkozásba, ha a pályázatok már nem érdeklik.</p>
-<p>Ha hasonló üzenet érkezett, és nem tudja, melyik rekeszbe tartozik, írjon a <a href="contact.php">kapcsolati űrlapon</a>.</p>
+
 <p><em>Személyes beszámoló, nem jogi és nem befektetési tanács. A nevek, címek és árak azok, amelyek 2026. szeptember 25-én a Winning Writers és az AWAI oldalain, valamint a kapott e-mailben álltak. A normáloldal díja a saját díjszabásom, nem ajánlat az olvasónak.</em></p>
 HTML,
         ],
@@ -318,7 +318,7 @@ HTML,
 <li><strong>Leggete come è costruita la lettera.</strong> Una domanda nell’oggetto, il corsivo, «secret», «free». Quando venderete qualcosa di vostro, questo testo di direct response è un manuale gratuito. Il corso da 507 dollari non lo comprerei. Il materiale pubblico sul copywriting copre gran parte della stessa materia.</li>
 </ol>
 <p>In questa serie ci sono tre cose diverse. Il book trailer è una truffa. Atlas Agents è un sito lecito, senza maturità e senza motivo per consegnargli le chiavi. AWAI attraverso Winning Writers è una pubblicità legittima. I primi due vanno in una segnalazione di spam. Il terzo va in una cancellazione, se i concorsi non vi interessano più.</p>
-<p>Se vi è arrivato un messaggio simile e non sapete in quale scomparto metterlo, scrivetemi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+
 <p><em>È un resoconto personale, non un consiglio legale né di investimento. Nomi, indirizzi e prezzi sono ciò che il 25 settembre 2026 stava sui siti di Winning Writers e AWAI e nell’e-mail che ho ricevuto. Il compenso a cartella è il mio listino, non un’offerta al lettore.</em></p>
 HTML,
         ],
@@ -350,7 +350,7 @@ HTML,
 <li><strong>Прочитайте, як побудовано лист.</strong> Питання в темі, курсив, «secret», «free». Коли продаватимете своє, цей direct-response текст — безкоштовний підручник. Курс за 507 доларів я б не купував. Відкриті матеріали про копірайтинг покривають більшу частину того самого.</li>
 </ol>
 <p>У цій серії три різні речі. Book trailer — шахрайство. Atlas Agents — законний сайт без зрілості і без причини віддавати йому ключі. AWAI через Winning Writers — легітимна реклама. Перші два належать до скарги на спам. Третє — до відписки, якщо конкурси вас уже не цікавлять.</p>
-<p>Якщо вам прийшов подібний лист і ви не знаєте, до якої шухляди він належить, напишіть мені через <a href="contact.php">контакт</a>.</p>
+
 <p><em>Це особистий досвід, не юридична і не інвестиційна порада. Назви, адреси й ціни — те, що 25 вересня 2026 року стояло на сайтах Winning Writers і AWAI та в листі, який мені прийшов. Гонорар за нормосторінку — мій власний прайс, не пропозиція читачеві.</em></p>
 HTML,
         ],

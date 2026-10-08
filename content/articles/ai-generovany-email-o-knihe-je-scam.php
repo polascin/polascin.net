@@ -43,7 +43,7 @@ return [
 <p>Neodpovedal som. Ani „ďakujem, nemám záujem“. <a href="https://caniphish.com/blog/responding-to-a-phishing-email">CanIPhish</a> to vysvetľuje jednoducho: odpoveď je signál, že adresa je aktívna a pravidelne kontrolovaná. Zaradí vás do ďalších zoznamov.</p>
 <p>V Gmaile som správu označil ako spam a odosielateľa zablokoval. Vymazať nestačí — filter sa učí z označenia.</p>
 <p>Ak publikujete na Amazone, pozrite si author bio. Škola, mesto, mená učiteľov sú verejné krmivo pre botov, ktorí z nich skladajú ilúziu lokálneho spojenia.</p>
-<p>Dostali ste podobný e-mail? Napíšte mi cez <a href="contact.php">kontakt</a>. Nie odosielateľovi.</p>
+<p>Dostali ste podobný e-mail? Neodpovedajte odosielateľovi.</p>
 <p><em>Ide o osobnú skúsenosť, nie o právnu radu. Podozrivú správu nahláste poskytovateľovi e-mailu.</em></p>
 HTML,
         ],
@@ -61,7 +61,7 @@ HTML,
 <p>I did not reply. Not even “thank you, I am not interested.” <a href="https://caniphish.com/blog/responding-to-a-phishing-email">CanIPhish</a> puts it simply: a reply signals that the address is active and regularly checked. It puts you on further lists.</p>
 <p>In Gmail I marked the message as spam and blocked the sender. Deleting is not enough — the filter learns from the spam label.</p>
 <p>If you publish on Amazon, look at your author bio. School, town, teachers’ names are public feed for bots that assemble the illusion of a local connection.</p>
-<p>Have you received a similar email? Write to me via the <a href="contact.php">contact form</a>. Not to the sender.</p>
+<p>Have you received a similar email? Do not reply to the sender.</p>
 <p><em>This is a personal account, not legal advice. Report a suspicious message to your email provider.</em></p>
 HTML,
         ],
@@ -79,7 +79,7 @@ HTML,
 <p>Neodpověděl jsem. Ani „děkuji, nemám zájem“. <a href="https://caniphish.com/blog/responding-to-a-phishing-email">CanIPhish</a> to vysvětluje jednoduše: odpověď je signál, že adresa je aktivní a pravidelně kontrolovaná. Zařadí vás do dalších seznamů.</p>
 <p>V Gmailu jsem zprávu označil jako spam a odesílatele zablokoval. Smazat nestačí — filtr se učí z označení.</p>
 <p>Pokud publikujete na Amazonu, podívejte se na author bio. Škola, město, jména učitelů jsou veřejné krmivo pro boty, kteří z nich skládají iluzi místního spojení.</p>
-<p>Dostali jste podobný e-mail? Napište mi přes <a href="contact.php">kontakt</a>. Ne odesílateli.</p>
+<p>Dostali jste podobný e-mail? Neodpovídejte odesílateli.</p>
 <p><em>Jde o osobní zkušenost, ne o právní radu. Podezřelou zprávu nahlaste poskytovateli e-mailu.</em></p>
 HTML,
         ],
@@ -97,7 +97,7 @@ HTML,
 <p>Ich habe nicht geantwortet. Auch nicht mit „danke, kein Interesse“. <a href="https://caniphish.com/blog/responding-to-a-phishing-email">CanIPhish</a> sagt es schlicht: Eine Antwort signalisiert, dass die Adresse aktiv und regelmäßig geprüft wird. Sie landet auf weiteren Listen.</p>
 <p>In Gmail habe ich die Nachricht als Spam markiert und den Absender blockiert. Löschen reicht nicht — der Filter lernt von der Markierung.</p>
 <p>Wenn Sie auf Amazon veröffentlichen, sehen Sie sich die Autorenbio an. Schule, Stadt, Lehrernamen sind öffentliches Futter für Bots, die daraus die Illusion einer lokalen Verbindung bauen.</p>
-<p>Haben Sie eine ähnliche E-Mail bekommen? Schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>. Nicht dem Absender.</p>
+<p>Haben Sie eine ähnliche E-Mail bekommen? Antworten Sie dem Absender nicht.</p>
 <p><em>Das ist ein persönlicher Bericht, keine Rechtsberatung. Melden Sie eine verdächtige Nachricht Ihrem E-Mail-Anbieter.</em></p>
 HTML,
         ],
@@ -115,7 +115,7 @@ HTML,
 <p>Je n'ai pas répondu. Même pas « merci, cela ne m'intéresse pas ». <a href="https://caniphish.com/blog/responding-to-a-phishing-email">CanIPhish</a> le dit simplement : une réponse signale que l'adresse est active et régulièrement consultée. Elle vous place sur d'autres listes.</p>
 <p>Dans Gmail, j'ai marqué le message comme spam et bloqué l'expéditeur. Effacer ne suffit pas — le filtre apprend de l'étiquette spam.</p>
 <p>Si vous publiez sur Amazon, regardez votre bio d'auteur. L'école, la ville, les noms d'enseignants sont de la nourriture publique pour des bots qui en assemblent l'illusion d'un lien local.</p>
-<p>Avez-vous reçu un e-mail similaire ? Écrivez-moi via le <a href="contact.php">formulaire de contact</a>. Pas à l'expéditeur.</p>
+<p>Avez-vous reçu un e-mail similaire ? Ne répondez pas à l'expéditeur.</p>
 <p><em>Ceci est un récit personnel, pas un conseil juridique. Signalez un message suspect à votre fournisseur de messagerie.</em></p>
 HTML,
         ],
@@ -133,7 +133,7 @@ HTML,
 <p>No respondí. Ni siquiera «gracias, no me interesa». <a href="https://caniphish.com/blog/responding-to-a-phishing-email">CanIPhish</a> lo explica con sencillez: una respuesta señala que la dirección está activa y se revisa con regularidad. Le mete en más listas.</p>
 <p>En Gmail marqué el mensaje como spam y bloqueé al remitente. Borrar no basta: el filtro aprende de la etiqueta.</p>
 <p>Si publica en Amazon, mire su bio de autor. La escuela, la ciudad, los nombres de profesores son alimento público para bots que montan la ilusión de un vínculo local.</p>
-<p>¿Ha recibido un correo parecido? Escríbame a través del <a href="contact.php">formulario de contacto</a>. No al remitente.</p>
+<p>¿Ha recibido un correo parecido? No responda al remitente.</p>
 <p><em>Esto es un relato personal, no un consejo jurídico. Denuncie un mensaje sospechoso a su proveedor de correo.</em></p>
 HTML,
         ],
@@ -151,7 +151,7 @@ HTML,
 <p>Nie odpowiedziałem. Nawet nie „dziękuję, nie jestem zainteresowany”. <a href="https://caniphish.com/blog/responding-to-a-phishing-email">CanIPhish</a> tłumaczy to prosto: odpowiedź to sygnał, że adres jest aktywny i regularnie sprawdzany. Wciąga was na kolejne listy.</p>
 <p>W Gmailu oznaczyłem wiadomość jako spam i zablokowałem nadawcę. Usunięcie nie wystarczy — filtr uczy się z oznaczenia.</p>
 <p>Jeśli publikujecie na Amazonie, zerknijcie na author bio. Szkoła, miasto, nazwiska nauczycieli to publiczna karma dla botów, które składają z nich złudzenie lokalnego powiązania.</p>
-<p>Dostaliście podobny e-mail? Napiszcie do mnie przez <a href="contact.php">kontakt</a>. Nie do nadawcy.</p>
+<p>Dostaliście podobny e-mail? Nie odpowiadajcie nadawcy.</p>
 <p><em>To osobiste doświadczenie, nie porada prawna. Podejrzaną wiadomość zgłoście dostawcy poczty.</em></p>
 HTML,
         ],
@@ -169,7 +169,7 @@ HTML,
 <p>Nem válaszoltam. Még egy „köszönöm, nem érdekel” sem. A <a href="https://caniphish.com/blog/responding-to-a-phishing-email">CanIPhish</a> egyszerűen fogalmaz: a válasz jelzi, hogy a cím aktív és rendszeresen ellenőrzött. További listákra teszi.</p>
 <p>A Gmailben spammé jelöltem az üzenetet, és letiltottam a feladót. Törölni nem elég — a szűrő a jelölésből tanul.</p>
 <p>Ha Amazonon publikál, nézze meg a szerzői biót. Iskola, város, tanárok nevei nyilvános táplálék botoknak, amelyek ebből helyi kapcsolat illúzióját rakják össze.</p>
-<p>Kapott hasonló e-mailt? Írjon nekem a <a href="contact.php">kapcsolati űrlapon</a>. Nem a feladónak.</p>
+<p>Kapott hasonló e-mailt? Ne válaszoljon a feladónak.</p>
 <p><em>Személyes beszámoló, nem jogi tanács. A gyanús üzenetet jelentse az e-mail-szolgáltatójának.</em></p>
 HTML,
         ],
@@ -187,7 +187,7 @@ HTML,
 <p>Non ho risposto. Nemmeno «grazie, non mi interessa». <a href="https://caniphish.com/blog/responding-to-a-phishing-email">CanIPhish</a> lo spiega in modo semplice: una risposta segnala che l'indirizzo è attivo e controllato di routine. Vi mette in altre liste.</p>
 <p>In Gmail ho contrassegnato il messaggio come spam e bloccato il mittente. Cancellare non basta — il filtro impara dall'etichetta.</p>
 <p>Se pubblicate su Amazon, guardate la bio dell'autore. Scuola, città, nomi degli insegnanti sono cibo pubblico per bot che ne assemblano l'illusione di un legame locale.</p>
-<p>Avete ricevuto un'e-mail simile? Scrivetemi tramite il <a href="contact.php">modulo di contatto</a>. Non al mittente.</p>
+<p>Avete ricevuto un'e-mail simile? Non rispondete al mittente.</p>
 <p><em>Questo è un resoconto personale, non un parere legale. Segnalate un messaggio sospetto al vostro fornitore di posta.</em></p>
 HTML,
         ],
@@ -205,7 +205,7 @@ HTML,
 <p>Я не відповів. Навіть не «дякую, не цікаво». <a href="https://caniphish.com/blog/responding-to-a-phishing-email">CanIPhish</a> пояснює просто: відповідь — сигнал, що адреса активна й регулярно перевіряється. Вона ставить вас у наступні списки.</p>
 <p>У Gmail я позначив повідомлення як спам і заблокував відправника. Видалити замало — фільтр вчиться з позначки.</p>
 <p>Якщо публікуєте на Amazon, подивіться author bio. Школа, місто, імена вчителів — публічна пожива для ботів, які складають з них ілюзію місцевого зв'язку.</p>
-<p>Отримали подібний лист? Напишіть мені через <a href="contact.php">контакт</a>. Не відправникові.</p>
+<p>Отримали подібний лист? Не відповідайте відправникові.</p>
 <p><em>Це особистий досвід, не юридична порада. Підозріле повідомлення повідомте постачальникові пошти.</em></p>
 HTML,
         ],

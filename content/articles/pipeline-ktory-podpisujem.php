@@ -41,7 +41,7 @@ return [
 <p>To isté je princíp tohto postupu. Agent text pripraví. Nasadenie sa overí. Pravidlo, ktoré si nechávam, znie takto: ostávam človek, ktorý tvrdenie podpisuje. Nie je to výkaz, že som po slove prešiel každú už zverejnenú vetu. Je to záväzok, podľa ktorého ďalší text ide von.</p>
 <p>Kontrola, ktorú pred nasadením nepreskočím, je konkrétna. Kľúčové stránky majú vrátiť stav 200, interné cesty stav 403, hlavička Content-Security-Policy má niesť nonce a mapa stránok má uviesť odkazy hreflang. Rýchlosť nie je riziko. Riziko je zverejniť niečo, čo ste neoverili.</p>
 <p>Ak publikujete s pomocou umelej inteligencie, aká je vaša kontrola, ktorú pred nasadením neobídete?</p>
-<p>Napíšte mi cez <a href="contact.php">kontakt</a>.</p>
+
 HTML,
         ],
         'en' => [
@@ -55,7 +55,7 @@ HTML,
 <p>The same thing is the design principle of this pipeline. The agent produces. Deployment is checked. The rule I keep is this: I remain the person who signs the claim. It is not a ledger that I have gone through every sentence already published, word by word. It is the commitment under which the next piece goes out.</p>
 <p>The check I do not skip before deploy is concrete. Key pages should return status 200, internal paths status 403, the Content-Security-Policy header should carry a nonce, and the sitemap should list the hreflang links. Speed is not the risk. Publishing something you have not checked is.</p>
 <p>If you publish with the help of artificial intelligence, what is the check you do not bypass before deploy?</p>
-<p>Write to me via the <a href="contact.php">contact form</a>.</p>
+
 HTML,
         ],
         'cs' => [
@@ -69,7 +69,7 @@ HTML,
 <p>Totéž je princip tohoto postupu. Agent text připraví. Nasazení se ověří. Pravidlo, které si nechávám, zní takto: zůstávám člověk, který tvrzení podepisuje. Není to výkaz, že jsem po slově prošel každou už zveřejněnou větu. Je to závazek, podle kterého další text jde ven.</p>
 <p>Kontrola, kterou před nasazením nepřeskočím, je konkrétní. Klíčové stránky mají vrátit stav 200, interní cesty stav 403, hlavička Content-Security-Policy má nést nonce a mapa stránek má uvést odkazy hreflang. Rychlost není riziko. Riziko je zveřejnit něco, co jste neověřili.</p>
 <p>Pokud publikujete s pomocí umělé inteligence, jakou kontrolu před nasazením neobejdete?</p>
-<p>Napište mi přes <a href="contact.php">kontakt</a>.</p>
+
 HTML,
         ],
         'de' => [
@@ -83,7 +83,7 @@ HTML,
 <p>Dasselbe ist der Grundsatz dieses Ablaufs. Der Agent bereitet den Text vor. Die Veröffentlichung wird geprüft. Die Regel, die ich behalte, lautet: Ich bleibe der Mensch, der die Behauptung unterschreibt. Das ist keine Aufstellung, dass ich jeden schon veröffentlichten Satz Wort für Wort durchgegangen wäre. Es ist die Verpflichtung, unter der der nächste Text hinausgeht.</p>
 <p>Die Prüfung, die ich vor der Veröffentlichung nicht auslasse, ist konkret. Zentrale Seiten sollen den Status 200 liefern, interne Pfade den Status 403, der Content-Security-Policy-Header soll eine Nonce tragen und die Sitemap soll die hreflang-Links nennen. Geschwindigkeit ist nicht das Risiko. Das Risiko ist, etwas zu veröffentlichen, das Sie nicht geprüft haben.</p>
 <p>Wenn Sie mit Hilfe künstlicher Intelligenz veröffentlichen: Welche Prüfung lassen Sie vor der Veröffentlichung nicht aus?</p>
-<p>Schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>.</p>
+
 HTML,
         ],
         'fr' => [
@@ -97,7 +97,7 @@ HTML,
 <p>Le même principe règle ce circuit. L’agent prépare le texte. La mise en ligne est vérifiée. La règle que je garde est celle-ci : je reste la personne qui signe l’affirmation. Ce n’est pas un relevé selon lequel j’aurais relu mot à mot chaque phrase déjà publiée. C’est l’engagement sous lequel le texte suivant sort.</p>
 <p>Le contrôle que je ne saute pas avant la mise en ligne est concret. Les pages principales doivent renvoyer le statut 200, les chemins internes le statut 403, l’en-tête Content-Security-Policy doit porter un nonce et le plan du site doit indiquer les liens hreflang. La vitesse n’est pas le risque. Le risque est de publier quelque chose que vous n’avez pas vérifié.</p>
 <p>Si vous publiez avec l’aide de l’intelligence artificielle, quel contrôle ne laissez-vous pas de côté avant la mise en ligne ?</p>
-<p>Écrivez-moi via le <a href="contact.php">formulaire de contact</a>.</p>
+
 HTML,
         ],
         'es' => [
@@ -111,7 +111,7 @@ HTML,
 <p>El mismo principio rige este circuito. El agente prepara el texto. La publicación se comprueba. La regla que me quedo es esta: sigo siendo la persona que firma la afirmación. No es un parte de que haya revisado palabra por palabra cada frase ya publicada. Es el compromiso con el que sale el texto siguiente.</p>
 <p>El control que no me salto antes de publicar es concreto. Las páginas principales deben devolver el estado 200, las rutas internas el estado 403, la cabecera Content-Security-Policy debe llevar un nonce y el mapa del sitio debe indicar los enlaces hreflang. La velocidad no es el riesgo. El riesgo es publicar algo que usted no ha comprobado.</p>
 <p>Si publica con ayuda de la inteligencia artificial, ¿cuál es el control que usted no se salta antes de publicar?</p>
-<p>Escríbame a través del <a href="contact.php">formulario de contacto</a>.</p>
+
 HTML,
         ],
         'pl' => [
@@ -125,7 +125,7 @@ HTML,
 <p>Ta sama zasada rządzi tym tokiem pracy. Agent przygotowuje tekst. Publikacja jest sprawdzana. Reguła, którą zostawiam sobie, brzmi tak: zostaję człowiekiem, który twierdzenie podpisuje. To nie jest zestawienie, że przeszedłem słowo po słowie każde już opublikowane zdanie. To zobowiązanie, według którego wychodzi następny tekst.</p>
 <p>Kontrola, której nie pomijam przed wdrożeniem, jest konkretna. Kluczowe strony mają zwrócić stan 200, ścieżki wewnętrzne stan 403, nagłówek Content-Security-Policy ma nieść nonce, a mapa witryny ma podać odnośniki hreflang. Szybkość nie jest ryzykiem. Ryzykiem jest opublikować coś, czego nie sprawdziłeś.</p>
 <p>Jeśli publikujesz z pomocą sztucznej inteligencji, jakiej kontroli nie pomijasz przed wdrożeniem?</p>
-<p>Napisz przez <a href="contact.php">kontakt</a>.</p>
+
 HTML,
         ],
         'hu' => [
@@ -139,7 +139,7 @@ HTML,
 <p>Ugyanez a menete elve. Az ügynök elkészíti a szöveget. A közzétételt ellenőrzöm. A szabály, amelyet magamnál tartok, ez: én maradok az, aki az állítást aláírja. Ez nem kimutatás arról, hogy szóról szóra végigmentem minden már megjelent mondaton. Ez az a kötelezettség, amely szerint a következő szöveg kimehet.</p>
 <p>Az ellenőrzés, amelyet a közzététel előtt nem hagyok ki, konkrét. A fontos oldalak 200-as állapotot adjanak, a belső útvonalak 403-at, a Content-Security-Policy fejléc vigyen nonce-t, a webhelytérkép pedig sorolja a hreflang hivatkozásokat. A sebesség nem a kockázat. A kockázat az, ha olyasmit teszel közzé, amit nem ellenőriztél.</p>
 <p>Ha mesterséges intelligencia segítségével publikálsz, melyik ellenőrzést nem hagyod ki a közzététel előtt?</p>
-<p>Írj a <a href="contact.php">kapcsolati űrlapon</a>.</p>
+
 HTML,
         ],
         'it' => [
@@ -153,7 +153,7 @@ HTML,
 <p>Lo stesso principio regola questo procedimento. L’agente prepara il testo. La pubblicazione viene verificata. La regola che mi tengo è questa: resto la persona che firma l’affermazione. Non è un rendiconto di aver riletto parola per parola ogni frase già pubblicata. È l’impegno con cui esce il testo successivo.</p>
 <p>Il controllo che non salto prima della pubblicazione è concreto. Le pagine principali devono restituire lo stato 200, i percorsi interni lo stato 403, l’intestazione Content-Security-Policy deve portare un nonce e la mappa del sito deve indicare i link hreflang. La velocità non è il rischio. Il rischio è pubblicare qualcosa che non hai verificato.</p>
 <p>Se pubblichi con l’aiuto dell’intelligenza artificiale, quale controllo non salti prima della messa online?</p>
-<p>Scrivi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+
 HTML,
         ],
         'uk' => [
@@ -167,7 +167,7 @@ HTML,
 <p>Той самий принцип тримає цей хід роботи. Агент готує текст. Розгортання перевіряється. Правило, яке я лишаю собі, таке: я лишаюся людиною, яка підписує твердження. Це не звіт про те, що я слово за словом переглянув кожне вже опубліковане речення. Це зобов’язання, за яким виходить наступний текст.</p>
 <p>Перевірка, яку я не пропускаю перед розгортанням, конкретна. Ключові сторінки мають повернути стан 200, внутрішні шляхи — стан 403, заголовок Content-Security-Policy має нести nonce, а мапа сайту має навести посилання hreflang. Швидкість не є ризиком. Ризик — оприлюднити те, чого ви не перевірили.</p>
 <p>Якщо ви публікуєте з допомогою штучного інтелекту, яку перевірку ви не пропускаєте перед розгортанням?</p>
-<p>Напишіть через <a href="contact.php">контакт</a>.</p>
+
 HTML,
         ],
     ],

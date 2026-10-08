@@ -71,7 +71,7 @@ return [
 <h2>Jeden detail, ktorý môže byť zaujímavý</h2>
 <p>Čeres nebol iba dekoratívny kus kroja. Bol to predmet spojený s pastierstvom, lesnou prácou, fyzickou silou a horským spôsobom života. Mal praktickú funkciu pri ochrane drieku a nosili sa v ňom peniaze a drobné predmety. V ľudovej kultúre získal aj symbolický význam sily a objavuje sa v zbojníckych tradíciách.</p>
 <p>Ak teda susedia nazývali obyvateľov určitej dediny Čeresarmi, mohlo to znamenať nielen „tí s opaskami“, ale aj identifikovať komunitu charakteristickú archaickejším horským odevom alebo pastierskou kultúrou. To by ku Kyjovu pod Minčolom a k tradičnému lesnému a valašskému hospodárstvu veľmi dobre pasovalo: história obce uvádza poľnohospodárstvo, chov dobytka, sezónnu prácu v lesoch a pálenie dreva. Toto posledné spojenie je však interpretácia, nie zatiaľ priamo doložený výrok prameňa.</p>
-<p>Ak máte prístup k Varcholovej heslu o Čeresaroch alebo k miestnej pamäti Kyjova, napíšte mi cez <a href="contact.php">kontakt</a> — rád upresním pracovnú hypotézu primárnym zápisom.</p>
+
 <p><em>Ide o čítanie verejne dostupných etnografických a obecných prameňov a o pracovnú etymologickú interpretáciu. Nie je to uzavretý historický verdikt o pôvode prezývky konkrétnej obce.</em></p>
 HTML,
         ],
@@ -108,7 +108,7 @@ HTML,
 <h2>One detail that may matter</h2>
 <p>A čeres was not only a decorative piece of costume. It was tied to herding, forest work, physical strength and mountain life. It protected the waist in practice, and money and small items were carried in it. In folk culture it also took on a symbolic meaning of strength and appears in outlaw traditions.</p>
 <p>So if neighbours called the people of a village Čeresare, it may have meant not only “those with the belts,” but also marked a community with a more archaic mountain dress or a pastoral culture. That would fit Kyjov under Minčol and its traditional forest and Wallachian economy well: the village history records agriculture, cattle-raising, seasonal forest work and charcoal-burning. That last link, however, is an interpretation, not yet a direct statement from a source.</p>
-<p>If you have access to Varcholová’s entry on the Čeresare or to Kyjov’s local memory, write to me via the <a href="contact.php">contact form</a> — I would gladly firm up the working hypothesis with a primary record.</p>
+
 <p><em>This is a reading of publicly available ethnographic and municipal sources, and a working etymological interpretation. It is not a closed historical verdict on the origin of one village’s nickname.</em></p>
 HTML,
         ],
@@ -145,7 +145,7 @@ HTML,
 <h2>Jeden detail, který může být zajímavý</h2>
 <p>Čeres nebyl jen dekorativní kus kroje. Byl to předmět spojený s pastevectvím, lesní prací, fyzickou silou a horským způsobem života. Měl praktickou funkci při ochraně beder a nosily se v něm peníze a drobné předměty. V lidové kultuře získal i symbolický význam síly a objevuje se ve zbojnických tradicích.</p>
 <p>Pokud tedy sousedé nazývali obyvatele určité vesnice Čeresary, mohlo to znamenat nejen „ti s opasky“, ale i identifikovat komunitu charakteristickou archaičtějším horským oděvem nebo pasteveckou kulturou. To by ke Kyjovu pod Minčolem a k tradičnímu lesnímu a valašskému hospodářství velmi dobře pasovalo: historie obce uvádí zemědělství, chov dobytka, sezónní práci v lesích a pálení dřeva. Toto poslední spojení je však interpretace, ne zatím přímo doložený výrok pramene.</p>
-<p>Pokud máte přístup k Varcholové heslu o Čeresarech nebo k místní paměti Kyjova, napište mi přes <a href="contact.php">kontakt</a> — rád upřesním pracovní hypotézu primárním zápisem.</p>
+
 <p><em>Jde o čtení veřejně dostupných etnografických a obecních pramenů a o pracovní etymologickou interpretaci. Není to uzavřený historický verdikt o původu přezdívky konkrétní obce.</em></p>
 HTML,
         ],
@@ -182,7 +182,7 @@ HTML,
 <h2>Ein Detail, das interessant sein kann</h2>
 <p>Der Čeres war nicht nur ein dekoratives Trachtstück. Er hing mit Hirtenwesen, Waldarbeit, Körperkraft und bergischem Leben zusammen. Er hatte eine praktische Schutzfunktion für die Lende; Geld und Kleinteile wurden darin getragen. In der Volkskultur gewann er auch symbolische Bedeutung von Kraft und erscheint in Räubertraditionen.</p>
 <p>Wenn Nachbarn also die Bewohner eines Dorfes Čeresare nannten, konnte das nicht nur „die mit den Gürteln“ bedeuten, sondern auch eine Gemeinschaft mit archaischerer Bergtracht oder Hirtenkultur markieren. Das würde zu Kyjov unter dem Minčol und zur traditionellen Wald- und Walachenwirtschaft gut passen: die Ortsgeschichte nennt Landwirtschaft, Viehzucht, saisonale Waldarbeit und Holzkohlenbrennen. Diese letzte Verbindung ist jedoch Interpretation, noch kein direkt belegter Quellensatz.</p>
-<p>Wenn Sie Zugang zu Varcholovás Eintrag über die Čeresare oder zur örtlichen Erinnerung Kyjovs haben, schreiben Sie mir über das <a href="contact.php">Kontaktformular</a> — ich präzisiere die Arbeitshypothese gerne mit einem Primäreintrag.</p>
+
 <p><em>Es handelt sich um die Lektüre öffentlich zugänglicher ethnographischer und gemeindlicher Quellen und um eine arbeitende etymologische Interpretation. Es ist kein abgeschlossenes historisches Urteil über den Ursprung des Spitznamens eines konkreten Dorfes.</em></p>
 HTML,
         ],
@@ -219,7 +219,7 @@ HTML,
 <h2>Un détail qui peut compter</h2>
 <p>Le čeres n’était pas seulement une pièce décorative du costume. Il était lié au pastoralisme, au travail forestier, à la force physique et à la vie montagnarde. Il avait une fonction pratique de protection des reins ; on y portait argent et petits objets. Dans la culture populaire, il a aussi pris une valeur symbolique de force et apparaît dans les traditions de brigands.</p>
 <p>Si donc les voisins appelaient les habitants d’un village Čeresare, cela pouvait signifier non seulement « ceux aux ceintures », mais aussi marquer une communauté au costume montagnard plus archaïque ou à culture pastorale. Cela irait bien avec Kyjov au pied du Minčol et avec son économie forestière et valaque traditionnelle : l’histoire communale mentionne l’agriculture, l’élevage, le travail saisonnier en forêt et le chauffage du bois. Ce dernier lien est toutefois une interprétation, pas encore un énoncé de source directement attesté.</p>
-<p>Si vous avez accès à l’entrée de Varcholová sur les Čeresare ou à la mémoire locale de Kyjov, écrivez-moi via le <a href="contact.php">formulaire de contact</a> — je préciserai volontiers l’hypothèse de travail par un enregistrement primaire.</p>
+
 <p><em>Il s’agit d’une lecture de sources ethnographiques et communales publiquement disponibles, et d’une interprétation étymologique de travail. Ce n’est pas un verdict historique clos sur l’origine du sobriquet d’un village précis.</em></p>
 HTML,
         ],
@@ -256,7 +256,7 @@ HTML,
 <h2>Un detalle que puede ser interesante</h2>
 <p>El čeres no era solo una pieza decorativa del traje. Estaba ligado al pastoreo, al trabajo forestal, a la fuerza física y a la vida de montaña. Tenía una función práctica de protección de la cintura; en él se llevaban dinero y objetos pequeños. En la cultura popular adquirió también un significado simbólico de fuerza y aparece en tradiciones de bandoleros.</p>
 <p>Así que si los vecinos llamaban Čeresare a los habitantes de cierta aldea, podía significar no solo «los de los cinturones», sino también identificar a una comunidad con vestimenta de montaña más arcaica o cultura pastoril. Eso encajaría muy bien con Kyjov bajo el Minčol y con su economía forestal y valaca tradicional: la historia de la aldea menciona agricultura, cría de ganado, trabajo estacional en los bosques y quema de madera. Este último vínculo es, sin embargo, una interpretación, no aún un enunciado de fuente directamente documentado.</p>
-<p>Si tiene acceso a la entrada de Varcholová sobre los Čeresare o a la memoria local de Kyjov, escríbame por el <a href="contact.php">formulario de contacto</a>: con gusto precisaré la hipótesis de trabajo con un registro primario.</p>
+
 <p><em>Se trata de una lectura de fuentes etnográficas y municipales disponibles en público, y de una interpretación etimológica de trabajo. No es un veredicto histórico cerrado sobre el origen del apodo de una aldea concreta.</em></p>
 HTML,
         ],
@@ -293,7 +293,7 @@ HTML,
 <h2>Jeden szczegół, który może być ciekawy</h2>
 <p>Čeres nie był tylko dekoracyjnym elementem stroju. Był przedmiotem związanym z pasterstwem, pracą leśną, siłą fizyczną i górskim trybem życia. Miał praktyczną funkcję ochrony bioder; noszono w nim pieniądze i drobne przedmioty. W kulturze ludowej zyskał też symboliczne znaczenie siły i pojawia się w tradycjach zbójnickich.</p>
 <p>Jeśli więc sąsiedzi nazywali mieszkańców danej wsi Čeresarami, mogło to oznaczać nie tylko „tych z pasami”, lecz także identyfikować wspólnotę o bardziej archaicznym stroju górskim lub kulturze pasterskiej. To bardzo dobrze pasowałoby do Kyjova pod Minčolem i do tradycyjnej gospodarki leśnej i wołoskiej: historia wsi wymienia rolnictwo, hodowlę bydła, sezonową pracę w lasach i wypalanie drewna. To ostatnie połączenie jest jednak interpretacją, nie jeszcze bezpośrednio poświadczonym stwierdzeniem źródła.</p>
-<p>Jeśli macie dostęp do hasła Varcholovej o Čeresarach lub do lokalnej pamięci Kyjova, napiszcie do mnie przez <a href="contact.php">kontakt</a> — chętnie uściślę roboczą hipotezę pierwotnym zapisem.</p>
+
 <p><em>To lektura publicznie dostępnych źródeł etnograficznych i gminnych oraz robocza interpretacja etymologiczna. Nie jest to zamknięty historyczny werdykt o pochodzeniu przezwiska konkretnej wsi.</em></p>
 HTML,
         ],
@@ -330,7 +330,7 @@ HTML,
 <h2>Egy részlet, amely érdekes lehet</h2>
 <p>A čeres nem csupán díszes viseletdarab volt. A pásztorkodáshoz, erdei munkához, fizikai erőhöz és hegyi életmódhoz kapcsolódott. Gyakorlati funkciója volt a derék védelmében; pénzt és apró tárgyakat hordtak benne. A népi kultúrában az erő szimbolikus jelentését is elnyerte, és megjelenik a betyárhagyományokban.</p>
 <p>Ha tehát a szomszédok egy falu lakóit Čeresare néven nevezték, ez jelenthette nemcsak azt, hogy „azok az övesek”, hanem egy archaikusabb hegyi viseletű vagy pásztorkultúrájú közösséget is azonosíthatott. Ez nagyon jól illene a Minčol alatti Kyjovhoz és a hagyományos erdei és oláh gazdasághoz: a falu története mezőgazdaságot, állattartást, szezonális erdei munkát és faszénégetést említ. Ez az utolsó kapcsolat azonban értelmezés, még nem közvetlenül igazolt forrásmondat.</p>
-<p>Ha hozzáfér Varcholová Čeresare címszavához vagy Kyjov helyi emlékezetéhez, írjon a <a href="contact.php">kapcsolati űrlapon</a> — szívesen pontosítom a munkahipotézist elsődleges bejegyzéssel.</p>
+
 <p><em>Nyilvánosan elérhető néprajzi és községi források olvasata, valamint munkában lévő etimológiai értelmezés. Nem lezárt történeti ítélet egy konkrét falu gúnynevének eredetéről.</em></p>
 HTML,
         ],
@@ -367,7 +367,7 @@ HTML,
 <h2>Un dettaglio che può essere interessante</h2>
 <p>Il čeres non era solo un pezzo decorativo del costume. Era legato alla pastorizia, al lavoro forestale, alla forza fisica e alla vita di montagna. Aveva una funzione pratica di protezione dei fianchi; vi si portavano denaro e piccoli oggetti. Nella cultura popolare acquisì anche un significato simbolico di forza e compare nelle tradizioni di briganti.</p>
 <p>Se dunque i vicini chiamavano Čeresare gli abitanti di un certo villaggio, poteva significare non solo «quelli con le cinture», ma anche identificare una comunità con abito montano più arcaico o cultura pastorale. Ciò andrebbe molto bene con Kyjov sotto il Minčol e con la sua economia forestale e valacca tradizionale: la storia del villaggio cita agricoltura, allevamento, lavoro stagionale nei boschi e carbonizzazione del legno. Quest’ultimo legame è però un’interpretazione, non ancora un enunciato di fonte direttamente attestato.</p>
-<p>Se avete accesso alla voce di Varcholová sui Čeresare o alla memoria locale di Kyjov, scrivetemi tramite il <a href="contact.php">modulo di contatto</a>: volentieri preciserei l’ipotesi di lavoro con una registrazione primaria.</p>
+
 <p><em>Si tratta di una lettura di fonti etnografiche e comunali pubblicamente disponibili, e di un’interpretazione etimologica di lavoro. Non è un verdetto storico chiuso sull’origine del soprannome di un villaggio concreto.</em></p>
 HTML,
         ],
@@ -404,7 +404,7 @@ HTML,
 <h2>Одна деталь, яка може бути цікавою</h2>
 <p>Черес не був лише декоративною частиною строю. Це був предмет, пов’язаний із пастухуванням, лісовою працею, фізичною силою й гірським способом життя. Мав практичну функцію захисту поперека; у ньому носили гроші й дрібні речі. У народній культурі він також набув символічного значення сили й з’являється в розбійницьких традиціях.</p>
 <p>Тож якщо сусіди називали мешканців певного села Чересарами, це могло означати не лише «ті з поясами», а й ідентифікувати спільноту з архаїчнішим гірським одягом чи пастушою культурою. Це дуже добре пасувало б до Кийова під Мінчолом і до традиційного лісового й волоського господарства: історія села згадує рільництво, розведення худоби, сезонну працю в лісах і випалювання деревини. Це останнє поєднання є, однак, інтерпретацією, ще не безпосередньо засвідченим висловом джерела.</p>
-<p>Якщо маєте доступ до гасла Вархолової про Чересарів або до місцевої пам’яті Кийова, напишіть мені через <a href="contact.php">контакт</a> — охоче уточню робочу гіпотезу первинним записом.</p>
+
 <p><em>Це читання загальнодоступних етнографічних і громадських джерел та робоча етимологічна інтерпретація. Це не закритий історичний вердикт про походження прізвиська конкретного села.</em></p>
 HTML,
         ],

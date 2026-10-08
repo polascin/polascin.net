@@ -60,7 +60,7 @@ return [
 <li><strong>Ak by vás produkt niekedy zaujímal naozaj,</strong> až potom: zápis LLC u North Carolina Secretary of State, referencie, ktorým zavoláte vy, a API kľúče len ako burner s denným stropom útraty. Nikdy so širokými oprávneniami. Dnes nie.</li>
 </ul>
 <p>Toto je tretia vlna na ten istý základ. Predtým <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">lichôtky o knihe</a> a book trailer. Zdroj nie je prienik do schránky. Je to verejný e-mail na GitHub profile a scraper.</p>
-<p>Správu som nechal v spame. Ak vám prišla podobná, napíšte mi cez <a href="contact.php">kontakt</a>. Nie odosielateľovi.</p>
+<p>Správu som nechal v spame. Ak vám prišla podobná, neodpovedajte odosielateľovi.</p>
 <p><em>Ide o osobnú skúsenosť, nie o právnu radu. Mená a čísla sú to, čo 25. septembra 2026 stálo na webe, na GitHube a v e-maile. Register firmy som neoveroval. Podozrivú správu nahláste poskytovateľovi pošty.</em></p>
 HTML,
         ],
@@ -92,7 +92,7 @@ HTML,
 <li><strong>If the product ever interests you for real,</strong> only then: an LLC filing at the North Carolina Secretary of State, references you call yourself, and API keys only as a burner with a daily spend cap. Never with wide scopes. Not today.</li>
 </ul>
 <p>This is the third wave on the same footing. Before it, <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">flattery about a book</a> and a book trailer. The source is not a break-in. It is a public email on a GitHub profile, and a scraper.</p>
-<p>I left the message in spam. If a similar one reached you, write to me via the <a href="contact.php">contact form</a>. Not to the sender.</p>
+<p>I left the message in spam. If a similar one reached you, do not reply to the sender.</p>
 <p><em>This is a personal account, not legal advice. The names and figures are what stood on the site, on GitHub, and in the email on 25 September 2026. I did not verify the company register. Report a suspicious message to your email provider.</em></p>
 HTML,
         ],
@@ -124,7 +124,7 @@ HTML,
 <li><strong>Kdyby vás produkt někdy zajímal doopravdy,</strong> až potom: zápis LLC u North Carolina Secretary of State, reference, kterým zavoláte sami, a API klíče jen jako burner s denním stropem útraty. Nikdy s širokými oprávněními. Dnes ne.</li>
 </ul>
 <p>Tohle je třetí vlna na stejném základě. Předtím <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">lichotky o knize</a> a book trailer. Zdroj není průnik do schránky. Je to veřejný e-mail na GitHub profilu a scraper.</p>
-<p>Zprávu jsem nechal ve spamu. Pokud vám přišla podobná, napište mi přes <a href="contact.php">kontakt</a>. Ne odesílateli.</p>
+<p>Zprávu jsem nechal ve spamu. Pokud vám přišla podobná, neodpovídejte odesílateli.</p>
 <p><em>Jde o osobní zkušenost, ne o právní radu. Jména a čísla jsou to, co 25. září 2026 stálo na webu, na GitHubu a v e-mailu. Rejstřík firmy jsem neověřoval. Podezřelou zprávu nahlaste poskytovateli pošty.</em></p>
 HTML,
         ],
@@ -156,7 +156,7 @@ HTML,
 <li><strong>Wenn das Produkt Sie einmal wirklich interessiert,</strong> erst dann: eine LLC-Eintragung beim North Carolina Secretary of State, Referenzen, die Sie selbst anrufen, und API-Schlüssel nur als Burner mit täglicher Ausgabengrenze. Niemals mit weiten Rechten. Heute nicht.</li>
 </ul>
 <p>Das ist die dritte Welle auf derselben Grundlage. Davor <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">Schmeichelei über ein Buch</a> und ein Book Trailer. Die Quelle ist kein Einbruch. Es ist eine öffentliche E-Mail im GitHub-Profil und ein Scraper.</p>
-<p>Die Nachricht habe ich im Spam gelassen. Wenn eine ähnliche bei Ihnen ankam, schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>. Nicht dem Absender.</p>
+<p>Die Nachricht habe ich im Spam gelassen. Wenn eine ähnliche bei Ihnen ankam, antworten Sie dem Absender nicht.</p>
 <p><em>Das ist ein persönlicher Bericht, keine Rechtsberatung. Namen und Zahlen sind das, was am 25. September 2026 auf der Seite, auf GitHub und in der E-Mail stand. Das Firmenregister habe ich nicht geprüft. Melden Sie eine verdächtige Nachricht Ihrem E-Mail-Anbieter.</em></p>
 HTML,
         ],
@@ -188,7 +188,7 @@ HTML,
 <li><strong>Si le produit vous intéresse vraiment un jour,</strong> seulement alors : un dépôt de LLC auprès du North Carolina Secretary of State, des références que vous appelez vous-même, et des clés API seulement en burner avec un plafond de dépense quotidien. Jamais avec des droits larges. Pas aujourd’hui.</li>
 </ul>
 <p>C’est la troisième vague sur la même base. Avant, <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">des flatteries sur un livre</a> et un book trailer. La source n’est pas une intrusion. C’est un e-mail public sur un profil GitHub, et un scraper.</p>
-<p>J’ai laissé le message dans les spams. Si un message semblable vous est arrivé, écrivez-moi via le <a href="contact.php">formulaire de contact</a>. Pas à l’expéditeur.</p>
+<p>J’ai laissé le message dans les spams. Si un message semblable vous est arrivé, ne répondez pas à l’expéditeur.</p>
 <p><em>Il s’agit d’un récit personnel, pas d’un conseil juridique. Les noms et les chiffres sont ce qui figurait sur le site, sur GitHub et dans l’e-mail le 25 septembre 2026. Je n’ai pas vérifié le registre de la société. Signalez un message suspect à votre fournisseur de messagerie.</em></p>
 HTML,
         ],
@@ -220,7 +220,7 @@ HTML,
 <li><strong>Si el producto le interesa de verdad algún día,</strong> solo entonces: un asiento de LLC en el North Carolina Secretary of State, referencias a las que llame usted, y claves API solo como burner con un tope de gasto diario. Nunca con permisos amplios. Hoy no.</li>
 </ul>
 <p>Esta es la tercera oleada sobre la misma base. Antes, <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">halagos sobre un libro</a> y un book trailer. La fuente no es una intrusión. Es un correo público en un perfil de GitHub y un scraper.</p>
-<p>Dejé el mensaje en spam. Si le llegó uno parecido, escríbame por el <a href="contact.php">formulario de contacto</a>. No al remitente.</p>
+<p>Dejé el mensaje en spam. Si le llegó uno parecido, no responda al remitente.</p>
 <p><em>Es un relato personal, no asesoramiento jurídico. Los nombres y las cifras son lo que figuraba en la web, en GitHub y en el correo el 25 de septiembre de 2026. No verifiqué el registro de la empresa. Denuncie un mensaje sospechoso a su proveedor de correo.</em></p>
 HTML,
         ],
@@ -252,7 +252,7 @@ HTML,
 <li><strong>Jeśli produkt kiedyś naprawdę was zainteresuje,</strong> dopiero wtedy: wpis LLC u North Carolina Secretary of State, referencje, do których zadzwonicie sami, i klucze API tylko jako burner z dziennym limitem wydatków. Nigdy z szerokimi uprawnieniami. Dziś nie.</li>
 </ul>
 <p>To trzecia fala na tym samym podłożu. Wcześniej <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">komplementy o książce</a> i book trailer. Źródłem nie jest włamanie. To publiczny e-mail na profilu GitHub i scraper.</p>
-<p>Wiadomość zostawiłem w spamie. Jeśli podobna przyszła do was, napiszcie przez <a href="contact.php">kontakt</a>. Nie do nadawcy.</p>
+<p>Wiadomość zostawiłem w spamie. Jeśli podobna przyszła do was, nie odpowiadajcie nadawcy.</p>
 <p><em>To osobiste doświadczenie, nie porada prawna. Nazwiska i liczby są tym, co 25 września 2026 stało na stronie, na GitHubie i w e-mailu. Rejestru firmy nie sprawdzałem. Podejrzaną wiadomość zgłoście dostawcy poczty.</em></p>
 HTML,
         ],
@@ -284,7 +284,7 @@ HTML,
 <li><strong>Ha a termék egyszer valóban érdekli,</strong> csak utána: LLC-bejegyzés a North Carolina Secretary of State-nél, referenciák, amelyeket ön hív fel, és API-kulcsok csak burnerként, napi költési plafonnal. Soha széles jogosultsággal. Ma nem.</li>
 </ul>
 <p>Ez a harmadik hullám ugyanazon az alapon. Előtte <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">hízelgés egy könyvről</a> és egy book trailer. A forrás nem betörés. Nyilvános e-mail egy GitHub-profilon, és egy scraper.</p>
-<p>A levelet a spamben hagytam. Ha hasonló érkezett önhöz, írjon a <a href="contact.php">kapcsolati űrlapon</a>. Ne a feladónak.</p>
+<p>A levelet a spamben hagytam. Ha hasonló érkezett önhöz, ne válaszoljon a feladónak.</p>
 <p><em>Személyes beszámoló, nem jogi tanács. A nevek és a számok azok, amelyek 2026. szeptember 25-én a weben, a GitHubon és a levélben álltak. A cégjegyzéket nem ellenőriztem. A gyanús üzenetet jelentse a levelezőszolgáltatónak.</em></p>
 HTML,
         ],
@@ -316,7 +316,7 @@ HTML,
 <li><strong>Se il prodotto un giorno vi interessa davvero,</strong> solo allora: un deposito LLC presso il North Carolina Secretary of State, referenze che chiamate voi, e chiavi API solo come burner con un tetto di spesa giornaliero. Mai con permessi ampi. Oggi no.</li>
 </ul>
 <p>Questa è la terza ondata sulla stessa base. Prima, <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">lusinghe su un libro</a> e un book trailer. La fonte non è un’intrusione. È un’e-mail pubblica su un profilo GitHub e uno scraper.</p>
-<p>Ho lasciato il messaggio nello spam. Se ne è arrivato uno simile, scrivetemi tramite il <a href="contact.php">modulo di contatto</a>. Non al mittente.</p>
+<p>Ho lasciato il messaggio nello spam. Se ne è arrivato uno simile, non rispondete al mittente.</p>
 <p><em>È un resoconto personale, non un parere legale. Nomi e cifre sono ciò che il 25 settembre 2026 stava sul sito, su GitHub e nell’e-mail. Non ho verificato il registro della società. Segnalate un messaggio sospetto al fornitore di posta.</em></p>
 HTML,
         ],
@@ -348,7 +348,7 @@ HTML,
 <li><strong>Якщо продукт колись справді зацікавить,</strong> лише тоді: запис LLC у North Carolina Secretary of State, рекомендації, яким зателефонуєте ви самі, і ключі API лише як burner із денною стелею витрат. Ніколи з широкими правами. Сьогодні — ні.</li>
 </ul>
 <p>Це третя хвиля на тій самій основі. Перед тим — <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">компліменти про книжку</a> і book trailer. Джерело — не злам. Це публічна адреса в профілі GitHub і скрейпер.</p>
-<p>Лист я лишив у спамі. Якщо подібний надійшов і вам, напишіть мені через <a href="contact.php">контакт</a>. Не відправнику.</p>
+<p>Лист я лишив у спамі. Якщо подібний надійшов і вам, не відповідайте відправнику.</p>
 <p><em>Це особистий досвід, не юридична порада. Імена й цифри — те, що 25 вересня 2026 року стояло на сайті, на GitHub і в листі. Реєстр компанії я не перевіряв. Підозрілий лист повідомте своєму поштовому сервісу.</em></p>
 HTML,
         ],

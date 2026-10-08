@@ -1665,8 +1665,8 @@ foreach ($articleSeedFiles as $articleSeedPath) {
         );
         expectTrue(
             !str_contains(strtolower($clean), '<script')
-                && str_contains($clean, 'contact.php'),
-            "{$articleFile} ({$articleLang}) musí po sanitizácii zachovať odkaz na kontakt a nesmie obsahovať skript"
+                && !str_contains($clean, 'contact.php'),
+            "{$articleFile} ({$articleLang}) nesmie po sanitizácii obsahovať skript ani výzvu na kontakt"
         );
         expectTrue(
             trim((string) ($payload['image_alt'] ?? '')) !== ''

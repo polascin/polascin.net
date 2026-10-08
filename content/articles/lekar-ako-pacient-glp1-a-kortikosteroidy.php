@@ -40,7 +40,7 @@ return [
 <p>Nízkosacharidové jedlá to paradoxne zhoršili. Bielkoviny a tuk bez sacharidov hlad prehĺbili, namiesto toho, aby ho utíšili. Takú vec si prečítate v štúdiách; inak ju cítite, keď ide o vlastné telo.</p>
 <p>V tom istom období som stihol aj krátky pokus s retratrutidom. Iná molekula, iný receptorový profil, iný zážitok. Dáta o týchto liekoch sa hýbu rýchlejšie, než stíhajú klinické odporúčania.</p>
 <p>Nejde o to, ktorá molekula „vyhrala“. Ide o to, že ako lekár som vedel zdokumentovať každú premennú. Ako pacient som každú z nich cítil. Takýto dvojitý pohľad by som prial zažiť viacerým kolegom na vlastnej koži.</p>
-<p>Ak pracujete s pacientmi na inkretínovej liečbe — najmä súbežne so steroidmi — aké vzorce ste videli? Napíšte mi cez <a href="contact.php">kontakt</a>.</p>
+<p>Ak pracujete s pacientmi na inkretínovej liečbe — najmä súbežne so steroidmi — aké vzorce ste videli?</p>
 <p><em>Ide o osobnú skúsenosť, nie o liečebné odporúčanie. Rozhodnutia o liečbe patria do rozhovoru s ošetrujúcim lekárom.</em></p>
 HTML,
         ],
@@ -55,7 +55,7 @@ HTML,
 <p>Low-carb meals made it worse, paradoxically. Protein and fat without carbohydrate deepened the hunger rather than satisfying it. The kind of thing you read about in trials but feel differently when it is your own body.</p>
 <p>I also ran a short retatrutide trial during this period. A different molecule, a different receptor profile, a different experience. The data on these drugs is moving faster than clinical guidelines can track.</p>
 <p>The point is not which drug “won.” It is that as a physician I could document every variable. As a patient, I felt every one of them. That dual perspective is something I wish more of my colleagues had the chance to experience firsthand.</p>
-<p>If you work with patients on incretin therapies — especially alongside steroids — what patterns have you seen? Write to me via the <a href="contact.php">contact form</a>.</p>
+<p>If you work with patients on incretin therapies — especially alongside steroids — what patterns have you seen?</p>
 <p><em>This is personal experience, not medical advice. Treatment decisions belong in a conversation with the treating physician.</em></p>
 HTML,
         ],
@@ -70,7 +70,7 @@ HTML,
 <p>Nízkosacharidová jídla to paradoxně zhoršila. Bílkoviny a tuk bez sacharidů hlad prohloubily, místo aby ho utišily. Takovou věc si přečtete ve studiích; jinak ji cítíte, když jde o vlastní tělo.</p>
 <p>Ve stejném období jsem stihl i krátký pokus s retratrutidem. Jiná molekula, jiný receptorový profil, jiný zážitek. Data o těchto lécích se hýbou rychleji, než stíhají klinická doporučení.</p>
 <p>Nejde o to, která molekula „vyhrála“. Jde o to, že jako lékař jsem uměl zdokumentovat každou proměnnou. Jako pacient jsem každou z nich cítil. Takový dvojí pohled bych přál zažít více kolegům na vlastní kůži.</p>
-<p>Pokud pracujete s pacienty na inkretinové léčbě — zejména souběžně se steroidy — jaké vzorce jste viděli? Napište mi přes <a href="contact.php">kontakt</a>.</p>
+<p>Pokud pracujete s pacienty na inkretinové léčbě — zejména souběžně se steroidy — jaké vzorce jste viděli?</p>
 <p><em>Jde o osobní zkušenost, nikoli o léčebné doporučení. Rozhodnutí o léčbě patří do rozhovoru s ošetřujícím lékařem.</em></p>
 HTML,
         ],
@@ -85,7 +85,7 @@ HTML,
 <p>Kohlenhydratarme Mahlzeiten haben es paradoxerweise verschlimmert. Eiweiß und Fett ohne Kohlenhydrate haben den Hunger vertieft, statt ihn zu stillen. Sowas liest man in Studien; anders fühlt man es, wenn es der eigene Körper ist.</p>
 <p>Im selben Zeitraum habe ich auch einen kurzen Versuch mit Retratrutid gemacht. Ein anderes Molekül, ein anderes Rezeptorprofil, eine andere Erfahrung. Die Daten zu diesen Arzneimitteln bewegen sich schneller, als klinische Leitlinien mithalten können.</p>
 <p>Es geht nicht darum, welches Molekül „gewonnen“ hat. Es geht darum, dass ich als Arzt jede Variable dokumentieren konnte. Als Patient habe ich jede einzelne gespürt. Diese doppelte Perspektive wünsche ich mehr Kolleginnen und Kollegen am eigenen Leib.</p>
-<p>Wenn Sie Patientinnen und Patienten mit Inkretintherapien betreuen — besonders parallel zu Steroiden — welche Muster haben Sie gesehen? Schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>.</p>
+<p>Wenn Sie Patientinnen und Patienten mit Inkretintherapien betreuen — besonders parallel zu Steroiden — welche Muster haben Sie gesehen?</p>
 <p><em>Das ist eine persönliche Erfahrung, keine Behandlungsempfehlung. Therapieentscheidungen gehören ins Gespräch mit der behandelnden Ärztin oder dem behandelnden Arzt.</em></p>
 HTML,
         ],
@@ -100,7 +100,7 @@ HTML,
 <p>Les repas pauvres en glucides ont paradoxalement aggravé la situation. Protéines et lipides sans glucides ont approfondi la faim au lieu de l'apaiser. On lit cela dans les essais ; on le ressent autrement quand il s'agit de son propre corps.</p>
 <p>Durant la même période, j'ai aussi fait un court essai de rétratutide. Une autre molécule, un autre profil de récepteurs, une autre expérience. Les données sur ces médicaments évoluent plus vite que les recommandations cliniques.</p>
 <p>Il ne s'agit pas de savoir quelle molécule « a gagné ». Il s'agit du fait qu'en tant que médecin, j'ai pu documenter chaque variable. En tant que patient, je les ai toutes ressenties. Ce double regard, je le souhaiterais à davantage de collègues, dans leur propre corps.</p>
-<p>Si vous suivez des patients sous traitements incrétines — surtout en parallèle des stéroïdes — quels schémas avez-vous observés ? Écrivez-moi via le <a href="contact.php">formulaire de contact</a>.</p>
+<p>Si vous suivez des patients sous traitements incrétines — surtout en parallèle des stéroïdes — quels schémas avez-vous observés ?</p>
 <p><em>Il s'agit d'une expérience personnelle, non d'un conseil thérapeutique. Les décisions de traitement appartiennent à la conversation avec le médecin traitant.</em></p>
 HTML,
         ],
@@ -115,7 +115,7 @@ HTML,
 <p>Las comidas bajas en hidratos de carbono lo empeoraron, paradójicamente. Proteínas y grasas sin hidratos profundizaron el hambre en lugar de calmarla. Eso se lee en los ensayos; se siente de otro modo cuando es el propio cuerpo.</p>
 <p>En el mismo periodo también hice un breve ensayo con retratrutida. Otra molécula, otro perfil de receptores, otra experiencia. Los datos sobre estos fármacos se mueven más rápido de lo que pueden seguir las guías clínicas.</p>
 <p>No se trata de qué molécula «ganó». Se trata de que, como médico, pude documentar cada variable. Como paciente, sentí cada una de ellas. Esa doble perspectiva se la desearía a más colegas en su propia piel.</p>
-<p>Si trabaja con pacientes en terapias incretínicas —sobre todo junto a esteroides— ¿qué patrones ha visto? Escríbame a través del <a href="contact.php">formulario de contacto</a>.</p>
+<p>Si trabaja con pacientes en terapias incretínicas —sobre todo junto a esteroides— ¿qué patrones ha visto?</p>
 <p><em>Es una experiencia personal, no una recomendación terapéutica. Las decisiones de tratamiento pertenecen a la conversación con el médico responsable.</em></p>
 HTML,
         ],
@@ -130,7 +130,7 @@ HTML,
 <p>Posiłki niskowęglowodanowe paradoksalnie to pogorszyły. Białko i tłuszcz bez węglowodanów pogłębiły głód, zamiast go uciszyć. Taką rzecz czyta się w badaniach; inaczej czuje się ją, gdy chodzi o własne ciało.</p>
 <p>W tym samym okresie zdążyłem też na krótki epizod z retratrutydem. Inna cząsteczka, inny profil receptorów, inne doświadczenie. Dane o tych lekach zmieniają się szybciej, niż nadążają zalecenia kliniczne.</p>
 <p>Nie chodzi o to, która cząsteczka „wygrała”. Chodzi o to, że jako lekarz umiałem udokumentować każdą zmienną. Jako pacjent każdą z nich czułem. Takiego podwójnego spojrzenia życzyłbym doświadczyć większej liczbie kolegów na własnej skórze.</p>
-<p>Jeśli pracujecie z pacjentami na leczeniu inkretynowym — zwłaszcza równolegle ze steroidami — jakie wzorce widzieliście? Napiszcie do mnie przez <a href="contact.php">kontakt</a>.</p>
+<p>Jeśli pracujecie z pacjentami na leczeniu inkretynowym — zwłaszcza równolegle ze steroidami — jakie wzorce widzieliście?</p>
 <p><em>To osobiste doświadczenie, nie zalecenie terapeutyczne. Decyzje o leczeniu należą do rozmowy z lekarzem prowadzącym.</em></p>
 HTML,
         ],
@@ -145,7 +145,7 @@ HTML,
 <p>A szénhidrátszegény ételek paradox módon rontottak a helyzeten. Fehérje és zsír szénhidrát nélkül mélyítette az éhséget, ahelyett hogy csillapította volna. Ilyesmit a vizsgálatokban olvas az ember; másképp érzi, ha a saját teste a tét.</p>
 <p>Ugyanebben az időszakban egy rövid retratrutid-próbát is beiktattam. Más molekula, más receptorprofil, más élmény. Ezeknek a gyógyszereknek az adatai gyorsabban mozognak, mint a klinikai irányelvek.</p>
 <p>Nem az a lényeg, melyik molekula „nyert”. Hanem az, hogy orvosként minden változót dokumentálni tudtam. Betegként mindegyiket éreztem. Ezt a kettős nézőpontot több kollégának kívánnám a saját bőrén.</p>
-<p>Ha inkretinkezelésben — különösen szteroiddal együtt — gondoz betegeket: milyen mintázatokat látott? Írjon nekem a <a href="contact.php">kapcsolati űrlapon</a>.</p>
+<p>Ha inkretinkezelésben — különösen szteroiddal együtt — gondoz betegeket: milyen mintázatokat látott?</p>
 <p><em>Személyes tapasztalat, nem kezelési javaslat. A terápiás döntés a kezelőorvossal folytatott beszélgetéshez tartozik.</em></p>
 HTML,
         ],
@@ -160,7 +160,7 @@ HTML,
 <p>I pasti a basso contenuto di carboidrati, paradossalmente, l'hanno peggiorata. Proteine e grassi senza carboidrati hanno approfondito la fame invece di calmarla. È il genere di cosa che si legge negli studi; si sente diversamente quando è il proprio corpo.</p>
 <p>Nello stesso periodo ho fatto anche un breve tentativo con retratrutide. Una molecola diversa, un profilo recettoriale diverso, un'esperienza diversa. I dati su questi farmaci si muovono più in fretta di quanto le linee guida cliniche riescano a seguire.</p>
 <p>Non si tratta di quale molecola «abbia vinto». Si tratta del fatto che, come medico, ho potuto documentare ogni variabile. Come paziente le ho sentite tutte. Questa doppia prospettiva la augurerei a più colleghi sulla propria pelle.</p>
-<p>Se lavorate con pazienti in terapia incretinica — soprattutto in parallelo agli steroidi — quali schemi avete visto? Scrivetemi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+<p>Se lavorate con pazienti in terapia incretinica — soprattutto in parallelo agli steroidi — quali schemi avete visto?</p>
 <p><em>È un'esperienza personale, non un consiglio terapeutico. Le decisioni di trattamento appartengono al colloquio con il medico curante.</em></p>
 HTML,
         ],
@@ -175,7 +175,7 @@ HTML,
 <p>Низьковуглеводні страви парадоксально погіршили ситуацію. Білок і жир без вуглеводів поглибили голод замість того, щоб його вгамувати. Таке читаєш у дослідженнях; інакше відчуваєш, коли йдеться про власне тіло.</p>
 <p>У той самий період я встиг і на короткий епізод із ретратрутидом. Інша молекула, інший рецепторний профіль, інший досвід. Дані про ці ліки рухаються швидше, ніж встигають клінічні настанови.</p>
 <p>Йдеться не про те, яка молекула «перемогла». Йдеться про те, що як лікар я міг задокументувати кожну змінну. Як пацієнт я кожну з них відчував. Такий подвійний погляд я бажав би більше колегам на власній шкірі.</p>
-<p>Якщо ви працюєте з пацієнтами на інкретиновій терапії — особливо разом зі стероїдами — які закономірності ви бачили? Напишіть мені через <a href="contact.php">контакт</a>.</p>
+<p>Якщо ви працюєте з пацієнтами на інкретиновій терапії — особливо разом зі стероїдами — які закономірності ви бачили?</p>
 <p><em>Це особистий досвід, а не лікувальне призначення. Рішення про лікування належать розмові з лікарем, який веде пацієнта.</em></p>
 HTML,
         ],

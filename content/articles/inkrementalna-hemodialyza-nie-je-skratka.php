@@ -48,7 +48,7 @@ return [
 </ul>
 <p>Čo chýba, je dôkaz, že menej procedúr samo chráni reziduálnu funkciu alebo zlepšuje prežívanie. Štúdia VA IncHVets (<a href="https://clinicaltrials.gov/study/NCT05465044">NCT05465044</a>) stále naberá. Register bol aktualizovaný 20. augusta 2026. Odhadované ukončenie primárneho sledovania je 30. septembra 2027. Výsledky v registri zatiaľ nie sú.</p>
 <p>Inkrementálna hemodialýza je rozumná možnosť pre starostlivo vybraných pacientov pod blízkym dohľadom. Nie je to skratka.</p>
-<p>Ak o tom chcete hovoriť ako o dôkazoch v praxi, napíšte mi cez <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Ide o odborný komentár k prehľadu, nie o individuálny liečebný predpis. O dialyzačnom režime rozhoduje ošetrujúci tím.</em></p>
 HTML,
         ],
@@ -70,7 +70,7 @@ HTML,
 </ul>
 <p>What is missing is proof that fewer sessions themselves protect residual function or improve survival. The VA IncHVets trial (<a href="https://clinicaltrials.gov/study/NCT05465044">NCT05465044</a>) is still recruiting. The registry was updated on 20 August 2026. Primary completion is estimated for 30 September 2027. Results are not posted yet.</p>
 <p>Incremental hemodialysis is a reasonable option for carefully selected patients under close monitoring. It is not a shortcut.</p>
-<p>If you want to talk about this as evidence in practice, write to me via the <a href="contact.php">contact form</a>.</p>
+
 <p><em>This is a clinical commentary on a review, not a treatment prescription for an individual patient. The dialysis schedule is a decision for the treating team.</em></p>
 HTML,
         ],
@@ -92,7 +92,7 @@ HTML,
 </ul>
 <p>Co chybí, je důkaz, že méně procedur samo chrání reziduální funkci nebo zlepšuje přežití. Studie VA IncHVets (<a href="https://clinicaltrials.gov/study/NCT05465044">NCT05465044</a>) stále nabírá. Registr byl aktualizován 20. srpna 2026. Odhadované ukončení primárního sledování je 30. září 2027. Výsledky v registru zatím nejsou.</p>
 <p>Inkrementální hemodialýza je rozumná možnost pro pečlivě vybrané pacienty pod blízkým dohledem. Není to zkratka.</p>
-<p>Pokud o tom chcete mluvit jako o důkazech v praxi, napište mi přes <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Jde o odborný komentář k přehledu, ne o individuální léčebný předpis. O dialyzačním režimu rozhoduje ošetřující tým.</em></p>
 HTML,
         ],
@@ -114,7 +114,7 @@ HTML,
 </ul>
 <p>Was fehlt, ist der Nachweis, dass weniger Sitzungen für sich die Restfunktion schützen oder das Überleben verbessern. Die Studie VA IncHVets (<a href="https://clinicaltrials.gov/study/NCT05465044">NCT05465044</a>) rekrutiert noch. Das Register wurde am 20. August 2026 aktualisiert. Der geschätzte Abschluss der primären Nachbeobachtung ist der 30. September 2027. Ergebnisse stehen im Register noch nicht.</p>
 <p>Inkrementelle Hämodialyse ist eine vernünftige Möglichkeit für sorgfältig ausgewählte Patienten unter enger Überwachung. Sie ist keine Abkürzung.</p>
-<p>Wenn Sie darüber als Evidenz in der Praxis sprechen wollen, schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>.</p>
+
 <p><em>Dies ist ein fachlicher Kommentar zu einer Übersicht, keine individuelle Behandlungsverordnung. Über das Dialyseschema entscheidet das behandelnde Team.</em></p>
 HTML,
         ],
@@ -136,7 +136,7 @@ HTML,
 </ul>
 <p>Ce qui manque, c’est la preuve que moins de séances protègent par elles-mêmes la fonction résiduelle ou améliorent la survie. L’essai VA IncHVets (<a href="https://clinicaltrials.gov/study/NCT05465044">NCT05465044</a>) recrute encore. Le registre a été mis à jour le 20 août 2026. La fin estimée du suivi principal est le 30 septembre 2027. Les résultats ne sont pas encore publiés dans le registre.</p>
 <p>L’hémodialyse incrémentale est une option raisonnable pour des patients soigneusement choisis, sous surveillance étroite. Ce n’est pas un raccourci.</p>
-<p>Si vous voulez en parler comme d’une preuve en pratique, écrivez-moi via le <a href="contact.php">formulaire de contact</a>.</p>
+
 <p><em>Ceci est un commentaire clinique sur une revue, pas une prescription pour un patient donné. Le schéma de dialyse relève de l’équipe soignante.</em></p>
 HTML,
         ],
@@ -158,7 +158,7 @@ HTML,
 </ul>
 <p>Lo que falta es la prueba de que menos sesiones, por sí mismas, protegen la función residual o mejoran la supervivencia. El ensayo VA IncHVets (<a href="https://clinicaltrials.gov/study/NCT05465044">NCT05465044</a>) sigue reclutando. El registro se actualizó el 20 de agosto de 2026. La finalización primaria estimada es el 30 de septiembre de 2027. Aún no hay resultados en el registro.</p>
 <p>La hemodiálisis incremental es una opción razonable para pacientes cuidadosamente seleccionados y bajo vigilancia estrecha. No es un atajo.</p>
-<p>Si quiere hablar de esto como evidencia en la práctica, escríbame a través del <a href="contact.php">formulario de contacto</a>.</p>
+
 <p><em>Esto es un comentario clínico sobre una revisión, no una prescripción para un paciente concreto. El esquema de diálisis lo decide el equipo tratante.</em></p>
 HTML,
         ],
@@ -180,7 +180,7 @@ HTML,
 </ul>
 <p>Brakuje dowodu, że mniejsza liczba zabiegów sama chroni funkcję resztkową albo poprawia przeżycie. Badanie VA IncHVets (<a href="https://clinicaltrials.gov/study/NCT05465044">NCT05465044</a>) wciąż rekrutuje. Rejestr zaktualizowano 20 sierpnia 2026. Szacowane zakończenie obserwacji pierwotnej to 30 września 2027. Wyników w rejestrze jeszcze nie ma.</p>
 <p>Hemodializa inkrementalna jest rozsądną możliwością dla starannie wybranych pacjentów pod ścisłą obserwacją. To nie skrót.</p>
-<p>Jeśli chcesz o tym rozmawiać jak o dowodach w praktyce, napisz przez <a href="contact.php">kontakt</a>.</p>
+
 <p><em>To komentarz kliniczny do przeglądu, a nie indywidualne zalecenie leczenia. O schemacie dializy decyduje zespół leczący.</em></p>
 HTML,
         ],
@@ -202,7 +202,7 @@ HTML,
 </ul>
 <p>Ami hiányzik, az a bizonyíték, hogy a kevesebb kezelés önmagában védi a reziduális funkciót vagy javítja a túlélést. A VA IncHVets vizsgálat (<a href="https://clinicaltrials.gov/study/NCT05465044">NCT05465044</a>) még toboroz. A regisztert 2026. augusztus 20-án frissítették. Az elsődleges követés becsült befejezése 2027. szeptember 30. Eredmény a regiszterben még nincs.</p>
 <p>Az inkrementális hemodialízis ésszerű lehetőség gondosan kiválasztott betegeknél, szoros követés mellett. Nem rövidítés.</p>
-<p>Ha a gyakorlat bizonyítékaként akarod megbeszélni, írj a <a href="contact.php">kapcsolati űrlapon</a>.</p>
+
 <p><em>Ez klinikai kommentár egy áttekintéshez, nem egyéni kezelési előírás. A dialízisrendről a kezelőcsapat dönt.</em></p>
 HTML,
         ],
@@ -224,7 +224,7 @@ HTML,
 </ul>
 <p>Manca la prova che meno sedute, da sole, proteggano la funzione residua o migliorino la sopravvivenza. Lo studio VA IncHVets (<a href="https://clinicaltrials.gov/study/NCT05465044">NCT05465044</a>) sta ancora reclutando. Il registro è stato aggiornato il 20 agosto 2026. Il completamento primario stimato è il 30 settembre 2027. I risultati nel registro non ci sono ancora.</p>
 <p>L’emodialisi incrementale è un’opzione ragionevole per pazienti scelti con cura e sotto stretto monitoraggio. Non è una scorciatoia.</p>
-<p>Se vuoi parlarne come evidenza nella pratica, scrivi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+
 <p><em>È un commento clinico a una rassegna, non una prescrizione per un singolo paziente. Lo schema dialitico lo decide l’équipe curante.</em></p>
 HTML,
         ],
@@ -246,7 +246,7 @@ HTML,
 </ul>
 <p>Чого бракує — доказу, що менша кількість процедур сама захищає залишкову функцію або поліпшує виживання. Дослідження VA IncHVets (<a href="https://clinicaltrials.gov/study/NCT05465044">NCT05465044</a>) досі набирає учасників. Реєстр оновлено 20 серпня 2026 року. Орієнтовне завершення первинного спостереження — 30 вересня 2027 року. Результатів у реєстрі ще немає.</p>
 <p>Інкрементальний гемодіаліз — розумна можливість для ретельно відібраних пацієнтів під пильним наглядом. Це не короткий шлях.</p>
-<p>Якщо хочете говорити про це як про докази в практиці, напишіть через <a href="contact.php">контакт</a>.</p>
+
 <p><em>Це клінічний коментар до огляду, а не індивідуальне призначення лікування. Про режим діалізу вирішує лікувальна команда.</em></p>
 HTML,
         ],

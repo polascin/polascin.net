@@ -57,7 +57,7 @@ return [
 </ol>
 <p>Navrhli sme dvojtýždňový pilot na sekundárnej linke. Ak dodávateľ odpovie na všetkých dvanásť, testujeme. Ak nie, nejdeme ďalej. Otázky som poslal sprostredkovateľovi; ten ich 17.&nbsp;9.&nbsp;2026 preposlal dodávateľovi.</p>
 <p>Americkí poskytovatelia zameraní na zdravotníctvo — napríklad Ona Health, Hello Patient, Talkie.ai či Arini — na svojich stránkach uvádzajú HIPAA, SOC&nbsp;2 a BAA. To je relevantný signál o vyspelosti produktu, nie však náhrada za európsku DPA. AI v klinike nie je o tom, kto je prvý. Je o tom, či je systém dosť bezpečný, aby pacient, ktorý volá o druhej v noci s bolesťou na hrudníku, dostal správnu odpoveď.</p>
-<p>Ak hodnotíte AI nástroje pre ambulanciu — čo máte na svojom checkliste? Napíšte mi cez <a href="contact.php">kontakt</a>.</p>
+<p>Ak hodnotíte AI nástroje pre ambulanciu — čo máte na svojom checkliste?</p>
 <p><em>Ide o odborný úsudok autora pri hodnotení ponuky pre ambulanciu, nie o recenziu produktu pre pacientov ani o radu volajúcim v núdzi. Pri akútnych príznakoch volajte 155/112.</em></p>
 HTML,
         ],
@@ -88,7 +88,7 @@ HTML,
 </ol>
 <p>We proposed a two-week pilot on a secondary line. If the vendor answers all twelve, we test. If not, we do not. I sent the questions to the intermediary; on 17&nbsp;September&nbsp;2026 he forwarded them to the vendor.</p>
 <p>US healthcare-focused providers — for example Ona Health, Hello Patient, Talkie.ai, or Arini — state HIPAA, SOC&nbsp;2, and BAA on their sites. That is a maturity signal, not a substitute for a European DPA. AI in a clinic is not about being first. It is about being safe enough that the patient who calls at 2&nbsp;a.m. with chest pain gets the right response.</p>
-<p>If you evaluate AI tools for a clinical setting — what is on your checklist? Write to me via the <a href="contact.php">contact form</a>.</p>
+<p>If you evaluate AI tools for a clinical setting — what is on your checklist?</p>
 <p><em>This is the author’s professional judgement when assessing a clinic vendor offer, not a product review for patients and not advice for callers in distress. For acute symptoms, call 155/112.</em></p>
 HTML,
         ],
@@ -119,7 +119,7 @@ HTML,
 </ol>
 <p>Navrhli jsme dvoutýdenní pilot na sekundární lince. Pokud dodavatel odpoví na všech dvanáct, testujeme. Pokud ne, nejdeme dál. Otázky jsem poslal zprostředkovateli; ten je 17.&nbsp;9.&nbsp;2026 přeposlal dodavateli.</p>
 <p>Američtí poskytovatelé zaměření na zdravotnictví — například Ona Health, Hello Patient, Talkie.ai či Arini — na svých stránkách uvádějí HIPAA, SOC&nbsp;2 a BAA. To je relevantní signál o vyspělosti produktu, nikoli však náhrada za evropskou DPA. AI na klinice není o tom, kdo je první. Je o tom, zda je systém dost bezpečný, aby pacient, který volá o druhé v noci s bolestí na hrudi, dostal správnou odpověď.</p>
-<p>Pokud hodnotíte AI nástroje pro ambulanci — co máte na svém checklistu? Napište mi přes <a href="contact.php">kontakt</a>.</p>
+<p>Pokud hodnotíte AI nástroje pro ambulanci — co máte na svém checklistu?</p>
 <p><em>Jde o odborný úsudek autora při hodnocení nabídky pro ambulanci, nikoli o recenzi produktu pro pacienty ani o radu volajícím v nouzi. Při akutních příznacích volejte 155/112.</em></p>
 HTML,
         ],
@@ -150,7 +150,7 @@ HTML,
 </ol>
 <p>Wir schlugen einen zweiwöchigen Pilot auf einer Nebenleitung vor. Beantwortet der Anbieter alle zwölf, testen wir. Wenn nicht, gehen wir nicht weiter. Die Fragen schickte ich an den Vermittler; am 17.&nbsp;9.&nbsp;2026 leitete er sie an den Anbieter weiter.</p>
 <p>US-Anbieter mit Healthcare-Fokus — etwa Ona Health, Hello Patient, Talkie.ai oder Arini — nennen auf ihren Seiten HIPAA, SOC&nbsp;2 und BAA. Das ist ein Reifesignal, kein Ersatz für eine europäische DPA. KI in der Klinik geht nicht darum, wer zuerst ist. Es geht darum, ob das System sicher genug ist, dass der Patient, der um 2&nbsp;Uhr nachts mit Brustschmerz anruft, die richtige Antwort bekommt.</p>
-<p>Wenn Sie KI-Tools für die Praxis bewerten — was steht auf Ihrer Checkliste? Schreiben Sie mir über das <a href="contact.php">Kontaktformular</a>.</p>
+<p>Wenn Sie KI-Tools für die Praxis bewerten — was steht auf Ihrer Checkliste?</p>
 <p><em>Dies ist das fachliche Urteil des Autors bei der Bewertung eines Praxisangebots, keine Produktrezension für Patienten und kein Rat für Anrufende in Not. Bei akuten Symptomen 155/112 wählen.</em></p>
 HTML,
         ],
@@ -181,7 +181,7 @@ HTML,
 </ol>
 <p>Nous avons proposé un pilote de deux semaines sur une ligne secondaire. Si le fournisseur répond aux douze, nous testons. Sinon, nous n'avançons pas. J'ai envoyé les questions à l'intermédiaire ; le 17&nbsp;septembre&nbsp;2026, il les a transmises au fournisseur.</p>
 <p>Des fournisseurs américains axés santé — par exemple Ona Health, Hello Patient, Talkie.ai ou Arini — indiquent sur leurs sites HIPAA, SOC&nbsp;2 et BAA. C'est un signal de maturité, pas un substitut à un DPA européen. L'IA en clinique n'est pas une course à être le premier. C'est la question de savoir si le système est assez sûr pour que le patient qui appelle à 2&nbsp;h du matin avec une douleur thoracique reçoive la bonne réponse.</p>
-<p>Si vous évaluez des outils d'IA pour un cabinet — qu'y a-t-il sur votre checklist ? Écrivez-moi via le <a href="contact.php">formulaire de contact</a>.</p>
+<p>Si vous évaluez des outils d'IA pour un cabinet — qu'y a-t-il sur votre checklist ?</p>
 <p><em>Il s'agit du jugement professionnel de l'auteur lors de l'évaluation d'une offre pour un cabinet, non d'une revue produit pour les patients ni d'un conseil aux appelants en détresse. En cas de symptômes aigus, composez le 155/112.</em></p>
 HTML,
         ],
@@ -212,7 +212,7 @@ HTML,
 </ol>
 <p>Propusimos un piloto de dos semanas en una línea secundaria. Si el proveedor responde a las doce, probamos. Si no, no seguimos. Envié las preguntas al intermediario; el 17&nbsp;de&nbsp;septiembre&nbsp;de&nbsp;2026 las reenvió al proveedor.</p>
 <p>Proveedores estadounidenses centrados en sanidad — por ejemplo Ona Health, Hello Patient, Talkie.ai o Arini — indican en sus sitios HIPAA, SOC&nbsp;2 y BAA. Es una señal de madurez, no un sustituto de un DPA europeo. La IA en clínica no va de ser el primero. Va de si el sistema es lo bastante seguro para que el paciente que llama a las 2&nbsp;de la madrugada con dolor torácico reciba la respuesta correcta.</p>
-<p>Si evalúa herramientas de IA para una consulta — ¿qué tiene en su checklist? Escríbame a través del <a href="contact.php">formulario de contacto</a>.</p>
+<p>Si evalúa herramientas de IA para una consulta — ¿qué tiene en su checklist?</p>
 <p><em>Se trata del juicio profesional del autor al valorar una oferta para una consulta, no de una reseña de producto para pacientes ni de consejo a quienes llaman en urgencia. Ante síntomas agudos, llame al 155/112.</em></p>
 HTML,
         ],
@@ -243,7 +243,7 @@ HTML,
 </ol>
 <p>Zaproponowaliśmy dwutygodniowy pilotaż na linii dodatkowej. Jeśli dostawca odpowie na wszystkie dwanaście, testujemy. Jeśli nie — nie idziemy dalej. Pytania wysłałem pośrednikowi; 17&nbsp;września&nbsp;2026 przekazał je dostawcy.</p>
 <p>Amerykańscy dostawcy skupieni na ochronie zdrowia — np. Ona Health, Hello Patient, Talkie.ai czy Arini — na swoich stronach podają HIPAA, SOC&nbsp;2 i BAA. To sygnał dojrzałości produktu, nie zastępstwo europejskiej DPA. AI w klinice nie jest o byciu pierwszym. Jest o tym, czy system jest wystarczająco bezpieczny, by pacjent dzwoniący o drugiej w nocy z bólem w klatce dostał właściwą odpowiedź.</p>
-<p>Jeśli oceniacie narzędzia AI dla poradni — co macie na swojej checkliście? Napiszcie do mnie przez <a href="contact.php">kontakt</a>.</p>
+<p>Jeśli oceniacie narzędzia AI dla poradni — co macie na swojej checkliście?</p>
 <p><em>To fachowa ocena autora przy rozpatrywaniu oferty dla poradni, nie recenzja produktu dla pacjentów ani rada dla dzwoniących w nagłym przypadku. Przy ostrych objawach dzwońcie 155/112.</em></p>
 HTML,
         ],
@@ -274,7 +274,7 @@ HTML,
 </ol>
 <p>Kéthetes pilotot javasoltunk másodlagos vonalon. Ha a szállító mind a tizenkettőre válaszol, tesztelünk. Ha nem, nem megyünk tovább. A kérdéseket elküldtem a közvetítőnek; ő 2026.&nbsp;szeptember&nbsp;17-én továbbította a szállítónak.</p>
 <p>Az amerikai, egészségügyre fókuszáló szolgáltatók — pl. Ona Health, Hello Patient, Talkie.ai vagy Arini — oldalukon HIPAA-t, SOC&nbsp;2-t és BAA-t említenek. Ez érettségi jel, nem európai DPA-pótlék. A klinikán az AI nem arról szól, ki az első. Arról, hogy elég biztonságos-e a rendszer ahhoz, hogy a hajnali 2-kor mellkasi fájdalommal hívó beteg helyes választ kapjon.</p>
-<p>Ha AI-eszközöket értékel rendelőbe — mi van a checklistjén? Írjon nekem a <a href="contact.php">kapcsolati űrlapon</a>.</p>
+<p>Ha AI-eszközöket értékel rendelőbe — mi van a checklistjén?</p>
 <p><em>Ez a szerző szakmai ítélete egy rendelői ajánlat értékelésekor, nem termékismertető betegeknek, és nem tanács vészhelyzetben hívóknak. Akut tüneteknél hívja a 155/112-t.</em></p>
 HTML,
         ],
@@ -305,7 +305,7 @@ HTML,
 </ol>
 <p>Abbiamo proposto un pilota di due settimane su una linea secondaria. Se il fornitore risponde a tutte e dodici, testiamo. Se no, non proseguiamo. Ho inviato le domande all'intermediario; il 17&nbsp;settembre&nbsp;2026 le ha inoltrate al fornitore.</p>
 <p>Fornitori USA orientati alla sanità — ad esempio Ona Health, Hello Patient, Talkie.ai o Arini — indicano sui propri siti HIPAA, SOC&nbsp;2 e BAA. È un segnale di maturità, non un sostituto di un DPA europeo. L'IA in ambulatorio non è una corsa a essere i primi. È se il sistema è abbastanza sicuro perché il paziente che chiama alle 2&nbsp;di notte con dolore toracico riceva la risposta giusta.</p>
-<p>Se valutate strumenti IA per l'ambulatorio — cosa c'è nella vostra checklist? Scrivetemi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+<p>Se valutate strumenti IA per l'ambulatorio — cosa c'è nella vostra checklist?</p>
 <p><em>Si tratta del giudizio professionale dell'autore nella valutazione di un'offerta per ambulatorio, non di una recensione di prodotto per i pazienti né di un consiglio per chi chiama in emergenza. In caso di sintomi acuti, chiamare 155/112.</em></p>
 HTML,
         ],
@@ -336,7 +336,7 @@ HTML,
 </ol>
 <p>Ми запропонували двотижневий пілот на вторинній лінії. Якщо постачальник відповість на всі дванадцять — тестуємо. Якщо ні — не йдемо далі. Запитання я надіслав посереднику; 17&nbsp;вересня&nbsp;2026 він переслав їх постачальнику.</p>
 <p>Американські провайдери з фокусом на охорону здоров’я — наприклад Ona Health, Hello Patient, Talkie.ai чи Arini — на своїх сайтах зазначають HIPAA, SOC&nbsp;2 і BAA. Це сигнал зрілості продукту, а не заміна європейській DPA. AI в клініці — не про те, хто перший. А про те, чи система достатньо безпечна, щоб пацієнт, який дзвонить о другій ночі з болем у грудях, отримав правильну відповідь.</p>
-<p>Якщо ви оцінюєте AI-інструменти для амбулаторії — що у вашому чеклисті? Напишіть мені через <a href="contact.php">контакт</a>.</p>
+<p>Якщо ви оцінюєте AI-інструменти для амбулаторії — що у вашому чеклисті?</p>
 <p><em>Це фахова оцінка автора при розгляді пропозиції для амбулаторії, не огляд продукту для пацієнтів і не порада тим, хто дзвонить у невідкладності. При гострих симптомах телефонуйте 155/112.</em></p>
 HTML,
         ],

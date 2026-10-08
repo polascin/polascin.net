@@ -43,7 +43,7 @@ return [
 <p>Keď ste solo vývojár, ste celý bezpečnostný tím. Nie je DevSecOps, nie je partner na code review, nie je red team. Nástroje musia strážiť za vás.</p>
 <p>Pre-commit hook, ktorý blokuje tajomstvá, nestojí nič na inštaláciu a chytí jedinú chybu, ktorá by stála všetko. Je to bezpečnostné opatrenie s najvyšším ROI, ktoré som tento rok pridal.</p>
 <p>Ak píšete kód bez skenera tajomstiev v pre-commit reťazi, opravte to tento týždeň. Nie budúci.</p>
-<p>Ak spúšťate projekty solo a chcete si prebrať praktický checklist, napíšte cez <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Osobná skúsenosť autora s hardeningom vlastného vývojového prostredia. Nie je to návod na obchádzanie skenerov ani na ťaženie tajomstiev z histórie.</em></p>
 HTML,
         ],
@@ -61,7 +61,7 @@ HTML,
 <p>When you are a solo developer, you are the entire security team. There is no DevSecOps, no code-review partner, no red team. The tools have to do the watching for you.</p>
 <p>A pre-commit hook that blocks secrets costs nothing to install and catches the one mistake that would cost everything. It is the highest-ROI security measure I have added this year.</p>
 <p>If you are writing code without a secret scanner in your pre-commit chain, fix that this week. Not next week.</p>
-<p>If you ship projects solo and want to walk through a practical checklist, write via the <a href="contact.php">contact form</a>.</p>
+
 <p><em>Personal experience hardening the author’s own development environment. Not a guide to bypassing scanners or mining secrets from history.</em></p>
 HTML,
         ],
@@ -79,7 +79,7 @@ HTML,
 <p>Když jste solo vývojář, jste celý bezpečnostní tým. Není DevSecOps, není partner na code review, není red team. Nástroje musí hlídat za vás.</p>
 <p>Pre-commit hook, který blokuje tajemství, nestojí nic na instalaci a chytí jedinou chybu, která by stála všechno. Je to bezpečnostní opatření s nejvyšším ROI, které jsem letos přidal.</p>
 <p>Pokud píšete kód bez skeneru tajemství v pre-commit řetězu, opravte to tento týden. Ne příští.</p>
-<p>Pokud spouštíte projekty solo a chcete si projít praktický checklist, napište přes <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Osobní zkušenost autora s hardeningem vlastního vývojového prostředí. Není to návod na obcházení skenerů ani na těžbu tajemství z historie.</em></p>
 HTML,
         ],
@@ -97,7 +97,7 @@ HTML,
 <p>Als Solo-Entwickler sind Sie das gesamte Security-Team. Es gibt kein DevSecOps, keinen Code-Review-Partner, kein Red Team. Die Tools müssen für Sie wachen.</p>
 <p>Ein Pre-Commit-Hook, der Secrets blockiert, kostet nichts in der Installation und fängt den einen Fehler, der alles kosten würde. Es ist die Security-Maßnahme mit dem höchsten ROI, die ich dieses Jahr hinzugefügt habe.</p>
 <p>Wenn Sie Code ohne Secret-Scanner in der Pre-Commit-Kette schreiben, beheben Sie das diese Woche. Nicht nächste Woche.</p>
-<p>Wenn Sie Projekte solo ausliefern und einen praktischen Checklist durchgehen wollen, schreiben Sie über das <a href="contact.php">Kontaktformular</a>.</p>
+
 <p><em>Persönliche Erfahrung des Autors mit dem Hardening der eigenen Entwicklungsumgebung. Keine Anleitung zum Umgehen von Scannern oder zum Auslesen von Secrets aus der Historie.</em></p>
 HTML,
         ],
@@ -115,7 +115,7 @@ HTML,
 <p>Quand vous êtes développeur solo, vous êtes toute l’équipe sécurité. Pas de DevSecOps, pas de partenaire de revue de code, pas de red team. Les outils doivent veiller à votre place.</p>
 <p>Un hook pre-commit qui bloque les secrets ne coûte rien à installer et attrape l’erreur unique qui coûterait tout. C’est la mesure de sécurité au meilleur ROI que j’ai ajoutée cette année.</p>
 <p>Si vous écrivez du code sans scanner de secrets dans votre chaîne pre-commit, corrigez cela cette semaine. Pas la semaine prochaine.</p>
-<p>Si vous livrez des projets en solo et voulez parcourir une checklist pratique, écrivez via le <a href="contact.php">formulaire de contact</a>.</p>
+
 <p><em>Expérience personnelle de l’auteur sur le durcissement de son propre environnement de développement. Ce n’est pas un guide pour contourner les scanners ni pour extraire des secrets de l’historique.</em></p>
 HTML,
         ],
@@ -133,7 +133,7 @@ HTML,
 <p>Cuando eres desarrollador en solitario, eres todo el equipo de seguridad. No hay DevSecOps, no hay compañero de revisión de código, no hay red team. Las herramientas tienen que vigilar por ti.</p>
 <p>Un hook pre-commit que bloquea secretos no cuesta nada instalar y atrapa el único error que lo costaría todo. Es la medida de seguridad con mayor ROI que he añadido este año.</p>
 <p>Si escribes código sin un escáner de secretos en tu cadena pre-commit, arréglalo esta semana. No la próxima.</p>
-<p>Si lanzas proyectos en solitario y quieres revisar una checklist práctica, escribe por el <a href="contact.php">formulario de contacto</a>.</p>
+
 <p><em>Experiencia personal del autor endureciendo su propio entorno de desarrollo. No es una guía para eludir escáneres ni para extraer secretos del historial.</em></p>
 HTML,
         ],
@@ -151,7 +151,7 @@ HTML,
 <p>Gdy jesteś solo developerem, jesteś całym zespołem bezpieczeństwa. Nie ma DevSecOps, nie ma partnera do code review, nie ma red teamu. Narzędzia muszą pilnować za Ciebie.</p>
 <p>Hook pre-commit, który blokuje sekrety, nic nie kosztuje w instalacji i łapie jeden błąd, który kosztowałby wszystko. To zabezpieczenie o najwyższym ROI, jakie dodałem w tym roku.</p>
 <p>Jeśli piszesz kod bez skanera sekretów w łańcuchu pre-commit, napraw to w tym tygodniu. Nie w następnym.</p>
-<p>Jeśli prowadzisz projekty solo i chcesz przejść praktyczną checklistę, napisz przez <a href="contact.php">kontakt</a>.</p>
+
 <p><em>Osobiste doświadczenie autora z hardeningiem własnego środowiska deweloperskiego. To nie jest przewodnik po omijaniu skanerów ani wydobywaniu sekretów z historii.</em></p>
 HTML,
         ],
@@ -169,7 +169,7 @@ HTML,
 <p>Ha solo fejlesztő vagy, te vagy a teljes biztonsági csapat. Nincs DevSecOps, nincs code-review partner, nincs red team. Az eszközöknek kell őrködniük helyetted.</p>
 <p>Egy pre-commit hook, amely blokkolja a titkokat, semmibe sem kerül telepíteni, és elkapja azt az egy hibát, ami mindent elvinne. Ez az idei legmagasabb ROI-jú biztonsági intézkedésem.</p>
 <p>Ha titokszkenner nélkül írsz kódot a pre-commit láncodban, javítsd ki ezen a héten. Ne a következőn.</p>
-<p>Ha solo projekteket futtatsz, és szeretnél végigmenni egy gyakorlati checklistán, írj a <a href="contact.php">kapcsolati űrlapon</a>.</p>
+
 <p><em>A szerző személyes tapasztalata a saját fejlesztői környezetének megerősítéséről. Nem útmutató szkennerek megkerüléséhez vagy titkok előzményekből való kinyeréséhez.</em></p>
 HTML,
         ],
@@ -187,7 +187,7 @@ HTML,
 <p>Quando sei uno sviluppatore solo, sei l’intero team di sicurezza. Non c’è DevSecOps, non c’è un partner di code review, non c’è red team. Gli strumenti devono fare la guardia al posto tuo.</p>
 <p>Un hook pre-commit che blocca i segreti non costa nulla da installare e cattura l’unico errore che costerebbe tutto. È la misura di sicurezza con il ROI più alto che ho aggiunto quest’anno.</p>
 <p>Se scrivi codice senza uno scanner di segreti nella catena pre-commit, sistemalo questa settimana. Non la prossima.</p>
-<p>Se spedisci progetti da solo e vuoi ripassare una checklist pratica, scrivi tramite il <a href="contact.php">modulo di contatto</a>.</p>
+
 <p><em>Esperienza personale dell’autore sull’hardening del proprio ambiente di sviluppo. Non è una guida per aggirare gli scanner né per estrarre segreti dalla cronologia.</em></p>
 HTML,
         ],
@@ -205,7 +205,7 @@ HTML,
 <p>Коли ви соло-розробник, ви — вся команда безпеки. Немає DevSecOps, немає партнера з code review, немає red team. Інструменти мають стерегти за вас.</p>
 <p>Pre-commit hook, який блокує секрети, нічого не коштує встановити і ловить ту єдину помилку, яка коштувала б усього. Це захід безпеки з найвищим ROI, який я додав цього року.</p>
 <p>Якщо ви пишете код без сканера секретів у pre-commit ланцюгу, виправте це цього тижня. Не наступного.</p>
-<p>Якщо запускаєте проєкти соло і хочете пройти практичний чекліст, напишіть через <a href="contact.php">контакт</a>.</p>
+
 <p><em>Особистий досвід автора з hardening власного середовища розробки. Це не інструкція з обходу сканерів і не з видобування секретів з історії.</em></p>
 HTML,
         ],
