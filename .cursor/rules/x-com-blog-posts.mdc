@@ -1,8 +1,8 @@
 ---
-description: X posting je súčasť blog-article-pipeline.mdc (nepoužívať samostatne)
+description: X posting je súčasť skillu blog-article (nepoužívať samostatne)
 alwaysApply: false
 ---
 
 # X.com príspevky k blogu
 
-Presunuté do `.cursor/rules/blog-article-pipeline.mdc` (krok 5). Tento súbor je zámerne bez `alwaysApply`, aby sa inštrukcie neduplikovali.
+Presunuté do `.cursor/skills/blog-article/SKILL.md` (krok 5). Tento súbor je zámerne bez `alwaysApply`, aby sa inštrukcie neduplikovali.

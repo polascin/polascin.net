@@ -5,64 +5,6 @@ alwaysApply: true
 
 # Pipeline blogového článku
 
-Keď používateľ dodá text na blog, **bez ďalšieho pokynu** urob kroky 1–5. Ak slug už existuje, nedej duplikát článku ani sociálne príspevky. Čisto dokumentačné zmeny nie. Článok na webe nenechávaj čakať na Disk ani sociálne siete.
+Keď používateľ dodá text na blog, **bez ďalšieho pokynu** prečítaj a dodrž `.cursor/skills/blog-article/SKILL.md`. Ak slug už existuje, nedej duplikát článku ani sociálne príspevky. Čisto dokumentačné zmeny nie. Článok na webe nenechávaj čakať na Disk ani sociálne siete.
 
-Poradie vykonania: korektúra a seed (1+4) → obálka WebP + JPEG pre OG (2, seeder ju vyžaduje) → PNG na Disk (3, môže ísť súbežne) → testy, commit, push, deploy, overenie produkcie → sociálne siete (5).
-
-Jazyky stránky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk`. Autor: `MUDr. Ľubomír Polaščín`. DB sa plní len cez `setup_db.php` (`seedPublishedArticleFromFile`); neseeduj z notebooku.
-
-## 1. Korektúra a zverejnenie
-
-- Jazyková korektúra dodaného textu (sk/en), fakty over Tavily (názvy, URL, dátumy). Nevyhlasuj rukopis za uverejnený, kým to text nepovie. Cesta k PDF alebo knihe je zdroj textu: článok je esej z neho, nie prepis celku. Plný text, ak už je v knižnici, prepoj cez `library.php?slug=`.
-- `content/articles/{slug}.php`: 403 guard ako existujúce seed súbory; `slug` `[a-z0-9-]+`; `category` `blog`; `published_at` teraz; `image` `images/articles/{slug}.webp`.
-- Každý jazyk: `title` (≤255), `excerpt`, `image_alt` (≤255), HTML `content` cez `sanitizeHtmlContent` (žiadny `<script>`, CTA `contact.php` kde sedí, disclaimer ak ide o osobnú/medicínsku skúsenosť).
-- Migrácia `YYYYMMDDNN_short_name` v `setup_db.php` + ten istý názov v `scripts/audit_db_check.php` `EXPECTED_MIGRATIONS`. Seeder **nevypisuje** existujúce `(slug, lang)` (len doplní chýbajúce a aktualizuje obálku).
-- `php tests/run.php`. Potom commit/push/deploy podľa deploy pravidla.
-
-## 2. Ilustračný obrázok
-
-- `GenerateImage`, 16:9, cinematic, **bez textu/log** na obrázku, farby značky fialová `#3d1a78` / tyrkys `#078d70`. Aj keď požiadavka hovorí 16:10, obálka ostáva 16:9 (ideálne 1280×720): testy aj generátor držia tento pomer.
-- Ak nástroj uloží JPEG s príponou `.png`, načítaj `imagecreatefromjpeg` (nie png). Konverzia: `images/articles/{slug}.webp`, q82, **≥1200×675**, ideálne 1280×720.
-- `image` + `image_alt` vo všetkých prekladoch. Verejný SELECT oba stĺpce ťahá (Beh #27), takže `image_alt` je to, čo skončí v `alt` aj v `og:image:alt` — píš ho ako popis obrázka, nie ako druhý titulok.
-- Po konverzii spusti `php scripts/make_og_covers.php`. Vyrobí JPEG dvojičku v `images/articles/og/{slug}.jpg` pre `og:image` — WebP náhľad LinkedIn nezobrazí. JPEG **commitni**; test v `tests/run.php` chýbajúcu dvojičku zhodí.
-
-## 3. PNG na Google Disk
-
-- Z WebP urob skutočné PNG (GD `imagepng`, mime `image/png`).
-- Priečinok [polascin.net – obálky blogu](https://drive.google.com/drive/folders/1MOa4l69tswsLmQB3ZmYAdoZd9gZ5aVas) (`1MOa4l69tswsLmQB3ZmYAdoZd9gZ5aVas`). Kopíruj na `G:\Môj disk\polascin.net – obálky blogu\` (účet polascin@gmail.com), over `mimeType = image/png`.
-- PNG **necommituj** do repa. Lokálne tmp zmaž.
-
-## 4. Jazykové mutácie
-
-- Seed musí mať **všetky** kľúče `appLanguages()` už pri prvom deployi. Prekladaj celý článok (title, excerpt, alt, HTML), nie strojový kalk.
-- CS: slovenské reálie (SOLEN/Via practica) podľa existujúcich článkov. Po deployi spot-check aspoň SK, EN a jeden ďalší jazyk + hreflang v sitemape.
-
-## 5. Sociálne siete (až po success deployi)
-
-Až **po** success deployi a HTTP 200 kanonickej URL (OG karta s JPEG). Príspevok vždy **so slovenským textom**, kanonickou URL `https://polascin.net/article.php?slug=SLUG` (bez `lang=`) a **s ilustráciou** (WebP/JPEG súbor podľa platformy; LinkedIn OG preferuje JPEG). Heslo/passkey/2FA **nehádaj** — dialóg nechaj otvorený, na danej sieti zastav a pokračuj ostatnými. Ak sieť zlyhá, nahlás to; web ostane live. Pred ďalším článkom skontroluj, či slug na profile už nie je.
-
-### 5a. X.com @polascin
-
-Účet **@polascin** (`https://x.com/polascin`), nie `@LPolascin99873` a nie preklep `@polacin`. Overenie: „Odhlásiť používateľa @polascin“, na profile „Upraviť profil“. Chránený účet je OK.
-
-Prihlásenie: `https://x.com/home`; ak treba username `polascin`. Po „Prihlásený.“ pokračuj.
-
-Tweet: slovenčina, hook z SK title/excerpt, URL (počíta sa ako 23 znakov), pod 280 znakov. Pole „Text príspevku“ → prilož obrázok → „Uverejniť“ v compose (nie sidebar). Zober `https://x.com/polascin/status/…`.
-
-Už na X (neopakovať): `lekar-ako-pacient-glp1-a-kortikosteroidy`, `ai-agent-bezpecnostny-audit-arenibus`, `hypertenzia-oblicky-algoritmus-pre-vld`, `ai-modely-ako-nastroje-nie-operacny-system`, `ai-recepcna-dvanast-otazok`, `cloudflare-zakaz-ai-trenovania`, `skener-tajomstiev-shell-historia`, `arenibus-v-google-4177-testov`, `ai-book-trailer-ponuka-je-scam`, `atlas-agents-studeny-email-z-icloud`, `awai-dvojstranovy-pribeh-za-1500`, `dobry-skeptik-viac-nez-pochybnost`, `ceresare-z-kyjova`, `ochrana-webu-pred-ai-aj-pred-vlastnou`, `efektivita-sa-doplni`, `inkrementalna-hemodialyza-nie-je-skratka`, `tri-ponuky-za-tyzden-nikto-necital`, `pipeline-ktory-podpisujem`, `co-jestvuje-ked-nic-nezjestvuje`, `prezivanie-je-vychodisko-nie-odpoved`, `aj-clovek-ma-svoj-skill-md`.
-
-### 5b. Facebook, LinkedIn, Threads, Substack, Medium
-
-Na každej sieti uverejni krátky slovenský príspevok s obrázkom a kanonickou URL. Použi `cursor-ide-browser` (tabs → navigate → lock → interact → unlock). Zober verejnú URL príspevku.
-
-| Sieť | Účet / vstup | Poznámky |
-|------|----------------|----------|
-| Facebook | `https://www.facebook.com/lubomir.polascin` | Compose „What's on your mind“ → Post. OG karta z URL často stiahne JPEG; priama príloha cez CDP `DOM.setFileInputFiles` je v browseri **zakázaná**. Text píš **raz** (`browser_fill` po `Ctrl+A`+Backspace, nie `slowly` type) — dvojité vyplnenie zduplikuje text. |
-| LinkedIn | `https://www.linkedin.com/in/lubomirpolascin/` alebo feed → Start a post (`/sharing/compose`) | Post to Anyone → Post. Náhľad OG = JPEG. Activity URN: `https://www.linkedin.com/feed/update/urn:li:activity:…`. Ak je Post disabled po fill, spusti React input (medzera/backspace) pred klikom. |
-| Threads | `https://www.threads.com/@lubomirpolascin` | Vyžaduje prihlásenie (viditeľné „Log in“); heslo/passkey nehádaj. Cookie banner: Decline/Allow. Ak je session live, compose „New thread“. Lexical: `browser_type slowly` aj `InputEvent insertText` často **zduplikujú** text — pred Post over `innerText` (jeden výskyt hooku); pri zdvojení nepublikuj, dialóg nechaj používateľovi. Clipboard paste z hostu do Electron webview často zlyhá. |
-| Substack | `https://polascin.substack.com/publish/posts/published` | Pri neprihlásení redirect na `substack.com/sign-in` — dialóg nechaj otvorený. |
-| Medium | `https://medium.com/@lubomir` | Cloudflare „Attention Required!“ môže zablokovať automatizáciu — nechaj stránku otvorenú pre používateľa. |
-
-**Príloha obrázka:** CDP `DOM.setFileInputFiles` nie je v `cursor-ide-browser` povolené. Ak sa nepodarí nahrať súbor inak, uverejni text + kanonickú URL (OG JPEG z webu) a v reporte uveď, že lokálna príloha zlyhala. Požiadavku na ilustráciu v rule nemeň.
-
-Ak login/passkey/2FA/Cloudflare zablokuje agentovú automatizáciu, nechaj dialóg použiteľný pre používateľa a v reporte uveď blocker; požiadavku na príspevok v rule nemeň.
+Poradie: korektúra a seed so všetkými jazykmi → obálka WebP + OG JPEG → PNG na Disk → testy, commit, push, deploy, overenie produkcie → sociálne siete. Zoznam slugov už zverejnených na X je v skille; po novom príspevku ho doplň tam.
