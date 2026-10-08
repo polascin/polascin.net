@@ -581,6 +581,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/prezivanie-je-vychodisko-nie-odpoved.php'
             );
         },
+        '2026100801_human_skill_md_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/aj-clovek-ma-svoj-skill-md.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

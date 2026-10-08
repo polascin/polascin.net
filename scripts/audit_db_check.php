@@ -68,6 +68,7 @@ const EXPECTED_MIGRATIONS = [
     '2026100305_three_unsolicited_offers_article',
     '2026100401_what_exists_sunday_article',
     '2026100402_experience_starting_point_article',
+    '2026100801_human_skill_md_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
