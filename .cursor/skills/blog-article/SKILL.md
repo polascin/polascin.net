@@ -18,7 +18,7 @@ Jazyky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk` (`app
 
 ## 1. Korektúra a seed
 
-- Jazyková korektúra dodaného textu, fakty over Tavily (názvy, URL, dátumy). Nevyhlasuj rukopis za uverejnený, kým to text nepovie. PDF alebo kniha je zdroj: článok je esej, nie prepis celku. Plný text v knižnici prepoj cez `library.php?slug=`.
+- Pred korektúrou prečítaj a dodrž `.cursor/skills/humanizacia-neodborneho-textu/SKILL.md`. Platí aj pri úprave už zverejneného článku. Fakty over Tavily (názvy, URL, dátumy). Nevyhlasuj rukopis za uverejnený, kým to text nepovie. PDF alebo kniha je zdroj: článok je esej, nie prepis celku. Plný text v knižnici prepoj cez `library.php?slug=`.
 - `content/articles/{slug}.php`: 403 guard ako existujúce seed súbory; `slug` `[a-z0-9-]+`; `category` `blog`; `published_at` teraz v Europe/Bratislava (test odmieta budúcnosť); `image` `images/articles/{slug}.webp`.
 - Každý jazyk: `title` ≤255, `excerpt`, `image_alt` ≤255, HTML `content`. Žiadny `<script>` a žiadna výzva na kontakt (`contact.php`). Disclaimer pri osobnej alebo medicínskej skúsenosti. Úvod neopakuje titulok.
 - `image_alt` opisuje obrázok. Nesmie to byť druhý titulok. Verejný výpis ho dáva do `alt` aj `og:image:alt`.

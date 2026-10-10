@@ -44,7 +44,7 @@ return [
 <p>Pre vydavateľov je to skutočné napätie. Chcem, aby Google indexoval nefrologický portál <a href="https://nefro.polascin.net/">nefro.polascin.net</a>, aby pacienti našli informácie. Nechcem, aby AI model články „prehltol“ a odpovedal pacientovi priamo — s obchádzkou môjho webu.</p>
 <p>Nové ovládače sú granulárne: <strong>Search</strong>, <strong>Training</strong> a <strong>Agent</strong>. Môžete povoliť indexáciu a zároveň odmietnuť trénovanie. Môžete nechať agentov stiahnuť stránku pre konkrétny používateľský dopyt a zabrániť hromadnému zoškrabávaniu.</p>
 <p>Spravujem 14 webových properties. Pacientské portály, produktové weby, katalóg kníh. Každá má iný vzťah k AI crawlerom. Edukačný portál chce maximálny dosah. Produktový web — napríklad <a href="https://nephroctor.com/">nephroctor.com</a> alebo <a href="https://arenibus.polascin.net/">arenibus.polascin.net</a> — nemusí kŕmiť model konkurencie. Katalóg <a href="https://books.polascin.net/">books.polascin.net</a> zase potrebuje objaviteľnosť, nie voľný tréningový materiál.</p>
-<p>Starý prepínač bol binárny. Nový je chirurgický.</p>
+<p>Starý prepínač bol binárny. Nový rozlišuje, na čo sa obsah smie použiť.</p>
 <p>Ak máte web na Cloudflare a od septembrovej aktualizácie ste AI crawler settings nekontrolovali, je čas to urobiť.</p>
 HTML,
         ],
@@ -61,7 +61,7 @@ HTML,
 <p>For publishers, this is the real tension. I want Google to index the nephrology portal <a href="https://nefro.polascin.net/">nefro.polascin.net</a> so patients find information. I do not want an AI model to ingest the articles and answer the patient directly — bypassing my site entirely.</p>
 <p>The new controls are granular: <strong>Search</strong>, <strong>Training</strong>, and <strong>Agent</strong>. You can allow indexing while refusing training. You can let agents fetch a page for a specific user query while preventing bulk scraping.</p>
 <p>I manage 14 web properties. Patient portals, product sites, a book catalog. Each has a different relationship with AI crawlers. An education portal wants maximum reach. A product site — for example <a href="https://nephroctor.com/">nephroctor.com</a> or <a href="https://arenibus.polascin.net/">arenibus.polascin.net</a> — does not need to feed a competitor’s model. The catalog <a href="https://books.polascin.net/">books.polascin.net</a> needs discoverability, not free training material.</p>
-<p>The old switch was binary. The new one is surgical.</p>
+<p>The old switch was binary. The new one distinguishes what the content may be used for.</p>
 <p>If you run a site on Cloudflare and have not checked your AI crawler settings since the September update, now is the time.</p>
 HTML,
         ],
@@ -78,7 +78,7 @@ HTML,
 <p>Pro vydavatele je to skutečné napětí. Chci, aby Google indexoval nefrologický portál <a href="https://nefro.polascin.net/">nefro.polascin.net</a>, aby pacienti našli informace. Nechci, aby AI model články „spolkl“ a odpověděl pacientovi přímo — s obejitím mého webu.</p>
 <p>Nové ovladače jsou granulární: <strong>Search</strong>, <strong>Training</strong> a <strong>Agent</strong>. Můžete povolit indexaci a zároveň odmítnout trénování. Můžete nechat agenty stáhnout stránku pro konkrétní uživatelský dotaz a zabránit hromadnému oškrabávání.</p>
 <p>Spravuji 14 webových properties. Pacientské portály, produktové weby, katalog knih. Každá má jiný vztah k AI crawlerům. Edukační portál chce maximální dosah. Produktový web — například <a href="https://nephroctor.com/">nephroctor.com</a> nebo <a href="https://arenibus.polascin.net/">arenibus.polascin.net</a> — nemusí krmit model konkurence. Katalog <a href="https://books.polascin.net/">books.polascin.net</a> zase potřebuje objevitelnost, ne volný tréninkový materiál.</p>
-<p>Starý přepínač byl binární. Nový je chirurgický.</p>
+<p>Starý přepínač byl binární. Nový rozlišuje, k čemu se obsah smí použít.</p>
 <p>Pokud máte web na Cloudflare a od zářijové aktualizace jste AI crawler settings nekontrolovali, je čas to udělat.</p>
 HTML,
         ],
@@ -95,7 +95,7 @@ HTML,
 <p>Für Verleger ist das die echte Spannung. Ich will, dass Google das Nephrologie-Portal <a href="https://nefro.polascin.net/">nefro.polascin.net</a> indexiert, damit Patienten Informationen finden. Ich will nicht, dass ein KI-Modell die Artikel „verschluckt“ und dem Patienten direkt antwortet — unter Umgehung meiner Website.</p>
 <p>Die neuen Steuerungen sind granular: <strong>Search</strong>, <strong>Training</strong> und <strong>Agent</strong>. Sie können Indexierung erlauben und Training zugleich verweigern. Sie können Agenten eine Seite für eine konkrete Nutzeranfrage abrufen lassen und Massen-Scraping verhindern.</p>
 <p>Ich verwalte 14 Web-Properties. Patientenportale, Produktseiten, einen Bücherkatalog. Jede hat ein anderes Verhältnis zu KI-Crawlern. Ein Bildungsportal will maximale Reichweite. Eine Produktseite — etwa <a href="https://nephroctor.com/">nephroctor.com</a> oder <a href="https://arenibus.polascin.net/">arenibus.polascin.net</a> — muss kein Konkurrenzmodell füttern. Der Katalog <a href="https://books.polascin.net/">books.polascin.net</a> braucht Auffindbarkeit, kein freies Trainingsmaterial.</p>
-<p>Der alte Schalter war binär. Der neue ist chirurgisch.</p>
+<p>Der alte Schalter war binär. Der neue unterscheidet, wofür der Inhalt verwendet werden darf.</p>
 <p>Wenn Sie eine Website auf Cloudflare betreiben und die AI-Crawler-Einstellungen seit dem September-Update nicht geprüft haben, ist jetzt der Moment.</p>
 HTML,
         ],
@@ -112,7 +112,7 @@ HTML,
 <p>Pour les éditeurs, c’est la vraie tension. Je veux que Google indexe le portail de néphrologie <a href="https://nefro.polascin.net/">nefro.polascin.net</a> pour que les patients trouvent l’information. Je ne veux pas qu’un modèle d’IA « avale » les articles et réponde au patient directement — en contournant mon site.</p>
 <p>Les nouveaux contrôles sont granulaires : <strong>Search</strong>, <strong>Training</strong> et <strong>Agent</strong>. Vous pouvez autoriser l’indexation tout en refusant l’entraînement. Vous pouvez laisser des agents récupérer une page pour une requête utilisateur précise tout en empêchant le raclage massif.</p>
 <p>Je gère 14 propriétés web. Portails patients, sites produit, un catalogue de livres. Chacune a un rapport différent aux crawlers d’IA. Un portail éducatif veut une portée maximale. Un site produit — par exemple <a href="https://nephroctor.com/">nephroctor.com</a> ou <a href="https://arenibus.polascin.net/">arenibus.polascin.net</a> — n’a pas besoin de nourrir le modèle d’un concurrent. Le catalogue <a href="https://books.polascin.net/">books.polascin.net</a> a besoin de découvrabilité, pas de matériel d’entraînement libre.</p>
-<p>L’ancien commutateur était binaire. Le nouveau est chirurgical.</p>
+<p>L’ancien commutateur était binaire. Le nouveau distingue à quoi le contenu peut servir.</p>
 <p>Si vous avez un site sur Cloudflare et n’avez pas vérifié les réglages AI crawler depuis la mise à jour de septembre, c’est le moment.</p>
 HTML,
         ],
@@ -129,7 +129,7 @@ HTML,
 <p>Para los editores, esa es la tensión real. Quiero que Google indexe el portal de nefrología <a href="https://nefro.polascin.net/">nefro.polascin.net</a> para que los pacientes encuentren información. No quiero que un modelo de IA «trague» los artículos y responda al paciente directamente — eludiendo mi sitio.</p>
 <p>Los nuevos controles son granulares: <strong>Search</strong>, <strong>Training</strong> y <strong>Agent</strong>. Puede permitir la indexación y a la vez rechazar el entrenamiento. Puede dejar que agentes descarguen una página para una consulta concreta del usuario e impedir el raspado masivo.</p>
 <p>Gestiono 14 propiedades web. Portales de pacientes, sitios de producto, un catálogo de libros. Cada una tiene una relación distinta con los crawlers de IA. Un portal educativo quiere el máximo alcance. Un sitio de producto — por ejemplo <a href="https://nephroctor.com/">nephroctor.com</a> o <a href="https://arenibus.polascin.net/">arenibus.polascin.net</a> — no necesita alimentar el modelo de un competidor. El catálogo <a href="https://books.polascin.net/">books.polascin.net</a> necesita descubribilidad, no material de entrenamiento libre.</p>
-<p>El interruptor antiguo era binario. El nuevo es quirúrgico.</p>
+<p>El interruptor antiguo era binario. El nuevo distingue para qué se puede usar el contenido.</p>
 <p>Si tiene un sitio en Cloudflare y no ha revisado los ajustes de AI crawler desde la actualización de septiembre, es el momento.</p>
 HTML,
         ],
@@ -146,7 +146,7 @@ HTML,
 <p>Dla wydawców to prawdziwe napięcie. Chcę, by Google indeksował portal nefrologiczny <a href="https://nefro.polascin.net/">nefro.polascin.net</a>, żeby pacjenci znaleźli informacje. Nie chcę, by model AI „przełykał” artykuły i odpowiadał pacjentowi bezpośrednio — omijając moją stronę.</p>
 <p>Nowe sterowanie jest granularne: <strong>Search</strong>, <strong>Training</strong> i <strong>Agent</strong>. Możecie pozwolić na indeksację i jednocześnie odmówić trenowania. Możecie pozwolić agentom pobrać stronę dla konkretnego zapytania użytkownika i zapobiec masowemu skrobaniu.</p>
 <p>Zarządzam 14 właściwościami webowymi. Portale pacjenckie, strony produktowe, katalog książek. Każda ma inny stosunek do crawlerów AI. Portal edukacyjny chce maksymalnego zasięgu. Strona produktowa — na przykład <a href="https://nephroctor.com/">nephroctor.com</a> lub <a href="https://arenibus.polascin.net/">arenibus.polascin.net</a> — nie musi karmić modelu konkurencji. Katalog <a href="https://books.polascin.net/">books.polascin.net</a> z kolei potrzebuje odkrywalności, nie wolnego materiału treningowego.</p>
-<p>Stary przełącznik był binarny. Nowy jest chirurgiczny.</p>
+<p>Stary przełącznik był binarny. Nowy rozróżnia, do czego treść wolno użyć.</p>
 <p>Jeśli macie stronę na Cloudflare i od wrześniowej aktualizacji nie sprawdzaliście ustawień AI crawler, czas to zrobić.</p>
 HTML,
         ],
@@ -163,7 +163,7 @@ HTML,
 <p>A kiadóknak ez a valódi feszültség. Azt akarom, hogy a Google indexelje a nefrológiai portált (<a href="https://nefro.polascin.net/">nefro.polascin.net</a>), hogy a betegek megtalálják az információt. Nem akarom, hogy egy AI-modell „lenyelje” a cikkeket, és közvetlenül válaszoljon a betegnek — megkerülve a webhelyemet.</p>
 <p>Az új vezérlők granulárisak: <strong>Search</strong>, <strong>Training</strong> és <strong>Agent</strong>. Engedélyezheti az indexelést, és közben elutasíthatja a tréninget. Engedheti, hogy ügynökök egy konkrét felhasználói lekérdezéshez letöltsenek egy oldalt, és megakadályozhatja a tömeges kaparást.</p>
 <p>14 web propertyt kezelek. Betegportálok, termékoldalak, könyvkatalógus. Mindegyiknek más a viszonya az AI-crawlerekhez. Az oktatási portál maximális elérést akar. A termékoldal — például a <a href="https://nephroctor.com/">nephroctor.com</a> vagy az <a href="https://arenibus.polascin.net/">arenibus.polascin.net</a> — nem kell, hogy a versenytárs modelljét táplálja. A <a href="https://books.polascin.net/">books.polascin.net</a> katalógusnak felfedezhetőség kell, nem szabad tréninganyag.</p>
-<p>A régi kapcsoló bináris volt. Az új sebészi.</p>
+<p>A régi kapcsoló bináris volt. Az új megkülönbözteti, mire szabad a tartalmat használni.</p>
 <p>Ha Cloudflare-en fut a webhelye, és a szeptemberi frissítés óta nem nézte az AI crawler beállításokat, most van itt az ideje.</p>
 HTML,
         ],
@@ -180,7 +180,7 @@ HTML,
 <p>Per gli editori è la vera tensione. Voglio che Google indicizzi il portale di nefrologia <a href="https://nefro.polascin.net/">nefro.polascin.net</a> così i pazienti trovano le informazioni. Non voglio che un modello IA «ingoii» gli articoli e risponda al paziente direttamente — aggirando il mio sito.</p>
 <p>I nuovi controlli sono granulari: <strong>Search</strong>, <strong>Training</strong> e <strong>Agent</strong>. Potete consentire l’indicizzazione e al tempo stesso rifiutare l’addestramento. Potete lasciare che gli agent recuperino una pagina per una query utente specifica e prevenire lo scraping di massa.</p>
 <p>Gestisco 14 proprietà web. Portali pazienti, siti prodotto, un catalogo di libri. Ognuna ha un rapporto diverso con i crawler IA. Un portale educativo vuole la massima portata. Un sito prodotto — ad esempio <a href="https://nephroctor.com/">nephroctor.com</a> o <a href="https://arenibus.polascin.net/">arenibus.polascin.net</a> — non deve alimentare il modello di un concorrente. Il catalogo <a href="https://books.polascin.net/">books.polascin.net</a> ha bisogno di scopribilità, non di materiale di addestramento libero.</p>
-<p>Il vecchio interruttore era binario. Il nuovo è chirurgico.</p>
+<p>Il vecchio interruttore era binario. Il nuovo distingue a che cosa si può usare il contenuto.</p>
 <p>Se avete un sito su Cloudflare e non avete controllato le impostazioni AI crawler dall’aggiornamento di settembre, è il momento.</p>
 HTML,
         ],
@@ -197,7 +197,7 @@ HTML,
 <p>Для видавців це справжня напруга. Я хочу, щоб Google індексував нефрологічний портал <a href="https://nefro.polascin.net/">nefro.polascin.net</a>, щоб пацієнти знаходили інформацію. Не хочу, щоб AI-модель «ковтала» статті й відповідала пацієнтові напряму — в обхід мого сайту.</p>
 <p>Нові керування гранулярні: <strong>Search</strong>, <strong>Training</strong> і <strong>Agent</strong>. Можна дозволити індексацію й водночас відмовити в тренуванні. Можна дозволити агентам стягнути сторінку для конкретного запиту користувача й запобігти масовому зскрібанню.</p>
 <p>Я керую 14 веб-properties. Пацієнтські портали, продуктові сайти, каталог книг. Кожна має інше ставлення до AI-crawlerів. Освітній портал хоче максимального охоплення. Продуктовий сайт — наприклад <a href="https://nephroctor.com/">nephroctor.com</a> або <a href="https://arenibus.polascin.net/">arenibus.polascin.net</a> — не мусить годувати модель конкурента. Каталог <a href="https://books.polascin.net/">books.polascin.net</a> потребує знаходження, а не вільного тренувального матеріалу.</p>
-<p>Старий перемикач був бінарним. Новий — хірургічний.</p>
+<p>Старий перемикач був бінарним. Новий розрізняє, для чого вміст можна використати.</p>
 <p>Якщо ваш сайт на Cloudflare і від вересневого оновлення ви не перевіряли AI crawler settings, час це зробити.</p>
 HTML,
         ],

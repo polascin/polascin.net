@@ -40,7 +40,7 @@ return [
 <p>CI pipeline spustila 1&nbsp;011 testov Vitest. Všetky zelené. Predtým, než som išiel spať, odišla verzia v0.17.128.</p>
 <p>Toto nie je hypotéza. Ani demo. Je to skutočný postup, ktorým ako jeden človek posielam do sveta klinický softvér.</p>
 <p>Chcem byť úprimný v jednom: AI nenahradila úsudok. Vyniesla na povrch veci, ktoré by som prehliadol, a napísala boilerplate, ktorý som písať nechcel. Ale rozhodnúť, či nález záleží, či je záplata správna a či je bezpečné nasadiť — to ostáva na mne.</p>
-<p>Skutočný posun nie je v tom, že „AI píše kód“. Je v tom, že priepasť medzi tým, čo zvládne sólový zakladateľ, a tým, čo zvládne malý tím, sa dramaticky zúžila.</p>
+<p>Skutočný posun nie je v tom, že „AI píše kód“. Je v tom, že priepasť medzi tým, čo zvládne sólový zakladateľ, a tým, čo zvládne malý tím, sa zúžila.</p>
 <p>Ak staviate niečo sami: ktorú jednu úlohu by ste AI agentovi odovzdali ako prvú?</p>
 HTML,
         ],
@@ -55,7 +55,7 @@ HTML,
 <p>The CI pipeline ran 1,011 Vitest tests. All green. I deployed v0.17.128 before I went to bed.</p>
 <p>This is not a hypothetical. It is not a demo. It is the actual workflow I use to ship clinical software as a one-person team.</p>
 <p>The part I want to be honest about: the AI did not replace judgment. It surfaced things I would have missed and wrote boilerplate I did not want to write. But deciding whether a finding matters, whether the patch is correct, and whether it is safe to deploy — that is still on me.</p>
-<p>The real shift is not “AI writes code.” It is that the gap between what a solo founder can build and what a small team can build has narrowed dramatically.</p>
+<p>The real shift is not “AI writes code.” It is that the gap between what a solo founder can build and what a small team can build has narrowed.</p>
 <p>If you are building something alone, what is the one task you would hand to an AI agent first?</p>
 HTML,
         ],
@@ -70,7 +70,7 @@ HTML,
 <p>CI pipeline spustila 1&nbsp;011 testů Vitest. Všechny zelené. Než jsem šel spát, odešla verze v0.17.128.</p>
 <p>Tohle není hypotéza. Ani demo. Je to skutečný postup, kterým jako jeden člověk posílám do světa klinický software.</p>
 <p>Chci být upřímný v jednom: AI nenahradila úsudek. Vynesla na povrch věci, které bych přehlédl, a napsala boilerplate, který jsem psát nechtěl. Ale rozhodnout, zda nález záleží, zda je záplata správná a zda je bezpečné nasadit — to zůstává na mně.</p>
-<p>Skutečný posun není v tom, že „AI píše kód“. Je v tom, že propast mezi tím, co zvládne sólový zakladatel, a tím, co zvládne malý tým, se dramaticky zúžila.</p>
+<p>Skutečný posun není v tom, že „AI píše kód“. Je v tom, že propast mezi tím, co zvládne sólový zakladatel, a tím, co zvládne malý tým, se zúžila.</p>
 <p>Pokud stavíte něco sami: který jeden úkol byste AI agentovi předali jako první?</p>
 HTML,
         ],
@@ -85,7 +85,7 @@ HTML,
 <p>Die CI-Pipeline hat 1&nbsp;011 Vitest-Tests ausgeführt. Alle grün. Bevor ich schlafen ging, war Version v0.17.128 draußen.</p>
 <p>Das ist keine Hypothese. Auch kein Demo. Es ist der tatsächliche Ablauf, mit dem ich als Einzelperson klinische Software ausliefere.</p>
 <p>In einem Punkt will ich ehrlich sein: Die KI hat das Urteil nicht ersetzt. Sie hat Dinge an die Oberfläche gebracht, die ich übersehen hätte, und Boilerplate geschrieben, den ich nicht schreiben wollte. Ob ein Befund zählt, ob der Patch stimmt und ob ein Deploy sicher ist — das bleibt bei mir.</p>
-<p>Die eigentliche Verschiebung ist nicht „KI schreibt Code“. Es ist, dass die Kluft zwischen dem, was ein Solo-Gründer schafft, und dem, was ein kleines Team schafft, dramatisch schmaler geworden ist.</p>
+<p>Die eigentliche Verschiebung ist nicht „KI schreibt Code“. Es ist, dass die Kluft zwischen dem, was ein Solo-Gründer schafft, und dem, was ein kleines Team schafft, schmaler geworden ist.</p>
 <p>Wenn Sie etwas allein bauen: Welche eine Aufgabe würden Sie einem KI-Agenten als erste übergeben?</p>
 HTML,
         ],
@@ -100,7 +100,7 @@ HTML,
 <p>La pipeline CI a exécuté 1&nbsp;011 tests Vitest. Tous verts. Avant d'aller dormir, la version v0.17.128 était partie.</p>
 <p>Ce n'est pas une hypothèse. Ni une démo. C'est le flux réel par lequel, seul, j'envoie du logiciel clinique dans le monde.</p>
 <p>Je veux être honnête sur un point : l'IA n'a pas remplacé le jugement. Elle a fait remonter des choses que j'aurais manquées et écrit le boilerplate que je ne voulais pas écrire. Décider si un constat compte, si le correctif est juste et s'il est sûr de déployer — cela reste à moi.</p>
-<p>Le vrai basculement n'est pas « l'IA écrit du code ». C'est que l'écart entre ce qu'un fondateur solo peut faire et ce qu'une petite équipe peut faire s'est dramatiquement réduit.</p>
+<p>Le vrai basculement n'est pas « l'IA écrit du code ». C'est que l'écart entre ce qu'un fondateur solo peut faire et ce qu'une petite équipe peut faire s'est réduit.</p>
 <p>Si vous construisez quelque chose seul : quelle unique tâche confieriez-vous en premier à un agent IA ?</p>
 HTML,
         ],
@@ -115,7 +115,7 @@ HTML,
 <p>El pipeline de CI ejecutó 1&nbsp;011 pruebas Vitest. Todas verdes. Antes de irme a dormir salió la versión v0.17.128.</p>
 <p>Esto no es una hipótesis. Ni una demo. Es el flujo real con el que, como una sola persona, envío software clínico al mundo.</p>
 <p>Quiero ser honesto en una cosa: la IA no sustituyó el juicio. Sacó a la superficie cosas que habría pasado por alto y escribió el boilerplate que no quería escribir. Decidir si un hallazgo importa, si el parche es correcto y si es seguro desplegar — eso sigue siendo mío.</p>
-<p>El verdadero cambio no es que «la IA escribe código». Es que la brecha entre lo que puede un fundador en solitario y lo que puede un equipo pequeño se ha estrechado de forma dramática.</p>
+<p>El verdadero cambio no es que «la IA escribe código». Es que la brecha entre lo que puede un fundador en solitario y lo que puede un equipo pequeño se ha estrechado.</p>
 <p>Si construye algo solo: ¿cuál es la única tarea que entregaría primero a un agente de IA?</p>
 HTML,
         ],
@@ -130,7 +130,7 @@ HTML,
 <p>Pipeline CI uruchomił 1&nbsp;011 testów Vitest. Wszystkie zielone. Zanim poszedłem spać, wyszła wersja v0.17.128.</p>
 <p>To nie hipoteza. Ani demo. To rzeczywisty proces, którym jako jedna osoba wysyłam w świat oprogramowanie kliniczne.</p>
 <p>Chcę być szczery w jednym: AI nie zastąpiła osądu. Wydobyła na wierzch rzeczy, które bym przeoczył, i napisała boilerplate, którego nie chciałem pisać. Ale zdecydować, czy ustalenie ma znaczenie, czy łatka jest poprawna i czy wdrożenie jest bezpieczne — to zostaje przy mnie.</p>
-<p>Prawdziwa zmiana nie polega na tym, że „AI pisze kod”. Polega na tym, że przepaść między tym, co ogarnie solowy założyciel, a tym, co ogarnie mały zespół, dramatycznie się zwęziła.</p>
+<p>Prawdziwa zmiana nie polega na tym, że „AI pisze kod”. Polega na tym, że przepaść między tym, co ogarnie solowy założyciel, a tym, co ogarnie mały zespół, się zwęziła.</p>
 <p>Jeśli budujecie coś sami: które jedno zadanie przekazalibyście agentowi AI jako pierwsze?</p>
 HTML,
         ],
@@ -145,7 +145,7 @@ HTML,
 <p>A CI-folyamat 1&nbsp;011 Vitest tesztet futtatott. Mind zöld. Mielőtt aludni mentem, kiment a v0.17.128.</p>
 <p>Ez nem hipotézis. Nem demo. Ez a valós folyamat, amellyel egy emberként klinikai szoftvert küldök a világba.</p>
 <p>Egy dologban őszinte akarok lenni: az AI nem helyettesítette az ítélőképességet. Felszínre hozott dolgokat, amelyeket elnéztem volna, és megírta a boilerplate-et, amelyet nem akartam megírni. De eldönteni, hogy egy megállapítás számít-e, helyes-e a folt, és biztonságos-e telepíteni — az rajtam marad.</p>
-<p>Az igazi eltolódás nem az, hogy „az AI kódot ír”. Hanem az, hogy a szóló alapító és egy kis csapat képessége közötti szakadék drámaian beszűkült.</p>
+<p>Az igazi eltolódás nem az, hogy „az AI kódot ír”. Hanem az, hogy a szóló alapító és egy kis csapat képessége közötti szakadék beszűkült.</p>
 <p>Ha egyedül épít valamit: melyik egyetlen feladatot adná át először egy AI-ügynöknek?</p>
 HTML,
         ],
@@ -160,7 +160,7 @@ HTML,
 <p>La pipeline CI ha eseguito 1&nbsp;011 test Vitest. Tutti verdi. Prima di andare a dormire è uscita la versione v0.17.128.</p>
 <p>Non è un'ipotesi. Né una demo. È il flusso reale con cui, da solo, mando nel mondo software clinico.</p>
 <p>Voglio essere onesto su un punto: l'IA non ha sostituito il giudizio. Ha portato in superficie cose che avrei trascurato e ha scritto il boilerplate che non volevo scrivere. Decidere se un rilievo conta, se la patch è corretta e se è sicuro fare il deploy — resta a me.</p>
-<p>Il vero spostamento non è «l'IA scrive codice». È che il divario tra ciò che un fondatore in solitaria può fare e ciò che può fare un piccolo team si è ridotto in modo drammatico.</p>
+<p>Il vero spostamento non è «l'IA scrive codice». È che il divario tra ciò che un fondatore in solitaria può fare e ciò che può fare un piccolo team si è ridotto.</p>
 <p>Se costruite qualcosa da soli: quale unico compito affidereste per primo a un agente IA?</p>
 HTML,
         ],
@@ -175,7 +175,7 @@ HTML,
 <p>CI-конвеєр виконав 1&nbsp;011 тестів Vitest. Усі зелені. Перш ніж я пішов спати, вийшла версія v0.17.128.</p>
 <p>Це не гіпотеза. І не демо. Це реальний процес, яким я як одна людина відправляю у світ клінічне ПЗ.</p>
 <p>Хочу бути чесним в одному: AI не замінила судження. Вона винесла на поверхню речі, які я б проґавив, і написала boilerplate, який я не хотів писати. Але вирішити, чи знахідка має значення, чи латка правильна і чи безпечно випускати — лишається на мені.</p>
-<p>Справжній зсув не в тому, що «AI пише код». А в тому, що прірва між тим, що може соло-засновник, і тим, що може мала команда, драматично звузилася.</p>
+<p>Справжній зсув не в тому, що «AI пише код». А в тому, що прірва між тим, що може соло-засновник, і тим, що може мала команда, звузилася.</p>
 <p>Якщо ви будуєте щось самі: яке одне завдання ви передали б AI-агенту першим?</p>
 HTML,
         ],

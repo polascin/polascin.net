@@ -38,7 +38,6 @@ return [
             'image_alt' => 'Lekár-vývojár pri tichom stole: na monitore žiari dialyzačný softvér, za ním stena zelených testovacích svetiel a hľadáčikový lúč svetla, ktorý produkt nachádza.',
             'excerpt' => 'Google indexoval arenibus.polascin.net. Od v0.17.143 po v0.17.162 som za päť dní poslal dvadsať vydaní — 1 772 unit, 754 integračných a 1 651 frontendových testov, všetky zelené. AI píše boilerplate; klinickú logiku rozhodujem ja.',
             'content' => <<<'HTML'
-<p>Môj nefrologický softvér sa tento týždeň objavil vo výsledkoch Google. Cesta k tomu mala 4&nbsp;177 zelených testov.</p>
 <p><a href="https://arenibus.polascin.net/">Arenibus</a> začal ako .NET informačný systém pre manažment dialýzy. Jeden vývojár. Jeden lekár. Bez tímu.</p>
 <p>Tento týždeň Google indexoval arenibus.polascin.net — Google Alert na „polascin.net“ to potvrdil 20.&nbsp;9.&nbsp;2026. Po prvý raz, keď niekto hľadá nefrologický softvér po slovensky, produkt existuje vo výsledkoch.</p>
 <p>Čísla pri vydaní <strong>v0.17.162</strong> (22.&nbsp;9.&nbsp;2026), zapísané v statuse produktu:</p>
@@ -52,7 +51,7 @@ return [
 <p>Čo changelog nepovie: každé z tých vydaní najprv prešlo AI-asistovaným auditom. AI píše boilerplate. Ja prečítam každý riadok a rozhodnem klinickú biznis logiku. Tá delba práce je celý produkt.</p>
 <p>Stavať klinický softvér sólo kedysi znamenalo voliť medzi rýchlosťou a bezpečnosťou. Keď AI zvládne opakujúcu sa prácu — testy, záplaty, bezpečnostné skeny — ten kompromis sa zužuje.</p>
 <p>Produkt je nájditeľný. Testovacia sada je dôvod, prečo je bezpečné ho nájsť.</p>
-<p>Ak staviaťe niečo podobné sami — čo by ste AI odovzdali ako prvé?</p>
+<p>Ak staviate niečo podobné sami — čo by ste AI odovzdali ako prvé?</p>
 HTML,
         ],
         'en' => [
@@ -60,7 +59,6 @@ HTML,
             'image_alt' => 'A physician-developer at a quiet desk: dialysis software glowing on a monitor, a wall of green test lights behind him, a search beam finding the product.',
             'excerpt' => 'Google indexed arenibus.polascin.net. From v0.17.143 to v0.17.162 I shipped twenty releases in five days — 1,772 unit, 754 integration and 1,651 frontend tests, all green. AI writes the boilerplate; I decide the clinical logic.',
             'content' => <<<'HTML'
-<p>My nephrology software showed up in Google search results this week. Getting there took 4,177 green tests.</p>
 <p><a href="https://arenibus.polascin.net/">Arenibus</a> started as a .NET information system for dialysis management. One developer. One physician. No team.</p>
 <p>This week Google indexed arenibus.polascin.net — a Google Alert for “polascin.net” confirmed it on 20&nbsp;September&nbsp;2026. For the first time, if you search for nephrology software in Slovak, the product exists in the results.</p>
 <p>The numbers at release <strong>v0.17.162</strong> (22&nbsp;September&nbsp;2026), recorded in the product status:</p>
@@ -82,7 +80,6 @@ HTML,
             'image_alt' => 'Lékař-vývojář u tichého stolu: na monitoru září dialyzační software, za ním stěna zelených testovacích světel a hledáčkový paprsek světla, který produkt nachází.',
             'excerpt' => 'Google indexoval arenibus.polascin.net. Od v0.17.143 po v0.17.162 jsem za pět dní poslal dvacet vydání — 1 772 unit, 754 integračních a 1 651 frontendových testů, všechny zelené. AI píše boilerplate; klinickou logiku rozhoduji já.',
             'content' => <<<'HTML'
-<p>Můj nefrologický software se tento týden objevil ve výsledcích Google. Cesta k tomu měla 4&nbsp;177 zelených testů.</p>
 <p><a href="https://arenibus.polascin.net/">Arenibus</a> začal jako .NET informační systém pro management dialýzy. Jeden vývojář. Jeden lékař. Bez týmu.</p>
 <p>Tento týden Google indexoval arenibus.polascin.net — Google Alert na „polascin.net“ to potvrdil 20.&nbsp;9.&nbsp;2026. Poprvé, když někdo hledá nefrologický software slovensky, produkt ve výsledcích existuje.</p>
 <p>Čísla při vydání <strong>v0.17.162</strong> (22.&nbsp;9.&nbsp;2026), zapsaná ve statusu produktu:</p>
@@ -104,7 +101,6 @@ HTML,
             'image_alt' => 'Arzt-Entwickler an einem ruhigen Schreibtisch: Dialysesoftware leuchtet auf dem Monitor, dahinter eine Wand grüner Testlichter, ein Suchstrahl findet das Produkt.',
             'excerpt' => 'Google hat arenibus.polascin.net indexiert. Von v0.17.143 bis v0.17.162 lieferte ich in fünf Tagen zwanzig Releases — 1.772 Unit-, 754 Integrations- und 1.651 Frontend-Tests, alle grün. KI schreibt Boilerplate; die klinische Logik entscheide ich.',
             'content' => <<<'HTML'
-<p>Meine Nephrologie-Software tauchte diese Woche in den Google-Suchergebnissen auf. Der Weg dorthin umfasste 4.177 grüne Tests.</p>
 <p><a href="https://arenibus.polascin.net/">Arenibus</a> begann als .NET-Informationssystem für das Dialysemanagement. Ein Entwickler. Ein Arzt. Kein Team.</p>
 <p>Diese Woche hat Google arenibus.polascin.net indexiert — ein Google Alert für „polascin.net“ bestätigte das am 20.&nbsp;9.&nbsp;2026. Zum ersten Mal existiert das Produkt in den Ergebnissen, wenn man auf Slowakisch nach Nephrologie-Software sucht.</p>
 <p>Die Zahlen beim Release <strong>v0.17.162</strong> (22.&nbsp;9.&nbsp;2026), festgehalten im Produktstatus:</p>
@@ -126,7 +122,6 @@ HTML,
             'image_alt' => 'Un médecin-développeur à un bureau calme : logiciel de dialyse lumineux sur l’écran, mur de voyants de tests verts derrière lui, faisceau de recherche qui trouve le produit.',
             'excerpt' => 'Google a indexé arenibus.polascin.net. De v0.17.143 à v0.17.162 j’ai livré vingt versions en cinq jours — 1 772 tests unitaires, 754 d’intégration et 1 651 frontend, tous verts. L’IA écrit le boilerplate ; je décide la logique clinique.',
             'content' => <<<'HTML'
-<p>Mon logiciel de néphrologie est apparu cette semaine dans les résultats Google. Le chemin a compté 4&nbsp;177 tests verts.</p>
 <p><a href="https://arenibus.polascin.net/">Arenibus</a> a commencé comme système d’information .NET pour la gestion de la dialyse. Un développeur. Un médecin. Pas d’équipe.</p>
 <p>Cette semaine, Google a indexé arenibus.polascin.net — une alerte Google sur «&nbsp;polascin.net&nbsp;» l’a confirmé le 20&nbsp;septembre&nbsp;2026. Pour la première fois, si l’on cherche un logiciel de néphrologie en slovaque, le produit existe dans les résultats.</p>
 <p>Les chiffres à la version <strong>v0.17.162</strong> (22&nbsp;septembre&nbsp;2026), consignés dans le statut du produit&nbsp;:</p>
@@ -148,7 +143,6 @@ HTML,
             'image_alt' => 'Un médico-desarrollador en un escritorio tranquilo: software de diálisis brillando en el monitor, una pared de luces verdes de tests detrás, un haz de búsqueda que encuentra el producto.',
             'excerpt' => 'Google indexó arenibus.polascin.net. De v0.17.143 a v0.17.162 envié veinte versiones en cinco días — 1.772 unitarios, 754 de integración y 1.651 de frontend, todos verdes. La IA escribe el boilerplate; yo decido la lógica clínica.',
             'content' => <<<'HTML'
-<p>Mi software de nefrología apareció esta semana en los resultados de Google. El camino tuvo 4.177 tests en verde.</p>
 <p><a href="https://arenibus.polascin.net/">Arenibus</a> empezó como un sistema de información .NET para la gestión de diálisis. Un desarrollador. Un médico. Sin equipo.</p>
 <p>Esta semana Google indexó arenibus.polascin.net — una alerta de Google sobre «polascin.net» lo confirmó el 20&nbsp;de septiembre&nbsp;de&nbsp;2026. Por primera vez, si buscas software de nefrología en eslovaco, el producto existe en los resultados.</p>
 <p>Los números en la versión <strong>v0.17.162</strong> (22&nbsp;de septiembre&nbsp;de&nbsp;2026), registrados en el estado del producto:</p>
@@ -170,7 +164,6 @@ HTML,
             'image_alt' => 'Lekarz-programista przy spokojnym biurku: oprogramowanie dializacyjne świeci na monitorze, za nim ściana zielonych świateł testów, wiązka wyszukiwania odnajduje produkt.',
             'excerpt' => 'Google zindeksował arenibus.polascin.net. Od v0.17.143 do v0.17.162 w pięć dni wysłałem dwadzieścia wydań — 1 772 unit, 754 integracyjnych i 1 651 frontendowych, wszystkie zielone. AI pisze boilerplate; logikę kliniczną decyduję ja.',
             'content' => <<<'HTML'
-<p>Mój soft nefrologiczny pojawił się w tym tygodniu w wynikach Google. Droga do tego miała 4&nbsp;177 zielonych testów.</p>
 <p><a href="https://arenibus.polascin.net/">Arenibus</a> zaczął jako system informacyjny .NET do zarządzania dializą. Jeden programista. Jeden lekarz. Bez zespołu.</p>
 <p>W tym tygodniu Google zindeksował arenibus.polascin.net — alert Google na „polascin.net” potwierdził to 20&nbsp;września&nbsp;2026. Po raz pierwszy, gdy ktoś szuka softu nefrologicznego po słowacku, produkt istnieje w wynikach.</p>
 <p>Liczby przy wydaniu <strong>v0.17.162</strong> (22&nbsp;września&nbsp;2026), zapisane w statusie produktu:</p>
@@ -192,7 +185,6 @@ HTML,
             'image_alt' => 'Orvos-fejlesztő csendes asztalnál: dialízis-szoftver világít a monitoron, mögötte zöld tesztlámpák fala, kereső fénysugár találja meg a terméket.',
             'excerpt' => 'A Google indexelte az arenibus.polascin.net oldalt. A v0.17.143-tól a v0.17.162-ig öt nap alatt húsz kiadást küldtem — 1 772 unit, 754 integrációs és 1 651 frontend teszt, mind zöld. Az AI írja a boilerplate-et; a klinikai logikát én döntöm el.',
             'content' => <<<'HTML'
-<p>A nefrológiai szoftverem ezen a héten megjelent a Google találatok között. Az odáig vezető út 4&nbsp;177 zöld teszt volt.</p>
 <p>Az <a href="https://arenibus.polascin.net/">Arenibus</a> .NET információs rendszerként indult dialíziskezelésre. Egy fejlesztő. Egy orvos. Csapat nélkül.</p>
 <p>Ezen a héten a Google indexelte az arenibus.polascin.net oldalt — a „polascin.net” Google Alert 2026.&nbsp;szeptember&nbsp;20-án igazolta. Először, ha valaki szlovákul keres nefrológiai szoftvert, a termék létezik a találatokban.</p>
 <p>A <strong>v0.17.162</strong> kiadás számai (2026.&nbsp;szeptember&nbsp;22.), a termékstátuszban rögzítve:</p>
@@ -214,7 +206,6 @@ HTML,
             'image_alt' => 'Un medico-sviluppatore a una scrivania silenziosa: software di dialisi luminoso sul monitor, dietro di lui un muro di luci verdi dei test, un fascio di ricerca che trova il prodotto.',
             'excerpt' => 'Google ha indicizzato arenibus.polascin.net. Da v0.17.143 a v0.17.162 in cinque giorni ho rilasciato venti versioni — 1.772 unit, 754 di integrazione e 1.651 frontend, tutti verdi. L’IA scrive il boilerplate; la logica clinica la decido io.',
             'content' => <<<'HTML'
-<p>Il mio software di nefrologia è comparso questa settimana nei risultati di Google. Il percorso ha contato 4.177 test verdi.</p>
 <p><a href="https://arenibus.polascin.net/">Arenibus</a> è nato come sistema informativo .NET per la gestione della dialisi. Un sviluppatore. Un medico. Senza team.</p>
 <p>Questa settimana Google ha indicizzato arenibus.polascin.net — un avviso Google su «polascin.net» l’ha confermato il 20&nbsp;settembre&nbsp;2026. Per la prima volta, chi cerca software di nefrologia in slovacco trova il prodotto nei risultati.</p>
 <p>I numeri al rilascio <strong>v0.17.162</strong> (22&nbsp;settembre&nbsp;2026), registrati nello stato del prodotto:</p>
@@ -236,7 +227,6 @@ HTML,
             'image_alt' => 'Лікар-розробник за спокійним столом: на моніторі світиться діалізний софт, за ним стіна зелених тестових ліхтарів, пошуковий промінь знаходить продукт.',
             'excerpt' => 'Google проіндексував arenibus.polascin.net. Від v0.17.143 до v0.17.162 за п’ять днів я випустив двадцять релізів — 1 772 unit, 754 інтеграційних і 1 651 фронтенд-тестів, усі зелені. AI пише boilerplate; клінічну логіку вирішую я.',
             'content' => <<<'HTML'
-<p>Мій нефрологічний софт цього тижня з’явився в результатах Google. Шлях до цього мав 4&nbsp;177 зелених тестів.</p>
 <p><a href="https://arenibus.polascin.net/">Arenibus</a> почався як .NET інформаційна система для керування діалізом. Один розробник. Один лікар. Без команди.</p>
 <p>Цього тижня Google проіндексував arenibus.polascin.net — Google Alert на «polascin.net» підтвердив це 20&nbsp;вересня&nbsp;2026. Уперше, коли хтось шукає нефрологічний софт словацькою, продукт існує в результатах.</p>
 <p>Цифри на релізі <strong>v0.17.162</strong> (22&nbsp;вересня&nbsp;2026), записані в статусі продукту:</p>

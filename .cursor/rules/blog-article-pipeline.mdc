@@ -5,6 +5,6 @@ alwaysApply: true
 
 # Pipeline blogového článku
 
-Keď používateľ dodá text na blog, **bez ďalšieho pokynu** prečítaj a dodrž `.cursor/skills/blog-article/SKILL.md`. Ak slug už existuje, nedej duplikát článku ani sociálne príspevky. Čisto dokumentačné zmeny nie. Článok na webe nenechávaj čakať na Disk ani sociálne siete.
+Keď používateľ dodá text na blog alebo upravuje blogový príspevok, **bez ďalšieho pokynu** prečítaj a dodrž `.cursor/skills/humanizacia-neodborneho-textu/SKILL.md` a `.cursor/skills/blog-article/SKILL.md`. Ak slug už existuje, nedej duplikát článku ani sociálne príspevky. Čisto dokumentačné zmeny nie. Článok na webe nenechávaj čakať na Disk ani sociálne siete.
 
 Poradie: korektúra a seed so všetkými jazykmi → obálka WebP a `php scripts/make_og_covers.php` → PNG na Disk → testy, commit, push, deploy, overenie produkcie → sociálne siete. Zoznam slugov už zverejnených na X je v skille; po novom príspevku ho doplň tam.

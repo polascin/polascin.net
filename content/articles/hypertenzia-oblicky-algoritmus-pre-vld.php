@@ -34,7 +34,7 @@ return [
             'image_alt' => 'Ambulancia všeobecného lekára: meranie tlaku v popredí, v presýpacích hodinách sa míňa čas obličiek.',
             'excerpt' => 'S redaktorkou vydavateľstva SOLEN sme dokončili rukopis pre Via practica: algoritmus pre VLD, ako z KDIGO a ESH urobiť rozhodnutie v bežnej ambulancii — kedy skríning, kedy odoslať, kedy začať liečbu ešte pred odoslaním.',
             'content' => <<<'HTML'
-<p>Väčšinu ochorení obličiek zachytíme neskoro, lebo guidelines sa nedostanú k lekárom, ktorí pacienta vidia ako prví.</p>
+<p>Väčšinu ochorení obličiek zachytíme neskoro, lebo odporúčania sa nedostanú k lekárom, ktorí pacienta vidia ako prví.</p>
 <p>Tento týždeň som s redaktorkou vydavateľstva SOLEN dokončil rukopis pre časopis <a href="https://www.solen.sk/sk/casopisy/via-practica">Via practica</a>. Názov: <em>Hypertenzia a obličky: nové odporúčania a algoritmus pre VLD</em>. VLD sú všeobecní lekári pre dospelých na Slovensku.</p>
 <p>Problém, ktorý text rieši, je jednoduchý a tvrdošijný. Nefrologické odporúčania píšu nefrológovia pre nefrológov. Pacient, u ktorého sa rozvinie chronické ochorenie obličiek, však do nefrologickej ambulancie nepríde ako prvý. Príde k svojmu obvodnému lekárovi s vysokým krvným tlakom.</p>
 <p>Kým sa ku mne dostane, eGFR už často klesol pod 60&nbsp;ml/min/1,73&nbsp;m². Okno na zásah — inhibítory SGLT2, blokáda RAAS, úprava životosprávy — bolo o mesiace alebo roky skôr.</p>
@@ -49,7 +49,6 @@ HTML,
             'image_alt' => 'A primary-care consult: blood pressure in the foreground while a kidney-shaped hourglass runs out of time.',
             'excerpt' => 'With an editor at SOLEN I finished a Via practica manuscript: an algorithm for Slovak primary-care physicians that turns KDIGO and ESH guidance into a routine consult — when to screen, when to refer, when to start treatment before the referral.',
             'content' => <<<'HTML'
-<p>Most kidney disease is caught too late because the guidelines never reach the doctors who see patients first.</p>
 <p>This week I finalized a manuscript with an editor at SOLEN, for the journal <a href="https://www.solen.sk/en/journals/via-practica">Via practica</a>. The title: <em>Hypertension and Kidneys: New Recommendations and Algorithm for VLD</em> — VLD being adult primary-care physicians in Slovakia.</p>
 <p>The problem it addresses is simple and stubborn. Nephrology guidelines are written by nephrologists, for nephrologists. But the patient who will develop CKD does not walk into a nephrology clinic first. They walk into their family doctor with high blood pressure.</p>
 <p>By the time they reach me, the eGFR has often already dropped below 60&nbsp;ml/min/1.73&nbsp;m². The window for intervention — SGLT2 inhibitors, RAAS blockade, lifestyle modification — was months or years earlier.</p>
@@ -64,7 +63,7 @@ HTML,
             'image_alt' => 'Ambulance praktického lékaře: měření tlaku v popředí, v přesýpacích hodinách se míjí čas ledvin.',
             'excerpt' => 'S redaktorkou vydavatelství SOLEN jsme dokončili rukopis pro Via practica: algoritmus pro praktické lékaře, jak z KDIGO a ESH udělat rozhodnutí v běžné ambulanci — kdy screening, kdy odeslat, kdy začít léčbu ještě před odesláním.',
             'content' => <<<'HTML'
-<p>Většinu onemocnění ledvin zachytíme pozdě, protože guidelines se nedostanou k lékařům, kteří pacienta vidí jako první.</p>
+<p>Většinu onemocnění ledvin zachytíme pozdě, protože doporučení se nedostanou k lékařům, kteří pacienta vidí jako první.</p>
 <p>Tento týden jsem s redaktorkou vydavatelství SOLEN, dokončil rukopis pro časopis <a href="https://www.solen.sk/sk/casopisy/via-practica">Via practica</a>. Název: <em>Hypertenzia a obličky: nové odporúčania a algoritmus pre VLD</em>. VLD jsou praktičtí lékaři pro dospělé na Slovensku.</p>
 <p>Problém, který text řeší, je jednoduchý a tvrdošíjný. Nefrologická doporučení píší nefrologové pro nefrology. Pacient, u něhož se rozvine chronické onemocnění ledvin, však do nefrologické ambulance nepřijde jako první. Přijde ke svému obvodnímu lékaři s vysokým krevním tlakem.</p>
 <p>Než se ke mně dostane, eGFR už často klesl pod 60&nbsp;ml/min/1,73&nbsp;m². Okno na zásah — inhibitory SGLT2, blokáda RAAS, úprava životosprávy — bylo o měsíce nebo roky dříve.</p>
@@ -94,7 +93,7 @@ HTML,
             'image_alt' => 'Consultation de médecine générale : la mesure de la tension au premier plan, un sablier rénal dont le temps s\'écoule.',
             'excerpt' => 'Avec une rédactrice chez SOLEN, j\'ai achevé un manuscrit pour Via practica : un algorithme pour les médecins de premier recours slovaques, qui transforme KDIGO et ESH en décision de consultation — quand dépister, quand adresser, quand traiter avant l\'adressage.',
             'content' => <<<'HTML'
-<p>La plupart des maladies rénales se dépistent trop tard, parce que les guidelines n'atteignent pas les médecins qui voient les patients en premier.</p>
+<p>La plupart des maladies rénales se dépistent trop tard, parce que les recommandations n'atteignent pas les médecins qui voient les patients en premier.</p>
 <p>Cette semaine, j'ai finalisé un manuscrit avec une rédactrice chez SOLEN, pour la revue <a href="https://www.solen.sk/en/journals/via-practica">Via practica</a>. Titre : <em>Hypertenzia a obličky: nové odporúčania a algoritmus pre VLD</em>. VLD désigne les médecins de premier recours pour adultes en Slovaquie.</p>
 <p>Le problème que le texte traite est simple et tenace. Les recommandations de néphrologie sont écrites par des néphrologues, pour des néphrologues. Or le patient chez qui une MRC se développera n'entre pas d'abord dans une consultation de néphrologie. Il entre chez son médecin de famille avec une hypertension.</p>
 <p>Quand il arrive jusqu'à moi, le DFGe est souvent déjà tombé sous 60&nbsp;ml/min/1,73&nbsp;m². La fenêtre d'intervention — inhibiteurs SGLT2, blocage du SRAA, modification du mode de vie — était des mois ou des années plus tôt.</p>
@@ -109,7 +108,7 @@ HTML,
             'image_alt' => 'Consulta de atención primaria: medición de la presión en primer plano y un reloj de arena renal cuyo tiempo se acaba.',
             'excerpt' => 'Con una editora de SOLEN, cerré un manuscrito para Via practica: un algoritmo para médicos de familia eslovacos que convierte KDIGO y ESH en una consulta rutinaria — cuándo cribar, cuándo derivar, cuándo tratar antes de la derivación.',
             'content' => <<<'HTML'
-<p>La mayor parte de la enfermedad renal se detecta demasiado tarde porque las guidelines no llegan a los médicos que ven al paciente primero.</p>
+<p>La mayor parte de la enfermedad renal se detecta demasiado tarde porque las guías no llegan a los médicos que ven al paciente primero.</p>
 <p>Esta semana finalicé un manuscrito con una editora de SOLEN, para la revista <a href="https://www.solen.sk/en/journals/via-practica">Via practica</a>. Título: <em>Hypertenzia a obličky: nové odporúčania a algoritmus pre VLD</em>. VLD son los médicos de atención primaria de adultos en Eslovaquia.</p>
 <p>El problema que aborda el texto es simple y tenaz. Las recomendaciones de nefrología las escriben nefrólogos para nefrólogos. Pero el paciente en el que se desarrollará una ERC no entra primero en una consulta de nefrología. Entra en la de su médico de familia con hipertensión.</p>
 <p>Cuando llega a mí, el TFGe a menudo ya ha bajado de 60&nbsp;ml/min/1,73&nbsp;m². La ventana de intervención — inhibidores SGLT2, bloqueo del SRAA, cambio de estilo de vida — estaba meses o años antes.</p>
@@ -124,7 +123,7 @@ HTML,
             'image_alt' => 'Poradnia lekarza rodzinnego: pomiar ciśnienia na pierwszym planie, w klepsydrze ucieka czas nerek.',
             'excerpt' => 'Z redaktorką wydawnictwa SOLEN dokończyliśmy rękopis dla Via practica: algorytm dla lekarzy rodzinnych, jak z KDIGO i ESH zrobić decyzję w zwykłej poradni — kiedy przesiew, kiedy skierować, kiedy zacząć leczenie jeszcze przed skierowaniem.',
             'content' => <<<'HTML'
-<p>Większość chorób nerek wychwytujemy za późno, bo guidelines nie docierają do lekarzy, którzy pacjenta widzą jako pierwsi.</p>
+<p>Większość chorób nerek wychwytujemy za późno, bo wytyczne nie docierają do lekarzy, którzy pacjenta widzą jako pierwsi.</p>
 <p>W tym tygodniu z redaktorką wydawnictwa SOLEN, dokończyłem rękopis dla czasopisma <a href="https://www.solen.sk/en/journals/via-practica">Via practica</a>. Tytuł: <em>Hypertenzia a obličky: nové odporúčania a algoritmus pre VLD</em>. VLD to lekarze rodzinni dla dorosłych na Słowacji.</p>
 <p>Problem, który tekst podejmuje, jest prosty i uporczywy. Zalecenia nefrologiczne piszą nefrolodzy dla nefrologów. Pacjent, u którego rozwinie się przewlekła choroba nerek, nie przychodzi jednak najpierw do poradni nefrologicznej. Przychodzi do swojego lekarza rodzinnego z nadciśnieniem.</p>
 <p>Zanim dotrze do mnie, eGFR często już spadł poniżej 60&nbsp;ml/min/1,73&nbsp;m². Okno na interwencję — inhibitory SGLT2, blokada RAAS, zmiana stylu życia — było miesiącami lub latami wcześniej.</p>
@@ -139,7 +138,7 @@ HTML,
             'image_alt' => 'Háziorvosi rendelő: vérnyomásmérés az előtérben, a vese alakú homokórában fogy az idő.',
             'excerpt' => 'A SOLEN szerkesztőjével lezártuk a Via practica kéziratát: algoritmus háziorvosoknak, hogyan legyen a KDIGO és az ESH döntés a rendelőben — mikor szűrjünk, mikor utaljunk, mikor kezdjünk kezelést az utalás előtt.',
             'content' => <<<'HTML'
-<p>A vesebetegségek többségét későn ismerjük fel, mert a guidelines nem jutnak el azokhoz az orvosokhoz, akik a beteget először látják.</p>
+<p>A vesebetegségek többségét későn ismerjük fel, mert az ajánlások nem jutnak el azokhoz az orvosokhoz, akik a beteget először látják.</p>
 <p>Ezen a héten A SOLEN kiadó szerkesztőjével lezártam a <a href="https://www.solen.sk/en/journals/via-practica">Via practica</a> kéziratát. Cím: <em>Hypertenzia a obličky: nové odporúčania a algoritmus pre VLD</em>. A VLD Szlovákiában a felnőttek háziorvosait jelenti.</p>
 <p>A szöveg problémája egyszerű és makacs. A nefrológiai ajánlásokat nefrológusok írják nefrológusoknak. A beteg, akinél krónikus vesebetegség alakul ki, azonban nem a nefrológiai rendelőbe lép be először. A háziorvosához megy magas vérnyomással.</p>
 <p>Mire hozzám eljut, az eGFR gyakran már 60&nbsp;ml/min/1,73&nbsp;m² alá esett. A beavatkozás ablaka — SGLT2-gátlók, RAAS-blokád, életmódváltás — hónapokkal vagy évekkel korábban volt.</p>
@@ -154,7 +153,7 @@ HTML,
             'image_alt' => 'Ambulatorio di medicina generale: misurazione della pressione in primo piano e una clessidra renale il cui tempo sta finendo.',
             'excerpt' => 'Con una redattrice di SOLEN, ho chiuso un manoscritto per Via practica: un algoritmo per i medici di famiglia slovacchi che trasforma KDIGO ed ESH in una visita di routine — quando fare screening, quando inviare, quando trattare prima dell\'invio.',
             'content' => <<<'HTML'
-<p>La maggior parte delle malattie renali si intercetta troppo tardi, perché le guidelines non arrivano ai medici che vedono il paziente per primi.</p>
+<p>La maggior parte delle malattie renali si intercetta troppo tardi, perché le linee guida non arrivano ai medici che vedono il paziente per primi.</p>
 <p>Questa settimana ho finalizzato un manoscritto con una redattrice della casa editrice SOLEN, per la rivista <a href="https://www.solen.sk/en/journals/via-practica">Via practica</a>. Titolo: <em>Hypertenzia a obličky: nové odporúčania a algoritmus pre VLD</em>. VLD sono i medici di medicina generale per adulti in Slovacchia.</p>
 <p>Il problema che il testo affronta è semplice e ostinato. Le raccomandazioni nefrologiche le scrivono nefrologi per nefrologi. Il paziente in cui si svilupperà una MRC, però, non entra prima in un ambulatorio di nefrologia. Entra dal medico di famiglia con la pressione alta.</p>
 <p>Quando arriva da me, l'eGFR è spesso già sceso sotto 60&nbsp;ml/min/1,73&nbsp;m². La finestra di intervento — inibitori SGLT2, blocco del RAAS, modifica dello stile di vita — era mesi o anni prima.</p>
@@ -169,7 +168,7 @@ HTML,
             'image_alt' => 'Кабінет сімейного лікаря: вимірювання тиску на передньому плані, у пісковому годиннику спливає час нирок.',
             'excerpt' => 'З редакторкою видавництва SOLEN ми завершили рукопис для Via practica: алгоритм для сімейних лікарів, як із KDIGO та ESH зробити рішення на звичайному прийомі — коли скринінг, коли скерувати, коли почати лікування ще до скерування.',
             'content' => <<<'HTML'
-<p>Більшість хвороб нирок виявляємо запізно, бо guidelines не доходять до лікарів, які бачать пацієнта першими.</p>
+<p>Більшість хвороб нирок виявляємо запізно, бо настанови не доходять до лікарів, які бачать пацієнта першими.</p>
 <p>Цього тижня я з редакторкою видавництва SOLEN, завершив рукопис для журналу <a href="https://www.solen.sk/en/journals/via-practica">Via practica</a>. Назва: <em>Hypertenzia a obličky: nové odporúčania a algoritmus pre VLD</em>. VLD — це сімейні лікарі для дорослих у Словаччині.</p>
 <p>Проблема, яку розв'язує текст, проста й уперта. Нефрологічні настанови пишуть нефрологи для нефрологів. Пацієнт, у якого розвинеться хронічна хвороба нирок, однак не заходить спочатку до нефрологічного кабінету. Він іде до свого сімейного лікаря з високим тиском.</p>
 <p>Поки він доходить до мене, eGFR часто вже впав нижче 60&nbsp;мл/хв/1,73&nbsp;м². Вікно для втручання — інгібітори SGLT2, блокада RAAS, зміна способу життя — було місяцями чи роками раніше.</p>

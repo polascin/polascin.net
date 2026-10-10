@@ -38,7 +38,7 @@ return [
 <p>Prekvapilo ma však niečo iné: návrat potravinového šumu — <em>food noise</em>.</p>
 <p>To stále, vtieravé myslenie na jedlo, ktoré semaglutid potichu vypol, sa vrátilo v priebehu dní po zmene. Nie preto, že by bol tirzepatid slabší. Ale preto, že súhra medzi signálmi chuti do jedla a inzulínovou rezistenciou z kortikosteroidov je zložitejšia, než vysvetlí jeden receptor.</p>
 <p>Nízkosacharidové jedlá to paradoxne zhoršili. Bielkoviny a tuk bez sacharidov hlad prehĺbili, namiesto toho, aby ho utíšili. Takú vec si prečítate v štúdiách; inak ju cítite, keď ide o vlastné telo.</p>
-<p>V tom istom období som stihol aj krátky pokus s retratrutidom. Iná molekula, iný receptorový profil, iný zážitok. Dáta o týchto liekoch sa hýbu rýchlejšie, než stíhajú klinické odporúčania.</p>
+<p>V tom istom období som stihol aj krátky pokus s retatrutidom. Iná molekula, iný receptorový profil, iný zážitok. Dáta o týchto liekoch sa hýbu rýchlejšie, než stíhajú klinické odporúčania.</p>
 <p>Nejde o to, ktorá molekula „vyhrala“. Ide o to, že ako lekár som vedel zdokumentovať každú premennú. Ako pacient som každú z nich cítil. Takýto dvojitý pohľad by som prial zažiť viacerým kolegom na vlastnej koži.</p>
 <p>Ak pracujete s pacientmi na inkretínovej liečbe — najmä súbežne so steroidmi — aké vzorce ste videli?</p>
 <p><em>Ide o osobnú skúsenosť, nie o liečebné odporúčanie. Rozhodnutia o liečbe patria do rozhovoru s ošetrujúcim lekárom.</em></p>
@@ -68,7 +68,7 @@ HTML,
 <p>Překvapilo mě však něco jiného: návrat potravinového šumu — <em>food noise</em>.</p>
 <p>To stálé, vtíravé myšlení na jídlo, které semaglutid potichu vypnul, se vrátilo během dnů po změně. Ne proto, že by byl tirzepatid slabší. Ale proto, že souhra mezi signály chuti k jídlu a inzulinovou rezistencí z kortikosteroidů je složitější, než vysvětlí jeden receptor.</p>
 <p>Nízkosacharidová jídla to paradoxně zhoršila. Bílkoviny a tuk bez sacharidů hlad prohloubily, místo aby ho utišily. Takovou věc si přečtete ve studiích; jinak ji cítíte, když jde o vlastní tělo.</p>
-<p>Ve stejném období jsem stihl i krátký pokus s retratrutidem. Jiná molekula, jiný receptorový profil, jiný zážitek. Data o těchto lécích se hýbou rychleji, než stíhají klinická doporučení.</p>
+<p>Ve stejném období jsem stihl i krátký pokus s retatrutidem. Jiná molekula, jiný receptorový profil, jiný zážitek. Data o těchto lécích se hýbou rychleji, než stíhají klinická doporučení.</p>
 <p>Nejde o to, která molekula „vyhrála“. Jde o to, že jako lékař jsem uměl zdokumentovat každou proměnnou. Jako pacient jsem každou z nich cítil. Takový dvojí pohled bych přál zažít více kolegům na vlastní kůži.</p>
 <p>Pokud pracujete s pacienty na inkretinové léčbě — zejména souběžně se steroidy — jaké vzorce jste viděli?</p>
 <p><em>Jde o osobní zkušenost, nikoli o léčebné doporučení. Rozhodnutí o léčbě patří do rozhovoru s ošetřujícím lékařem.</em></p>
@@ -83,7 +83,7 @@ HTML,
 <p>Überrascht hat mich aber etwas anderes: die Rückkehr des Food Noise.</p>
 <p>Dieses ständige, aufdringliche Denken an Essen — das Semaglutid still abgeschaltet hatte — kam innerhalb von Tagen nach dem Wechsel zurück. Nicht weil Tirzepatid schwächer wäre. Sondern weil das Zusammenspiel zwischen Appetitsignalen und kortikosteroidbedingter Insulinresistenz komplexer ist, als ein einzelner Rezeptor erklärt.</p>
 <p>Kohlenhydratarme Mahlzeiten haben es paradoxerweise verschlimmert. Eiweiß und Fett ohne Kohlenhydrate haben den Hunger vertieft, statt ihn zu stillen. Sowas liest man in Studien; anders fühlt man es, wenn es der eigene Körper ist.</p>
-<p>Im selben Zeitraum habe ich auch einen kurzen Versuch mit Retratrutid gemacht. Ein anderes Molekül, ein anderes Rezeptorprofil, eine andere Erfahrung. Die Daten zu diesen Arzneimitteln bewegen sich schneller, als klinische Leitlinien mithalten können.</p>
+<p>Im selben Zeitraum habe ich auch einen kurzen Versuch mit Retatrutid gemacht. Ein anderes Molekül, ein anderes Rezeptorprofil, eine andere Erfahrung. Die Daten zu diesen Arzneimitteln bewegen sich schneller, als klinische Leitlinien mithalten können.</p>
 <p>Es geht nicht darum, welches Molekül „gewonnen“ hat. Es geht darum, dass ich als Arzt jede Variable dokumentieren konnte. Als Patient habe ich jede einzelne gespürt. Diese doppelte Perspektive wünsche ich mehr Kolleginnen und Kollegen am eigenen Leib.</p>
 <p>Wenn Sie Patientinnen und Patienten mit Inkretintherapien betreuen — besonders parallel zu Steroiden — welche Muster haben Sie gesehen?</p>
 <p><em>Das ist eine persönliche Erfahrung, keine Behandlungsempfehlung. Therapieentscheidungen gehören ins Gespräch mit der behandelnden Ärztin oder dem behandelnden Arzt.</em></p>
@@ -98,7 +98,7 @@ HTML,
 <p>Ce qui m'a surpris, c'est le retour du food noise.</p>
 <p>Cette pensée constante et intrusive de la nourriture — que le sémaglutide avait discrètement éteinte — est revenue en quelques jours après le changement. Non pas parce que le tirzépatide serait plus faible. Mais parce que l'interaction entre les signaux de l'appétit et la résistance à l'insuline due aux corticoïdes est plus complexe que ce qu'un seul récepteur explique.</p>
 <p>Les repas pauvres en glucides ont paradoxalement aggravé la situation. Protéines et lipides sans glucides ont approfondi la faim au lieu de l'apaiser. On lit cela dans les essais ; on le ressent autrement quand il s'agit de son propre corps.</p>
-<p>Durant la même période, j'ai aussi fait un court essai de rétratutide. Une autre molécule, un autre profil de récepteurs, une autre expérience. Les données sur ces médicaments évoluent plus vite que les recommandations cliniques.</p>
+<p>Durant la même période, j'ai aussi fait un court essai de rétatrutide. Une autre molécule, un autre profil de récepteurs, une autre expérience. Les données sur ces médicaments évoluent plus vite que les recommandations cliniques.</p>
 <p>Il ne s'agit pas de savoir quelle molécule « a gagné ». Il s'agit du fait qu'en tant que médecin, j'ai pu documenter chaque variable. En tant que patient, je les ai toutes ressenties. Ce double regard, je le souhaiterais à davantage de collègues, dans leur propre corps.</p>
 <p>Si vous suivez des patients sous traitements incrétines — surtout en parallèle des stéroïdes — quels schémas avez-vous observés ?</p>
 <p><em>Il s'agit d'une expérience personnelle, non d'un conseil thérapeutique. Les décisions de traitement appartiennent à la conversation avec le médecin traitant.</em></p>
@@ -113,7 +113,7 @@ HTML,
 <p>Lo que me sorprendió fue el regreso del food noise.</p>
 <p>Ese pensamiento constante e invasivo sobre la comida —lo que la semaglutida había apagado en silencio— volvió a los pocos días del cambio. No porque la tirzepatida sea más débil. Sino porque la interacción entre las señales del apetito y la resistencia a la insulina por corticoides es más compleja de lo que explica un solo receptor.</p>
 <p>Las comidas bajas en hidratos de carbono lo empeoraron, paradójicamente. Proteínas y grasas sin hidratos profundizaron el hambre en lugar de calmarla. Eso se lee en los ensayos; se siente de otro modo cuando es el propio cuerpo.</p>
-<p>En el mismo periodo también hice un breve ensayo con retratrutida. Otra molécula, otro perfil de receptores, otra experiencia. Los datos sobre estos fármacos se mueven más rápido de lo que pueden seguir las guías clínicas.</p>
+<p>En el mismo periodo también hice un breve ensayo con retatrutida. Otra molécula, otro perfil de receptores, otra experiencia. Los datos sobre estos fármacos se mueven más rápido de lo que pueden seguir las guías clínicas.</p>
 <p>No se trata de qué molécula «ganó». Se trata de que, como médico, pude documentar cada variable. Como paciente, sentí cada una de ellas. Esa doble perspectiva se la desearía a más colegas en su propia piel.</p>
 <p>Si trabaja con pacientes en terapias incretínicas —sobre todo junto a esteroides— ¿qué patrones ha visto?</p>
 <p><em>Es una experiencia personal, no una recomendación terapéutica. Las decisiones de tratamiento pertenecen a la conversación con el médico responsable.</em></p>
@@ -128,7 +128,7 @@ HTML,
 <p>Zaskoczyło mnie jednak coś innego: powrót food noise.</p>
 <p>To stałe, natrętne myślenie o jedzeniu — które semaglutyd cicho wyłączył — wróciło w ciągu dni po zmianie. Nie dlatego, że tirzepatyd jest słabszy. Lecz dlatego, że współgra sygnałów apetytu i oporności insulinowej z kortykosteroidów jest bardziej złożona, niż tłumaczy jeden receptor.</p>
 <p>Posiłki niskowęglowodanowe paradoksalnie to pogorszyły. Białko i tłuszcz bez węglowodanów pogłębiły głód, zamiast go uciszyć. Taką rzecz czyta się w badaniach; inaczej czuje się ją, gdy chodzi o własne ciało.</p>
-<p>W tym samym okresie zdążyłem też na krótki epizod z retratrutydem. Inna cząsteczka, inny profil receptorów, inne doświadczenie. Dane o tych lekach zmieniają się szybciej, niż nadążają zalecenia kliniczne.</p>
+<p>W tym samym okresie zdążyłem też na krótki epizod z retatrutydem. Inna cząsteczka, inny profil receptorów, inne doświadczenie. Dane o tych lekach zmieniają się szybciej, niż nadążają zalecenia kliniczne.</p>
 <p>Nie chodzi o to, która cząsteczka „wygrała”. Chodzi o to, że jako lekarz umiałem udokumentować każdą zmienną. Jako pacjent każdą z nich czułem. Takiego podwójnego spojrzenia życzyłbym doświadczyć większej liczbie kolegów na własnej skórze.</p>
 <p>Jeśli pracujecie z pacjentami na leczeniu inkretynowym — zwłaszcza równolegle ze steroidami — jakie wzorce widzieliście?</p>
 <p><em>To osobiste doświadczenie, nie zalecenie terapeutyczne. Decyzje o leczeniu należą do rozmowy z lekarzem prowadzącym.</em></p>
@@ -143,7 +143,7 @@ HTML,
 <p>Más lepett meg: a food noise visszatérése.</p>
 <p>Az az állandó, tolakodó gondolkodás az ételről — amit a semaglutid csendben kikapcsolt — a váltás után napokon belül visszajött. Nem azért, mert a tirzepatid gyengébb lenne. Hanem mert az étvágyjelzések és a kortikoszteroid okozta inzulinrezisztencia összjátéka bonyolultabb, mint amit egyetlen receptor megmagyaráz.</p>
 <p>A szénhidrátszegény ételek paradox módon rontottak a helyzeten. Fehérje és zsír szénhidrát nélkül mélyítette az éhséget, ahelyett hogy csillapította volna. Ilyesmit a vizsgálatokban olvas az ember; másképp érzi, ha a saját teste a tét.</p>
-<p>Ugyanebben az időszakban egy rövid retratrutid-próbát is beiktattam. Más molekula, más receptorprofil, más élmény. Ezeknek a gyógyszereknek az adatai gyorsabban mozognak, mint a klinikai irányelvek.</p>
+<p>Ugyanebben az időszakban egy rövid retatrutid-próbát is beiktattam. Más molekula, más receptorprofil, más élmény. Ezeknek a gyógyszereknek az adatai gyorsabban mozognak, mint a klinikai irányelvek.</p>
 <p>Nem az a lényeg, melyik molekula „nyert”. Hanem az, hogy orvosként minden változót dokumentálni tudtam. Betegként mindegyiket éreztem. Ezt a kettős nézőpontot több kollégának kívánnám a saját bőrén.</p>
 <p>Ha inkretinkezelésben — különösen szteroiddal együtt — gondoz betegeket: milyen mintázatokat látott?</p>
 <p><em>Személyes tapasztalat, nem kezelési javaslat. A terápiás döntés a kezelőorvossal folytatott beszélgetéshez tartozik.</em></p>
@@ -158,7 +158,7 @@ HTML,
 <p>Ciò che mi ha sorpreso è stato il ritorno del food noise.</p>
 <p>Quel pensiero costante e invadente sul cibo — che il semaglutide aveva spento in silenzio — è tornato nel giro di giorni dal cambio. Non perché il tirzepatide sia più debole. Ma perché l'interazione tra i segnali dell'appetito e la resistenza insulinica da corticosteroidi è più complessa di quanto spieghi un singolo recettore.</p>
 <p>I pasti a basso contenuto di carboidrati, paradossalmente, l'hanno peggiorata. Proteine e grassi senza carboidrati hanno approfondito la fame invece di calmarla. È il genere di cosa che si legge negli studi; si sente diversamente quando è il proprio corpo.</p>
-<p>Nello stesso periodo ho fatto anche un breve tentativo con retratrutide. Una molecola diversa, un profilo recettoriale diverso, un'esperienza diversa. I dati su questi farmaci si muovono più in fretta di quanto le linee guida cliniche riescano a seguire.</p>
+<p>Nello stesso periodo ho fatto anche un breve tentativo con retatrutide. Una molecola diversa, un profilo recettoriale diverso, un'esperienza diversa. I dati su questi farmaci si muovono più in fretta di quanto le linee guida cliniche riescano a seguire.</p>
 <p>Non si tratta di quale molecola «abbia vinto». Si tratta del fatto che, come medico, ho potuto documentare ogni variabile. Come paziente le ho sentite tutte. Questa doppia prospettiva la augurerei a più colleghi sulla propria pelle.</p>
 <p>Se lavorate con pazienti in terapia incretinica — soprattutto in parallelo agli steroidi — quali schemi avete visto?</p>
 <p><em>È un'esperienza personale, non un consiglio terapeutico. Le decisioni di trattamento appartengono al colloquio con il medico curante.</em></p>
@@ -173,7 +173,7 @@ HTML,
 <p>Здивувало мене інше: повернення food noise.</p>
 <p>Це постійне, нав'язливе думання про їжу — яке семаглутид тихо вимкнув — повернулося за кілька днів після зміни. Не тому, що тирзепатид слабший. А тому, що взаємодія між сигналами апетиту й інсулінорезистентністю від кортикостероїдів складніша, ніж пояснює один рецептор.</p>
 <p>Низьковуглеводні страви парадоксально погіршили ситуацію. Білок і жир без вуглеводів поглибили голод замість того, щоб його вгамувати. Таке читаєш у дослідженнях; інакше відчуваєш, коли йдеться про власне тіло.</p>
-<p>У той самий період я встиг і на короткий епізод із ретратрутидом. Інша молекула, інший рецепторний профіль, інший досвід. Дані про ці ліки рухаються швидше, ніж встигають клінічні настанови.</p>
+<p>У той самий період я встиг і на короткий епізод із ретатрутидом. Інша молекула, інший рецепторний профіль, інший досвід. Дані про ці ліки рухаються швидше, ніж встигають клінічні настанови.</p>
 <p>Йдеться не про те, яка молекула «перемогла». Йдеться про те, що як лікар я міг задокументувати кожну змінну. Як пацієнт я кожну з них відчував. Такий подвійний погляд я бажав би більше колегам на власній шкірі.</p>
 <p>Якщо ви працюєте з пацієнтами на інкретиновій терапії — особливо разом зі стероїдами — які закономірності ви бачили?</p>
 <p><em>Це особистий досвід, а не лікувальне призначення. Рішення про лікування належать розмові з лікарем, який веде пацієнта.</em></p>
