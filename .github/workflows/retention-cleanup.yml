@@ -1,0 +1,108 @@
+name: Production retention cleanup
+
+on:
+  schedule:
+    # 20:17 UTC = 22:17 CEST / 21:17 CET; mimo celej hodiny kvôli frontám.
+    - cron: "17 20 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Iba vypočítať počty bez trvalého mazania
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: polascin-production-deploy
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  cleanup:
+    name: Delete data past retention periods
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Validate connection configuration
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_REMOTE_PATH: ${{ secrets.DEPLOY_REMOTE_PATH }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          POLASCIN_ENV_PATH: ${{ secrets.POLASCIN_ENV_PATH }}
+        run: |
+          set -euo pipefail
+          fail() { echo "::error::$1" >&2; exit 1; }
+          validate_path() {
+            local path="$1" component
+            local -a components=()
+            [[ -n "$path" && "$path" == /* && ! "$path" =~ ^/+$ ]] || return 1
+            [[ "$path" =~ ^/[A-Za-z0-9._/-]+$ && "$path" != *"//"* ]] || return 1
+            IFS='/' read -r -a components <<<"$path"
+            for component in "${components[@]}"; do
+              [[ "$component" != "." && "$component" != ".." ]] || return 1
+            done
+          }
+
+          [[ -n "$DEPLOY_HOST" ]] || fail "Missing DEPLOY_HOST secret."
+          [[ -n "$DEPLOY_USER" ]] || fail "Missing DEPLOY_USER secret."
+          [[ -n "$DEPLOY_SSH_KEY" ]] || fail "Missing DEPLOY_SSH_KEY secret."
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]] || fail "DEPLOY_HOST contains unsupported characters."
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z0-9._-]+$ ]] || fail "DEPLOY_USER contains unsupported characters."
+          PORT="${DEPLOY_PORT:-22}"
+          [[ "$PORT" =~ ^[0-9]{1,5}$ ]] || fail "DEPLOY_PORT must be a number from 1 to 65535."
+          ((10#$PORT >= 1 && 10#$PORT <= 65535)) || fail "DEPLOY_PORT must be a number from 1 to 65535."
+
+          REMOTE_PATH="$DEPLOY_REMOTE_PATH"
+          while [[ "$REMOTE_PATH" == */ && "$REMOTE_PATH" != "/" ]]; do REMOTE_PATH="${REMOTE_PATH%/}"; done
+          validate_path "$REMOTE_PATH" || fail "DEPLOY_REMOTE_PATH must be a safe absolute non-root path."
+          REMOTE_PARENT="${REMOTE_PATH%/*}"
+          [[ -n "$REMOTE_PARENT" ]] || REMOTE_PARENT="/"
+          ENV_PATH="${POLASCIN_ENV_PATH:-${REMOTE_PARENT%/}/private/polascin.env.ini}"
+          validate_path "$ENV_PATH" || fail "POLASCIN_ENV_PATH must be a safe absolute non-root path."
+          case "$ENV_PATH" in "$REMOTE_PATH"|"$REMOTE_PATH"/*) fail "POLASCIN_ENV_PATH must be outside DEPLOY_REMOTE_PATH.";; esac
+
+          printf 'DEPLOY_PORT_SAFE=%s\n' "$PORT" >>"$GITHUB_ENV"
+          printf 'DEPLOY_REMOTE_PATH_SAFE=%s\n' "$REMOTE_PATH" >>"$GITHUB_ENV"
+          printf 'POLASCIN_ENV_PATH_SAFE=%s\n' "$ENV_PATH" >>"$GITHUB_ENV"
+
+      - name: Setup SSH
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" | tr -d '\r' >~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          [[ -n "$DEPLOY_KNOWN_HOSTS" ]] || { echo "::error::DEPLOY_KNOWN_HOSTS is required."; exit 1; }
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" | tr -d '\r' >~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -y -f ~/.ssh/deploy_key >/dev/null
+          if [[ "$DEPLOY_PORT_SAFE" == "22" ]]; then HOST_TARGET="$DEPLOY_HOST"; else HOST_TARGET="[$DEPLOY_HOST]:$DEPLOY_PORT_SAFE"; fi
+          ssh-keygen -F "$HOST_TARGET" -f ~/.ssh/known_hosts >/dev/null || { echo "::error::Known hosts entry is missing."; exit 1; }
+
+      - name: Run retention cleanup over SSH
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DRY_RUN: ${{ inputs.dry_run || false }}
+        run: |
+          set -euo pipefail
+          SSH_OPTS=(-p "$DEPLOY_PORT_SAFE" -i "$HOME/.ssh/deploy_key" -o BatchMode=yes -o ConnectTimeout=30 -o StrictHostKeyChecking=yes)
+          RETENTION_DRY_RUN=false
+          [[ "$DRY_RUN" == "true" ]] && RETENTION_DRY_RUN=true
+          ssh "${SSH_OPTS[@]}" "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            "cd '${DEPLOY_REMOTE_PATH_SAFE}' && POLASCIN_ENV_PATH='${POLASCIN_ENV_PATH_SAFE}' RETENTION_DRY_RUN='${RETENTION_DRY_RUN}' php" \
+            <scripts/retention_cleanup.php

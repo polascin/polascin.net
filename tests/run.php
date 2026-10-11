@@ -1345,6 +1345,36 @@ expectTrue(!str_contains($sitemapIndex, '<urlset'), 'sitemap.xml nesmie obsahova
 // rozišli, kontrola by ticho hlásila „OK" na schéme, ktorú vôbec nepozná.
 $dbCheckSource = (string) file_get_contents(dirname(__DIR__) . '/scripts/audit_db_check.php');
 $setupDbSource = (string) file_get_contents(dirname(__DIR__) . '/setup_db.php');
+$retentionSource = (string) file_get_contents(dirname(__DIR__) . '/scripts/retention_cleanup.php');
+$retentionWorkflow = (string) file_get_contents(dirname(__DIR__) . '/.github/workflows/retention-cleanup.yml');
+
+expectTrue(
+    str_contains($retentionSource, "DELETE FROM contact_messages WHERE created_at < :cutoff")
+        && str_contains($retentionSource, "DELETE FROM newsletter_subscribers WHERE is_confirmed = 0 AND created_at < :cutoff")
+        && str_contains($retentionSource, "DELETE FROM access_logs WHERE created_at < :cutoff")
+        && str_contains($retentionSource, "DELETE FROM admin_audit_log WHERE created_at < :cutoff")
+        && str_contains($retentionSource, "DELETE FROM form_rate_limit WHERE last_attempt < :cutoff"),
+    'Retenčný skript musí prerezávať všetky osobné a prevádzkové tabuľky podľa času'
+);
+expectTrue(
+    !str_contains($retentionSource, 'DELETE FROM newsletter_subscribers WHERE created_at')
+        && str_contains($retentionSource, 'is_confirmed = 0'),
+    'Retenčný skript nesmie automaticky mazať potvrdených odberateľov newslettera'
+);
+expectTrue(
+    str_contains($retentionSource, '$pdo->beginTransaction()')
+        && str_contains($retentionSource, '$pdo->commit()')
+        && str_contains($retentionSource, '$pdo->rollBack()')
+        && str_contains($retentionSource, "getenv('RETENTION_DRY_RUN')"),
+    'Retenčné mazanie musí byť transakčné a podporovať bezpečný náhľad'
+);
+expectTrue(
+    str_contains($retentionWorkflow, 'cron: "17 20 * * *"')
+        && str_contains($retentionWorkflow, '<scripts/retention_cleanup.php')
+        && str_contains($retentionWorkflow, 'group: polascin-production-deploy')
+        && str_contains($retentionWorkflow, 'StrictHostKeyChecking=yes'),
+    'Retenčné mazanie musí bežať denne cez overené SSH a nesmie sa prekryť s deployom'
+);
 
 /** Vytiahne prvky z `const NAZOV = [...]` v kontrolnom skripte. */
 $dbCheckConstant = static function (string $constantName) use ($dbCheckSource): array {

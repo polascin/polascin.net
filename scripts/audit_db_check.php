@@ -94,6 +94,7 @@ const PII_TABLES = [
     'access_logs' => 'created_at',
     'contact_messages' => 'created_at',
     'newsletter_subscribers' => 'created_at',
+    'admin_audit_log' => 'created_at',
     'form_rate_limit' => 'last_attempt',
 ];
 
@@ -345,7 +346,14 @@ $retentionDays = (int) ($env['ACCESS_LOG_RETENTION_DAYS'] ?? 90);
 if ($retentionDays <= 0) {
     $retentionDays = 90;
 }
+$contactRetentionDays = max(30, (int) ($env['CONTACT_MESSAGE_RETENTION_DAYS'] ?? 180));
+$pendingNewsletterHours = max(48, (int) ($env['NEWSLETTER_PENDING_RETENTION_HOURS'] ?? 72));
+$auditRetentionDays = max(30, (int) ($env['ADMIN_AUDIT_LOG_RETENTION_DAYS'] ?? 365));
+$rateLimitRetentionHours = max(48, (int) ($env['FORM_RATE_LIMIT_RETENTION_HOURS'] ?? 48));
+$contactCutoff = date('Y-m-d H:i:s', time() - ($contactRetentionDays * 86400));
+$pendingNewsletterCutoff = date('Y-m-d H:i:s', time() - ($pendingNewsletterHours * 3600));
 out('Nastavená retencia access logov: **' . $retentionDays . ' dní** (`ACCESS_LOG_RETENTION_DAYS`).');
+out('Kontaktné správy: **' . $contactRetentionDays . ' dní**; nepotvrdený newsletter: **' . $pendingNewsletterHours . ' hodín**; administrátorský audit: **' . $auditRetentionDays . ' dní**.');
 out();
 out('| Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |');
 out('| --- | --- | --- | --- |');
@@ -382,9 +390,10 @@ foreach (PII_TABLES as $piiTable => $timestampColumn) {
     if ($piiTable === 'contact_messages') {
         $handled = (int) fetchOne($pdo, 'SELECT COUNT(*) FROM contact_messages WHERE is_read = 1');
         $pending = (int) fetchOne($pdo, 'SELECT COUNT(*) FROM contact_messages WHERE is_read = 0');
-        $staleHandled = (int) fetchOne(
+        $staleContact = (int) fetchOne(
             $pdo,
-            'SELECT COUNT(*) FROM contact_messages WHERE is_read = 1 AND created_at < (NOW() - INTERVAL 180 DAY)'
+            'SELECT COUNT(*) FROM contact_messages WHERE created_at < :cutoff',
+            ['cutoff' => $contactCutoff]
         );
         $staleUnhandled = (int) fetchOne(
             $pdo,
@@ -396,15 +405,14 @@ foreach (PII_TABLES as $piiTable => $timestampColumn) {
         $contactSummary = [
             'Kontaktné správy: **' . $handled . '** vybavených, **' . $pending . '** nevybavených',
             '(z toho **' . $staleUnhandled . '** nevybavených dlhšie ako 30 dní, **'
-                . $staleHandled . '** vybavených starších ako 180 dní).',
+                . $staleContact . '** správ prekročilo retenčnú lehotu ' . $contactRetentionDays . ' dní).',
         ];
 
-        if ($staleHandled > 0) {
+        if ($staleContact > 0) {
             finding(
                 'STREDNÉ',
-                "{$staleHandled} vybavených kontaktných správ je starších ako 180 dní. Zásada ochrany údajov "
-                . 'sľubuje uchovanie „iba po dobu potrebnú na vybavenie komunikácie“ — vybavené správy '
-                . 'treba zmazať v `admin_contact.php` alebo do zásady doplniť konkrétnu lhotu.'
+                "{$staleContact} kontaktných správ prekročilo nastavenú retenciu {$contactRetentionDays} dní. "
+                . 'Automatické retenčné mazanie neprebehlo alebo zlyhalo.'
             );
         }
 
@@ -421,10 +429,23 @@ foreach (PII_TABLES as $piiTable => $timestampColumn) {
             );
         }
     }
-    if ($piiTable === 'form_rate_limit' && $ageDays > 7) {
+    if ($piiTable === 'newsletter_subscribers') {
+        $stalePending = (int) fetchOne(
+            $pdo,
+            'SELECT COUNT(*) FROM newsletter_subscribers WHERE is_confirmed = 0 AND created_at < :cutoff',
+            ['cutoff' => $pendingNewsletterCutoff]
+        );
+        if ($stalePending > 0) {
+            finding('STREDNÉ', "{$stalePending} nepotvrdených registrácií newslettera prekročilo retenciu {$pendingNewsletterHours} hodín.");
+        }
+    }
+    if ($piiTable === 'admin_audit_log' && $ageDays > $auditRetentionDays) {
+        finding('STREDNÉ', "Administrátorský audit obsahuje záznamy staršie ako nastavená retencia {$auditRetentionDays} dní.");
+    }
+    if ($piiTable === 'form_rate_limit' && ($ageDays * 24) > $rateLimitRetentionHours) {
         finding(
             'STREDNÉ',
-            "`form_rate_limit` drží záznamy staré {$ageDays} dní; tabuľka je prevádzková a mala by sa priebežne prerezávať."
+            "`form_rate_limit` drží záznamy staršie ako nastavená retencia {$rateLimitRetentionHours} hodín."
         );
     }
 }
