@@ -344,7 +344,7 @@ foreach (['index.html', 'privacy.html', 'terms.html'] as $staticHeaderFile) {
 // pri výpadku databázy, takže vtedy by vracajúci sa návštevník dostal týždne
 // starý CSS a JS z vlastnej cache — pri consent skripte s dopadom na GDPR.
 // Pin je preto skrátený hash obsahu a drží ho tento test.
-foreach (['css/styles.css', 'js/main.js', 'js/consent-default.js'] as $staticAsset) {
+foreach (['css/styles.css', 'css/fonts.css', 'js/main.js', 'js/consent-default.js'] as $staticAsset) {
     $expectedAssetVersion = substr(hash_file('sha256', dirname(__DIR__) . '/' . $staticAsset), 0, 8);
     foreach (['index.html', 'privacy.html', 'terms.html'] as $staticAssetFile) {
         $staticAssetMarkup = (string) file_get_contents(dirname(__DIR__) . '/' . $staticAssetFile);
@@ -353,6 +353,171 @@ foreach (['css/styles.css', 'js/main.js', 'js/consent-default.js'] as $staticAss
             "{$staticAssetFile} musí odkazovať na {$staticAsset} s aktuálnym cache-busting pinom ?v={$expectedAssetVersion}"
         );
     }
+}
+foreach (array_merge(
+    glob(dirname(__DIR__) . '/*.php') ?: [],
+    glob(dirname(__DIR__) . '/*.html') ?: [],
+    glob(dirname(__DIR__) . '/lang/*.php') ?: [],
+    glob(dirname(__DIR__) . '/weblogo/*.html') ?: [],
+    [dirname(__DIR__) . '/.htaccess']
+) as $fontSurface) {
+    $fontSurfaceContent = (string) file_get_contents($fontSurface);
+    expectTrue(
+        !str_contains($fontSurfaceContent, 'fonts.googleapis.com')
+            && !str_contains($fontSurfaceContent, 'fonts.gstatic.com'),
+        basename($fontSurface) . ' nesmie načítavať Google Fonts'
+    );
+}
+$fontStylesheet = (string) file_get_contents(dirname(__DIR__) . '/css/fonts.css');
+preg_match_all('~url\("([^"]+\.woff2)"\)~', $fontStylesheet, $fontUrls);
+expectSame(18, count($fontUrls[1]), 'Lokálny fontový CSS musí deklarovať všetkých 18 súborov pre podporované skripty a váhy');
+foreach ($fontUrls[1] as $fontUrl) {
+    expectTrue(
+        str_starts_with($fontUrl, '../fonts/')
+            && is_file(dirname(__DIR__) . '/' . str_replace('../', '', $fontUrl)),
+        "Font {$fontUrl} musí byť dostupný ako lokálny asset"
+    );
+}
+$fontLicenses = [
+    dirname(__DIR__) . '/fonts/inter/LICENSE' => 'The Inter Project Authors',
+    dirname(__DIR__) . '/fonts/open-sans/LICENSE' => 'The Open Sans Project Authors',
+];
+foreach ($fontLicenses as $fontLicense => $copyrightHolder) {
+    $fontLicenseContent = is_file($fontLicense) ? (string) file_get_contents($fontLicense) : '';
+    expectTrue(
+        is_file($fontLicense)
+            && str_contains($fontLicenseContent, 'SIL OPEN FONT LICENSE Version 1.1')
+            && str_contains($fontLicenseContent, $copyrightHolder),
+        basename(dirname($fontLicense)) . ' musí obsahovať správnu licenciu SIL Open Font License 1.1'
+    );
+}
+$privacyRetentionMarkers = [
+    'cs' => ['2 roky', 'Provozovatel určil začátek dvouleté lhůty jako datum a čas posledního přihlášení nebo registrace. U záznamů bez účtu určil začátek jako poslední aktualizaci stránek. Další aktualizace tuto lhůtu obnovuje; nejde tedy o pevný maximální věk záznamu. Aktualizací se rozumí nasazení podle data a času poslední změny nasazeného souboru index.php', 'automatické mazání podle ní není zavedeno'],
+    'de' => ['2 Jahren', 'Der Betreiber hat Datum und Uhrzeit der letzten Anmeldung oder Registrierung als Fristbeginn festgelegt. Bei Datensätzen ohne Konto beginnt die Frist nach seiner Entscheidung mit der letzten Aktualisierung der Website. Weitere Aktualisierungen setzen die Frist zurück; sie begrenzt daher nicht das absolute Alter eines Datensatzes. Aktualisierung bedeutet Deployment anhand von Datum und Uhrzeit der letzten Änderung der bereitgestellten Datei index.php', 'automatische Löschung nach dieser Regel ist nicht eingerichtet'],
+    'en' => ['2 years', 'The operator has set the date and time of the last login or registration as the start of the two-year period. For records without an account, the operator has set the last site update as the start. Further site updates reset this period, so it is not a fixed maximum record age. An update means deployment based on the last-modified date and time of the deployed index.php file', 'automated deletion under this policy is not implemented'],
+    'es' => ['2 años', 'El operador ha fijado la fecha y hora del último inicio de sesión o registro como inicio del plazo. Para los registros sin cuenta, el operador ha fijado la última actualización del sitio como inicio. Las nuevas actualizaciones reinician el plazo; no es una antigüedad máxima fija del registro. Actualización significa despliegue según la fecha y hora de última modificación del archivo index.php desplegado', 'borrado automático según esta política no está implantado'],
+    'fr' => ['2 ans', 'L’exploitant a fixé la date et l’heure de la dernière connexion ou inscription comme point de départ. Pour les données sans compte, l’exploitant a fixé la dernière mise à jour du site comme point de départ. Les mises à jour suivantes réinitialisent le délai ; il ne limite donc pas l’âge absolu des données. Une mise à jour désigne le déploiement selon la date et l’heure de dernière modification du fichier index.php déployé', 'suppression automatique selon cette règle n’est pas mise en place'],
+    'hu' => ['2 év', 'Az üzemeltető a legutóbbi bejelentkezés vagy regisztráció dátumát és időpontját határozta meg kezdőpontként. A fiók nélküli rekordoknál az üzemeltető a webhely legutóbbi frissítését jelölte meg kezdőpontként. Az újabb frissítések újraindítják a határidőt, így ez nem a rekord korának rögzített felső határa. A frissítés a telepített index.php fájl utolsó módosításának dátuma és időpontja szerinti telepítést jelenti', 'automatikus törlés nincs bevezetve'],
+    'it' => ['2 anni', 'Il gestore ha fissato la data e l’ora dell’ultimo accesso o registrazione come inizio del periodo. Per i record senza account, il gestore ha fissato l’ultimo aggiornamento del sito come inizio. Gli aggiornamenti successivi reimpostano il periodo; non è quindi un limite fisso all’età del record. Per aggiornamento si intende la distribuzione in base alla data e ora di ultima modifica del file index.php distribuito', 'cancellazione automatica secondo questa regola non è implementata'],
+    'pl' => ['2 lat', 'Operator określił datę i godzinę ostatniego logowania lub rejestracji jako początek okresu. Dla zapisów bez konta operator wskazał ostatnią aktualizację strony jako początek. Kolejne aktualizacje resetują okres; nie jest to więc stały maksymalny wiek zapisu. Aktualizacja oznacza wdrożenie według daty i godziny ostatniej modyfikacji wdrożonego pliku index.php', 'automatyczne usuwanie według tej zasady nie jest wdrożone'],
+    'sk' => ['2 roky', 'Prevádzkovateľ určil začiatok dvojročnej lehoty ako dátum a čas posledného prihlásenia alebo registrácie. Pri záznamoch bez účtu prevádzkovateľ určil začiatok ako ostatnú aktualizáciu stránok. Ďalšie aktualizácie túto lehotu obnovujú; nejde preto o pevnú hornú hranicu veku záznamu. Aktualizáciou sa rozumie nasadenie podľa dátumu a času poslednej úpravy nasadeného súboru index.php', 'automatické mazanie podľa nej zatiaľ nie je zavedené'],
+    'uk' => ['2 роки', 'Оператор визначив початком строку дату й час останнього входу або реєстрації. Для записів без облікового запису оператор визначив початком останнє оновлення сайту. Подальші оновлення поновлюють строк, тому це не фіксована верхня межа віку запису. Оновлення означає розгортання за датою й часом останньої зміни розгорнутого файлу index.php', 'автоматичне видалення за цим правилом не впроваджене'],
+];
+$gaRetentionMarkers = [
+    'cs' => ['14 měsíců', 'Nová aktivita obnovuje', 'standardních souhrnných reportů'],
+    'de' => ['14 Monate', 'Neue Aktivität setzt', 'standardmäßigen aggregierten Berichte'],
+    'en' => ['14 months', 'New activity resets', 'standard aggregated reports'],
+    'es' => ['14 meses', 'La nueva actividad reinicia', 'informes estándar agregados'],
+    'fr' => ['14 mois', 'Une nouvelle activité réinitialise', 'rapports standards agrégés'],
+    'hu' => ['14 hónapra', 'Az új aktivitás újraindítja', 'szabványos összesített jelentést'],
+    'it' => ['14 mesi', 'Una nuova attività reimposta', 'report standard aggregati'],
+    'pl' => ['14 miesięcy', 'Nowa aktywność resetuje', 'standardowych raportów zbiorczych'],
+    'sk' => ['14 mesiacov', 'Pri novej aktivite', 'štandardných súhrnných reportov'],
+    'uk' => ['14 місяців', 'Нова активність поновлює', 'стандартних зведених звітів'],
+];
+foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $languageFile) {
+    $privacyLanguage = require $languageFile;
+    expectTrue(
+        is_array($privacyLanguage)
+            && isset(
+                $privacyLanguage['privacy.s2_cookies'],
+                $privacyLanguage['privacy.s3_item5'],
+                $privacyLanguage['privacy.s4_text'],
+                $privacyLanguage['privacy.s5_text'],
+                $privacyLanguage['privacy.s6_text']
+            ),
+        basename($languageFile) . ' musí obsahovať všetky privacy preklady'
+    );
+    expectTrue(
+        !preg_match('/90/', $privacyLanguage['privacy.s4_text']),
+        basename($languageFile) . ' nesmie uvádzať neoverenú dobu hostingových logov'
+    );
+    foreach ($gaRetentionMarkers[basename($languageFile, '.php')] as $marker) {
+        expectTrue(
+            str_contains($privacyLanguage['privacy.s4_text'], $marker),
+            basename($languageFile) . ' musí uvádzať overenú GA4 retenciu, obnovovanie a výnimku súhrnných reportov'
+        );
+    }
+    expectTrue(
+        str_contains($privacyLanguage['privacy.s4_text'], '__Host-POLASCINSESSID'),
+        basename($languageFile) . ' musí pomenovať nevyhnutný session cookie'
+    );
+    expectTrue(
+        str_contains($privacyLanguage['privacy.s4_text'], 'polascin_lang'),
+        basename($languageFile) . ' musí uvádzať názov a dobu platnosti jazykového cookie'
+    );
+    expectTrue(
+        str_contains($privacyLanguage['privacy.s5_text'], 'Websupport')
+            && str_contains($privacyLanguage['privacy.s5_text'], 'PHP mail()'),
+        basename($languageFile) . ' musí uvádzať overené hostingové prostredie a spôsob odosielania newslettera'
+    );
+    foreach ($privacyRetentionMarkers[basename($languageFile, '.php')] as $marker) {
+        expectTrue(
+            str_contains($privacyLanguage['privacy.s4_text'], $marker),
+            basename($languageFile) . ' musí odlíšiť dvojročné rozhodnutie od neovereného začiatku a nezavedeného mazania'
+        );
+    }
+    expectTrue(
+        preg_match('/6.*1.*f/u', $privacyLanguage['privacy.s3_text']) === 1
+            && preg_match('/6.*1.*a/u', $privacyLanguage['privacy.s3_text']) === 1,
+        basename($languageFile) . ' musí odlíšiť oprávnený záujem kontaktu od súhlasu newslettera'
+    );
+    expectTrue(
+        str_contains($privacyLanguage['privacy.s5_text'], 'SCC')
+            && str_contains($privacyLanguage['privacy.s5_text'], 'EU-US Data Privacy Framework')
+            && str_contains($privacyLanguage['privacy.s5_text'], 'GA4'),
+        basename($languageFile) . ' musí uvádzať analytiku a referenčné prenosové záruky bez tvrdenia výlučného EHP'
+    );
+    expectTrue(
+        !str_contains($privacyLanguage['privacy.s4_text'], '<code>')
+            && !str_contains($privacyLanguage['privacy.s4_text'], '</code>'),
+        basename($languageFile) . ' nesmie v escapovanom preklade zobrazovať HTML značky'
+    );
+}
+foreach (['privacy.html' => '2 roky', 'weblogo/privacy.html' => '2 years'] as $privacyPath => $twoYears) {
+    $staticPrivacy = (string) file_get_contents(dirname(__DIR__) . '/' . $privacyPath);
+    $staticGaMarkers = $gaRetentionMarkers[$privacyPath === 'privacy.html' ? 'sk' : 'en'];
+    foreach ($staticGaMarkers as $marker) {
+        expectTrue(
+            str_contains(preg_replace('/\s+/', ' ', $staticPrivacy), $marker),
+            $privacyPath . ' musí uvádzať overenú GA4 retenciu s podmienkami'
+        );
+    }
+    expectTrue(
+        str_contains($staticPrivacy, $twoYears)
+            && str_contains($staticPrivacy, 'EU-US Data Privacy Framework')
+            && str_contains($staticPrivacy, 'Websupport'),
+        $privacyPath . ' musí obsahovať dvojročné rozhodnutie a rovnaké disclosures ako jazykové katalógy'
+    );
+}
+$i18nSource = (string) file_get_contents(dirname(__DIR__) . '/i18n.php');
+expectTrue(
+    str_contains($i18nSource, 'const APP_LANGUAGE_COOKIE_LIFETIME = 31536000;'),
+    'Jednoročná doba jazykového cookie musí zostať doložená implementáciou'
+);
+$consentScript = (string) file_get_contents(dirname(__DIR__) . '/js/main.js');
+expectTrue(
+    str_contains($consentScript, 'if (persist && analyticsWasLoaded)')
+        && str_contains($consentScript, 'window.location.reload()'),
+    'Odvolanie analytického súhlasu po načítaní GA musí reloadom zastaviť ďalšie meranie'
+);
+$weblogoConsentScript = (string) file_get_contents(dirname(__DIR__) . '/weblogo/js/main.js');
+$weblogoLoadFunction = strpos($weblogoConsentScript, 'function loadAnalytics()');
+$weblogoScriptSource = strpos($weblogoConsentScript, 'script.src = `https://www.googletagmanager.com/gtag/js');
+expectTrue(
+    $weblogoLoadFunction !== false
+        && $weblogoScriptSource !== false
+        && $weblogoScriptSource > $weblogoLoadFunction,
+    'Sekundárne statické stránky smú vkladať gtag.js iba vo funkcii načítania po súhlase'
+);
+foreach (glob(dirname(__DIR__) . '/weblogo/*.html') ?: [] as $weblogoPage) {
+    $weblogoMarkup = (string) file_get_contents($weblogoPage);
+    expectTrue(
+        str_contains($weblogoMarkup, '../js/consent-default.js?v=3eb88f21')
+            && str_contains($weblogoMarkup, 'id="cookie-consent-container"')
+            && str_contains($weblogoMarkup, 'class="cookie-settings-trigger"'),
+        basename($weblogoPage) . ' musí mať predvolené odmietnutie, banner a ovládanie odvolania súhlasu'
+    );
 }
 expectTrue(
     str_contains($siteStyles, '.nav-brand-photo')

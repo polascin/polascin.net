@@ -445,6 +445,10 @@
     }
 
     function updateAnalyticsConsent(granted, persist = true) {
+      const analyticsWasLoaded = Boolean(
+        document.getElementById("google-analytics-script"),
+      );
+
       window.gtag("consent", "update", {
         ad_storage: "denied",
         ad_user_data: "denied",
@@ -460,6 +464,9 @@
         loadAnalytics();
       } else {
         clearAnalyticsCookies();
+        if (persist && analyticsWasLoaded) {
+          window.location.reload();
+        }
       }
     }
 

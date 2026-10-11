@@ -13,20 +13,15 @@
     <link rel="canonical" href="https://polascin.net/privacy.html" />
     <link rel="icon" href="CrystalKidney.png" type="image/png" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Open+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="../css/fonts.css?v=e4c3fea0" />
+    <script src="../js/consent-default.js?v=3eb88f21"></script>
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/all.css" />
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css" />
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js?v=d00ed748" defer></script>
   </head>
 
   <body>
@@ -74,7 +69,7 @@
     <section class="page-content" style="padding-top: 120px; min-height: 80vh">
       <div class="container">
         <h1 class="section-title">Privacy Policy</h1>
-        <p><strong>Last Updated: January 30, 2026</strong></p>
+        <p><strong>Last Updated: October 11, 2026</strong></p>
 
         <h3>1. Introduction</h3>
         <p>
@@ -92,53 +87,104 @@
         </p>
         <ul>
           <li>
-            <strong>Technical Data:</strong> Includes internet protocol (IP)
-            address, browser type and version, time zone setting, operating
-            system and platform. This data is collected automatically via server
-            logs for security and performance purposes.
+            <strong>Technical data:</strong> Requests may include an IP address,
+            browser details, the requested address, request time and response
+            information. They are used to deliver and secure the site and to
+            diagnose errors. The production log-retention period has not been
+            verified.
           </li>
           <li>
-            <strong>Cookies:</strong> We use minimal local storage to remember
-            your theme preference (Dark/Light mode). <br /><br />
-            <strong>Google Analytics 4 (GA4):</strong> We use Google Analytics
-            to analyze website traffic and user behavior. We implement
-            <strong>Google Consent Mode v2</strong>
-            to respect your privacy preferences.
-            <br />
-            By default, all tracking consent is set to
-            <strong>'denied'</strong>. Scripts may load to ensure basic site
-            functionality, but they will not store cookies or access personal
-            data for tracking purposes unless you explicitly click "Accept" on
-            our banner. You can manage your preferences at any time.
+            <strong>Local preferences and analytics:</strong> Theme and the
+            analytics decision are stored in browser storage. Your selected
+            language is stored in the <code>polascin_lang</code> cookie for up
+            to one year. Google Analytics 4 loads only after you explicitly choose <strong>Allow
+            analytics</strong>; advertising features remain disabled. You can
+            change or withdraw your choice with Cookie settings in the footer.
+          </li>
+          <li>
+            <strong>Necessary session cookie:</strong>
+            <code>__Host-POLASCINSESSID</code> is a browser-session cookie used
+            for administrator authentication and form protection. It is
+            HttpOnly, Secure and SameSite=Strict. Authenticated server sessions
+            expire after 30 minutes of inactivity or 8 hours at the latest.
           </li>
         </ul>
 
         <h3>3. How We Use Your Information</h3>
-        <p>We use your data to:</p>
+        <p>
+          Site operation, security and handling contact messages rely on
+          legitimate interests in running the site and answering enquiries
+          (Article 6(1)(f) GDPR). The newsletter relies on voluntary consent
+          (Article 6(1)(a)), withdrawable at any time by unsubscribing. Email
+          confirmation verifies the subscription request and protects against
+          abuse. Optional analytics requires separate consent.
+        </p>
         <ul>
           <li>Deliver the website content to you.</li>
           <li>Ensure the security of the website.</li>
-          <li>Remember your preferences (e.g., Theme).</li>
+          <li>Remember your theme preference, selected language and analytics decision.</li>
+          <li>
+            Measure visits and site usage with Google Analytics 4 only after
+            you allow analytics (Article 6(1)(a) GDPR). You may withdraw consent
+            at any time using Cookie settings and choosing Decline. The
+            contractual recipients and specific international transfer
+            safeguards still need evidence.
+          </li>
         </ul>
 
-        <h3>4. Third-Party Links</h3>
+        <h3>4. Retention</h3>
         <p>
-          This website may include links to third-party websites, plug-ins, and
-          applications (e.g., Amazon, Social Media). Clicking on those links may
-          allow third parties to collect or share data about you. We do not
-          control these third-party websites and are not responsible for their
-          privacy statements.
+          The session cookie lasts for the current browser session. The server
+          ends authenticated sessions after 30 minutes of inactivity or 8 hours
+          at the latest. The <code>polascin_lang</code> language cookie lasts
+          up to one year. The operator has set a planned period of
+          <strong>2 years</strong> for contact messages and newsletter records;
+          data should remain only while the purpose continues, and newsletter
+          data no later than consent withdrawal. The operator has set the date
+          and time of the last login or registration as the start of the
+          two-year period. For records without an account, the operator has set
+          the last site update as the start. Further site updates reset this
+          period, so it is not a fixed maximum record age. An update means
+          deployment based on the last-modified date and time of the deployed
+          index.php file; automated deletion under this policy
+          is not implemented. A valid unsubscribe deletes the subscription
+          record; administrators can delete contact messages. GA4 event and
+          user data retention is set to 14 months. New activity resets the
+          user-data period, so this is not an absolute limit from the first
+          visit. This setting does not affect most standard aggregated reports.
+          Hosting-log retention remains unverified. The two-year decision does
+          not apply to cookies or GA4.
         </p>
 
-        <h3>5. Your Legal Rights (GDPR/CCPA)</h3>
+        <h3>5. Recipients and third-party links</h3>
         <p>
-          Under certain circumstances, you have rights under data protection
-          laws in relation to your personal data, including the right to request
-          access, correction, erasure, or restriction of processing of your
-          personal data.
+          Third-party sites linked from this website have their own privacy
+          notices. Websupport provides hosting and the database; according to
+          the operator, it also delivers newsletter emails sent through PHP mail().
+          Contact messages stay in the portal database and are not supplied to
+          additional contact services; hosting-related processing is not excluded.
+          Following consent, Google receives analytics data through GA4;
+          processing may involve the USA and other third countries. A regional
+          endpoint does not guarantee EEA-only processing. Nefro names SCCs or
+          the EU-US Data Privacy Framework, but their applicability to this portal
+          and its contractual recipients still needs evidence. Application
+          access logging is disabled; hosting logs are not thereby excluded.
         </p>
 
-        <h3>6. Contact</h3>
+        <h3>6. Your rights under the GDPR</h3>
+        <p>
+          Where the GDPR applies and its conditions are met, you may request
+          access, rectification, erasure or restriction of your personal data.
+          You may object to processing based on legitimate interests.
+          Portability applies only to automated processing based on consent or
+          a contract. You may withdraw consent for consent-based processing at
+          any time without affecting earlier lawful processing. You may lodge a
+          complaint with the competent supervisory authority; in Slovakia this
+          is the Office for Personal Data Protection (ÚOOÚ). To exercise a
+          right, contact me at the address below.
+        </p>
+
+        <h3>7. Contact</h3>
         <p>
           If you have any questions about this privacy policy, please contact me
           at: <a href="mailto:lubomir@polascin.net">lubomir@polascin.net</a>.
@@ -162,9 +208,11 @@
             >books.polascin.net</a
           >
           | <a href="privacy.html">Privacy Policy</a> |
-          <a href="terms.html">Terms of Service</a>
+          <a href="terms.html">Terms of Service</a> |
+          <button type="button" class="cookie-settings-trigger">Cookie settings</button>
         </p>
       </div>
     </footer>
+    <div id="cookie-consent-container"></div>
   </body>
 </html>

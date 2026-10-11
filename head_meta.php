@@ -57,6 +57,7 @@ $ogImageType = $ogImageType ?? 'image/jpeg';
 $themeColor = $themeColor ?? '#ffffff';
 
 $cssVersion = is_file(__DIR__ . '/css/styles.css') ? (string) filemtime(__DIR__ . '/css/styles.css') : '1';
+$fontsVersion = is_file(__DIR__ . '/css/fonts.css') ? (string) filemtime(__DIR__ . '/css/fonts.css') : '1';
 $consentVersion = is_file(__DIR__ . '/js/consent-default.js') ? (string) filemtime(__DIR__ . '/js/consent-default.js') : '1';
 $jsVersion = is_file(__DIR__ . '/js/main.js') ? (string) filemtime(__DIR__ . '/js/main.js') : '1';
 ?>
@@ -140,9 +141,7 @@ if ($xDefault === null) {
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="128x128" href="favicon-128.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/fonts.css?v=<?= htmlspecialchars(rawurlencode($fontsVersion), ENT_QUOTES, 'UTF-8') ?>">
 <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/fontawesome.css">
 <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/solid.css">
 <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/brands.css">
