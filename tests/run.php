@@ -418,6 +418,11 @@ foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $languageFile) {
         basename($languageFile) . ' musí uvádzať názov a dobu platnosti jazykového cookie'
     );
     expectTrue(
+        str_contains($privacyLanguage['privacy.s5_text'], 'Websupport')
+            && str_contains($privacyLanguage['privacy.s5_text'], 'PHP mail()'),
+        basename($languageFile) . ' musí uvádzať overené hostingové prostredie a spôsob odosielania newslettera'
+    );
+    expectTrue(
         !str_contains($privacyLanguage['privacy.s4_text'], '<code>')
             && !str_contains($privacyLanguage['privacy.s4_text'], '</code>'),
         basename($languageFile) . ' nesmie v escapovanom preklade zobrazovať HTML značky'
