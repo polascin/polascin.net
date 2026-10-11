@@ -391,6 +391,18 @@ foreach ($fontLicenses as $fontLicense => $copyrightHolder) {
         basename(dirname($fontLicense)) . ' musí obsahovať správnu licenciu SIL Open Font License 1.1'
     );
 }
+$privacyRetentionMarkers = [
+    'cs' => ['2 roky', 'Začátek dvouleté lhůty ještě nebyl určen', 'automatické mazání podle ní není zavedeno'],
+    'de' => ['2 Jahren', 'Der Fristbeginn steht noch nicht fest', 'automatische Löschung nach dieser Regel ist nicht eingerichtet'],
+    'en' => ['2 years', 'The start of the two-year period has not yet been determined', 'automated deletion under this policy is not implemented'],
+    'es' => ['2 años', 'El inicio del plazo aún no está definido', 'borrado automático según esta política no está implantado'],
+    'fr' => ['2 ans', 'Le point de départ reste indéterminé', 'suppression automatique selon cette règle n’est pas mise en place'],
+    'hu' => ['2 év', 'A határidő kezdete még nincs meghatározva', 'automatikus törlés nincs bevezetve'],
+    'it' => ['2 anni', 'L’inizio del periodo non è ancora definito', 'cancellazione automatica secondo questa regola non è implementata'],
+    'pl' => ['2 lat', 'Początek okresu nie został określony', 'automatyczne usuwanie według tej zasady nie jest wdrożone'],
+    'sk' => ['2 roky', 'Začiatok dvojročnej lehoty ešte nebol určený', 'automatické mazanie podľa nej zatiaľ nie je zavedené'],
+    'uk' => ['2 роки', 'Початок строку ще не визначено', 'автоматичне видалення за цим правилом не впроваджене'],
+];
 foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $languageFile) {
     $privacyLanguage = require $languageFile;
     expectTrue(
@@ -422,10 +434,36 @@ foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $languageFile) {
             && str_contains($privacyLanguage['privacy.s5_text'], 'PHP mail()'),
         basename($languageFile) . ' musí uvádzať overené hostingové prostredie a spôsob odosielania newslettera'
     );
+    foreach ($privacyRetentionMarkers[basename($languageFile, '.php')] as $marker) {
+        expectTrue(
+            str_contains($privacyLanguage['privacy.s4_text'], $marker),
+            basename($languageFile) . ' musí odlíšiť dvojročné rozhodnutie od neovereného začiatku a nezavedeného mazania'
+        );
+    }
+    expectTrue(
+        preg_match('/6.*1.*f/u', $privacyLanguage['privacy.s3_text']) === 1
+            && preg_match('/6.*1.*a/u', $privacyLanguage['privacy.s3_text']) === 1,
+        basename($languageFile) . ' musí odlíšiť oprávnený záujem kontaktu od súhlasu newslettera'
+    );
+    expectTrue(
+        str_contains($privacyLanguage['privacy.s5_text'], 'SCC')
+            && str_contains($privacyLanguage['privacy.s5_text'], 'EU-US Data Privacy Framework')
+            && str_contains($privacyLanguage['privacy.s5_text'], 'GA4'),
+        basename($languageFile) . ' musí uvádzať analytiku a referenčné prenosové záruky bez tvrdenia výlučného EHP'
+    );
     expectTrue(
         !str_contains($privacyLanguage['privacy.s4_text'], '<code>')
             && !str_contains($privacyLanguage['privacy.s4_text'], '</code>'),
         basename($languageFile) . ' nesmie v escapovanom preklade zobrazovať HTML značky'
+    );
+}
+foreach (['privacy.html' => '2 roky', 'weblogo/privacy.html' => '2 years'] as $privacyPath => $twoYears) {
+    $staticPrivacy = (string) file_get_contents(dirname(__DIR__) . '/' . $privacyPath);
+    expectTrue(
+        str_contains($staticPrivacy, $twoYears)
+            && str_contains($staticPrivacy, 'EU-US Data Privacy Framework')
+            && str_contains($staticPrivacy, 'Websupport'),
+        $privacyPath . ' musí obsahovať dvojročné rozhodnutie a rovnaké disclosures ako jazykové katalógy'
     );
 }
 $i18nSource = (string) file_get_contents(dirname(__DIR__) . '/i18n.php');
