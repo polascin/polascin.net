@@ -403,6 +403,18 @@ $privacyRetentionMarkers = [
     'sk' => ['2 roky', 'Začiatok dvojročnej lehoty ešte nebol určený', 'automatické mazanie podľa nej zatiaľ nie je zavedené'],
     'uk' => ['2 роки', 'Початок строку ще не визначено', 'автоматичне видалення за цим правилом не впроваджене'],
 ];
+$gaRetentionMarkers = [
+    'cs' => ['14 měsíců', 'Nová aktivita obnovuje', 'standardních souhrnných reportů'],
+    'de' => ['14 Monate', 'Neue Aktivität setzt', 'standardmäßigen aggregierten Berichte'],
+    'en' => ['14 months', 'New activity resets', 'standard aggregated reports'],
+    'es' => ['14 meses', 'La nueva actividad reinicia', 'informes estándar agregados'],
+    'fr' => ['14 mois', 'Une nouvelle activité réinitialise', 'rapports standards agrégés'],
+    'hu' => ['14 hónapra', 'Az új aktivitás újraindítja', 'szabványos összesített jelentést'],
+    'it' => ['14 mesi', 'Una nuova attività reimposta', 'report standard aggregati'],
+    'pl' => ['14 miesięcy', 'Nowa aktywność resetuje', 'standardowych raportów zbiorczych'],
+    'sk' => ['14 mesiacov', 'Pri novej aktivite', 'štandardných súhrnných reportov'],
+    'uk' => ['14 місяців', 'Нова активність поновлює', 'стандартних зведених звітів'],
+];
 foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $languageFile) {
     $privacyLanguage = require $languageFile;
     expectTrue(
@@ -417,10 +429,15 @@ foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $languageFile) {
         basename($languageFile) . ' musí obsahovať všetky privacy preklady'
     );
     expectTrue(
-        !preg_match('/14/', $privacyLanguage['privacy.s3_item5'])
-            && !preg_match('/90/', $privacyLanguage['privacy.s4_text']),
-        basename($languageFile) . ' nesmie uvádzať neoverenú dobu uchovávania'
+        !preg_match('/90/', $privacyLanguage['privacy.s4_text']),
+        basename($languageFile) . ' nesmie uvádzať neoverenú dobu hostingových logov'
     );
+    foreach ($gaRetentionMarkers[basename($languageFile, '.php')] as $marker) {
+        expectTrue(
+            str_contains($privacyLanguage['privacy.s4_text'], $marker),
+            basename($languageFile) . ' musí uvádzať overenú GA4 retenciu, obnovovanie a výnimku súhrnných reportov'
+        );
+    }
     expectTrue(
         str_contains($privacyLanguage['privacy.s4_text'], '__Host-POLASCINSESSID'),
         basename($languageFile) . ' musí pomenovať nevyhnutný session cookie'
@@ -459,6 +476,13 @@ foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $languageFile) {
 }
 foreach (['privacy.html' => '2 roky', 'weblogo/privacy.html' => '2 years'] as $privacyPath => $twoYears) {
     $staticPrivacy = (string) file_get_contents(dirname(__DIR__) . '/' . $privacyPath);
+    $staticGaMarkers = $gaRetentionMarkers[$privacyPath === 'privacy.html' ? 'sk' : 'en'];
+    foreach ($staticGaMarkers as $marker) {
+        expectTrue(
+            str_contains(preg_replace('/\s+/', ' ', $staticPrivacy), $marker),
+            $privacyPath . ' musí uvádzať overenú GA4 retenciu s podmienkami'
+        );
+    }
     expectTrue(
         str_contains($staticPrivacy, $twoYears)
             && str_contains($staticPrivacy, 'EU-US Data Privacy Framework')
