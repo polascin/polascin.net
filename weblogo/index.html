@@ -2,21 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script>
-      // 1. Define dataLayer and the gtag function immediately
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      // 2. Set default consent to 'denied'
-      gtag("consent", "default", {
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-        analytics_storage: "denied",
-        wait_for_update: 500,
-      });
-    </script>
+    <script src="../js/consent-default.js?v=3eb88f21"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -136,14 +122,14 @@
       content="https://polascin.net/images/profile.jpg"
     />
 
-    <link rel="stylesheet" href="../css/fonts.css" />
+    <link rel="stylesheet" href="../css/fonts.css?v=e4c3fea0" />
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/all.css" />
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css" />
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js?v=d00ed748" defer></script>
   </head>
 
   <body>
@@ -664,7 +650,8 @@
             >books.polascin.net</a
           >
           | <a href="privacy.html">Privacy Policy</a> |
-          <a href="terms.html">Terms of Service</a>
+          <a href="terms.html">Terms of Service</a> |
+          <button type="button" class="cookie-settings-trigger">Cookie settings</button>
         </p>
       </div>
     </footer>

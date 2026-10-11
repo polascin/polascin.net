@@ -344,7 +344,7 @@ foreach (['index.html', 'privacy.html', 'terms.html'] as $staticHeaderFile) {
 // pri výpadku databázy, takže vtedy by vracajúci sa návštevník dostal týždne
 // starý CSS a JS z vlastnej cache — pri consent skripte s dopadom na GDPR.
 // Pin je preto skrátený hash obsahu a drží ho tento test.
-foreach (['css/styles.css', 'js/main.js', 'js/consent-default.js'] as $staticAsset) {
+foreach (['css/styles.css', 'css/fonts.css', 'js/main.js', 'js/consent-default.js'] as $staticAsset) {
     $expectedAssetVersion = substr(hash_file('sha256', dirname(__DIR__) . '/' . $staticAsset), 0, 8);
     foreach (['index.html', 'privacy.html', 'terms.html'] as $staticAssetFile) {
         $staticAssetMarkup = (string) file_get_contents(dirname(__DIR__) . '/' . $staticAssetFile);
@@ -353,6 +353,104 @@ foreach (['css/styles.css', 'js/main.js', 'js/consent-default.js'] as $staticAss
             "{$staticAssetFile} musí odkazovať na {$staticAsset} s aktuálnym cache-busting pinom ?v={$expectedAssetVersion}"
         );
     }
+}
+foreach (array_merge(
+    glob(dirname(__DIR__) . '/*.php') ?: [],
+    glob(dirname(__DIR__) . '/*.html') ?: [],
+    glob(dirname(__DIR__) . '/lang/*.php') ?: [],
+    glob(dirname(__DIR__) . '/weblogo/*.html') ?: [],
+    [dirname(__DIR__) . '/.htaccess']
+) as $fontSurface) {
+    $fontSurfaceContent = (string) file_get_contents($fontSurface);
+    expectTrue(
+        !str_contains($fontSurfaceContent, 'fonts.googleapis.com')
+            && !str_contains($fontSurfaceContent, 'fonts.gstatic.com'),
+        basename($fontSurface) . ' nesmie načítavať Google Fonts'
+    );
+}
+$fontStylesheet = (string) file_get_contents(dirname(__DIR__) . '/css/fonts.css');
+preg_match_all('~url\("([^"]+\.woff2)"\)~', $fontStylesheet, $fontUrls);
+expectSame(18, count($fontUrls[1]), 'Lokálny fontový CSS musí deklarovať všetkých 18 súborov pre podporované skripty a váhy');
+foreach ($fontUrls[1] as $fontUrl) {
+    expectTrue(
+        str_starts_with($fontUrl, '../fonts/')
+            && is_file(dirname(__DIR__) . '/' . str_replace('../', '', $fontUrl)),
+        "Font {$fontUrl} musí byť dostupný ako lokálny asset"
+    );
+}
+$fontLicenses = [
+    dirname(__DIR__) . '/fonts/inter/LICENSE' => 'The Inter Project Authors',
+    dirname(__DIR__) . '/fonts/open-sans/LICENSE' => 'The Open Sans Project Authors',
+];
+foreach ($fontLicenses as $fontLicense => $copyrightHolder) {
+    $fontLicenseContent = is_file($fontLicense) ? (string) file_get_contents($fontLicense) : '';
+    expectTrue(
+        is_file($fontLicense)
+            && str_contains($fontLicenseContent, 'SIL OPEN FONT LICENSE Version 1.1')
+            && str_contains($fontLicenseContent, $copyrightHolder),
+        basename(dirname($fontLicense)) . ' musí obsahovať správnu licenciu SIL Open Font License 1.1'
+    );
+}
+foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $languageFile) {
+    $privacyLanguage = require $languageFile;
+    expectTrue(
+        is_array($privacyLanguage)
+            && isset(
+                $privacyLanguage['privacy.s2_cookies'],
+                $privacyLanguage['privacy.s3_item5'],
+                $privacyLanguage['privacy.s4_text'],
+                $privacyLanguage['privacy.s5_text'],
+                $privacyLanguage['privacy.s6_text']
+            ),
+        basename($languageFile) . ' musí obsahovať všetky privacy preklady'
+    );
+    expectTrue(
+        !preg_match('/14/', $privacyLanguage['privacy.s3_item5'])
+            && !preg_match('/90/', $privacyLanguage['privacy.s4_text']),
+        basename($languageFile) . ' nesmie uvádzať neoverenú dobu uchovávania'
+    );
+    expectTrue(
+        str_contains($privacyLanguage['privacy.s4_text'], '__Host-POLASCINSESSID'),
+        basename($languageFile) . ' musí pomenovať nevyhnutný session cookie'
+    );
+    expectTrue(
+        str_contains($privacyLanguage['privacy.s4_text'], 'polascin_lang'),
+        basename($languageFile) . ' musí uvádzať názov a dobu platnosti jazykového cookie'
+    );
+    expectTrue(
+        !str_contains($privacyLanguage['privacy.s4_text'], '<code>')
+            && !str_contains($privacyLanguage['privacy.s4_text'], '</code>'),
+        basename($languageFile) . ' nesmie v escapovanom preklade zobrazovať HTML značky'
+    );
+}
+$i18nSource = (string) file_get_contents(dirname(__DIR__) . '/i18n.php');
+expectTrue(
+    str_contains($i18nSource, 'const APP_LANGUAGE_COOKIE_LIFETIME = 31536000;'),
+    'Jednoročná doba jazykového cookie musí zostať doložená implementáciou'
+);
+$consentScript = (string) file_get_contents(dirname(__DIR__) . '/js/main.js');
+expectTrue(
+    str_contains($consentScript, 'if (persist && analyticsWasLoaded)')
+        && str_contains($consentScript, 'window.location.reload()'),
+    'Odvolanie analytického súhlasu po načítaní GA musí reloadom zastaviť ďalšie meranie'
+);
+$weblogoConsentScript = (string) file_get_contents(dirname(__DIR__) . '/weblogo/js/main.js');
+$weblogoLoadFunction = strpos($weblogoConsentScript, 'function loadAnalytics()');
+$weblogoScriptSource = strpos($weblogoConsentScript, 'script.src = `https://www.googletagmanager.com/gtag/js');
+expectTrue(
+    $weblogoLoadFunction !== false
+        && $weblogoScriptSource !== false
+        && $weblogoScriptSource > $weblogoLoadFunction,
+    'Sekundárne statické stránky smú vkladať gtag.js iba vo funkcii načítania po súhlase'
+);
+foreach (glob(dirname(__DIR__) . '/weblogo/*.html') ?: [] as $weblogoPage) {
+    $weblogoMarkup = (string) file_get_contents($weblogoPage);
+    expectTrue(
+        str_contains($weblogoMarkup, '../js/consent-default.js?v=3eb88f21')
+            && str_contains($weblogoMarkup, 'id="cookie-consent-container"')
+            && str_contains($weblogoMarkup, 'class="cookie-settings-trigger"'),
+        basename($weblogoPage) . ' musí mať predvolené odmietnutie, banner a ovládanie odvolania súhlasu'
+    );
 }
 expectTrue(
     str_contains($siteStyles, '.nav-brand-photo')
