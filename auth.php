@@ -95,8 +95,8 @@ function sendSecurityHeaders(): void {
     $csp =
         "default-src 'self'; " .
         "img-src 'self' data: https:; " .
-        "style-src 'self' https://fonts.googleapis.com 'nonce-{$nonce}'; " .
-        "font-src 'self' https://fonts.gstatic.com; " .
+        "style-src 'self' 'nonce-{$nonce}'; " .
+        "font-src 'self'; " .
         "script-src 'self' 'nonce-{$nonce}' https://www.googletagmanager.com https://www.google-analytics.com; " .
         "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com " .
             "https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; " .
