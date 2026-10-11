@@ -392,16 +392,16 @@ foreach ($fontLicenses as $fontLicense => $copyrightHolder) {
     );
 }
 $privacyRetentionMarkers = [
-    'cs' => ['2 roky', 'Začátek dvouleté lhůty ještě nebyl určen', 'automatické mazání podle ní není zavedeno'],
-    'de' => ['2 Jahren', 'Der Fristbeginn steht noch nicht fest', 'automatische Löschung nach dieser Regel ist nicht eingerichtet'],
-    'en' => ['2 years', 'The start of the two-year period has not yet been determined', 'automated deletion under this policy is not implemented'],
-    'es' => ['2 años', 'El inicio del plazo aún no está definido', 'borrado automático según esta política no está implantado'],
-    'fr' => ['2 ans', 'Le point de départ reste indéterminé', 'suppression automatique selon cette règle n’est pas mise en place'],
-    'hu' => ['2 év', 'A határidő kezdete még nincs meghatározva', 'automatikus törlés nincs bevezetve'],
-    'it' => ['2 anni', 'L’inizio del periodo non è ancora definito', 'cancellazione automatica secondo questa regola non è implementata'],
-    'pl' => ['2 lat', 'Początek okresu nie został określony', 'automatyczne usuwanie według tej zasady nie jest wdrożone'],
-    'sk' => ['2 roky', 'Začiatok dvojročnej lehoty ešte nebol určený', 'automatické mazanie podľa nej zatiaľ nie je zavedené'],
-    'uk' => ['2 роки', 'Початок строку ще не визначено', 'автоматичне видалення за цим правилом не впроваджене'],
+    'cs' => ['2 roky', 'Provozovatel určil začátek dvouleté lhůty jako datum a čas posledního přihlášení nebo registrace. Kontaktní zprávy a odběry však nejsou propojeny s účty; použití tohoto kritéria na ně ještě není technicky vyřešeno', 'automatické mazání podle ní není zavedeno'],
+    'de' => ['2 Jahren', 'Der Betreiber hat Datum und Uhrzeit der letzten Anmeldung oder Registrierung als Fristbeginn festgelegt. Kontaktanfragen und Abonnements sind jedoch nicht mit Konten verknüpft; die technische Anwendung dieses Kriteriums ist noch ungeklärt', 'automatische Löschung nach dieser Regel ist nicht eingerichtet'],
+    'en' => ['2 years', 'The operator has set the date and time of the last login or registration as the start of the two-year period. Contact messages and subscriptions are not linked to accounts; applying this criterion to them is not yet technically resolved', 'automated deletion under this policy is not implemented'],
+    'es' => ['2 años', 'El operador ha fijado la fecha y hora del último inicio de sesión o registro como inicio del plazo. Los mensajes y las suscripciones no están vinculados a cuentas; la aplicación técnica de este criterio aún no está resuelta', 'borrado automático según esta política no está implantado'],
+    'fr' => ['2 ans', 'L’exploitant a fixé la date et l’heure de la dernière connexion ou inscription comme point de départ. Les messages et abonnements ne sont pas liés à des comptes ; l’application technique de ce critère reste à résoudre', 'suppression automatique selon cette règle n’est pas mise en place'],
+    'hu' => ['2 év', 'Az üzemeltető a legutóbbi bejelentkezés vagy regisztráció dátumát és időpontját határozta meg kezdőpontként. Az üzenetek és feliratkozások nincsenek fiókokhoz kapcsolva; e feltétel technikai alkalmazása még nincs megoldva', 'automatikus törlés nincs bevezetve'],
+    'it' => ['2 anni', 'Il gestore ha fissato la data e l’ora dell’ultimo accesso o registrazione come inizio del periodo. Messaggi e iscrizioni non sono collegati ad account; l’applicazione tecnica di questo criterio non è ancora risolta', 'cancellazione automatica secondo questa regola non è implementata'],
+    'pl' => ['2 lat', 'Operator określił datę i godzinę ostatniego logowania lub rejestracji jako początek okresu. Wiadomości i subskrypcje nie są powiązane z kontami; techniczne zastosowanie tego kryterium nie jest jeszcze rozwiązane', 'automatyczne usuwanie według tej zasady nie jest wdrożone'],
+    'sk' => ['2 roky', 'Prevádzkovateľ určil začiatok dvojročnej lehoty ako dátum a čas posledného prihlásenia alebo registrácie. Kontaktné správy a odbery však nie sú prepojené s účtami; technické uplatnenie tohto kritéria na ne ešte nie je vyriešené', 'automatické mazanie podľa nej zatiaľ nie je zavedené'],
+    'uk' => ['2 роки', 'Оператор визначив початком строку дату й час останнього входу або реєстрації. Повідомлення та підписки не пов’язані з обліковими записами; технічне застосування цього критерію ще не вирішене', 'автоматичне видалення за цим правилом не впроваджене'],
 ];
 $gaRetentionMarkers = [
     'cs' => ['14 měsíců', 'Nová aktivita obnovuje', 'standardních souhrnných reportů'],
