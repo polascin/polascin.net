@@ -354,6 +354,14 @@ foreach (['css/styles.css', 'css/fonts.css', 'js/main.js', 'js/consent-default.j
         );
     }
 }
+foreach (['weblogo/index.html', 'weblogo/privacy.html', 'weblogo/terms.html'] as $legacyFontPage) {
+    $legacyFontMarkup = (string) file_get_contents(dirname(__DIR__) . '/' . $legacyFontPage);
+    $fontVersion = substr(hash_file('sha256', dirname(__DIR__) . '/css/fonts.css'), 0, 8);
+    expectTrue(
+        str_contains($legacyFontMarkup, '../css/fonts.css?v=' . $fontVersion),
+        "{$legacyFontPage} musí odkazovať na zdieľané fonty s aktuálnym hash pinom"
+    );
+}
 foreach (array_merge(
     glob(dirname(__DIR__) . '/*.php') ?: [],
     glob(dirname(__DIR__) . '/*.html') ?: [],
