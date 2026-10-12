@@ -399,30 +399,14 @@ foreach ($fontLicenses as $fontLicense => $copyrightHolder) {
         basename(dirname($fontLicense)) . ' musí obsahovať správnu licenciu SIL Open Font License 1.1'
     );
 }
-$privacyRetentionMarkers = [
-    'cs' => ['2 roky', 'Provozovatel určil začátek dvouleté lhůty jako datum a čas posledního přihlášení nebo registrace. U záznamů bez účtu určil začátek jako poslední aktualizaci stránek. Další aktualizace tuto lhůtu obnovuje; nejde tedy o pevný maximální věk záznamu. Aktualizací se rozumí nasazení podle data a času poslední změny nasazeného souboru index.php', 'automatické mazání podle ní není zavedeno'],
-    'de' => ['2 Jahren', 'Der Betreiber hat Datum und Uhrzeit der letzten Anmeldung oder Registrierung als Fristbeginn festgelegt. Bei Datensätzen ohne Konto beginnt die Frist nach seiner Entscheidung mit der letzten Aktualisierung der Website. Weitere Aktualisierungen setzen die Frist zurück; sie begrenzt daher nicht das absolute Alter eines Datensatzes. Aktualisierung bedeutet Deployment anhand von Datum und Uhrzeit der letzten Änderung der bereitgestellten Datei index.php', 'automatische Löschung nach dieser Regel ist nicht eingerichtet'],
-    'en' => ['2 years', 'The operator has set the date and time of the last login or registration as the start of the two-year period. For records without an account, the operator has set the last site update as the start. Further site updates reset this period, so it is not a fixed maximum record age. An update means deployment based on the last-modified date and time of the deployed index.php file', 'automated deletion under this policy is not implemented'],
-    'es' => ['2 años', 'El operador ha fijado la fecha y hora del último inicio de sesión o registro como inicio del plazo. Para los registros sin cuenta, el operador ha fijado la última actualización del sitio como inicio. Las nuevas actualizaciones reinician el plazo; no es una antigüedad máxima fija del registro. Actualización significa despliegue según la fecha y hora de última modificación del archivo index.php desplegado', 'borrado automático según esta política no está implantado'],
-    'fr' => ['2 ans', 'L’exploitant a fixé la date et l’heure de la dernière connexion ou inscription comme point de départ. Pour les données sans compte, l’exploitant a fixé la dernière mise à jour du site comme point de départ. Les mises à jour suivantes réinitialisent le délai ; il ne limite donc pas l’âge absolu des données. Une mise à jour désigne le déploiement selon la date et l’heure de dernière modification du fichier index.php déployé', 'suppression automatique selon cette règle n’est pas mise en place'],
-    'hu' => ['2 év', 'Az üzemeltető a legutóbbi bejelentkezés vagy regisztráció dátumát és időpontját határozta meg kezdőpontként. A fiók nélküli rekordoknál az üzemeltető a webhely legutóbbi frissítését jelölte meg kezdőpontként. Az újabb frissítések újraindítják a határidőt, így ez nem a rekord korának rögzített felső határa. A frissítés a telepített index.php fájl utolsó módosításának dátuma és időpontja szerinti telepítést jelenti', 'automatikus törlés nincs bevezetve'],
-    'it' => ['2 anni', 'Il gestore ha fissato la data e l’ora dell’ultimo accesso o registrazione come inizio del periodo. Per i record senza account, il gestore ha fissato l’ultimo aggiornamento del sito come inizio. Gli aggiornamenti successivi reimpostano il periodo; non è quindi un limite fisso all’età del record. Per aggiornamento si intende la distribuzione in base alla data e ora di ultima modifica del file index.php distribuito', 'cancellazione automatica secondo questa regola non è implementata'],
-    'pl' => ['2 lat', 'Operator określił datę i godzinę ostatniego logowania lub rejestracji jako początek okresu. Dla zapisów bez konta operator wskazał ostatnią aktualizację strony jako początek. Kolejne aktualizacje resetują okres; nie jest to więc stały maksymalny wiek zapisu. Aktualizacja oznacza wdrożenie według daty i godziny ostatniej modyfikacji wdrożonego pliku index.php', 'automatyczne usuwanie według tej zasady nie jest wdrożone'],
-    'sk' => ['2 roky', 'Prevádzkovateľ určil začiatok dvojročnej lehoty ako dátum a čas posledného prihlásenia alebo registrácie. Pri záznamoch bez účtu prevádzkovateľ určil začiatok ako ostatnú aktualizáciu stránok. Ďalšie aktualizácie túto lehotu obnovujú; nejde preto o pevnú hornú hranicu veku záznamu. Aktualizáciou sa rozumie nasadenie podľa dátumu a času poslednej úpravy nasadeného súboru index.php', 'automatické mazanie podľa nej zatiaľ nie je zavedené'],
-    'uk' => ['2 роки', 'Оператор визначив початком строку дату й час останнього входу або реєстрації. Для записів без облікового запису оператор визначив початком останнє оновлення сайту. Подальші оновлення поновлюють строк, тому це не фіксована верхня межа віку запису. Оновлення означає розгортання за датою й часом останньої зміни розгорнутого файлу index.php', 'автоматичне видалення за цим правилом не впроваджене'],
-];
-$gaRetentionMarkers = [
-    'cs' => ['14 měsíců', 'Nová aktivita obnovuje', 'standardních souhrnných reportů'],
-    'de' => ['14 Monate', 'Neue Aktivität setzt', 'standardmäßigen aggregierten Berichte'],
-    'en' => ['14 months', 'New activity resets', 'standard aggregated reports'],
-    'es' => ['14 meses', 'La nueva actividad reinicia', 'informes estándar agregados'],
-    'fr' => ['14 mois', 'Une nouvelle activité réinitialise', 'rapports standards agrégés'],
-    'hu' => ['14 hónapra', 'Az új aktivitás újraindítja', 'szabványos összesített jelentést'],
-    'it' => ['14 mesi', 'Una nuova attività reimposta', 'report standard aggregati'],
-    'pl' => ['14 miesięcy', 'Nowa aktywność resetuje', 'standardowych raportów zbiorczych'],
-    'sk' => ['14 mesiacov', 'Pri novej aktivite', 'štandardných súhrnných reportov'],
-    'uk' => ['14 місяців', 'Нова активність поновлює', 'стандартних зведених звітів'],
-];
+$privacyRetentionMarkers = array_fill_keys(
+    ['cs', 'de', 'en', 'es', 'fr', 'hu', 'it', 'pl', 'sk', 'uk'],
+    ['90', '48', '365', '180', '72']
+);
+$gaRetentionMarkers = array_fill_keys(
+    ['cs', 'de', 'en', 'es', 'fr', 'hu', 'it', 'pl', 'sk', 'uk'],
+    ['14']
+);
 foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $languageFile) {
     $privacyLanguage = require $languageFile;
     expectTrue(
@@ -437,8 +421,8 @@ foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $languageFile) {
         basename($languageFile) . ' musí obsahovať všetky privacy preklady'
     );
     expectTrue(
-        !preg_match('/90/', $privacyLanguage['privacy.s4_text']),
-        basename($languageFile) . ' nesmie uvádzať neoverenú dobu hostingových logov'
+        preg_match('/90/', $privacyLanguage['privacy.s4_text']) === 1,
+        basename($languageFile) . ' musí uvádzať 90-dňovú retenciu aplikačných access logov'
     );
     foreach ($gaRetentionMarkers[basename($languageFile, '.php')] as $marker) {
         expectTrue(
@@ -462,7 +446,7 @@ foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $languageFile) {
     foreach ($privacyRetentionMarkers[basename($languageFile, '.php')] as $marker) {
         expectTrue(
             str_contains($privacyLanguage['privacy.s4_text'], $marker),
-            basename($languageFile) . ' musí odlíšiť dvojročné rozhodnutie od neovereného začiatku a nezavedeného mazania'
+            basename($languageFile) . ' musí uvádzať všetky automatizované retenčné lehoty'
         );
     }
     expectTrue(
@@ -482,7 +466,7 @@ foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $languageFile) {
         basename($languageFile) . ' nesmie v escapovanom preklade zobrazovať HTML značky'
     );
 }
-foreach (['privacy.html' => '2 roky', 'weblogo/privacy.html' => '2 years'] as $privacyPath => $twoYears) {
+foreach (['privacy.html' => '180 dňoch', 'weblogo/privacy.html' => '180 days'] as $privacyPath => $contactRetention) {
     $staticPrivacy = (string) file_get_contents(dirname(__DIR__) . '/' . $privacyPath);
     $staticGaMarkers = $gaRetentionMarkers[$privacyPath === 'privacy.html' ? 'sk' : 'en'];
     foreach ($staticGaMarkers as $marker) {
@@ -492,10 +476,11 @@ foreach (['privacy.html' => '2 roky', 'weblogo/privacy.html' => '2 years'] as $p
         );
     }
     expectTrue(
-        str_contains($staticPrivacy, $twoYears)
-            && str_contains($staticPrivacy, 'EU-US Data Privacy Framework')
+        str_contains($staticPrivacy, $contactRetention)
+            && str_contains($staticPrivacy, 'EU-US')
+            && str_contains($staticPrivacy, 'Data Privacy Framework')
             && str_contains($staticPrivacy, 'Websupport'),
-        $privacyPath . ' musí obsahovať dvojročné rozhodnutie a rovnaké disclosures ako jazykové katalógy'
+        $privacyPath . ' musí obsahovať automatickú retenciu a rovnaké disclosures ako jazykové katalógy'
     );
 }
 $i18nSource = (string) file_get_contents(dirname(__DIR__) . '/i18n.php');
@@ -859,7 +844,7 @@ foreach (array_keys(appLanguages()) as $dialysisLinkLang) {
     );
 }
 
-// Predávané publikácie: katalóg z 2026-10-04 (nefro.polascin.net/publikacie.php
+// Predávané publikácie: katalóg z 2026-10-12 (nefro.polascin.net/publikacie.php
 // a profil polascin.gumroad.com, pole products v Inertia JSON). Pri audite sa
 // zoznam porovná so živou ponukou a pri zmene sa aktualizuje tu aj na stránke
 // — viď .audit.md, sekcia 7. Kontrola hľadá celý href, lebo kratší permalink
@@ -873,6 +858,11 @@ $soldPublicationLinks = [
     'https://polascin.gumroad.com/l/sk-nefro-baza-1-kompendium',
     'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-kompendium-en',
     'https://polascin.gumroad.com/l/sk-nefro-baza-1-kompendium-en',
+    'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-de',
+    'https://polascin.gumroad.com/l/sk-nefro-baza-1-de',
+    'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-kompendium-de',
+    'https://polascin.gumroad.com/l/sk-nefro-baza-1-kompendium-de',
+    'https://polascin.gumroad.com/l/sk-nefro-belegt-wahrscheinlich-offen-de',
     'https://polascin.gumroad.com/l/hcilux',
     'https://polascin.gumroad.com/l/veszhk',
 ];
@@ -881,6 +871,12 @@ foreach ($soldPublicationLinks as $soldPublicationLink) {
     expectSame(1, substr_count($homeTemplate, $soldPublicationHref), "Dynamická stránka musí obsahovať odkaz {$soldPublicationLink}");
     expectSame(1, substr_count($staticFallback, $soldPublicationHref), "Statický fallback musí obsahovať odkaz {$soldPublicationLink}");
     expectSame(1, substr_count($legacyFallback, $soldPublicationHref), "Starší fallback musí obsahovať odkaz {$soldPublicationLink}");
+}
+$externalLinkFiles = ['index.html', 'privacy.html', 'terms.html', 'weblogo/index.html', 'weblogo/privacy.html', 'weblogo/terms.html'];
+foreach ($externalLinkFiles as $externalLinkFile) {
+    $externalLinkHtml = (string) file_get_contents(dirname(__DIR__) . '/' . $externalLinkFile);
+    preg_match_all('~<a\b(?=[^>]*target="_blank")(?![^>]*rel="noopener noreferrer")[^>]*>~s', $externalLinkHtml, $unsafeBlankLinks);
+    expectSame([], $unsafeBlankLinks[0], "{$externalLinkFile} nesmie otvárať novú kartu bez ochrany opener/referrer");
 }
 expectTrue(
     !str_contains($homeTemplate, '_gl=')
@@ -899,6 +895,11 @@ $soldPublicationKeys = [
     'home.link_pub_gumroad_kompendium',
     'home.link_pub_nefro_kompendium_en',
     'home.link_pub_gumroad_kompendium_en',
+    'home.link_pub_nefro_baza_de',
+    'home.link_pub_gumroad_baza_de',
+    'home.link_pub_nefro_kompendium_de',
+    'home.link_pub_gumroad_kompendium_de',
+    'home.link_pub_evidence_de',
     'home.link_pub_medicinsky_post',
     'home.link_pub_medical_fasting',
 ];
@@ -1322,6 +1323,17 @@ expectTrue(
     str_contains($auditDoc, '## Recursive self-improvement (povinné)')
         && str_contains($doAuditDoc, '## Recursive self-improvement (povinné)'),
     '.audit.md aj .doaudit.md musia obsahovať povinnú sekciu recursive self-improvement'
+);
+expectTrue(
+    str_contains($checklistSection, '#### Aktuálnosť dokumentácie')
+        && str_contains($doAuditDoc, 'Aktuálnosť dokumentácie')
+        && str_contains($doAuditDoc, 'Posledná zdokumentovaná konfigurácia'),
+    'Audit musí kontrolovať zastarané tvrdenia a externú konfiguráciu nesmie vydávať za živý overený stav'
+);
+expectTrue(
+    str_contains($auditDoc, 'Fonty sú lokálne')
+        && !str_contains($checklistSection, 'Google Fonts'),
+    'Živá auditná dokumentácia musí zodpovedať lokálnemu načítavaniu fontov'
 );
 
 foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $cataloguePath) {

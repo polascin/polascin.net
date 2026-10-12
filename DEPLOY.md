@@ -76,13 +76,13 @@ transakciu vráti späť.
 
 Predvolené lehoty sa dajú zmeniť v produkčnom `env.ini`:
 
-| Premenná | Predvolená hodnota | Účel |
-| --- | ---: | --- |
-| `CONTACT_MESSAGE_RETENTION_DAYS` | 180 | kontaktné správy |
-| `NEWSLETTER_PENDING_RETENTION_HOURS` | 72 | nepotvrdené registrácie newslettera |
-| `ACCESS_LOG_RETENTION_DAYS` | 90 | technické prístupové záznamy |
-| `FORM_RATE_LIMIT_RETENTION_HOURS` | 48 | záznamy ochrany formulárov |
-| `ADMIN_AUDIT_LOG_RETENTION_DAYS` | 365 | administrátorský audit |
+| Premenná                             | Predvolená hodnota | Účel                                |
+| ------------------------------------ | -----------------: | ----------------------------------- |
+| `CONTACT_MESSAGE_RETENTION_DAYS`     |                180 | kontaktné správy                    |
+| `NEWSLETTER_PENDING_RETENTION_HOURS` |                 72 | nepotvrdené registrácie newslettera |
+| `ACCESS_LOG_RETENTION_DAYS`          |                 90 | technické prístupové záznamy        |
+| `FORM_RATE_LIMIT_RETENTION_HOURS`    |                 48 | záznamy ochrany formulárov          |
+| `ADMIN_AUDIT_LOG_RETENTION_DAYS`     |                365 | administrátorský audit              |
 
 Potvrdené adresy newslettera sa automaticky nemažú; uchovávajú sa do
 odhlásenia. Lehotu nepotvrdenej registrácie nemožno nastaviť pod 48 hodín,
