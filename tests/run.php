@@ -1579,6 +1579,11 @@ expectTrue(
     'Správa musí mať minimálnu dĺžku a neúspešný zápis musí uvoľniť deduplikačný limit'
 );
 expectTrue(
+    str_contains($contactSource, "te('contact.privacy_notice')")
+        && str_contains($contactSource, "langUrl(\$lang, 'privacy.php')"),
+    'Kontaktný formulár musí priamo uvádzať prvú vrstvu informácií o spracúvaní a odkaz na zásady'
+);
+expectTrue(
     str_contains($mainJsSource, 'form[data-submit-once]')
         && str_contains($mainJsSource, 'submitButton.disabled = true'),
     'Klient musí zabrániť opakovanému odoslaniu dvojklikom'
@@ -2002,6 +2007,19 @@ expectTrue(
     'Slug zakončený novým riadkom nesmie prejsť validáciou obálky'
 );
 $newsletterSource = (string) file_get_contents(dirname(__DIR__) . '/newsletter.php');
+expectTrue(
+    str_contains($newsletterSource, "te('newsletter.privacy_notice')")
+        && str_contains($newsletterSource, "langUrl(\$lang, 'privacy.php')"),
+    'Newsletter musí priamo uvádzať prvú vrstvu informácií o súhlase, retencii a odhlásení'
+);
+foreach (array_keys(appLanguages()) as $noticeLang) {
+    $noticeCatalogue = require dirname(__DIR__) . '/lang/' . $noticeLang . '.php';
+    expectTrue(
+        !empty($noticeCatalogue['contact.privacy_notice'])
+            && !empty($noticeCatalogue['newsletter.privacy_notice']),
+        "Katalóg {$noticeLang} musí obsahovať informačné texty pri oboch formulároch"
+    );
+}
 expectSame(
     0,
     preg_match_all('~preg_match\(\'/\^\[a-f0-9\]\{48\}\$/\'~', $newsletterSource),

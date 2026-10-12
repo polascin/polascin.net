@@ -146,6 +146,7 @@ $formProof = generateTimedFormProof('contact');
           <label for="message"><?= te('contact.message') ?> <span aria-label="<?= te('common.required') ?>">*</span></label>
           <textarea id="message" name="message" rows="6" required minlength="20" maxlength="5000"><?= htmlspecialchars($formData['message'], ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
+        <p class="form-hint"><?= te('contact.privacy_notice') ?> <a href="<?= htmlspecialchars(langUrl($lang, 'privacy.php'), ENT_QUOTES, 'UTF-8') ?>"><?= te('footer.privacy') ?></a>.</p>
         <button type="submit" class="btn btn-primary"><?= te('contact.submit') ?></button>
       </form>
     </div>

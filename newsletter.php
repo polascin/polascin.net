@@ -292,6 +292,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'newsletter.php');
             <label for="email"><?= te('newsletter.email') ?> <span aria-label="<?= te('common.required') ?>">*</span></label>
             <input type="email" id="email" name="email" value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>" required maxlength="255">
           </div>
+          <p class="form-hint"><?= te('newsletter.privacy_notice') ?> <a href="<?= htmlspecialchars(langUrl($lang, 'privacy.php'), ENT_QUOTES, 'UTF-8') ?>"><?= te('footer.privacy') ?></a>.</p>
           <button type="submit" class="btn btn-primary"><?= te('newsletter.subscribe') ?></button>
         </form>
       <?php endif; ?>
