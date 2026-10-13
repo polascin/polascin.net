@@ -2322,9 +2322,10 @@ expectSame(
         'sk-nefro-dokazane-pravdepodobne-otvorene',
         'sk-nefro-proven-probable-open',
         'sk-nefro-belegt-wahrscheinlich-offen',
+        'sk-nefro-dimostrato-probabile-aperto',
     ],
     $libraryByTopic['nefrologia'] ?? [],
-    'Nefrologické vydania musia ísť slovenské, anglické, nemecké'
+    'Nefrologické vydania musia ísť slovenské, anglické, nemecké, talianske'
 );
 expectSame(
     ['metafyzika', 'metafyzika-2'],
