@@ -627,6 +627,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/najvacsia-verzia-nie-je-najuzitocnejsia.php'
             );
         },
+        '2026101506_curiosity_without_borrowed_authority_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/zvedavost-bez-pozicanej-autority.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
