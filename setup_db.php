@@ -597,6 +597,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 refreshPublishedArticleTextFromFile($pdo, $articlePath);
             }
         },
+        '2026101501_buy_for_bottleneck_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/kup-na-uzke-miesto.php'
+            );
+        },
         '2026101502_death_cancellation_rule_article' => static function (PDO $pdo): void {
             seedPublishedArticleFromFile(
                 $pdo,

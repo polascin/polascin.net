@@ -71,6 +71,7 @@ const EXPECTED_MIGRATIONS = [
     '2026100801_human_skill_md_article',
     '2026100802_remove_blog_contact_ctas',
     '2026101001_blog_prose_pass',
+    '2026101501_buy_for_bottleneck_article',
     '2026101502_death_cancellation_rule_article',
 ];
 
