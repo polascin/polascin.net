@@ -609,6 +609,18 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/pravidlo-zrusenia-po-umrti.php'
             );
         },
+        '2026101503_right_number_wrong_currency_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/spravne-cislo-zla-mena.php'
+            );
+        },
+        '2026101504_fewer_reports_not_less_work_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/menej-hlaseni-nie-menej-prace.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

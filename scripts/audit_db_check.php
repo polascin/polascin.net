@@ -73,6 +73,8 @@ const EXPECTED_MIGRATIONS = [
     '2026101001_blog_prose_pass',
     '2026101501_buy_for_bottleneck_article',
     '2026101502_death_cancellation_rule_article',
+    '2026101503_right_number_wrong_currency_article',
+    '2026101504_fewer_reports_not_less_work_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
