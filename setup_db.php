@@ -621,6 +621,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/menej-hlaseni-nie-menej-prace.php'
             );
         },
+        '2026101505_largest_version_usefulness_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/najvacsia-verzia-nie-je-najuzitocnejsia.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

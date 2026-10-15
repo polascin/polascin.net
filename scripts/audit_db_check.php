@@ -75,6 +75,7 @@ const EXPECTED_MIGRATIONS = [
     '2026101502_death_cancellation_rule_article',
     '2026101503_right_number_wrong_currency_article',
     '2026101504_fewer_reports_not_less_work_article',
+    '2026101505_largest_version_usefulness_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
