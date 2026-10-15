@@ -1,6 +1,6 @@
 # Kontrola produkčnej databázy — polascin.net
 
-Generované: 2026-10-14 22:43:55 CEST  
+Generované: 2026-10-15 22:43:48 CEST  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
@@ -18,14 +18,14 @@ Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávan
 
 | Tabuľka | Engine | Collation | Riadkov (presne) |
 | --- | --- | --- | --- |
-| `access_logs` | InnoDB | utf8mb4_unicode_ci | 45335 |
+| `access_logs` | InnoDB | utf8mb4_unicode_ci | 46287 |
 | `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 44 |
-| `articles` | InnoDB | utf8mb4_unicode_ci | 220 |
+| `articles` | InnoDB | utf8mb4_unicode_ci | 280 |
 | `contact_messages` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `content_blocks` | InnoDB | utf8mb4_unicode_ci | 5 |
 | `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `newsletter_subscribers` | InnoDB | utf8mb4_unicode_ci | 0 |
-| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 34 |
+| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 40 |
 | `users` | InnoDB | utf8mb4_unicode_ci | 1 |
 
 ## Migrácie schémy
@@ -64,6 +64,12 @@ Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávan
 - ✅ `2026100801_human_skill_md_article` — 2026-10-08 07:37:06
 - ✅ `2026100802_remove_blog_contact_ctas` — 2026-10-08 08:11:37
 - ✅ `2026101001_blog_prose_pass` — 2026-10-10 22:46:33
+- ✅ `2026101501_buy_for_bottleneck_article` — 2026-10-15 17:49:53
+- ✅ `2026101502_death_cancellation_rule_article` — 2026-10-15 17:48:13
+- ✅ `2026101503_right_number_wrong_currency_article` — 2026-10-15 17:52:21
+- ✅ `2026101504_fewer_reports_not_less_work_article` — 2026-10-15 17:52:21
+- ✅ `2026101505_largest_version_usefulness_article` — 2026-10-15 18:52:08
+- ✅ `2026101506_curiosity_without_borrowed_authority_article` — 2026-10-15 18:54:47
 
 ## Indexy strážené migráciou
 
@@ -79,18 +85,18 @@ Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávan
 
 ## Obsah a jazyky
 
-- Publikovaných článkov: 220
+- Publikovaných článkov: 280
 - Články podľa jazyka:
-  - `cs`: 22
-  - `de`: 22
-  - `en`: 22
-  - `es`: 22
-  - `fr`: 22
-  - `hu`: 22
-  - `it`: 22
-  - `pl`: 22
-  - `sk`: 22
-  - `uk`: 22
+  - `cs`: 28
+  - `de`: 28
+  - `en`: 28
+  - `es`: 28
+  - `fr`: 28
+  - `hu`: 28
+  - `it`: 28
+  - `pl`: 28
+  - `sk`: 28
+  - `uk`: 28
 - Obsahové bloky podľa jazyka:
   - `sk`: 5
 
@@ -101,9 +107,9 @@ Kontaktné správy: **180 dní**; nepotvrdený newsletter: **72 hodín**; admini
 
 | Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |
 | --- | --- | --- | --- |
-| `access_logs` | 45335 | 2026-07-28 12:20:55 | 78 |
+| `access_logs` | 46287 | 2026-07-28 12:20:55 | 79 |
 | `contact_messages` | 0 | — | — |
 | `newsletter_subscribers` | 0 | — | — |
-| `admin_audit_log` | 44 | 2026-09-11 20:22:06 | 33 |
+| `admin_audit_log` | 44 | 2026-09-11 20:22:06 | 34 |
 | `form_rate_limit` | 0 | — | — |
 
