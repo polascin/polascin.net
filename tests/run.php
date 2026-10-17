@@ -2306,7 +2306,7 @@ expectTrue(
 expectTrue(str_contains($libraryPage, 'libraryGroups'), 'Katalóg knižnice musí diela radiť po témach');
 $libraryGroups = libraryGroups();
 expectSame(
-    ['nefrologia', 'magistraliter', 'vyziva', 'metafyzika', 'etnografia'],
+    ['nefrologia', 'magistraliter', 'vyziva', 'metafyzika', 'etnografia', 'other'],
     array_map(static fn(array $group): string => (string) $group['topic'], $libraryGroups),
     'Katalóg knižnice musí mať témy v pevnom poradí'
 );
@@ -2328,9 +2328,14 @@ expectSame(
     'Nefrologické vydania musia ísť slovenské, anglické, nemecké, talianske'
 );
 expectSame(
-    ['metafyzika', 'metafyzika-2'],
+    ['metafyzika', 'metafyzika-2', 'metafyzika-3'],
     $libraryByTopic['metafyzika'] ?? [],
-    'Metafyzika musí ísť od prvého dielu k druhému'
+    'Metafyzika musí ísť od prvého dielu k tretiemu'
+);
+expectSame(
+    ['generacie-v-dejinach-a-v-sucasnosti'],
+    $libraryByTopic['other'] ?? [],
+    'Štúdia o generáciách musí byť v ostatných textoch'
 );
 expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/main_nav.php'), "t('nav.library')"),
