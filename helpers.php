@@ -12,8 +12,8 @@ if (
         fwrite(STDERR, "Chyba: helpers.php je interný súbor a nemožno ho spúšťať priamo.\n");
         exit(1);
     }
-    header("HTTP/1.1 403 Forbidden");
-    exit("Prístup odmietnutý.");
+    http_response_code(403);
+    exit('Prístup odmietnutý.');
 }
 unset($requestedScript, $executedFile);
 

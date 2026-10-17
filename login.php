@@ -16,7 +16,7 @@ if (isLoggedIn()) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (!validateCsrfToken((string) $csrfToken)) {
+    if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken)) {
         http_response_code(400);
         $errors[] = t('error.csrf');
     } else {

@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
     $action = (string) ($_POST['action'] ?? '');
-    if (!validateCsrfToken((string) $csrfToken)) {
+    if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken)) {
         setFlashMessage('error', 'Akciu sa nepodarilo overiť.');
     } elseif ($action === 'delete_all') {
         $confirmation = (string) ($_POST['confirmation'] ?? '');
@@ -108,7 +108,8 @@ $canonicalUrl = $baseUrl . '/admin_contact.php';
       <?php if (empty($messages)): ?>
         <p>Zatiaľ žiadne správy.</p>
       <?php else: ?>
-      <table class="admin-table admin-table-wrap">
+      <div class="table-responsive">
+      <table class="admin-table">
         <thead><tr><th>Dátum</th><th>Meno</th><th>E-mail</th><th>Predmet</th><th>Stav</th><th>Akcie</th></tr></thead>
         <tbody>
           <?php foreach ($messages as $msg): ?>
@@ -147,6 +148,7 @@ $canonicalUrl = $baseUrl . '/admin_contact.php';
           <?php endforeach; ?>
         </tbody>
       </table>
+      </div>
       <?php endif; ?>
     </div>
   </section>

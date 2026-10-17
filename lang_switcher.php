@@ -3,7 +3,11 @@ declare(strict_types=1);
 
 $partialName = basename(__FILE__);
 $requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
-if (preg_match('~(?:^|/)' . preg_quote($partialName, '~') . '(?:/|$)~i', $requestedScript) === 1) {
+$executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
+if (
+    $executedFile === __FILE__
+    || preg_match('~(?:^|/)' . preg_quote($partialName, '~') . '(?:/|$)~i', $requestedScript) === 1
+) {
     if (PHP_SAPI === 'cli') {
         fwrite(STDERR, "Chyba: {$partialName} je interný súbor a nemožno ho spúšťať priamo.\n");
         exit(1);
@@ -11,7 +15,7 @@ if (preg_match('~(?:^|/)' . preg_quote($partialName, '~') . '(?:/|$)~i', $reques
     http_response_code(403);
     exit('Prístup odmietnutý.');
 }
-unset($partialName, $requestedScript);
+unset($partialName, $requestedScript, $executedFile);
 
 $switcherCurrent = currentLang();
 $switcherLanguages = appLanguages();

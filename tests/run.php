@@ -2347,6 +2347,129 @@ expectTrue(
     'Navigácia musí obsahovať knižnicu'
 );
 
+// ── Beh #42: konzistentná ochrana admin/POST stránok, responzívne tabuľky a živá dokumentácia ──
+$originalScriptForNoRef = $_SERVER['SCRIPT_NAME'] ?? null;
+foreach (glob(dirname(__DIR__) . '/*.php') ?: [] as $rootPhpFile) {
+    $rootPhpName = basename($rootPhpFile);
+    $rootPhpSource = (string) file_get_contents($rootPhpFile);
+    if (
+        preg_match('~(?<!function\s)\brequireAdmin\(\)~', $rootPhpSource) === 1
+        || in_array($rootPhpName, ['login.php', 'logout.php', 'newsletter.php'], true)
+    ) {
+        $_SERVER['SCRIPT_NAME'] = '/' . $rootPhpName;
+        expectTrue(
+            requestNeedsNoReferrer(),
+            "{$rootPhpName} musí cez requestNeedsNoReferrer() dostávať prísne hlavičky no-referrer, DENY a no-store"
+        );
+    }
+    if (str_contains($rootPhpSource, "\$_SERVER['REQUEST_METHOD'] === 'POST'")) {
+        expectTrue(
+            str_contains($rootPhpSource, 'isTrustedStateChangingRequest()'),
+            "{$rootPhpName} musí pri POST požiadavke overovať dôveryhodný pôvod cez isTrustedStateChangingRequest()"
+        );
+        if ($rootPhpName !== 'contact.php') {
+            expectTrue(
+                str_contains($rootPhpSource, 'validateCsrfToken('),
+                "{$rootPhpName} musí pri POST požiadavke overovať aj CSRF token"
+            );
+        }
+    }
+}
+foreach (['index.php', 'articles.php', 'article.php', 'library.php', 'contact.php', 'privacy.php', 'terms.php', 'sitemap.php'] as $publicPageName) {
+    $_SERVER['SCRIPT_NAME'] = '/' . $publicPageName;
+    expectTrue(
+        !requestNeedsNoReferrer(),
+        "Verejná stránka {$publicPageName} nesmie spadať pod requestNeedsNoReferrer()"
+    );
+}
+if ($originalScriptForNoRef === null) {
+    unset($_SERVER['SCRIPT_NAME']);
+} else {
+    $_SERVER['SCRIPT_NAME'] = $originalScriptForNoRef;
+}
+
+foreach (
+    [
+        'config_loader.php',
+        'db_config.php',
+        'auth.php',
+        'helpers.php',
+        'i18n.php',
+        'head_meta.php',
+        'header.php',
+        'main_nav.php',
+        'lang_switcher.php',
+        'footer.php',
+    ] as $internalPhpFile
+) {
+    $internalPhpSource = (string) file_get_contents(dirname(__DIR__) . '/' . $internalPhpFile);
+    expectTrue(
+        str_contains($internalPhpSource, '$executedFile === __FILE__')
+            && str_contains($internalPhpSource, 'http_response_code(403)')
+            && !str_contains($internalPhpSource, "header('HTTP/1.1 403 Forbidden')"),
+        "Interný súbor {$internalPhpFile} musí odmietnuť priame spustenie cez \$executedFile === __FILE__ a http_response_code(403)"
+    );
+}
+
+foreach (glob(dirname(__DIR__) . '/admin_*.php') ?: [] as $adminSubpagePath) {
+    $adminSubpageName = basename($adminSubpagePath);
+    $adminSubpageSource = (string) file_get_contents($adminSubpagePath);
+    expectTrue(
+        str_contains($adminSubpageSource, 'href="admin.php"'),
+        "{$adminSubpageName} musí obsahovať odkaz späť na hlavný admin panel"
+    );
+    if (str_contains($adminSubpageSource, 'class="admin-table')) {
+        expectTrue(
+            str_contains($adminSubpageSource, '<div class="table-responsive">')
+                && !str_contains($adminSubpageSource, 'admin-table-wrap'),
+            "{$adminSubpageName} musí obaľovať admin-table do <div class=\"table-responsive\"> bez neexistujúcej triedy admin-table-wrap"
+        );
+    }
+}
+expectTrue(
+    str_contains($libraryAdminPage, 'data-confirm="Odstrániť tento text z knižnice?"')
+        && str_contains($libraryAdminPage, 'btn-danger'),
+    'Odstránenie nahratého diela v admin_library.php musí mať potvrdzovací dialóg a btn-danger'
+);
+
+$staticPrivacyHtml = (string) file_get_contents(dirname(__DIR__) . '/privacy.html');
+$staticTermsHtml = (string) file_get_contents(dirname(__DIR__) . '/terms.html');
+$weblogoPrivacyHtml = (string) file_get_contents(dirname(__DIR__) . '/weblogo/privacy.html');
+expectTrue(
+    str_contains(preg_replace('/\s+/', ' ', $staticPrivacyHtml), 'za posledných 14 dní')
+        && !str_contains($staticPrivacyHtml, 'zostáva neoverená'),
+    'Statický privacy.html musí uvádzať 14-dňovú dostupnosť záloh serverových logov Websupportu rovnako ako lang/sk.php'
+);
+expectTrue(
+    str_contains(preg_replace('/\s+/', ' ', $weblogoPrivacyHtml), 'last 14 days')
+        && !str_contains($weblogoPrivacyHtml, 'remains unverified'),
+    'Statický weblogo/privacy.html musí uvádzať 14-dňovú dostupnosť záloh serverových logov Websupportu rovnako ako lang/en.php'
+);
+foreach (['privacy.html' => $staticPrivacyHtml, 'terms.html' => $staticTermsHtml] as $staticLegalName => $staticLegalHtml) {
+    expectTrue(
+        str_contains($staticLegalHtml, 'href="library.php"')
+            && str_contains($staticLegalHtml, 'href="index.html#projects"')
+            && str_contains($staticLegalHtml, 'href="index.html#links"'),
+        "{$staticLegalName} musí mať v navigácii rovnaké položky (Projekty, Knižnica, Odkazy) ako index.html"
+    );
+}
+
+$liveAuditRules = explode("\n## Beh #", $auditDoc, 2)[0];
+expectTrue(
+    !str_contains($liveAuditRules, 'Merriweather')
+        && !str_contains($liveAuditRules, 'rel="preconnect"')
+        && str_contains($liveAuditRules, 'css/fonts.css')
+        && str_contains($liveAuditRules, 'sitemap.php')
+        && str_contains($liveAuditRules, 'isTrustedStateChangingRequest()'),
+    'Živá časť .audit.md nesmie uvádzať neexistujúci font Merriweather ani preconnect na externé fonty a musí uvádzať aktuálne súbory jadra'
+);
+expectTrue(
+    str_contains($doAuditDoc, 'retention-cleanup.yml')
+        && str_contains($doAuditDoc, 'scripts/retention_cleanup.php')
+        && str_contains($doAuditDoc, 'PII_TABLES'),
+    '.doaudit.md musí dokumentovať denný retenčný workflow a všetky tabuľky PII_TABLES'
+);
+
 if ($failures !== []) {
     fwrite(STDERR, "Zlyhané kontroly:\n- " . implode("\n- ", $failures) . "\n");
     exit(1);

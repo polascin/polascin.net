@@ -11,7 +11,7 @@ requireAdmin();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-    if (!validateCsrfToken((string) $csrfToken) || $id < 1) {
+    if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken) || $id < 1) {
         setFlashMessage('error', 'Odstránenie sa nepodarilo overiť.');
     } else {
         $stmt = $pdo->prepare("DELETE FROM newsletter_subscribers WHERE id = :id LIMIT 1");
@@ -44,7 +44,8 @@ $canonicalUrl = $baseUrl . '/admin_newsletter.php';
       <h1>Odberatelia newslettera</h1>
       <p><a href="admin.php" class="btn btn-secondary btn-sm">Späť na panel</a></p>
       <p>Celkovo potvrdených: <?= (int) $pdo->query("SELECT COUNT(*) FROM newsletter_subscribers WHERE is_confirmed = 1")->fetchColumn() ?></p>
-      <table class="admin-table admin-table-wrap">
+      <div class="table-responsive">
+      <table class="admin-table">
         <thead><tr><th>E-mail</th><th>Stav</th><th>Prihlásený</th><th>Potvrdený</th><th>Akcie</th></tr></thead>
         <tbody>
           <?php foreach ($subscribers as $sub): ?>
@@ -64,6 +65,7 @@ $canonicalUrl = $baseUrl . '/admin_newsletter.php';
           <?php endforeach; ?>
         </tbody>
       </table>
+      </div>
     </div>
   </section>
 </main>

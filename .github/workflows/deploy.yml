@@ -261,7 +261,7 @@ jobs:
 
           echo "Removing previously deployed repository-only files..."
           ssh "${SSH_OPTS[@]}" "$TARGET" \
-            "set -eu; cd '${DEPLOY_REMOTE_PATH_SAFE}'; rm -f -- DEPLOY.md README.md .audit.md .doaudit.md .deployignore .gitignore .gitattributes env.ini.example hooks/deploy.sh hooks/deploy.env.example tests/run.php .github/workflows/deploy.yml .vscode/settings.json .vscode/tasks.json .vscode/extensions.json .claude/settings.json .trunk/trunk.yaml .trunk/configs/svgo.config.js .cursor/settings.json .cursor/rules/*.mdc; rmdir hooks tests .github/workflows .github .vscode .claude .trunk/configs .trunk .cursor/rules .cursor 2>/dev/null || true"
+            "set -eu; cd '${DEPLOY_REMOTE_PATH_SAFE}'; rm -rf -- .idea .agents scripts audit-reports; rm -f -- DEPLOY.md README.md .audit.md .doaudit.md .deployignore .gitignore .gitattributes env.ini.example hooks/deploy.sh hooks/deploy.env.example tests/run.php .github/workflows/deploy.yml .vscode/settings.json .vscode/tasks.json .vscode/extensions.json .claude/settings.json .trunk/trunk.yaml .trunk/configs/svgo.config.js .cursor/settings.json .cursor/rules/*.mdc; rmdir hooks tests .github/workflows .github .vscode .claude .trunk/configs .trunk .cursor/rules .cursor 2>/dev/null || true"
 
       - name: Create remote environment config
         env:

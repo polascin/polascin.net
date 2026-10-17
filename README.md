@@ -1,8 +1,8 @@
 # polascin.net
 
 Zdrojový kód osobnej stránky [polascin.net](https://polascin.net): verejný web,
-blog, kontaktný formulár, newsletter a jednoduchá administrácia. Aplikácia je
-postavená na PHP a MariaDB bez aplikačného frameworku.
+blog, knižnica textov, kontaktný formulár, newsletter a jednoduchá administrácia.
+Aplikácia je postavená na PHP a MariaDB bez aplikačného frameworku.
 
 ## Požiadavky
 

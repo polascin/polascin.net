@@ -25,7 +25,8 @@ $allArticles = (function () use ($pdo): array {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (!validateCsrfToken((string) $csrfToken)) {
+    if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken)) {
+        http_response_code(400);
         $errors[] = 'Neplatný bezpečnostný token.';
     } else {
         $action = $_POST['action'] ?? '';
@@ -47,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 );
                 $update->execute([':is_top' => $nextTop, ':group' => $groupId]);
                 logAdminAction($pdo, $nextTop === 1 ? 'article_top_on' : 'article_top_off', 'article_group', $groupId);
-                header('Location: admin_articles.php?top=1');
+                header('Location: admin_articles.php?top=1', true, 303);
                 exit;
             }
         }
@@ -62,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt = $pdo->prepare("DELETE FROM articles WHERE translation_group = :group");
                 $stmt->execute([':group' => $groupId]);
                 logAdminAction($pdo, 'article_group_delete', 'article_group', $groupId);
-                header('Location: admin_articles.php');
+                header('Location: admin_articles.php', true, 303);
                 exit;
             }
         }
@@ -72,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("DELETE FROM articles WHERE id = :id LIMIT 1");
             $stmt->execute([':id' => $id]);
             logAdminAction($pdo, 'article_delete', 'article', $id);
-            header('Location: admin_articles.php');
+            header('Location: admin_articles.php', true, 303);
             exit;
         }
 
@@ -226,7 +227,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         "UPDATE articles SET is_top = :is_top WHERE translation_group = :group"
                     );
                     $topStmt->execute([':is_top' => $isTop, ':group' => $groupId]);
-                    header('Location: admin_articles.php?edit=' . $id . '&saved=1');
+                    header('Location: admin_articles.php?edit=' . $id . '&saved=1', true, 303);
                     exit;
                 }
             }

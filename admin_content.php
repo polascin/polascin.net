@@ -15,7 +15,8 @@ $editing = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (!validateCsrfToken((string) $csrfToken)) {
+    if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken)) {
+        http_response_code(400);
         $errors[] = 'Neplatný bezpečnostný token.';
     } else {
         $action = $_POST['action'] ?? '';
@@ -23,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("DELETE FROM content_blocks WHERE id = :id LIMIT 1");
             $stmt->execute([':id' => (int) $_POST['id']]);
             logAdminAction($pdo, 'content_delete', 'content_block', (int) $_POST['id']);
-            header('Location: admin_content.php');
+            header('Location: admin_content.php', true, 303);
             exit;
         }
 
@@ -79,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $id = (int) $pdo->lastInsertId();
                         logAdminAction($pdo, 'content_create', 'content_block', $id);
                     }
-                    header('Location: admin_content.php?edit=' . $id . '&saved=1');
+                    header('Location: admin_content.php?edit=' . $id . '&saved=1', true, 303);
                     exit;
                 }
             }
@@ -162,6 +163,7 @@ $canonicalUrl = $baseUrl . '/admin_content.php';
       </form>
 
       <h2>Existujúce bloky</h2>
+      <div class="table-responsive">
       <table class="admin-table">
         <thead><tr><th>Kľúč</th><th>Názov</th><th>Jazyk</th><th>Aktívny</th><th>Akcie</th></tr></thead>
         <tbody>
@@ -184,6 +186,7 @@ $canonicalUrl = $baseUrl . '/admin_content.php';
           <?php endforeach; ?>
         </tbody>
       </table>
+      </div>
     </div>
   </section>
 </main>

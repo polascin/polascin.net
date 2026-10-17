@@ -20,7 +20,8 @@ $form = [
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (!validateCsrfToken(is_string($csrfToken) ? $csrfToken : '')) {
+    if (!isTrustedStateChangingRequest() || !validateCsrfToken(is_string($csrfToken) ? $csrfToken : '')) {
+        http_response_code(400);
         $errors[] = 'Neplatný bezpečnostný token. Odošlite formulár znova.';
     } else {
         $action = $_POST['action'] ?? '';
@@ -74,6 +75,7 @@ $canonicalUrl = $baseUrl . '/admin_library.php';
   <section class="admin-section">
     <div class="container">
       <h1>Knižnica textov</h1>
+      <p><a href="admin.php" class="btn btn-secondary btn-sm">Späť na panel</a></p>
       <p class="form-hint">Nahraté súbory zostanú na serveri aj po ďalšom nasadení webu. Povolené sú PDF, TXT, Markdown, HTML a EPUB, najviac <?= htmlspecialchars($uploadLimit, ENT_QUOTES, 'UTF-8') ?>.</p>
       <?php foreach ($errors as $error): ?>
         <div class="alert alert-error"><p><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p></div>
@@ -115,6 +117,7 @@ $canonicalUrl = $baseUrl . '/admin_library.php';
       <?php if ($works === []): ?>
         <p>Knižnica je zatiaľ prázdna.</p>
       <?php else: ?>
+          <div class="table-responsive">
           <table class="admin-table">
             <thead>
               <tr>
@@ -137,11 +140,11 @@ $canonicalUrl = $baseUrl . '/admin_library.php';
                 <td class="actions">
                   <a class="btn btn-secondary btn-sm" href="<?= htmlspecialchars(langUrl('sk', 'library.php', ['slug' => (string) $work['slug']]), ENT_QUOTES, 'UTF-8') ?>">Otvoriť</a>
                   <?php if ((string) $work['source'] === 'uploads'): ?>
-                  <form method="post" class="inline-form" data-submit-once>
+                  <form method="post" class="inline-form" data-confirm="Odstrániť tento text z knižnice?" data-submit-once>
                     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
                     <input type="hidden" name="action" value="delete">
                     <input type="hidden" name="slug" value="<?= htmlspecialchars((string) $work['slug'], ENT_QUOTES, 'UTF-8') ?>">
-                    <button type="submit" class="btn btn-secondary btn-sm">Odstrániť</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Odstrániť</button>
                   </form>
                   <?php endif; ?>
                 </td>
@@ -149,6 +152,7 @@ $canonicalUrl = $baseUrl . '/admin_library.php';
               <?php endforeach; ?>
             </tbody>
           </table>
+          </div>
       <?php endif; ?>
     </div>
   </section>

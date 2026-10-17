@@ -158,7 +158,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $showUnsubscribeConfirmation = preg_match('/^[a-f0-9]{48}$/D', $token) === 1;
     }
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (!validateCsrfToken((string) $csrfToken)) {
+    if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken)) {
+        http_response_code(400);
         $errors[] = t('error.csrf');
     } elseif ($formAction === 'unsubscribe') {
         $unsubscribeToken = $token;

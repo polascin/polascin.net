@@ -39,6 +39,9 @@ function getScriptNonce(): string {
 
 function requestNeedsNoReferrer(): bool {
     $script = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
+    if (preg_match('~(?:^|/)admin_[a-z0-9_]+\.php(?:/|$)~i', $script) === 1) {
+        return true;
+    }
     $sensitiveScripts = [
         'login.php',
         'admin.php',
@@ -47,6 +50,7 @@ function requestNeedsNoReferrer(): bool {
         'admin_contact.php',
         'admin_newsletter.php',
         'admin_users.php',
+        'admin_library.php',
         'logout.php',
         'newsletter.php',
     ];
@@ -358,7 +362,7 @@ function requireLogin(): void {
 function requireAdmin(): void {
     requireLogin();
     if (!isAdmin()) {
-        header('HTTP/1.1 403 Forbidden');
+        http_response_code(403);
         exit('Prístup len pre administrátora.');
     }
     if (

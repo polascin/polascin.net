@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $csrfToken = $_POST['csrf_token'] ?? '';
-if (!validateCsrfToken((string) $csrfToken)) {
+if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken)) {
     // Hlásenie sa vykreslí na verejnej stránke, teda v jazyku návštevníka.
     setFlashMessage('error', t('logout.csrf_failed'));
     header('Location: ' . (isLoggedIn() ? 'admin.php' : 'index.php'), true, 303);

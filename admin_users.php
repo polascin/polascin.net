@@ -262,7 +262,7 @@ $canonicalUrl = $baseUrl . '/admin_users.php';
 
         <h2>Existujúci administrátori</h2>
         <div class="table-responsive">
-          <table class="admin-table admin-table-wrap">
+          <table class="admin-table">
             <thead>
               <tr><th scope="col">E-mail</th><th scope="col">Stav</th><th scope="col">Vytvorený</th></tr>
             </thead>
