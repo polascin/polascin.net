@@ -199,6 +199,8 @@ return [
     'home.link_pub_gumroad_baza_de' => 'SK Nefro Báza 1 (Deutsch, Gumroad)',
     'home.link_pub_nefro_kompendium_de' => 'SK Nefro Báza 1 Kompendium (Deutsch, nefro.polascin.net)',
     'home.link_pub_gumroad_kompendium_de' => 'SK Nefro Báza 1 Kompendium (Deutsch, Gumroad)',
+    'home.link_pub_nefro_baza_it' => 'SK Nefro Báza 1 (Italiano, nefro.polascin.net)',
+    'home.link_pub_nefro_kompendium_it' => 'SK Nefro Báza 1 Компендіум (Italiano, nefro.polascin.net)',
     'home.link_pub_evidence_de' => 'SK Nefro: Belegt, wahrscheinlich, offen (Gumroad)',
     'home.link_pub_medicinsky_post' => 'Medicínsky pôst (Gumroad)',
     'home.link_pub_medical_fasting' => 'Medical Fasting (Gumroad)',

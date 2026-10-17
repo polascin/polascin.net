@@ -1,19 +1,22 @@
-# robots.txt — polascin.net
-# Updated: 2026-09-26
+# robots.txt - polascin.net
+# Updated: 2026-10-18
 
 # ── General rules ────────────────────────────────────────────────────────────
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /admin.php
 Disallow: /admin_articles.php
 Disallow: /admin_content.php
 Disallow: /admin_contact.php
+Disallow: /admin_library.php
 Disallow: /admin_newsletter.php
 Disallow: /admin_users.php
 Disallow: /auth.php
 Disallow: /config_loader.php
 Disallow: /db_config.php
 Disallow: /helpers.php
+Disallow: /i18n.php
 Disallow: /login.php
 Disallow: /logout.php
 Disallow: /newsletter.php
@@ -23,6 +26,7 @@ Disallow: /content/
 Disallow: /scripts/
 Disallow: /audit-reports/
 Disallow: /.cursor/
+Disallow: /.agents/
 Disallow: /portfolio/
 Disallow: /setup_db.php
 Disallow: /weblogo/

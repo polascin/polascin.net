@@ -17,6 +17,7 @@
 .trunk
 .cursor
 .idea
+.agents
 
 # Dokumentácia a auditné súbory (nie sú verejný web root)
 .audit.md

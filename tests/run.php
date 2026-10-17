@@ -739,7 +739,7 @@ expectTrue(
 );
 
 // Lokálne konfigurácie editorov a nástrojov nesmú skončiť vo verejnom web roote.
-foreach (['.vscode', '.claude', '.trunk', '.cursor', '.idea'] as $localToolDir) {
+foreach (['.vscode', '.claude', '.trunk', '.cursor', '.idea', '.agents'] as $localToolDir) {
     expectTrue(
         preg_match('~(^|\r?\n)' . preg_quote($localToolDir, '~') . '(\r?\n|$)~', $deployIgnoreRules) === 1,
         ".deployignore musí vylúčiť {$localToolDir} z nasadenia"
@@ -844,11 +844,11 @@ foreach (array_keys(appLanguages()) as $dialysisLinkLang) {
     );
 }
 
-// Predávané publikácie: katalóg z 2026-10-12 (nefro.polascin.net/publikacie.php
+// Predávané publikácie: katalóg z 2026-10-18 (nefro.polascin.net/publikacie.php
 // a profil polascin.gumroad.com, pole products v Inertia JSON). Pri audite sa
 // zoznam porovná so živou ponukou a pri zmene sa aktualizuje tu aj na stránke
 // — viď .audit.md, sekcia 7. Kontrola hľadá celý href, lebo kratší permalink
-// je prefixom dlhšieho (sk-nefro-baza-1 vs -en a -kompendium).
+// je prefixom dlhšieho (sk-nefro-baza-1 vs -en, -de, -it a -kompendium).
 $soldPublicationLinks = [
     'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1',
     'https://polascin.gumroad.com/l/sk-nefro-baza-1',
@@ -862,6 +862,8 @@ $soldPublicationLinks = [
     'https://polascin.gumroad.com/l/sk-nefro-baza-1-de',
     'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-kompendium-de',
     'https://polascin.gumroad.com/l/sk-nefro-baza-1-kompendium-de',
+    'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-it',
+    'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-kompendium-it',
     'https://polascin.gumroad.com/l/sk-nefro-belegt-wahrscheinlich-offen-de',
     'https://polascin.gumroad.com/l/hcilux',
     'https://polascin.gumroad.com/l/veszhk',
@@ -899,6 +901,8 @@ $soldPublicationKeys = [
     'home.link_pub_gumroad_baza_de',
     'home.link_pub_nefro_kompendium_de',
     'home.link_pub_gumroad_kompendium_de',
+    'home.link_pub_nefro_baza_it',
+    'home.link_pub_nefro_kompendium_it',
     'home.link_pub_evidence_de',
     'home.link_pub_medicinsky_post',
     'home.link_pub_medical_fasting',
@@ -1683,6 +1687,7 @@ foreach (['scripts', 'audit-reports'] as $auditOnlyDir) {
 // hlási 404 z neprítomnosti, nie 403 zo zákazu. Zoznam v `.htaccess` sa nesmie
 // rozísť s tým, čo je interné (Beh #29).
 $internalWebRootDirs = [
+    '.agents',
     '.claude',
     '.cursor',
     '.idea',

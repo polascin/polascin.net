@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $works = libraryList();
 $uploadLimit = libraryFormatSize(libraryUploadLimitBytes());
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Knižnica | Administrácia';
+$pageTitle = 'Správa knižnice | MUDr. Ľubomír Polaščín';
 $seoDescription = 'Správa osobnej knižnice textov.';
 $robotsMeta = 'noindex, nofollow';
 $canonicalUrl = $baseUrl . '/admin_library.php';

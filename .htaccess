@@ -69,7 +69,7 @@ DirectoryIndex index.php index.html
     # vrstva — `.cursor/rules/*.mdc` sa raz nasadiť podarilo (Beh #18). Zákaz
     # tu je druhá vrstva: keby exclude alebo mazanie zlyhalo, súbory zostanú
     # neprístupné. Zhodu tohto zoznamu s `.deployignore` stráži test.
-    RewriteRule ^(\.claude|\.cursor|\.git|\.github|\.idea|\.trunk|\.vscode|audit-reports|content|hooks|lang|private|scripts|tests)(/.*)?$ - [F,L]
+    RewriteRule ^(\.agents|\.claude|\.cursor|\.git|\.github|\.idea|\.trunk|\.vscode|audit-reports|content|hooks|lang|private|scripts|tests)(/.*)?$ - [F,L]
 </IfModule>
 
 # ── Blokovanie interných PHP skriptov a citlivých súborov ───────────────────
