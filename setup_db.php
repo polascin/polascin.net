@@ -633,6 +633,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/zvedavost-bez-pozicanej-autority.php'
             );
         },
+        '2026101901_normal_results_missing_uacr_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/v-norme-chyba-uacr.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

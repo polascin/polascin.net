@@ -77,6 +77,7 @@ const EXPECTED_MIGRATIONS = [
     '2026101504_fewer_reports_not_less_work_article',
     '2026101505_largest_version_usefulness_article',
     '2026101506_curiosity_without_borrowed_authority_article',
+    '2026101901_normal_results_missing_uacr_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
