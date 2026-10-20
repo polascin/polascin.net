@@ -639,6 +639,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/v-norme-chyba-uacr.php'
             );
         },
+        '2026102001_pneumococcal_ckd_eight_weeks_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/zlyhanie-oblicky-interval-osem-tyzdnov.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
