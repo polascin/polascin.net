@@ -844,7 +844,7 @@ foreach (array_keys(appLanguages()) as $dialysisLinkLang) {
     );
 }
 
-// Predávané publikácie: katalóg z 2026-10-18 (nefro.polascin.net/publikacie.php
+// Predávané publikácie: katalóg z 2026-10-23 (nefro.polascin.net/publikacie.php
 // a profil polascin.gumroad.com, pole products v Inertia JSON). Pri audite sa
 // zoznam porovná so živou ponukou a pri zmene sa aktualizuje tu aj na stránke
 // — viď .audit.md, sekcia 7. Kontrola hľadá celý href, lebo kratší permalink
@@ -864,6 +864,7 @@ $soldPublicationLinks = [
     'https://polascin.gumroad.com/l/sk-nefro-baza-1-kompendium-de',
     'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-it',
     'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1-kompendium-it',
+    'https://nefro.polascin.net/publikacia.php?slug=marza-z-krvi',
     'https://polascin.gumroad.com/l/sk-nefro-belegt-wahrscheinlich-offen-de',
     'https://polascin.gumroad.com/l/hcilux',
     'https://polascin.gumroad.com/l/veszhk',
@@ -903,6 +904,7 @@ $soldPublicationKeys = [
     'home.link_pub_gumroad_kompendium_de',
     'home.link_pub_nefro_baza_it',
     'home.link_pub_nefro_kompendium_it',
+    'home.link_pub_nefro_marza',
     'home.link_pub_evidence_de',
     'home.link_pub_medicinsky_post',
     'home.link_pub_medical_fasting',
