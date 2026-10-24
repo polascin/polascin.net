@@ -381,4 +381,8 @@ return [
     'library.topic.metafyzika' => 'Metafizika',
     'library.topic.etnografia' => 'Néprajz',
     'library.topic.other' => 'Egyéb',
+    'home.marza_subtitle' => 'Thriller az ellopott percekről',
+    'home.marza_text' => 'Amikor a betegek ideje nyereséggé válik. A Marža z krvi szlovák nyelvű thriller a dialízis világából, lelkiismeretről, hatalomról és pénzről.',
+    'home.marza_gumroad' => 'Gumroad-kínálat',
+    'home.marza_nefro' => 'A Nefro-projekt kiadványai',
 ];

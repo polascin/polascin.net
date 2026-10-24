@@ -381,4 +381,8 @@ return [
     'library.topic.metafyzika' => 'Metafyzika',
     'library.topic.etnografia' => 'Etnografie',
     'library.topic.other' => 'Ostatní',
+    'home.marza_subtitle' => 'Thriller o ukradených minutách',
+    'home.marza_text' => 'Když se čas pacientů mění v zisk. Marža z krvi je slovenský thriller z prostředí dialýzy o svědomí, moci a penězích.',
+    'home.marza_gumroad' => 'Nabídka na Gumroadu',
+    'home.marza_nefro' => 'Publikace Nefro-projektu',
 ];

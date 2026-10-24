@@ -162,6 +162,20 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
     </div>
   </section>
 
+  <section class="links-section" aria-labelledby="marza-title">
+    <div class="container">
+      <div class="card">
+        <h2 id="marza-title">Marža z krvi</h2>
+        <h3><?= te('home.marza_subtitle') ?></h3>
+        <p><?= te('home.marza_text') ?></p>
+        <div class="about-actions">
+          <a href="https://polascin.gumroad.com/" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?= te('home.marza_gumroad') ?></a>
+          <a href="https://nefro.polascin.net/publikacie.php" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><?= te('home.marza_nefro') ?></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="nephrology" class="nephrology">
     <div class="container">
       <h2 class="section-title reveal"><?= te('home.nephrology_heading') ?></h2>

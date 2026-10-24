@@ -381,4 +381,8 @@ return [
     'library.topic.metafyzika' => 'Metaphysics',
     'library.topic.etnografia' => 'Ethnography',
     'library.topic.other' => 'Other',
+    'home.marza_subtitle' => 'A thriller about stolen minutes',
+    'home.marza_text' => 'When patients’ time becomes profit. Marža z krvi is a Slovak-language thriller set in dialysis care, about conscience, power and money.',
+    'home.marza_gumroad' => 'Browse Gumroad',
+    'home.marza_nefro' => 'Nefro-project publications',
 ];

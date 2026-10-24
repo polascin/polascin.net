@@ -381,4 +381,8 @@ return [
     'library.topic.metafyzika' => 'Метафізика',
     'library.topic.etnografia' => 'Етнографія',
     'library.topic.other' => 'Інше',
+    'home.marza_subtitle' => 'Трилер про вкрадені хвилини',
+    'home.marza_text' => 'Коли час пацієнтів перетворюється на прибуток. Marža z krvi; словацькомовний трилер зі світу діалізу про совість, владу та гроші.',
+    'home.marza_gumroad' => 'Каталог Gumroad',
+    'home.marza_nefro' => 'Публікації проєкту Nefro',
 ];
