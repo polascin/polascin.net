@@ -484,19 +484,69 @@ function isTrustedApplicationOrigin(string $sourceUrl): bool {
     }
 
     $parts = parse_url($baseUrl);
-    if (!is_array($parts) || empty($parts['scheme']) || empty($parts['host'])) {
+    if (is_array($parts) && !empty($parts['scheme']) && !empty($parts['host'])) {
+        $host = strtolower((string) $parts['host']);
+        if (!filter_var($host, FILTER_VALIDATE_IP) && str_contains($host, '.')) {
+            $aliasHost = str_starts_with($host, 'www.') ? substr($host, 4) : 'www.' . $host;
+            $aliasUrl = (string) $parts['scheme'] . '://' . $aliasHost;
+            if (isset($parts['port'])) {
+                $aliasUrl .= ':' . (int) $parts['port'];
+            }
+            if (httpOriginsMatch($sourceUrl, $aliasUrl)) {
+                return true;
+            }
+        }
+    }
+
+    return isTrustedLocalDevelopmentOrigin($sourceUrl);
+}
+
+/**
+ * Pôvod aktuálnej požiadavky (scheme://host[:port]) odvodený z hlavičky Host.
+ * Pri chýbajúcej alebo syntakticky neplatnej hlavičke vracia null.
+ */
+function currentRequestOrigin(): ?string {
+    $host = strtolower(trim((string) ($_SERVER['HTTP_HOST'] ?? '')));
+    if (
+        $host === ''
+        || preg_match('/^(?:\[[0-9a-f:.]+\]|[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?)(?::\d{1,5})?$/D', $host) !== 1
+    ) {
+        return null;
+    }
+    return (isRequestHttps() ? 'https' : 'http') . '://' . $host;
+}
+
+/** localhost, loopback adresy a vyhradené vývojové domény .localhost a .test. */
+function isLocalDevelopmentHost(string $host): bool {
+    $host = strtolower(trim($host));
+    $host = (string) preg_replace('/:\d{1,5}$/D', '', $host);
+    if (in_array($host, ['localhost', '[::1]'], true)) {
+        return true;
+    }
+    if (str_starts_with($host, '127.')) {
+        return filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false;
+    }
+    return str_ends_with($host, '.localhost') || str_ends_with($host, '.test');
+}
+
+/**
+ * Lokálny vývoj: APP_BASE_URL smeruje na produkčnú doménu, no prehliadač posiela
+ * Origin a Referer z http://localhost alebo 127.0.0.1. Bez tejto vetvy každý POST
+ * vrátane prihlásenia administrátora končil chybou „Neplatný bezpečnostný token“.
+ * Porovnáva sa s vlastnou hlavičkou Host, ktorú prehliadač obete pri CSRF útoku
+ * podvrhnúť nevie. Vetva platí len pri APP_ENV=local alebo pri lokálnom hoste;
+ * v produkcii zostáva výlučne zoznam pôvodov vyššie.
+ */
+function isTrustedLocalDevelopmentOrigin(string $sourceUrl): bool {
+    $requestOrigin = currentRequestOrigin();
+    if ($requestOrigin === null) {
         return false;
     }
-    $host = strtolower((string) $parts['host']);
-    if (filter_var($host, FILTER_VALIDATE_IP) || !str_contains($host, '.')) {
+    $requestHost = (string) parse_url($requestOrigin, PHP_URL_HOST);
+    if (!isAppLocalDev() && !isLocalDevelopmentHost($requestHost)) {
         return false;
     }
-    $aliasHost = str_starts_with($host, 'www.') ? substr($host, 4) : 'www.' . $host;
-    $aliasUrl = (string) $parts['scheme'] . '://' . $aliasHost;
-    if (isset($parts['port'])) {
-        $aliasUrl .= ':' . (int) $parts['port'];
-    }
-    return httpOriginsMatch($sourceUrl, $aliasUrl);
+    return httpOriginsMatch($sourceUrl, $requestOrigin);
 }
 
 /**

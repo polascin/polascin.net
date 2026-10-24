@@ -1234,6 +1234,69 @@ expectTrue(
     isTrustedApplicationOrigin('https://www.polascin.net/contact.php'),
     'Verejný www alias aplikácie musí zostať povoleným pôvodom'
 );
+
+// Lokálny vývoj: formuláre sa odosielajú z http://localhost alebo 127.0.0.1,
+// hoci APP_BASE_URL smeruje na produkčnú doménu. Vlastný pôvod požiadavky musí
+// prejsť, inak každé prihlásenie administrátora skončí chybou tokenu.
+$originalHttpHost = $_SERVER['HTTP_HOST'] ?? null;
+$originalHttpsFlag = $_SERVER['HTTPS'] ?? null;
+$originalServerPort = $_SERVER['SERVER_PORT'] ?? null;
+unset($_SERVER['HTTPS']);
+$_SERVER['SERVER_PORT'] = '8099';
+$_SERVER['HTTP_HOST'] = 'localhost:8099';
+$requestScheme = isRequestHttps() ? 'https' : 'http';
+expectSame(
+    $requestScheme . '://localhost:8099',
+    currentRequestOrigin(),
+    'Pôvod požiadavky sa skladá zo schémy a hlavičky Host vrátane portu'
+);
+expectTrue(
+    isTrustedApplicationOrigin($requestScheme . '://localhost:8099/login.php'),
+    'Prihlásenie z lokálneho vývojového servera musí byť dôveryhodným pôvodom'
+);
+expectTrue(
+    !isTrustedApplicationOrigin($requestScheme . '://localhost:9000/login.php'),
+    'Lokálny pôvod s iným portom nesmie prejsť'
+);
+$_SERVER['HTTP_HOST'] = '127.0.0.1:8099';
+expectTrue(
+    isTrustedApplicationOrigin($requestScheme . '://127.0.0.1:8099/login.php'),
+    'Loopback adresa lokálneho servera musí byť dôveryhodným pôvodom'
+);
+$_SERVER['HTTP_HOST'] = 'evil.example/x';
+expectSame(null, currentRequestOrigin(), 'Syntakticky neplatná hlavička Host nesmie vytvoriť pôvod');
+expectTrue(
+    !isTrustedLocalDevelopmentOrigin($requestScheme . '://evil.example/x'),
+    'Neplatná hlavička Host nesmie legitimizovať pôvod'
+);
+if (!isAppLocalDev()) {
+    $_SERVER['HTTP_HOST'] = 'evil.example';
+    expectTrue(
+        !isTrustedApplicationOrigin($requestScheme . '://evil.example/login.php'),
+        'Mimo lokálneho vývoja nesmie cudzí host prejsť len preto, že sa zhoduje s hlavičkou Host'
+    );
+}
+foreach (['localhost', 'localhost:8080', '127.0.0.1', '127.0.0.1:8099', '[::1]:8099', 'app.localhost', 'polascin.test'] as $devHost) {
+    expectTrue(isLocalDevelopmentHost($devHost), "{$devHost} musí byť rozpoznaný ako lokálny vývojový host");
+}
+foreach (['polascin.net', 'www.polascin.net', 'localhost.attacker.example', '127.0.0.1.attacker.example', 'test', '127.example'] as $publicHost) {
+    expectTrue(!isLocalDevelopmentHost($publicHost), "{$publicHost} nesmie byť rozpoznaný ako lokálny vývojový host");
+}
+if ($originalHttpHost === null) {
+    unset($_SERVER['HTTP_HOST']);
+} else {
+    $_SERVER['HTTP_HOST'] = $originalHttpHost;
+}
+if ($originalHttpsFlag === null) {
+    unset($_SERVER['HTTPS']);
+} else {
+    $_SERVER['HTTPS'] = $originalHttpsFlag;
+}
+if ($originalServerPort === null) {
+    unset($_SERVER['SERVER_PORT']);
+} else {
+    $_SERVER['SERVER_PORT'] = $originalServerPort;
+}
 expectTrue(
     !httpOriginsMatch('https://polascin.net.attacker.example', 'https://polascin.net'),
     'Doména s dôveryhodným prefixom nesmie mať zhodný pôvod'
