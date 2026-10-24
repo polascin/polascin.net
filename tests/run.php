@@ -1235,6 +1235,44 @@ expectTrue(
     'Verejný www alias aplikácie musí zostať povoleným pôvodom'
 );
 
+// Prehliadače posielajú pri POST zo stránky s Referrer-Policy: no-referrer
+// (prihlásenie, administrácia) hlavičku Origin: null a žiadny Referer.
+$originalOriginHeader = $_SERVER['HTTP_ORIGIN'] ?? null;
+$originalRefererHeader = $_SERVER['HTTP_REFERER'] ?? null;
+$originalFetchSiteHeader = $_SERVER['HTTP_SEC_FETCH_SITE'] ?? null;
+unset($_SERVER['HTTP_REFERER']);
+$_SERVER['HTTP_ORIGIN'] = 'null';
+$_SERVER['HTTP_SEC_FETCH_SITE'] = 'same-origin';
+expectTrue(
+    isTrustedStateChangingRequest(),
+    'POST s Origin: null a Sec-Fetch-Site: same-origin (prihlásenie pri no-referrer) musí byť dôveryhodný'
+);
+unset($_SERVER['HTTP_SEC_FETCH_SITE']);
+expectTrue(
+    isTrustedStateChangingRequest(),
+    'POST s Origin: null bez Fetch Metadata musí ostať kompatibilný, chráni ho CSRF token'
+);
+$_SERVER['HTTP_SEC_FETCH_SITE'] = 'cross-site';
+expectTrue(
+    !isTrustedStateChangingRequest(),
+    'POST s Origin: null z cudzej stránky musí odmietnuť Sec-Fetch-Site: cross-site'
+);
+$_SERVER['HTTP_SEC_FETCH_SITE'] = 'same-origin';
+$_SERVER['HTTP_ORIGIN'] = 'https://attacker.example';
+expectTrue(
+    !isTrustedStateChangingRequest(),
+    'Skutočný cudzí Origin musí byť odmietnutý aj so Sec-Fetch-Site: same-origin'
+);
+$_SERVER['HTTP_ORIGIN'] = 'https://polascin.net';
+expectTrue(isTrustedStateChangingRequest(), 'Origin hlavnej domény musí prejsť');
+foreach (['HTTP_ORIGIN' => $originalOriginHeader, 'HTTP_REFERER' => $originalRefererHeader, 'HTTP_SEC_FETCH_SITE' => $originalFetchSiteHeader] as $headerKey => $headerValue) {
+    if ($headerValue === null) {
+        unset($_SERVER[$headerKey]);
+    } else {
+        $_SERVER[$headerKey] = $headerValue;
+    }
+}
+
 // Lokálny vývoj: formuláre sa odosielajú z http://localhost alebo 127.0.0.1,
 // hoci APP_BASE_URL smeruje na produkčnú doménu. Vlastný pôvod požiadavky musí
 // prejsť, inak každé prihlásenie administrátora skončí chybou tokenu.

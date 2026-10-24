@@ -410,9 +410,10 @@ function logCsrfFailure(string $form, bool $trustedOrigin, mixed $token): void {
     }
 
     $sessionCookie = isset($_COOKIE[session_name()]) ? 'ano' : 'nie';
-    $origin = normalizeHttpOrigin((string) ($_SERVER['HTTP_ORIGIN'] ?? ''))
+    $rawOrigin = trim((string) ($_SERVER['HTTP_ORIGIN'] ?? ''));
+    $origin = normalizeHttpOrigin($rawOrigin)
         ?? normalizeHttpOrigin((string) ($_SERVER['HTTP_REFERER'] ?? ''))
-        ?? 'ziadny';
+        ?? ($rawOrigin === '' ? 'ziadny' : 'neplatny:' . substr((string) preg_replace('/[^A-Za-z0-9.:_-]/', '', $rawOrigin), 0, 40));
     $sanitize = static fn (string $value): string => substr((string) preg_replace('/[^A-Za-z0-9.:\[\]_-]/', '', $value), 0, 80);
     $fetchSite = $sanitize((string) ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? '-'));
     $host = $sanitize((string) ($_SERVER['HTTP_HOST'] ?? '-'));
@@ -598,6 +599,15 @@ function isTrustedStateChangingRequest(): bool {
     }
 
     $sourceUrl = trim((string) ($_SERVER['HTTP_ORIGIN'] ?? ''));
+    // Stránky s `Referrer-Policy: no-referrer` (login.php, admin_*.php) dostanú
+    // pri POST od prehliadača doslova `Origin: null` (Fetch Standard, krok
+    // „append a request Origin header“) a Referer vôbec. Nie je to cudzí pôvod,
+    // ale chýbajúci údaj: cross-site požiadavky už odmietol Sec-Fetch-Site vyššie
+    // a ochranou ostáva povinný CSRF token viazaný na reláciu. Bez tejto vetvy
+    // sa od Behu #42 nedal nikto prihlásiť do administrácie.
+    if (strcasecmp($sourceUrl, 'null') === 0) {
+        $sourceUrl = '';
+    }
     if ($sourceUrl === '') {
         $sourceUrl = trim((string) ($_SERVER['HTTP_REFERER'] ?? ''));
     }
