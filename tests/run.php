@@ -2335,9 +2335,9 @@ expectSame(
     'Nefrologické vydania musia ísť slovenské, anglické, nemecké, talianske'
 );
 expectSame(
-    ['metafyzika', 'metafyzika-2', 'metafyzika-3'],
+    ['metafyzika', 'metafyzika-2', 'metafyzika-3', 'metafyzika-4'],
     $libraryByTopic['metafyzika'] ?? [],
-    'Metafyzika musí ísť od prvého dielu k tretiemu'
+    'Metafyzika musí ísť od prvého dielu k štvrtému'
 );
 expectSame(
     ['generacie-v-dejinach-a-v-sucasnosti'],
