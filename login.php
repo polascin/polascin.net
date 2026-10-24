@@ -16,9 +16,11 @@ if (isLoggedIn()) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken)) {
+    $trustedOrigin = isTrustedStateChangingRequest();
+    if (!$trustedOrigin || !validateCsrfToken((string) $csrfToken)) {
         http_response_code(400);
         $errors[] = t('error.csrf');
+        logCsrfFailure('login', $trustedOrigin, $csrfToken);
     } else {
         $username = trim((string) ($_POST['username'] ?? ''));
         $password = (string) ($_POST['password'] ?? '');

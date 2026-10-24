@@ -1548,6 +1548,58 @@ expectTrue(
 );
 $loginSource = (string) file_get_contents(dirname(__DIR__) . '/login.php');
 expectTrue(
+    str_contains($loginSource, "logCsrfFailure('login'")
+        && str_contains((string) file_get_contents(dirname(__DIR__) . '/logout.php'), "logCsrfFailure('logout'"),
+    'Neúspešná CSRF kontrola prihlásenia a odhlásenia musí zapísať dôvod do error logu'
+);
+$csrfLogFile = tempnam(sys_get_temp_dir(), 'csrflog');
+$originalErrorLog = ini_get('error_log');
+ini_set('error_log', (string) $csrfLogFile);
+$originalCsrfSessionToken = $_SESSION['csrf_token'] ?? null;
+$originalHttpHostForLog = $_SERVER['HTTP_HOST'] ?? null;
+$_SERVER['HTTP_HOST'] = 'polascin.net';
+$_SERVER['HTTP_ORIGIN'] = 'https://attacker.example/evil?csrf_token=secret';
+$_SERVER['HTTP_USER_AGENT'] = "Testovac\u{00ed} agent\n s riadiacim znakom";
+logCsrfFailure('login', false, 'abc');
+unset($_SESSION['csrf_token']);
+logCsrfFailure('login', true, 'abc');
+$_SESSION['csrf_token'] = 'tajny-token-v-relacii';
+logCsrfFailure('login', true, '');
+logCsrfFailure('logout', true, 'iny-token');
+$csrfLog = (string) file_get_contents((string) $csrfLogFile);
+ini_set('error_log', (string) $originalErrorLog);
+@unlink((string) $csrfLogFile);
+unset($_SERVER['HTTP_ORIGIN'], $_SERVER['HTTP_USER_AGENT']);
+if ($originalHttpHostForLog === null) {
+    unset($_SERVER['HTTP_HOST']);
+} else {
+    $_SERVER['HTTP_HOST'] = $originalHttpHostForLog;
+}
+if ($originalCsrfSessionToken === null) {
+    unset($_SESSION['csrf_token']);
+} else {
+    $_SESSION['csrf_token'] = $originalCsrfSessionToken;
+}
+expectTrue(
+    str_contains($csrfLog, 'CSRF zlyhalo [login]: dovod=nedoveryhodny-povod')
+        && str_contains($csrfLog, 'dovod=relacia-bez-tokenu')
+        && str_contains($csrfLog, 'dovod=prazdny-token')
+        && str_contains($csrfLog, 'CSRF zlyhalo [logout]: dovod=nezhoda-tokenu'),
+    'Diagnostika CSRF musí rozlíšiť cudzí pôvod, reláciu bez tokenu, prázdny token a nezhodu tokenu'
+);
+expectTrue(
+    str_contains($csrfLog, 'povod=https://attacker.example:443')
+        && !str_contains($csrfLog, 'csrf_token=secret')
+        && !str_contains($csrfLog, 'tajny-token-v-relacii')
+        && !str_contains($csrfLog, 'iny-token')
+        && !str_contains($csrfLog, 'abc'),
+    'Diagnostika CSRF nesmie zapísať hodnoty tokenov ani parametre z Origin'
+);
+expectTrue(
+    str_contains($csrfLog, 'ua=Testovac agent s riadiacim znakom'),
+    'User-Agent v diagnostike CSRF musí byť zbavený riadiacich a neASCII znakov'
+);
+expectTrue(
     str_contains($loginSource, "http_response_code(401)")
         && str_contains($loginSource, "http_response_code(429)")
         && str_contains($loginSource, "header('Retry-After: 900')"),

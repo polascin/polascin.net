@@ -393,6 +393,44 @@ function validateCsrfToken(mixed $token): bool {
 }
 
 /**
+ * Diagnostika neúspešnej CSRF kontroly do error logu servera. Zapisuje sa iba
+ * dôvod a tvar požiadavky; nikdy token, cookie, meno ani IP adresa. Bez tohto
+ * záznamu nebolo možné na produkcii rozlíšiť vypršanú reláciu, chýbajúcu cookie,
+ * cudzí pôvod a skutočnú nezhodu tokenu, všetky končili tou istou hláškou.
+ */
+function logCsrfFailure(string $form, bool $trustedOrigin, mixed $token): void {
+    if (!$trustedOrigin) {
+        $reason = 'nedoveryhodny-povod';
+    } elseif (!isset($_SESSION['csrf_token'])) {
+        $reason = 'relacia-bez-tokenu';
+    } elseif (!is_string($token) || $token === '') {
+        $reason = 'prazdny-token';
+    } else {
+        $reason = 'nezhoda-tokenu';
+    }
+
+    $sessionCookie = isset($_COOKIE[session_name()]) ? 'ano' : 'nie';
+    $origin = normalizeHttpOrigin((string) ($_SERVER['HTTP_ORIGIN'] ?? ''))
+        ?? normalizeHttpOrigin((string) ($_SERVER['HTTP_REFERER'] ?? ''))
+        ?? 'ziadny';
+    $sanitize = static fn (string $value): string => substr((string) preg_replace('/[^A-Za-z0-9.:\[\]_-]/', '', $value), 0, 80);
+    $fetchSite = $sanitize((string) ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? '-'));
+    $host = $sanitize((string) ($_SERVER['HTTP_HOST'] ?? '-'));
+    $userAgent = substr((string) preg_replace('/[^ -~]/', '', (string) ($_SERVER['HTTP_USER_AGENT'] ?? '-')), 0, 120);
+
+    error_log(sprintf(
+        'CSRF zlyhalo [%s]: dovod=%s cookie-relacie=%s povod=%s sec-fetch-site=%s host=%s ua=%s',
+        $form,
+        $reason,
+        $sessionCookie,
+        $origin,
+        $fetchSite === '' ? '-' : $fetchSite,
+        $host === '' ? '-' : $host,
+        $userAgent === '' ? '-' : $userAgent
+    ));
+}
+
+/**
  * Vytvorí krátkodobý jednorazový dôkaz, že formulár bol najprv načítaný.
  * Viac tokenov umožňuje mať formulár otvorený vo viacerých kartách.
  */
