@@ -645,6 +645,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/zlyhanie-oblicky-interval-osem-tyzdnov.php'
             );
         },
+        '2026102401_consent_two_conditions_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/ohrozenie-zivota-samo-suhlas-nenahradi.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

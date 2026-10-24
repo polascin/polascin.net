@@ -79,6 +79,7 @@ const EXPECTED_MIGRATIONS = [
     '2026101506_curiosity_without_borrowed_authority_article',
     '2026101901_normal_results_missing_uacr_article',
     '2026102001_pneumococcal_ckd_eight_weeks_article',
+    '2026102401_consent_two_conditions_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
