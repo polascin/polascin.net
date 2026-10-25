@@ -651,6 +651,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/ohrozenie-zivota-samo-suhlas-nenahradi.php'
             );
         },
+        '2026102501_names_are_not_reading_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/pozna-moje-mena-este-nie-je-citanie.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
