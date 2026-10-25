@@ -82,6 +82,7 @@ const EXPECTED_MIGRATIONS = [
     '2026102401_consent_two_conditions_article',
     '2026102501_names_are_not_reading_article',
     '2026102502_mercury_token_limit_article',
+    '2026102503_same_death_three_acts_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

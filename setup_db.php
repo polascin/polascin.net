@@ -663,6 +663,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/sestnast-tokenov-na-rozmyslanie.php'
             );
         },
+        '2026102503_same_death_three_acts_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/ta-ista-smrt-moze-byt-tri-ciny.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
