@@ -669,6 +669,19 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/ta-ista-smrt-moze-byt-tri-ciny.php'
             );
         },
+        '2026102504_same_death_three_acts_title' => static function (PDO $pdo): void {
+            $article = require __DIR__ . '/content/articles/ta-ista-smrt-moze-byt-tri-ciny.php';
+            $update = $pdo->prepare(
+                'UPDATE articles SET title = :title WHERE slug = :slug AND lang = :lang'
+            );
+            foreach ($article['translations'] as $lang => $payload) {
+                $update->execute([
+                    ':title' => trim((string) ($payload['title'] ?? '')),
+                    ':slug' => (string) $article['slug'],
+                    ':lang' => (string) $lang,
+                ]);
+            }
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

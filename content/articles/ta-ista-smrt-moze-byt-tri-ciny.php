@@ -39,7 +39,7 @@ return [
     'image' => 'images/articles/ta-ista-smrt-moze-byt-tri-ciny.webp',
     'translations' => [
         'sk' => [
-            'title' => 'Tá istá smrť môže byť tri činy. Nezačať dialýzu, ukončiť ju a podať smrtiacu látku nie je to isté.',
+            'title' => 'Tá istá smrť môže znamenať tri rôzne činy. Nezačať dialýzu, ukončiť ju a podať smrtiacu látku nie je to isté.',
             'image_alt' => 'Fialová izba. Na prázdnej posteli zvinutá tyrkysová hadička so zatvoreným spojom. Vľavo dvere, kabát a taška. Vpravo lekár od chrbta s prázdnymi rukami. Nad posteľou plný a kratší prerušený tyrkysový oblúk.',
             'excerpt' => 'Piaty diel Nedeľnej metafyziky je v knižnici pripravený na nedeľu 1. novembra 2026. Tento článok nie je jeho skrátený prepis. Rovnaký výsledok pri dialýze ešte nehovorí, či išlo o rešpekt, o hranicu liečby, alebo o čin, ktorý právo zakazuje.',
             'content' => <<<'HTML'
@@ -58,7 +58,7 @@ return [
 HTML,
         ],
         'en' => [
-            'title' => 'The same death can be three acts. Not starting dialysis, stopping it, and giving a lethal substance are not the same.',
+            'title' => 'The same death can mean three different acts. Not starting dialysis, stopping it, and giving a lethal substance are not the same.',
             'image_alt' => 'A purple room. A coiled teal tube with a closed connector on an empty bed. A door, a coat and a bag on the left. A physician from behind, hands empty, on the right. Above the bed, one solid teal arc and a shorter broken arc.',
             'excerpt' => 'The fifth volume of Sunday Metaphysics is ready in the library for Sunday 1 November 2026. This essay is not a shortened copy of it. The same outcome in dialysis does not yet say whether the act was respect, a limit of treatment, or an act the law forbids.',
             'content' => <<<'HTML'
@@ -77,7 +77,7 @@ HTML,
 HTML,
         ],
         'cs' => [
-            'title' => 'Tatáž smrt může být tři činy. Nezačít dialýzu, ukončit ji a podat smrtící látku není totéž.',
+            'title' => 'Tatáž smrt může znamenat tři různé činy. Nezačít dialýzu, ukončit ji a podat smrtící látku není totéž.',
             'image_alt' => 'Fialový pokoj. Na prázdné posteli svinutá tyrkysová hadička s uzavřeným spojem. Vlevo dveře, kabát a taška. Vpravo lékař zezadu s prázdnýma rukama. Nad postelí plný a kratší přerušený tyrkysový oblouk.',
             'excerpt' => 'Pátý díl Nedělní metafyziky je v knihovně připravený na neděli 1. listopadu 2026. Tento článek není jeho zkrácený přepis. Stejný výsledek u dialýzy ještě neříká, zda šlo o respekt, o hranici léčby, nebo o čin, který právo zakazuje.',
             'content' => <<<'HTML'
@@ -96,7 +96,7 @@ HTML,
 HTML,
         ],
         'de' => [
-            'title' => 'Derselbe Tod kann drei Handlungen sein. Dialyse nicht beginnen, sie beenden und einen tödlichen Stoff geben ist nicht dasselbe.',
+            'title' => 'Derselbe Tod kann drei verschiedene Handlungen bedeuten. Dialyse nicht beginnen, sie beenden und einen tödlichen Stoff geben ist nicht dasselbe.',
             'image_alt' => 'Ein violettes Zimmer. Auf einem leeren Bett ein aufgerollter petrolfarbener Schlauch mit geschlossenem Anschluss. Links Tür, Mantel und Tasche. Rechts ein Arzt von hinten, die Hände leer. Darüber ein ganzer und ein kürzerer unterbrochener Bogen.',
             'excerpt' => 'Der fünfte Band der Sonntagsmetaphysik liegt für Sonntag, den 1. November 2026, in der Bibliothek bereit. Dieser Essay ist keine gekürzte Abschrift. Dasselbe Ergebnis bei der Dialyse sagt noch nicht, ob es Achtung war, eine Grenze der Behandlung oder eine Handlung, die das Recht verbietet.',
             'content' => <<<'HTML'
@@ -115,7 +115,7 @@ HTML,
 HTML,
         ],
         'fr' => [
-            'title' => 'La même mort peut être trois actes. Ne pas commencer la dialyse, l’arrêter et donner une substance létale, ce n’est pas la même chose.',
+            'title' => 'La même mort peut signifier trois actes différents. Ne pas commencer la dialyse, l’arrêter et donner une substance létale, ce n’est pas la même chose.',
             'image_alt' => 'Une chambre violette. Sur un lit vide, un tuyau turquoise enroulé, raccord fermé. À gauche, une porte, un manteau et un sac. À droite, un médecin de dos, les mains vides. Au-dessus, un arc turquoise plein et un arc plus court, interrompu.',
             'excerpt' => 'Le cinquième volume de la métaphysique du dimanche est prêt dans la bibliothèque pour le dimanche 1er novembre 2026. Cet essai n’en est pas une copie raccourcie. Le même résultat en dialyse ne dit pas encore s’il s’agissait de respect, d’une limite du traitement, ou d’un acte que le droit interdit.',
             'content' => <<<'HTML'
@@ -134,7 +134,7 @@ HTML,
 HTML,
         ],
         'es' => [
-            'title' => 'La misma muerte puede ser tres actos. No iniciar la diálisis, suspenderla y administrar una sustancia letal no es lo mismo.',
+            'title' => 'La misma muerte puede significar tres actos distintos. No iniciar la diálisis, suspenderla y administrar una sustancia letal no es lo mismo.',
             'image_alt' => 'Una habitación violeta. En una cama vacía, un tubo turquesa enrollado, conector cerrado. A la izquierda, puerta, abrigo y bolso. A la derecha, un médico de espaldas, manos vacías. Encima, un arco turquesa continuo y otro más corto, interrumpido.',
             'excerpt' => 'El quinto volumen de la metafísica del domingo está listo en la biblioteca para el domingo 1 de noviembre de 2026. Este ensayo no es una copia abreviada. El mismo resultado en diálisis todavía no dice si se trató de respeto, de un límite del tratamiento o de un acto que el derecho prohíbe.',
             'content' => <<<'HTML'
@@ -153,7 +153,7 @@ HTML,
 HTML,
         ],
         'pl' => [
-            'title' => 'Ta sama śmierć może być trzema czynami. Nie zacząć dializy, zakończyć ją i podać śmiertelną substancję to nie to samo.',
+            'title' => 'Ta sama śmierć może oznaczać trzy różne czyny. Nie zacząć dializy, zakończyć ją i podać śmiertelną substancję to nie to samo.',
             'image_alt' => 'Fioletowy pokój. Na pustym łóżku zwinięta turkusowa rurka z zamkniętym złączem. Po lewej drzwi, płaszcz i torba. Po prawej lekarz od tyłu, z pustymi rękami. Nad łóżkiem pełny i krótszy przerwany turkusowy łuk.',
             'excerpt' => 'Piąty tom metafizyki niedzielnej jest w bibliotece gotowy na niedzielę 1 listopada 2026. Ten esej nie jest jego skróconym przepisaniem. Ten sam wynik przy dializie jeszcze nie mówi, czy chodziło o szacunek, o granicę leczenia, czy o czyn, którego prawo zakazuje.',
             'content' => <<<'HTML'
@@ -172,7 +172,7 @@ HTML,
 HTML,
         ],
         'hu' => [
-            'title' => 'Ugyanaz a halál három cselekedet lehet. A dialízist el nem kezdeni, abbahagyni és halálos anyagot adni nem ugyanaz.',
+            'title' => 'Ugyanaz a halál három különböző cselekedetet jelenthet. A dialízist el nem kezdeni, abbahagyni és halálos anyagot adni nem ugyanaz.',
             'image_alt' => 'Lila szoba. Az üres ágyon feltekert türkiz cső, zárt csatlakozóval. Balra ajtó, kabát és táska. Jobbra orvos hátulról, üres kézzel. Fölötte egy teljes és egy rövidebb, megszakított türkiz ív.',
             'excerpt' => 'A vasárnapi metafizika ötödik kötete 2026. november 1-jére kész a könyvtárban. Ez az esszé nem annak rövidített másolata. A dialízisnél ugyanaz a kimenetel még nem mondja meg, hogy tiszteletről, a kezelés határáról vagy a jog által tiltott cselekményről volt szó.',
             'content' => <<<'HTML'
@@ -191,7 +191,7 @@ HTML,
 HTML,
         ],
         'it' => [
-            'title' => 'La stessa morte può essere tre atti. Non iniziare la dialisi, interromperla e somministrare una sostanza letale non è la stessa cosa.',
+            'title' => 'La stessa morte può significare tre atti diversi. Non iniziare la dialisi, interromperla e somministrare una sostanza letale non è la stessa cosa.',
             'image_alt' => 'Una stanza viola. Su un letto vuoto un tubo turchese arrotolato, raccordo chiuso. A sinistra porta, cappotto e borsa. A destra un medico di spalle, mani vuote. Sopra, un arco turchese intero e uno più corto, interrotto.',
             'excerpt' => 'Il quinto volume della metafisica della domenica è pronto in biblioteca per domenica 1 novembre 2026. Questo saggio non ne è una copia abbreviata. Lo stesso esito nella dialisi non dice ancora se si è trattato di rispetto, di un limite della cura o di un atto che il diritto vieta.',
             'content' => <<<'HTML'
@@ -210,7 +210,7 @@ HTML,
 HTML,
         ],
         'uk' => [
-            'title' => 'Та сама смерть може бути трьома діями. Не почати діаліз, припинити його і дати смертельну речовину не є тим самим.',
+            'title' => 'Та сама смерть може означати три різні дії. Не почати діаліз, припинити його і дати смертельну речовину не є тим самим.',
             'image_alt' => 'Фіолетова кімната. На порожньому ліжку згорнута бірюзова трубка із закритим з’єднанням. Ліворуч двері, пальто і сумка. Праворуч лікар зі спини, руки порожні. Над ліжком суцільна і коротша перервана бірюзова дуга.',
             'excerpt' => 'П’ятий том недільної метафізики готовий у бібліотеці на неділю 1 листопада 2026 року. Цей есей не є його скороченим переказом. Той самий результат при діалізі ще не каже, чи йшлося про повагу, про межу лікування, чи про діяння, яке право забороняє.',
             'content' => <<<'HTML'
