@@ -1,6 +1,6 @@
 # Kontrola produkčnej databázy — polascin.net
 
-Generované: 2026-10-24 22:41:57 CEST  
+Generované: 2026-10-25 21:42:47 CET  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
@@ -19,63 +19,67 @@ NALEZOV: 0
 
 | Tabuľka | Engine | Collation | Riadkov (presne) |
 | --- | --- | --- | --- |
-| `access_logs` | InnoDB | utf8mb4_unicode_ci | 53617 |
+| `access_logs` | InnoDB | utf8mb4_unicode_ci | 55037 |
 | `access_logs_backup_2026_10_24_tests` | InnoDB | utf8mb4_general_ci | 54 |
 | `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 53 |
-| `articles` | InnoDB | utf8mb4_unicode_ci | 310 |
+| `articles` | InnoDB | utf8mb4_unicode_ci | 340 |
 | `contact_messages` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `content_blocks` | InnoDB | utf8mb4_unicode_ci | 5 |
 | `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 4 |
 | `form_rate_limit_backup_2026_10_24_tests` | InnoDB | utf8mb4_general_ci | 3 |
 | `newsletter_subscribers` | InnoDB | utf8mb4_unicode_ci | 0 |
-| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 43 |
+| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 47 |
 | `users` | InnoDB | utf8mb4_unicode_ci | 1 |
 
 ## Migrácie schémy
 
-- ✅ `2026072801_security_indexes` — 2026-07-29 15:56:06
-- ✅ `2026072901_multilingual_content` — 2026-07-29 15:56:06
-- ✅ `2026072902_profile_copy` — 2026-07-29 18:45:44
-- ✅ `2026091101_admin_password_rotation` — 2026-09-11 20:56:52
-- ✅ `2026091701_glp1_steroid_food_noise_article` — 2026-09-17 18:48:41
-- ✅ `2026091702_arenibus_ai_security_audit_article` — 2026-09-17 18:53:07
-- ✅ `2026091703_via_practica_vld_algorithm_article` — 2026-09-17 18:55:43
-- ✅ `2026091704_ai_model_freedom_article` — 2026-09-17 18:59:57
-- ✅ `2026091705_article_cover_images` — 2026-09-17 19:18:16
-- ✅ `2026091706_article_all_language_translations` — 2026-09-17 19:31:35
-- ✅ `2026092001_ai_author_phishing_email_article` — 2026-09-20 16:33:14
-- ✅ `2026092401_ai_receptionist_twelve_questions_article` — 2026-09-24 16:50:35
-- ✅ `2026092402_cloudflare_disallow_ai_training_article` — 2026-09-24 17:25:47
-- ✅ `2026092403_cloudflare_article_published_at_fix` — 2026-09-24 17:28:13
-- ✅ `2026092404_secret_scanner_shell_history_article` — 2026-09-24 17:39:05
-- ✅ `2026092405_arenibus_google_4177_tests_article` — 2026-09-24 17:42:53
-- ✅ `2026092406_arenibus_article_published_at_fix` — 2026-09-24 17:46:20
-- ✅ `2026092501_anonymize_blog_personal_names` — 2026-09-25 16:49:03
-- ✅ `2026092502_ai_book_trailer_scam_article` — 2026-09-25 16:55:49
-- ✅ `2026092503_atlas_agents_cold_email_article` — 2026-09-25 17:07:28
-- ✅ `2026092504_awai_two_page_story_article` — 2026-09-25 17:56:58
-- ✅ `2026092505_awai_figel_wording` — 2026-09-25 19:40:58
-- ✅ `2026092506_good_sceptic_probabilia_article` — 2026-09-25 20:13:20
-- ✅ `2026100101_ceresare_kyjov_article` — 2026-10-01 08:12:56
-- ✅ `2026100301_web_guard_own_ai_article` — 2026-10-03 06:10:49
-- ✅ `2026100302_efficiency_refilled_article` — 2026-10-03 21:35:52
-- ✅ `2026100303_incremental_hd_odds_ratio_article` — 2026-10-03 21:58:56
-- ✅ `2026100304_pipeline_i_sign_article` — 2026-10-03 22:20:01
-- ✅ `2026100305_three_unsolicited_offers_article` — 2026-10-03 22:21:04
-- ✅ `2026100401_what_exists_sunday_article` — 2026-10-04 16:43:57
-- ✅ `2026100402_experience_starting_point_article` — 2026-10-04 16:52:55
-- ✅ `2026100801_human_skill_md_article` — 2026-10-08 07:37:06
-- ✅ `2026100802_remove_blog_contact_ctas` — 2026-10-08 08:11:37
-- ✅ `2026101001_blog_prose_pass` — 2026-10-10 22:46:33
-- ✅ `2026101501_buy_for_bottleneck_article` — 2026-10-15 17:49:53
-- ✅ `2026101502_death_cancellation_rule_article` — 2026-10-15 17:48:13
-- ✅ `2026101503_right_number_wrong_currency_article` — 2026-10-15 17:52:21
-- ✅ `2026101504_fewer_reports_not_less_work_article` — 2026-10-15 17:52:21
-- ✅ `2026101505_largest_version_usefulness_article` — 2026-10-15 18:52:08
-- ✅ `2026101506_curiosity_without_borrowed_authority_article` — 2026-10-15 18:54:47
-- ✅ `2026101901_normal_results_missing_uacr_article` — 2026-10-19 19:00:44
-- ✅ `2026102001_pneumococcal_ckd_eight_weeks_article` — 2026-10-20 13:17:11
-- ✅ `2026102401_consent_two_conditions_article` — 2026-10-24 02:42:18
+- ✅ `2026072801_security_indexes` — 2026-07-29 14:56:06
+- ✅ `2026072901_multilingual_content` — 2026-07-29 14:56:06
+- ✅ `2026072902_profile_copy` — 2026-07-29 17:45:44
+- ✅ `2026091101_admin_password_rotation` — 2026-09-11 19:56:52
+- ✅ `2026091701_glp1_steroid_food_noise_article` — 2026-09-17 17:48:41
+- ✅ `2026091702_arenibus_ai_security_audit_article` — 2026-09-17 17:53:07
+- ✅ `2026091703_via_practica_vld_algorithm_article` — 2026-09-17 17:55:43
+- ✅ `2026091704_ai_model_freedom_article` — 2026-09-17 17:59:57
+- ✅ `2026091705_article_cover_images` — 2026-09-17 18:18:16
+- ✅ `2026091706_article_all_language_translations` — 2026-09-17 18:31:35
+- ✅ `2026092001_ai_author_phishing_email_article` — 2026-09-20 15:33:14
+- ✅ `2026092401_ai_receptionist_twelve_questions_article` — 2026-09-24 15:50:35
+- ✅ `2026092402_cloudflare_disallow_ai_training_article` — 2026-09-24 16:25:47
+- ✅ `2026092403_cloudflare_article_published_at_fix` — 2026-09-24 16:28:13
+- ✅ `2026092404_secret_scanner_shell_history_article` — 2026-09-24 16:39:05
+- ✅ `2026092405_arenibus_google_4177_tests_article` — 2026-09-24 16:42:53
+- ✅ `2026092406_arenibus_article_published_at_fix` — 2026-09-24 16:46:20
+- ✅ `2026092501_anonymize_blog_personal_names` — 2026-09-25 15:49:03
+- ✅ `2026092502_ai_book_trailer_scam_article` — 2026-09-25 15:55:49
+- ✅ `2026092503_atlas_agents_cold_email_article` — 2026-09-25 16:07:28
+- ✅ `2026092504_awai_two_page_story_article` — 2026-09-25 16:56:58
+- ✅ `2026092505_awai_figel_wording` — 2026-09-25 18:40:58
+- ✅ `2026092506_good_sceptic_probabilia_article` — 2026-09-25 19:13:20
+- ✅ `2026100101_ceresare_kyjov_article` — 2026-10-01 07:12:56
+- ✅ `2026100301_web_guard_own_ai_article` — 2026-10-03 05:10:49
+- ✅ `2026100302_efficiency_refilled_article` — 2026-10-03 20:35:52
+- ✅ `2026100303_incremental_hd_odds_ratio_article` — 2026-10-03 20:58:56
+- ✅ `2026100304_pipeline_i_sign_article` — 2026-10-03 21:20:01
+- ✅ `2026100305_three_unsolicited_offers_article` — 2026-10-03 21:21:04
+- ✅ `2026100401_what_exists_sunday_article` — 2026-10-04 15:43:57
+- ✅ `2026100402_experience_starting_point_article` — 2026-10-04 15:52:55
+- ✅ `2026100801_human_skill_md_article` — 2026-10-08 06:37:06
+- ✅ `2026100802_remove_blog_contact_ctas` — 2026-10-08 07:11:37
+- ✅ `2026101001_blog_prose_pass` — 2026-10-10 21:46:33
+- ✅ `2026101501_buy_for_bottleneck_article` — 2026-10-15 16:49:53
+- ✅ `2026101502_death_cancellation_rule_article` — 2026-10-15 16:48:13
+- ✅ `2026101503_right_number_wrong_currency_article` — 2026-10-15 16:52:21
+- ✅ `2026101504_fewer_reports_not_less_work_article` — 2026-10-15 16:52:21
+- ✅ `2026101505_largest_version_usefulness_article` — 2026-10-15 17:52:08
+- ✅ `2026101506_curiosity_without_borrowed_authority_article` — 2026-10-15 17:54:47
+- ✅ `2026101901_normal_results_missing_uacr_article` — 2026-10-19 18:00:44
+- ✅ `2026102001_pneumococcal_ckd_eight_weeks_article` — 2026-10-20 12:17:11
+- ✅ `2026102401_consent_two_conditions_article` — 2026-10-24 01:42:18
+- ✅ `2026102501_names_are_not_reading_article` — 2026-10-25 12:10:52
+- ✅ `2026102502_mercury_token_limit_article` — 2026-10-25 17:25:20
+- ✅ `2026102503_same_death_three_acts_article` — 2026-10-25 17:55:15
+- ✅ `2026102504_same_death_three_acts_title` — 2026-10-25 19:21:58
 
 ## Indexy strážené migráciou
 
@@ -91,18 +95,18 @@ NALEZOV: 0
 
 ## Obsah a jazyky
 
-- Publikovaných článkov: 310
+- Publikovaných článkov: 340
 - Články podľa jazyka:
-  - `cs`: 31
-  - `de`: 31
-  - `en`: 31
-  - `es`: 31
-  - `fr`: 31
-  - `hu`: 31
-  - `it`: 31
-  - `pl`: 31
-  - `sk`: 31
-  - `uk`: 31
+  - `cs`: 34
+  - `de`: 34
+  - `en`: 34
+  - `es`: 34
+  - `fr`: 34
+  - `hu`: 34
+  - `it`: 34
+  - `pl`: 34
+  - `sk`: 34
+  - `uk`: 34
 - Obsahové bloky podľa jazyka:
   - `sk`: 5
 
@@ -113,9 +117,9 @@ Kontaktné správy: **180 dní**; nepotvrdený newsletter: **72 hodín**; admini
 
 | Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |
 | --- | --- | --- | --- |
-| `access_logs` | 53617 | 2026-07-28 12:20:55 | 88 |
+| `access_logs` | 55037 | 2026-07-28 11:20:55 | 89 |
 | `contact_messages` | 0 | — | — |
 | `newsletter_subscribers` | 0 | — | — |
-| `admin_audit_log` | 53 | 2026-09-11 20:22:06 | 43 |
-| `form_rate_limit` | 4 | 2026-10-24 09:34:06 | 0 |
+| `admin_audit_log` | 53 | 2026-09-11 19:22:06 | 44 |
+| `form_rate_limit` | 4 | 2026-10-24 09:34:06 | 1 |
 
