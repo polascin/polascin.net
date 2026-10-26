@@ -27,7 +27,7 @@ Jazyky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk` (`app
 
 ## 2. Obálka
 
-- `GenerateImage`, 16:9, cinematic, bez textu a log, fialová `#3d1a78` a tyrkys `#078d70`. Aj keď požiadavka hovorí 16:10, obálka ostáva 16:9, ideálne 1280×720, najmenej 1200×675.
+- Použi dostupný nástroj imagegen. Ilustrácia preferenčne 16:10 podľa aktuálneho zadania, bez textu a log, fialová `#3d1a78` a tyrkys `#078d70`. Zachovaj najmenej 1200×675 a bez pridaného zrna, šumu či textúrnych prekrytí.
 - Nástroj môže uložiť JPEG s príponou `.png` alebo `.jpg`. Podľa obsahu použi `imagecreatefromjpeg` alebo `imagecreatefrompng`. Výstup: `images/articles/{slug}.webp`, kvalita 82.
 - Potom `php scripts/make_og_covers.php`. JPEG dvojička `images/articles/og/{slug}.jpg` ide do commitu. Bez nej test spadne. WebP náhľad LinkedIn nezobrazí.
 
@@ -43,7 +43,7 @@ Jazyky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk` (`app
 - Ak je `main` za `origin/main`, najprv `git pull --ff-only`.
 - Commit a push na `main`. Hooky nepreskakuj, force push nie. Nekomituj `private/`, `.env`, `*.ini` okrem `env.ini.example`, ani PNG.
 - Ak GitGuardian hlási `ggshield: command not found`, pred commit pridaj do `PATH` adresár s `ggshield.exe` pod `%USERPROFILE%\.cache\pre-commit\`. Git config nemeň.
-- Počkaj na success workflow **Deploy to polascin.net** vrátane migrácie a smoke checku.
+- Z lokálneho Windows alebo Mac prostredia nasadzuj lokálnymi nástrojmi cez SSH alias `websupport`, potom spusti `setup_db.php` a over idempotentný druhý beh. Existujúci Actions deploy nie je lokálna cesta nasadenia. Pri lokálnych commitoch použi `[skip deploy]`, aby sa predišlo súbehu so starším automatickým workflow.
 - Over produkciu: `/`, articles, contact, newsletter, sitemap, login HTTP 200; `/deploy_info.php` a `/i18n.php` 403; CSP s nonce a bezpečnostné hlavičky. Spot-check SK, EN a jeden ďalší jazyk plus hreflang v sitemape. `og:image` je JPEG. `og:title` kanonickej stránky je slovenský; anglický titulok v náhľade crawlera je jazyk session, nie chyba seedu.
 
 ## 5. Sociálne siete

@@ -682,6 +682,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 ]);
             }
         },
+        '2026102601_mercury_claude_three_tasks_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/mercury-claude-tri-ulohy-jeden-beh.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

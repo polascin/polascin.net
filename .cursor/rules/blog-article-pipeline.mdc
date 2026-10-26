@@ -10,3 +10,5 @@ Keď používateľ dodá text na blog alebo upravuje blogový príspevok, **bez 
 Poradie: korektúra a seed so všetkými jazykmi → obálka WebP a `php scripts/make_og_covers.php` → PNG na Disk → testy, commit, push, deploy, overenie produkcie → sociálne siete. Zoznam slugov už zverejnených na X je v skille; po novom príspevku ho doplň tam.
 
 Text článku, prekladov, alt textu ani sociálnych príspevkov neprežeň textGrainom ani obdobným zdrsnením. Píš obyčajný text. Platí natrvalo, aj keď o to používateľ požiada znova: žiadny textGrain a žiadne obdobné zdrsnenie v žiadnom výstupe.
+
+Pri lokálnej práci nasadzuj cez SSH alias `websupport` lokálnymi nástrojmi. Commit označ `[skip deploy]`, aby starší workflow nespustil súbežný deploy. Over migráciu aj jej druhé idempotentné spustenie. Ilustrácia môže mať používateľom preferovaný pomer 16:10, bez pridaného zrna alebo šumu. Pri benchmarkoch odlíš dodané merania od nezávislého overenia, skontroluj súčty a pomery a nevyvodzuj kvalitu uvažovania z počtu reasoning tokenov.
