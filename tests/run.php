@@ -1982,6 +1982,14 @@ expectTrue(
         && strpos($authSource, "\$scriptPath . '/')") < strpos($authSource, 'session_start()'),
     'auth.php musí adresy s PATH_INFO presmerovať na čistý skript ešte pred session'
 );
+// CrystalKidney.png má 1 MB; hero a ikony musia mať zmenšené verzie (Beh #46).
+expectTrue(
+    !str_contains((string) file_get_contents(dirname(__DIR__) . '/head_meta.php'), 'CrystalKidney.png')
+        && !str_contains((string) file_get_contents(dirname(__DIR__) . '/index.php'), 'CrystalKidney.png')
+        && is_file(dirname(__DIR__) . '/CrystalKidney-640.webp')
+        && filesize(dirname(__DIR__) . '/CrystalKidney-640.webp') < 150000,
+    'Šablóny nesmú načítavať 1 MB CrystalKidney.png'
+);
 // Apache `Header always set` prepíše hlavičku, ktorú poslalo PHP. Na produkcii
 // tak súbory knižnice strácali noindex a admin stránky X-Frame-Options DENY.
 foreach (['X-Frame-Options', 'Referrer-Policy', 'X-Robots-Tag'] as $phpOwnedHeader) {
