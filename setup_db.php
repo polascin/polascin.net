@@ -709,6 +709,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/lacnejsi-token-drazsi-ucet.php'
             );
         },
+        '2026102704_cheaper_token_ramp_not_gartner' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/lacnejsi-token-drazsi-ucet.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
