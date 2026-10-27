@@ -1,6 +1,6 @@
 # Kontrola produkčnej databázy — polascin.net
 
-Generované: 2026-10-26 21:45:15 CET  
+Generované: 2026-10-27 21:39:16 CET  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
@@ -12,23 +12,20 @@ NALEZOV: 0
 
 ## Súhrn
 
-- **INFO** — Tabuľka `access_logs_backup_2026_10_24_tests` nie je v schéme `setup_db.php` — zvyšok po migrácii?
-- **INFO** — Tabuľka `form_rate_limit_backup_2026_10_24_tests` nie je v schéme `setup_db.php` — zvyšok po migrácii?
+Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávanom stave.
 
 ## Tabuľky
 
 | Tabuľka | Engine | Collation | Riadkov (presne) |
 | --- | --- | --- | --- |
-| `access_logs` | InnoDB | utf8mb4_unicode_ci | 55511 |
-| `access_logs_backup_2026_10_24_tests` | InnoDB | utf8mb4_general_ci | 54 |
+| `access_logs` | InnoDB | utf8mb4_unicode_ci | 58499 |
 | `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 53 |
 | `articles` | InnoDB | utf8mb4_unicode_ci | 350 |
 | `contact_messages` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `content_blocks` | InnoDB | utf8mb4_unicode_ci | 5 |
 | `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 0 |
-| `form_rate_limit_backup_2026_10_24_tests` | InnoDB | utf8mb4_general_ci | 3 |
 | `newsletter_subscribers` | InnoDB | utf8mb4_unicode_ci | 0 |
-| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 48 |
+| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 50 |
 | `users` | InnoDB | utf8mb4_unicode_ci | 1 |
 
 ## Migrácie schémy
@@ -81,6 +78,8 @@ NALEZOV: 0
 - ✅ `2026102503_same_death_three_acts_article` — 2026-10-25 17:55:15
 - ✅ `2026102504_same_death_three_acts_title` — 2026-10-25 19:21:58
 - ✅ `2026102601_mercury_claude_three_tasks_article` — 2026-10-26 20:44:12
+- ✅ `2026102701_drop_manual_pii_backups` — 2026-10-27 07:30:06
+- ✅ `2026102702_sanitizer_tags_refresh` — 2026-10-27 16:54:35
 
 ## Indexy strážené migráciou
 
@@ -118,9 +117,9 @@ Kontaktné správy: **180 dní**; nepotvrdený newsletter: **72 hodín**; admini
 
 | Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |
 | --- | --- | --- | --- |
-| `access_logs` | 55511 | 2026-07-28 22:21:41 | 89 |
+| `access_logs` | 58499 | 2026-07-29 21:42:10 | 89 |
 | `contact_messages` | 0 | — | — |
 | `newsletter_subscribers` | 0 | — | — |
-| `admin_audit_log` | 53 | 2026-09-11 19:22:06 | 45 |
+| `admin_audit_log` | 53 | 2026-09-11 19:22:06 | 46 |
 | `form_rate_limit` | 0 | — | — |
 
