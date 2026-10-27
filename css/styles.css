@@ -254,6 +254,10 @@ h6 {
   margin-bottom: var(--spacing-sm);
   color: var(--text-main);
   text-wrap: balance;
+  /* Dlhé zložené slová (de „Pneumokokkenerkrankung“) by na 375 px vytŕčali
+     a `body { overflow-x: hidden }` by ich orezal. */
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 /* Plynulá typografia: veľkosť rastie s viewportom, aby nadpisy na veľkej
@@ -2029,6 +2033,8 @@ a.lang-chip {
 
 .article-body {
   line-height: 1.7;
+  /* E-mailové adresy a URL v texte sa zalomia namiesto pretečenia. */
+  overflow-wrap: break-word;
 }
 
 .article-body h2,

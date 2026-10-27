@@ -2027,6 +2027,12 @@ expectTrue(
         && strpos($authSource, "\$scriptPath . '/')") < strpos($authSource, 'session_start()'),
     'auth.php musí adresy s PATH_INFO presmerovať na čistý skript ešte pred session'
 );
+// Alias /privacy a /terms .htaccess presmeruje 301; vlastné odkazy idú priamo (Beh #48).
+expectTrue(
+    preg_match("~langUrl\\([^)]*'/(privacy|terms)'~", (string) file_get_contents(dirname(__DIR__) . '/footer.php')) !== 1
+        && !str_contains((string) file_get_contents(dirname(__DIR__) . '/js/main.js'), '"/privacy"'),
+    'Pätička a cookie banner musia odkazovať priamo na privacy.php a terms.php'
+);
 // CrystalKidney.png má 1 MB; hero a ikony musia mať zmenšené verzie (Beh #46).
 expectTrue(
     !str_contains((string) file_get_contents(dirname(__DIR__) . '/head_meta.php'), 'CrystalKidney.png')

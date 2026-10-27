@@ -85,8 +85,8 @@ $footerBeat = appSwatchBeat($footerUpdateTs);
       <a href="<?= htmlspecialchars(langUrl($footerLang, 'index.php'), ENT_QUOTES, 'UTF-8') ?>">polascin.net</a> |
       <a href="<?= htmlspecialchars(langUrl($footerLang, 'library.php'), ENT_QUOTES, 'UTF-8') ?>"><?= te('home.link_library') ?></a> |
       <a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer">books.polascin.net</a> |
-      <a href="<?= htmlspecialchars(langUrl($footerLang, '/privacy'), ENT_QUOTES, 'UTF-8') ?>"><?= te('footer.privacy') ?></a> |
-      <a href="<?= htmlspecialchars(langUrl($footerLang, '/terms'), ENT_QUOTES, 'UTF-8') ?>"><?= te('footer.terms') ?></a> |
+      <a href="<?= htmlspecialchars(langUrl($footerLang, 'privacy.php'), ENT_QUOTES, 'UTF-8') ?>"><?= te('footer.privacy') ?></a> |
+      <a href="<?= htmlspecialchars(langUrl($footerLang, 'terms.php'), ENT_QUOTES, 'UTF-8') ?>"><?= te('footer.terms') ?></a> |
       <button type="button" class="cookie-settings-trigger" aria-haspopup="dialog" aria-controls="cookie-consent-container"><?= te('footer.cookie_settings') ?></button>
     </p>
     <p class="footer-updated">
@@ -98,7 +98,7 @@ $footerBeat = appSwatchBeat($footerUpdateTs);
 </footer>
 <div
   id="cookie-consent-container"
-  data-privacy-url="<?= htmlspecialchars(langUrl($footerLang, '/privacy'), ENT_QUOTES, 'UTF-8') ?>"
+  data-privacy-url="<?= htmlspecialchars(langUrl($footerLang, 'privacy.php'), ENT_QUOTES, 'UTF-8') ?>"
   data-cookie-title="<?= te('cookie.title') ?>"
   data-cookie-description="<?= te('cookie.description') ?>"
   data-cookie-privacy-label="<?= te('cookie.privacy_link') ?>"
