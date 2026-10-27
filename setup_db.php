@@ -733,6 +733,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/spravna-odpoved-zo-zleho-dovodu.php'
             );
         },
+        '2026102805_typesetting_package_not_print_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/balik-pre-sadzbu-este-nie-je-tlac.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
