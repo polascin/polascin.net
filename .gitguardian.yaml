@@ -13,5 +13,5 @@
 version: 2
 
 secret:
-  ignored-paths:
+  ignored_paths:
     - tests/run.php
