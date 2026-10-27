@@ -694,23 +694,13 @@ function applySchemaMigrations(PDO $pdo): void {
             $pdo->exec('DROP TABLE IF EXISTS `access_logs_backup_2026_10_24_tests`');
             $pdo->exec('DROP TABLE IF EXISTS `form_rate_limit_backup_2026_10_24_tests`');
         },
-        // Sanitizér tabuľky nepoznal a pri prvom seede ich rozbalil na
-        // zlepený text. Po jeho rozšírení sa obsah článku uloží znova.
-        '2026102702_mercury_claude_tables' => static function (PDO $pdo): void {
-            refreshPublishedArticleTextFromFile(
-                $pdo,
-                __DIR__ . '/content/articles/mercury-claude-tri-ulohy-jeden-beh.php'
-            );
-        },
-        // `<sup>` sa rozbaľoval, takže 1 − 0,95^10 sa zobrazovalo ako
-        // „1 − 0,9510“; rovnako zanikali exponenty a `<code>`.
-        '2026102703_sup_sub_code_articles' => static function (PDO $pdo): void {
-            foreach ([
-                'v-norme-chyba-uacr.php',
-                'zlyhanie-oblicky-interval-osem-tyzdnov.php',
-                'ochrana-webu-pred-ai-aj-pred-vlastnou.php',
-            ] as $articleFile) {
-                refreshPublishedArticleTextFromFile($pdo, __DIR__ . '/content/articles/' . $articleFile);
+        // Sanitizér rozbaľoval tabuľky, `<sup>`, `<sub>`, `<code>` a `<small>`:
+        // tabuľky v článku Mercury a Claude sa zliali do textu a 1 − 0,95^10
+        // sa zobrazovalo ako „1 − 0,9510“. Pred migráciou sa všetkých 350
+        // riadkov v DB zhodovalo so seedmi (Beh #47), obnova nič neprepíše.
+        '2026102702_sanitizer_tags_refresh' => static function (PDO $pdo): void {
+            foreach (glob(__DIR__ . '/content/articles/*.php') ?: [] as $articlePath) {
+                refreshPublishedArticleTextFromFile($pdo, $articlePath);
             }
         },
     ];
