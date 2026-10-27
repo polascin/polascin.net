@@ -286,8 +286,10 @@ else
 	else
 		echo "[deploy] Spúšťam rsync na serveri..."
 	fi
+	# Zámok zdieľa nočná kontrola DB (hooks/ops/nightly.sh), aby nikdy
+	# nečítala rozostavaný web root.
 	ssh "${SSH_OPTS[@]}" "$SSH_SPEC" \
-		"rsync ${RSYNC_FLAGS} --exclude-from='${STAGE}/.deployignore' '${STAGE}/' '${REMOTE_PATH}/'"
+		"flock -w 900 '${REMOTE_PARENT%/}/private/ops.lock' rsync ${RSYNC_FLAGS} --exclude-from='${STAGE}/.deployignore' '${STAGE}/' '${REMOTE_PATH}/'"
 
 	if ((DRY_RUN)); then
 		echo "[deploy] DRY-RUN hotový, web root sa nezmenil."

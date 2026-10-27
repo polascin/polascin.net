@@ -65,7 +65,8 @@ php tests/run.php
 ```
 
 Pred odovzdaním zmien sa kontroluje aj syntax všetkých PHP a JavaScript
-súborov. Rovnaké kontroly spúšťa validačný job v GitHub Actions.
+súborov, lokálne pred nasadením cez `hooks/deploy.sh`. Vývoj ani nasadenie
+nezávisia od GitHubu (DEPLOY.md).
 
 ## Nasadenie
 

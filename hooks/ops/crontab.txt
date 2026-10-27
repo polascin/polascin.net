@@ -1,0 +1,7 @@
+# polascin.net: nočné úlohy na hostingu (náhrada GitHub Actions).
+# Server beží v Europe/Bratislava. Retencia ide pred kontrolou DB, aby report
+# videl stav po čistení. Inštalácia a overenie: DEPLOY.md, „Nočné úlohy na serveri“.
+# BEGIN polascin.net ops
+17 21 * * * git --git-dir=$HOME/git/polascin.net.git show main:hooks/ops/nightly.sh | /bin/bash -s retention >> $HOME/polascin.net/private/ops-retention.log 2>&1
+37 21 * * * git --git-dir=$HOME/git/polascin.net.git show main:hooks/ops/nightly.sh | /bin/bash -s verify-db >> $HOME/polascin.net/private/ops-verify-db.log 2>&1
+# END polascin.net ops

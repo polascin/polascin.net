@@ -1533,11 +1533,11 @@ expectTrue(
     'Retenčné mazanie musí byť transakčné a podporovať bezpečný náhľad'
 );
 expectTrue(
-    str_contains($retentionWorkflow, 'cron: "17 20 * * *"')
+    preg_match('~^\d{1,2} \d{1,2} \* \* \* .*nightly\.sh \| /bin/bash -s retention ~m', (string) file_get_contents(dirname(__DIR__) . '/hooks/ops/crontab.txt')) === 1
         && str_contains($retentionWorkflow, '<scripts/retention_cleanup.php')
         && str_contains($retentionWorkflow, 'group: polascin-production-deploy')
         && str_contains($retentionWorkflow, 'StrictHostKeyChecking=yes'),
-    'Retenčné mazanie musí bežať denne cez overené SSH a nesmie sa prekryť s deployom'
+    'Retenčné mazanie musí bežať denne z crontabu servera a ručná záloha cez overené SSH'
 );
 
 /** Vytiahne prvky z `const NAZOV = [...]` v kontrolnom skripte. */
@@ -2067,18 +2067,51 @@ expectTrue(
 // rutina číta report z predchádzajúceho dňa. Samotné „pred polnocou“ nestačí:
 // GitHub plánované behy odkladá aj o ~2 h (behy #5–#7 štartovali 01:27–01:45
 // UTC namiesto 23:50), preto sa vyžaduje rezerva aspoň 2 hodiny (Beh #24).
+// Nočné úlohy bežia v crontabe servera, nie v GitHub Actions (Beh #49).
+// Server je v Europe/Bratislava, rutina štartuje o 03:10 miestneho času.
+$opsCrontab = (string) file_get_contents(dirname(__DIR__) . '/hooks/ops/crontab.txt');
+$opsNightly = (string) file_get_contents(dirname(__DIR__) . '/hooks/ops/nightly.sh');
+preg_match_all('~^(\d{1,2}) (\d{1,2}) \* \* \* .*nightly\.sh \| /bin/bash -s (retention|verify-db) ~m', $opsCrontab, $opsJobs, PREG_SET_ORDER);
+$opsMinutes = [];
+foreach ($opsJobs as $opsJob) {
+    $opsMinutes[$opsJob[3]] = (int) $opsJob[2] * 60 + (int) $opsJob[1];
+    expectTrue((int) $opsJob[1] !== 0, "cron {$opsJob[3]} nesmie sedieť na celej hodine");
+}
 expectTrue(
-    preg_match('~cron: "(\d{1,2}) (\d{1,2}) \* \* \*"~', $verifyWorkflow, $cronMatch) === 1
-        && (24 - (int) $cronMatch[2]) * 60 - (int) $cronMatch[1] >= 120,
-    'verify-db.yml musí bežať aspoň 2 h pred 00:00 UTC, aby stihol report pred nočnou rutinou'
+    isset($opsMinutes['retention'], $opsMinutes['verify-db'])
+        && $opsMinutes['retention'] < $opsMinutes['verify-db']
+        && $opsMinutes['verify-db'] >= 18 * 60,
+    'Crontab musí spúšťať retenciu pred večernou kontrolou DB'
 );
 expectTrue(
-    isset($cronMatch[1]) && (int) $cronMatch[1] !== 0,
-    'cron verify-db.yml nesmie sedieť na celej hodine, kde je fronta plánovaných behov najdlhšia'
+    str_contains($opsCrontab, 'show main:hooks/ops/nightly.sh')
+        && str_contains($opsNightly, 'show "main:${script_path}"')
+        && str_contains($opsNightly, 'scripts/audit_db_check.php')
+        && str_contains($opsNightly, 'scripts/retention_cleanup.php'),
+    'Nočné úlohy musia brať skripty z vetvy main v repozitári na serveri, nie z web rootu'
 );
 expectTrue(
-    str_contains($verifyWorkflow, 'group: polascin-production-deploy'),
-    'verify-db.yml musí zdieľať concurrency skupinu s nasadením, aby sa nikdy neprekryli'
+    str_contains($opsNightly, 'flock -w 900 9')
+        && str_contains($deployScript, "flock -w 900 '\${REMOTE_PARENT%/}/private/ops.lock'"),
+    'Nočná kontrola a nasadenie musia zdieľať zámok, aby sa nikdy neprekryli'
+);
+expectTrue(
+    str_contains($opsNightly, 'STATUS: ZLYHANIE') && str_contains($opsNightly, 'git pull -q --rebase origin main'),
+    'Nočná kontrola musí pri zlyhaní zapísať report ZLYHANIE a push reportu opakovať'
+);
+foreach (['deploy.yml' => $deployWorkflow, 'verify-db.yml' => $verifyWorkflow, 'retention-cleanup.yml' => $retentionWorkflow] as $manualWorkflowName => $manualWorkflow) {
+    expectTrue(
+        preg_match('~^on:\s*\n(\s+workflow_dispatch:.*\n)(?!\s+(push|schedule):)~m', $manualWorkflow) === 1
+            && preg_match('~^\s+(push|schedule):~m', $manualWorkflow) !== 1,
+        "{$manualWorkflowName} smie byť iba ručná záloha bez push a schedule spúšťača"
+    );
+}
+expectTrue(
+    str_contains($deployScript, 'git archive --format=tar HEAD')
+        && str_contains($deployScript, 'git status --porcelain --untracked-files=no')
+        && str_contains($deployScript, '--dry-run --itemize-changes')
+        && str_contains($deployScript, "--exclude-from='\${STAGE}/.deployignore'"),
+    'hooks/deploy.sh musí vedieť nasadiť commitnutý HEAD bez lokálneho rsync a so suchým behom'
 );
 
 // Beh #24: SSH krok „Create remote environment config“ raz padol na
@@ -2705,10 +2738,10 @@ expectTrue(
     'Živá časť .audit.md nesmie uvádzať neexistujúci font Merriweather ani preconnect na externé fonty a musí uvádzať aktuálne súbory jadra'
 );
 expectTrue(
-    str_contains($doAuditDoc, 'retention-cleanup.yml')
+    str_contains($doAuditDoc, 'hooks/ops/crontab.txt')
         && str_contains($doAuditDoc, 'scripts/retention_cleanup.php')
         && str_contains($doAuditDoc, 'PII_TABLES'),
-    '.doaudit.md musí dokumentovať denný retenčný workflow a všetky tabuľky PII_TABLES'
+    '.doaudit.md musí dokumentovať dennú retenciu v crontabe servera a všetky tabuľky PII_TABLES'
 );
 
 if ($failures !== []) {
