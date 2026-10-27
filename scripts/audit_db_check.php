@@ -463,6 +463,54 @@ foreach (PII_TABLES as $piiTable => $timestampColumn) {
         );
     }
 }
+
+// Ručné kópie PII tabuliek (napr. `access_logs_backup_…`) retenčné čistenie
+// nevidí, takže osobné údaje v nich môžu prežiť sľúbenú lehotu. Vek najstaršieho
+// záznamu ide preto do nálezov, nie len do INFO o neznámej tabuľke.
+$piiRetentionDays = [
+    'access_logs' => $retentionDays,
+    'contact_messages' => $contactRetentionDays,
+    'admin_audit_log' => $auditRetentionDays,
+    'form_rate_limit' => intdiv($rateLimitRetentionHours, 24),
+];
+foreach ($unexpectedTables as $unexpectedTable) {
+    if (preg_match('~^[A-Za-z0-9_]+$~', $unexpectedTable) !== 1) {
+        continue;
+    }
+    foreach (PII_TABLES as $piiTable => $timestampColumn) {
+        if (!str_starts_with($unexpectedTable, $piiTable . '_')) {
+            continue;
+        }
+        $hasTimestamp = (int) fetchOne(
+            $pdo,
+            'SELECT COUNT(*) FROM information_schema.columns
+              WHERE table_schema = DATABASE() AND table_name = :table AND column_name = :column',
+            ['table' => $unexpectedTable, 'column' => $timestampColumn]
+        );
+        $copyRows = (int) fetchOne($pdo, 'SELECT COUNT(*) FROM `' . $unexpectedTable . '`');
+        if ($copyRows === 0) {
+            break;
+        }
+        $copyAgeDays = $hasTimestamp > 0
+            ? (int) fetchOne(
+                $pdo,
+                'SELECT TIMESTAMPDIFF(DAY, MIN(`' . $timestampColumn . '`), NOW()) FROM `' . $unexpectedTable . '`'
+            )
+            : null;
+        out('| `' . $unexpectedTable . '` (kópia) | ' . $copyRows . ' | — | ' . ($copyAgeDays ?? '?') . ' |');
+
+        $limitDays = $piiRetentionDays[$piiTable] ?? null;
+        $overLimit = $copyAgeDays !== null && $limitDays !== null && $copyAgeDays > $limitDays;
+        finding(
+            $overLimit ? 'STREDNÉ' : 'NÍZKE',
+            "Kópia `{$unexpectedTable}` z tabuľky `{$piiTable}` (počet záznamov: {$copyRows}; "
+            . 'vek najstaršieho: ' . ($copyAgeDays === null ? 'neznámy' : "{$copyAgeDays} d.")
+            . ($limitDays !== null ? "; retencia: {$limitDays} d." : '')
+            . ') nepodlieha retenčnému čisteniu. Po overení ju treba zmazať.'
+        );
+        break;
+    }
+}
 out();
 if ($contactSummary !== []) {
     foreach ($contactSummary as $line) {

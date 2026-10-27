@@ -1551,6 +1551,12 @@ expectTrue(
     str_contains($dbCheckSource, '$serverMajorMinor') && !str_contains($dbCheckSource, '$rawVersion . '),
     'audit_db_check.php musí verziu servera skrátiť na hlavné číslo, nie ju vypísať celú'
 );
+// Ručné kópie PII tabuliek retenčné čistenie nevidí; ich vek musí ísť do nálezov.
+expectTrue(
+    str_contains($dbCheckSource, "str_starts_with(\$unexpectedTable, \$piiTable . '_')")
+        && str_contains($dbCheckSource, "\$overLimit ? 'STREDNÉ' : 'NÍZKE'"),
+    'audit_db_check.php musí hlásiť vek kópií PII tabuliek ako nález'
+);
 // Retenčná tabuľka reportu sa kreslí v cykle nad PII_TABLES. Akýkoľvek iný
 // výstup v tom cykle (napr. súhrn kontaktných správ) Markdown tabuľku ukončí
 // a zvyšné riadky v reporte vypadnú ako voľný text (Beh #30).
