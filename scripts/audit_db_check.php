@@ -86,6 +86,7 @@ const EXPECTED_MIGRATIONS = [
     '2026102504_same_death_three_acts_title',
     '2026102601_mercury_claude_three_tasks_article',
     '2026102701_drop_manual_pii_backups',
+    '2026102702_sanitizer_tags_refresh',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

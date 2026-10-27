@@ -694,6 +694,15 @@ function applySchemaMigrations(PDO $pdo): void {
             $pdo->exec('DROP TABLE IF EXISTS `access_logs_backup_2026_10_24_tests`');
             $pdo->exec('DROP TABLE IF EXISTS `form_rate_limit_backup_2026_10_24_tests`');
         },
+        // Sanitizér rozbaľoval tabuľky, `<sup>`, `<sub>`, `<code>` a `<small>`:
+        // tabuľky v článku Mercury a Claude sa zliali do textu a 1 − 0,95^10
+        // sa zobrazovalo ako „1 − 0,9510“. Pred migráciou sa všetkých 350
+        // riadkov v DB zhodovalo so seedmi (Beh #47), obnova nič neprepíše.
+        '2026102702_sanitizer_tags_refresh' => static function (PDO $pdo): void {
+            foreach (glob(__DIR__ . '/content/articles/*.php') ?: [] as $articlePath) {
+                refreshPublishedArticleTextFromFile($pdo, $articlePath);
+            }
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

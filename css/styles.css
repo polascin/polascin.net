@@ -2037,6 +2037,41 @@ a.lang-chip {
   margin-bottom: 0.75rem;
 }
 
+.article-body .table-responsive {
+  margin: 1.5rem 0;
+}
+
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.article-body caption {
+  caption-side: top;
+  padding-bottom: 0.5rem;
+  font-weight: 600;
+  text-align: start;
+}
+
+.article-body th,
+.article-body td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  text-align: start;
+  vertical-align: top;
+}
+
+.article-body td {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.article-body thead th {
+  background: var(--bg-surface);
+}
+
 .library-topic {
   margin-top: var(--spacing-lg);
   margin-bottom: 0;

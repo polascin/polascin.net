@@ -75,7 +75,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
   <section id="home" class="hero">
     <div class="container">
       <div class="hero-content">
-        <img src="CrystalKidney.png" alt="<?= te('home.logo_alt') ?>" class="profile-img" loading="eager">
+        <img src="CrystalKidney-640.webp" alt="<?= te('home.logo_alt') ?>" class="profile-img" width="640" height="640" loading="eager" fetchpriority="high">
         <h1 class="hero-title"><?= htmlspecialchars($heroTitle, ENT_QUOTES, 'UTF-8') ?></h1>
         <p class="hero-subtitle"><?= htmlspecialchars($heroSubtitle, ENT_QUOTES, 'UTF-8') ?></p>
         <div class="hero-buttons">

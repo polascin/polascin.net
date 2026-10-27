@@ -108,6 +108,51 @@ expectSame(
     'Úvodné nepárové </div> nesmie zahodiť celý vstup'
 );
 
+// Tabuľky sa zachovajú a dostanú posuvný obal práve raz (Beh #47).
+$tableHtml = '<table><caption>Čas</caption><thead><tr><th scope="col" onclick="x()">Úloha</th></tr></thead>'
+    . '<tbody><tr><th scope="evil">A</th><td colspan="2" rowspan="999" style="x">4.6</td></tr></tbody></table>'
+    . '<p><small>Zdroj</small></p>';
+$tableSanitized = sanitizeHtmlContent($tableHtml);
+expectTrue(
+    str_contains($tableSanitized, '<div class="table-responsive"><table><caption>Čas</caption><thead><tr><th scope="col">Úloha</th>')
+        && str_contains($tableSanitized, '<th>A</th><td colspan="2">4.6</td>')
+        && str_contains($tableSanitized, '<small>Zdroj</small>'),
+    'Sanitizér musí zachovať tabuľku, bezpečné atribúty buniek a <small>'
+);
+expectTrue(
+    !str_contains($tableSanitized, 'onclick') && !str_contains($tableSanitized, 'style=') && !str_contains($tableSanitized, '999'),
+    'Sanitizér musí z tabuľky odstrániť nebezpečné a neplatné atribúty'
+);
+expectSame($tableSanitized, sanitizeHtmlContent($tableSanitized), 'Opakovaná sanitizácia nesmie tabuľku zabaliť druhýkrát');
+expectSame(
+    '<p>1 − 0,95<sup>10</sup>, H<sub>2</sub>O, <code>bot_guard.php</code></p>',
+    sanitizeHtmlContent('<p>1 − 0,95<sup>10</sup>, H<sub>2</sub>O, <code>bot_guard.php</code></p>'),
+    'Sanitizér musí zachovať <sup>, <sub> a <code>'
+);
+// Žiadny seed článku nesmie použiť značku, ktorú sanitizér rozbalí na text.
+$sanitizerTagProbe = '';
+foreach (glob(dirname(__DIR__) . '/content/articles/*.php') ?: [] as $seedArticlePath) {
+    $seedArticle = require $seedArticlePath;
+    foreach ($seedArticle['translations'] as $seedLang => $seedPayload) {
+        $seedHtml = (string) ($seedPayload['content'] ?? '');
+        preg_match_all('~<([a-z][a-z0-9]*)\b~i', $seedHtml, $seedTags);
+        preg_match_all('~<([a-z][a-z0-9]*)\b~i', sanitizeHtmlContent($seedHtml), $cleanTags);
+        $lostTags = array_diff(array_unique(array_map('strtolower', $seedTags[1])), array_map('strtolower', $cleanTags[1]));
+        if ($lostTags !== []) {
+            $sanitizerTagProbe .= basename($seedArticlePath) . " ({$seedLang}): " . implode(', ', $lostTags) . '; ';
+        }
+    }
+}
+expectSame('', $sanitizerTagProbe, 'Seed článku obsahuje značky, ktoré sanitizér zahodí');
+$mercuryArticle = require dirname(__DIR__) . '/content/articles/mercury-claude-tri-ulohy-jeden-beh.php';
+foreach ($mercuryArticle['translations'] as $mercuryLang => $mercuryPayload) {
+    expectSame(
+        3,
+        substr_count(sanitizeHtmlContent((string) $mercuryPayload['content']), '<table>'),
+        "Článok Mercury a Claude ({$mercuryLang}) musí po sanitizácii mať tri tabuľky"
+    );
+}
+
 // Medzery v ceste URL sa musia zachovať, riadiace znaky nie (Beh #4).
 expectSame(
     'https://example.com/môj súbor.pdf',
@@ -1981,6 +2026,14 @@ expectTrue(
     str_contains($authSource, "str_starts_with(\$requestPath, \$scriptPath . '/')")
         && strpos($authSource, "\$scriptPath . '/')") < strpos($authSource, 'session_start()'),
     'auth.php musí adresy s PATH_INFO presmerovať na čistý skript ešte pred session'
+);
+// CrystalKidney.png má 1 MB; hero a ikony musia mať zmenšené verzie (Beh #46).
+expectTrue(
+    !str_contains((string) file_get_contents(dirname(__DIR__) . '/head_meta.php'), 'CrystalKidney.png')
+        && !str_contains((string) file_get_contents(dirname(__DIR__) . '/index.php'), 'CrystalKidney.png')
+        && is_file(dirname(__DIR__) . '/CrystalKidney-640.webp')
+        && filesize(dirname(__DIR__) . '/CrystalKidney-640.webp') < 150000,
+    'Šablóny nesmú načítavať 1 MB CrystalKidney.png'
 );
 // Apache `Header always set` prepíše hlavičku, ktorú poslalo PHP. Na produkcii
 // tak súbory knižnice strácali noindex a admin stránky X-Frame-Options DENY.
