@@ -20,6 +20,37 @@ unset($requestedScript, $executedFile);
 require_once __DIR__ . '/config_loader.php';
 require_once __DIR__ . '/helpers.php';
 
+// Aplikácia pozná len GET, HEAD a POST. Ostatné metódy (PUT, DELETE, OPTIONS)
+// dostávali 200 s celou stránkou a novou session; odmietnu sa ešte pred ňou.
+if (PHP_SAPI !== 'cli' && !in_array(strtoupper((string) ($_SERVER['REQUEST_METHOD'] ?? 'GET')), ['GET', 'HEAD', 'POST'], true)) {
+    http_response_code(405);
+    header('Allow: GET, HEAD, POST');
+    header('Content-Type: text/plain; charset=UTF-8');
+    header('X-Content-Type-Options: nosniff');
+    header('Cache-Control: no-store');
+    exit('Method Not Allowed');
+}
+
+// Produkcia (PHP-FPM za proxy) prijíma PATH_INFO napriek `AcceptPathInfo Off`:
+// `/login.php/x` vrátil stránku, na ktorej sa relatívne CSS a odkazy rozbili
+// a crawler dostal nekonečný priestor adries. Presmeruje sa na čistý skript.
+if (PHP_SAPI !== 'cli') {
+    $requestPath = (string) (parse_url((string) ($_SERVER['REQUEST_URI'] ?? ''), PHP_URL_PATH) ?? '');
+    $scriptPath = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? ''));
+    if ($scriptPath !== '' && str_starts_with($requestPath, $scriptPath . '/')) {
+        $cleanPath = basename($scriptPath) === 'index.php' ? dirname($scriptPath) : $scriptPath;
+        $cleanPath = rtrim(str_replace('\\', '/', $cleanPath), '/');
+        if ($cleanPath === '' || basename($scriptPath) === 'index.php') {
+            $cleanPath .= '/';
+        }
+        $queryString = (string) ($_SERVER['QUERY_STRING'] ?? '');
+        header('Location: ' . $cleanPath . ($queryString !== '' ? '?' . $queryString : ''), true, 301);
+        header('Cache-Control: no-store');
+        exit;
+    }
+    unset($requestPath, $scriptPath);
+}
+
 const SESSION_IDLE_TIMEOUT = 1800;
 const SESSION_ABSOLUTE_TIMEOUT = 28800;
 const SESSION_RENEWAL_INTERVAL = 900;

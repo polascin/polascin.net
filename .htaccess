@@ -9,7 +9,9 @@ DirectoryIndex index.php index.html
 # Pre statické súbory (fallback .html) sa nastavuje základná CSP nižšie, aby sa
 # nebila s PHP nonce politikou.
 <IfModule mod_headers.c>
-    Header always set X-Frame-Options "SAMEORIGIN"
+    # Hlavičky, ktoré PHP nastavuje podľa stránky, majú len `setifempty`:
+    # `set` by prepísal DENY na admin stránkach a noindex súborov knižnice.
+    Header always setifempty X-Frame-Options "SAMEORIGIN"
     Header always set X-Content-Type-Options "nosniff"
     Header always setifempty Referrer-Policy "strict-origin-when-cross-origin"
     <If "%{HTTPS} == 'on' || %{HTTP:X-Forwarded-Proto} == 'https'">
@@ -21,7 +23,7 @@ DirectoryIndex index.php index.html
     Header always set X-Permitted-Cross-Domain-Policies "none"
     # Výhrada proti použitiu obsahu na tréning AI (W3C TDM Reservation).
     Header always set TDM-Reservation "1"
-    Header always set X-Robots-Tag "noai, noimageai"
+    Header always setifempty X-Robots-Tag "noai, noimageai"
     Header always unset X-Powered-By
     Header unset X-Powered-By
 
