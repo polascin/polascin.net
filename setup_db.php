@@ -715,6 +715,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/lacnejsi-token-drazsi-ucet.php'
             );
         },
+        '2026102802_checkout_before_diagnosis_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/pokladna-pred-diagnozou.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

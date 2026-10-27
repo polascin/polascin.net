@@ -89,6 +89,7 @@ const EXPECTED_MIGRATIONS = [
     '2026102702_sanitizer_tags_refresh',
     '2026102703_cheaper_token_higher_bill_article',
     '2026102704_cheaper_token_ramp_not_gartner',
+    '2026102802_checkout_before_diagnosis_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

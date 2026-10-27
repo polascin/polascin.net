@@ -41,7 +41,7 @@ Ku každému príspevku vygeneruj a pripoj príjemnú, príťažlivú, výraznú
 
 Drž poradie z `.cursor/rules/blog-article-pipeline.mdc` a z `blog-article`: korektúra vrátane druhého prechodu a seed so všetkými jazykmi, obálka WebP a `php scripts/make_og_covers.php`, PNG na Disk, testy, commit, push, deploy, overenie produkcie, až potom sociálne siete. Článok nenechávaj čakať na Disk ani na siete.
 
-Sociálne príspevky uverejni s ilustráciou spôsobom z kroku 5 v `blog-article`. Účty sú https://x.com/polascin (@polascin), https://www.facebook.com/lubomir.polascin, https://www.linkedin.com/in/lubomirpolascin/ a https://www.threads.com/@lubomirpolascin. Ďalšie siete, ktoré ten krok už uvádza, nevynechávaj. Nové API nepridávaj.
+Sociálne príspevky uverejni s ilustráciou spôsobom z kroku 5 v `blog-article`. Povinné účty sú https://x.com/polascin (@polascin), https://www.facebook.com/lubomir.polascin, https://www.linkedin.com/in/lubomirpolascin/ a https://www.threads.com/@lubomirpolascin. Substack a Medium patria k úlohe len vtedy, keď o ne používateľ v tej istej úlohe výslovne požiada. Nové API nepridávaj.
 
 Lokálne nasadenie ide cez SSH alias `websupport` a lokálne nástroje. Commit označ `[skip deploy]`, aby starší workflow nespustil súbežný deploy. Migráciu over aj druhým, idempotentným behom.
 

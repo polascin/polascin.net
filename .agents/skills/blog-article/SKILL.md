@@ -27,14 +27,14 @@ Jazyky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk` (`app
 
 ## 2. Obálka
 
-- Použi dostupný nástroj imagegen. Ilustrácia preferenčne 16:10 podľa aktuálneho zadania, bez textu a log, fialová `#3d1a78` a tyrkys `#078d70`. Zachovaj najmenej 1200×675 a bez pridaného zrna, šumu či textúrnych prekrytí.
+- Použi dostupný nástroj imagegen. Ilustrácia preferenčne 16:10 podľa aktuálneho zadania, bez textu a log, fialová `#3d1a78` a tyrkys `#078d70`. Generátor dáva 16:9. Obálka na web je 1600×1000, stredový orez po zväčšení, rovnako ako posledné obálky. Zachovaj najmenej 1200×675 a bez pridaného zrna, šumu či textúrnych prekrytí.
 - Nástroj môže uložiť JPEG s príponou `.png` alebo `.jpg`. Podľa obsahu použi `imagecreatefromjpeg` alebo `imagecreatefrompng`. Výstup: `images/articles/{slug}.webp`, kvalita 82.
 - Potom `php scripts/make_og_covers.php`. JPEG dvojička `images/articles/og/{slug}.jpg` ide do commitu. Bez nej test spadne. WebP náhľad LinkedIn nezobrazí.
 
 ## 3. PNG na Google Disk
 
 - Z WebP urob skutočné PNG (`imagepng`, signatúra PNG, nie premenovaný JPEG).
-- Skopíruj na `G:\Môj disk\polascin.net – obálky blogu\` (účet polascin@gmail.com, priečinok `1MOa4l69tswsLmQB3ZmYAdoZd9gZ5aVas`). Over `image/png` a rozmery.
+- Skopíruj na `G:\Môj disk\polascin.net – obálky blogu\` (účet polascin@gmail.com, priečinok `1a_g8vTcMH3hIA2rECaV0aRVoPp3xfwFC`). Staršie ID `1MOa4l69tswsLmQB3ZmYAdoZd9gZ5aVas` je v koši. Over `image/png` a rozmery.
 - PNG necommituj. Lokálne tmp zmaž.
 
 ## 4. Test, deploy, produkcia
@@ -48,7 +48,7 @@ Jazyky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk` (`app
 
 ## 5. Sociálne siete
 
-Až po HTTP 200 kanonickej URL `https://polascin.net/article.php?slug=SLUG` (bez `lang=`). Text vždy slovenský, s touto URL a s ilustráciou. Heslo, passkey ani 2FA nehádaj. Dialóg nechaj otvorený, na danej sieti zastav a pokračuj ostatnými. Sieť, ktorá zlyhá, nahlás; web ostane live. Pred ďalším článkom skontroluj, či slug na profile už nie je.
+Až po HTTP 200 kanonickej URL `https://polascin.net/article.php?slug=SLUG` (bez `lang=`). Text vždy slovenský, s touto URL a s ilustráciou. Povinné siete sú X, Facebook, LinkedIn a Threads. Substack a Medium patria k úlohe len vtedy, keď o ne používateľ v tej istej úlohe výslovne požiada. Heslo, passkey ani 2FA nehádaj. Dialóg nechaj otvorený, na danej sieti zastav a pokračuj ostatnými. Sieť, ktorá zlyhá, nahlás; web ostane live. Pred ďalším článkom skontroluj, či slug na profile už nie je.
 
 Prehliadač: `cursor-ide-browser` (tabs → navigate → lock → interact → unlock). CDP `DOM.setFileInputFiles` je zakázané. Ak súbor inak nenahráš, uverejni text a kanonickú URL (OG JPEG z webu) a v reporte napíš, že lokálna príloha zlyhala.
 
