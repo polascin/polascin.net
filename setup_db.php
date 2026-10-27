@@ -703,6 +703,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 refreshPublishedArticleTextFromFile($pdo, $articlePath);
             }
         },
+        '2026102703_cheaper_token_higher_bill_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/lacnejsi-token-drazsi-ucet.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
