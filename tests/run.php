@@ -108,6 +108,31 @@ expectSame(
     'Úvodné nepárové </div> nesmie zahodiť celý vstup'
 );
 
+// Tabuľky sa zachovajú a dostanú posuvný obal práve raz (Beh #47).
+$tableHtml = '<table><caption>Čas</caption><thead><tr><th scope="col" onclick="x()">Úloha</th></tr></thead>'
+    . '<tbody><tr><th scope="evil">A</th><td colspan="2" rowspan="999" style="x">4.6</td></tr></tbody></table>'
+    . '<p><small>Zdroj</small></p>';
+$tableSanitized = sanitizeHtmlContent($tableHtml);
+expectTrue(
+    str_contains($tableSanitized, '<div class="table-responsive"><table><caption>Čas</caption><thead><tr><th scope="col">Úloha</th>')
+        && str_contains($tableSanitized, '<th>A</th><td colspan="2">4.6</td>')
+        && str_contains($tableSanitized, '<small>Zdroj</small>'),
+    'Sanitizér musí zachovať tabuľku, bezpečné atribúty buniek a <small>'
+);
+expectTrue(
+    !str_contains($tableSanitized, 'onclick') && !str_contains($tableSanitized, 'style=') && !str_contains($tableSanitized, '999'),
+    'Sanitizér musí z tabuľky odstrániť nebezpečné a neplatné atribúty'
+);
+expectSame($tableSanitized, sanitizeHtmlContent($tableSanitized), 'Opakovaná sanitizácia nesmie tabuľku zabaliť druhýkrát');
+$mercuryArticle = require dirname(__DIR__) . '/content/articles/mercury-claude-tri-ulohy-jeden-beh.php';
+foreach ($mercuryArticle['translations'] as $mercuryLang => $mercuryPayload) {
+    expectSame(
+        3,
+        substr_count(sanitizeHtmlContent((string) $mercuryPayload['content']), '<table>'),
+        "Článok Mercury a Claude ({$mercuryLang}) musí po sanitizácii mať tri tabuľky"
+    );
+}
+
 // Medzery v ceste URL sa musia zachovať, riadiace znaky nie (Beh #4).
 expectSame(
     'https://example.com/môj súbor.pdf',

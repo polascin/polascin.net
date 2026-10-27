@@ -293,22 +293,24 @@ $sources = <<<'HTML'
 <p><small><em>Ľubomír Polaščín: OpenCode, Mercury 3 / Claude Sonnet 5.5, T1 / T2 / T3. <a href="https://www.inceptionlabs.ai/blog/introducing-mercury-3">Inception Team: Diffusion at Scale: Introducing Mercury 3</a>. <a href="https://www.anthropic.com/claude-sonnet-5-5">Anthropic: Introducing Claude Sonnet 5.5</a>. <a href="https://www.ema.europa.eu/en/documents/product-information/pradaxa-epar-product-information_en.pdf">European Medicines Agency: Pradaxa, product information</a>. <a href="https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults">NIDDK: eGFR Equations for Adults, 2021 CKD-EPI Creatinine Equation</a>.</em></small></p>
 HTML;
 
-foreach ($translations as &$translation) {
+foreach ($translations as $lang => &$translation) {
     [$task, $seconds, $cost, $tokens, $t1, $t2, $t3, $total, $caption] = $translation['labels'];
+    // Desatinná čiarka ako v texte článku; bodku má len angličtina.
+    $number = static fn(string $value): string => $lang === 'en' ? $value : str_replace('.', ',', $value);
     $tables = '<table><caption>' . $caption . '</caption><thead><tr><th>' . $task
         . '</th><th>Mercury 3: ' . $seconds . '</th><th>Claude Sonnet 5.5: ' . $seconds . '</th></tr></thead><tbody>';
     foreach ([[$t1, '4.6', '9.1'], [$t2, '10.6', '24.2'], [$t3, '4.5', '13.6'], [$total, '19.7', '46.9']] as $row) {
-        $tables .= '<tr><th>' . $row[0] . '</th><td>' . $row[1] . '</td><td>' . $row[2] . '</td></tr>';
+        $tables .= '<tr><th>' . $row[0] . '</th><td>' . $number($row[1]) . '</td><td>' . $number($row[2]) . '</td></tr>';
     }
     $tables .= '</tbody></table><table><caption>' . $cost . '</caption><thead><tr><th>' . $task
         . '</th><th>Mercury 3</th><th>Claude Sonnet 5.5</th></tr></thead><tbody>';
     foreach ([[$t1, '0.00033', '0.0620'], [$t2, '0.00147', '0.0302'], [$t3, '0.00065', '0.0200'], [$total, '0.00245', '0.1122']] as $row) {
-        $tables .= '<tr><th>' . $row[0] . '</th><td>' . $row[1] . '</td><td>' . $row[2] . '</td></tr>';
+        $tables .= '<tr><th>' . $row[0] . '</th><td>' . $number($row[1]) . '</td><td>' . $number($row[2]) . '</td></tr>';
     }
     $tables .= '</tbody></table><table><caption>' . $tokens . '</caption><thead><tr><th>' . $task
         . '</th><th>Mercury 3</th><th>Claude Sonnet 5.5</th></tr></thead><tbody>';
     foreach ([[$t1, '100 + 346', '230 + 510'], [$t2, '680 + 3013', '1556 + 1173'], [$t3, '536 + 895', '922 + 789']] as $row) {
-        $tables .= '<tr><th>' . $row[0] . '</th><td>' . $row[1] . '</td><td>' . $row[2] . '</td></tr>';
+        $tables .= '<tr><th>' . $row[0] . '</th><td>' . $number($row[1]) . '</td><td>' . $number($row[2]) . '</td></tr>';
     }
     $translation['content'] = $translation['intro'] . $tables . $translation['body'] . $sources;
     unset($translation['intro'], $translation['body'], $translation['labels']);

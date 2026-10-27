@@ -427,7 +427,8 @@ function copySanitizedHtmlChildren(DOMNode $source, DOMNode $destination, DOMDoc
     $allowedTags = [
         'p', 'br', 'hr', 'h2', 'h3', 'h4', 'h5', 'h6',
         'strong', 'b', 'em', 'i', 'u', 'ul', 'ol', 'li',
-        'blockquote', 'a', 'span', 'img', 'div',
+        'blockquote', 'a', 'span', 'img', 'div', 'small',
+        'table', 'caption', 'thead', 'tbody', 'tfoot', 'tr', 'th', 'td',
     ];
     $dropWithContents = [
         'script', 'style', 'iframe', 'object', 'embed', 'template',
@@ -437,6 +438,8 @@ function copySanitizedHtmlChildren(DOMNode $source, DOMNode $destination, DOMDoc
     $allowedTagAttrs = [
         'a' => ['href'],
         'img' => ['src', 'alt', 'title', 'loading'],
+        'th' => ['scope', 'colspan', 'rowspan'],
+        'td' => ['colspan', 'rowspan'],
     ];
 
     foreach ($source->childNodes as $child) {
@@ -483,6 +486,10 @@ function copySanitizedHtmlChildren(DOMNode $source, DOMNode $destination, DOMDoc
                 continue;
             } elseif ($name === 'loading' && !in_array(strtolower($value), ['eager', 'lazy'], true)) {
                 continue;
+            } elseif ($name === 'scope' && !in_array(strtolower($value), ['row', 'col', 'rowgroup', 'colgroup'], true)) {
+                continue;
+            } elseif (($name === 'colspan' || $name === 'rowspan') && preg_match('/^[1-9][0-9]?$/D', $value) !== 1) {
+                continue;
             }
 
             $cleanElement->setAttribute($name, $value);
@@ -497,7 +504,20 @@ function copySanitizedHtmlChildren(DOMNode $source, DOMNode $destination, DOMDoc
             }
         }
 
-        $destination->appendChild($cleanElement);
+        // Tabuľka dostane posuvný obal, aby na úzkom displeji nerozťahovala
+        // stránku. Obsah sa sanitizuje pri uložení aj pri zobrazení, preto sa
+        // už zabalená tabuľka nebalí druhýkrát.
+        $alreadyWrapped = $source instanceof DOMElement
+            && strtolower($source->tagName) === 'div'
+            && preg_match('/(?:^|\s)table-responsive(?:\s|$)/', $source->getAttribute('class')) === 1;
+        if ($tag === 'table' && !$alreadyWrapped) {
+            $wrapper = $cleanDom->createElement('div');
+            $wrapper->setAttribute('class', 'table-responsive');
+            $wrapper->appendChild($cleanElement);
+            $destination->appendChild($wrapper);
+        } else {
+            $destination->appendChild($cleanElement);
+        }
         if (!in_array($tag, ['br', 'hr', 'img'], true)) {
             copySanitizedHtmlChildren($child, $cleanElement, $cleanDom);
         }

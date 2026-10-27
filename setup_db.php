@@ -694,6 +694,14 @@ function applySchemaMigrations(PDO $pdo): void {
             $pdo->exec('DROP TABLE IF EXISTS `access_logs_backup_2026_10_24_tests`');
             $pdo->exec('DROP TABLE IF EXISTS `form_rate_limit_backup_2026_10_24_tests`');
         },
+        // Sanitizér tabuľky nepoznal a pri prvom seede ich rozbalil na
+        // zlepený text. Po jeho rozšírení sa obsah článku uloží znova.
+        '2026102702_mercury_claude_tables' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/mercury-claude-tri-ulohy-jeden-beh.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
