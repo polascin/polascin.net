@@ -427,7 +427,7 @@ function copySanitizedHtmlChildren(DOMNode $source, DOMNode $destination, DOMDoc
     $allowedTags = [
         'p', 'br', 'hr', 'h2', 'h3', 'h4', 'h5', 'h6',
         'strong', 'b', 'em', 'i', 'u', 'ul', 'ol', 'li',
-        'blockquote', 'a', 'span', 'img', 'div', 'small',
+        'blockquote', 'a', 'span', 'img', 'div', 'small', 'sup', 'sub', 'code',
         'table', 'caption', 'thead', 'tbody', 'tfoot', 'tr', 'th', 'td',
     ];
     $dropWithContents = [

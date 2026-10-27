@@ -124,6 +124,26 @@ expectTrue(
     'Sanitizér musí z tabuľky odstrániť nebezpečné a neplatné atribúty'
 );
 expectSame($tableSanitized, sanitizeHtmlContent($tableSanitized), 'Opakovaná sanitizácia nesmie tabuľku zabaliť druhýkrát');
+expectSame(
+    '<p>1 − 0,95<sup>10</sup>, H<sub>2</sub>O, <code>bot_guard.php</code></p>',
+    sanitizeHtmlContent('<p>1 − 0,95<sup>10</sup>, H<sub>2</sub>O, <code>bot_guard.php</code></p>'),
+    'Sanitizér musí zachovať <sup>, <sub> a <code>'
+);
+// Žiadny seed článku nesmie použiť značku, ktorú sanitizér rozbalí na text.
+$sanitizerTagProbe = '';
+foreach (glob(dirname(__DIR__) . '/content/articles/*.php') ?: [] as $seedArticlePath) {
+    $seedArticle = require $seedArticlePath;
+    foreach ($seedArticle['translations'] as $seedLang => $seedPayload) {
+        $seedHtml = (string) ($seedPayload['content'] ?? '');
+        preg_match_all('~<([a-z][a-z0-9]*)\b~i', $seedHtml, $seedTags);
+        preg_match_all('~<([a-z][a-z0-9]*)\b~i', sanitizeHtmlContent($seedHtml), $cleanTags);
+        $lostTags = array_diff(array_unique(array_map('strtolower', $seedTags[1])), array_map('strtolower', $cleanTags[1]));
+        if ($lostTags !== []) {
+            $sanitizerTagProbe .= basename($seedArticlePath) . " ({$seedLang}): " . implode(', ', $lostTags) . '; ';
+        }
+    }
+}
+expectSame('', $sanitizerTagProbe, 'Seed článku obsahuje značky, ktoré sanitizér zahodí');
 $mercuryArticle = require dirname(__DIR__) . '/content/articles/mercury-claude-tri-ulohy-jeden-beh.php';
 foreach ($mercuryArticle['translations'] as $mercuryLang => $mercuryPayload) {
     expectSame(

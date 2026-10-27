@@ -702,6 +702,17 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/mercury-claude-tri-ulohy-jeden-beh.php'
             );
         },
+        // `<sup>` sa rozbaľoval, takže 1 − 0,95^10 sa zobrazovalo ako
+        // „1 − 0,9510“; rovnako zanikali exponenty a `<code>`.
+        '2026102703_sup_sub_code_articles' => static function (PDO $pdo): void {
+            foreach ([
+                'v-norme-chyba-uacr.php',
+                'zlyhanie-oblicky-interval-osem-tyzdnov.php',
+                'ochrana-webu-pred-ai-aj-pred-vlastnou.php',
+            ] as $articleFile) {
+                refreshPublishedArticleTextFromFile($pdo, __DIR__ . '/content/articles/' . $articleFile);
+            }
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

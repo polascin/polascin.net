@@ -87,6 +87,7 @@ const EXPECTED_MIGRATIONS = [
     '2026102601_mercury_claude_three_tasks_article',
     '2026102701_drop_manual_pii_backups',
     '2026102702_mercury_claude_tables',
+    '2026102703_sup_sub_code_articles',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
