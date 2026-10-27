@@ -1970,6 +1970,13 @@ expectTrue(
         && str_contains($htaccessRules, 'Header always setifempty X-Robots-Tag "noai, noimageai"'),
     '.htaccess musí výhradu TDM a noai posielať aj na statické súbory'
 );
+expectTrue(
+    str_contains($authSource, "['GET', 'HEAD', 'POST']")
+        && str_contains($authSource, 'http_response_code(405);')
+        && str_contains($authSource, "header('Allow: GET, HEAD, POST');")
+        && strpos($authSource, 'http_response_code(405);') < strpos($authSource, 'session_start()'),
+    'auth.php musí odmietnuť iné metódy než GET, HEAD a POST ešte pred session'
+);
 // Apache `Header always set` prepíše hlavičku, ktorú poslalo PHP. Na produkcii
 // tak súbory knižnice strácali noindex a admin stránky X-Frame-Options DENY.
 foreach (['X-Frame-Options', 'Referrer-Policy', 'X-Robots-Tag'] as $phpOwnedHeader) {

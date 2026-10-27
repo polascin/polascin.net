@@ -20,6 +20,17 @@ unset($requestedScript, $executedFile);
 require_once __DIR__ . '/config_loader.php';
 require_once __DIR__ . '/helpers.php';
 
+// Aplikácia pozná len GET, HEAD a POST. Ostatné metódy (PUT, DELETE, OPTIONS)
+// dostávali 200 s celou stránkou a novou session; odmietnu sa ešte pred ňou.
+if (PHP_SAPI !== 'cli' && !in_array(strtoupper((string) ($_SERVER['REQUEST_METHOD'] ?? 'GET')), ['GET', 'HEAD', 'POST'], true)) {
+    http_response_code(405);
+    header('Allow: GET, HEAD, POST');
+    header('Content-Type: text/plain; charset=UTF-8');
+    header('X-Content-Type-Options: nosniff');
+    header('Cache-Control: no-store');
+    exit('Method Not Allowed');
+}
+
 const SESSION_IDLE_TIMEOUT = 1800;
 const SESSION_ABSOLUTE_TIMEOUT = 28800;
 const SESSION_RENEWAL_INTERVAL = 900;
