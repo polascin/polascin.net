@@ -1967,9 +1967,18 @@ expectTrue(
 );
 expectTrue(
     str_contains($htaccessRules, 'Header always set TDM-Reservation "1"')
-        && str_contains($htaccessRules, 'Header always set X-Robots-Tag "noai, noimageai"'),
+        && str_contains($htaccessRules, 'Header always setifempty X-Robots-Tag "noai, noimageai"'),
     '.htaccess musí výhradu TDM a noai posielať aj na statické súbory'
 );
+// Apache `Header always set` prepíše hlavičku, ktorú poslalo PHP. Na produkcii
+// tak súbory knižnice strácali noindex a admin stránky X-Frame-Options DENY.
+foreach (['X-Frame-Options', 'Referrer-Policy', 'X-Robots-Tag'] as $phpOwnedHeader) {
+    expectTrue(
+        preg_match('/^\s*Header\s+(always\s+)?set\s+' . preg_quote($phpOwnedHeader, '/') . '\b/mi', $htaccessRules) !== 1
+            && str_contains($htaccessRules, 'Header always setifempty ' . $phpOwnedHeader . ' '),
+        ".htaccess nesmie prepísať hlavičku {$phpOwnedHeader}, ktorú nastavuje PHP"
+    );
+}
 foreach (['index.html', 'privacy.html', 'terms.html'] as $tdmFallback) {
     expectTrue(
         str_contains((string) file_get_contents(dirname(__DIR__) . '/' . $tdmFallback), 'name="tdm-reservation" content="1"')
