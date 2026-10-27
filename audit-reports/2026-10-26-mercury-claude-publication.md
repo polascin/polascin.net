@@ -20,16 +20,16 @@ Uverejnené 2026-10-27 cez Chrome po schválení textu majiteľom. Pred uverejne
 - X @polascin: https://x.com/polascin/status/2114974124712059038 (účet je chránený, príspevok vidia sledovatelia)
 - Facebook lubomir.polascin (verejné): https://www.facebook.com/lubomir.polascin/posts/pfbid0h7i4KnBHUZ4iApEEVVVEBENGYXUpY3VK9tX2X7b2yr3bVaTxNw2EH1FpggR1HPc1l
 - LinkedIn lubomirpolascin: https://www.linkedin.com/feed/update/urn:li:share:7520742317906087936/
-- Threads @lubomirpolascin: neuverejnené, Chrome nebol prihlásený. Ostáva otvorené.
+- Threads @lubomirpolascin: https://www.threads.com/@lubomirpolascin/post/De_WAaICKxH (uverejnené 2026-10-27 o 8:40 s textom pre X, po prihlásení majiteľa)
 
 Náhľad odkazu nesie og:image a anglický titulok (crawlery dostávajú `lang=en`), rovnako ako pri predchádzajúcich príspevkoch. Ponaučenie: Facebook načítava náhľad pri každom napísanom znaku adresy. Dávka požiadaviek spustila na hostingu limit 429 (197 odpovedí 429 pre facebookexternalhit) a náhľad ukázal „429 Too Many Requests“. Oprava: Sharing Debugger „Scrape Again“ po krátkej pauze a adresu do editora vložiť naraz zo schránky, nie písať po znakoch.
 
-Pripravený text pre X a Threads:
+Text pre X a Threads:
 
 19,7 sekundy oproti 46,9. Mercury 3 bol v troch úlohách rýchlejší a lacnejší než Claude Sonnet 5.5. Jeden beh však neurčí celkovú kvalitu. Prepočítal som náklady aj klinický príklad.
 https://polascin.net/article.php?slug=mercury-claude-tri-ulohy-jeden-beh
 
-Pripravený text pre Facebook a LinkedIn:
+Text pre Facebook a LinkedIn:
 
 Na tri rovnaké zadania potreboval Mercury 3 spolu 19,7 sekundy. Claude Sonnet 5.5 potreboval 46,9. Rozdiel v zaznamenaných nákladoch bol približne 45-násobný, no časť tvoril prvý zápis do cache.
 
