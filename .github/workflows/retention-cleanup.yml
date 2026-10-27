@@ -1,9 +1,8 @@
 name: Production retention cleanup
 
+# Plánovaný beh prevzal crontab na serveri (`hooks/ops/crontab.txt`). Workflow
+# zostáva iba ako ručná záloha.
 on:
-  schedule:
-    # 20:17 UTC = 22:17 CEST / 21:17 CET; mimo celej hodiny kvôli frontám.
-    - cron: "17 20 * * *"
   workflow_dispatch:
     inputs:
       dry_run:

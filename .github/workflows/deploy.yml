@@ -1,9 +1,8 @@
 name: Deploy to polascin.net
 
+# Vývoj nezávisí od GitHubu: nasadzuje sa lokálne cez `hooks/deploy.sh`
+# (DEPLOY.md). Workflow zostáva iba ako ručná záloha, push ho nespúšťa.
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch: {}
 
 permissions:

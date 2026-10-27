@@ -1,9 +1,15 @@
 # Deploy – polascin.net
 
-Repozitár obsahuje dva spôsoby nasadenia:
+Vývoj, nasadenie aj nočné úlohy nezávisia od GitHubu (od Behu #49):
 
-1. **GitHub Actions** – automatický deploy po pushi do `main` vetvy.
-2. **Lokálny `hooks/deploy.sh`** – ručný deploy z vývojového počítača cez SSH/SFTP.
+1. **Lokálny `hooks/deploy.sh`** – jediná bežná cesta nasadenia, z vývojového
+   počítača cez SSH alias `websupport`. Push do žiadneho remotu nič nenasadzuje.
+2. **Crontab na serveri** – retenčné čistenie a nočná kontrola DB
+   (sekcia „Nočné úlohy na serveri“).
+3. **Git remote `websupport`** – repozitár na hostingu mimo web rootu. GitHub
+   (`origin`) je iba zrkadlo a jeho výpadok vývoj nezastaví.
+4. **GitHub Actions** – workflowy zostali iba ako ručná záloha
+   (`workflow_dispatch`), bez spúšťania pushom alebo plánom.
 
 Oba spôsoby odmietnu prázdnu, relatívnu alebo koreňovú (`/`) cieľovú cestu. Pred
 synchronizáciou tiež overia, že vzdialený adresár už existuje. Je to bezpečnostná
@@ -18,7 +24,46 @@ auditné MD, README, ukážkový aj lokálny env súbor, `private/` a pod.). Po
 synchronizácii odstráni presne pomenované staré repozitárové súbory, ktoré mohli
 ostať z dávnejšieho manuálneho deployu; obsah `private/` sa nemaže.
 
-## GitHub Actions
+## Git remote na serveri
+
+Repozitár `~/git/polascin.net.git` na hostingu je holý, mimo web rootu, so
+zakázaným force-pushom (`receive.denyNonFastForwards`) a mazaním vetiev
+(`receive.denyDeletes`). Na vývojovom stroji:
+
+```bash
+git remote add websupport websupport:git/polascin.net.git
+git pull websupport main
+git push websupport main
+git push origin main   # zrkadlo na GitHub, keď je dostupný
+```
+
+Nočná kontrola DB commituje report do `websupport` `main`, preto pred prácou
+vždy `git pull websupport main`.
+
+## Nočné úlohy na serveri
+
+[`hooks/ops/crontab.txt`](hooks/ops/crontab.txt) spúšťa
+[`hooks/ops/nightly.sh`](hooks/ops/nightly.sh) priamo z vetvy `main`
+v repozitári na serveri: o 21:17 retenciu, o 21:37 read-only kontrolu DB
+(Europe/Bratislava). Kontrola zapíše `audit-reports/db-latest.md` a commitne
+ho do `main` na serveri. Úlohy aj nasadenie zdieľajú zámok `private/ops.lock`.
+Logy sú v `private/ops-retention.log` a `private/ops-verify-db.log`.
+
+Inštalácia (crontab na serveri obsahuje aj úlohy iných projektov, preto iba
+pridať blok medzi značkami `BEGIN/END polascin.net ops`, po zálohe):
+
+```bash
+ssh websupport 'crontab -l > ~/crontab.bak-$(date +%Y%m%d-%H%M%S)'
+```
+
+Ručné spustenie a náhľad retencie bez mazania:
+
+```bash
+ssh websupport 'bash -s verify-db' < hooks/ops/nightly.sh
+ssh websupport 'RETENTION_DRY_RUN=true bash -s retention' < hooks/ops/nightly.sh
+```
+
+## GitHub Actions (iba ručná záloha)
 
 ### Nastavenie secrets
 
@@ -50,7 +95,9 @@ pre web root `/data/uid12345/www` je to `/data/uid12345/private/polascin.env.ini
 
 ### Aktivácia
 
-Workflow `.github/workflows/deploy.yml` sa spustí automaticky po pushi do `main`. Ak chceš pushnúť bez deployu, použi v commit message `[skip deploy]`.
+Workflow `.github/workflows/deploy.yml` sa pushom nespúšťa, iba ručne cez
+`workflow_dispatch`. Značka `[skip deploy]` v commitoch zostáva ako popis
+pre čitateľa histórie.
 
 Pred nasadením sa vždy skontroluje syntax deploy skriptu, všetkých sledovaných
 PHP súborov a vlastných JavaScript súborov a spustí sa `php tests/run.php`.
@@ -68,8 +115,9 @@ Workflow podporuje aj `workflow_dispatch`, takže ho môžeš spustiť ručne z 
 
 ### Automatické retenčné mazanie
 
-Workflow `.github/workflows/retention-cleanup.yml` sa spúšťa denne a cez SSH
-vykoná `scripts/retention_cleanup.php` priamo nad produkčnou databázou. Skript
+Denné mazanie spúšťa crontab na serveri (`nightly.sh retention`), workflow
+`.github/workflows/retention-cleanup.yml` je iba ručná záloha. Oba vykonajú
+`scripts/retention_cleanup.php` priamo nad produkčnou databázou. Skript
 maže iba záznamy staršie než nakonfigurovaná lehota a vypisuje len počty, nie
 obsah osobných údajov. Ručné spustenie podporuje voľbu `dry_run`, ktorá celú
 transakciu vráti späť.
@@ -136,8 +184,14 @@ Ak nepoužiješ explicitný `known_hosts` súbor, lokálny skript predvolene pou
 
 Z rootu repozitára:
 
+Ak na stroji chýba `rsync` (Git Bash na Windows), skript prenesie
+`git archive HEAD` cez SSH do dočasného adresára v `private/` a `rsync`
+spustí na serveri s porovnaním obsahu (`-c`). Nasadzuje sa iba commitnutý
+stav; necommitnuté zmeny skript odmietne. V tomto režime `--dry-run` naozaj
+porovná server s HEAD a vypíše, čo by sa zmenilo, bez zásahu do web rootu.
+
 ```bash
-# Iba náhľad
+# Náhľad zmien (v režime archive porovnanie so serverom)
 hooks/deploy.sh --dry-run
 
 # Skutočný deploy (iba súbory)
