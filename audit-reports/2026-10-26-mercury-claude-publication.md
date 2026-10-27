@@ -13,9 +13,16 @@ Verejne cez curl overené všetky jazykové URL: HTTP 200, zodpovedajúce titulk
 Obrázok: images/articles/mercury-claude-tri-ulohy-jeden-beh.webp, 1600 × 1000. OG JPEG v images/articles/og/. PNG na Disku účtu polascin@gmail.com, účet overený konektorom. Cloudový súbor overený vyhľadávaním, MIME image/png:
 https://drive.google.com/file/d/1zA-iTKr5_CNl4-eQSd_vJ_EAwnt79Hxi/view
 
-## Sociálne siete zostávajú otvorené
+## Sociálne siete
 
-X @polascin, Facebook lubomir.polascin, LinkedIn lubomirpolascin a Threads @lubomirpolascin: nič nebolo publikované. Computer Use sa bezpečnostne zastavil, pretože nedokázal dostatočne spoľahlivo určiť aktuálnu URL v Chrome. Obmedzenie nebolo obchádzané. Pri obnovení najprv skontrolovať profily kvôli duplicite, potom pridať slovenský text, kanonickú URL a obrázok, overiť publikáciu a uložiť permalink. Slug zatiaľ nepatrí do zoznamu už publikovaných príspevkov na X.
+Uverejnené 2026-10-27 cez Chrome po schválení textu majiteľom. Pred uverejnením skontrolované profily, duplicita nebola nájdená.
+
+- X @polascin: https://x.com/polascin/status/2114974124712059038 (účet je chránený, príspevok vidia sledovatelia)
+- Facebook lubomir.polascin (verejné): https://www.facebook.com/lubomir.polascin/posts/pfbid0h7i4KnBHUZ4iApEEVVVEBENGYXUpY3VK9tX2X7b2yr3bVaTxNw2EH1FpggR1HPc1l
+- LinkedIn lubomirpolascin: https://www.linkedin.com/feed/update/urn:li:share:7520742317906087936/
+- Threads @lubomirpolascin: neuverejnené, Chrome nebol prihlásený. Ostáva otvorené.
+
+Náhľad odkazu nesie og:image a anglický titulok (crawlery dostávajú `lang=en`), rovnako ako pri predchádzajúcich príspevkoch. Ponaučenie: Facebook načítava náhľad pri každom napísanom znaku adresy. Dávka požiadaviek spustila na hostingu limit 429 (197 odpovedí 429 pre facebookexternalhit) a náhľad ukázal „429 Too Many Requests“. Oprava: Sharing Debugger „Scrape Again“ po krátkej pauze a adresu do editora vložiť naraz zo schránky, nie písať po znakoch.
 
 Pripravený text pre X a Threads:
 
