@@ -727,6 +727,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/pokladna-pred-diagnozou.php'
             );
         },
+        '2026102804_right_answer_bad_reason_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/spravna-odpoved-zo-zleho-dovodu.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
