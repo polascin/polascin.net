@@ -6,7 +6,11 @@ usage() {
 	cat <<'EOF'
 Použitie: hooks/deploy.sh [--dry-run] [--migrate]
 
-Lokálny deploy polascin.net cez rsync/SSH.
+Lokálny deploy polascin.net cez SSH, bez závislosti od GitHubu.
+Prenos: lokálny rsync, alebo (keď rsync chýba, napr. Git Bash na Windows)
+`git archive HEAD` cez SSH do dočasného adresára a rsync na serveri.
+Režim volí POLASCIN_DEPLOY_TRANSPORT=auto|rsync|archive (predvolene auto).
+V režime archive --dry-run vypíše zmeny, ktoré by nasadenie urobilo.
 Konfiguráciu načíta zo súboru ~/.config/polascin/deploy.env alebo z premenných
 prostredia (POLASCIN_DEPLOY_*). Cieľ môže odkazovať aj na host definovaný
 v ~/.ssh/config (cez POLASCIN_DEPLOY_TARGET).
@@ -96,6 +100,7 @@ SSH_KEY=${POLASCIN_SSH_KEY:-"$HOME/.ssh/polascin_deploy"}
 KNOWN_HOSTS_FILE=${POLASCIN_DEPLOY_KNOWN_HOSTS_FILE:-""}
 HOST_KEY_CHECK=${POLASCIN_SSH_HOST_KEY_CHECK:-"accept-new"}
 REMOTE_ENV_PATH=${POLASCIN_ENV_PATH:-""}
+TRANSPORT=${POLASCIN_DEPLOY_TRANSPORT:-"auto"}
 
 if [[ -n $DEPLOY_TARGET ]]; then
 	[[ $DEPLOY_TARGET =~ ^[A-Za-z0-9._-]+$ ]] ||
@@ -180,16 +185,32 @@ for _ssh_opt in "${SSH_OPTS[@]}"; do
 done
 unset _ssh_opt
 
-echo "[deploy] Cieľ: ${SSH_SPEC}:${REMOTE_PATH}"
+case "$TRANSPORT" in
+auto)
+	if command -v rsync >/dev/null 2>&1; then
+		TRANSPORT=rsync
+	else
+		TRANSPORT=archive
+	fi
+	;;
+rsync | archive) ;;
+*)
+	fail "POLASCIN_DEPLOY_TRANSPORT podporuje iba hodnoty 'auto', 'rsync' alebo 'archive'."
+	;;
+esac
 
-if ((DRY_RUN)); then
+echo "[deploy] Cieľ: ${SSH_SPEC}:${REMOTE_PATH} (prenos: ${TRANSPORT})"
+
+if ((DRY_RUN)) && [[ $TRANSPORT == rsync ]]; then
 	printf '[deploy] DRY-RUN: '
 	printf '%q ' rsync -avz --delete-delay --exclude-from=.deployignore -e "$RSYNC_RSH" ./ "${SSH_SPEC}:${REMOTE_PATH}/"
 	printf '\n'
 	exit 0
 fi
 
-for required_command in git rsync ssh date base64 tr dirname; do
+REQUIRED_COMMANDS=(git ssh date base64 tr dirname)
+[[ $TRANSPORT == rsync ]] && REQUIRED_COMMANDS+=(rsync)
+for required_command in "${REQUIRED_COMMANDS[@]}"; do
 	command -v "$required_command" >/dev/null 2>&1 ||
 		fail "Chýba príkaz: ${required_command}"
 done
@@ -231,12 +252,48 @@ GUARD
 echo "[deploy] Overujem vzdialený cieľový adresár..."
 ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "test -d '${REMOTE_PATH}'"
 
-echo "[deploy] Spúšťam rsync..."
-rsync -avz --delete-delay \
-	--exclude-from=.deployignore \
-	-e "$RSYNC_RSH" \
-	./ \
-	"${SSH_SPEC}:${REMOTE_PATH}/"
+if [[ $TRANSPORT == rsync ]]; then
+	echo "[deploy] Spúšťam rsync..."
+	rsync -avz --delete-delay \
+		--exclude-from=.deployignore \
+		-e "$RSYNC_RSH" \
+		./ \
+		"${SSH_SPEC}:${REMOTE_PATH}/"
+else
+	# Nasadzuje sa iba commitnutý HEAD, preto necommitnutá zmena nesmie
+	# zostať potichu bokom.
+	[[ -z $(git status --porcelain --untracked-files=no) ]] ||
+		fail "Režim archive nasadzuje iba commitnutý HEAD. Najprv commitni zmeny."
+	STAGE="${REMOTE_PARENT%/}/private/deploy-staging-${COMMIT}-$$"
+	validate_absolute_remote_path "$STAGE" ||
+		fail "Dočasný adresár na serveri nemá bezpečnú cestu."
+	cleanup_stage() {
+		ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "rm -rf -- '${STAGE}'" || true
+	}
+	trap cleanup_stage EXIT
+
+	echo "[deploy] Prenášam git archive ${COMMIT} do dočasného adresára mimo web rootu..."
+	git archive --format=tar HEAD |
+		ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "umask 022 && mkdir -p '${STAGE}' && tar -xf - -C '${STAGE}'"
+	ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "cat > '${STAGE}/deploy_info.php'" <deploy_info.php
+
+	# -c porovnáva obsah, nie čas z archívu: nezmenené súbory ostanú
+	# nedotknuté a zmenené dostanú aktuálny mtime pre cache-busting.
+	RSYNC_FLAGS="-rlpc --delete-delay"
+	if ((DRY_RUN)); then
+		RSYNC_FLAGS+=" --dry-run --itemize-changes"
+		echo "[deploy] DRY-RUN: zmeny, ktoré by nasadenie urobilo:"
+	else
+		echo "[deploy] Spúšťam rsync na serveri..."
+	fi
+	ssh "${SSH_OPTS[@]}" "$SSH_SPEC" \
+		"rsync ${RSYNC_FLAGS} --exclude-from='${STAGE}/.deployignore' '${STAGE}/' '${REMOTE_PATH}/'"
+
+	if ((DRY_RUN)); then
+		echo "[deploy] DRY-RUN hotový, web root sa nezmenil."
+		exit 0
+	fi
+fi
 
 echo "[deploy] Odstraňujem staré súbory určené iba pre repozitár..."
 ssh "${SSH_OPTS[@]}" "$SSH_SPEC" \
