@@ -545,7 +545,7 @@
         privacyLink.textContent = strings.privacyLabel;
         privacyLink.setAttribute(
           "href",
-          cookieContainer.dataset.privacyUrl || "/privacy",
+          cookieContainer.dataset.privacyUrl || "privacy.php",
         );
       }
 
