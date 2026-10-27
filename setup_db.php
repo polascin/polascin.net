@@ -688,6 +688,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/mercury-claude-tri-ulohy-jeden-beh.php'
             );
         },
+        // Ručné zálohy z 2026-10-24 niesli kópie IP adries a User-Agentov mimo
+        // retenčného čistenia; majiteľ ich po overení schválil zmazať.
+        '2026102701_drop_manual_pii_backups' => static function (PDO $pdo): void {
+            $pdo->exec('DROP TABLE IF EXISTS `access_logs_backup_2026_10_24_tests`');
+            $pdo->exec('DROP TABLE IF EXISTS `form_rate_limit_backup_2026_10_24_tests`');
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
