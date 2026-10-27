@@ -1977,6 +1977,11 @@ expectTrue(
         && strpos($authSource, 'http_response_code(405);') < strpos($authSource, 'session_start()'),
     'auth.php musí odmietnuť iné metódy než GET, HEAD a POST ešte pred session'
 );
+expectTrue(
+    str_contains($authSource, "str_starts_with(\$requestPath, \$scriptPath . '/')")
+        && strpos($authSource, "\$scriptPath . '/')") < strpos($authSource, 'session_start()'),
+    'auth.php musí adresy s PATH_INFO presmerovať na čistý skript ešte pred session'
+);
 // Apache `Header always set` prepíše hlavičku, ktorú poslalo PHP. Na produkcii
 // tak súbory knižnice strácali noindex a admin stránky X-Frame-Options DENY.
 foreach (['X-Frame-Options', 'Referrer-Policy', 'X-Robots-Tag'] as $phpOwnedHeader) {

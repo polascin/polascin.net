@@ -31,6 +31,26 @@ if (PHP_SAPI !== 'cli' && !in_array(strtoupper((string) ($_SERVER['REQUEST_METHO
     exit('Method Not Allowed');
 }
 
+// Produkcia (PHP-FPM za proxy) prijíma PATH_INFO napriek `AcceptPathInfo Off`:
+// `/login.php/x` vrátil stránku, na ktorej sa relatívne CSS a odkazy rozbili
+// a crawler dostal nekonečný priestor adries. Presmeruje sa na čistý skript.
+if (PHP_SAPI !== 'cli') {
+    $requestPath = (string) (parse_url((string) ($_SERVER['REQUEST_URI'] ?? ''), PHP_URL_PATH) ?? '');
+    $scriptPath = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? ''));
+    if ($scriptPath !== '' && str_starts_with($requestPath, $scriptPath . '/')) {
+        $cleanPath = basename($scriptPath) === 'index.php' ? dirname($scriptPath) : $scriptPath;
+        $cleanPath = rtrim(str_replace('\\', '/', $cleanPath), '/');
+        if ($cleanPath === '' || basename($scriptPath) === 'index.php') {
+            $cleanPath .= '/';
+        }
+        $queryString = (string) ($_SERVER['QUERY_STRING'] ?? '');
+        header('Location: ' . $cleanPath . ($queryString !== '' ? '?' . $queryString : ''), true, 301);
+        header('Cache-Control: no-store');
+        exit;
+    }
+    unset($requestPath, $scriptPath);
+}
+
 const SESSION_IDLE_TIMEOUT = 1800;
 const SESSION_ABSOLUTE_TIMEOUT = 28800;
 const SESSION_RENEWAL_INTERVAL = 900;
