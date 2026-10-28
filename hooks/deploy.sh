@@ -4,7 +4,10 @@ set -eEuo pipefail
 
 usage() {
 	cat <<'EOF'
-Použitie: hooks/deploy.sh [--dry-run] [--migrate]
+Použitie: hooks/deploy.sh [--dry-run] [--migrate] [--smoke-only]
+
+Po nasadení skript overí produkciu (kľúčové stránky 200, interné súbory
+403/404, detail článku zo sitemapy). --smoke-only spustí iba toto overenie.
 
 Lokálny deploy polascin.net cez SSH, bez závislosti od GitHubu.
 Prenos: lokálny rsync, alebo (keď rsync chýba, napr. Git Bash na Windows)
@@ -51,8 +54,56 @@ validate_absolute_remote_path() {
 	done
 }
 
+# Overenie produkcie po nasadení, prevzaté z kroku „Smoke check deployed site“
+# v deploy.yml: od Behu #49 sa nasadzuje lokálne a workflow sa nespúšťa.
+smoke_check() {
+	local base=${POLASCIN_SMOKE_BASE_URL:-"https://polascin.net"}
+	local failed=0 code path sitemap article_url article_match
+	command -v curl >/dev/null 2>&1 || fail "Chýba príkaz: curl (smoke check)"
+	echo "[deploy] Smoke check ${base}..."
+	for path in "/" "/contact.php" "/articles.php" "/library.php" "/sitemap.php" "/newsletter.php" "/login.php" "/privacy.php" "/terms.php"; do
+		code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 5 "${base%/}${path}" || echo "000")
+		if [[ $code == "200" ]]; then
+			echo "  OK   ${code}  ${path}"
+		else
+			echo "  CHYBA ${code}  ${path}" >&2
+			failed=1
+		fi
+	done
+	for path in "/i18n.php" "/lang/sk.php" "/helpers.php" "/deploy_info.php" "/content/" "/scripts/audit_db_check.php" "/audit-reports/db-latest.md" "/private/" "/hooks/deploy.sh" "/CLAUDE.md" "/content/library/fosfatovy-roztok/work.json"; do
+		code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "${base%/}${path}" || echo "000")
+		if [[ $code == "403" || $code == "404" ]]; then
+			echo "  OK   ${code}  ${path} (neprístupné)"
+		else
+			echo "  CHYBA ${code}  ${path} je dostupný" >&2
+			failed=1
+		fi
+	done
+	# Sitemapa ide do súboru, nie rúrou do head (Broken pipe, Beh #31).
+	sitemap=$(mktemp)
+	curl -sS -o "$sitemap" --max-time 30 --retry 2 --retry-delay 5 "${base%/}/sitemap.php" || true
+	article_match=$(grep -m 1 -o 'https://[^<]*article\.php?slug=[^<&]*' "$sitemap" || true)
+	article_url=${article_match%%$'\n'*}
+	rm -f "$sitemap"
+	if [[ -n $article_url ]]; then
+		code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 5 "$article_url" || echo "000")
+		if [[ $code == "200" ]]; then
+			echo "  OK   ${code}  ${article_url}"
+		else
+			echo "  CHYBA ${code}  ${article_url}" >&2
+			failed=1
+		fi
+	else
+		echo "  CHYBA v sitemape nie je ani jeden článok" >&2
+		failed=1
+	fi
+	((failed == 0)) || fail "Smoke check zlyhal, produkcia potrebuje kontrolu."
+	echo "[deploy] Smoke check prešiel."
+}
+
 DRY_RUN=0
 MIGRATE=0
+SMOKE_ONLY=0
 
 while (($# > 0)); do
 	case "$1" in
@@ -61,6 +112,9 @@ while (($# > 0)); do
 		;;
 	--migrate)
 		MIGRATE=1
+		;;
+	--smoke-only)
+		SMOKE_ONLY=1
 		;;
 	-h | --help)
 		usage
@@ -84,6 +138,11 @@ REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null) || {
 	exit 1
 }
 cd "$REPO_ROOT" || exit 1
+
+if ((SMOKE_ONLY)); then
+	smoke_check
+	exit 0
+fi
 
 DEPLOY_CONFIG=${POLASCIN_DEPLOY_CONFIG:-"$HOME/.config/polascin/deploy.env"}
 if [[ -r $DEPLOY_CONFIG ]]; then
@@ -324,5 +383,7 @@ if ((MIGRATE)); then
 			"cd '${REMOTE_PATH}' && export POLASCIN_ENV_PATH='${REMOTE_ENV_PATH}' && php setup_db.php && rm -f -- '${REMOTE_PATH}/env.ini' '${REMOTE_PATH}/private/polascin.env.ini' '${REMOTE_PATH}/private/env.ini'"
 	fi
 fi
+
+smoke_check
 
 echo "[deploy] Hotovo! (${TIMESTAMP}, ${BRANCH}@${COMMIT})"

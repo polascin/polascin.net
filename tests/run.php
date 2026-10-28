@@ -2113,6 +2113,14 @@ expectTrue(
         && str_contains($deployScript, "--exclude-from='\${STAGE}/.deployignore'"),
     'hooks/deploy.sh musí vedieť nasadiť commitnutý HEAD bez lokálneho rsync a so suchým behom'
 );
+expectTrue(
+    preg_match('~\nsmoke_check\n\necho "\[deploy\] Hotovo!~', $deployScript) === 1
+        && str_contains($deployScript, '--smoke-only')
+        && str_contains($deployScript, '"/newsletter.php" "/login.php" "/privacy.php" "/terms.php"')
+        && str_contains($deployScript, '"/deploy_info.php"')
+        && str_contains($deployScript, "article\\.php?slug="),
+    'hooks/deploy.sh musí po nasadení overiť produkciu ako predtým deploy.yml'
+);
 
 // Beh #24: SSH krok „Create remote environment config“ raz padol na
 // `Connection closed by <host>` bez zmeny kódu. Keepalive a opakovaný pokus

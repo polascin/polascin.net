@@ -201,6 +201,10 @@ hooks/deploy.sh
 hooks/deploy.sh --migrate
 ```
 
+Po nasadení skript overí produkciu: kľúčové stránky musia vrátiť 200, interné
+súbory 403 alebo 404 a detail prvého článku zo sitemapy 200. Pri chybe skončí
+nenulovým kódom. Samotné overenie bez nasadenia: `hooks/deploy.sh --smoke-only`.
+
 ## Databázová schéma a env.ini
 
 GitHub Actions aj `hooks/deploy.sh --migrate` automaticky spustia `setup_db.php` na serveri po súborovom deploye.
