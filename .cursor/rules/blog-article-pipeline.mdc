@@ -14,3 +14,5 @@ Text článku, prekladov, alt textu, sociálnych príspevkov ani ilustrácie nep
 Ak návrh opisuje stav, ktorý medzitým zmenil vlastný zverejnený katalóg autora, ponechaj datovanú udalosť a uveď neskorší overený stav. Prekonaný stav nepodávaj ako súčasný.
 
 Pri lokálnej práci nasadzuj cez SSH alias `websupport` lokálnymi nástrojmi. Commit označ `[skip deploy]`, aby starší workflow nespustil súbežný deploy. Over migráciu aj jej druhé idempotentné spustenie. Pri benchmarkoch odlíš dodané merania od nezávislého overenia, skontroluj súčty a pomery a nevyvodzuj kvalitu uvažovania z počtu reasoning tokenov.
+
+Pre Claude Code platí ten istý postup cez `CLAUDE.md` v koreni repozitára a skill `.claude/skills/blogovy-prispevok/SKILL.md`; zoznam slugov na X zostáva iba v `.cursor/skills/blog-article/SKILL.md`.

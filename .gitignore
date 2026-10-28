@@ -4,8 +4,9 @@
 !.vscode/tasks.json
 !.vscode/extensions.json
 
-# Claude Code — celý adresár je lokálny (rovnaká logika ako nefro)
-.claude/
+# Claude Code: skilly zdieľame v gite, lokálne nastavenia a worktrees nie
+.claude/*
+!.claude/skills/
 
 # Trunk linter cache — celý adresár je lokálny
 .trunk/
