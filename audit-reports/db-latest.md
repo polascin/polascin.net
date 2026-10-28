@@ -1,6 +1,6 @@
 # Kontrola produkčnej databázy — polascin.net
 
-Generované: 2026-10-27 22:43:31 CET  
+Generované: 2026-10-28 05:24:05 CET  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
@@ -18,14 +18,14 @@ Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávan
 
 | Tabuľka | Engine | Collation | Riadkov (presne) |
 | --- | --- | --- | --- |
-| `access_logs` | InnoDB | utf8mb4_unicode_ci | 58552 |
-| `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 53 |
-| `articles` | InnoDB | utf8mb4_unicode_ci | 350 |
+| `access_logs` | InnoDB | utf8mb4_unicode_ci | 59265 |
+| `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 54 |
+| `articles` | InnoDB | utf8mb4_unicode_ci | 400 |
 | `contact_messages` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `content_blocks` | InnoDB | utf8mb4_unicode_ci | 5 |
 | `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 0 |
 | `newsletter_subscribers` | InnoDB | utf8mb4_unicode_ci | 0 |
-| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 50 |
+| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 56 |
 | `users` | InnoDB | utf8mb4_unicode_ci | 1 |
 
 ## Migrácie schémy
@@ -80,6 +80,12 @@ Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávan
 - ✅ `2026102601_mercury_claude_three_tasks_article` — 2026-10-26 20:44:12
 - ✅ `2026102701_drop_manual_pii_backups` — 2026-10-27 07:30:06
 - ✅ `2026102702_sanitizer_tags_refresh` — 2026-10-27 16:54:35
+- ✅ `2026102703_cheaper_token_higher_bill_article` — 2026-10-27 23:24:39
+- ✅ `2026102704_cheaper_token_ramp_not_gartner` — 2026-10-27 23:24:39
+- ✅ `2026102801_generated_is_not_delivered_article` — 2026-10-28 00:52:37
+- ✅ `2026102803_checkout_before_diagnosis_article` — 2026-10-28 00:56:49
+- ✅ `2026102804_right_answer_bad_reason_article` — 2026-10-28 00:56:49
+- ✅ `2026102805_typesetting_package_not_print_article` — 2026-10-28 00:57:28
 
 ## Indexy strážené migráciou
 
@@ -95,18 +101,18 @@ Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávan
 
 ## Obsah a jazyky
 
-- Publikovaných článkov: 350
+- Publikovaných článkov: 400
 - Články podľa jazyka:
-  - `cs`: 35
-  - `de`: 35
-  - `en`: 35
-  - `es`: 35
-  - `fr`: 35
-  - `hu`: 35
-  - `it`: 35
-  - `pl`: 35
-  - `sk`: 35
-  - `uk`: 35
+  - `cs`: 40
+  - `de`: 40
+  - `en`: 40
+  - `es`: 40
+  - `fr`: 40
+  - `hu`: 40
+  - `it`: 40
+  - `pl`: 40
+  - `sk`: 40
+  - `uk`: 40
 - Obsahové bloky podľa jazyka:
   - `sk`: 5
 
@@ -117,9 +123,9 @@ Kontaktné správy: **180 dní**; nepotvrdený newsletter: **72 hodín**; admini
 
 | Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |
 | --- | --- | --- | --- |
-| `access_logs` | 58552 | 2026-07-29 21:42:10 | 90 |
+| `access_logs` | 59265 | 2026-07-30 06:50:28 | 89 |
 | `contact_messages` | 0 | — | — |
 | `newsletter_subscribers` | 0 | — | — |
-| `admin_audit_log` | 53 | 2026-09-11 19:22:06 | 46 |
+| `admin_audit_log` | 54 | 2026-09-11 19:22:06 | 46 |
 | `form_rate_limit` | 0 | — | — |
 
