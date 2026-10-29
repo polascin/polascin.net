@@ -745,6 +745,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/mesiac-v-ktorom-sa-overovalo-vsetko.php'
             );
         },
+        '2026102902_context_comes_in_batches_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/kontext-prichadza-po-davkach.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

@@ -94,6 +94,7 @@ const EXPECTED_MIGRATIONS = [
     '2026102804_right_answer_bad_reason_article',
     '2026102805_typesetting_package_not_print_article',
     '2026102901_month_of_verification_article',
+    '2026102902_context_comes_in_batches_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
