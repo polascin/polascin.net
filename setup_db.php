@@ -751,6 +751,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/kontext-prichadza-po-davkach.php'
             );
         },
+        '2026102903_month_of_verification_closing' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/mesiac-v-ktorom-sa-overovalo-vsetko.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

@@ -44,7 +44,7 @@ return [
 <p>Kontext: zadám ho raz a potom odkazujem na to, čo už bolo povedané. V prvej správe o audioknihe som dal celý súbor a povedal urob analýzu. Každá ďalšia správa stavala na predchádzajúcej bez opakovania, vrátane príkazu pokračovať, kde stačilo jedno slovo.</p>
 <p>Rozlišovanie: keď sa zdroj nedá overiť, chcem to vedieť. Pri audioknihe som žiadal platné webové odkazy a hĺbkové overenie. Pri legislatívnom rešerši som trval na konsolidovanom znení z <a href="https://www.slov-lex.sk">slov-lex.sk</a>, nie na sekundárnych súhrnoch.</p>
 <p>Starostlivosť o údaje: osobné údaje v inštrukciách majú vlastné pravidlo. Claude nemá uchovávať mená, rodné čísla ani kontaktné údaje, s výnimkou fiktívnych postáv. V preferenciách Coworku som to rozšíril o citovaných autorov a verejných činiteľov.</p>
-<p>Mesačný súhrn od nástroja, s ktorým pracujem, nie je diagnostika. Je to zrkadlo. Keď v ňom vidím, že som štyri dni strávil overovaním, nečítam to ako chválu produktu. Čítam to ako pripomienku, že dôvera bez kontroly ma stojí hodiny. A že hodiny kontroly sú práve tou prácou, ktorú nechcem automatizovať preč.</p>
+<p>Mesačný súhrn od nástroja, s ktorým pracujem, nie je diagnostika. Je to zrkadlo. Keď v ňom vidím, že som štyri dni strávil overovaním, nečítam to ako chválu produktu. Čítam to ako pripomienku, že dôvera bez kontroly ma stojí hodiny. A že hodiny kontroly sú práve tou prácou, ktorú si chcem nechať.</p>
 <p><em>Osobná reflexia z mesačného súhrnu Claude Reflect. Nie je to návod na prácu s konkrétnym modelom ani hodnotenie jeho kvality.</em></p>
 
 HTML,
@@ -62,7 +62,7 @@ HTML,
 <p>Context: I give it once and then point back to what was already said. In the first message about the audiobook I supplied the whole file and said do the analysis. Every later message built on the previous one without repetition, including a continue command where a single word was enough.</p>
 <p>Discernment: when a source cannot be verified, I want to know. For the audiobook I asked for valid web links and deep verification. For the legislative search I insisted on the consolidated text from <a href="https://www.slov-lex.sk">slov-lex.sk</a>, not on secondary summaries.</p>
 <p>Care with data: personal data in the instructions have their own rule. Claude is not to retain names, birth numbers or contact details, except for fictional characters. In the Cowork preferences I extended that with an exception for cited authors and public officials.</p>
-<p>A monthly summary from the tool I work with is not a diagnosis. It is a mirror. When I see in it that I spent four days verifying, I do not read it as praise of the product. I read it as a reminder that trust without checking costs me hours. And that the hours of checking are exactly the work I do not want to automate away.</p>
+<p>A monthly summary from the tool I work with is not a diagnosis. It is a mirror. When I see in it that I spent four days verifying, I do not read it as praise of the product. I read it as a reminder that trust without checking costs me hours. And that the hours of checking are exactly the work I want to keep.</p>
 <p><em>A personal reflection from a Claude Reflect monthly summary. It is not a guide to working with a particular model, nor an assessment of its quality.</em></p>
 
 HTML,
@@ -80,7 +80,7 @@ HTML,
 <p>Kontext: zadám ho jednou a pak odkazuji na to, co už bylo řečeno. V první zprávě o audioknize jsem dal celý soubor a řekl udělej analýzu. Každá další zpráva stavěla na předchozí bez opakování, včetně příkazu pokračovat, kde stačilo jedno slovo.</p>
 <p>Rozlišování: když se zdroj nedá ověřit, chci to vědět. U audioknihy jsem žádal platné webové odkazy a hloubkové ověření. U legislativní rešerše jsem trval na konsolidovaném znění z <a href="https://www.slov-lex.sk">slov-lex.sk</a>, ne na sekundárních souhrnech.</p>
 <p>Péče o údaje: osobní údaje v instrukcích mají vlastní pravidlo. Claude nemá uchovávat jména, rodná čísla ani kontaktní údaje, s výjimkou fiktivních postav. V preferencích Coworku jsem to rozšířil o citované autory a veřejné činitele.</p>
-<p>Měsíční souhrn od nástroje, se kterým pracuji, není diagnostika. Je to zrcadlo. Když v něm vidím, že jsem čtyři dny strávil ověřováním, nečtu to jako chválu produktu. Čtu to jako připomínku, že důvěra bez kontroly mě stojí hodiny. A že hodiny kontroly jsou právě tou prací, kterou nechci automatizovat pryč.</p>
+<p>Měsíční souhrn od nástroje, se kterým pracuji, není diagnostika. Je to zrcadlo. Když v něm vidím, že jsem čtyři dny strávil ověřováním, nečtu to jako chválu produktu. Čtu to jako připomínku, že důvěra bez kontroly mě stojí hodiny. A že hodiny kontroly jsou právě tou prací, kterou si chci nechat.</p>
 <p><em>Osobní reflexe z měsíčního souhrnu Claude Reflect. Není to návod na práci s konkrétním modelem ani hodnocení jeho kvality.</em></p>
 
 HTML,
@@ -98,7 +98,7 @@ HTML,
 <p>Kontext: ich gebe ihn einmal und verweise dann auf das bereits Gesagte. In der ersten Nachricht zum Hörbuch lieferte ich die ganze Datei und sagte: mach die Analyse. Jede weitere Nachricht baute ohne Wiederholung auf der vorigen auf, einschließlich eines Weiter-Befehls, bei dem ein einziges Wort genügte.</p>
 <p>Unterscheidung: wenn sich eine Quelle nicht prüfen lässt, will ich das wissen. Beim Hörbuch verlangte ich gültige Weblinks und gründliche Prüfung. Bei der legislativen Recherche bestand ich auf dem konsolidierten Text von <a href="https://www.slov-lex.sk">slov-lex.sk</a>, nicht auf sekundären Zusammenfassungen.</p>
 <p>Sorgfalt mit Daten: personenbezogene Daten in den Anweisungen haben eine eigene Regel. Claude soll Namen, Geburtsnummern und Kontaktdaten nicht speichern, ausgenommen fiktionale Figuren. In den Cowork-Präferenzen erweiterte ich das um zitierte Autoren und Amtsträger.</p>
-<p>Eine monatliche Zusammenfassung des Werkzeugs, mit dem ich arbeite, ist keine Diagnose. Es ist ein Spiegel. Wenn ich darin sehe, dass ich vier Tage mit Prüfen verbracht habe, lese ich das nicht als Lob des Produkts. Ich lese es als Erinnerung, dass Vertrauen ohne Kontrolle mich Stunden kostet. Und dass die Stunden der Kontrolle genau die Arbeit sind, die ich nicht wegrationalisieren will.</p>
+<p>Eine monatliche Zusammenfassung des Werkzeugs, mit dem ich arbeite, ist keine Diagnose. Es ist ein Spiegel. Wenn ich darin sehe, dass ich vier Tage mit Prüfen verbracht habe, lese ich das nicht als Lob des Produkts. Ich lese es als Erinnerung, dass Vertrauen ohne Kontrolle mich Stunden kostet. Und dass die Stunden der Kontrolle genau die Arbeit sind, die ich behalten will.</p>
 <p><em>Persönliche Reflexion aus einer monatlichen Claude-Reflect-Zusammenfassung. Keine Anleitung zur Arbeit mit einem bestimmten Modell und keine Bewertung seiner Qualität.</em></p>
 
 HTML,
@@ -116,7 +116,7 @@ HTML,
 <p>Contexte: je le donne une fois, puis je renvoie à ce qui a déjà été dit. Dans le premier message sur le livre audio, j’ai fourni le fichier entier et dit fais l’analyse. Chaque message suivant s’appuyait sur le précédent sans répétition, y compris une commande de continuer où un seul mot suffisait.</p>
 <p>Discernement: quand une source ne peut pas être vérifiée, je veux le savoir. Pour le livre audio, j’ai demandé des liens web valides et une vérification approfondie. Pour la recherche législative, j’ai insisté sur le texte consolidé de <a href="https://www.slov-lex.sk">slov-lex.sk</a>, pas sur des résumés secondaires.</p>
 <p>Soin des données: les données personnelles dans les instructions ont leur propre règle. Claude ne doit pas conserver les noms, les numéros d’identité ni les coordonnées, sauf pour les personnages fictifs. Dans les préférences Cowork, j’ai élargi cela aux auteurs cités et aux responsables publics.</p>
-<p>Un résumé mensuel de l’outil avec lequel je travaille n’est pas un diagnostic. C’est un miroir. Quand j’y vois que j’ai passé quatre jours à vérifier, je ne le lis pas comme un éloge du produit. Je le lis comme un rappel que la confiance sans contrôle me coûte des heures. Et que les heures de contrôle sont précisément le travail que je ne veux pas automatiser hors de ma portée.</p>
+<p>Un résumé mensuel de l’outil avec lequel je travaille n’est pas un diagnostic. C’est un miroir. Quand j’y vois que j’ai passé quatre jours à vérifier, je ne le lis pas comme un éloge du produit. Je le lis comme un rappel que la confiance sans contrôle me coûte des heures. Et que les heures de contrôle sont précisément le travail que je veux garder.</p>
 <p><em>Réflexion personnelle tirée d’un résumé mensuel Claude Reflect. Ce n’est ni un guide pour travailler avec un modèle précis, ni une évaluation de sa qualité.</em></p>
 
 HTML,
@@ -134,7 +134,7 @@ HTML,
 <p>Contexto: lo doy una vez y luego remito a lo ya dicho. En el primer mensaje sobre el audiolibro entregué el archivo completo y dije haz el análisis. Cada mensaje siguiente se apoyaba en el anterior sin repetición, incluido un comando de continuar en el que bastaba una sola palabra.</p>
 <p>Discernimiento: cuando una fuente no se puede verificar, quiero saberlo. En el audiolibro pedí enlaces web válidos y una verificación profunda. En la investigación legislativa insistí en el texto consolidado de <a href="https://www.slov-lex.sk">slov-lex.sk</a>, no en resúmenes secundarios.</p>
 <p>Cuidado con los datos: los datos personales en las instrucciones tienen su propia regla. Claude no debe conservar nombres, números de identidad ni datos de contacto, salvo personajes ficticios. En las preferencias de Cowork lo amplié a autores citados y cargos públicos.</p>
-<p>Un resumen mensual de la herramienta con la que trabajo no es un diagnóstico. Es un espejo. Cuando veo en él que pasé cuatro días verificando, no lo leo como elogio del producto. Lo leo como un recordatorio de que la confianza sin control me cuesta horas. Y de que las horas de control son precisamente el trabajo que no quiero automatizar fuera de mi alcance.</p>
+<p>Un resumen mensual de la herramienta con la que trabajo no es un diagnóstico. Es un espejo. Cuando veo en él que pasé cuatro días verificando, no lo leo como elogio del producto. Lo leo como un recordatorio de que la confianza sin control me cuesta horas. Y de que las horas de control son precisamente el trabajo que quiero conservar.</p>
 <p><em>Reflexión personal a partir de un resumen mensual de Claude Reflect. No es una guía para trabajar con un modelo concreto ni una valoración de su calidad.</em></p>
 
 HTML,
@@ -152,7 +152,7 @@ HTML,
 <p>Kontekst: podaję go raz, a potem odsyłam do tego, co już zostało powiedziane. W pierwszej wiadomości o audiobooku dałem cały plik i powiedziałem zrób analizę. Każda kolejna wiadomość budowała na poprzedniej bez powtórzeń, w tym polecenie kontynuuj, gdzie wystarczyło jedno słowo.</p>
 <p>Rozróżnianie: gdy źródła nie da się sprawdzić, chcę o tym wiedzieć. Przy audiobooku żądałem ważnych linków internetowych i dogłębnej weryfikacji. Przy kwerendzie legislacyjnej nalegałem na tekst skonsolidowany z <a href="https://www.slov-lex.sk">slov-lex.sk</a>, nie na wtórne streszczenia.</p>
 <p>Dbałość o dane: dane osobowe w instrukcjach mają własną regułę. Claude nie ma przechowywać imion, numerów urodzenia ani danych kontaktowych, z wyjątkiem postaci fikcyjnych. W preferencjach Cowork rozszerzyłem to o cytowanych autorów i osoby pełniące funkcje publiczne.</p>
-<p>Miesięczne podsumowanie od narzędzia, z którym pracuję, nie jest diagnozą. To lustro. Gdy widzę w nim, że cztery dni spędziłem na sprawdzaniu, nie czytam tego jako pochwały produktu. Czytam to jako przypomnienie, że zaufanie bez kontroli kosztuje mnie godziny. I że godziny kontroli to właśnie ta praca, której nie chcę automatyzować na bok.</p>
+<p>Miesięczne podsumowanie od narzędzia, z którym pracuję, nie jest diagnozą. To lustro. Gdy widzę w nim, że cztery dni spędziłem na sprawdzaniu, nie czytam tego jako pochwały produktu. Czytam to jako przypomnienie, że zaufanie bez kontroli kosztuje mnie godziny. I że godziny kontroli to właśnie ta praca, którą chcę sobie zostawić.</p>
 <p><em>Osobista refleksja z miesięcznego podsumowania Claude Reflect. To nie jest przewodnik po pracy z konkretnym modelem ani ocena jego jakości.</em></p>
 
 HTML,
@@ -170,7 +170,7 @@ HTML,
 <p>Kontextus: egyszer adom meg, aztán visszautalok arra, ami már elhangzott. A hangoskönyvről szóló első üzenetben az egész fájlt odaadtam, és azt mondtam: csináld meg az elemzést. Minden további üzenet ismétlés nélkül épült az előzőre, beleértve a folytatás parancsot, ahol egyetlen szó is elég volt.</p>
 <p>Megkülönböztetés: ha a forrás nem ellenőrizhető, tudni akarom. A hangoskönyvnél érvényes webcímeket és mély ellenőrzést kértem. A jogszabályi kutatásnál a <a href="https://www.slov-lex.sk">slov-lex.sk</a> konszolidált szövegére ragaszkodtam, nem másodlagos összefoglalókra.</p>
 <p>Adatgondosság: a személyes adatoknak az utasításokban saját szabályuk van. Claude ne őrizzen neveket, születési számokat vagy elérhetőségeket, a fiktív szereplők kivételével. A Cowork-preferenciákban ezt kiterjesztettem az idézett szerzőkre és a közszereplőkre.</p>
-<p>A havi összefoglaló attól az eszköztől, amellyel dolgozom, nem diagnózis. Tükör. Ha azt látom benne, hogy négy napot ellenőrzéssel töltöttem, nem a termék dicséreteként olvasom. Emlékeztetőként olvasom, hogy a bizalom ellenőrzés nélkül óráimba kerül. És hogy az ellenőrzés órái pontosan az a munka, amelyet nem akarok automatizálással elvenni magamtól.</p>
+<p>A havi összefoglaló attól az eszköztől, amellyel dolgozom, nem diagnózis. Tükör. Ha azt látom benne, hogy négy napot ellenőrzéssel töltöttem, nem a termék dicséreteként olvasom. Emlékeztetőként olvasom, hogy a bizalom ellenőrzés nélkül óráimba kerül. És hogy az ellenőrzés órái pontosan az a munka, amelyet magamnak akarok tartani.</p>
 <p><em>Személyes reflexió a Claude Reflect havi összefoglalójából. Nem útmutató egy konkrét modellel való munkához, és nem a minőségének értékelése.</em></p>
 
 HTML,
@@ -188,7 +188,7 @@ HTML,
 <p>Contesto: lo do una volta e poi rimando a ciò che è già stato detto. Nel primo messaggio sull’audiolibro ho dato l’intero file e detto fai l’analisi. Ogni messaggio successivo si costruiva sul precedente senza ripetizioni, compreso un comando di continua in cui bastava una sola parola.</p>
 <p>Discernimento: quando una fonte non si può verificare, voglio saperlo. Per l’audiolibro ho chiesto link web validi e una verifica approfondita. Per la ricerca legislativa ho insistito sul testo consolidato di <a href="https://www.slov-lex.sk">slov-lex.sk</a>, non su riassunti secondari.</p>
 <p>Cura dei dati: i dati personali nelle istruzioni hanno una regola propria. Claude non deve conservare nomi, numeri di nascita né dati di contatto, salvo personaggi fittizi. Nelle preferenze Cowork l’ho estesa agli autori citati e ai pubblici ufficiali.</p>
-<p>Un riepilogo mensile dello strumento con cui lavoro non è una diagnosi. È uno specchio. Quando ci vedo che ho passato quattro giorni a verificare, non lo leggo come lode del prodotto. Lo leggo come un promemoria: la fiducia senza controllo mi costa ore. E che le ore di controllo sono proprio il lavoro che non voglio automatizzare via.</p>
+<p>Un riepilogo mensile dello strumento con cui lavoro non è una diagnosi. È uno specchio. Quando ci vedo che ho passato quattro giorni a verificare, non lo leggo come lode del prodotto. Lo leggo come un promemoria: la fiducia senza controllo mi costa ore. E che le ore di controllo sono proprio il lavoro che voglio tenere.</p>
 <p><em>Riflessione personale da un riepilogo mensile di Claude Reflect. Non è una guida al lavoro con un modello particolare né una valutazione della sua qualità.</em></p>
 
 HTML,
@@ -206,7 +206,7 @@ HTML,
 <p>Контекст: я даю його раз, а потім посилаюся на те, що вже було сказано. У першому повідомленні про аудіокнигу я дав увесь файл і сказав зроби аналіз. Кожне наступне повідомлення будувалося на попередньому без повторень, включно з командою продовжуй, де вистачало одного слова.</p>
 <p>Розрізнення: коли джерело неможливо перевірити, я хочу це знати. Для аудіокниги я вимагав чинні вебпосилання й глибоку перевірку. Для законодавчого пошуку я наполягав на консолідованому тексті з <a href="https://www.slov-lex.sk">slov-lex.sk</a>, а не на вторинних оглядах.</p>
 <p>Дбайливість щодо даних: особисті дані в інструкціях мають власне правило. Claude не має зберігати імена, ідентифікаційні номери чи контакти, за винятком вигаданих персонажів. В уподобаннях Cowork я розширив це винятком для цитованих авторів і публічних посадовців.</p>
-<p>Місячний підсумок від інструменту, з яким я працюю, не є діагнозом. Це дзеркало. Коли я бачу в ньому, що чотири дні провів на перевірці, я не читаю це як похвалу продукту. Я читаю це як нагадування, що довіра без контролю коштує мені годин. І що години контролю — саме та робота, яку я не хочу автоматизувати геть.</p>
+<p>Місячний підсумок від інструменту, з яким я працюю, не є діагнозом. Це дзеркало. Коли я бачу в ньому, що чотири дні провів на перевірці, я не читаю це як похвалу продукту. Я читаю це як нагадування, що довіра без контролю коштує мені годин. І що години контролю є саме тією роботою, яку хочу залишити собі.</p>
 <p><em>Особиста рефлексія з місячного підсумку Claude Reflect. Це не інструкція з роботи з конкретною моделлю і не оцінка її якості.</em></p>
 
 HTML,
