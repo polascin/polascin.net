@@ -701,14 +701,23 @@ foreach (
         'x-robots-tag',
     ] as $smokeHeader
 ) {
+    // Od Behu #49 sa nasadzuje lokálne, preto hlavičky stráži aj hooks/deploy.sh.
+    foreach (['deploy.yml' => $deployWorkflow, 'hooks/deploy.sh' => $deployScript] as $smokeName => $smokeSource) {
+        expectTrue(
+            str_contains($smokeSource, '"' . $smokeHeader . '"'),
+            'Smoke check v ' . $smokeName . ' musí overiť hlavičku ' . $smokeHeader
+        );
+    }
+}
+foreach (['deploy.yml' => $deployWorkflow, 'hooks/deploy.sh' => $deployScript] as $smokeName => $smokeSource) {
     expectTrue(
-        str_contains($deployWorkflow, '"' . $smokeHeader . '"'),
-        'Smoke check po nasadení musí overiť hlavičku ' . $smokeHeader
+        str_contains($smokeSource, 'CSP na produkcii neobsahuje nonce-'),
+        'Smoke check v ' . $smokeName . ' musí overiť, že CSP na produkcii nesie nonce'
     );
 }
 expectTrue(
-    str_contains($deployWorkflow, 'CSP na produkcii neobsahuje nonce-'),
-    'Smoke check po nasadení musí overiť, že CSP na produkcii nesie nonce'
+    str_contains($deployScript, "CSP na produkcii povoľuje 'unsafe-inline'"),
+    "Smoke check v hooks/deploy.sh musí odmietnuť CSP s 'unsafe-inline'"
 );
 // Bod 5 sekcie „Dokončenie“ v `.doaudit.md` vymenúva kľúčové URL; keďže ich
 // nočná rutina overiť nemôže, musia byť v smoke checku (Beh #24).

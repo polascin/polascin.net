@@ -59,10 +59,13 @@ validate_absolute_remote_path() {
 smoke_check() {
 	local base=${POLASCIN_SMOKE_BASE_URL:-"https://polascin.net"}
 	local failed=0 code path sitemap article_url article_match
+	# Hosting po ~25 požiadavkách vracia 429 (asi 10 za minútu na IP); curl
+	# 429 opakuje sám, oneskorenie musí stačiť na doplnenie limitu.
+	local -a retry=(--retry 3 --retry-delay 10)
 	command -v curl >/dev/null 2>&1 || fail "Chýba príkaz: curl (smoke check)"
 	echo "[deploy] Smoke check ${base}..."
 	for path in "/" "/contact.php" "/articles.php" "/library.php" "/sitemap.php" "/newsletter.php" "/login.php" "/privacy.php" "/terms.php"; do
-		code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 5 "${base%/}${path}" || echo "000")
+		code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "${retry[@]}" "${base%/}${path}" || echo "000")
 		if [[ $code == "200" ]]; then
 			echo "  OK   ${code}  ${path}"
 		else
@@ -71,7 +74,7 @@ smoke_check() {
 		fi
 	done
 	for path in "/i18n.php" "/lang/sk.php" "/helpers.php" "/deploy_info.php" "/content/" "/scripts/audit_db_check.php" "/audit-reports/db-latest.md" "/private/" "/hooks/deploy.sh" "/CLAUDE.md" "/content/library/fosfatovy-roztok/work.json"; do
-		code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "${base%/}${path}" || echo "000")
+		code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "${retry[@]}" "${base%/}${path}" || echo "000")
 		if [[ $code == "403" || $code == "404" ]]; then
 			echo "  OK   ${code}  ${path} (neprístupné)"
 		else
@@ -79,14 +82,39 @@ smoke_check() {
 			failed=1
 		fi
 	done
+	# Hlavičky z deploy.yml: kontroluje sa prítomnosť, nie presná hodnota,
+	# hosting niektoré prepisuje (Beh #24).
+	local headers_file header
+	headers_file=$(mktemp)
+	curl -sS -D "$headers_file" -o /dev/null --max-time 30 "${retry[@]}" "${base%/}/" || true
+	for header in "strict-transport-security" "x-content-type-options" "x-frame-options" "referrer-policy" "permissions-policy" "cross-origin-opener-policy" "cross-origin-resource-policy" "x-permitted-cross-domain-policies" "content-security-policy" "tdm-reservation" "x-robots-tag"; do
+		if grep -qi "^${header}:" "$headers_file"; then
+			echo "  OK   hlavička ${header}"
+		else
+			echo "  CHYBA chýba bezpečnostná hlavička ${header}" >&2
+			failed=1
+		fi
+	done
+	# CSP sa skladá v auth.php; nonce drží script-src bez 'unsafe-inline'.
+	if grep -i "^content-security-policy:" "$headers_file" | grep -q "nonce-"; then
+		echo "  OK   CSP obsahuje nonce"
+	else
+		echo "  CHYBA CSP na produkcii neobsahuje nonce-" >&2
+		failed=1
+	fi
+	if grep -i "^content-security-policy:" "$headers_file" | grep -q "unsafe-inline"; then
+		echo "  CHYBA CSP na produkcii povoľuje 'unsafe-inline'" >&2
+		failed=1
+	fi
+	rm -f "$headers_file"
 	# Sitemapa ide do súboru, nie rúrou do head (Broken pipe, Beh #31).
 	sitemap=$(mktemp)
-	curl -sS -o "$sitemap" --max-time 30 --retry 2 --retry-delay 5 "${base%/}/sitemap.php" || true
+	curl -sS -o "$sitemap" --max-time 30 "${retry[@]}" "${base%/}/sitemap.php" || true
 	article_match=$(grep -m 1 -o 'https://[^<]*article\.php?slug=[^<&]*' "$sitemap" || true)
 	article_url=${article_match%%$'\n'*}
 	rm -f "$sitemap"
 	if [[ -n $article_url ]]; then
-		code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 5 "$article_url" || echo "000")
+		code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "${retry[@]}" "$article_url" || echo "000")
 		if [[ $code == "200" ]]; then
 			echo "  OK   ${code}  ${article_url}"
 		else
