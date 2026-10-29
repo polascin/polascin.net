@@ -739,6 +739,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/balik-pre-sadzbu-este-nie-je-tlac.php'
             );
         },
+        '2026102901_month_of_verification_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/mesiac-v-ktorom-sa-overovalo-vsetko.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
