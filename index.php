@@ -169,7 +169,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
         <h3><?= te('home.marza_subtitle') ?></h3>
         <p><?= te('home.marza_text') ?></p>
         <div class="about-actions">
-          <a href="https://polascin.gumroad.com/" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?= te('home.marza_gumroad') ?></a>
+          <a href="https://polascin.gumroad.com/l/marza-z-krvi" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?= te('home.marza_gumroad') ?></a>
           <a href="https://nefro.polascin.net/publikacie.php" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><?= te('home.marza_nefro') ?></a>
         </div>
       </div>

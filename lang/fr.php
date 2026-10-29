@@ -383,6 +383,6 @@ return [
     'library.topic.other' => 'Autres',
     'home.marza_subtitle' => 'Un thriller sur des minutes volées',
     'home.marza_text' => 'Quand le temps des patients devient une source de profit. Marža z krvi est un thriller en slovaque situé dans le milieu de la dialyse, sur la conscience, le pouvoir et l’argent.',
-    'home.marza_gumroad' => 'Catalogue Gumroad',
+    'home.marza_gumroad' => 'Le livre sur Gumroad',
     'home.marza_nefro' => 'Publications du projet Nefro',
 ];

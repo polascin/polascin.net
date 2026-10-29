@@ -383,6 +383,6 @@ return [
     'library.topic.other' => 'Inne',
     'home.marza_subtitle' => 'Thriller o skradzionych minutach',
     'home.marza_text' => 'Gdy czas pacjentów staje się zyskiem. Marža z krvi to słowackojęzyczny thriller ze świata dializ o sumieniu, władzy i pieniądzach.',
-    'home.marza_gumroad' => 'Oferta na Gumroadzie',
+    'home.marza_gumroad' => 'Książka na Gumroadzie',
     'home.marza_nefro' => 'Publikacje projektu Nefro',
 ];

@@ -383,6 +383,6 @@ return [
     'library.topic.other' => 'Ostatné',
     'home.marza_subtitle' => 'Triler o ukradnutých minútach',
     'home.marza_text' => 'Keď sa čas pacientov mení na zisk. Marža z krvi je slovenský triler z prostredia dialýzy o svedomí, moci a peniazoch.',
-    'home.marza_gumroad' => 'Ponuka na Gumroade',
+    'home.marza_gumroad' => 'Kniha na Gumroade',
     'home.marza_nefro' => 'Publikácie Nefro-projektu',
 ];

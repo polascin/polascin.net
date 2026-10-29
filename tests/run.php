@@ -929,6 +929,10 @@ foreach ($soldPublicationLinks as $soldPublicationLink) {
     expectSame(1, substr_count($staticFallback, $soldPublicationHref), "Statický fallback musí obsahovať odkaz {$soldPublicationLink}");
     expectSame(1, substr_count($legacyFallback, $soldPublicationHref), "Starší fallback musí obsahovať odkaz {$soldPublicationLink}");
 }
+// Sekcia Marža z krvi vedie priamo na produkt, nie na koreň obchodu.
+$marzaGumroadHref = 'href="https://polascin.gumroad.com/l/marza-z-krvi"';
+expectSame(1, substr_count($homeTemplate, $marzaGumroadHref), 'Dynamická stránka musí v sekcii Marža z krvi odkazovať na produkt na Gumroade');
+expectSame(1, substr_count($staticFallback, $marzaGumroadHref), 'Statický fallback musí v sekcii Marža z krvi odkazovať na produkt na Gumroade');
 $externalLinkFiles = ['index.html', 'privacy.html', 'terms.html', 'weblogo/index.html', 'weblogo/privacy.html', 'weblogo/terms.html'];
 foreach ($externalLinkFiles as $externalLinkFile) {
     $externalLinkHtml = (string) file_get_contents(dirname(__DIR__) . '/' . $externalLinkFile);
