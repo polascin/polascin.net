@@ -264,6 +264,19 @@ if [[ -f $SSH_KEY ]]; then
 	SSH_OPTS+=(-i "$SSH_KEY")
 fi
 
+# Hosting po sérii spojení niekedy zruší SSH už pri výmene kľúčov
+# (kex_exchange_identification: Connection reset, 2026-10-29). Príkaz sa
+# vtedy na serveri nespustí, preto ho pri idempotentných krokoch skúsime znova.
+ssh_idempotent() {
+	local attempt
+	for attempt in 1 2 3; do
+		ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "$@" && return 0
+		((attempt < 3)) || return 1
+		echo "[deploy] SSH zlyhalo (pokus ${attempt}/3), opakujem o 15 s..." >&2
+		sleep 15
+	done
+}
+
 # rsync -e rozdeľuje reťazec podľa úvodzoviek, nie podľa spätných lomítok,
 # preto sa každý argument obaľuje úvodzovkami (cesty môžu obsahovať medzery).
 RSYNC_RSH="ssh"
@@ -337,7 +350,7 @@ GUARD
 } >>deploy_info.php
 
 echo "[deploy] Overujem vzdialený cieľový adresár..."
-ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "test -d '${REMOTE_PATH}'"
+ssh_idempotent "test -d '${REMOTE_PATH}'"
 
 if [[ $TRANSPORT == rsync ]]; then
 	echo "[deploy] Spúšťam rsync..."
@@ -375,7 +388,7 @@ else
 	fi
 	# Zámok zdieľa nočná kontrola DB (hooks/ops/nightly.sh), aby nikdy
 	# nečítala rozostavaný web root.
-	ssh "${SSH_OPTS[@]}" "$SSH_SPEC" \
+	ssh_idempotent \
 		"flock -w 900 '${REMOTE_PARENT%/}/private/ops.lock' rsync ${RSYNC_FLAGS} --exclude-from='${STAGE}/.deployignore' '${STAGE}/' '${REMOTE_PATH}/'"
 
 	if ((DRY_RUN)); then
@@ -385,7 +398,7 @@ else
 fi
 
 echo "[deploy] Odstraňujem staré súbory určené iba pre repozitár..."
-ssh "${SSH_OPTS[@]}" "$SSH_SPEC" \
+ssh_idempotent \
 	"set -eu; cd '${REMOTE_PATH}'; rm -rf -- .idea .agents scripts audit-reports; rm -f -- DEPLOY.md README.md .audit.md .doaudit.md .deployignore .gitignore .gitattributes env.ini.example hooks/deploy.sh hooks/deploy.env.example tests/run.php .github/workflows/deploy.yml .vscode/settings.json .vscode/tasks.json .vscode/extensions.json .claude/settings.json .trunk/trunk.yaml .trunk/configs/svgo.config.js .cursor/settings.json .cursor/rules/*.mdc; rmdir hooks tests .github/workflows .github .vscode .claude .trunk/configs .trunk .cursor/rules .cursor 2>/dev/null || true"
 
 POLASCIN_ENV_INI=${POLASCIN_ENV_INI:-""}

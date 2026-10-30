@@ -933,6 +933,20 @@ foreach ($soldPublicationLinks as $soldPublicationLink) {
 $marzaGumroadHref = 'href="https://polascin.gumroad.com/l/marza-z-krvi"';
 expectSame(1, substr_count($homeTemplate, $marzaGumroadHref), 'Dynamická stránka musí v sekcii Marža z krvi odkazovať na produkt na Gumroade');
 expectSame(1, substr_count($staticFallback, $marzaGumroadHref), 'Statický fallback musí v sekcii Marža z krvi odkazovať na produkt na Gumroade');
+// Kex reset hostingu prerušil 2026-10-29 čistenie po nasadení; idempotentné
+// kroky sa preto opakujú cez ssh_idempotent.
+foreach (
+    [
+        'ssh_idempotent "test -d',
+        "ssh_idempotent \\\n\t\t\"flock -w 900",
+        "Odstraňujem staré súbory určené iba pre repozitár...\"\nssh_idempotent",
+    ] as $sshRetryNeedle
+) {
+    expectTrue(
+        str_contains($deployScript, $sshRetryNeedle),
+        'hooks/deploy.sh musí opakovať idempotentný SSH krok: ' . strtok($sshRetryNeedle, "\n")
+    );
+}
 $externalLinkFiles = ['index.html', 'privacy.html', 'terms.html', 'weblogo/index.html', 'weblogo/privacy.html', 'weblogo/terms.html'];
 foreach ($externalLinkFiles as $externalLinkFile) {
     $externalLinkHtml = (string) file_get_contents(dirname(__DIR__) . '/' . $externalLinkFile);
