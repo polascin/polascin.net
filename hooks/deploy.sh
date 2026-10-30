@@ -348,6 +348,11 @@ GUARD
 	printf "define('DEPLOY_COMMIT', '%s');\n" "$COMMIT"
 	printf "define('DEPLOY_BRANCH', '%s');\n" "$BRANCH"
 } >>deploy_info.php
+# Poškodený deploy_info.php zhodí každú stránku, lebo ho načítava pätička
+# (Parse error na produkcii 2026-10-24 14:30). Bez platnej syntaxe sa nenasadzuje.
+if command -v php >/dev/null 2>&1; then
+	php -l deploy_info.php >/dev/null || fail "Vygenerovaný deploy_info.php nemá platnú syntax PHP."
+fi
 
 echo "[deploy] Overujem vzdialený cieľový adresár..."
 ssh_idempotent "test -d '${REMOTE_PATH}'"

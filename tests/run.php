@@ -947,6 +947,16 @@ foreach (
         'hooks/deploy.sh musí opakovať idempotentný SSH krok: ' . strtok($sshRetryNeedle, "\n")
     );
 }
+// Poškodený deploy_info.php nesmie zhodiť pätičku a nesmie sa nasadiť.
+$footerSource = (string) file_get_contents(dirname(__DIR__) . '/footer.php');
+expectTrue(
+    (bool) preg_match('~try \{\s*require_once \$deployInfoFile;\s*\} catch \(ParseError~', $footerSource),
+    'footer.php musí zachytiť ParseError z deploy_info.php'
+);
+expectTrue(
+    str_contains($deployScript, 'php -l deploy_info.php'),
+    'hooks/deploy.sh musí pred nasadením overiť syntax deploy_info.php'
+);
 $externalLinkFiles = ['index.html', 'privacy.html', 'terms.html', 'weblogo/index.html', 'weblogo/privacy.html', 'weblogo/terms.html'];
 foreach ($externalLinkFiles as $externalLinkFile) {
     $externalLinkHtml = (string) file_get_contents(dirname(__DIR__) . '/' . $externalLinkFile);

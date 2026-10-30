@@ -36,7 +36,13 @@ $vekoveHodnoty = [
 // sa berie čas úpravy zobrazovaného skriptu.
 $deployInfoFile = __DIR__ . '/deploy_info.php';
 if (is_file($deployInfoFile)) {
-    require_once $deployInfoFile;
+    // Chybný súbor z nasadenia nesmie zhodiť stránku (Parse error 2026-10-24);
+    // pätička vtedy použije čas úpravy skriptu.
+    try {
+        require_once $deployInfoFile;
+    } catch (ParseError $deployInfoError) {
+        error_log('deploy_info.php sa nedá načítať: ' . $deployInfoError->getMessage());
+    }
 }
 if (defined('DEPLOY_TIMESTAMP')) {
     $footerUpdateTs = (int) DEPLOY_TIMESTAMP;
