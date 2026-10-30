@@ -207,6 +207,12 @@ musí niesť bezpečnostné hlavičky a CSP s nonce bez `'unsafe-inline'`. Pri
 odpovedi 429 (limit hostingu na IP) curl požiadavku zopakuje po 10 s. Pri chybe
 skončí nenulovým kódom. Samotné overenie bez nasadenia: `hooks/deploy.sh --smoke-only`.
 
+Pred prenosom skript overí syntax vygenerovaného `deploy_info.php` cez `php -l`;
+pätička ho načítava na každej stránke, preto sa chybný súbor nenasadí.
+Overenie cieľa, rsync na serveri a čistenie súborov určených iba pre repozitár
+sa pri zlyhaní SSH (hosting občas zruší spojenie pri výmene kľúčov) opakujú až
+trikrát po 15 s. Kroky so vstupom zo stdin sa neopakujú.
+
 ## Databázová schéma a env.ini
 
 GitHub Actions aj `hooks/deploy.sh --migrate` automaticky spustia `setup_db.php` na serveri po súborovom deploye.
