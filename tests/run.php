@@ -2510,6 +2510,42 @@ foreach ($coverSources as $coverSource) {
         "Open Graph musí pre {$coverName} podsunúť JPEG, nie WebP"
     );
 }
+// Karty na úvodnej stránke a v zozname článkov ťahali plnú obálku 1600 px
+// (až 124 kB) do miesta širokého okolo 400 px. Každá obálka preto potrebuje
+// zmenšeniny pre `srcset` a karty ich musia aj ponúknuť.
+expectSame(
+    'const CARD_WIDTHS = [' . implode(', ', ARTICLE_CARD_COVER_WIDTHS) . '];',
+    preg_match('~const CARD_WIDTHS = \[[0-9, ]+\];~', (string) file_get_contents(dirname(__DIR__) . '/scripts/make_og_covers.php'), $cardWidthsMatch) === 1 ? $cardWidthsMatch[0] : '',
+    'Šírky zmenšenín v make_og_covers.php sa musia zhodovať s ARTICLE_CARD_COVER_WIDTHS'
+);
+foreach ($coverSources as $coverSource) {
+    $coverName = basename($coverSource, '.webp');
+    $coverWidth = (int) (getimagesize($coverSource)[0] ?? 0);
+    foreach (ARTICLE_CARD_COVER_WIDTHS as $cardWidth) {
+        $cardVariant = dirname(__DIR__) . '/images/articles/card/' . $coverName . '-' . $cardWidth . '.webp';
+        $cardInfo = is_file($cardVariant) ? getimagesize($cardVariant) : false;
+        expectTrue(
+            is_array($cardInfo) && $cardInfo['mime'] === 'image/webp' && $cardInfo[0] === $cardWidth,
+            "Obálka {$coverName}.webp musí mať zmenšeninu card/{$coverName}-{$cardWidth}.webp (php scripts/make_og_covers.php)"
+        );
+    }
+    $cardHtml = articleCoverHtml(['slug' => $coverName], 'card-cover', true, true, CARD_COVER_SIZES);
+    expectTrue(
+        str_contains($cardHtml, 'srcset="images/articles/card/' . $coverName . '-480.webp 480w, images/articles/card/' . $coverName . '-960.webp 960w, images/articles/' . $coverName . '.webp ' . $coverWidth . 'w"')
+            && str_contains($cardHtml, 'sizes="' . CARD_COVER_SIZES . '"'),
+        "Karta s obálkou {$coverName} musí ponúknuť srcset so zmenšeninami"
+    );
+}
+expectTrue(
+    !str_contains(articleCoverHtml(['slug' => basename($coverSources[0] ?? '', '.webp')], 'article-cover-img', false), 'srcset='),
+    'Obálka v detaile článku zostáva bez srcset kariet'
+);
+foreach (['index.php', 'articles.php'] as $cardTemplate) {
+    expectTrue(
+        str_contains((string) file_get_contents(dirname(__DIR__) . '/' . $cardTemplate), "articleCoverHtml(\$article, 'card-cover', true, true, CARD_COVER_SIZES)"),
+        "{$cardTemplate} musí kartám posielať CARD_COVER_SIZES"
+    );
+}
 expectTrue(
     articleCoverSocialSrc(null, 'neexistujuci-slug') === null,
     'Bez obálky nesmie articleCoverSocialSrc() nič vymyslieť'

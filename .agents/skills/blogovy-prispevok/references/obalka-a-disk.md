@@ -47,7 +47,7 @@ Skript drž mimo repozitára (scratchpad) alebo ho po použití zmaž. Over: `im
 php scripts/make_og_covers.php
 ```
 
-Vznikne `images/articles/og/{slug}.jpg`. Ide do commitu spolu s WebP. Bez neho `tests/run.php` spadne a LinkedIn nezobrazí náhľad. Článok v HTML podsúva JPEG do `og:image` a `twitter:image` automaticky.
+Vznikne `images/articles/og/{slug}.jpg` a zmenšeniny kariet `images/articles/card/{slug}-480.webp` a `-960.webp`. Všetky idú do commitu spolu s WebP. Bez neho `tests/run.php` spadne a LinkedIn nezobrazí náhľad. Článok v HTML podsúva JPEG do `og:image` a `twitter:image` automaticky.
 
 ## 4. PNG na Google Disk
 

@@ -65,7 +65,7 @@ Podľa [seed-a-migracia.md](references/seed-a-migracia.md): `content/articles/{s
 
 ### 5. Obálka
 
-Podľa [obalka-a-disk.md](references/obalka-a-disk.md): ilustrácia bez textu a log, pomer 16:10 (iný len keď ho téma potrebuje), farby webu (fialová `#3d1a78`, tyrkys `#078d70`, svetlé pozadie alebo tmavá scéna ako posledné obálky), príjemná, výrazná a presvedčivá. Výstup `images/articles/{slug}.webp` 1600×1000, kvalita 82, potom `php scripts/make_og_covers.php` (JPEG `images/articles/og/{slug}.jpg` ide do commitu, bez neho test spadne).
+Podľa [obalka-a-disk.md](references/obalka-a-disk.md): ilustrácia bez textu a log, pomer 16:10 (iný len keď ho téma potrebuje), farby webu (fialová `#3d1a78`, tyrkys `#078d70`, svetlé pozadie alebo tmavá scéna ako posledné obálky), príjemná, výrazná a presvedčivá. Výstup `images/articles/{slug}.webp` 1600×1000, kvalita 82, potom `php scripts/make_og_covers.php` (JPEG `images/articles/og/{slug}.jpg` a zmenšeniny kariet `images/articles/card/{slug}-480.webp` a `-960.webp` idú do commitu, bez nich test spadne).
 
 ### 6. PNG na Google Disk
 

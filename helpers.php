@@ -340,7 +340,41 @@ function articleCoverSocialSrc(?string $image, ?string $slug = null): ?string {
     return is_file(__DIR__ . '/' . $jpeg) ? $jpeg : $src;
 }
 
-function articleCoverHtml(array $article, string $class, bool $lazy = true, bool $decorative = false): string {
+/** Šírky zmenšených obálok pre karty, ktoré vyrába `scripts/make_og_covers.php`. */
+const ARTICLE_CARD_COVER_WIDTHS = [480, 960];
+// `.card-grid` má stĺpce `minmax(300px, 1fr)` v kontajneri 1200 px: tri
+// stĺpce okolo 400 px, pod 1024 px dva, na mobile jeden na celú šírku.
+const CARD_COVER_SIZES = '(min-width: 1024px) 400px, (min-width: 680px) 50vw, 100vw';
+
+/**
+ * `srcset` pre obálku na karte. Karta má na počítači okolo 400 px, no plná
+ * obálka má 1600 px a až 124 kB. Zmenšeniny ležia v `images/articles/card/`
+ * a použijú sa len vtedy, keď existujú všetky, inak ostane samotné `src`.
+ */
+function articleCoverCardSrcset(string $src, int $width): ?string {
+    if (!str_ends_with($src, '.webp') || !str_starts_with($src, 'images/articles/')) {
+        return null;
+    }
+    $name = basename($src, '.webp');
+    $candidates = [];
+    foreach (ARTICLE_CARD_COVER_WIDTHS as $cardWidth) {
+        if ($cardWidth >= $width) {
+            continue;
+        }
+        $variant = 'images/articles/card/' . $name . '-' . $cardWidth . '.webp';
+        if (!is_file(__DIR__ . '/' . $variant)) {
+            return null;
+        }
+        $candidates[] = $variant . ' ' . $cardWidth . 'w';
+    }
+    if ($candidates === []) {
+        return null;
+    }
+    $candidates[] = $src . ' ' . $width . 'w';
+    return implode(', ', $candidates);
+}
+
+function articleCoverHtml(array $article, string $class, bool $lazy = true, bool $decorative = false, ?string $sizes = null): string {
     $src = articleCoverSrc(
         isset($article['image']) ? (string) $article['image'] : null,
         isset($article['slug']) ? (string) $article['slug'] : null
@@ -353,8 +387,12 @@ function articleCoverHtml(array $article, string $class, bool $lazy = true, bool
     $height = is_array($info) ? (int) $info[1] : 720;
     $alt = $decorative ? '' : trim((string) ($article['image_alt'] ?? $article['title'] ?? ''));
     $loading = $lazy ? 'lazy' : 'eager';
+    $srcset = $sizes !== null && is_array($info) ? articleCoverCardSrcset($src, $width) : null;
+    $responsive = $srcset === null ? '' : '" srcset="' . htmlspecialchars($srcset, ENT_QUOTES, 'UTF-8')
+        . '" sizes="' . htmlspecialchars((string) $sizes, ENT_QUOTES, 'UTF-8');
     return '<img class="' . htmlspecialchars($class, ENT_QUOTES, 'UTF-8')
         . '" src="' . htmlspecialchars($src, ENT_QUOTES, 'UTF-8')
+        . $responsive
         . '" alt="' . htmlspecialchars($alt, ENT_QUOTES, 'UTF-8')
         . '" width="' . $width . '" height="' . $height
         . '" loading="' . $loading . '" decoding="async">';
