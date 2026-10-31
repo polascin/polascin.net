@@ -46,7 +46,7 @@ function columnExists(PDO $pdo, string $table, string $column): bool {
  * Nájde názov jedinečného indexu postaveného presne nad jedným zadaným stĺpcom.
  *
  * Implicitný index z `UNIQUE` v CREATE TABLE sa síce zvyčajne volá rovnako ako
- * stĺpec, ale spoliehať sa na to nemožno — pri migrácii by sa potom starý index
+ * stĺpec, ale spoliehať sa na to nemožno: pri migrácii by sa potom starý index
  * ticho nezrušil.
  */
 function findSingleColumnUniqueIndex(PDO $pdo, string $table, string $column, array $ignore = []): ?string {
@@ -234,7 +234,7 @@ function refreshPublishedArticleTextFromFile(PDO $pdo, string $articlePath): voi
 }
 
 function applySchemaMigrations(PDO $pdo): void {
-    // Poradie kľúčov určuje poradie aplikovania — drž ho chronologicky.
+    // Poradie kľúčov určuje poradie aplikovania. Drž ho chronologicky.
     $migrations = [
         '2026072801_security_indexes' => static function (PDO $pdo): void {
             $indexes = [
@@ -264,7 +264,7 @@ function applySchemaMigrations(PDO $pdo): void {
             // pripoja neskôr nastavením rovnakej hodnoty.
             $pdo->exec("UPDATE articles SET translation_group = id WHERE translation_group IS NULL");
 
-            // Slug musí byť jedinečný v rámci jazyka, nie globálne — inak by ten istý
+            // Slug musí byť jedinečný v rámci jazyka, nie globálne, inak by ten istý
             // článok nemohol mať preklad s rovnakým slugom.
             $oldSlugIndex = findSingleColumnUniqueIndex($pdo, 'articles', 'slug', ['uniq_slug_lang']);
             if ($oldSlugIndex !== null) {
@@ -757,6 +757,14 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/mesiac-v-ktorom-sa-overovalo-vsetko.php'
             );
         },
+        // Pomlčky v textoch článkov sú nahradené interpunkciou. Pred migráciou
+        // sa všetkých 420 riadkov v DB zhodovalo so seedmi (Beh #55), obnova
+        // teda neprepíše úpravy z administrácie.
+        '2026103101_replace_dashes_in_articles' => static function (PDO $pdo): void {
+            foreach (glob(__DIR__ . '/content/articles/*.php') ?: [] as $articlePath) {
+                refreshPublishedArticleTextFromFile($pdo, $articlePath);
+            }
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
@@ -946,7 +954,7 @@ if (!$existing->fetch()) {
         $hash = hashAppPassword($password);
     } catch (\Throwable) {
         // Okrem pravidiel pre heslo odmieta bcrypt aj NUL bajt, a to cez
-        // \ValueError — užší catch by inicializáciu zhodil fatálnou chybou.
+        // \ValueError. Užší catch by inicializáciu zhodil fatálnou chybou.
         fwrite(STDERR, "Chyba: administrátorské heslo musí mať " . APP_PASSWORD_MIN_BYTES . " až " . APP_PASSWORD_MAX_BYTES . " bajtov a obsahovať malé písmeno, veľké písmeno a číslicu.\n");
         exit(1);
     }

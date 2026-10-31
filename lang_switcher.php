@@ -23,7 +23,7 @@ $switcherLanguages = appLanguages();
 /**
  * Cieľové URL prepínača.
  *
- * Zámerne sa nepoužíva `$languageAlternates` z `head_meta.php` — tie sú
+ * Zámerne sa nepoužíva `$languageAlternates` z `head_meta.php`, tie sú
  * kanonické a pre predvolený jazyk neobsahujú parameter `lang`, takže by sa
  * ním nedalo prepnúť späť na slovenčinu.
  *

@@ -71,12 +71,12 @@ return [
     'footer.facebook' => 'Perfil en Facebook',
     'footer.email' => 'Enviar un correo electrónico',
     'footer.discord' => 'Unirse a Discord',
-    'footer.copyright' => '© 1998 – :year Ľubomír Polaščín. Todos los derechos reservados.',
+    'footer.copyright' => '© 1998 a :year Ľubomír Polaščín. Todos los derechos reservados.',
     'footer.privacy' => 'Política de privacidad',
     'footer.terms' => 'Condiciones de uso',
     'footer.cookie_settings' => 'Configuración de cookies',
     'footer.updated' => 'Actualizado:',
-    'footer.beat_title' => 'Swiss Internet Time — 1 día = 1000 beats',
+    'footer.beat_title' => 'Swiss Internet Time: 1 día = 1000 beats',
 
     // Metadatos de las páginas
     'meta.default_description' => 'Sitio web personal y profesional del Dr. Ľubomír Polaščín: nefrología y diálisis, formación y escritura médicas, traducción especializada y herramientas digitales prácticas.',
@@ -90,7 +90,7 @@ return [
     'meta.contact_title' => 'Contacto',
     'meta.contact_description' => 'Póngase en contacto con el Dr. Ľubomír Polaščín para consultas profesionales, propuestas de colaboración o cualquier pregunta.',
     'meta.newsletter_title' => 'Newsletter',
-    'meta.newsletter_description' => 'Suscríbase al Newsletter de Polascin.net — novedades sobre nefrología, medicina interna, libros y tecnología.',
+    'meta.newsletter_description' => 'Suscríbase al Newsletter de Polascin.net: novedades sobre nefrología, medicina interna, libros y tecnología.',
     'meta.login_title' => 'Iniciar sesión',
     'meta.login_description' => 'Acceso de administrador en Polascin.net.',
     'meta.privacy_title' => 'Política de privacidad',
@@ -98,14 +98,14 @@ return [
     'meta.terms_title' => 'Condiciones de uso',
     'meta.terms_description' => 'Condiciones de uso del sitio web del Dr. Ľubomír Polaščín.',
 
-    // Página de inicio — sección principal
+    // Página de inicio: sección principal
     'home.logo_alt' => 'Crystal Kidney',
     'home.hero_title' => 'Dr. Ľubomír Polaščín',
     'home.hero_subtitle' => 'Soy nefrólogo e internista, docente en medicina y autor. Pongo mi larga experiencia en diálisis al servicio de la escritura especializada, la traducción y el desarrollo de herramientas digitales prácticas.',
     'home.cta_about' => 'A qué me dedico',
     'home.cta_articles' => 'Leer artículos',
 
-    // Página de inicio — biografía
+    // Página de inicio: biografía
     'home.about_heading' => 'Sobre mí',
     'home.about_intro' => 'Soy médico especializado en nefrología y medicina interna. Mi actividad profesional se ha centrado en la diálisis y las enfermedades renales; he dirigido dos centros de diálisis en Bratislava y he trabajado en formación médica.',
     'home.about_who' => 'Escribo textos especializados y literarios, traduzco contenidos médicos entre el eslovaco y el inglés y desarrollo sitios web y aplicaciones. Valoro la tecnología y la inteligencia artificial por su utilidad práctica: si hacen más accesible el conocimiento, simplifican el trabajo o mejoran la calidad del resultado.',
@@ -148,7 +148,7 @@ return [
     'home.education_scope' => 'Mi experiencia profesional abarca la hemodiálisis, la hemodiafiltración, la diálisis peritoneal, la diálisis hepática con el sistema Prometheus, las técnicas de depuración extrarrenal en situaciones agudas, la ecografía, el cuidado de los accesos vasculares y la preparación de pacientes para el trasplante renal. Combino esta experiencia con la escritura especializada, las ponencias, la docencia y el desarrollo de proyectos digitales en medicina.',
 
     'home.personal_heading' => 'Más allá de la medicina',
-    'home.personal_text' => 'Me interesan la literatura, la filosofía, la poesía y los viajes. También me atraen los idiomas — por eso, entre otras razones, este sitio está disponible en diez de ellos — y dedico mi tiempo libre a la lectura, la traducción y la programación de mis propios proyectos.',
+    'home.personal_text' => 'Me interesan la literatura, la filosofía, la poesía y los viajes. También me atraen los idiomas, y por eso, entre otras razones, este sitio está disponible en diez de ellos. Dedico mi tiempo libre a la lectura, la traducción y la programación de mis propios proyectos.',
     'home.personal_writing' => 'En mis libros y otros escritos vuelvo a la medicina, los conflictos morales y la relación entre las personas y la tecnología. Publico los textos especializados con mi propio nombre, mientras que mi obra literaria aparece también bajo el seudónimo Walter Kyo Csoelle, cuyo perfil de autor está disponible en Amazon.',
 
     'home.identity_nephrologist' => 'Nefrólogo',
@@ -157,7 +157,7 @@ return [
     'home.books_cta' => 'Ver libros',
     'home.amazon_cta' => 'Perfil de autor en Amazon',
 
-    // Página de inicio — nefrología
+    // Página de inicio: nefrología
     'home.nephrology_heading' => 'La nefrología en breve',
     'home.nephrology_intro' => 'La nefrología no se limita a la diálisis. Combina la prevención, el diagnóstico precoz y el tratamiento a largo plazo de las enfermedades renales con la terapia renal sustitutiva cuando el tratamiento conservador ya no es suficiente.',
     'home.ckd_title' => 'Enfermedad renal crónica (ERC)',
@@ -174,7 +174,7 @@ return [
     'home.diagnostics_text' => 'El diagnóstico se basa en la historia clínica, la exploración física, los análisis de sangre y orina y las pruebas de imagen. Se realiza una biopsia renal cuando está clínicamente indicada.',
     'home.nephrology_note' => 'Esta información es educativa y no sustituye una exploración médica ni el asesoramiento individual.',
 
-    // Página de inicio — artículos, proyectos, enlaces, contacto
+    // Página de inicio: artículos, proyectos, enlaces, contacto
     'home.latest_heading' => 'Últimos artículos',
     'home.all_articles' => 'Ver todos los artículos',
     'home.projects_heading' => 'Proyectos seleccionados',
@@ -184,7 +184,7 @@ return [
     'home.project_books_text' => 'Una visión general de mis libros, publicaciones especializadas, capítulos y otros escritos.',
     'home.project_alphagrab_text' => 'Herramienta experimental de búsqueda de eventos y entradas que utiliza la API Ticketmaster Discovery.',
     'home.project_arenibus_text' => 'Un sistema de información .NET en una fase avanzada de desarrollo para clínicas de nefrología y centros de diálisis. Su MVP abarca los registros de pacientes y visitas, las prescripciones de diálisis, la programación, los resultados de laboratorio, las trazas de auditoría y la integración con el sistema eHealth de Eslovaquia; una demostración pública utiliza datos ficticios.',
-    'home.project_gumroad_text' => 'Productos digitales y libros electrónicos en Gumroad — Medicínsky pôst y Medical Fasting, ediciones en eslovaco, inglés y alemán de SK Nefro Báza 1 y SK Nefro Báza 1 Kompendium, y el título alemán SK Nefro: Belegt, wahrscheinlich, offen.',
+    'home.project_gumroad_text' => 'Productos digitales y libros electrónicos en Gumroad: Medicínsky pôst y Medical Fasting, ediciones en eslovaco, inglés y alemán de SK Nefro Báza 1 y SK Nefro Báza 1 Kompendium, y el título alemán SK Nefro: Belegt, wahrscheinlich, offen.',
     'home.publications_heading' => 'Publicaciones a la venta',
     'home.publications_intro' => 'Libros electrónicos que vendo en nefro.polascin.net y en Gumroad.',
     'home.link_pub_nefro_baza' => 'SK Nefro Báza 1 (nefro.polascin.net)',
@@ -209,10 +209,10 @@ return [
     'home.links_heading' => 'Otros sitios web y enlaces',
     'home.links_intro' => 'Mis otros sitios web, libros y una selección de herramientas.',
     'home.link_nephrosite' => 'NephroSite (en eslovaco)',
-    'home.link_dialysis_bratislava' => 'Diálisis en Bratislava – Medimpax (en eslovaco)',
+    'home.link_dialysis_bratislava' => 'Diálisis en Bratislava: Medimpax (en eslovaco)',
     'home.link_impax_centres' => 'Centros de diálisis IMPAX (en eslovaco)',
-    'home.link_vital_2nd' => 'Vital Algorithm — 2.ª edición (Amazon)',
-    'home.link_vital_1st' => 'The Vital Algorithm — 1.ª edición (Amazon)',
+    'home.link_vital_2nd' => 'Vital Algorithm, 2.ª edición (Amazon)',
+    'home.link_vital_1st' => 'The Vital Algorithm, 1.ª edición (Amazon)',
     'home.contact_heading' => 'Contacto',
     'home.contact_intro' => 'Para una colaboración profesional, una conferencia, una traducción médica o un proyecto digital, envíeme un mensaje. Este contacto no está destinado a consultas médicas urgentes.',
     'home.contact_cta' => 'Abrir el formulario de contacto',
@@ -232,7 +232,7 @@ return [
     'article.not_found_heading' => 'Artículo no encontrado',
     'article.not_found_text' => 'El artículo solicitado no existe o no está publicado.',
     'article.back_to_list' => 'Volver a los artículos',
-    'article.admin_preview' => 'Vista previa de administrador — este artículo todavía no está disponible públicamente.',
+    'article.admin_preview' => 'Vista previa de administrador: este artículo todavía no está disponible públicamente.',
     'article.available_in' => 'Disponible también en:',
 
     // Formulario de contacto

@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     } catch (\Throwable $rehashError) {
                         // Rehash je best-effort. Staré heslo nemusí spĺňať dnešné pravidlá
                         // a bcrypt odmieta napríklad NUL bajt (\ValueError), no prihlásenie
-                        // už bolo úspešné — nesmie ho zhodiť fatálna chyba.
+                        // už bolo úspešné, nesmie ho zhodiť fatálna chyba.
                         error_log('Rehash hesla zlyhal: ' . $rehashError->getMessage());
                     }
                 }

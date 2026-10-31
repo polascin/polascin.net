@@ -71,12 +71,12 @@ return [
     'footer.facebook' => 'Facebook profile',
     'footer.email' => 'Send an email',
     'footer.discord' => 'Join on Discord',
-    'footer.copyright' => '© 1998 – :year Ľubomír Polaščín. All rights reserved.',
+    'footer.copyright' => '© 1998 to :year Ľubomír Polaščín. All rights reserved.',
     'footer.privacy' => 'Privacy Policy',
     'footer.terms' => 'Terms of Use',
     'footer.cookie_settings' => 'Cookie settings',
     'footer.updated' => 'Updated:',
-    'footer.beat_title' => 'Swiss Internet Time — 1 day = 1000 beats',
+    'footer.beat_title' => 'Swiss Internet Time: 1 day = 1000 beats',
 
     // Page metadata
     'meta.default_description' => 'The personal and professional website of Ľubomír Polaščín, MD: nephrology and dialysis, medical education and writing, specialist translation, and practical digital tools.',
@@ -90,7 +90,7 @@ return [
     'meta.contact_title' => 'Contact',
     'meta.contact_description' => 'Contact Ľubomír Polaščín, MD, with professional questions, proposals for collaboration or general inquiries.',
     'meta.newsletter_title' => 'Newsletter',
-    'meta.newsletter_description' => 'Subscribe to updates from Polascin.net — news on nephrology, internal medicine, books and technology.',
+    'meta.newsletter_description' => 'Subscribe to updates from Polascin.net: news on nephrology, internal medicine, books and technology.',
     'meta.login_title' => 'Log in',
     'meta.login_description' => 'Administrator login for Polascin.net.',
     'meta.privacy_title' => 'Privacy Policy',
@@ -98,14 +98,14 @@ return [
     'meta.terms_title' => 'Terms of Use',
     'meta.terms_description' => 'Terms of use for the website of Ľubomír Polaščín, MD.',
 
-    // Home page — hero
+    // Home page: hero
     'home.logo_alt' => 'Crystal Kidney',
     'home.hero_title' => 'Ľubomír Polaščín, MD',
     'home.hero_subtitle' => 'I am a nephrologist and internist, medical educator and author. I bring long experience in dialysis to specialist writing, translation and the development of practical digital tools.',
     'home.cta_about' => 'What I do',
     'home.cta_articles' => 'Read articles',
 
-    // Home page — biography
+    // Home page: biography
     'home.about_heading' => 'About me',
     'home.about_intro' => 'I am a physician specialising in nephrology and internal medicine. My professional work has centred on dialysis and kidney disease; I have led two dialysis centres in Bratislava and worked in medical education.',
     'home.about_who' => 'I write professional and literary texts, translate medical content between Slovak and English, and build websites and applications. I judge technology and artificial intelligence by their practical value: whether they make knowledge more accessible, simplify work or improve the quality of the result.',
@@ -142,14 +142,14 @@ return [
     'home.skills_ai_text' => 'language models, automation and critical evaluation of their use in medicine',
 
     'home.education_heading' => 'Education and career',
-    'home.education_school' => 'I completed secondary school with a focus on programming in 1989 — in Basic and Pascal at the time — and also won a district programming competition.',
+    'home.education_school' => 'I completed secondary school with a focus on programming in 1989, when we programmed in Basic and Pascal, and also won a district programming competition.',
     'home.education_text' => 'I graduated in general medicine from Pavol Jozef Šafárik University in Košice in 1995. I qualified in internal medicine in 1998 and in nephrology in 2009, when I also received certification in abdominal ultrasonography in adults.',
     'home.education_path' => 'I have worked in dialysis and nephrology since 1995. I later led two dialysis centres in Bratislava and worked in medical education.',
     'home.education_scope' => 'My professional experience covers haemodialysis, haemodiafiltration, peritoneal dialysis, liver dialysis on the Prometheus system, acute extracorporeal blood purification, ultrasonography, vascular access care and the preparation of patients for kidney transplantation. I combine this experience with specialist writing, lectures, teaching and the development of digital medical projects.',
 
     'home.personal_heading' => 'Beyond medicine',
-    'home.personal_text' => 'I am interested in literature, philosophy, poetry and travel. Languages are close to my heart — one reason this site is available in ten of them — and I spend my free time reading, translating and programming my own projects.',
-    'home.personal_writing' => 'In my books and other writing I return to medicine, moral conflict and the relationship between people and technology. I publish specialist texts under my own name, while my literary work also appears under the pen name Walter Kyo Csoelle — whose author profile is available on Amazon.',
+    'home.personal_text' => 'I am interested in literature, philosophy, poetry and travel. Languages are close to my heart, which is one reason this site is available in ten of them. I spend my free time reading, translating and programming my own projects.',
+    'home.personal_writing' => 'In my books and other writing I return to medicine, moral conflict and the relationship between people and technology. I publish specialist texts under my own name, while my literary work also appears under the pen name Walter Kyo Csoelle, whose author profile is available on Amazon.',
 
     'home.identity_nephrologist' => 'Nephrologist',
     'home.identity_internist' => 'Internist',
@@ -157,7 +157,7 @@ return [
     'home.books_cta' => 'View books',
     'home.amazon_cta' => 'Amazon author profile',
 
-    // Home page — nephrology
+    // Home page: nephrology
     'home.nephrology_heading' => 'Nephrology in brief',
     'home.nephrology_intro' => 'Nephrology is not only about dialysis. It combines prevention, early diagnosis and long-term treatment of kidney disease with kidney replacement therapy when conservative care is no longer enough.',
     'home.ckd_title' => 'Chronic kidney disease (CKD)',
@@ -174,7 +174,7 @@ return [
     'home.diagnostics_text' => 'Diagnosis draws on medical history, physical examination, blood and urine tests, and imaging. A kidney biopsy is added when clinically indicated.',
     'home.nephrology_note' => 'This information is educational and does not replace a medical examination or individual advice.',
 
-    // Home page — articles, projects, links, contact
+    // Home page: articles, projects, links, contact
     'home.latest_heading' => 'Latest articles',
     'home.all_articles' => 'View all articles',
     'home.projects_heading' => 'Selected projects',
@@ -184,7 +184,7 @@ return [
     'home.project_books_text' => 'An overview of my books, specialist publications, chapters and other writing.',
     'home.project_alphagrab_text' => 'An experimental event and ticket search tool using the Ticketmaster Discovery API.',
     'home.project_arenibus_text' => 'A .NET information system in advanced development for nephrology clinics and dialysis centres. Its MVP covers patient and visit records, dialysis prescriptions, scheduling, laboratory results, audit trails and integration with Slovakia\'s eHealth system; a public demo uses fictional data.',
-    'home.project_gumroad_text' => 'Digital products and e-books on Gumroad — Medicínsky pôst and Medical Fasting, Slovak, English and German editions of SK Nefro Báza 1 and SK Nefro Báza 1 Kompendium, and the German title SK Nefro: Belegt, wahrscheinlich, offen.',
+    'home.project_gumroad_text' => 'Digital products and e-books on Gumroad: Medicínsky pôst and Medical Fasting, Slovak, English and German editions of SK Nefro Báza 1 and SK Nefro Báza 1 Kompendium, and the German title SK Nefro: Belegt, wahrscheinlich, offen.',
     'home.publications_heading' => 'Publications for sale',
     'home.publications_intro' => 'E-books I sell on nefro.polascin.net and on Gumroad.',
     'home.link_pub_nefro_baza' => 'SK Nefro Báza 1 (nefro.polascin.net)',
@@ -211,8 +211,8 @@ return [
     'home.link_nephrosite' => 'NephroSite (in Slovak)',
     'home.link_dialysis_bratislava' => 'Dialysis in Bratislava: Medimpax (in Slovak)',
     'home.link_impax_centres' => 'IMPAX dialysis centres (in Slovak)',
-    'home.link_vital_2nd' => 'Vital Algorithm — 2nd edition (Amazon)',
-    'home.link_vital_1st' => 'The Vital Algorithm — 1st edition (Amazon)',
+    'home.link_vital_2nd' => 'Vital Algorithm, 2nd edition (Amazon)',
+    'home.link_vital_1st' => 'The Vital Algorithm, 1st edition (Amazon)',
     'home.contact_heading' => 'Contact',
     'home.contact_intro' => 'For professional collaboration, a lecture, medical translation or a digital project, send me a message. This contact is not intended for urgent medical questions.',
     'home.contact_cta' => 'Open the contact form',
@@ -232,7 +232,7 @@ return [
     'article.not_found_heading' => 'Article not found',
     'article.not_found_text' => 'The requested article does not exist or has not been published.',
     'article.back_to_list' => 'Back to articles',
-    'article.admin_preview' => 'Administrator preview — this article is not publicly available yet.',
+    'article.admin_preview' => 'Administrator preview: this article is not publicly available yet.',
     'article.available_in' => 'Also available in:',
 
     // Contact form

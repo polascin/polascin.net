@@ -58,7 +58,7 @@ if ($notFound) {
 
     // hreflang má zmysel len pri skutočnom preklade. Bez tohto priradenia by
     // `head_meta.php` doplnil klaster všetkých šiestich jazykov, hoci každá z tých
-    // adries sa kanonizuje späť na tento článok — rozbitý klaster vyhľadávače
+    // adries sa kanonizuje späť na tento článok. Rozbitý klaster vyhľadávače
     // zahodia celý. Rovnaké pravidlo platí v `sitemap.php`.
     $languageAlternates = [];
     if (count($articleTranslations) > 1) {
@@ -73,7 +73,7 @@ if ($notFound) {
         (string) ($article['slug'] ?? '')
     );
     if ($coverSrc !== null) {
-        // Na stránke ostáva WebP, do Open Graphu ide JPEG odvodenina — WebP
+        // Na stránke ostáva WebP, do Open Graphu ide JPEG odvodenina, lebo WebP
         // náhľad niektoré siete (LinkedIn) nezobrazia vôbec.
         $coverSocialSrc = articleCoverSocialSrc(
             isset($article['image']) ? (string) $article['image'] : null,

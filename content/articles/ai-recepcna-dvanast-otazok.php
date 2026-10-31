@@ -35,10 +35,10 @@ return [
             'image_alt' => 'Nočná recepcia nefrologickej ambulancie: lekár prezerá checklist, vedľa bliká nezdvihnutý telefón a jemné tyrkysovo-fialové svetlo hlasového rozhrania.',
             'excerpt' => 'Ponuka sľubovala zachytiť 30 % neprijatých hovorov a stotisíc eur ročne. Pri hĺbkovom pohľade chýbali fallback, eskalácia núdze a dohoda podľa GDPR čl. 9. Preto som napísal dvanásť otázok a navrhol dvojtýždňový pilot.',
             'content' => <<<'HTML'
-<p>Ponuku AI-Recepčnej som dostal cez sprostredkovateľa z IMPAX — od zástupcu dodávateľa TOMMAX. Na papieri vyzerala pôsobivo: zachytiť približne 30&nbsp;% neprijatých hovorov, plynulá slovenčina a podľa potreby čeština, nemčina, maďarčina či angličtina, návratnosť často do mesiaca a odhadovaný ročný prínos na tržbách nad 100&nbsp;tisíc eur.</p>
+<p>Ponuku AI-Recepčnej som dostal cez sprostredkovateľa z IMPAX, od zástupcu dodávateľa TOMMAX. Na papieri vyzerala pôsobivo: zachytiť približne 30&nbsp;% neprijatých hovorov, plynulá slovenčina a podľa potreby čeština, nemčina, maďarčina či angličtina, návratnosť často do mesiaca a odhadovaný ročný prínos na tržbách nad 100&nbsp;tisíc eur.</p>
 <p>Keď som sa však pozrel podrobnejšie, začali sa ukazovať medzery.</p>
-<p>Slovenčina patrí medzi jazyky s menším objemom trénovacích dát pre hlasové modely — tzv. <em>lower-resource</em>. Marketingová „plynulosť“ preto nemusí sedieť s medicínskou konverzáciou so staršími pacientmi, ktorí hovoria dialektom, robia pauzy uprostred vety alebo opisujú príznaky oklukou.</p>
-<p>V materiáloch som nenašiel jasný fallback ani eskalačný protokol pre bolesť na hrudníku či dýchavičnosť. Chýbali aj certifikácie, ktoré v USA bežne uvádzajú poskytovatelia hlasových služieb v zdravotníctve (HIPAA, SOC&nbsp;2, BAA) — tie však pre slovenskú ambulanciu nie sú záväzným rámcom. Pre nás je kľúčová dohoda o spracúvaní osobitných kategórií podľa <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR čl.&nbsp;9</a> a jasné miesto hostingu či prenosu. Prípadové štúdie v ponuke — TYMO Beauty a Manhattan Dental Studio — nie sú nefrológia na Slovensku.</p>
+<p>Slovenčina patrí medzi jazyky s menším objemom trénovacích dát pre hlasové modely, tzv. <em>lower-resource</em>. Marketingová „plynulosť“ preto nemusí sedieť s medicínskou konverzáciou so staršími pacientmi, ktorí hovoria dialektom, robia pauzy uprostred vety alebo opisujú príznaky oklukou.</p>
+<p>V materiáloch som nenašiel jasný fallback ani eskalačný protokol pre bolesť na hrudníku či dýchavičnosť. Chýbali aj certifikácie, ktoré v USA bežne uvádzajú poskytovatelia hlasových služieb v zdravotníctve (HIPAA, SOC&nbsp;2, BAA). Tie však pre slovenskú ambulanciu nie sú záväzným rámcom. Pre nás je kľúčová dohoda o spracúvaní osobitných kategórií podľa <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR čl.&nbsp;9</a> a jasné miesto hostingu či prenosu. Prípadové štúdie v ponuke, TYMO Beauty a Manhattan Dental Studio, nie sú nefrológia na Slovensku.</p>
 <p>Preto som napísal dvanásť otázok pre dodávateľa:</p>
 <ol>
 <li>Aký je presný eskalačný protokol, keď pacient povie „chcem hovoriť s človekom“ alebo „to je núdzový prípad“?</li>
@@ -55,8 +55,8 @@ return [
 <li>Kto technicky stojí za AI enginom? Používate vlastný model, alebo Vapi/Retell/inú platformu?</li>
 </ol>
 <p>Navrhli sme dvojtýždňový pilot na sekundárnej linke. Ak dodávateľ odpovie na všetkých dvanásť, testujeme. Ak nie, nejdeme ďalej. Otázky som poslal sprostredkovateľovi; ten ich 17.&nbsp;9.&nbsp;2026 preposlal dodávateľovi.</p>
-<p>Americkí poskytovatelia zameraní na zdravotníctvo — napríklad Ona Health, Hello Patient, Talkie.ai či Arini — na svojich stránkach uvádzajú HIPAA, SOC&nbsp;2 a BAA. To je relevantný signál o vyspelosti produktu, nie však náhrada za európsku DPA. AI v klinike nie je o tom, kto je prvý. Je o tom, či je systém dosť bezpečný, aby pacient, ktorý volá o druhej v noci s bolesťou na hrudníku, dostal správnu odpoveď.</p>
-<p>Ak hodnotíte AI nástroje pre ambulanciu — čo máte na svojom checkliste?</p>
+<p>Americkí poskytovatelia zameraní na zdravotníctvo, napríklad Ona Health, Hello Patient, Talkie.ai či Arini, na svojich stránkach uvádzajú HIPAA, SOC&nbsp;2 a BAA. To je relevantný signál o vyspelosti produktu, nie však náhrada za európsku DPA. AI v klinike nie je o tom, kto je prvý. Je o tom, či je systém dosť bezpečný, aby pacient, ktorý volá o druhej v noci s bolesťou na hrudníku, dostal správnu odpoveď.</p>
+<p>Ak hodnotíte AI nástroje pre ambulanciu, čo máte na svojom checkliste?</p>
 <p><em>Ide o odborný úsudok autora pri hodnotení ponuky pre ambulanciu, nie o recenziu produktu pre pacientov ani o radu volajúcim v núdzi. Pri akútnych príznakoch volajte 155/112.</em></p>
 HTML,
         ],
@@ -65,10 +65,10 @@ HTML,
             'image_alt' => 'Night-time nephrology clinic reception: a physician reviews a checklist beside an unanswered phone and a soft teal-purple glow of a voice interface.',
             'excerpt' => 'The pitch promised to catch 30% of missed calls and a hundred thousand euros a year. Digging deeper, fallback, emergency escalation, and a GDPR Art. 9 agreement were missing. So I wrote twelve questions and proposed a two-week pilot.',
             'content' => <<<'HTML'
-<p>The AI-Receptionist offer reached me via an intermediary at IMPAX — from a representative of the vendor TOMMAX. On paper it looked strong: catch roughly 30% of missed calls; fluent Slovak and, as needed, Czech, German, Hungarian, or English; ROI often within a month; and an estimated annual revenue uplift above €100,000.</p>
+<p>The AI-Receptionist offer reached me via an intermediary at IMPAX, from a representative of the vendor TOMMAX. On paper it looked strong: catch roughly 30% of missed calls; fluent Slovak and, as needed, Czech, German, Hungarian, or English; ROI often within a month; and an estimated annual revenue uplift above €100,000.</p>
 <p>When I dug in, the gaps appeared.</p>
-<p>Slovak is a lower-resource language for voice models — less training data than English or German. Marketing “fluency” therefore may not match medical conversations with elderly patients who use dialect, pause mid-sentence, or describe symptoms in roundabout ways.</p>
-<p>I found no clear fallback and no escalation protocol for chest pain or shortness of breath. The pitch also did not present the certifications US healthcare voice vendors often advertise (HIPAA, SOC&nbsp;2, BAA) — those are US instruments, not what binds a Slovak clinic. What matters here is a processing agreement for special categories under <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR Art.&nbsp;9</a>, plus clear hosting and transfer. The case studies on offer — TYMO Beauty and Manhattan Dental Studio — are not nephrology in Slovakia.</p>
+<p>Slovak is a lower-resource language for voice models: less training data than English or German. Marketing “fluency” therefore may not match medical conversations with elderly patients who use dialect, pause mid-sentence, or describe symptoms in roundabout ways.</p>
+<p>I found no clear fallback and no escalation protocol for chest pain or shortness of breath. The pitch also did not present the certifications US healthcare voice vendors often advertise (HIPAA, SOC&nbsp;2, BAA). Those are US instruments, not what binds a Slovak clinic. What matters here is a processing agreement for special categories under <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR Art.&nbsp;9</a>, plus clear hosting and transfer. The case studies on offer, TYMO Beauty and Manhattan Dental Studio, are not nephrology in Slovakia.</p>
 <p>So I wrote twelve questions for the vendor:</p>
 <ol>
 <li>What is the exact escalation protocol when a patient says “I want to talk to a human” or “this is an emergency”?</li>
@@ -85,8 +85,8 @@ HTML,
 <li>Who technically powers the AI engine? Do you use your own model, or Vapi/Retell/another platform?</li>
 </ol>
 <p>We proposed a two-week pilot on a secondary line. If the vendor answers all twelve, we test. If not, we do not. I sent the questions to the intermediary; on 17&nbsp;September&nbsp;2026 he forwarded them to the vendor.</p>
-<p>US healthcare-focused providers — for example Ona Health, Hello Patient, Talkie.ai, or Arini — state HIPAA, SOC&nbsp;2, and BAA on their sites. That is a maturity signal, not a substitute for a European DPA. AI in a clinic is not about being first. It is about being safe enough that the patient who calls at 2&nbsp;a.m. with chest pain gets the right response.</p>
-<p>If you evaluate AI tools for a clinical setting — what is on your checklist?</p>
+<p>US healthcare-focused providers, for example Ona Health, Hello Patient, Talkie.ai, or Arini, state HIPAA, SOC&nbsp;2, and BAA on their sites. That is a maturity signal, not a substitute for a European DPA. AI in a clinic is not about being first. It is about being safe enough that the patient who calls at 2&nbsp;a.m. with chest pain gets the right response.</p>
+<p>If you evaluate AI tools for a clinical setting, what is on your checklist?</p>
 <p><em>This is the author’s professional judgement when assessing a clinic vendor offer, not a product review for patients and not advice for callers in distress. For acute symptoms, call 155/112.</em></p>
 HTML,
         ],
@@ -95,10 +95,10 @@ HTML,
             'image_alt' => 'Noční recepce nefrologické ambulance: lékař prohlíží checklist, vedle bliká nezvednutý telefon a jemné tyrkysovo-fialové světlo hlasového rozhraní.',
             'excerpt' => 'Nabídka slibovala zachytit 30 % nepřijatých hovorů a sto tisíc eur ročně. Při hlubším pohledu chyběly fallback, eskalace nouze a dohoda podle GDPR čl. 9. Proto jsem napsal dvanáct otázek a navrhl dvoutýdenní pilot.',
             'content' => <<<'HTML'
-<p>Nabídku AI-Recepční jsem dostal přes zprostředkovatele z IMPAX — od zástupce dodavatele TOMMAX. Na papíře vypadala působivě: zachytit přibližně 30&nbsp;% nepřijatých hovorů, plynulá slovenština a podle potřeby čeština, němčina, maďarština či angličtina, návratnost často do měsíce a odhadovaný roční přínos na tržbách nad 100&nbsp;tisíc eur.</p>
+<p>Nabídku AI-Recepční jsem dostal přes zprostředkovatele z IMPAX, od zástupce dodavatele TOMMAX. Na papíře vypadala působivě: zachytit přibližně 30&nbsp;% nepřijatých hovorů, plynulá slovenština a podle potřeby čeština, němčina, maďarština či angličtina, návratnost často do měsíce a odhadovaný roční přínos na tržbách nad 100&nbsp;tisíc eur.</p>
 <p>Když jsem se však podíval podrobněji, začaly se ukazovat mezery.</p>
-<p>Slovenština patří mezi jazyky s menším objemem trénovacích dat pro hlasové modely — tzv. <em>lower-resource</em>. Marketingová „plynulost“ proto nemusí sedět s medicínskou konverzací se staršími pacienty, kteří mluví dialektem, dělají pauzy uprostřed věty nebo popisují příznaky oklikou.</p>
-<p>V materiálech jsem nenašel jasný fallback ani eskalační protokol pro bolest na hrudi či dušnost. Chyběly i certifikace, které v USA běžně uvádějí poskytovatelé hlasových služeb ve zdravotnictví (HIPAA, SOC&nbsp;2, BAA) — ty však pro slovenskou ambulanci nejsou závazným rámcem. Pro nás je klíčová dohoda o zpracování zvláštních kategorií podle <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR čl.&nbsp;9</a> a jasné místo hostingu či přenosu. Případové studie v nabídce — TYMO Beauty a Manhattan Dental Studio — nejsou nefrologie na Slovensku.</p>
+<p>Slovenština patří mezi jazyky s menším objemem trénovacích dat pro hlasové modely, tzv. <em>lower-resource</em>. Marketingová „plynulost“ proto nemusí sedět s medicínskou konverzací se staršími pacienty, kteří mluví dialektem, dělají pauzy uprostřed věty nebo popisují příznaky oklikou.</p>
+<p>V materiálech jsem nenašel jasný fallback ani eskalační protokol pro bolest na hrudi či dušnost. Chyběly i certifikace, které v USA běžně uvádějí poskytovatelé hlasových služeb ve zdravotnictví (HIPAA, SOC&nbsp;2, BAA). Ty však pro slovenskou ambulanci nejsou závazným rámcem. Pro nás je klíčová dohoda o zpracování zvláštních kategorií podle <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR čl.&nbsp;9</a> a jasné místo hostingu či přenosu. Případové studie v nabídce, TYMO Beauty a Manhattan Dental Studio, nejsou nefrologie na Slovensku.</p>
 <p>Proto jsem napsal dvanáct otázek pro dodavatele:</p>
 <ol>
 <li>Jaký je přesný eskalační protokol, když pacient řekne „chci mluvit s člověkem“ nebo „tohle je nouzový případ“?</li>
@@ -115,8 +115,8 @@ HTML,
 <li>Kdo technicky stojí za AI enginem? Používáte vlastní model, nebo Vapi/Retell/jinou platformu?</li>
 </ol>
 <p>Navrhli jsme dvoutýdenní pilot na sekundární lince. Pokud dodavatel odpoví na všech dvanáct, testujeme. Pokud ne, nejdeme dál. Otázky jsem poslal zprostředkovateli; ten je 17.&nbsp;9.&nbsp;2026 přeposlal dodavateli.</p>
-<p>Američtí poskytovatelé zaměření na zdravotnictví — například Ona Health, Hello Patient, Talkie.ai či Arini — na svých stránkách uvádějí HIPAA, SOC&nbsp;2 a BAA. To je relevantní signál o vyspělosti produktu, nikoli však náhrada za evropskou DPA. AI na klinice není o tom, kdo je první. Je o tom, zda je systém dost bezpečný, aby pacient, který volá o druhé v noci s bolestí na hrudi, dostal správnou odpověď.</p>
-<p>Pokud hodnotíte AI nástroje pro ambulanci — co máte na svém checklistu?</p>
+<p>Američtí poskytovatelé zaměření na zdravotnictví, například Ona Health, Hello Patient, Talkie.ai či Arini, na svých stránkách uvádějí HIPAA, SOC&nbsp;2 a BAA. To je relevantní signál o vyspělosti produktu, nikoli však náhrada za evropskou DPA. AI na klinice není o tom, kdo je první. Je o tom, zda je systém dost bezpečný, aby pacient, který volá o druhé v noci s bolestí na hrudi, dostal správnou odpověď.</p>
+<p>Pokud hodnotíte AI nástroje pro ambulanci, co máte na svém checklistu?</p>
 <p><em>Jde o odborný úsudek autora při hodnocení nabídky pro ambulanci, nikoli o recenzi produktu pro pacienty ani o radu volajícím v nouzi. Při akutních příznacích volejte 155/112.</em></p>
 HTML,
         ],
@@ -125,10 +125,10 @@ HTML,
             'image_alt' => 'Nächtliche Rezeption einer nephrologischen Praxis: ein Arzt prüft eine Checkliste neben einem unbeantworteten Telefon und einem sanften türkis-violetten Schimmer einer Sprachschnittstelle.',
             'excerpt' => 'Das Angebot versprach, 30 % verpasster Anrufe und hunderttausend Euro im Jahr einzufangen. Bei genauerem Blick fehlten Fallback, Notfalleskalation und eine Vereinbarung nach DSGVO Art. 9. Deshalb schrieb ich zwölf Fragen und schlug einen zweiwöchigen Pilot vor.',
             'content' => <<<'HTML'
-<p>Das Angebot zur AI-Rezeption erreichte mich über einen Vermittler von IMPAX — von einem Vertreter des Anbieters TOMMAX. Auf dem Papier wirkte es stark: etwa 30&nbsp;% verpasster Anrufe auffangen; fließendes Slowakisch und bei Bedarf Tschechisch, Deutsch, Ungarisch oder Englisch; ROI oft innerhalb eines Monats; geschätzter jährlicher Umsatzbeitrag über 100&nbsp;000&nbsp;Euro.</p>
+<p>Das Angebot zur AI-Rezeption erreichte mich über einen Vermittler von IMPAX, von einem Vertreter des Anbieters TOMMAX. Auf dem Papier wirkte es stark: etwa 30&nbsp;% verpasster Anrufe auffangen; fließendes Slowakisch und bei Bedarf Tschechisch, Deutsch, Ungarisch oder Englisch; ROI oft innerhalb eines Monats; geschätzter jährlicher Umsatzbeitrag über 100&nbsp;000&nbsp;Euro.</p>
 <p>Als ich genauer hinsah, zeigten sich die Lücken.</p>
-<p>Slowakisch gehört zu den Sprachen mit weniger Trainingsdaten für Sprachmodelle — sogenannt <em>lower-resource</em>. Marketingmäßige „Flüssigkeit“ muss daher nicht zu medizinischen Gesprächen mit älteren Patientinnen und Patienten passen, die Dialekt sprechen, mitten im Satz pausieren oder Symptome umständlich beschreiben.</p>
-<p>In den Unterlagen fand ich keinen klaren Fallback und kein Eskalationsprotokoll für Brustschmerz oder Atemnot. Es fehlten auch Zertifizierungen, die US-Healthcare-Voice-Anbieter oft nennen (HIPAA, SOC&nbsp;2, BAA) — das sind US-Instrumente, nicht der verbindliche Rahmen für eine slowakische Praxis. Für uns zählt eine Verarbeitungsvereinbarung für besondere Kategorien nach <a href="https://gdpr-info.eu/art-9-gdpr/">DSGVO Art.&nbsp;9</a> sowie klarer Hosting- und Transferort. Die Case Studies im Angebot — TYMO Beauty und Manhattan Dental Studio — sind keine Nephrologie in der Slowakei.</p>
+<p>Slowakisch gehört zu den Sprachen mit weniger Trainingsdaten für Sprachmodelle, sogenannt <em>lower-resource</em>. Marketingmäßige „Flüssigkeit“ muss daher nicht zu medizinischen Gesprächen mit älteren Patientinnen und Patienten passen, die Dialekt sprechen, mitten im Satz pausieren oder Symptome umständlich beschreiben.</p>
+<p>In den Unterlagen fand ich keinen klaren Fallback und kein Eskalationsprotokoll für Brustschmerz oder Atemnot. Es fehlten auch Zertifizierungen, die US-Healthcare-Voice-Anbieter oft nennen (HIPAA, SOC&nbsp;2, BAA). Das sind US-Instrumente, nicht der verbindliche Rahmen für eine slowakische Praxis. Für uns zählt eine Verarbeitungsvereinbarung für besondere Kategorien nach <a href="https://gdpr-info.eu/art-9-gdpr/">DSGVO Art.&nbsp;9</a> sowie klarer Hosting- und Transferort. Die Case Studies im Angebot, TYMO Beauty und Manhattan Dental Studio, sind keine Nephrologie in der Slowakei.</p>
 <p>Deshalb schrieb ich zwölf Fragen an den Anbieter:</p>
 <ol>
 <li>Wie lautet das genaue Eskalationsprotokoll, wenn ein Patient sagt „Ich möchte mit einem Menschen sprechen“ oder „Das ist ein Notfall“?</li>
@@ -145,8 +145,8 @@ HTML,
 <li>Wer steht technisch hinter der KI-Engine? Nutzen Sie ein eigenes Modell oder Vapi/Retell/eine andere Plattform?</li>
 </ol>
 <p>Wir schlugen einen zweiwöchigen Pilot auf einer Nebenleitung vor. Beantwortet der Anbieter alle zwölf, testen wir. Wenn nicht, gehen wir nicht weiter. Die Fragen schickte ich an den Vermittler; am 17.&nbsp;9.&nbsp;2026 leitete er sie an den Anbieter weiter.</p>
-<p>US-Anbieter mit Healthcare-Fokus — etwa Ona Health, Hello Patient, Talkie.ai oder Arini — nennen auf ihren Seiten HIPAA, SOC&nbsp;2 und BAA. Das ist ein Reifesignal, kein Ersatz für eine europäische DPA. KI in der Klinik geht nicht darum, wer zuerst ist. Es geht darum, ob das System sicher genug ist, dass der Patient, der um 2&nbsp;Uhr nachts mit Brustschmerz anruft, die richtige Antwort bekommt.</p>
-<p>Wenn Sie KI-Tools für die Praxis bewerten — was steht auf Ihrer Checkliste?</p>
+<p>US-Anbieter mit Healthcare-Fokus, etwa Ona Health, Hello Patient, Talkie.ai oder Arini, nennen auf ihren Seiten HIPAA, SOC&nbsp;2 und BAA. Das ist ein Reifesignal, kein Ersatz für eine europäische DPA. KI in der Klinik geht nicht darum, wer zuerst ist. Es geht darum, ob das System sicher genug ist, dass der Patient, der um 2&nbsp;Uhr nachts mit Brustschmerz anruft, die richtige Antwort bekommt.</p>
+<p>Wenn Sie KI-Tools für die Praxis bewerten, was steht auf Ihrer Checkliste?</p>
 <p><em>Dies ist das fachliche Urteil des Autors bei der Bewertung eines Praxisangebots, keine Produktrezension für Patienten und kein Rat für Anrufende in Not. Bei akuten Symptomen 155/112 wählen.</em></p>
 HTML,
         ],
@@ -155,10 +155,10 @@ HTML,
             'image_alt' => 'Réception nocturne d\'un cabinet de néphrologie : un médecin parcourt une checklist près d\'un téléphone sans réponse et d\'une douce lueur turquoise-violette d\'interface vocale.',
             'excerpt' => 'La proposition promettait de rattraper 30 % des appels manqués et cent mille euros par an. En creusant, manquaient le repli, l\'escalade d\'urgence et un accord RGPD art. 9. J\'ai donc écrit douze questions et proposé un pilote de deux semaines.',
             'content' => <<<'HTML'
-<p>L'offre AI-Réception m'est parvenue via un intermédiaire d'IMPAX — d'un représentant du fournisseur TOMMAX. Sur le papier, elle impressionnait : rattraper environ 30&nbsp;% des appels manqués ; un slovaque courant et, au besoin, le tchèque, l'allemand, le hongrois ou l'anglais ; un retour sur investissement souvent en un mois ; un gain annuel estimé de plus de 100&nbsp;000&nbsp;euros.</p>
+<p>L'offre AI-Réception m'est parvenue via un intermédiaire d'IMPAX, d'un représentant du fournisseur TOMMAX. Sur le papier, elle impressionnait : rattraper environ 30&nbsp;% des appels manqués ; un slovaque courant et, au besoin, le tchèque, l'allemand, le hongrois ou l'anglais ; un retour sur investissement souvent en un mois ; un gain annuel estimé de plus de 100&nbsp;000&nbsp;euros.</p>
 <p>En regardant de plus près, les lacunes sont apparues.</p>
-<p>Le slovaque fait partie des langues à moindre volume de données d'entraînement pour les modèles vocaux — dites <em>lower-resource</em>. La « fluidité » marketing peut donc ne pas coller aux conversations médicales avec des patients âgés qui parlent dialecte, s'interrompent en milieu de phrase ou décrivent les symptômes de biais.</p>
-<p>Dans les documents, je n'ai trouvé ni repli clair ni protocole d'escalade pour douleur thoracique ou dyspnée. Manquaient aussi les certifications que les acteurs vocaux US healthcare citent souvent (HIPAA, SOC&nbsp;2, BAA) — ce sont des instruments américains, pas le cadre contraignant d'un cabinet slovaque. Pour nous, l'essentiel est un accord de traitement des catégories particulières selon l'<a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 du RGPD</a>, plus un hébergement et un transfert clairs. Les études de cas de l'offre — TYMO Beauty et Manhattan Dental Studio — ne sont pas de la néphrologie en Slovaquie.</p>
+<p>Le slovaque fait partie des langues à moindre volume de données d'entraînement pour les modèles vocaux, dites <em>lower-resource</em>. La « fluidité » marketing peut donc ne pas coller aux conversations médicales avec des patients âgés qui parlent dialecte, s'interrompent en milieu de phrase ou décrivent les symptômes de biais.</p>
+<p>Dans les documents, je n'ai trouvé ni repli clair ni protocole d'escalade pour douleur thoracique ou dyspnée. Manquaient aussi les certifications que les acteurs vocaux US healthcare citent souvent (HIPAA, SOC&nbsp;2, BAA). Ce sont des instruments américains, pas le cadre contraignant d'un cabinet slovaque. Pour nous, l'essentiel est un accord de traitement des catégories particulières selon l'<a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 du RGPD</a>, plus un hébergement et un transfert clairs. Les études de cas de l'offre, TYMO Beauty et Manhattan Dental Studio, ne sont pas de la néphrologie en Slovaquie.</p>
 <p>J'ai donc écrit douze questions au fournisseur :</p>
 <ol>
 <li>Quel est le protocole d'escalade exact lorsqu'un patient dit « je veux parler à un humain » ou « c'est une urgence » ?</li>
@@ -175,8 +175,8 @@ HTML,
 <li>Qui alimente techniquement le moteur d'IA ? Utilisez-vous votre propre modèle, ou Vapi/Retell/une autre plateforme ?</li>
 </ol>
 <p>Nous avons proposé un pilote de deux semaines sur une ligne secondaire. Si le fournisseur répond aux douze, nous testons. Sinon, nous n'avançons pas. J'ai envoyé les questions à l'intermédiaire ; le 17&nbsp;septembre&nbsp;2026, il les a transmises au fournisseur.</p>
-<p>Des fournisseurs américains axés santé — par exemple Ona Health, Hello Patient, Talkie.ai ou Arini — indiquent sur leurs sites HIPAA, SOC&nbsp;2 et BAA. C'est un signal de maturité, pas un substitut à un DPA européen. L'IA en clinique n'est pas une course à être le premier. C'est la question de savoir si le système est assez sûr pour que le patient qui appelle à 2&nbsp;h du matin avec une douleur thoracique reçoive la bonne réponse.</p>
-<p>Si vous évaluez des outils d'IA pour un cabinet — qu'y a-t-il sur votre checklist ?</p>
+<p>Des fournisseurs américains axés santé, par exemple Ona Health, Hello Patient, Talkie.ai ou Arini, indiquent sur leurs sites HIPAA, SOC&nbsp;2 et BAA. C'est un signal de maturité, pas un substitut à un DPA européen. L'IA en clinique n'est pas une course à être le premier. C'est la question de savoir si le système est assez sûr pour que le patient qui appelle à 2&nbsp;h du matin avec une douleur thoracique reçoive la bonne réponse.</p>
+<p>Si vous évaluez des outils d'IA pour un cabinet, qu'y a-t-il sur votre checklist ?</p>
 <p><em>Il s'agit du jugement professionnel de l'auteur lors de l'évaluation d'une offre pour un cabinet, non d'une revue produit pour les patients ni d'un conseil aux appelants en détresse. En cas de symptômes aigus, composez le 155/112.</em></p>
 HTML,
         ],
@@ -185,10 +185,10 @@ HTML,
             'image_alt' => 'Recepción nocturna de una consulta de nefrología: un médico revisa una lista junto a un teléfono sin contestar y un suave resplandor turquesa-violeta de una interfaz de voz.',
             'excerpt' => 'La oferta prometía captar el 30 % de las llamadas perdidas y cien mil euros al año. Al profundizar faltaban el fallback, la escalada de emergencia y un acuerdo GDPR art. 9. Por eso escribí doce preguntas y propuse un piloto de dos semanas.',
             'content' => <<<'HTML'
-<p>La oferta de AI-Recepción me llegó a través de un intermediario de IMPAX — de un representante del proveedor TOMMAX. Sobre el papel impresionaba: captar aproximadamente el 30&nbsp;% de las llamadas no atendidas; eslovaco fluido y, según necesidad, checo, alemán, húngaro o inglés; retorno de la inversión a menudo en un mes; y un aporte anual estimado de más de 100&nbsp;000&nbsp;euros.</p>
+<p>La oferta de AI-Recepción me llegó a través de un intermediario de IMPAX, de un representante del proveedor TOMMAX. Sobre el papel impresionaba: captar aproximadamente el 30&nbsp;% de las llamadas no atendidas; eslovaco fluido y, según necesidad, checo, alemán, húngaro o inglés; retorno de la inversión a menudo en un mes; y un aporte anual estimado de más de 100&nbsp;000&nbsp;euros.</p>
 <p>Cuando miré con más detalle, aparecieron las lagunas.</p>
-<p>El eslovaco pertenece a las lenguas con menor volumen de datos de entrenamiento para modelos de voz — las llamadas <em>lower-resource</em>. La «fluidez» de marketing puede no encajar con conversaciones médicas con pacientes mayores que usan dialecto, hacen pausas a mitad de frase o describen síntomas de forma indirecta.</p>
-<p>En los materiales no encontré un fallback claro ni un protocolo de escalada para dolor torácico o disnea. Tampoco presentaban las certificaciones que suelen citar los proveedores de voz sanitaria en EE.&nbsp;UU. (HIPAA, SOC&nbsp;2, BAA) — son instrumentos estadounidenses, no el marco vinculante de una consulta eslovaca. Para nosotros es clave un acuerdo de tratamiento de categorías especiales según el <a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 del GDPR</a> y un alojamiento o transferencia claros. Los casos de estudio de la oferta — TYMO Beauty y Manhattan Dental Studio — no son nefrología en Eslovaquia.</p>
+<p>El eslovaco pertenece a las lenguas con menor volumen de datos de entrenamiento para modelos de voz, las llamadas <em>lower-resource</em>. La «fluidez» de marketing puede no encajar con conversaciones médicas con pacientes mayores que usan dialecto, hacen pausas a mitad de frase o describen síntomas de forma indirecta.</p>
+<p>En los materiales no encontré un fallback claro ni un protocolo de escalada para dolor torácico o disnea. Tampoco presentaban las certificaciones que suelen citar los proveedores de voz sanitaria en EE.&nbsp;UU. (HIPAA, SOC&nbsp;2, BAA). Son instrumentos estadounidenses, no el marco vinculante de una consulta eslovaca. Para nosotros es clave un acuerdo de tratamiento de categorías especiales según el <a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 del GDPR</a> y un alojamiento o transferencia claros. Los casos de estudio de la oferta, TYMO Beauty y Manhattan Dental Studio, no son nefrología en Eslovaquia.</p>
 <p>Por eso escribí doce preguntas al proveedor:</p>
 <ol>
 <li>¿Cuál es el protocolo exacto de escalada cuando un paciente dice «quiero hablar con una persona» o «esto es una emergencia»?</li>
@@ -205,8 +205,8 @@ HTML,
 <li>¿Quién impulsa técnicamente el motor de IA? ¿Usan su propio modelo, o Vapi/Retell/otra plataforma?</li>
 </ol>
 <p>Propusimos un piloto de dos semanas en una línea secundaria. Si el proveedor responde a las doce, probamos. Si no, no seguimos. Envié las preguntas al intermediario; el 17&nbsp;de&nbsp;septiembre&nbsp;de&nbsp;2026 las reenvió al proveedor.</p>
-<p>Proveedores estadounidenses centrados en sanidad — por ejemplo Ona Health, Hello Patient, Talkie.ai o Arini — indican en sus sitios HIPAA, SOC&nbsp;2 y BAA. Es una señal de madurez, no un sustituto de un DPA europeo. La IA en clínica no va de ser el primero. Va de si el sistema es lo bastante seguro para que el paciente que llama a las 2&nbsp;de la madrugada con dolor torácico reciba la respuesta correcta.</p>
-<p>Si evalúa herramientas de IA para una consulta — ¿qué tiene en su checklist?</p>
+<p>Proveedores estadounidenses centrados en sanidad, por ejemplo Ona Health, Hello Patient, Talkie.ai o Arini, indican en sus sitios HIPAA, SOC&nbsp;2 y BAA. Es una señal de madurez, no un sustituto de un DPA europeo. La IA en clínica no va de ser el primero. Va de si el sistema es lo bastante seguro para que el paciente que llama a las 2&nbsp;de la madrugada con dolor torácico reciba la respuesta correcta.</p>
+<p>Si evalúa herramientas de IA para una consulta, ¿qué tiene en su checklist?</p>
 <p><em>Se trata del juicio profesional del autor al valorar una oferta para una consulta, no de una reseña de producto para pacientes ni de consejo a quienes llaman en urgencia. Ante síntomas agudos, llame al 155/112.</em></p>
 HTML,
         ],
@@ -215,10 +215,10 @@ HTML,
             'image_alt' => 'Nocna recepcja poradni nefrologicznej: lekarz przegląda checklistę obok nieodebranego telefonu i miękkiej turkusowo-fioletowej poświaty interfejsu głosowego.',
             'excerpt' => 'Oferta obiecywała przechwycić 30 % nieodebranych połączeń i sto tysięcy euro rocznie. Przy głębszym spojrzeniu brakowało fallbacku, eskalacji nagłych przypadków i umowy RODO art. 9. Dlatego napisałem dwanaście pytań i zaproponowałem dwutygodniowy pilotaż.',
             'content' => <<<'HTML'
-<p>Ofertę AI-Recepcji dostałem przez pośrednika z IMPAX — od przedstawiciela dostawcy TOMMAX. Na papierze wyglądała imponująco: przechwycić około 30&nbsp;% nieodebranych połączeń; płynny słowacki i w razie potrzeby czeski, niemiecki, węgierski lub angielski; zwrot często w miesiąc; szacowany roczny wzrost przychodów powyżej 100&nbsp;tys. euro.</p>
+<p>Ofertę AI-Recepcji dostałem przez pośrednika z IMPAX, od przedstawiciela dostawcy TOMMAX. Na papierze wyglądała imponująco: przechwycić około 30&nbsp;% nieodebranych połączeń; płynny słowacki i w razie potrzeby czeski, niemiecki, węgierski lub angielski; zwrot często w miesiąc; szacowany roczny wzrost przychodów powyżej 100&nbsp;tys. euro.</p>
 <p>Gdy jednak spojrzałem dokładniej, pojawiły się luki.</p>
-<p>Słowacki należy do języków z mniejszą ilością danych treningowych dla modeli głosowych — tzw. <em>lower-resource</em>. Marketingowa „płynność” może więc nie pasować do rozmów medycznych ze starszymi pacjentami, którzy mówią dialektem, robią pauzy w środku zdania lub opisują objawy okrężnie.</p>
-<p>W materiałach nie znalazłem jasnego fallbacku ani protokołu eskalacji przy bólu w klatce piersiowej czy duszności. Brakowało też certyfikacji, które w USA często podają dostawcy voice healthcare (HIPAA, SOC&nbsp;2, BAA) — to jednak ramy amerykańskie, nie wiążące dla słowackiej poradni. Dla nas kluczowa jest umowa o przetwarzaniu szczególnych kategorii według <a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 RODO</a> oraz jasne miejsce hostingu i transferu. Studia przypadków w ofercie — TYMO Beauty i Manhattan Dental Studio — to nie nefrologia na Słowacji.</p>
+<p>Słowacki należy do języków z mniejszą ilością danych treningowych dla modeli głosowych, tzw. <em>lower-resource</em>. Marketingowa „płynność” może więc nie pasować do rozmów medycznych ze starszymi pacjentami, którzy mówią dialektem, robią pauzy w środku zdania lub opisują objawy okrężnie.</p>
+<p>W materiałach nie znalazłem jasnego fallbacku ani protokołu eskalacji przy bólu w klatce piersiowej czy duszności. Brakowało też certyfikacji, które w USA często podają dostawcy voice healthcare (HIPAA, SOC&nbsp;2, BAA). To jednak ramy amerykańskie, nie wiążące dla słowackiej poradni. Dla nas kluczowa jest umowa o przetwarzaniu szczególnych kategorii według <a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 RODO</a> oraz jasne miejsce hostingu i transferu. Studia przypadków w ofercie, TYMO Beauty i Manhattan Dental Studio, to nie nefrologia na Słowacji.</p>
 <p>Dlatego napisałem dwanaście pytań do dostawcy:</p>
 <ol>
 <li>Jaki jest dokładny protokół eskalacji, gdy pacjent powie „chcę mówić z człowiekiem” lub „to nagły przypadek”?</li>
@@ -234,9 +234,9 @@ HTML,
 <li>Czy możemy uruchomić dwutygodniowy pilotaż na numerze dodatkowym, zanim przekierujemy główną linię?</li>
 <li>Kto technicznie stoi za silnikiem AI? Używacie własnego modelu, czy Vapi/Retell/innej platformy?</li>
 </ol>
-<p>Zaproponowaliśmy dwutygodniowy pilotaż na linii dodatkowej. Jeśli dostawca odpowie na wszystkie dwanaście, testujemy. Jeśli nie — nie idziemy dalej. Pytania wysłałem pośrednikowi; 17&nbsp;września&nbsp;2026 przekazał je dostawcy.</p>
-<p>Amerykańscy dostawcy skupieni na ochronie zdrowia — np. Ona Health, Hello Patient, Talkie.ai czy Arini — na swoich stronach podają HIPAA, SOC&nbsp;2 i BAA. To sygnał dojrzałości produktu, nie zastępstwo europejskiej DPA. AI w klinice nie jest o byciu pierwszym. Jest o tym, czy system jest wystarczająco bezpieczny, by pacjent dzwoniący o drugiej w nocy z bólem w klatce dostał właściwą odpowiedź.</p>
-<p>Jeśli oceniacie narzędzia AI dla poradni — co macie na swojej checkliście?</p>
+<p>Zaproponowaliśmy dwutygodniowy pilotaż na linii dodatkowej. Jeśli dostawca odpowie na wszystkie dwanaście, testujemy. Jeśli nie, nie idziemy dalej. Pytania wysłałem pośrednikowi; 17&nbsp;września&nbsp;2026 przekazał je dostawcy.</p>
+<p>Amerykańscy dostawcy skupieni na ochronie zdrowia, np. Ona Health, Hello Patient, Talkie.ai czy Arini, na swoich stronach podają HIPAA, SOC&nbsp;2 i BAA. To sygnał dojrzałości produktu, nie zastępstwo europejskiej DPA. AI w klinice nie jest o byciu pierwszym. Jest o tym, czy system jest wystarczająco bezpieczny, by pacjent dzwoniący o drugiej w nocy z bólem w klatce dostał właściwą odpowiedź.</p>
+<p>Jeśli oceniacie narzędzia AI dla poradni, co macie na swojej checkliście?</p>
 <p><em>To fachowa ocena autora przy rozpatrywaniu oferty dla poradni, nie recenzja produktu dla pacjentów ani rada dla dzwoniących w nagłym przypadku. Przy ostrych objawach dzwońcie 155/112.</em></p>
 HTML,
         ],
@@ -245,10 +245,10 @@ HTML,
             'image_alt' => 'Éjszakai nefrológiai rendelő-recepció: orvos checklistát néz, mellette villogó, felvételen telefon és lágy türkiz-lila hanginterfész-fény.',
             'excerpt' => 'Az ajánlat 30 % elmulasztott hívás és százezer euró éves bevétel megfogását ígérte. Közelebbről hiányzott a fallback, a vészhelyzeti eszkaláció és a GDPR 9. cikk szerinti megállapodás. Ezért tizenkét kérdést írtam és kéthetes pilotot javasoltam.',
             'content' => <<<'HTML'
-<p>Az AI-Recepciós ajánlat egy IMPAX-os közvetítőn keresztül érkezett — a TOMMAX egy képviselőjétől. Papíron erősnek tűnt: kb. 30&nbsp;% elmulasztott hívás megfogása; folyékony szlovák, szükség szerint cseh, német, magyar vagy angol; gyakran egy hónapon belüli megtérülés; évi 100&nbsp;000&nbsp;euró feletti becsült bevételnövekmény.</p>
+<p>Az AI-Recepciós ajánlat egy IMPAX-os közvetítőn keresztül érkezett, a TOMMAX egy képviselőjétől. Papíron erősnek tűnt: kb. 30&nbsp;% elmulasztott hívás megfogása; folyékony szlovák, szükség szerint cseh, német, magyar vagy angol; gyakran egy hónapon belüli megtérülés; évi 100&nbsp;000&nbsp;euró feletti becsült bevételnövekmény.</p>
 <p>Amikor azonban közelebbről néztem, megjelentek a hiányosságok.</p>
-<p>A szlovák a hangmodellek számára kisebb tanítóadatú — úgynevezett <em>lower-resource</em> — nyelv. A marketing „folyékonyság” ezért nem feltétlenül illik idősebb, dialektust beszélő, mondat közben szünetelő vagy kerülő úton panaszoló betegek orvosi beszélgetéseihez.</p>
-<p>Az anyagokban nem találtam világos fallbackot, sem mellkasi fájdalomra vagy nehézlégzésre vonatkozó eszkalációs protokollt. Hiányoztak azok a tanúsítványok is, amelyeket az amerikai healthcare voice szereplők gyakran említenek (HIPAA, SOC&nbsp;2, BAA) — ezek amerikai eszközök, nem a szlovák rendelő kötelező kerete. Nálunk a <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR 9.&nbsp;cikk</a> szerinti különleges kategóriák feldolgozási megállapodása és a hosting/átadás helye a lényeg. Az ajánlat case study-jai — TYMO Beauty és Manhattan Dental Studio — nem szlovákiai nefrológia.</p>
+<p>A szlovák a hangmodellek számára kisebb tanítóadatú (úgynevezett <em>lower-resource</em>) nyelv. A marketing „folyékonyság” ezért nem feltétlenül illik idősebb, dialektust beszélő, mondat közben szünetelő vagy kerülő úton panaszoló betegek orvosi beszélgetéseihez.</p>
+<p>Az anyagokban nem találtam világos fallbackot, sem mellkasi fájdalomra vagy nehézlégzésre vonatkozó eszkalációs protokollt. Hiányoztak azok a tanúsítványok is, amelyeket az amerikai healthcare voice szereplők gyakran említenek (HIPAA, SOC&nbsp;2, BAA). Ezek amerikai eszközök, nem a szlovák rendelő kötelező kerete. Nálunk a <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR 9.&nbsp;cikk</a> szerinti különleges kategóriák feldolgozási megállapodása és a hosting/átadás helye a lényeg. Az ajánlat case study-jai, TYMO Beauty és Manhattan Dental Studio, nem szlovákiai nefrológia.</p>
 <p>Ezért tizenkét kérdést írtam a szállítónak:</p>
 <ol>
 <li>Mi a pontos eszkalációs protokoll, ha a beteg azt mondja: „emberrel akarok beszélni” vagy „ez sürgős eset”?</li>
@@ -265,8 +265,8 @@ HTML,
 <li>Ki áll technikailag az AI-motor mögött? Saját modellt használnak, vagy Vapi/Retell/más platformot?</li>
 </ol>
 <p>Kéthetes pilotot javasoltunk másodlagos vonalon. Ha a szállító mind a tizenkettőre válaszol, tesztelünk. Ha nem, nem megyünk tovább. A kérdéseket elküldtem a közvetítőnek; ő 2026.&nbsp;szeptember&nbsp;17-én továbbította a szállítónak.</p>
-<p>Az amerikai, egészségügyre fókuszáló szolgáltatók — pl. Ona Health, Hello Patient, Talkie.ai vagy Arini — oldalukon HIPAA-t, SOC&nbsp;2-t és BAA-t említenek. Ez érettségi jel, nem európai DPA-pótlék. A klinikán az AI nem arról szól, ki az első. Arról, hogy elég biztonságos-e a rendszer ahhoz, hogy a hajnali 2-kor mellkasi fájdalommal hívó beteg helyes választ kapjon.</p>
-<p>Ha AI-eszközöket értékel rendelőbe — mi van a checklistjén?</p>
+<p>Az amerikai, egészségügyre fókuszáló szolgáltatók, pl. Ona Health, Hello Patient, Talkie.ai vagy Arini, oldalukon HIPAA-t, SOC&nbsp;2-t és BAA-t említenek. Ez érettségi jel, nem európai DPA-pótlék. A klinikán az AI nem arról szól, ki az első. Arról, hogy elég biztonságos-e a rendszer ahhoz, hogy a hajnali 2-kor mellkasi fájdalommal hívó beteg helyes választ kapjon.</p>
+<p>Ha AI-eszközöket értékel rendelőbe, mi van a checklistjén?</p>
 <p><em>Ez a szerző szakmai ítélete egy rendelői ajánlat értékelésekor, nem termékismertető betegeknek, és nem tanács vészhelyzetben hívóknak. Akut tüneteknél hívja a 155/112-t.</em></p>
 HTML,
         ],
@@ -275,10 +275,10 @@ HTML,
             'image_alt' => 'Reception notturna di un ambulatorio di nefrologia: un medico esamina una checklist accanto a un telefono senza risposta e a un soft bagliore turchese-viola di un\'interfaccia vocale.',
             'excerpt' => 'L\'offerta prometteva di intercettare il 30 % delle chiamate perse e centomila euro l\'anno. Approfondendo mancavano fallback, escalation di emergenza e un accordo GDPR art. 9. Perciò ho scritto dodici domande e proposto un pilota di due settimane.',
             'content' => <<<'HTML'
-<p>L'offerta AI-Reception mi è arrivata tramite un intermediario di IMPAX — da un rappresentante del fornitore TOMMAX. Sulla carta sembrava solida: intercettare circa il 30&nbsp;% delle chiamate non risposte; slovacco fluido e, se necessario, ceco, tedesco, ungherese o inglese; ROI spesso entro un mese; contributo annuale stimato oltre 100&nbsp;000&nbsp;euro.</p>
+<p>L'offerta AI-Reception mi è arrivata tramite un intermediario di IMPAX, da un rappresentante del fornitore TOMMAX. Sulla carta sembrava solida: intercettare circa il 30&nbsp;% delle chiamate non risposte; slovacco fluido e, se necessario, ceco, tedesco, ungherese o inglese; ROI spesso entro un mese; contributo annuale stimato oltre 100&nbsp;000&nbsp;euro.</p>
 <p>Quando ho approfondito, sono emerse le lacune.</p>
-<p>Lo slovacco è una lingua con meno dati di addestramento per i modelli vocali — detta <em>lower-resource</em>. La «fluidità» di marketing quindi può non combaciare con conversazioni mediche con pazienti anziani che usano il dialetto, fanno pause a metà frase o descrivono i sintomi in modo indiretto.</p>
-<p>Nei materiali non ho trovato un fallback chiaro né un protocollo di escalation per dolore toracico o dispnea. Mancavano anche le certificazioni che i fornitori vocali healthcare USA citano spesso (HIPAA, SOC&nbsp;2, BAA) — strumenti americani, non il quadro vincolante di un ambulatorio slovacco. Per noi conta un accordo di trattamento delle categorie particolari secondo l'<a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 del GDPR</a> e un hosting/trasferimento chiari. I case study dell'offerta — TYMO Beauty e Manhattan Dental Studio — non sono nefrologia in Slovacchia.</p>
+<p>Lo slovacco è una lingua con meno dati di addestramento per i modelli vocali, detta <em>lower-resource</em>. La «fluidità» di marketing quindi può non combaciare con conversazioni mediche con pazienti anziani che usano il dialetto, fanno pause a metà frase o descrivono i sintomi in modo indiretto.</p>
+<p>Nei materiali non ho trovato un fallback chiaro né un protocollo di escalation per dolore toracico o dispnea. Mancavano anche le certificazioni che i fornitori vocali healthcare USA citano spesso (HIPAA, SOC&nbsp;2, BAA): strumenti americani, non il quadro vincolante di un ambulatorio slovacco. Per noi conta un accordo di trattamento delle categorie particolari secondo l'<a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 del GDPR</a> e un hosting/trasferimento chiari. I case study dell'offerta, TYMO Beauty e Manhattan Dental Studio, non sono nefrologia in Slovacchia.</p>
 <p>Perciò ho scritto dodici domande al fornitore:</p>
 <ol>
 <li>Qual è l'esatto protocollo di escalation quando un paziente dice «voglio parlare con una persona» o «è un'emergenza»?</li>
@@ -295,8 +295,8 @@ HTML,
 <li>Chi alimenta tecnicamente il motore IA? Usate un modello proprio o Vapi/Retell/un'altra piattaforma?</li>
 </ol>
 <p>Abbiamo proposto un pilota di due settimane su una linea secondaria. Se il fornitore risponde a tutte e dodici, testiamo. Se no, non proseguiamo. Ho inviato le domande all'intermediario; il 17&nbsp;settembre&nbsp;2026 le ha inoltrate al fornitore.</p>
-<p>Fornitori USA orientati alla sanità — ad esempio Ona Health, Hello Patient, Talkie.ai o Arini — indicano sui propri siti HIPAA, SOC&nbsp;2 e BAA. È un segnale di maturità, non un sostituto di un DPA europeo. L'IA in ambulatorio non è una corsa a essere i primi. È se il sistema è abbastanza sicuro perché il paziente che chiama alle 2&nbsp;di notte con dolore toracico riceva la risposta giusta.</p>
-<p>Se valutate strumenti IA per l'ambulatorio — cosa c'è nella vostra checklist?</p>
+<p>Fornitori USA orientati alla sanità, ad esempio Ona Health, Hello Patient, Talkie.ai o Arini, indicano sui propri siti HIPAA, SOC&nbsp;2 e BAA. È un segnale di maturità, non un sostituto di un DPA europeo. L'IA in ambulatorio non è una corsa a essere i primi. È se il sistema è abbastanza sicuro perché il paziente che chiama alle 2&nbsp;di notte con dolore toracico riceva la risposta giusta.</p>
+<p>Se valutate strumenti IA per l'ambulatorio, cosa c'è nella vostra checklist?</p>
 <p><em>Si tratta del giudizio professionale dell'autore nella valutazione di un'offerta per ambulatorio, non di una recensione di prodotto per i pazienti né di un consiglio per chi chiama in emergenza. In caso di sintomi acuti, chiamare 155/112.</em></p>
 HTML,
         ],
@@ -305,10 +305,10 @@ HTML,
             'image_alt' => 'Нічна рецепція нефрологічного кабінету: лікар переглядає чеклист біля не піднятого телефону та м’якого бірюзово-фіолетового сяйва голосового інтерфейсу.',
             'excerpt' => 'Пропозиція обіцяла перехопити 30 % пропущених дзвінків і сто тисяч євро на рік. При глибшому погляді бракувало fallback, ескалації невідкладності та угоди за ст. 9 GDPR. Тому я написав дванадцять запитань і запропонував двотижневий пілот.',
             'content' => <<<'HTML'
-<p>Пропозиція AI-Рецепції надійшла через посередника з IMPAX — від представника постачальника TOMMAX. На папері виглядала сильно: перехопити приблизно 30&nbsp;% неприйнятих дзвінків; вільна словацька й за потреби чеська, німецька, угорська чи англійська; окупність часто за місяць; оцінений річний приріст виручки понад 100&nbsp;тисяч євро.</p>
+<p>Пропозиція AI-Рецепції надійшла через посередника з IMPAX, від представника постачальника TOMMAX. На папері виглядала сильно: перехопити приблизно 30&nbsp;% неприйнятих дзвінків; вільна словацька й за потреби чеська, німецька, угорська чи англійська; окупність часто за місяць; оцінений річний приріст виручки понад 100&nbsp;тисяч євро.</p>
 <p>Коли я придивився детальніше, з’явилися прогалини.</p>
-<p>Словацька належить до мов із меншим обсягом навчальних даних для голосових моделей — так званих <em>lower-resource</em>. Маркетингова «плинність» тому може не збігатися з медичними розмовами з літніми пацієнтами, які говорять діалектом, роблять паузи посеред речення або описують симптоми опосередковано.</p>
-<p>У матеріалах я не знайшов чіткого fallback і протоколу ескалації при болю в грудях чи задишці. Бракувало й сертифікацій, які в США часто згадують постачальники голосових сервісів у медицині (HIPAA, SOC&nbsp;2, BAA) — це американські інструменти, не обов’язкова рамка для словацької амбулаторії. Для нас ключова угода про обробку особливих категорій за <a href="https://gdpr-info.eu/art-9-gdpr/">ст.&nbsp;9 GDPR</a> і зрозуміле місце хостингу чи передачі. Приклади в пропозиції — TYMO Beauty і Manhattan Dental Studio — це не нефрологія в Словаччині.</p>
+<p>Словацька належить до мов із меншим обсягом навчальних даних для голосових моделей, так званих <em>lower-resource</em>. Маркетингова «плинність» тому може не збігатися з медичними розмовами з літніми пацієнтами, які говорять діалектом, роблять паузи посеред речення або описують симптоми опосередковано.</p>
+<p>У матеріалах я не знайшов чіткого fallback і протоколу ескалації при болю в грудях чи задишці. Бракувало й сертифікацій, які в США часто згадують постачальники голосових сервісів у медицині (HIPAA, SOC&nbsp;2, BAA). Це американські інструменти, не обов’язкова рамка для словацької амбулаторії. Для нас ключова угода про обробку особливих категорій за <a href="https://gdpr-info.eu/art-9-gdpr/">ст.&nbsp;9 GDPR</a> і зрозуміле місце хостингу чи передачі. Приклади в пропозиції, TYMO Beauty і Manhattan Dental Studio, не є нефрологією в Словаччині.</p>
 <p>Тому я написав дванадцять запитань постачальнику:</p>
 <ol>
 <li>Який точний протокол ескалації, коли пацієнт каже «хочу говорити з людиною» або «це невідкладний випадок»?</li>
@@ -324,9 +324,9 @@ HTML,
 <li>Чи можемо запустити двотижневий пілот на вторинному номері, перш ніж перенаправимо головну лінію?</li>
 <li>Хто технічно стоїть за AI-рушієм? Використовуєте власну модель чи Vapi/Retell/іншу платформу?</li>
 </ol>
-<p>Ми запропонували двотижневий пілот на вторинній лінії. Якщо постачальник відповість на всі дванадцять — тестуємо. Якщо ні — не йдемо далі. Запитання я надіслав посереднику; 17&nbsp;вересня&nbsp;2026 він переслав їх постачальнику.</p>
-<p>Американські провайдери з фокусом на охорону здоров’я — наприклад Ona Health, Hello Patient, Talkie.ai чи Arini — на своїх сайтах зазначають HIPAA, SOC&nbsp;2 і BAA. Це сигнал зрілості продукту, а не заміна європейській DPA. AI в клініці — не про те, хто перший. А про те, чи система достатньо безпечна, щоб пацієнт, який дзвонить о другій ночі з болем у грудях, отримав правильну відповідь.</p>
-<p>Якщо ви оцінюєте AI-інструменти для амбулаторії — що у вашому чеклисті?</p>
+<p>Ми запропонували двотижневий пілот на вторинній лінії. Якщо постачальник відповість на всі дванадцять, тестуємо. Якщо ні, не йдемо далі. Запитання я надіслав посереднику; 17&nbsp;вересня&nbsp;2026 він переслав їх постачальнику.</p>
+<p>Американські провайдери з фокусом на охорону здоров’я, наприклад Ona Health, Hello Patient, Talkie.ai чи Arini, на своїх сайтах зазначають HIPAA, SOC&nbsp;2 і BAA. Це сигнал зрілості продукту, а не заміна європейській DPA. AI в клініці не про те, хто перший. А про те, чи система достатньо безпечна, щоб пацієнт, який дзвонить о другій ночі з болем у грудях, отримав правильну відповідь.</p>
+<p>Якщо ви оцінюєте AI-інструменти для амбулаторії, що у вашому чеклисті?</p>
 <p><em>Це фахова оцінка автора при розгляді пропозиції для амбулаторії, не огляд продукту для пацієнтів і не порада тим, хто дзвонить у невідкладності. При гострих симптомах телефонуйте 155/112.</em></p>
 HTML,
         ],

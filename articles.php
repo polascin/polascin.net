@@ -33,7 +33,7 @@ if (!$pageIsValid) {
     $canonicalUrl = absoluteLangUrl($lang, 'articles.php', $page > 1 ? ['page' => $page] : []);
 
     // Jazykové varianty zostávajú na tej istej strane stránkovania, ale iba ak
-    // v danom jazyku toľko článkov vôbec je — inak by odkaz viedol na 404.
+    // v danom jazyku toľko článkov vôbec je. Inak by odkaz viedol na 404.
     if ($page > 1) {
         $languageAlternates = [];
         $languageSwitchTargets = [];

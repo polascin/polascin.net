@@ -71,7 +71,7 @@ foreach (libraryList() as $libraryWork) {
 }
 
 // Všetky publikované články sa načítajú jedným dotazom a skupiny prekladov sa
-// zostavia v PHP — sitemap je verejný endpoint bez serverovej cache, takže sa
+// zostavia v PHP. Sitemap je verejný endpoint bez serverovej cache, takže sa
 // tu neoplatí dotazovať databázu pre každý článok zvlášť.
 $articleRows = [];
 try {

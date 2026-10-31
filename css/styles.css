@@ -2,7 +2,7 @@
 :root {
   /* Základná schéma je odvodená priamo z palety vlajky: fialová #5049CC ako
      primárna (na bielej 6,6:1), zelená #078D70 ako sekundárna pre ikony a
-     grafiku (4,2:1 — na drobný text sa nepoužíva). */
+     grafiku (4,2:1, na drobný text sa nepoužíva). */
   --primary-color: #5049cc;
   --secondary-color: #078d70;
   --accent-color: #ff6b6b;
@@ -169,7 +169,7 @@ a {
 
 a:hover,
 a:focus-visible {
-  /* Zelená vlajky má na bielej len 4,2:1, na drobný text nestačí —
+  /* Zelená vlajky má na bielej len 4,2:1, na drobný text nestačí:
      interaktívny stav preto ostáva vo fialovej vetve palety. */
   color: var(--primary-hover);
 }
@@ -193,7 +193,7 @@ main p a:not(.btn),
 }
 
 /* Na fialových plochách by fialový tint splynul s podkladom a označenie by
-   nebolo vidno — tam sa vyberá mätová s tmavým textom. */
+   nebolo vidno, tam sa vyberá mätová s tmavým textom. */
 footer ::selection,
 footer::selection,
 .btn-primary::selection,
@@ -275,7 +275,7 @@ h2 {
   text-align: center;
 }
 
-/* Krátky farebný podčiarknik pod nadpismi sekcií — čisto dekoratívny. */
+/* Krátky farebný podčiarknik pod nadpismi sekcií, čisto dekoratívny. */
 .section-title::after {
   content: "";
   display: block;
@@ -343,7 +343,7 @@ section {
   border-bottom: 1px solid var(--border-color);
 }
 
-/* „Sklenená“ navigácia — obsah pod ňou jemne presvitá. Priehľadnosť sa
+/* „Sklenená“ navigácia: obsah pod ňou jemne presvitá. Priehľadnosť sa
    zapína len tam, kde je podporené aj rozmazanie, inak by text pod lištou
    znižoval čitateľnosť. */
 @supports (backdrop-filter: blur(1px)) {
@@ -427,7 +427,7 @@ section {
   gap: 0.75rem;
 }
 
-/* Aktuálne počítaný vek — rovnaký výpočet ako na old.polascin.net */
+/* Aktuálne počítaný vek, rovnaký výpočet ako na old.polascin.net */
 .nav-age {
   display: inline-flex;
   flex-direction: column;
@@ -469,7 +469,7 @@ section {
   }
 }
 
-/* Na úzkych obrazovkách sa beat a presný vek postupne skryjú — spolu s
+/* Na úzkych obrazovkách sa beat a presný vek postupne skryjú, spolu s
    prepínačmi jazyka a témy a hamburgerom by sa lišta do 320 px nezmestila
    (prvky majú white-space: nowrap, takže by pretiekli mimo viewport). */
 @media (max-width: 480px) {
@@ -580,7 +580,7 @@ section {
   color: var(--primary-color);
 }
 
-/* Prepínač jazyka — postavený na <details>, takže funguje aj bez JavaScriptu. */
+/* Prepínač jazyka, postavený na <details>, takže funguje aj bez JavaScriptu. */
 .lang-switcher {
   position: relative;
   margin-left: var(--spacing-xs);
@@ -715,7 +715,7 @@ section {
   overflow: hidden;
 }
 
-/* Mäkké farebné škvrny v odtieňoch vlajky — čisto dekoratívne. */
+/* Mäkké farebné škvrny v odtieňoch vlajky, čisto dekoratívne. */
 .hero::before,
 .hero::after {
   content: "";
@@ -756,7 +756,7 @@ section {
 }
 
 /* Na počítači sa hero rozkladá do dvoch stĺpcov: text vľavo, logo vpravo.
-   Poradie prvkov v HTML zostáva (obrázok, nadpis, podtitul, tlačidlá) —
+   Poradie prvkov v HTML zostáva (obrázok, nadpis, podtitul, tlačidlá),
    o rozmiestnenie sa stará grid s pomenovanými oblasťami. */
 @media (min-width: 1025px) {
   .hero .hero-content {
@@ -831,7 +831,7 @@ section {
 
 @media (forced-colors: active) {
   /* Tmavý variant nadpisu má vyššiu špecificitu, preto ho musí reset uviesť
-     výslovne — inak by pri vynútených farbách zostal gradient orezaný do textu. */
+     výslovne, inak by pri vynútených farbách zostal gradient orezaný do textu. */
   .hero-title,
   [data-theme="dark"] .hero-title {
     background: none;
@@ -900,7 +900,7 @@ section {
   background-color: var(--bg-body);
 }
 
-/* Súvislý text nesmie na počítači tiecť na plnú šírku kontajnera — riadok
+/* Súvislý text nesmie na počítači tiecť na plnú šírku kontajnera: riadok
    dlhší než ~75 znakov sa zle číta. Prózu preto drží úzky stĺpec v strede;
    mriežky vnútri (oblasti, zručnosti) môžu byť širšie. */
 .about-text {
@@ -912,7 +912,7 @@ section {
   margin-top: var(--spacing-md);
 }
 
-/* Skupiny oblastí pôsobenia — medicína, jazyk, technológie vedľa seba */
+/* Skupiny oblastí pôsobenia: medicína, jazyk, technológie vedľa seba */
 .area-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -920,7 +920,7 @@ section {
   margin: var(--spacing-sm) 0 var(--spacing-md);
 }
 
-/* Každá oblasť má tenkú farebnú linku z palety vlajky — dekoratívny
+/* Každá oblasť má tenkú farebnú linku z palety vlajky, dekoratívny
    rozlišovací prvok, informáciu nesie nadpis. */
 .area {
   padding-inline-start: var(--spacing-sm);
@@ -944,7 +944,7 @@ section {
   padding-inline-start: 1.2rem;
 }
 
-/* Technologické zručnosti — dvojica označenie/obsah */
+/* Technologické zručnosti: dvojica označenie/obsah */
 .skill-list {
   display: grid;
   grid-template-columns: minmax(11rem, max-content) 1fr;
@@ -979,7 +979,7 @@ section {
   margin-top: var(--spacing-md);
 }
 
-/* Ikona pri odkaze, ktorý opúšťa stránku. Je dekoratívna — informáciu nesie
+/* Ikona pri odkaze, ktorý opúšťa stránku. Je dekoratívna: informáciu nesie
    skrytý text vedľa nej, preto sa pri forced-colors skryť nemusí. */
 .nav-link-external {
   font-size: 0.7em;
@@ -1026,7 +1026,7 @@ section {
   background: var(--bg-surface);
 }
 
-/* Pri prejdení kurzorom sa nad kartou objaví pruh vlajky. Dekorácia —
+/* Pri prejdení kurzorom sa nad kartou objaví pruh vlajky. Dekorácia,
    interaktívny stav signalizuje aj zdvih a zvýraznený okraj. */
 .card::before {
   content: "";
@@ -1064,7 +1064,7 @@ section {
 }
 
 /* Ikony striedajú akcenty vlajky. Ide o grafické prvky, ktoré majú podľa
-   WCAG 1.4.11 spĺňať 3:1 — odvodené premenné to zabezpečujú v oboch témach. */
+   WCAG 1.4.11 spĺňať 3:1. Odvodené premenné to zabezpečujú v oboch témach. */
 .card-grid > *:nth-child(3n + 1) .card-icon {
   color: var(--flag-accent-1);
 }
@@ -1135,7 +1135,7 @@ section {
   transform: translateY(-2px);
 }
 
-/* Footer — tmavá fialová vlajky v oboch témach; text je vždy svetlý,
+/* Footer: tmavá fialová vlajky v oboch témach; text je vždy svetlý,
    preto má pätička vlastné premenné nezávislé od --on-primary. */
 footer {
   background-color: var(--footer-bg);
@@ -1180,7 +1180,7 @@ footer .footer-heading {
   color: var(--footer-text);
 }
 
-/* Pätička je v oboch témach tmavá, takže obrys fokusu musí byť svetlý —
+/* Pätička je v oboch témach tmavá, takže obrys fokusu musí byť svetlý:
    --focus-on-primary je v tmavej téme tmavý a zanikol by. */
 footer a:focus-visible,
 footer button:focus-visible {
@@ -1459,7 +1459,7 @@ footer button:focus-visible {
   }
 }
 
-/* Cookie Settings Trigger — sedí v pätičke, preto pätičkové farby. */
+/* Cookie Settings Trigger: sedí v pätičke, preto pätičkové farby. */
 .cookie-settings-trigger {
   background: none;
   border: none;
@@ -1588,7 +1588,7 @@ footer button:focus-visible {
   margin-top: 10px;
 }
 
-/* Korelačné hodnoty veku — rovnaké výpočty ako v pätičke old.polascin.net */
+/* Korelačné hodnoty veku, rovnaké výpočty ako v pätičke old.polascin.net */
 .footer-ages {
   display: flex;
   flex-wrap: wrap;
@@ -1788,7 +1788,7 @@ footer button:focus-visible {
 .form-group textarea:focus,
 .form-group select:focus {
   /* Polopriehľadný 2px nádych mal voči podkladu len ~1,2:1 a jediným
-     zreteľným znakom fokusu bola zmena 1px rámika — polia preto dostávajú
+     zreteľným znakom fokusu bola zmena 1px rámika: polia preto dostávajú
      rovnaký prstenec ako ostatné interaktívne prvky stránky. */
   outline: 3px solid var(--focus-color);
   outline-offset: 2px;
@@ -1975,7 +1975,7 @@ a.lang-chip {
 .page-link:focus-visible {
   background-color: var(--primary-color);
   /* Nie #fff: v tmavej téme je primárna svetlá modrá a biely text by na nej
-     mal ~2,2:1 — --on-primary sa prepína spolu s témou. */
+     mal ~2,2:1, --on-primary sa prepína spolu s témou. */
   color: var(--on-primary);
 }
 

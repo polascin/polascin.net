@@ -6,14 +6,14 @@ declare(strict_types=1);
  * Read-only kontrola produkčnej databázy pre nočný audit.
  *
  * Spúšťa ho workflow `verify-db.yml` cez SSH so skriptom na štandardnom vstupe,
- * takže na server sa nič nezapisuje — ani dočasne do web rootu. Preto sa
+ * takže na server sa nič nezapisuje, ani dočasne do web rootu. Preto sa
  * `db_config.php` načítava z `getcwd()`, nie z `__DIR__`: pri čítaní zo stdin
  * je `__DIR__` pracovný adresár a ten workflow nastavuje na web root.
  *
  *   cd <webroot> && POLASCIN_ENV_PATH=<...> php < scripts/audit_db_check.php
  *
  * Skript zámerne nevypisuje žiadne prihlasovacie údaje ani obsah osobných
- * údajov — len agregáty, počty a veky najstarších záznamov. Report končí
+ * údajov: len agregáty, počty a veky najstarších záznamov. Report končí
  * v repozitári, takže nesmie obsahovať nič, čo by sa nemalo commitnúť.
  *
  * Vlastné zápisy sú vylúčené trojako: transakciou `READ ONLY`, absenciou
@@ -96,6 +96,7 @@ const EXPECTED_MIGRATIONS = [
     '2026102901_month_of_verification_article',
     '2026102902_context_comes_in_batches_article',
     '2026102903_month_of_verification_closing',
+    '2026103101_replace_dashes_in_articles',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
@@ -142,7 +143,7 @@ function finding(string $severity, string $text): void {
     $findings[] = ['severity' => $severity, 'text' => $text];
 }
 
-/** Jediná cesta k dátam — nič iné než SELECT/SHOW skript nespúšťa. */
+/** Jediná cesta k dátam: nič iné než SELECT/SHOW skript nespúšťa. */
 function fetchAll(PDO $pdo, string $sql, array $params = []): array {
     $statement = $pdo->prepare($sql);
     $statement->execute($params);
@@ -166,7 +167,7 @@ $generatedAt = (new DateTimeImmutable('now'))->format('Y-m-d H:i:s T');
 // Report sa commituje do **verejného** repozitára, takže názov databázy ani
 // presná verzia servera doň nepatria: sú to práve tie údaje, ktoré útočníkovi
 // chýbajú k platnému prihláseniu, resp. k namierenému exploitu na konkrétnu
-// patch verziu. Do reportu ide len to, čo treba na posúdenie stavu —
+// patch verziu. Do reportu ide len to, čo treba na posúdenie stavu:
 // hlavné číslo verzie a či server hlási MariaDB alebo MySQL.
 $rawVersion = (string) fetchOne($pdo, 'SELECT VERSION()');
 $serverFamily = stripos($rawVersion, 'mariadb') !== false ? 'MariaDB' : 'MySQL';
@@ -174,13 +175,13 @@ $serverMajorMinor = preg_match('~^(\d+\.\d+)~', $rawVersion, $versionMatch) === 
     ? $versionMatch[1] . '.x'
     : 'neznáma';
 
-head('# Kontrola produkčnej databázy — polascin.net');
+head('# Kontrola produkčnej databázy: polascin.net');
 head();
 head('Generované: ' . $generatedAt . '  ');
 head('Server: `' . $serverFamily . ' ' . $serverMajorMinor . '`  ');
 head('Režim: read-only transakcia, iba `SELECT`/`SHOW`');
 head();
-head('Názov databázy a presná verzia servera sa do reportu zámerne nepíšu —');
+head('Názov databázy a presná verzia servera sa do reportu zámerne nepíšu:');
 head('repozitár je verejný.');
 head();
 
@@ -202,12 +203,12 @@ foreach ($tableRows as $tableRow) {
 
 foreach (EXPECTED_TABLES as $expectedTable) {
     if (!in_array($expectedTable, $presentTables, true)) {
-        finding('KRITICKÉ', "Tabuľka `{$expectedTable}` v databáze chýba — schéma nie je kompletná.");
+        finding('KRITICKÉ', "Tabuľka `{$expectedTable}` v databáze chýba: schéma nie je kompletná.");
     }
 }
 $unexpectedTables = array_diff($presentTables, EXPECTED_TABLES);
 foreach ($unexpectedTables as $unexpectedTable) {
-    finding('INFO', "Tabuľka `{$unexpectedTable}` nie je v schéme `setup_db.php` — zvyšok po migrácii?");
+    finding('INFO', "Tabuľka `{$unexpectedTable}` nie je v schéme `setup_db.php`: zvyšok po migrácii?");
 }
 
 out('| Tabuľka | Engine | Collation | Riadkov (presne) |');
@@ -219,16 +220,16 @@ foreach ($tableRows as $tableRow) {
 
     // `information_schema.table_rows` je u InnoDB len odhad, preto presný COUNT.
     // Názov tabuľky pochádza z information_schema, nie zo vstupu, a navyše sa
-    // overuje proti zoznamu známych tabuliek — identifikátor sa viazať nedá.
+    // overuje proti zoznamu známych tabuliek: identifikátor sa viazať nedá.
     $exactCount = in_array($tableName, $presentTables, true)
         ? (int) fetchOne($pdo, 'SELECT COUNT(*) FROM `' . str_replace('`', '', $tableName) . '`')
         : 0;
 
     if ($engine !== 'InnoDB') {
-        finding('VYSOKÉ', "Tabuľka `{$tableName}` používa engine `{$engine}` namiesto InnoDB — bez transakcií a FK.");
+        finding('VYSOKÉ', "Tabuľka `{$tableName}` používa engine `{$engine}` namiesto InnoDB: bez transakcií a FK.");
     }
     if (!str_starts_with($collation, 'utf8mb4')) {
-        finding('VYSOKÉ', "Tabuľka `{$tableName}` má collation `{$collation}` namiesto utf8mb4 — riziko poškodenia diakritiky.");
+        finding('VYSOKÉ', "Tabuľka `{$tableName}` má collation `{$collation}` namiesto utf8mb4: riziko poškodenia diakritiky.");
     }
 
     out('| `' . $tableName . '` | ' . $engine . ' | ' . $collation . ' | ' . $exactCount . ' |');
@@ -248,16 +249,16 @@ if (in_array('schema_migrations', $presentTables, true)) {
 
 foreach (EXPECTED_MIGRATIONS as $expectedMigration) {
     if (!array_key_exists($expectedMigration, $appliedMigrations)) {
-        finding('KRITICKÉ', "Migrácia `{$expectedMigration}` nie je aplikovaná — nasadený kód počíta so schémou, ktorú DB nemá.");
-        out('- ❌ `' . $expectedMigration . '` — **neaplikovaná**');
+        finding('KRITICKÉ', "Migrácia `{$expectedMigration}` nie je aplikovaná: nasadený kód počíta so schémou, ktorú DB nemá.");
+        out('- ❌ `' . $expectedMigration . '`: **neaplikovaná**');
         continue;
     }
-    out('- ✅ `' . $expectedMigration . '` — ' . $appliedMigrations[$expectedMigration]);
+    out('- ✅ `' . $expectedMigration . '`: ' . $appliedMigrations[$expectedMigration]);
 }
 foreach (array_keys($appliedMigrations) as $appliedVersion) {
     if (!in_array($appliedVersion, EXPECTED_MIGRATIONS, true)) {
-        finding('STREDNÉ', "V DB je migrácia `{$appliedVersion}`, ktorú `setup_db.php` nepozná — DB je pred kódom.");
-        out('- ⚠️ `' . $appliedVersion . '` — v DB, ale nie v `setup_db.php`');
+        finding('STREDNÉ', "V DB je migrácia `{$appliedVersion}`, ktorú `setup_db.php` nepozná: DB je pred kódom.");
+        out('- ⚠️ `' . $appliedVersion . '`: v DB, ale nie v `setup_db.php`');
     }
 }
 out();
@@ -282,8 +283,8 @@ foreach ($requiredIndexes as [$indexTable, $indexName]) {
         [$indexTable, $indexName]
     );
     if ($indexCount === 0) {
-        finding('VYSOKÉ', "Index `{$indexName}` na `{$indexTable}` chýba — vyhľadávanie tokenov a rate-limit bežia bez indexu.");
-        out('- ❌ `' . $indexTable . '.' . $indexName . '` — chýba');
+        finding('VYSOKÉ', "Index `{$indexName}` na `{$indexTable}` chýba: vyhľadávanie tokenov a rate-limit bežia bez indexu.");
+        out('- ❌ `' . $indexTable . '.' . $indexName . '`: chýba');
         continue;
     }
     out('- ✅ `' . $indexTable . '.' . $indexName . '`');
@@ -305,13 +306,13 @@ if (in_array('users', $presentTables, true)) {
     out('- Neadministrátorských účtov: ' . $nonAdmins);
 
     if ($activeAdmins === 0) {
-        finding('KRITICKÉ', 'V DB nie je žiadny aktívny administrátor — do admin rozhrania sa nedá prihlásiť.');
+        finding('KRITICKÉ', 'V DB nie je žiadny aktívny administrátor: do admin rozhrania sa nedá prihlásiť.');
     }
     if ($activeAdmins > 1) {
         finding('STREDNÉ', "Aktívnych administrátorov je {$activeAdmins}; projekt má jediného správcu, preto over, či ide o zámer.");
     }
     if ($weakHashes > 0) {
-        finding('KRITICKÉ', "{$weakHashes} účtov nemá bcrypt ani argon2 hash hesla — možný zvyšok po ručnom zásahu do DB.");
+        finding('KRITICKÉ', "{$weakHashes} účtov nemá bcrypt ani argon2 hash hesla: možný zvyšok po ručnom zásahu do DB.");
     }
 }
 out();
@@ -333,7 +334,7 @@ if (in_array('articles', $presentTables, true)) {
             'VYSOKÉ',
             'Duplicitný slug `' . (string) $duplicateSlug['slug'] . '` v jazyku `'
             . (string) $duplicateSlug['lang'] . '` (' . (int) $duplicateSlug['pocet']
-            . 'x) — `article.php` vráti nedeterministický článok.'
+            . 'x): `article.php` vráti nedeterministický článok.'
         );
     }
 
@@ -342,7 +343,7 @@ if (in_array('articles', $presentTables, true)) {
         $langCode = (string) $langRow['lang'];
         out('  - `' . $langCode . '`: ' . (int) $langRow['pocet']);
         if (!in_array($langCode, EXPECTED_LANGUAGES, true)) {
-            finding('STREDNÉ', "Články majú jazyk `{$langCode}`, ktorý aplikácia nepodporuje — nezobrazia sa nikde.");
+            finding('STREDNÉ', "Články majú jazyk `{$langCode}`, ktorý aplikácia nepodporuje: nezobrazia sa nikde.");
         }
     }
 }
@@ -390,7 +391,7 @@ foreach (PII_TABLES as $piiTable => $timestampColumn) {
     }
     $rowCount = (int) fetchOne($pdo, 'SELECT COUNT(*) FROM `' . $piiTable . '`');
     if ($rowCount === 0) {
-        out('| `' . $piiTable . '` | 0 | — | — |');
+        out('| `' . $piiTable . '` | 0 | - | - |');
         continue;
     }
 
@@ -404,7 +405,7 @@ foreach (PII_TABLES as $piiTable => $timestampColumn) {
     if ($piiTable === 'access_logs' && $ageDays > $retentionDays) {
         finding(
             'VYSOKÉ',
-            "V `access_logs` sú záznamy staré {$ageDays} dní, hoci retencia je {$retentionDays} dní — "
+            "V `access_logs` sú záznamy staré {$ageDays} dní, hoci retencia je {$retentionDays} dní: "
             . 'čistenie logov sa nevykonáva a IP adresy sa držia dlhšie, než sľubuje zásada ochrany údajov.'
         );
     }
@@ -508,7 +509,7 @@ foreach ($unexpectedTables as $unexpectedTable) {
                 'SELECT TIMESTAMPDIFF(DAY, MIN(`' . $timestampColumn . '`), NOW()) FROM `' . $unexpectedTable . '`'
             )
             : null;
-        out('| `' . $unexpectedTable . '` (kópia) | ' . $copyRows . ' | — | ' . ($copyAgeDays ?? '?') . ' |');
+        out('| `' . $unexpectedTable . '` (kópia) | ' . $copyRows . ' | - | ' . ($copyAgeDays ?? '?') . ' |');
 
         $limitDays = $piiRetentionDays[$piiTable] ?? null;
         $overLimit = $copyAgeDays !== null && $limitDays !== null && $copyAgeDays > $limitDays;
@@ -542,7 +543,7 @@ usort(
 $blocking = array_filter($findings, static fn(array $f): bool => $f['severity'] !== 'INFO');
 $status = $blocking === [] ? 'OK' : 'NÁLEZY';
 
-// `STATUS:` a `NALEZOV:` sú strojovo čitateľné značky — workflow podľa nich
+// `STATUS:` a `NALEZOV:` sú strojovo čitateľné značky: workflow podľa nich
 // nastavuje výsledok behu a nočná rutina ich cituje v e-maile.
 $summary = [];
 $summary[] = 'STATUS: ' . $status;
@@ -551,10 +552,10 @@ $summary[] = '';
 $summary[] = '## Súhrn';
 $summary[] = '';
 if ($findings === []) {
-    $summary[] = 'Bez nálezov — schéma, migrácie, indexy, účty aj retencia sú v očakávanom stave.';
+    $summary[] = 'Bez nálezov: schéma, migrácie, indexy, účty aj retencia sú v očakávanom stave.';
 } else {
     foreach ($findings as $singleFinding) {
-        $summary[] = '- **' . $singleFinding['severity'] . '** — ' . $singleFinding['text'];
+        $summary[] = '- **' . $singleFinding['severity'] . '**: ' . $singleFinding['text'];
     }
 }
 $summary[] = '';

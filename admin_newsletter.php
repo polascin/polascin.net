@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $subscribers = $pdo->query("SELECT id, email, is_confirmed, confirmed_at, created_at FROM newsletter_subscribers ORDER BY created_at DESC LIMIT 1000")->fetchAll();
 
 $baseUrl = getAppBaseUrl();
-$pageTitle = 'Newsletter – odberatelia | MUDr. Ľubomír Polaščín';
+$pageTitle = 'Newsletter: odberatelia | MUDr. Ľubomír Polaščín';
 $seoDescription = 'Správa odberateľov newslettera na Polascin.net.';
 $robotsMeta = 'noindex, nofollow';
 $canonicalUrl = $baseUrl . '/admin_newsletter.php';
@@ -38,7 +38,7 @@ $canonicalUrl = $baseUrl . '/admin_newsletter.php';
 </head>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main-content" tabindex="-1" aria-label="Newsletter – odberatelia">
+<main id="main-content" tabindex="-1" aria-label="Newsletter: odberatelia">
   <section class="admin-section">
     <div class="container">
       <h1>Odberatelia newslettera</h1>

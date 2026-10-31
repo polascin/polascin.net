@@ -1,7 +1,7 @@
 # Konfigurácia skenovania tajomstiev (GitGuardian / ggshield).
 #
 # tests/run.php obsahuje vstupné reťazce pre validátor hesiel
-# (isAppPasswordValid, hashAppPassword) — testuje sa nimi, že funkcia odmietne
+# (isAppPasswordValid, hashAppPassword): testuje sa nimi, že funkcia odmietne
 # krátke heslo a že bcrypt vyhodí výnimku pri NUL bajte. Nie sú to prihlasovacie
 # údaje k žiadnej službe a nie je čo rotovať; detektor „Generic Password“ ich
 # hlásil ako falošný poplach (incident 35265453, commit f80767a).

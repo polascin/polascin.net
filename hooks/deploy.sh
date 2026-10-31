@@ -316,20 +316,20 @@ for required_command in "${REQUIRED_COMMANDS[@]}"; do
 done
 
 COMMIT=$(git rev-parse --short HEAD)
-# Iba bezpečné znaky — apostrof alebo backslash vo vetve by rozbili generovaný
+# Iba bezpečné znaky: apostrof alebo backslash vo vetve by rozbili generovaný
 # PHP reťazec a footer.php by potom zhodil každú stránku fatálnou chybou.
 BRANCH=$( (git symbolic-ref --quiet --short HEAD 2>/dev/null || printf 'detached') | tr -cd 'A-Za-z0-9._/-')
 [[ -n $BRANCH ]] || BRANCH='detached'
 UNIX_TS=$(date '+%s')
 TIMESTAMP=$(date '+%d.%m.%Y %H:%M')
 
-# Presný čas nasadenia pre pätičku — súbor vzniká pred rsyncom, aby sa
+# Presný čas nasadenia pre pätičku: súbor vzniká pred rsyncom, aby sa
 # nasadil spolu s kódom; lokálna kópia je v .gitignore. Guard proti priamemu
-# spusteniu cez web (aj cez PATH_INFO) — rovnaký vzor ako v lang/*.php;
+# spusteniu cez web (aj cez PATH_INFO), rovnaký vzor ako v lang/*.php;
 # include z footer.php guard nespustí.
 cat >deploy_info.php <<'GUARD'
 <?php
-// Automaticky generované nasadením — neupravovať manuálne.
+// Automaticky generované nasadením: neupravovať manuálne.
 $requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
 $executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
 if (

@@ -4,7 +4,7 @@
   všetky publikované články a k nim xhtml:link alternatívy.
 
   Tento súbor je iba index. Apache prepisuje /sitemap.xml priamo na sitemap.php
-  (.htaccess) a na produkcii sa tento prepis uplatňuje (Beh #5, nález 10 —
+  (.htaccess) a na produkcii sa tento prepis uplatňuje (Beh #5, nález 10:
   OpenResty je predsadená proxy pred Apache, ktorý .htaccess číta; overené
   v Behu #19: /sitemap.xml a /sitemap.php vracajú bajtovo identický výstup).
   Index tu zostáva ako obrana do hĺbky: keby mod_rewrite prepis neuplatnil,

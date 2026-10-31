@@ -23,7 +23,7 @@ unset($requestedScript, $executedFile);
  * a Adam Cohen, Northampton MA, odhlásenie z newslettera), kontakt na reklamu
  * adam@winningwriters.com, awai.com (od 1997, Delray Beach; vlajkový kurz
  * uvedený za 507 USD, na tej istej stránke veta o vrátení 197 USD),
- * prehľad honorárov AWAI: case study 1 200–2 000 USD.
+ * prehľad honorárov AWAI: case study 1 200 až 2 000 USD.
  * Názov bezplatného sprievodcu je citát z e-mailu, nie stránka, ktorú som otvoril.
  */
 return [
@@ -78,7 +78,7 @@ HTML,
 <p><a href="https://www.awai.com/copywriting/learn/opportunity-for-writers">AWAI</a> has sold copywriting courses since 1997, from Delray Beach, Florida. The flagship is the Accelerated Program for Six-Figure Copywriting. I read the page on 25 September 2026: it lists a price of $507. The same page still contains a sentence about refunding $197. That is not a scam. It is sales copy that does not agree with itself.</p>
 <h2>What the lines hide</h2>
 <ul>
-<li><strong>“A two-page story.”</strong> That is a case study for a company. The problem–solution–result frame has been public for decades. There is no secret structure.</li>
+<li><strong>“A two-page story.”</strong> That is a case study for a company. The problem-solution-result frame has been public for decades. There is no secret structure.</li>
 <li><strong>“$1,500 on average.”</strong> Their own <a href="https://www.awai.com/inside-awai/blueprint-for-becoming-well-paid-copywriter">fee overview</a>, which I read the same day, lists a case study at $1,200 to $2,000. That is the upper band of someone who already has clients. A beginner sees a fraction of it. The number in the subject line is their marketing, not a market audit.</li>
 <li><strong>“A secret structure.”</strong> A sales phrase. The same frame sits in textbooks and in pieces AWAI itself publishes.</li>
 <li><strong>The free guide “9 Ways to Make a Real Living as a Writer.”</strong> A lead magnet. After you enter an email, a sales sequence for the course begins. The file is not malware. It is bait.</li>
@@ -239,7 +239,7 @@ HTML,
 <h2>Co kryje się za zdaniami</h2>
 <ul>
 <li><strong>„Dwustronicowa historia.”</strong> To case study, studium przypadku dla firmy. Szkielet problem, rozwiązanie, wynik jest publicznie opisany od dziesięcioleci. Żadnej tajnej struktury.</li>
-<li><strong>„Średnio 1 500 dolarów.”</strong> Ich własny <a href="https://www.awai.com/inside-awai/blueprint-for-becoming-well-paid-copywriter">przegląd stawek</a>, który czytałem tego samego dnia, podaje case study w przedziale 1 200–2 000 dolarów. To górna liga kogoś, kto już ma klientów. Początkujący widzi z tego ułamek. Liczba w temacie to ich marketing, nie audyt rynku.</li>
+<li><strong>„Średnio 1 500 dolarów.”</strong> Ich własny <a href="https://www.awai.com/inside-awai/blueprint-for-becoming-well-paid-copywriter">przegląd stawek</a>, który czytałem tego samego dnia, podaje case study w przedziale od 1 200 do 2 000 dolarów. To górna liga kogoś, kto już ma klientów. Początkujący widzi z tego ułamek. Liczba w temacie to ich marketing, nie audyt rynku.</li>
 <li><strong>„Tajna struktura.”</strong> Formuła sprzedażowa. Ten sam szkielet jest w podręcznikach i w tekstach, które samo AWAI publikuje.</li>
 <li><strong>Darmowy przewodnik „9 Ways to Make a Real Living as a Writer”.</strong> Lead magnet. Po podaniu e-maila zaczyna się sekwencja sprzedażowa kursu. Plik nie jest złośliwym oprogramowaniem. Jest przynętą.</li>
 <li><strong>„Hi, Friend” i „To your success”.</strong> Cały list jest próbką copywritingu, który sprzedają. „Friend” w direct response nie znaczy, że ktoś cię zna.</li>
@@ -325,33 +325,33 @@ HTML,
         'uk' => [
             'title' => '1 500 доларів за двосторінкову історію. Це не шахрайство. Це воронка.',
             'image_alt' => 'Нічний письмовий стіл у фіолетовому й бірюзовому світлі: дві чисті сторінки, відкритий конверт і паперова стрічка, що звужується до далеких дверей.',
-            'excerpt' => 'Лист від Winning Writers обіцяє в середньому 1 500 доларів за двосторінкову історію. Обидві фірми справжні. Повідомлення — платна реклама AWAI, а безкоштовний посібник — принада на курс.',
+            'excerpt' => 'Лист від Winning Writers обіцяє в середньому 1 500 доларів за двосторінкову історію. Обидві фірми справжні. Повідомлення є платною рекламою AWAI, а безкоштовний посібник є принадою на курс.',
             'content' => <<<'HTML'
 <p>На <em>lubomir@polascin.net</em> прийшов лист із темою, яка звучить як пропозиція, від якої не відмовляються: у середньому 1 500 доларів за двосторінкову історію. Його надіслала розсилка <a href="https://winningwriters.com/about-us">Winning Writers</a>. За текстом стояв <a href="https://www.awai.com/">AWAI</a>, American Writers &amp; Artists Institute.</p>
-<p>Це не шахрайство в тому сенсі, що й <a href="article.php?slug=ai-book-trailer-ponuka-je-scam">пропозиція book trailer</a>. Це й не незрілий продукт, як <a href="article.php?slug=atlas-agents-studeny-email-z-icloud">Atlas Agents з iCloud</a>. Обидві фірми існують роками. Повідомлення — платна реклама, а безкоштовний посібник — принада у воронку продажу.</p>
+<p>Це не шахрайство в тому сенсі, що й <a href="article.php?slug=ai-book-trailer-ponuka-je-scam">пропозиція book trailer</a>. Це й не незрілий продукт, як <a href="article.php?slug=atlas-agents-studeny-email-z-icloud">Atlas Agents з iCloud</a>. Обидві фірми існують роками. Повідомлення є платною рекламою, а безкоштовний посібник є принадою у воронку продажу.</p>
 <h2>Хто це надсилає</h2>
-<p><a href="https://winningwriters.com/about-us">Winning Writers</a> заснували 2001 року Дженді Райтер і Адам Коен. Адресу вони вказують як 351 Pleasant Street, PMB 222, Нортгемптон, Массачусетс. Вони ведуть базу літературних конкурсів і надсилають безкоштовну розсилку. На власній сторінці пишуть, що з неї можна вийти будь-коли. Модель відома: конкурси й огляди безкоштовно, всередині платні спонсорські повідомлення. Контакт для реклами, який вони публікують, — <em>adam@winningwriters.com</em>. У підвалі листа, який мені прийшов, було сказано, що спонсорські повідомлення допомагають їм надавати послуги без плати.</p>
-<p><a href="https://www.awai.com/copywriting/learn/opportunity-for-writers">AWAI</a> продає курси копірайтингу з 1997 року, з адресою в Делрей-Біч, Флорида. Головний продукт — Accelerated Program for Six-Figure Copywriting. Сторінку я читав 25 вересня 2026 року: там указана ціна 507 доларів. На тій самій сторінці лишилася фраза про повернення 197 доларів. Це не шахрайство. Це продажний текст, який не збігається сам із собою.</p>
+<p><a href="https://winningwriters.com/about-us">Winning Writers</a> заснували 2001 року Дженді Райтер і Адам Коен. Адресу вони вказують як 351 Pleasant Street, PMB 222, Нортгемптон, Массачусетс. Вони ведуть базу літературних конкурсів і надсилають безкоштовну розсилку. На власній сторінці пишуть, що з неї можна вийти будь-коли. Модель відома: конкурси й огляди безкоштовно, всередині платні спонсорські повідомлення. Контакт для реклами, який вони публікують: <em>adam@winningwriters.com</em>. У підвалі листа, який мені прийшов, було сказано, що спонсорські повідомлення допомагають їм надавати послуги без плати.</p>
+<p><a href="https://www.awai.com/copywriting/learn/opportunity-for-writers">AWAI</a> продає курси копірайтингу з 1997 року, з адресою в Делрей-Біч, Флорида. Головний продукт: Accelerated Program for Six-Figure Copywriting. Сторінку я читав 25 вересня 2026 року: там указана ціна 507 доларів. На тій самій сторінці лишилася фраза про повернення 197 доларів. Це не шахрайство. Це продажний текст, який не збігається сам із собою.</p>
 <h2>Що ховається за фразами</h2>
 <ul>
 <li><strong>«Двосторінкова історія».</strong> Це case study, кейс для компанії. Каркас «проблема, рішення, результат» публічно описаний десятиліттями. Жодної таємної структури.</li>
-<li><strong>«У середньому 1 500 доларів».</strong> Їхній власний <a href="https://www.awai.com/inside-awai/blueprint-for-becoming-well-paid-copywriter">огляд гонорарів</a>, який я читав того самого дня, ставить кейс у діапазон від 1 200 до 2 000 доларів. Це верхня смуга того, хто вже має клієнтів. Початківець бачить із цього частку. Число в темі — їхній маркетинг, не аудит ринку.</li>
+<li><strong>«У середньому 1 500 доларів».</strong> Їхній власний <a href="https://www.awai.com/inside-awai/blueprint-for-becoming-well-paid-copywriter">огляд гонорарів</a>, який я читав того самого дня, ставить кейс у діапазон від 1 200 до 2 000 доларів. Це верхня смуга того, хто вже має клієнтів. Початківець бачить із цього частку. Число в темі є їхнім маркетингом, не аудитом ринку.</li>
 <li><strong>«Таємна структура».</strong> Продажна фраза. Той самий каркас є в підручниках і в текстах, які саме AWAI публікує.</li>
 <li><strong>Безкоштовний посібник «9 Ways to Make a Real Living as a Writer».</strong> Lead magnet. Після електронної пошти починається продажна послідовність курсу. Файл не є шкідливою програмою. Це принада.</li>
-<li><strong>«Hi, Friend» і «To your success».</strong> Увесь лист — зразок копірайтингу, який вони продають. «Friend» у direct response не означає, що вас хтось знає.</li>
+<li><strong>«Hi, Friend» і «To your success».</strong> Увесь лист є зразком копірайтингу, який вони продають. «Friend» у direct response не означає, що вас хтось знає.</li>
 </ul>
 <h2>Чому це прийшло мені</h2>
-<p><em>lubomir@polascin.net</em> — моя авторська скринька. На розсилку Winning Writers я колись підписався через конкурси до літературного псевдоніма Walter Kyo Csoelle. Це сходиться. Цільова група AWAI — ні.</p>
-<p>AWAI звертається до початківців на американському ринку direct response, англійською і для компаній. Фахові тексти я пишу під власним іменем, літературні — під псевдонімом. Медичні статті для Zdravotnícke noviny, Lekárske listy і <a href="https://www.solen.sk/en/journals/via-practica">Via practica</a> мають власний прайс: 60 євро за нормосторінку, 40 євро за уже опублікований текст. Це інший ринок, ніж обіцянка, що з двох сторінок вийде прожиток.</p>
+<p><em>lubomir@polascin.net</em> є моєю авторською скринькою. На розсилку Winning Writers я колись підписався через конкурси до літературного псевдоніма Walter Kyo Csoelle. Це сходиться. Цільова група AWAI не сходиться.</p>
+<p>AWAI звертається до початківців на американському ринку direct response, англійською і для компаній. Фахові тексти я пишу під власним іменем, а літературні під псевдонімом. Медичні статті для Zdravotnícke noviny, Lekárske listy і <a href="https://www.solen.sk/en/journals/via-practica">Via practica</a> мають власний прайс: 60 євро за нормосторінку, 40 євро за уже опублікований текст. Це інший ринок, ніж обіцянка, що з двох сторінок вийде прожиток.</p>
 <h2>Що з цим робити</h2>
 <ol>
 <li><strong>Залиште це, або завантажте посібник лише з цікавості.</strong> Файл не є шкідливою програмою. Після нього піде хвиля пропозицій. Якщо він потрібен, дайте іншу адресу, не ту, на якій іде авторська пошта.</li>
 <li><strong>Якщо листи йдуть регулярно, відпишіться.</strong> Це справжня розсилка. Відписка, яку вони обіцяють на сайті, має спрацювати. Це повідомлення не варто позначати як спам лише тому, що воно щось продає.</li>
-<li><strong>Прочитайте, як побудовано лист.</strong> Питання в темі, курсив, «secret», «free». Коли продаватимете своє, цей direct-response текст — безкоштовний підручник. Курс за 507 доларів я б не купував. Відкриті матеріали про копірайтинг покривають більшу частину того самого.</li>
+<li><strong>Прочитайте, як побудовано лист.</strong> Питання в темі, курсив, «secret», «free». Коли продаватимете своє, цей direct-response текст є безкоштовним підручником. Курс за 507 доларів я б не купував. Відкриті матеріали про копірайтинг покривають більшу частину того самого.</li>
 </ol>
-<p>У цій серії три різні речі. Book trailer — шахрайство. Atlas Agents — законний сайт без зрілості і без причини віддавати йому ключі. AWAI через Winning Writers — легітимна реклама. Перші два належать до скарги на спам. Третє — до відписки, якщо конкурси вас уже не цікавлять.</p>
+<p>У цій серії три різні речі. Book trailer: шахрайство. Atlas Agents: законний сайт без зрілості і без причини віддавати йому ключі. AWAI через Winning Writers: легітимна реклама. Перші два належать до скарги на спам. Третє належить до відписки, якщо конкурси вас уже не цікавлять.</p>
 
-<p><em>Це особистий досвід, не юридична і не інвестиційна порада. Назви, адреси й ціни — те, що 25 вересня 2026 року стояло на сайтах Winning Writers і AWAI та в листі, який мені прийшов. Гонорар за нормосторінку — мій власний прайс, не пропозиція читачеві.</em></p>
+<p><em>Це особистий досвід, не юридична і не інвестиційна порада. Назви, адреси й ціни відповідають тому, що 25 вересня 2026 року стояло на сайтах Winning Writers і AWAI та в листі, який мені прийшов. Гонорар за нормосторінку є моїм власним прайсом, не пропозицією читачеві.</em></p>
 HTML,
         ],
     ],

@@ -272,7 +272,7 @@ $canonicalUrl = $baseUrl . '/admin_users.php';
                   <td><?= htmlspecialchars((string) $admin['email'], ENT_QUOTES, 'UTF-8') ?><?= (int) $admin['id'] === $currentAdminId ? ' (vy)' : '' ?></td>
                   <td>
                     <?= (int) $admin['is_active'] === 1 ? 'Aktívny' : 'Neaktívny' ?>
-                    <?= (int) $admin['must_change_password'] === 1 ? ' – čaká na zmenu hesla' : '' ?>
+                    <?= (int) $admin['must_change_password'] === 1 ? ' (čaká na zmenu hesla)' : '' ?>
                   </td>
                   <td><?= htmlspecialchars((string) $admin['created_at'], ENT_QUOTES, 'UTF-8') ?></td>
                 </tr>

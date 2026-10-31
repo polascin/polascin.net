@@ -119,7 +119,7 @@ function languageFromAcceptHeader(?string $header): ?string {
 
 /**
  * Mapovanie krajiny na jazyk. Používa sa len ako záloha, keď prehliadač
- * jazyk neposlal — geolokácia je menej spoľahlivá než explicitné nastavenie.
+ * jazyk neposlal, lebo geolokácia je menej spoľahlivá než explicitné nastavenie.
  */
 function languageFromCountryCode(?string $countryCode): ?string {
     if (!is_string($countryCode) || preg_match('/^[A-Za-z]{2}$/D', trim($countryCode)) !== 1) {
@@ -199,7 +199,7 @@ function detectAppLanguage(): string {
     }
 
     // Návštevník, ktorého jazyk stránka nepozná, dostane angličtinu, nie
-    // slovenčinu — tá je zdrojový jazyk katalógov, nie univerzálna záloha.
+    // slovenčinu, ktorá je zdrojový jazyk katalógov, nie univerzálna záloha.
     return isSupportedLanguage(APP_FALLBACK_LANGUAGE) ? APP_FALLBACK_LANGUAGE : APP_DEFAULT_LANGUAGE;
 }
 
@@ -309,7 +309,7 @@ function te(string $key, array $params = [], ?string $lang = null): string {
  * Zostaví URL aktuálnej stránky v inom jazyku.
  *
  * Produkcia beží na OpenResty, ktorý neaplikuje `.htaccess`, takže jazyk sa
- * nesie v query parametri — funguje bez akéhokoľvek prepisu na strane servera
+ * nesie v query parametri. Funguje to bez akéhokoľvek prepisu na strane servera
  * a zároveň dáva každej jazykovej verzii vlastnú indexovateľnú URL.
  */
 function langUrl(string $lang, ?string $path = null, array $extraParams = []): string {
@@ -339,7 +339,7 @@ function langUrl(string $lang, ?string $path = null, array $extraParams = []): s
 }
 
 /**
- * Absolútna URL stránky v danom jazyku — pre canonical, hreflang a og:url.
+ * Absolútna URL stránky v danom jazyku pre canonical, hreflang a og:url.
  *
  * Na rozdiel od `langUrl()` sa pri predvolenom jazyku parameter `lang`
  * vynecháva a domovská stránka sa zapisuje ako koreň. Prepínač jazyka musí
@@ -379,7 +379,7 @@ function absoluteLangUrl(string $lang, string $path, array $extraParams = []): s
  * Zdrojom parametrov je zámerne kanonická URL, nie `$_GET`: kanonická adresa je
  * jediné miesto, kde stránka rozhodla, ktoré parametre určujú jej obsah. Zo
  * `$_GET` by sa do klastra dostali aj parametre, ktoré stránka ignoruje
- * (`articles.php?slug=…`), aj tie, ktoré si sama odstránila (`?page=1`) — a
+ * (`articles.php?slug=…`), aj tie, ktoré si sama odstránila (`?page=1`), a
  * hreflang by potom odkazoval na adresy s inou kanonickou URL, čo vyhľadávače
  * vyhodnotia ako rozbitý klaster a celý ho zahodia.
  */

@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $image = null;
                 }
             }
-            // Prázdny alt text pri nastavenej obálke padá na názov článku —
+            // Prázdny alt text pri nastavenej obálke padá na názov článku,
             // rovnako ako v seederi. Obrázok bez alternatívneho textu by inak
             // zostal pre čítačku obrazovky nemý.
             if ($image !== null && $imageAlt === '') {
@@ -333,14 +333,14 @@ $canonicalUrl = $baseUrl . '/admin_articles.php';
         $editingImage = trim((string) ($editing['image'] ?? ''));
         $coverChoices = availableArticleCovers();
         // Uloženú hodnotu treba v ponuke nechať aj vtedy, keď súbor na disku
-        // chýba — inak by uloženie formulára obálku ticho zmazalo.
+        // chýba, inak by uloženie formulára obálku ticho zmazalo.
         $coverMissing = $editingImage !== '' && !in_array($editingImage, $coverChoices, true);
         ?>
         <div class="form-row">
           <div class="form-group">
             <label for="image">Obálka</label>
             <select id="image" name="image" aria-describedby="image-hint">
-              <option value="">— bez obálky —</option>
+              <option value="">Bez obálky</option>
               <?php if ($coverMissing): ?>
                 <option value="<?= htmlspecialchars($editingImage, ENT_QUOTES, 'UTF-8') ?>" selected>
                   <?= htmlspecialchars(basename($editingImage), ENT_QUOTES, 'UTF-8') ?> (súbor chýba)

@@ -39,13 +39,13 @@ $canonicalUrl = $canonicalUrl ?? $currentUrl;
  * jazyk bez parametra `lang`.
  *
  * Táto premenná je určená výhradne pre SEO. Prepínač jazyka ju zámerne
- * nepoužíva — potreboval by parameter `lang` aj pre predvolený jazyk, inak by
+ * nepoužíva, pretože by potreboval by parameter `lang` aj pre predvolený jazyk, inak by
  * sa naň nedalo prepnúť späť.
  */
 if (!isset($languageAlternates) || !is_array($languageAlternates)) {
     // Parametre klastra sa čítajú z kanonickej URL, ktorú si stránka určila sama.
     // Stránka, ktorá má pre jednotlivé jazyky iné adresy (alebo preklad nemá
-    // vôbec), si `$languageAlternates` nastaví — vrátane prázdneho poľa, ktoré
+    // vôbec), si `$languageAlternates` nastaví, vrátane prázdneho poľa, ktoré
     // znamená „tento obsah existuje len v jednom jazyku“.
     $languageAlternates = languageAlternatesFor($canonicalUrl);
 }
@@ -76,7 +76,7 @@ $jsVersion = is_file(__DIR__ . '/js/main.js') ? (string) filemtime(__DIR__ . '/j
 <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
 <link rel="canonical" href="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
 <?php
-// Na neindexovaných stránkach nemá hreflang zmysel — vyhľadávače ho ignorujú
+// Na neindexovaných stránkach nemá hreflang zmysel: vyhľadávače ho ignorujú
 // a klaster by odkazoval na adresy, ktoré sa nemajú objaviť vo výsledkoch.
 $emitAlternates = !str_contains(strtolower($robotsMeta), 'noindex');
 ?>
@@ -85,7 +85,7 @@ $emitAlternates = !str_contains(strtolower($robotsMeta), 'noindex');
 <link rel="alternate" hreflang="<?= htmlspecialchars((string) $alternateLang, ENT_QUOTES, 'UTF-8') ?>" href="<?= htmlspecialchars((string) $alternateUrl, ENT_QUOTES, 'UTF-8') ?>">
 <?php endforeach; ?>
 <?php
-// x-default patrí verzii pre návštevníka, ktorého jazyk stránka nepodporuje —
+// x-default patrí verzii pre návštevníka, ktorého jazyk stránka nepodporuje,
 // teda tej, na ktorú ho pošle aj `detectAppLanguage()`. Musí byť rovnaké pre
 // všetky jazykové varianty tej istej stránky. Keď v klastri chýba, berie sa
 // prvý dostupný podľa poradia v appLanguages(), ktoré je rovnaké nech sa

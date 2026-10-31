@@ -71,12 +71,12 @@ return [
     'footer.facebook' => 'Facebook-profil',
     'footer.email' => 'E-mail küldése',
     'footer.discord' => 'Csatlakozás a Discordon',
-    'footer.copyright' => '© 1998 – :year Ľubomír Polaščín. Minden jog fenntartva.',
+    'footer.copyright' => '© 1998 és :year között Ľubomír Polaščín. Minden jog fenntartva.',
     'footer.privacy' => 'Adatvédelem',
     'footer.terms' => 'Felhasználási feltételek',
     'footer.cookie_settings' => 'Sütibeállítások',
     'footer.updated' => 'Frissítve:',
-    'footer.beat_title' => 'Swiss Internet Time — 1 nap = 1000 beat',
+    'footer.beat_title' => 'Swiss Internet Time: 1 nap = 1000 beat',
 
     // Oldalak metaadatai
     'meta.default_description' => 'Dr. Ľubomír Polaščín személyes és szakmai honlapja: nefrológia és dialízis, orvosi oktatás és szakmai szövegírás, orvosi szakfordítás, valamint gyakorlati digitális eszközök.',
@@ -90,7 +90,7 @@ return [
     'meta.contact_title' => 'Kapcsolat',
     'meta.contact_description' => 'Vegye fel a kapcsolatot Dr. Ľubomír Polaščínnal szakmai kérdésekkel, együttműködési javaslatokkal vagy érdeklődéssel.',
     'meta.newsletter_title' => 'Hírlevél',
-    'meta.newsletter_description' => 'Iratkozzon fel a Polascin.net hírlevelére — újdonságok a nefrológiáról, a belgyógyászatról, könyvekről és a technológiáról.',
+    'meta.newsletter_description' => 'Iratkozzon fel a Polascin.net hírlevelére: újdonságok a nefrológiáról, a belgyógyászatról, könyvekről és a technológiáról.',
     'meta.login_title' => 'Bejelentkezés',
     'meta.login_description' => 'Adminisztrátori bejelentkezés a Polascin.net oldalon.',
     'meta.privacy_title' => 'Adatvédelem',
@@ -98,14 +98,14 @@ return [
     'meta.terms_title' => 'Felhasználási feltételek',
     'meta.terms_description' => 'Dr. Ľubomír Polaščín webhelyének felhasználási feltételei.',
 
-    // Kezdőlap — fejrész
+    // Kezdőlap: fejrész
     'home.logo_alt' => 'Crystal Kidney',
     'home.hero_title' => 'Dr. Ľubomír Polaščín',
     'home.hero_subtitle' => 'Nefrológus és belgyógyász, orvosi oktató és szerző vagyok. A dialízis terén szerzett sokéves tapasztalatomat szakmai szövegírásban, fordításban és gyakorlati digitális eszközök fejlesztésében hasznosítom.',
     'home.cta_about' => 'Mivel foglalkozom',
     'home.cta_articles' => 'Cikkek olvasása',
 
-    // Kezdőlap — életrajz
+    // Kezdőlap: életrajz
     'home.about_heading' => 'Rólam',
     'home.about_intro' => 'Nefrológiára és belgyógyászatra szakosodott orvos vagyok. Szakmai munkám középpontjában a dialízis és a vesebetegségek állnak; két pozsonyi dialízisközpontot vezettem, és orvosi oktatással is foglalkoztam.',
     'home.about_who' => 'Szakmai és szépirodalmi szövegeket írok, szlovák és angol nyelv között fordítok orvosi tartalmakat, valamint weboldalakat és alkalmazásokat fejlesztek. A technológiát és a mesterséges intelligenciát gyakorlati értékük alapján ítélem meg: hozzáférhetőbbé teszik-e a tudást, egyszerűsítik-e a munkát, illetve javítják-e az eredmény minőségét.',
@@ -142,14 +142,14 @@ return [
     'home.skills_ai_text' => 'nyelvi modellek, automatizálás és orvosi alkalmazásuk kritikus értékelése',
 
     'home.education_heading' => 'Tanulmányok és szakmai pálya',
-    'home.education_school' => 'Gimnáziumi tanulmányaimat programozási szakirányon 1989-ben fejeztem be — akkoriban Basic és Pascal nyelven programoztunk —, és megnyertem a járási programozási versenyt is.',
+    'home.education_school' => 'Gimnáziumi tanulmányaimat programozási szakirányon 1989-ben fejeztem be, amikor még Basic és Pascal nyelven programoztunk, és megnyertem a járási programozási versenyt is.',
     'home.education_text' => '1995-ben szereztem általános orvosi diplomát a kassai Pavol Jozef Šafárik Egyetemen. 1998-ban belgyógyászati, 2009-ben nefrológiai szakvizsgát tettem; ugyanebben az évben felnőttkori hasi ultrahangvizsgálatból is képesítést szereztem.',
     'home.education_path' => '1995 óta dolgozom a dialízis és a nefrológia területén. Később két pozsonyi dialízisközpontot vezettem, és orvosi oktatással is foglalkoztam.',
     'home.education_scope' => 'Szakmai tapasztalatom kiterjed a hemodialízisre, a hemodiafiltrációra, a peritoneális dialízisre, a Prometheus rendszerrel végzett májdialízisre, az akut eliminációs módszerekre, az ultrahangdiagnosztikára, az érbemenetek gondozására és a betegek veseátültetésre való előkészítésére. Ezt a tapasztalatot szakmai írással, előadásokkal, oktatással és orvosi digitális projektek készítésével kapcsolom össze.',
 
     'home.personal_heading' => 'Az orvosláson túl',
-    'home.personal_text' => 'Érdekel az irodalom, a filozófia, a költészet és az utazás. Közel állnak hozzám az idegen nyelvek is — többek között ezért érhető el ez az oldal tíz nyelven —, szabadidőmet pedig olvasással, fordítással és saját projektjeim programozásával töltöm.',
-    'home.personal_writing' => 'Könyveimben és más írásaimban rendszeresen visszatérek az orvoslás, az erkölcsi konfliktusok, valamint az ember és a technológia kapcsolatának témájához. Szakmai szövegeimet saját nevem alatt írom, szépirodalmi műveim Walter Kyo Csoelle írói álnéven is megjelennek — szerzői profilja megtalálható az Amazonon.',
+    'home.personal_text' => 'Érdekel az irodalom, a filozófia, a költészet és az utazás. Közel állnak hozzám az idegen nyelvek is, többek között ezért érhető el ez az oldal tíz nyelven. Szabadidőmet olvasással, fordítással és saját projektjeim programozásával töltöm.',
+    'home.personal_writing' => 'Könyveimben és más írásaimban rendszeresen visszatérek az orvoslás, az erkölcsi konfliktusok, valamint az ember és a technológia kapcsolatának témájához. Szakmai szövegeimet saját nevem alatt írom, szépirodalmi műveim Walter Kyo Csoelle írói álnéven is megjelennek. Szerzői profilja megtalálható az Amazonon.',
 
     'home.identity_nephrologist' => 'Nefrológus',
     'home.identity_internist' => 'Belgyógyász',
@@ -157,7 +157,7 @@ return [
     'home.books_cta' => 'Könyvek megtekintése',
     'home.amazon_cta' => 'Amazon szerzői profil',
 
-    // Kezdőlap — nefrológia
+    // Kezdőlap: nefrológia
     'home.nephrology_heading' => 'Nefrológia röviden',
     'home.nephrology_intro' => 'A nefrológia nem csupán a dialízisről szól. A vesebetegségek megelőzését, korai felismerését és hosszú távú kezelését kapcsolja össze a vesepótló kezeléssel, amikor a konzervatív kezelés már nem elegendő.',
     'home.ckd_title' => 'Krónikus vesebetegség (CKD)',
@@ -174,7 +174,7 @@ return [
     'home.diagnostics_text' => 'A diagnózis az anamnézisre, a fizikális vizsgálatra, vér- és vizeletvizsgálatokra, valamint képalkotó eljárásokra épül. Klinikailag indokolt esetben vesebiopszia egészíti ki.',
     'home.nephrology_note' => 'Ez a tájékoztatás oktatási célú, és nem helyettesíti az orvosi vizsgálatot vagy a személyre szabott orvosi tanácsadást.',
 
-    // Kezdőlap — cikkek, projektek, hivatkozások, kapcsolat
+    // Kezdőlap: cikkek, projektek, hivatkozások, kapcsolat
     'home.latest_heading' => 'Legújabb cikkek',
     'home.all_articles' => 'Összes cikk megtekintése',
     'home.projects_heading' => 'Válogatott projektek',
@@ -184,7 +184,7 @@ return [
     'home.project_books_text' => 'Könyveim, szakmai kiadványaim, könyvfejezeteim és egyéb írásaim áttekintése.',
     'home.project_alphagrab_text' => 'Kísérleti esemény- és jegykereső eszköz, amely a Ticketmaster Discovery API-t használja.',
     'home.project_arenibus_text' => 'Előrehaladott fejlesztési szakaszban lévő .NET információs rendszer nefrológiai klinikák és dialízisközpontok számára. MVP-je lefedi a betegek és vizitek nyilvántartását, a dialíziselőírásokat, az ütemezést, a laboratóriumi eredményeket, az auditnaplókat, valamint a szlovákiai eHealth rendszerrel való integrációt; a nyilvános demó fiktív adatokat használ.',
-    'home.project_gumroad_text' => 'Digitális termékek és e-könyvek a Gumroadon — Medicínsky pôst és Medical Fasting, a SK Nefro Báza 1 és a SK Nefro Báza 1 Kompendium szlovák, angol és német kiadása, valamint a német SK Nefro: Belegt, wahrscheinlich, offen.',
+    'home.project_gumroad_text' => 'Digitális termékek és e-könyvek a Gumroadon: Medicínsky pôst és Medical Fasting, a SK Nefro Báza 1 és a SK Nefro Báza 1 Kompendium szlovák, angol és német kiadása, valamint a német SK Nefro: Belegt, wahrscheinlich, offen.',
     'home.publications_heading' => 'Eladó kiadványok',
     'home.publications_intro' => 'E-könyvek, amelyeket a nefro.polascin.net oldalon és a Gumroadon árulok.',
     'home.link_pub_nefro_baza' => 'SK Nefro Báza 1 (nefro.polascin.net)',
@@ -211,8 +211,8 @@ return [
     'home.link_nephrosite' => 'NephroSite (szlovák nyelven)',
     'home.link_dialysis_bratislava' => 'Dialízis Bratislavában: Medimpax (szlovák nyelven)',
     'home.link_impax_centres' => 'IMPAX dialízisközpontok (szlovák nyelven)',
-    'home.link_vital_2nd' => 'Vital Algorithm — 2. kiadás (Amazon)',
-    'home.link_vital_1st' => 'The Vital Algorithm — 1. kiadás (Amazon)',
+    'home.link_vital_2nd' => 'Vital Algorithm, 2. kiadás (Amazon)',
+    'home.link_vital_1st' => 'The Vital Algorithm, 1. kiadás (Amazon)',
     'home.contact_heading' => 'Kapcsolat',
     'home.contact_intro' => 'Szakmai együttműködéssel, előadással, orvosi szakfordítással vagy digitális projekttel kapcsolatban küldjön üzenetet. Ez a kapcsolat nem sürgős orvosi kérdésekre szolgál.',
     'home.contact_cta' => 'Kapcsolatfelvételi űrlap megnyitása',
@@ -232,7 +232,7 @@ return [
     'article.not_found_heading' => 'A cikk nem található',
     'article.not_found_text' => 'A kért cikk nem létezik, vagy még nem jelent meg.',
     'article.back_to_list' => 'Vissza a cikkekhez',
-    'article.admin_preview' => 'Adminisztrátori előnézet — ez a cikk még nem nyilvános.',
+    'article.admin_preview' => 'Adminisztrátori előnézet: ez a cikk még nem nyilvános.',
     'article.available_in' => 'Elérhető még ezeken a nyelveken:',
 
     // Kapcsolatfelvételi űrlap
@@ -248,7 +248,7 @@ return [
     'contact.error_name' => 'Adjon meg érvényes nevet.',
     'contact.error_email' => 'Adjon meg érvényes e-mail-címet.',
     'contact.error_subject' => 'A tárgy túl hosszú.',
-    'contact.error_message' => 'Írjon üzenetet (20–5000 karakter).',
+    'contact.error_message' => 'Írjon üzenetet (20 és 5000 karakter között).',
     'contact.error_rate_limit' => 'Túl sok üzenet érkezett erről a címről. Próbálja meg később.',
     'contact.error_save' => 'Az üzenetet nem sikerült elküldeni. Próbálja meg később.',
 

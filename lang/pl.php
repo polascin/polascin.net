@@ -71,12 +71,12 @@ return [
     'footer.facebook' => 'Profil na Facebooku',
     'footer.email' => 'Wyślij e-mail',
     'footer.discord' => 'Dołącz na Discordzie',
-    'footer.copyright' => '© 1998 – :year Ľubomír Polaščín. Wszelkie prawa zastrzeżone.',
+    'footer.copyright' => '© 1998 do :year Ľubomír Polaščín. Wszelkie prawa zastrzeżone.',
     'footer.privacy' => 'Ochrona prywatności',
     'footer.terms' => 'Warunki korzystania',
     'footer.cookie_settings' => 'Ustawienia plików cookie',
     'footer.updated' => 'Zaktualizowano:',
-    'footer.beat_title' => 'Swiss Internet Time — 1 dzień = 1000 beatów',
+    'footer.beat_title' => 'Swiss Internet Time: 1 dzień = 1000 beatów',
 
     // Metadane stron
     'meta.default_description' => 'Osobista i zawodowa strona MUDr. Ľubomíra Polaščína: nefrologia i dializoterapia, edukacja medyczna i pisarstwo specjalistyczne, tłumaczenia medyczne oraz praktyczne narzędzia cyfrowe.',
@@ -90,7 +90,7 @@ return [
     'meta.contact_title' => 'Kontakt',
     'meta.contact_description' => 'Skontaktuj się z MUDr. Ľubomírem Polaščínem w sprawach zawodowych, propozycji współpracy lub pytań.',
     'meta.newsletter_title' => 'Newsletter',
-    'meta.newsletter_description' => 'Zapisz się na newsletter Polascin.net — nowości z nefrologii, chorób wewnętrznych, książek i technologii.',
+    'meta.newsletter_description' => 'Zapisz się na newsletter Polascin.net: nowości z nefrologii, chorób wewnętrznych, książek i technologii.',
     'meta.login_title' => 'Logowanie',
     'meta.login_description' => 'Logowanie administratora w Polascin.net.',
     'meta.privacy_title' => 'Ochrona prywatności',
@@ -98,14 +98,14 @@ return [
     'meta.terms_title' => 'Warunki korzystania',
     'meta.terms_description' => 'Warunki korzystania z serwisu MUDr. Ľubomíra Polaščína.',
 
-    // Strona główna — sekcja powitalna
+    // Strona główna: sekcja powitalna
     'home.logo_alt' => 'Crystal Kidney',
     'home.hero_title' => 'MUDr. Ľubomír Polaščín',
     'home.hero_subtitle' => 'Jestem nefrologiem i internistą, edukatorem medycznym i autorem. Wieloletnie doświadczenie w dializoterapii wykorzystuję w pisarstwie specjalistycznym, tłumaczeniach i tworzeniu praktycznych narzędzi cyfrowych.',
     'home.cta_about' => 'Czym się zajmuję',
     'home.cta_articles' => 'Czytaj artykuły',
 
-    // Strona główna — życiorys
+    // Strona główna: życiorys
     'home.about_heading' => 'O mnie',
     'home.about_intro' => 'Jestem lekarzem specjalizującym się w nefrologii i chorobach wewnętrznych. Moja praca zawodowa koncentruje się na dializoterapii i chorobach nerek; kierowałem dwoma ośrodkami dializ w Bratysławie i zajmowałem się edukacją medyczną.',
     'home.about_who' => 'Piszę teksty specjalistyczne i literackie, tłumaczę treści medyczne między językiem słowackim a angielskim oraz tworzę strony internetowe i aplikacje. Technologie i sztuczną inteligencję oceniam według ich praktycznej wartości: czy ułatwiają dostęp do wiedzy, usprawniają pracę lub podnoszą jakość rezultatu.',
@@ -142,14 +142,14 @@ return [
     'home.skills_ai_text' => 'modele językowe, automatyzacja i krytyczna ocena ich zastosowania w medycynie',
 
     'home.education_heading' => 'Wykształcenie i droga zawodowa',
-    'home.education_school' => 'Liceum o profilu programistycznym ukończyłem w 1989 roku — programowało się wtedy w językach Basic i Pascal — wygrałem też powiatowy konkurs programistyczny.',
+    'home.education_school' => 'Liceum o profilu programistycznym ukończyłem w 1989 roku, kiedy programowało się w językach Basic i Pascal. Wygrałem też powiatowy konkurs programistyczny.',
     'home.education_text' => 'Studia na kierunku lekarskim ukończyłem na Uniwersytecie Pavla Jozefa Šafárika w Koszycach w 1995 roku. W 1998 roku uzyskałem specjalizację z chorób wewnętrznych, a w 2009 roku z nefrologii; w tym samym roku otrzymałem także certyfikat z ultrasonografii jamy brzusznej u dorosłych.',
     'home.education_path' => 'Od 1995 roku pracuję w dializoterapii i nefrologii. Później kierowałem dwoma ośrodkami dializ w Bratysławie i zajmowałem się edukacją medyczną.',
     'home.education_scope' => 'Moje doświadczenie zawodowe obejmuje hemodializę, hemodiafiltrację, dializę otrzewnową, dializę wątrobową w systemie Prometheus, metody eliminacyjne stosowane w stanach ostrych, ultrasonografię, opiekę nad dostępami naczyniowymi oraz przygotowanie pacjentów do przeszczepienia nerki. Łączę te doświadczenia z pisaniem tekstów specjalistycznych, wykładami, nauczaniem i tworzeniem medycznych projektów cyfrowych.',
 
     'home.personal_heading' => 'Poza medycyną',
-    'home.personal_text' => 'Interesuję się literaturą, filozofią, poezją i podróżami. Bliskie są mi także języki obce — między innymi dlatego ta strona jest dostępna w dziesięciu z nich — a wolne chwile spędzam na czytaniu, tłumaczeniach i programowaniu własnych projektów.',
-    'home.personal_writing' => 'W książkach i innych tekstach wracam do medycyny, konfliktów moralnych i relacji człowieka z technologią. Teksty specjalistyczne piszę pod własnym nazwiskiem, a twórczość literacka ukazuje się także pod pseudonimem Walter Kyo Csoelle — jego profil autorski można znaleźć w serwisie Amazon.',
+    'home.personal_text' => 'Interesuję się literaturą, filozofią, poezją i podróżami. Bliskie są mi także języki obce, między innymi dlatego ta strona jest dostępna w dziesięciu z nich. Wolne chwile spędzam na czytaniu, tłumaczeniach i programowaniu własnych projektów.',
+    'home.personal_writing' => 'W książkach i innych tekstach wracam do medycyny, konfliktów moralnych i relacji człowieka z technologią. Teksty specjalistyczne piszę pod własnym nazwiskiem, a twórczość literacka ukazuje się także pod pseudonimem Walter Kyo Csoelle. Jego profil autorski można znaleźć w serwisie Amazon.',
 
     'home.identity_nephrologist' => 'Nefrolog',
     'home.identity_internist' => 'Internista',
@@ -157,7 +157,7 @@ return [
     'home.books_cta' => 'Zobacz książki',
     'home.amazon_cta' => 'Profil autora na Amazonie',
 
-    // Strona główna — nefrologia
+    // Strona główna: nefrologia
     'home.nephrology_heading' => 'Nefrologia w skrócie',
     'home.nephrology_intro' => 'Nefrologia to nie tylko dializoterapia. Łączy profilaktykę, wczesne rozpoznawanie i długoterminowe leczenie chorób nerek z leczeniem nerkozastępczym, gdy postępowanie zachowawcze przestaje wystarczać.',
     'home.ckd_title' => 'Przewlekła choroba nerek (PChN)',
@@ -174,7 +174,7 @@ return [
     'home.diagnostics_text' => 'Rozpoznanie opiera się na wywiadzie, badaniu fizykalnym, badaniach krwi i moczu oraz diagnostyce obrazowej. Biopsję nerki wykonuje się, gdy istnieją wskazania kliniczne.',
     'home.nephrology_note' => 'Informacje mają charakter edukacyjny i nie zastępują badania lekarskiego ani indywidualnej porady.',
 
-    // Strona główna — artykuły, projekty, odnośniki, kontakt
+    // Strona główna: artykuły, projekty, odnośniki, kontakt
     'home.latest_heading' => 'Najnowsze artykuły',
     'home.all_articles' => 'Zobacz wszystkie artykuły',
     'home.projects_heading' => 'Wybrane projekty',
@@ -184,7 +184,7 @@ return [
     'home.project_books_text' => 'Przegląd moich książek, publikacji specjalistycznych, rozdziałów i innych tekstów.',
     'home.project_alphagrab_text' => 'Eksperymentalne narzędzie do wyszukiwania wydarzeń i biletów wykorzystujące Ticketmaster Discovery API.',
     'home.project_arenibus_text' => 'System informacyjny .NET na zaawansowanym etapie rozwoju, przeznaczony dla poradni nefrologicznych i ośrodków dializ. Jego MVP obejmuje dokumentację pacjentów i wizyt, zlecenia dializoterapii, planowanie terminów, wyniki badań laboratoryjnych, ścieżki audytu oraz integrację ze słowackim systemem eHealth; publiczna wersja demonstracyjna korzysta z fikcyjnych danych.',
-    'home.project_gumroad_text' => 'Produkty cyfrowe i e-booki na Gumroadzie — Medicínsky pôst i Medical Fasting, słowackie, angielskie i niemieckie wydania SK Nefro Báza 1 oraz SK Nefro Báza 1 Kompendium, a także niemiecki tytuł SK Nefro: Belegt, wahrscheinlich, offen.',
+    'home.project_gumroad_text' => 'Produkty cyfrowe i e-booki na Gumroadzie: Medicínsky pôst i Medical Fasting, słowackie, angielskie i niemieckie wydania SK Nefro Báza 1 oraz SK Nefro Báza 1 Kompendium, a także niemiecki tytuł SK Nefro: Belegt, wahrscheinlich, offen.',
     'home.publications_heading' => 'Publikacje w sprzedaży',
     'home.publications_intro' => 'E-booki, które sprzedaję na nefro.polascin.net i na Gumroadzie.',
     'home.link_pub_nefro_baza' => 'SK Nefro Báza 1 (nefro.polascin.net)',
@@ -211,8 +211,8 @@ return [
     'home.link_nephrosite' => 'NephroSite (po słowacku)',
     'home.link_dialysis_bratislava' => 'Dializa w Bratysławie: Medimpax (po słowacku)',
     'home.link_impax_centres' => 'Ośrodki dializ IMPAX (po słowacku)',
-    'home.link_vital_2nd' => 'Vital Algorithm — wydanie 2. (Amazon)',
-    'home.link_vital_1st' => 'The Vital Algorithm — wydanie 1. (Amazon)',
+    'home.link_vital_2nd' => 'Vital Algorithm, wydanie 2. (Amazon)',
+    'home.link_vital_1st' => 'The Vital Algorithm, wydanie 1. (Amazon)',
     'home.contact_heading' => 'Kontakt',
     'home.contact_intro' => 'W sprawie współpracy specjalistycznej, wykładu, tłumaczenia medycznego lub projektu cyfrowego wyślij mi wiadomość. Ten kontakt nie jest przeznaczony do pilnych pytań medycznych.',
     'home.contact_cta' => 'Otwórz formularz kontaktowy',
@@ -232,7 +232,7 @@ return [
     'article.not_found_heading' => 'Nie znaleziono artykułu',
     'article.not_found_text' => 'Żądany artykuł nie istnieje lub nie został opublikowany.',
     'article.back_to_list' => 'Powrót do artykułów',
-    'article.admin_preview' => 'Podgląd administratora — ten artykuł nie jest jeszcze publicznie dostępny.',
+    'article.admin_preview' => 'Podgląd administratora: ten artykuł nie jest jeszcze publicznie dostępny.',
     'article.available_in' => 'Dostępne także w językach:',
 
     // Formularz kontaktowy

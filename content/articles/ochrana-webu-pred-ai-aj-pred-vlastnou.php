@@ -32,7 +32,7 @@ return [
         'sk' => [
             'title' => 'Ako som ochránil svoj web pred umelou inteligenciou. Aj pred tou vlastnou.',
             'image_alt' => 'Nočný digitálny vchod: fialovo-tyrkysová brána blokuje siluety AI agentov aj majiteľa webu pred žiariacimi stránkami článkov; bez čitateľného textu.',
-            'excerpt' => 'Na nefro.polascin.net som nasadil ochranu pred hromadným sťahovaním obsahu na tréning AI. Potom som poveril vlastného agenta, aby stiahol moje články na e-knihu. Ochrana fungovala — aj proti mne.',
+            'excerpt' => 'Na nefro.polascin.net som nasadil ochranu pred hromadným sťahovaním obsahu na tréning AI. Potom som poveril vlastného agenta, aby stiahol moje články na e-knihu. Ochrana fungovala, aj proti mne.',
             'content' => <<<'HTML'
 <p>Pred pár dňami som na <a href="https://nefro.polascin.net/">nefro.polascin.net</a> implementoval ochranu pred automatizovaným sťahovaním obsahu a zberom textov na tréning umelej inteligencie. Na portáli zverejňujem odborné články, venujem im čas a nechcem, aby si ich každý okoloidúci robot bez opýtania odniesol vo veľkom.</p>
 <p>Rozumné rozhodnutie. Aspoň do dnešného rána.</p>
@@ -65,7 +65,7 @@ HTML,
         'en' => [
             'title' => 'How I protected my site from artificial intelligence. Including my own.',
             'image_alt' => 'A night digital doorway: a violet-teal gate blocks AI-agent silhouettes and the site owner from glowing article pages; no readable text.',
-            'excerpt' => 'I added protection against bulk content scraping for AI training on nefro.polascin.net. Then I asked my own agent to download my articles for an ebook. The guard worked — against me too.',
+            'excerpt' => 'I added protection against bulk content scraping for AI training on nefro.polascin.net. Then I asked my own agent to download my articles for an ebook. The guard worked, against me too.',
             'content' => <<<'HTML'
 <p>A few days ago I implemented protection against automated content downloading and text harvesting for AI training on <a href="https://nefro.polascin.net/">nefro.polascin.net</a>. I publish specialist articles there, I invest time in them, and I do not want every passing robot to carry them off in bulk without asking.</p>
 <p>A sensible decision. At least until this morning.</p>
@@ -98,7 +98,7 @@ HTML,
         'cs' => [
             'title' => 'Jak jsem ochránil svůj web před umělou inteligencí. I před tou vlastní.',
             'image_alt' => 'Noční digitální vchod: fialovo-tyrkysová brána blokuje siluety AI agentů i majitele webu před zářícími stránkami článků; bez čitelného textu.',
-            'excerpt' => 'Na nefro.polascin.net jsem nasadil ochranu před hromadným stahováním obsahu na trénování AI. Pak jsem pověřil vlastního agenta, aby stáhl mé články na e-knihu. Ochrana fungovala — i proti mně.',
+            'excerpt' => 'Na nefro.polascin.net jsem nasadil ochranu před hromadným stahováním obsahu na trénování AI. Pak jsem pověřil vlastního agenta, aby stáhl mé články na e-knihu. Ochrana fungovala, i proti mně.',
             'content' => <<<'HTML'
 <p>Před pár dny jsem na <a href="https://nefro.polascin.net/">nefro.polascin.net</a> implementoval ochranu před automatizovaným stahováním obsahu a sběrem textů na trénování umělé inteligence. Na portálu zveřejňuji odborné články, věnuji jim čas a nechci, aby si je každý kolemjdoucí robot bez otázání odnesl ve velkém.</p>
 <p>Rozumné rozhodnutí. Aspoň do dnešního rána.</p>
@@ -131,7 +131,7 @@ HTML,
         'de' => [
             'title' => 'Wie ich meine Website vor künstlicher Intelligenz schützte. Auch vor der eigenen.',
             'image_alt' => 'Nächtlicher digitaler Eingang: ein violett-türkises Tor blockiert KI-Agenten-Silhouetten und den Website-Besitzer vor leuchtenden Artikelseiten; kein lesbarer Text.',
-            'excerpt' => 'Auf nefro.polascin.net habe ich Schutz vor Massen-Scraping für KI-Training eingeführt. Dann beauftragte ich meinen eigenen Agenten, meine Artikel für ein E-Book zu laden. Der Schutz wirkte — auch gegen mich.',
+            'excerpt' => 'Auf nefro.polascin.net habe ich Schutz vor Massen-Scraping für KI-Training eingeführt. Dann beauftragte ich meinen eigenen Agenten, meine Artikel für ein E-Book zu laden. Der Schutz wirkte, auch gegen mich.',
             'content' => <<<'HTML'
 <p>Vor wenigen Tagen habe ich auf <a href="https://nefro.polascin.net/">nefro.polascin.net</a> einen Schutz vor automatisiertem Herunterladen von Inhalten und Textsammlung für das Training künstlicher Intelligenz implementiert. Auf dem Portal veröffentliche ich Fachartikel, investiere Zeit und will nicht, dass jeder vorbeikommende Roboter sie ungefragt in großem Stil mitnimmt.</p>
 <p>Eine vernünftige Entscheidung. Zumindest bis heute Morgen.</p>
@@ -164,7 +164,7 @@ HTML,
         'fr' => [
             'title' => 'Comment j’ai protégé mon site contre l’intelligence artificielle. Y compris la mienne.',
             'image_alt' => 'Entrée numérique nocturne : une porte violet-turquoise bloque des silhouettes d’agents IA et le propriétaire du site devant des pages d’articles lumineuses ; aucun texte lisible.',
-            'excerpt' => 'Sur nefro.polascin.net j’ai déployé une protection contre le téléchargement massif pour l’entraînement de l’IA. Puis j’ai chargé mon propre agent de télécharger mes articles pour un ebook. La garde a fonctionné — contre moi aussi.',
+            'excerpt' => 'Sur nefro.polascin.net j’ai déployé une protection contre le téléchargement massif pour l’entraînement de l’IA. Puis j’ai chargé mon propre agent de télécharger mes articles pour un ebook. La garde a fonctionné, contre moi aussi.',
             'content' => <<<'HTML'
 <p>Il y a quelques jours, j’ai mis en place sur <a href="https://nefro.polascin.net/">nefro.polascin.net</a> une protection contre le téléchargement automatisé de contenus et la collecte de textes pour l’entraînement de l’intelligence artificielle. Sur le portail je publie des articles spécialisés, j’y consacre du temps, et je ne veux pas que chaque robot de passage les emporte en masse sans demander.</p>
 <p>Une décision raisonnable. Du moins jusqu’à ce matin.</p>
@@ -197,7 +197,7 @@ HTML,
         'es' => [
             'title' => 'Cómo protegí mi web de la inteligencia artificial. También de la mía.',
             'image_alt' => 'Entrada digital nocturna: una puerta violeta-turquesa bloquea siluetas de agentes de IA y al dueño del sitio ante páginas de artículos luminosas; sin texto legible.',
-            'excerpt' => 'En nefro.polascin.net desplegué protección contra la descarga masiva de contenido para entrenar IA. Luego encargué a mi propio agente que bajara mis artículos para un ebook. La guarda funcionó — también contra mí.',
+            'excerpt' => 'En nefro.polascin.net desplegué protección contra la descarga masiva de contenido para entrenar IA. Luego encargué a mi propio agente que bajara mis artículos para un ebook. La guarda funcionó, también contra mí.',
             'content' => <<<'HTML'
 <p>Hace unos días implementé en <a href="https://nefro.polascin.net/">nefro.polascin.net</a> una protección contra la descarga automatizada de contenidos y la recolección de textos para el entrenamiento de inteligencia artificial. En el portal publico artículos especializados, les dedico tiempo y no quiero que cualquier robot de paso se los lleve a lo grande sin pedir permiso.</p>
 <p>Una decisión razonable. Al menos hasta esta mañana.</p>
@@ -230,7 +230,7 @@ HTML,
         'pl' => [
             'title' => 'Jak ochroniłem swoją stronę przed sztuczną inteligencją. Także przed własną.',
             'image_alt' => 'Nocne cyfrowe wejście: fioletowo-turkusowa brama blokuje sylwetki agentów AI i właściciela strony przed świecącymi stronami artykułów; bez czytelnego tekstu.',
-            'excerpt' => 'Na nefro.polascin.net wdrożyłem ochronę przed masowym pobieraniem treści do trenowania AI. Potem zleciłem własnemu agentowi pobranie moich artykułów na e-book. Ochrona zadziałała — także przeciwko mnie.',
+            'excerpt' => 'Na nefro.polascin.net wdrożyłem ochronę przed masowym pobieraniem treści do trenowania AI. Potem zleciłem własnemu agentowi pobranie moich artykułów na e-book. Ochrona zadziałała, także przeciwko mnie.',
             'content' => <<<'HTML'
 <p>Kilka dni temu wdrożyłem na <a href="https://nefro.polascin.net/">nefro.polascin.net</a> ochronę przed automatycznym pobieraniem treści i zbieraniem tekstów do trenowania sztucznej inteligencji. Na portalu publikuję artykuły specjalistyczne, poświęcam im czas i nie chcę, by każdy mijający robot zabierał je masowo bez pytania.</p>
 <p>Rozsądna decyzja. Przynajmniej do dzisiejszego rana.</p>
@@ -263,7 +263,7 @@ HTML,
         'hu' => [
             'title' => 'Hogyan védtem meg a webemet a mesterséges intelligenciától. A sajátomtól is.',
             'image_alt' => 'Éjszakai digitális bejárat: lila-türkiz kapu blokkolja az AI-ügynök sziluetteket és a web tulajdonosát a fényes cikkoldalak előtt; nincs olvasható szöveg.',
-            'excerpt' => 'A nefro.polascin.net-en védelmet vezettem be a tartalom tömeges letöltése ellen az AI-tréninghez. Aztán saját ügynökömet bíztam meg, hogy töltse le a cikkeimet e-könyvhöz. A védelem működött — ellenem is.',
+            'excerpt' => 'A nefro.polascin.net-en védelmet vezettem be a tartalom tömeges letöltése ellen az AI-tréninghez. Aztán saját ügynökömet bíztam meg, hogy töltse le a cikkeimet e-könyvhöz. A védelem működött, ellenem is.',
             'content' => <<<'HTML'
 <p>Néhány napja a <a href="https://nefro.polascin.net/">nefro.polascin.net</a>-en védelmet vezettem be a tartalom automatizált letöltése és a szövegek mesterségesintelligencia-tréninghez való gyűjtése ellen. A portálon szakcikkeket teszek közzé, időt fordítok rájuk, és nem akarom, hogy minden arra járó robot kérdezés nélkül nagyban elvigye őket.</p>
 <p>Ésszerű döntés. Legalábbis a mai reggelig.</p>
@@ -296,7 +296,7 @@ HTML,
         'it' => [
             'title' => 'Come ho protetto il mio sito dall’intelligenza artificiale. Anche dalla mia.',
             'image_alt' => 'Ingresso digitale notturno: un cancello viola-turchese blocca silhouettes di agenti IA e il proprietario del sito davanti a pagine di articoli luminose; nessun testo leggibile.',
-            'excerpt' => 'Su nefro.polascin.net ho messo una protezione contro il download massivo di contenuti per l’addestramento dell’IA. Poi ho incaricato il mio agente di scaricare i miei articoli per un ebook. La guardia ha funzionato — anche contro di me.',
+            'excerpt' => 'Su nefro.polascin.net ho messo una protezione contro il download massivo di contenuti per l’addestramento dell’IA. Poi ho incaricato il mio agente di scaricare i miei articoli per un ebook. La guardia ha funzionato, anche contro di me.',
             'content' => <<<'HTML'
 <p>Qualche giorno fa ho implementato su <a href="https://nefro.polascin.net/">nefro.polascin.net</a> una protezione contro il download automatizzato di contenuti e la raccolta di testi per l’addestramento dell’intelligenza artificiale. Sul portale pubblico articoli specialistici, ci investo tempo e non voglio che ogni robot di passaggio se li porti via in massa senza chiedere.</p>
 <p>Una decisione ragionevole. Almeno fino a stamattina.</p>
@@ -329,7 +329,7 @@ HTML,
         'uk' => [
             'title' => 'Як я захистив свій сайт від штучного інтелекту. І від власного теж.',
             'image_alt' => 'Нічний цифровий вхід: фіолетово-бірюзова брама блокує силуети AI-агентів і власника сайту перед сяючими сторінками статей; без читабельного тексту.',
-            'excerpt' => 'На nefro.polascin.net я впровадив захист від масового звантаження контенту для тренування ШІ. Потім доручив власному агенту звантажити мої статті для е-книги. Захист спрацював — і проти мене.',
+            'excerpt' => 'На nefro.polascin.net я впровадив захист від масового звантаження контенту для тренування ШІ. Потім доручив власному агенту звантажити мої статті для е-книги. Захист спрацював, і проти мене.',
             'content' => <<<'HTML'
 <p>Кілька днів тому на <a href="https://nefro.polascin.net/">nefro.polascin.net</a> я впровадив захист від автоматизованого звантаження контенту та збору текстів для тренування штучного інтелекту. На порталі публікую фахові статті, витрачаю на них час і не хочу, щоб кожен побіжний робот без дозволу забирав їх масово.</p>
 <p>Розумне рішення. Принаймні до сьогоднішнього ранку.</p>
@@ -350,8 +350,8 @@ HTML,
 <p>Лише я тим часом наказав собі дві речі, які взаємно виключаються.</p>
 <p>Спочатку: «Не дозволяй роботам масово звантажувати мої статті.»</p>
 <p>За кілька днів: «Роботе, звантаж мені масово мої статті.»</p>
-<p>Сайт не мав підстав вигадувати недоговорену додатку: «Але цей — мій.»</p>
-<p>З сьогоднішнього ранку я отже виношу цілком практичний урок. Якщо хочу захищати публічний сайт від небажаного збору контенту і водночас користуватися власними агентами, мушу підготувати їм окремий, авторизований спосіб доступу. Наприклад експорт статей, де не треба вдавати, що мій помічник — випадковий відвідувач інтернету.</p>
+<p>Сайт не мав підстав вигадувати недоговорену додатку: «Але цей є моїм.»</p>
+<p>З сьогоднішнього ранку я отже виношу цілком практичний урок. Якщо хочу захищати публічний сайт від небажаного збору контенту і водночас користуватися власними агентами, мушу підготувати їм окремий, авторизований спосіб доступу. Наприклад експорт статей, де не треба вдавати, що мій помічник є випадковим відвідувачем інтернету.</p>
 <p>Не вимикати захист. Додати відсутні двері.</p>
 <p>Поки що маю принаймні підтвердження, що мій цифровий швейцар не зважає на знайомства.</p>
 <p>Навіть коли приходить власник.</p>

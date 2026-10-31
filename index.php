@@ -57,8 +57,8 @@ $structuredData = [
     ],
 ];
 
-// Na domovskej stránke nesie titulok meno a odbornosť, nie slovo „Domov“ —
-// to vo výsledkoch vyhľadávania nič nehovorí.
+// Na domovskej stránke nesie titulok meno a odbornosť, nie slovo „Domov“,
+// lebo to vo výsledkoch vyhľadávania nič nehovorí.
 $pageTitle = t('common.author') . ' | ' . t('meta.home_tagline');
 $seoDescription = t('meta.default_description');
 $canonicalUrl = absoluteLangUrl($lang, 'index.php');
@@ -154,7 +154,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
           <div class="about-actions">
             <a href="https://books.polascin.net/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><?= te('home.books_cta') ?></a>
             <a href="https://www.amazon.com/stores/author/B07PN436VJ/about" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"><?= te('home.amazon_cta') ?></a>
-            <?php // Pseudonym je vlastné meno, neprekladá sa — kľúč v katalógoch netreba. ?>
+            <?php // Pseudonym je vlastné meno, neprekladá sa, kľúč v katalógoch netreba. ?>
             <a href="https://www.amazon.com/stores/Walter-Kyo-Csoelle/author/B0G2TCCJZZ" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">Walter Kyo Csoelle (Amazon)</a>
           </div>
         </div>

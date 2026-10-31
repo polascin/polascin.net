@@ -53,7 +53,7 @@ return [
 <h2>Ako to zvyčajne pokračuje</h2>
 <ol>
 <li><strong>Prvý e-mail.</strong> Lichôtka a otázka, či chcete ukážku. Žiadna cena. Cítite sa videní.</li>
-<li><strong>Druhý e-mail, ak odpoviete.</strong> Príde „concept sample“, často rýchle video nízkej kvality, a ponuka plnej produkcie. Tu sa objaví suma — stovky až tisíce dolárov.</li>
+<li><strong>Druhý e-mail, ak odpoviete.</strong> Príde „concept sample“, často rýchle video nízkej kvality, a ponuka plnej produkcie. Tu sa objaví suma: stovky až tisíce dolárov.</li>
 <li><strong>Ďalšie správy.</strong> Môžu prísť žiadosti o prístup k sociálnym sieťam, k účtu KDP alebo o ďalšie „marketingové“ služby. Bell to zhrnul takto: cieľom „good fit“ je dostať peniaze <em>a</em> prístup ku KDP účtu.</li>
 </ol>
 <p>Pod menom z podpisu som nenašiel produkciu, IMDb ani portfólio trailera. To nie je totožnosť overená z Facebooku. Je to absencia akejkoľvek profesionálnej stopy. Writer Beware túto vlnu marketingových a produkčných podvodov sleduje ako masovú a stále sa meniacu; časť z nej viaže na operátorov z Nigérie, bez toho, aby jeden Gmail dokazoval konkrétneho človeka.</p>
@@ -92,7 +92,7 @@ HTML,
 <h2>How it usually continues</h2>
 <ol>
 <li><strong>Email one.</strong> Flattery and a question about whether you want a sample. No price. You feel seen.</li>
-<li><strong>Email two, if you reply.</strong> A “concept sample” arrives, often a quick low-quality video, plus an offer of full production. The sum appears here — hundreds to thousands of dollars.</li>
+<li><strong>Email two, if you reply.</strong> A “concept sample” arrives, often a quick low-quality video, plus an offer of full production. The sum appears here: hundreds to thousands of dollars.</li>
 <li><strong>Later messages.</strong> Requests may follow for access to social accounts, a KDP account, or further “marketing” services. Bell put it this way: the goal of the “good fit” is to get the money <em>and</em> access to the KDP account.</li>
 </ol>
 <p>Under the name in the signature I found no production company, no IMDb, and no trailer portfolio. That is not an identity verified from Facebook. It is the absence of any professional trace. Writer Beware tracks this wave of marketing and production scams as massive and still changing; it ties part of the wave to operators in Nigeria, without one Gmail proving a specific person.</p>
@@ -131,7 +131,7 @@ HTML,
 <h2>Jak to obvykle pokračuje</h2>
 <ol>
 <li><strong>První e-mail.</strong> Lichotka a otázka, jestli chcete ukázku. Žádná cena. Cítíte se viděni.</li>
-<li><strong>Druhý e-mail, pokud odpovíte.</strong> Přijde „concept sample“, často rychlé video nízké kvality, a nabídka plné produkce. Tady se objeví suma — stovky až tisíce dolarů.</li>
+<li><strong>Druhý e-mail, pokud odpovíte.</strong> Přijde „concept sample“, často rychlé video nízké kvality, a nabídka plné produkce. Tady se objeví suma: stovky až tisíce dolarů.</li>
 <li><strong>Další zprávy.</strong> Mohou přijít žádosti o přístup k sociálním sítím, k účtu KDP nebo o další „marketingové“ služby. Bell to shrnul takto: cílem „good fit“ je dostat peníze <em>a</em> přístup ke KDP účtu.</li>
 </ol>
 <p>Pod jménem z podpisu jsem nenašel produkci, IMDb ani portfolio traileru. To není totožnost ověřená z Facebooku. Je to absence jakékoli profesionální stopy. Writer Beware tuto vlnu marketingových a produkčních podvodů sleduje jako masovou a stále se měnící; část z ní váže na operátory z Nigérie, aniž by jeden Gmail dokazoval konkrétního člověka.</p>
@@ -170,7 +170,7 @@ HTML,
 <h2>Wie es gewöhnlich weitergeht</h2>
 <ol>
 <li><strong>Erste E-Mail.</strong> Schmeichelei und die Frage, ob Sie eine Probe wollen. Kein Preis. Sie fühlen sich gesehen.</li>
-<li><strong>Zweite E-Mail, wenn Sie antworten.</strong> Eine „concept sample“ kommt, oft ein schnelles Video geringer Qualität, plus das Angebot einer vollen Produktion. Hier erscheint die Summe — Hunderte bis Tausende Dollar.</li>
+<li><strong>Zweite E-Mail, wenn Sie antworten.</strong> Eine „concept sample“ kommt, oft ein schnelles Video geringer Qualität, plus das Angebot einer vollen Produktion. Hier erscheint die Summe: Hunderte bis Tausende Dollar.</li>
 <li><strong>Weitere Nachrichten.</strong> Es können Bitten um Zugang zu sozialen Netzen, zum KDP-Konto oder um weitere „Marketing“-Dienste folgen. Bell fasste es so: Das Ziel des „good fit“ ist das Geld <em>und</em> der Zugang zum KDP-Konto.</li>
 </ol>
 <p>Unter dem Namen in der Signatur fand ich keine Produktion, kein IMDb und kein Trailer-Portfolio. Das ist keine über Facebook geprüfte Identität. Es ist das Fehlen jeder professionellen Spur. Writer Beware verfolgt diese Welle von Marketing- und Produktionsbetrug als massenhaft und weiter wandelbar; einen Teil bindet sie an Betreiber in Nigeria, ohne dass eine Gmail-Adresse eine bestimmte Person beweist.</p>
@@ -209,7 +209,7 @@ HTML,
 <h2>Comment cela continue d’habitude</h2>
 <ol>
 <li><strong>Premier e-mail.</strong> Flatterie et question : voulez-vous un échantillon ? Pas de prix. On se sent vu.</li>
-<li><strong>Deuxième e-mail, si vous répondez.</strong> Arrive un « concept sample », souvent une vidéo rapide de faible qualité, plus une offre de production complète. La somme apparaît ici — des centaines à des milliers de dollars.</li>
+<li><strong>Deuxième e-mail, si vous répondez.</strong> Arrive un « concept sample », souvent une vidéo rapide de faible qualité, plus une offre de production complète. La somme apparaît ici : des centaines à des milliers de dollars.</li>
 <li><strong>Messages suivants.</strong> Peuvent suivre des demandes d’accès aux réseaux, au compte KDP, ou d’autres services de « marketing ». Bell le résume ainsi : le but du « good fit » est l’argent <em>et</em> l’accès au compte KDP.</li>
 </ol>
 <p>Sous le nom de la signature, je n’ai trouvé ni production, ni IMDb, ni portfolio de trailers. Ce n’est pas une identité vérifiée sur Facebook. C’est l’absence de toute trace professionnelle. Writer Beware suit cette vague d’arnaques marketing et de production comme massive et encore changeante ; une part est liée à des opérateurs au Nigeria, sans qu’un Gmail prouve une personne précise.</p>
@@ -287,7 +287,7 @@ HTML,
 <h2>Jak to zwykle idzie dalej</h2>
 <ol>
 <li><strong>Pierwszy e-mail.</strong> Pochlebstwo i pytanie, czy chcecie próbkę. Bez ceny. Czujecie się zauważeni.</li>
-<li><strong>Drugi e-mail, jeśli odpowiecie.</strong> Przychodzi „concept sample”, często szybkie wideo niskiej jakości, i oferta pełnej produkcji. Tu pojawia się kwota — setki do tysięcy dolarów.</li>
+<li><strong>Drugi e-mail, jeśli odpowiecie.</strong> Przychodzi „concept sample”, często szybkie wideo niskiej jakości, i oferta pełnej produkcji. Tu pojawia się kwota: setki do tysięcy dolarów.</li>
 <li><strong>Kolejne wiadomości.</strong> Mogą prosić o dostęp do mediów społecznościowych, do konta KDP albo o dalsze usługi „marketingowe”. Bell ujął to tak: celem „good fit” są pieniądze <em>i</em> dostęp do konta KDP.</li>
 </ol>
 <p>Pod nazwiskiem z podpisu nie znalazłem produkcji, IMDb ani portfolio trailera. To nie jest tożsamość sprawdzona na Facebooku. To brak jakiegokolwiek śladu zawodowego. Writer Beware śledzi tę falę oszustw marketingowych i produkcyjnych jako masową i wciąż zmienną; część wiąże z operatorami z Nigerii, bez tego, by jeden Gmail dowodził konkretnej osoby.</p>
@@ -326,7 +326,7 @@ HTML,
 <h2>Hogyan folytatódik általában</h2>
 <ol>
 <li><strong>Első e-mail.</strong> Hízelgés és a kérdés, kell-e minta. Nincs ár. Úgy érzi, észrevették.</li>
-<li><strong>Második e-mail, ha válaszol.</strong> Jön egy „concept sample”, gyakran gyors, gyenge videó, és a teljes gyártás ajánlata. Itt jelenik meg az összeg — százaktól ezrekig dollárban.</li>
+<li><strong>Második e-mail, ha válaszol.</strong> Jön egy „concept sample”, gyakran gyors, gyenge videó, és a teljes gyártás ajánlata. Itt jelenik meg az összeg: százaktól ezrekig dollárban.</li>
 <li><strong>További üzenetek.</strong> Jöhet kérés közösségi fiókokhoz, KDP-fiókhoz vagy további „marketing” szolgáltatásokhoz. Bell így foglalta össze: a „good fit” célja a pénz <em>és</em> a KDP-fiók elérése.</li>
 </ol>
 <p>Az aláírásban álló név alatt nem találtam gyártót, IMDb-t vagy trailer-portfóliót. Ez nem Facebookon ellenőrzött személyazonosság. Bármilyen szakmai nyom hiánya. A Writer Beware ezt a marketing- és gyártási csaláshullámot tömegesnek és változónak követi; egy részét nigériai üzemeltetőkhöz köti, anélkül hogy egy Gmail konkrét embert bizonyítana.</p>
@@ -386,26 +386,26 @@ HTML,
             'image_alt' => 'Нічний письмовий стіл: відкрита книга, ноутбук і бірюзова голографічна постать, що витягає з конверта світну кінострічку.',
             'excerpt' => 'Непроханий лист з адреси gbabalola@gmail.com повторив публічні деталі з синопсису книжки й запропонував зразок book trailer «без тиску». Writer Beware і Author Academy описують той самий шаблон. Не відповідайте.',
             'content' => <<<'HTML'
-<p>Мені надійшов лист із пропозицією book trailer. Відправник підписався як Gabriel Babalola, адреса — <em>gbabalola@gmail.com</em>. Він писав, що книжка його зачепила, назвав Яну Бравцову, VITAL-7, Social Utility Score і мотив «glitch = вбивство» та спитав, чи надіслати зразок. Тон був м’який: лише показати, жодного тиску.</p>
+<p>Мені надійшов лист із пропозицією book trailer. Відправник підписався як Gabriel Babalola, адреса: <em>gbabalola@gmail.com</em>. Він писав, що книжка його зачепила, назвав Яну Бравцову, VITAL-7, Social Utility Score і мотив «glitch = вбивство» та спитав, чи надіслати зразок. Тон був м’який: лише показати, жодного тиску.</p>
 <p>Це звучало як кінематографіст, який прочитав книжку. Він ним не був.</p>
 <p>Ці деталі публічні. Вони стоять у синопсисі на Amazon KDP і на Substack. Модель їх ковтає і повертає лист, ніби хтось тримав книжку в руці. Жодного розділу, якого не витягнути з анотації. Жодного сайту, портфоліо, IMDb, домену продакшену. Ім’я і Gmail.</p>
-<p>У вересні мені надійшов <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">схожий улесливий лист про книжку</a>. Цього разу гачок — book trailer. Шаблон той самий.</p>
+<p>У вересні мені надійшов <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">схожий улесливий лист про книжку</a>. Цього разу гачок: book trailer. Шаблон той самий.</p>
 <h2>Що в листі не сходиться</h2>
 <ol>
-<li><strong>Gmail замість компанії.</strong> <a href="https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/">Victoria Strauss (Writer Beware, 28 серпня 2026)</a> пише, що пряме звернення продакшен-компанії — це «one of the least likely things ever to happen to you as a writer». Якби це справді сталося, лист прийшов би з корпоративного домену, не з Gmail.</li>
+<li><strong>Gmail замість компанії.</strong> <a href="https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/">Victoria Strauss (Writer Beware, 28 серпня 2026)</a> пише, що пряме звернення продакшен-компанії є «one of the least likely things ever to happen to you as a writer». Якби це справді сталося, лист прийшов би з корпоративного домену, не з Gmail.</li>
 <li><strong>Лестощі з публічного тексту.</strong> Персоналізація не доводить, що хтось прочитав книжку. Author Academy у серпні 2026 нагадує: більшість таких деталей публічні, і ШІ складає з них переконливого листа.</li>
 <li><strong>Непроханий холодний контакт.</strong> Самвидав і Голлівуд так не зустрічаються. Strauss називає це однією з найменш імовірних речей для автора.</li>
 <li><strong>«Надіслати вам зразок?»</strong> Перший лист не просить грошей. Writer Beware називає це підходом вареної жаби: «they ease you gently toward the actual money ask over the course of multiple emails.»</li>
 <li><strong>Підпис «Warm regards».</strong> Те саме завершення цитує <a href="https://killzoneblog.com/2025/08/your-book-deserves-to-reach-a-larger-audience.html">James Scott Bell (17 серпня 2025)</a> в листах ШІ, які обіцяють більшу авдиторію і не мають сайту.</li>
 <li><strong>Жодних перевірюваних кредитів.</strong> Справжній кінематографіст надішле IMDb, Vimeo, сайт продакшену й авторів, яким можна зателефонувати. Тут цього немає.</li>
 <li><strong>Кут book trailer.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">Author Academy, пункт 8</a>: за кілька тисяч доларів приходить маркетинговий пакет із трейлером, який виглядає так, «ніби його зробили в обідню перерву».</li>
-<li><strong>Низький тиск.</strong> «Simply to show», «no pressure». Відповідь — не ввічливість. Це підтвердження, що скринька жива.</li>
+<li><strong>Низький тиск.</strong> «Simply to show», «no pressure». Відповідь не є ввічливістю. Це підтвердження, що скринька жива.</li>
 </ol>
 <h2>Як це зазвичай триває далі</h2>
 <ol>
 <li><strong>Перший лист.</strong> Лестощі й питання, чи хочете зразок. Без ціни. Ви почуваєтеся побаченими.</li>
-<li><strong>Другий лист, якщо відповісте.</strong> Надходить «concept sample», часто швидке відео низької якості, і пропозиція повної продукції. Тут з’являється сума — від сотень до тисяч доларів.</li>
-<li><strong>Наступні листи.</strong> Можуть просити доступ до соцмереж, до облікового запису KDP або подальші «маркетингові» послуги. Bell сформулював це так: мета «good fit» — гроші <em>і</em> доступ до облікового запису KDP.</li>
+<li><strong>Другий лист, якщо відповісте.</strong> Надходить «concept sample», часто швидке відео низької якості, і пропозиція повної продукції. Тут з’являється сума: від сотень до тисяч доларів.</li>
+<li><strong>Наступні листи.</strong> Можуть просити доступ до соцмереж, до облікового запису KDP або подальші «маркетингові» послуги. Bell сформулював це так: мета «good fit»: гроші <em>і</em> доступ до облікового запису KDP.</li>
 </ol>
 <p>Під ім’ям із підпису я не знайшов продакшену, IMDb чи портфоліо трейлерів. Це не особа, перевірена через Facebook. Це відсутність будь-якого професійного сліду. Writer Beware стежить за цією хвилею маркетингових і продакшен-шахрайств як за масовою і змінною; частину пов’язує з операторами в Нігерії, не стверджуючи, що один Gmail доводить конкретну людину.</p>
 <h2>Що робити</h2>
@@ -417,7 +417,7 @@ HTML,
 </ul>
 <p>Bell описав той самий шаблон у серпні 2025, а 28 серпня 2026 Strauss написала, що хвиля далі змінюється: продакшен-компанії, агенти, чужі мови. Бізнес на обсязі. Досить частки авторів.</p>
 <p>Цей лист я викинув. Якщо подібний надійшов вам, не відповідайте відправнику.</p>
-<p><em>Це особистий досвід, не юридична порада. Підозрілий лист повідомте поштовому провайдеру. Ім’я в підписі — те, що стояло в листі, а не доведена особа конкретної людини.</em></p>
+<p><em>Це особистий досвід, не юридична порада. Підозрілий лист повідомте поштовому провайдеру. Ім’я в підписі: те, що стояло в листі, а не доведена особа конкретної людини.</em></p>
 HTML,
         ],
     ],

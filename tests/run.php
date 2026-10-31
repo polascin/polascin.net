@@ -85,7 +85,7 @@ if ($originalRemoteAddress === null) {
     $_SERVER['REMOTE_ADDR'] = $originalRemoteAddress;
 }
 
-// Vstupy pre validátor hesiel — nie sú to prihlasovacie údaje k ničomu.
+// Vstupy pre validátor hesiel: nie sú to prihlasovacie údaje k ničomu.
 // Názvy sú zvolené tak, aby to bolo zrejmé aj skenerom tajomstiev.
 expectTrue(!isAppPasswordValid('Kratke1A'), 'Krátke heslo nesmie prejsť');
 expectTrue(isAppPasswordValid('TestovaciVstup1'), 'Silné heslo musí prejsť');
@@ -144,6 +144,26 @@ foreach (glob(dirname(__DIR__) . '/content/articles/*.php') ?: [] as $seedArticl
     }
 }
 expectSame('', $sanitizerTagProbe, 'Seed článku obsahuje značky, ktoré sanitizér zahodí');
+// Autor dlhé ani krátke pomlčky nepoužíva; publikovaný text, rozhranie
+// a šablóny ich nesmú obsahovať (Beh #55).
+$dashFiles = array_merge(
+    glob(dirname(__DIR__) . '/content/articles/*.php') ?: [],
+    glob(dirname(__DIR__) . '/lang/*.php') ?: [],
+    glob(dirname(__DIR__) . '/content/library/*/work.json') ?: [],
+    glob(dirname(__DIR__) . '/*.php') ?: [],
+    glob(dirname(__DIR__) . '/*.html') ?: []
+);
+$dashHits = [];
+foreach ($dashFiles as $dashFile) {
+    if (basename($dashFile) === 'deploy_info.php') {
+        continue; // generuje ho nasadenie, v gite nie je
+    }
+    $dashSource = (string) file_get_contents($dashFile);
+    if (str_contains($dashSource, "\u{2014}") || str_contains($dashSource, "\u{2013}")) {
+        $dashHits[] = basename(dirname($dashFile)) . '/' . basename($dashFile);
+    }
+}
+expectSame([], $dashHits, 'Obsah, preklady a šablóny nesmú obsahovať dlhú ani krátku pomlčku');
 $mercuryArticle = require dirname(__DIR__) . '/content/articles/mercury-claude-tri-ulohy-jeden-beh.php';
 foreach ($mercuryArticle['translations'] as $mercuryLang => $mercuryPayload) {
     expectSame(
@@ -221,7 +241,7 @@ try {
 expectTrue($nulPasswordError instanceof \Throwable, 'Heslo s NUL bajtom musí vyhodiť výnimku');
 expectTrue(
     !$nulPasswordError instanceof \InvalidArgumentException,
-    'Výnimka pri NUL bajte nie je InvalidArgumentException — catch musí byť širší'
+    'Výnimka pri NUL bajte nie je InvalidArgumentException: catch musí byť širší'
 );
 
 // --- Viacjazyčnosť ---
@@ -241,7 +261,7 @@ expectSame(null, languageFromAcceptHeader('en;q=0'), 'Váha q=0 znamená odmietn
 expectSame(null, languageFromAcceptHeader('*'), 'Zástupný znak sám o sebe nič neurčuje');
 expectSame(null, languageFromAcceptHeader(null), 'Chýbajúca hlavička nesmie nič vrátiť');
 
-// Návštevník, ktorého jazyk stránka nepozná, dostane angličtinu — nie slovenčinu,
+// Návštevník, ktorého jazyk stránka nepozná, dostane angličtinu, nie slovenčinu,
 // ktorá je iba zdrojovým jazykom katalógov (Beh #6).
 $originalDetectGet = $_GET;
 $originalDetectCookie = $_COOKIE;
@@ -383,11 +403,11 @@ foreach (['index.html', 'privacy.html', 'terms.html'] as $staticHeaderFile) {
 }
 
 // Dynamické stránky odvodzujú `?v=` z `filemtime()` v `head_meta.php`, statické
-// fallbacky ho majú napísaný ručne — a ten sa rozišiel s obsahom (Beh #25):
+// fallbacky ho majú napísaný ručne, a ten sa rozišiel s obsahom (Beh #25):
 // `css/styles.css` aj `js/main.js` niesli pin z 2026-07-29, hoci sa medzitým
 // zmenili, a `js/consent-default.js` nemal `?v=` vôbec. Fallback sa podáva práve
 // pri výpadku databázy, takže vtedy by vracajúci sa návštevník dostal týždne
-// starý CSS a JS z vlastnej cache — pri consent skripte s dopadom na GDPR.
+// starý CSS a JS z vlastnej cache, pri consent skripte s dopadom na GDPR.
 // Pin je preto skrátený hash obsahu a drží ho tento test.
 foreach (['css/styles.css', 'css/fonts.css', 'js/main.js', 'js/consent-default.js'] as $staticAsset) {
     $expectedAssetVersion = substr(hash_file('sha256', dirname(__DIR__) . '/' . $staticAsset), 0, 8);
@@ -589,7 +609,7 @@ expectTrue(
     'js/main.js musí synchronizovať --navbar-height s nameranou výškou navigácie'
 );
 
-// Swatch Internet Time: stotiny sa orezávajú nadol — zaokrúhlenie by na konci
+// Swatch Internet Time: stotiny sa orezávajú nadol. Zaokrúhlenie by na konci
 // dňa zobrazilo neplatné @1000.00 (beaty bežia od 0.00 po 999.99).
 expectSame('@41.66', appSwatchBeat(0), 'appSwatchBeat musí orezávať stotiny nadol');
 expectSame('@999.98', appSwatchBeat(82799), 'Posledná sekunda BMT dňa nesmie byť @1000.00');
@@ -738,7 +758,7 @@ expectTrue(
 );
 
 // `robots.txt` vymenúva administrátorské stránky po jednej a zoznam sa pri
-// pribudnutí `admin_users.php` (Beh #23) neaktualizoval — všimol si to až
+// pribudnutí `admin_users.php` (Beh #23) neaktualizoval. Všimol si to až
 // Beh #25. Indexovaná nebola, lebo `Disallow: /admin` ju pokryl prefixom,
 // ale stránka nazvaná inak by takto prepadla bez povšimnutia. Kontrola preto
 // nevychádza z názvu súboru, ale z toho, ktoré stránky žiadajú `requireAdmin()`,
@@ -800,7 +820,7 @@ foreach (['.vscode', '.claude', '.trunk', '.cursor', '.idea', '.agents'] as $loc
     );
 }
 
-// Súbory, ktoré sa kedysi nasadili, musia deploy skripty aj aktívne zmazať —
+// Súbory, ktoré sa kedysi nasadili, musia deploy skripty aj aktívne zmazať:
 // rsync --exclude ich na cieli pred --delete chráni, sám ich nezmaže.
 $deployShSource = (string) file_get_contents(dirname(__DIR__) . '/hooks/deploy.sh');
 foreach (['deploy.yml' => $deployWorkflow, 'hooks/deploy.sh' => $deployShSource] as $cleanupName => $cleanupSource) {
@@ -901,7 +921,7 @@ foreach (array_keys(appLanguages()) as $dialysisLinkLang) {
 // Predávané publikácie: katalóg z 2026-10-23 (nefro.polascin.net/publikacie.php
 // a profil polascin.gumroad.com, pole products v Inertia JSON). Pri audite sa
 // zoznam porovná so živou ponukou a pri zmene sa aktualizuje tu aj na stránke
-// — viď .audit.md, sekcia 7. Kontrola hľadá celý href, lebo kratší permalink
+// (viď .audit.md, sekcia 7). Kontrola hľadá celý href, lebo kratší permalink
 // je prefixom dlhšieho (sk-nefro-baza-1 vs -en, -de, -it a -kompendium).
 $soldPublicationLinks = [
     'https://nefro.polascin.net/publikacia.php?slug=sk-nefro-baza-1',
@@ -1025,7 +1045,7 @@ expectTrue(
 );
 
 // Katalógy smú obsahovať iba latinku a cyriliku. Zachytáva to znak, ktorý sa do
-// prekladu dostane omylom — pri ukrajinčine takto prešli dva čínske znaky (Beh #6).
+// prekladu dostane omylom: pri ukrajinčine takto prešli dva čínske znaky (Beh #6).
 foreach (array_keys(appLanguages()) as $scriptLang) {
     $scriptCatalogue = require dirname(__DIR__) . '/lang/' . $scriptLang . '.php';
     $foreignScript = [];
@@ -1054,7 +1074,7 @@ foreach (['i18n.php', 'lang_switcher.php'] as $guardedFile) {
     );
 }
 
-// Seedy článkov sa na server nasadzujú — `setup_db.php` ich tam potrebuje —
+// Seedy článkov sa na server nasadzujú (`setup_db.php` ich tam potrebuje),
 // takže sú to jediné interné PHP súbory vo web roote, ktoré pribúdajú pri
 // každom novom článku. Guard v nich zatiaľ držala len ruka autora: `.htaccess`
 // ho na OpenResty nezachráni a nový článok bez guardu by sa dal spustiť priamo.
@@ -1071,7 +1091,7 @@ foreach ($guardedArticleSeeds as $guardedSeedPath) {
 
 // To isté pre pomocné skripty: nie sú nasadené, ale guard je aj tu jediná
 // vrstva, ktorá funguje bez `.htaccess`. Kontrola ide cez glob, aby ju nový
-// skript získal automaticky — doteraz bol testovaný len generátor OG obálok.
+// skript získal automaticky. Doteraz bol testovaný len generátor OG obálok.
 $guardedScripts = glob(dirname(__DIR__) . '/scripts/*.php') ?: [];
 expectTrue($guardedScripts !== [], 'Adresár scripts musí obsahovať aspoň jeden skript na kontrolu guardu');
 foreach ($guardedScripts as $guardedScriptPath) {
@@ -1107,7 +1127,7 @@ foreach (array_keys(appLanguages()) as $switcherLang) {
     );
 }
 
-// Regresia: prepínač nesmie zahodiť parametre aktuálnej stránky — na
+// Regresia: prepínač nesmie zahodiť parametre aktuálnej stránky, na
 // newsletter.php by sa tým stratil jednorazový token.
 $originalGet = $_GET;
 $originalScript = $_SERVER['SCRIPT_NAME'] ?? null;
@@ -1126,7 +1146,7 @@ if ($originalScript === null) {
 }
 
 // Jazykové varianty (hreflang) sa musia odvodzovať z kanonickej URL, nie zo
-// `$_GET` — inak by klaster odkazoval na adresy s inou kanonickou URL (Beh #5).
+// `$_GET`, inak by klaster odkazoval na adresy s inou kanonickou URL (Beh #5).
 $homeAlternates = languageAlternatesFor('https://polascin.net/');
 expectSame('https://polascin.net/', $homeAlternates['sk'], 'Alternatíva pre predvolený jazyk je čistá adresa');
 expectSame('https://polascin.net/?lang=en', $homeAlternates['en'], 'Alternatíva pre cudzí jazyk nesie parameter lang');
@@ -1259,7 +1279,7 @@ foreach (array_keys(appLanguages()) as $monthLang) {
 }
 
 // hreflang x-default patrí jazyku, ktorý dostane návštevník s nepodporovaným
-// jazykom — musí byť teda odvodený od APP_FALLBACK_LANGUAGE (Beh #6).
+// jazykom: musí byť teda odvodený od APP_FALLBACK_LANGUAGE (Beh #6).
 $defaultCluster = languageAlternatesFor('https://polascin.net/');
 expectSame(
     'https://polascin.net/?lang=en',
@@ -1450,10 +1470,10 @@ expectSame([], $missingFromDoc, 'Prehľad projektu v .audit.md musí uvádzať k
 
 // Kontrola vyššie porovnáva zoznam katalógov, nie počty vypísané slovom. Bod
 // o `hreflang` v kontrolnom zozname preto prežil Beh #19 s tvrdením „šesť
-// jazykov“ až do Behu #25, hoci ich je desať — a kontrolný zoznam je zadaním
+// jazykov“ až do Behu #25, hoci ich je desať, a kontrolný zoznam je zadaním
 // ďalších behov, takže by budúci beh šesť odkazov pokladal za správny stav.
 // Kontroluje sa iba kontrolný zoznam: staršie „Beh #X“ sú záznamom toho, čo
-// v danom čase platilo, a prepisovať sa nesmú — vtedy jazykov naozaj bolo šesť.
+// v danom čase platilo, a prepisovať sa nesmú: vtedy jazykov naozaj bolo šesť.
 $checklistSection = '';
 if (preg_match('~\n## Kontrolný zoznam auditu\n(.*?)\n## ~s', $auditDoc, $checklistMatch) === 1) {
     $checklistSection = $checklistMatch[1];
@@ -1609,7 +1629,7 @@ expectSame(
     'EXPECTED_LANGUAGES v audit_db_check.php musí zodpovedať appLanguages()'
 );
 
-// Kontrola musí zostať read-only. Toto je hrubé sito nad zdrojom, nie dôkaz —
+// Kontrola musí zostať read-only. Toto je hrubé sito nad zdrojom, nie dôkaz:
 // skutočnú ochranu nesie `START TRANSACTION READ ONLY` a odporúčaný DB grant.
 foreach (['INSERT ', 'UPDATE ', 'DELETE ', 'DROP ', 'TRUNCATE ', 'ALTER ', 'REPLACE INTO'] as $writeKeyword) {
     expectTrue(
@@ -1623,11 +1643,11 @@ expectTrue(
 );
 
 // Report sa commituje do verejného repozitára. Názov databázy a presná verzia
-// servera doň nepatria — sú to práve tie údaje, ktoré útočníkovi chýbajú
+// servera doň nepatria: sú to práve tie údaje, ktoré útočníkovi chýbajú
 // k platnému prihláseniu, resp. k exploitu na konkrétnu patch verziu.
 expectTrue(
     !str_contains($dbCheckSource, 'SELECT DATABASE()'),
-    'audit_db_check.php nesmie čítať názov databázy — report je vo verejnom repozitári'
+    'audit_db_check.php nesmie čítať názov databázy: report je vo verejnom repozitári'
 );
 expectTrue(
     str_contains($dbCheckSource, '$serverMajorMinor') && !str_contains($dbCheckSource, '$rawVersion . '),
@@ -1851,7 +1871,7 @@ expectTrue(
     'Čistenie form_rate_limit sa nesmie vrátiť k obmedzeniu na jednu akciu'
 );
 // Prerezanie viazané len na `checkFormRateLimit()` sa na stránke s nulovou
-// prevádzkou formulárov nespustí nikdy — produkčná DB držala IP adresy 47 dní
+// prevádzkou formulárov nespustí nikdy: produkčná DB držala IP adresy 47 dní
 // (Beh #24, nález z nočnej kontroly DB). Zápis access logu beží pri každej
 // požiadavke, takže housekeeping musí visieť aj na ňom.
 expectTrue(
@@ -1926,7 +1946,7 @@ foreach (['scripts', 'audit-reports'] as $auditOnlyDir) {
 // `.deployignore` a aktívne mazanie v deploy skriptoch sú len jedna vrstva.
 // `.cursor/rules/*.mdc` sa raz nasadiť podarilo (Beh #18), takže predpoklad
 // „v web roote to nikdy nebude“ už raz neplatil. `.htaccess` preto musí každý
-// interný adresár blokovať aj vtedy, keď tam súbory sú — inak smoke check
+// interný adresár blokovať aj vtedy, keď tam súbory sú, inak smoke check
 // hlási 404 z neprítomnosti, nie 403 zo zákazu. Zoznam v `.htaccess` sa nesmie
 // rozísť s tým, čo je interné (Beh #29).
 $internalWebRootDirs = [
@@ -1969,7 +1989,7 @@ expectTrue(
 );
 
 // Interné cesty, ktoré vznikli až pre nočný audit, musí smoke check overovať
-// rovnako ako `.cursor/rules/*.mdc` — inak by ich nasadenie nikto nezachytil.
+// rovnako ako `.cursor/rules/*.mdc`, inak by ich nasadenie nikto nezachytil.
 // Beh #31: knižnica textov ukladá nahraté súbory do `private/library/`
 // a nasadené do `content/library/`. Čítať sa smú len cez `library_file.php`;
 // priamy prístup by HTML súbor podal ako stránku v pôvode webu. Sonda na
@@ -1993,7 +2013,7 @@ foreach (['/scripts/audit_db_check.php', '/audit-reports/db-latest.md'] as $audi
     );
 }
 
-// robots.txt má interné adresáre zakazovať rovnako ako content/ a private/ —
+// robots.txt má interné adresáre zakazovať rovnako ako content/ a private/:
 // nie je to bezpečnostná vrstva, ale zoznam sa nemá rozchádzať s realitou.
 foreach (['/scripts/', '/audit-reports/', '/.cursor/'] as $robotsPath) {
     expectTrue(
@@ -2102,7 +2122,7 @@ expectTrue(
 
 // Nočná kontrola sa musí spustiť pred behom auditnej rutiny (00:00 UTC), inak
 // rutina číta report z predchádzajúceho dňa. Samotné „pred polnocou“ nestačí:
-// GitHub plánované behy odkladá aj o ~2 h (behy #5–#7 štartovali 01:27–01:45
+// GitHub plánované behy odkladá aj o ~2 h (behy #5 až #7 štartovali 01:27 až 01:45
 // UTC namiesto 23:50), preto sa vyžaduje rezerva aspoň 2 hodiny (Beh #24).
 // Nočné úlohy bežia v crontabe servera, nie v GitHub Actions (Beh #49).
 // Server je v Europe/Bratislava, rutina štartuje o 03:10 miestneho času.
@@ -2249,7 +2269,7 @@ foreach ($articleSeedFiles as $articleSeedPath) {
     expectTrue(
         $seedPublishedAt instanceof DateTimeImmutable
             && $seedPublishedAt <= new DateTimeImmutable('now', new DateTimeZone('Europe/Bratislava')),
-        "{$articleFile} musí mať published_at vo formáte Y-m-d H:i:s a nie v budúcnosti — inak ho verejné stránky po nasadení skryjú"
+        "{$articleFile} musí mať published_at vo formáte Y-m-d H:i:s a nie v budúcnosti, inak ho verejné stránky po nasadení skryjú"
     );
 }
 expectTrue(
@@ -2297,7 +2317,7 @@ expectTrue(
 // a `image_alt` a seeder ich plní vo všetkých desiatich jazykoch, ale čítacia
 // cesta ich nevyberala. Obálka sa preto našla len vďaka tomu, že sa súbor volá
 // rovnako ako slug, a jazykovo špecifický alt text (aj `og:image:alt`) sa nikdy
-// nepoužil — namiesto neho sa opakoval titulok článku. Rovnaký vzor drift ako
+// nepoužil: namiesto neho sa opakoval titulok článku. Rovnaký vzor drift ako
 // „stĺpec je v schéme, ale nie v SELECTe“ stráži tento test v oboch smeroch.
 $helpersSource = (string) file_get_contents(dirname(__DIR__) . '/helpers.php');
 expectTrue(
@@ -2469,7 +2489,7 @@ expectTrue(
     'Generátor OG obálok musí odmietnuť spustenie cez web'
 );
 // Rúra do `head` zavrie predchádzajúcemu príkazu výstup a zelený smoke check
-// potom hlási `curl: (23)` alebo „Broken pipe“ — vyzerá to ako chyba nasadenia.
+// potom hlási `curl: (23)` alebo „Broken pipe“: vyzerá to ako chyba nasadenia.
 // Stalo sa to dvakrát (Beh #27 pri sitemape, Beh #28 pri og:image), preto
 // vzor v smoke checku stráži test. Namiesto rúry: `grep -m 1` a expanzia.
 $deployHeadPipes = [];

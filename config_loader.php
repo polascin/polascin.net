@@ -60,7 +60,7 @@ function loadAppConfig(): array {
         $unparsable[] = $path;
     }
 
-    // Rozlíšenie „nenašiel sa“ od „našiel sa, ale je poškodený“ — bez neho
+    // Rozlíšenie „nenašiel sa“ od „našiel sa, ale je poškodený“: bez neho
     // syntaktická chyba v INI (napr. neuvodzovkovaný znak &) zvádza hľadať
     // chýbajúci súbor namiesto opravy jeho obsahu.
     if ($unparsable !== []) {

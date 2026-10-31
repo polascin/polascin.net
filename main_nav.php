@@ -30,7 +30,7 @@ if (!function_exists('_navA')) {
     /**
      * `$external` otvorí odkaz v novej karte. `rel` je pri `target="_blank"`
      * povinné (inak cieľová stránka dostane cez `window.opener` prístup k tejto)
-     * a skrytý dodatok oznámi zmenu kontextu aj čítačke obrazovky — vizuálne
+     * a skrytý dodatok oznámi zmenu kontextu aj čítačke obrazovky. Vizuálne
      * ju naznačuje ikona.
      */
     function _navA(string $href, string $label, bool $active, bool $external = false): string {

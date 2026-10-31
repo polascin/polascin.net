@@ -1,4 +1,4 @@
-// Early Google Consent Mode v2 default – must run before any gtag config.
+// Early Google Consent Mode v2 default: must run before any gtag config.
 window.dataLayer = window.dataLayer || [];
 function gtag() {
   dataLayer.push(arguments);

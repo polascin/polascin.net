@@ -20,7 +20,7 @@ unset($partialName, $requestedScript, $executedFile);
 $year = date('Y');
 $footerLang = currentLang();
 
-// Korelačné hodnoty veku — rovnaké výpočty ako v pätičke old.polascin.net
+// Korelačné hodnoty veku: rovnaké výpočty ako v pätičke old.polascin.net
 // (rok = 365,25 dňa; druhá a tretia hodnota majú historický posun +23/+22).
 $rokVSekundach = 60 * 60 * 24 * 365.25;
 $vekoveHodnoty = [
@@ -32,7 +32,7 @@ $vekoveHodnoty = [
 
 // Dátum aktualizácie a Swatch @beat ako v pätičke nefro.polascin.net.
 // Presný čas nasadenia nesie deploy_info.php generovaný pri nasadení
-// (workflow aj hooks/deploy.sh); bez neho — napr. pri lokálnom vývoji —
+// (workflow aj hooks/deploy.sh); bez neho, napr. pri lokálnom vývoji,
 // sa berie čas úpravy zobrazovaného skriptu.
 $deployInfoFile = __DIR__ . '/deploy_info.php';
 if (is_file($deployInfoFile)) {
@@ -51,7 +51,7 @@ if (defined('DEPLOY_TIMESTAMP')) {
     $footerUpdateTs = ($footerScript !== '' && is_file($footerScript)) ? (int) filemtime($footerScript) : time();
 }
 $footerUpdated = date('d.m.Y H:i', $footerUpdateTs);
-// Bez vnorených zátvoriek — hodnota sa vypisuje v zátvorkách za dátumom.
+// Bez vnorených zátvoriek: hodnota sa vypisuje v zátvorkách za dátumom.
 $footerTimezone = date('T', $footerUpdateTs) . ', ' . date_default_timezone_get();
 // Swiss Internet Time: BMT = UTC+1, 1 deň = 1000 beatov.
 $footerBeat = appSwatchBeat($footerUpdateTs);

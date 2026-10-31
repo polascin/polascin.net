@@ -23,7 +23,7 @@ if (!function_exists('isLoggedIn')) {
 
 $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
 
-// Aktuálne počítaný vek — rovnaký výpočet ako na old.polascin.net
+// Aktuálne počítaný vek, rovnaký výpočet ako na old.polascin.net
 // (narodenie 4. 3. 1971 o 8:30, rok = 365,25 dňa).
 $vekAktualny = (time() - mktime(8, 30, 0, 3, 4, 1971)) / (60 * 60 * 24 * 365.25);
 $vekRoky = (int) floor($vekAktualny);

@@ -1,14 +1,14 @@
-# Deploy – polascin.net
+# Deploy: polascin.net
 
 Vývoj, nasadenie aj nočné úlohy nezávisia od GitHubu (od Behu #49):
 
-1. **Lokálny `hooks/deploy.sh`** – jediná bežná cesta nasadenia, z vývojového
+1. **Lokálny `hooks/deploy.sh`**: jediná bežná cesta nasadenia, z vývojového
    počítača cez SSH alias `websupport`. Push do žiadneho remotu nič nenasadzuje.
-2. **Crontab na serveri** – retenčné čistenie a nočná kontrola DB
+2. **Crontab na serveri**: retenčné čistenie a nočná kontrola DB
    (sekcia „Nočné úlohy na serveri“).
-3. **Git remote `websupport`** – repozitár na hostingu mimo web rootu. GitHub
+3. **Git remote `websupport`**: repozitár na hostingu mimo web rootu. GitHub
    (`origin`) je iba zrkadlo a jeho výpadok vývoj nezastaví.
-4. **GitHub Actions** – workflowy zostali iba ako ručná záloha
+4. **GitHub Actions**: workflowy zostali iba ako ručná záloha
    (`workflow_dispatch`), bez spúšťania pushom alebo plánom.
 
 Oba spôsoby odmietnu prázdnu, relatívnu alebo koreňovú (`/`) cieľovú cestu. Pred
@@ -84,7 +84,7 @@ V repozitári na GitHub choď do **Settings → Secrets and variables → Action
 `DEPLOY_KNOWN_HOSTS` získaj napríklad cez `ssh-keyscan -p <port> <host>`, ale
 fingerprint kľúča vždy over aj nezávislým kanálom u poskytovateľa hostingu. Pri
 neštandardnom porte musí záznam obsahovať tvar `[host]:port`. Ak secret nie je
-nastavený, workflow zlyhá — na efemérnom GitHub runneri neexistuje dôveryhodný
+nastavený, workflow zlyhá: na efemérnom GitHub runneri neexistuje dôveryhodný
 `known_hosts`, ktorý by sa dal použiť. Hodnota `accept-new` je dostupná iba pre
 lokálny skript `hooks/deploy.sh`.
 
@@ -103,7 +103,7 @@ Pred nasadením sa vždy skontroluje syntax deploy skriptu, všetkých sledovan�
 PHP súborov a vlastných JavaScript súborov a spustí sa `php tests/run.php`.
 Produkčné deployee cez GitHub Actions sú serializované, takže dve rýchle zmeny
 nemôžu súčasne spustiť `rsync` a migrácie. Manuálny `hooks/deploy.sh` do tejto
-serializácie nespadá — nespúšťaj ho, kým beží deploy v Actions.
+serializácie nespadá. Nespúšťaj ho, kým beží deploy v Actions.
 
 Po úspešnom súborovom deployu workflow automaticky spustí `setup_db.php` na
 serveri. Skript vytvorí chýbajúce tabuľky a aplikuje iba doteraz nevykonané

@@ -124,7 +124,7 @@ if ($action === 'confirm' && $token !== '') {
                 // Výsledok sa vykresľuje priamo v tejto odpovedi, nie cez presmerovanie:
                 // potvrdzovací odkaz sa otvára z e-mailového klienta, teda cross-site,
                 // a session cookie so SameSite=Strict by sa v presmerovanej požiadavke
-                // neposlala — správa aj jednorazový odhlasovací odkaz by sa stratili.
+                // neposlala a správa aj jednorazový odhlasovací odkaz by sa stratili.
                 $message = t('newsletter.confirmed');
                 $messageType = 'success';
                 $oneTimeUnsubscribeUrl = $unsubscribeUrl;

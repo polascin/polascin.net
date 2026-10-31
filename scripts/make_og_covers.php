@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Vygeneruje JPEG varianty obálok článkov pre Open Graph.
  *
  * Obálky sú WebP, lebo na stránke je menší. Open Graph však WebP nezobrazí
- * všade — LinkedIn ho historicky nepodporuje a zdieľaný článok potom nemá
+ * všade: LinkedIn ho historicky nepodporuje a zdieľaný článok potom nemá
  * náhľadový obrázok vôbec. Preto ku každej obálke vzniká JPEG dvojička
  * v `images/articles/og/`, ktorú `articleCoverSocialSrc()` podsunie do
  * `og:image` a `twitter:image`.
@@ -17,7 +17,7 @@ declare(strict_types=1);
  * Spustenie (len CLI, z koreňa repozitára):
  *   php scripts/make_og_covers.php
  *
- * Skript je idempotentný — prepisuje len to, čo chýba alebo je staršie
+ * Skript je idempotentný: prepisuje len to, čo chýba alebo je staršie
  * ako zdrojový WebP. Súlad zdrojov a odvodenín stráži test v `tests/run.php`.
  */
 
@@ -47,7 +47,7 @@ if (!function_exists('imagecreatefromwebp') || !function_exists('imagejpeg')) {
 
 $sources = glob($sourceDir . '/*.webp');
 if ($sources === false || $sources === []) {
-    fwrite(STDOUT, "Žiadne WebP obálky — niet čo generovať.\n");
+    fwrite(STDOUT, "Žiadne WebP obálky: niet čo generovať.\n");
     exit(0);
 }
 

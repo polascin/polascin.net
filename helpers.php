@@ -51,7 +51,7 @@ function hashAppPassword(string $password): string {
  * Swatch Internet Time (BMT = UTC+1, 1 deň = 1000 beatov) pre daný unix čas.
  *
  * Stotiny sa orezávajú nadol celočíselnou aritmetikou (1 beat = 86,4 s, teda
- * 0,01 beatu = 864 ms) — zaokrúhlenie nahor by na konci dňa zobrazilo
+ * 0,01 beatu = 864 ms), pretože zaokrúhlenie nahor by na konci dňa zobrazilo
  * neplatné @1000.00. Rovnakú aritmetiku používa živý prepočet v js/main.js.
  */
 function appSwatchBeat(int $timestamp): string {
@@ -93,7 +93,7 @@ function appTextSlice(string $value, int $offset, ?int $length = null): string {
 /**
  * Obsahový blok v požadovanom jazyku.
  *
- * Ak blok pre daný jazyk neexistuje, použije sa `$default` — v šablónach je to
+ * Ak blok pre daný jazyk neexistuje, použije sa `$default`: v šablónach je to
  * preložený reťazec z katalógu, takže stránka je kompletná aj bez toho, aby bol
  * každý blok v databáze vyplnený vo všetkých jazykoch.
  */
@@ -177,8 +177,8 @@ function isArticleRowPubliclyVisible(array $row): bool {
 /**
  * Článok podľa slugu.
  *
- * Najprv sa hľadá v požadovanom jazyku. Ak tam taký článok nie je — alebo je, ale
- * nie je verejne viditeľný a volajúci nemá právo vidieť koncepty — hľadá sa rovnaký
+ * Najprv sa hľadá v požadovanom jazyku. Ak tam taký článok nie je, alebo je, ale
+ * nie je verejne viditeľný a volajúci nemá právo vidieť koncepty, hľadá sa rovnaký
  * slug v inom jazyku, aby staré odkazy nekončili na 404. Volajúci podľa `lang`
  * v odpovedi zistí, že ide o inú jazykovú verziu.
  *
@@ -266,7 +266,7 @@ function getArticleTranslations(PDO $pdo, ?int $translationGroup): array {
 
 /**
  * Relatívna cesta obalového obrázka článku. Povolené sú len súbory
- * v `images/articles/` s bezpečným názvom — žiadne `../` ani cudzie schémy.
+ * v `images/articles/` s bezpečným názvom, žiadne `../` ani cudzie schémy.
  */
 function normalizeArticleCoverPath(string $path): ?string {
     $path = str_replace('\\', '/', trim($path));
@@ -292,14 +292,14 @@ function articleCoverSrc(?string $image, ?string $slug = null): ?string {
 }
 
 /**
- * Obálky dostupné na disku — ponuka pre admin formulár. Zoznam sa berie zo
+ * Obálky dostupné na disku: ponuka pre admin formulár. Zoznam sa berie zo
  * súborov, nie od používateľa, takže do stĺpca `image` sa nedá zapísať cesta,
  * ktorú by `normalizeArticleCoverPath()` odmietla.
  *
  * @return list<string>
  */
 function availableArticleCovers(): array {
-    // Zámerne bez `GLOB_BRACE` — nie je všade dostupné. Filtruje sa tým istým
+    // Zámerne bez `GLOB_BRACE`, nie je všade dostupné. Filtruje sa tým istým
     // pravidlom, aké platí pre stĺpec `image`, takže ponuka a validácia
     // nemôžu povedať niečo iné.
     $found = glob(__DIR__ . '/images/articles/*');
@@ -323,7 +323,7 @@ function availableArticleCovers(): array {
 /**
  * Obálka pre Open Graph a Twitter Card.
  *
- * Na stránke sa podáva WebP, lebo je menší, ale zdieľanie ho nezvládne všade —
+ * Na stránke sa podáva WebP, lebo je menší, ale zdieľanie ho nezvládne všade:
  * LinkedIn WebP náhľad historicky nezobrazí vôbec. Ak teda ku WebP existuje
  * JPEG odvodenina z `scripts/make_og_covers.php`, do `og:image` ide ona.
  * Inak sa vracia pôvodná cesta, takže absencia JPEGu nič nerozbije.
@@ -1058,7 +1058,7 @@ function libraryMarkdownEmphasis(string $escaped): string {
 }
 
 function libraryMarkdownInline(string $escaped): string {
-    // Zvýraznenie sa uplatní len na text a popis odkazu, nikdy na URL —
+    // Zvýraznenie sa uplatní len na text a popis odkazu, nikdy na URL,
     // inak by `*` v adrese vložila `<em>` do atribútu `href` (Beh #31).
     $parts = preg_split(
         '~(\[[^\]\n]+\]\(https?://[^\s)]+\))~',

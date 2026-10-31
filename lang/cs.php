@@ -71,12 +71,12 @@ return [
     'footer.facebook' => 'Profil na Facebooku',
     'footer.email' => 'Poslat e-mail',
     'footer.discord' => 'Připojit se na Discord',
-    'footer.copyright' => '© 1998 – :year Ľubomír Polaščín. Všechna práva vyhrazena.',
+    'footer.copyright' => '© 1998 až :year Ľubomír Polaščín. Všechna práva vyhrazena.',
     'footer.privacy' => 'Ochrana soukromí',
     'footer.terms' => 'Podmínky používání',
     'footer.cookie_settings' => 'Nastavení cookies',
     'footer.updated' => 'Aktualizováno:',
-    'footer.beat_title' => 'Swiss Internet Time — 1 den = 1000 beatů',
+    'footer.beat_title' => 'Swiss Internet Time: 1 den = 1000 beatů',
 
     // Metadata stránek
     'meta.default_description' => 'Osobní a profesní web MUDr. Ľubomíra Polaščína: nefrologie a dialýza, medicínské vzdělávání a odborné psaní, specializované překlady a praktické digitální nástroje.',
@@ -90,7 +90,7 @@ return [
     'meta.contact_title' => 'Kontakt',
     'meta.contact_description' => 'Kontaktujte MUDr. Ľubomíra Polaščína v odborných záležitostech, ohledně spolupráce nebo s dotazy.',
     'meta.newsletter_title' => 'Newsletter',
-    'meta.newsletter_description' => 'Přihlaste se k odběru novinek z Polascin.net — aktuality o nefrologii, vnitřním lékařství, knihách a technologiích.',
+    'meta.newsletter_description' => 'Přihlaste se k odběru novinek z Polascin.net: aktuality o nefrologii, vnitřním lékařství, knihách a technologiích.',
     'meta.login_title' => 'Přihlášení',
     'meta.login_description' => 'Přihlášení administrátora na Polascin.net.',
     'meta.privacy_title' => 'Ochrana soukromí',
@@ -98,14 +98,14 @@ return [
     'meta.terms_title' => 'Podmínky používání',
     'meta.terms_description' => 'Podmínky používání webových stránek MUDr. Ľubomíra Polaščína.',
 
-    // Domovská stránka — hlavní blok
+    // Domovská stránka: hlavní blok
     'home.logo_alt' => 'Crystal Kidney',
     'home.hero_title' => 'MUDr. Ľubomír Polaščín',
     'home.hero_subtitle' => 'Jsem nefrolog a internista, věnuji se medicínskému vzdělávání a autorské tvorbě. Dlouholeté zkušenosti s dialýzou uplatňuji v odborném psaní, překladu a vývoji praktických digitálních nástrojů.',
     'home.cta_about' => 'Čemu se věnuji',
     'home.cta_articles' => 'Číst články',
 
-    // Domovská stránka — životopis
+    // Domovská stránka: životopis
     'home.about_heading' => 'O mně',
     'home.about_intro' => 'Jsem lékař se specializací v nefrologii a vnitřním lékařství. Moje profesní práce se soustředí na dialýzu a onemocnění ledvin; vedl jsem dvě dialyzační střediska v Bratislavě a působil v medicínském vzdělávání.',
     'home.about_who' => 'Píši odborné i literární texty, překládám medicínský obsah mezi slovenštinou a angličtinou a vytvářím webové stránky a aplikace. Technologie a umělou inteligenci posuzuji podle jejich praktické hodnoty: zda zpřístupňují znalosti, zjednodušují práci nebo zvyšují kvalitu výsledku.',
@@ -142,14 +142,14 @@ return [
     'home.skills_ai_text' => 'jazykové modely, automatizace a kritické hodnocení jejich využití v medicíně',
 
     'home.education_heading' => 'Vzdělání a profesní dráha',
-    'home.education_school' => 'Gymnázium se zaměřením na programování jsem dokončil v roce 1989 — programovalo se tehdy v jazycích Basic a Pascal — a vyhrál jsem také okresní soutěž v programování.',
+    'home.education_school' => 'Gymnázium se zaměřením na programování jsem dokončil v roce 1989, kdy se programovalo v jazycích Basic a Pascal, a vyhrál jsem také okresní soutěž v programování.',
     'home.education_text' => 'Studium všeobecného lékařství jsem absolvoval na Univerzitě Pavla Jozefa Šafárika v Košicích v roce 1995. Atestaci z vnitřního lékařství jsem získal v roce 1998 a z nefrologie v roce 2009; ve stejném roce jsem získal také certifikaci v abdominální ultrasonografii dospělých.',
     'home.education_path' => 'Dialýze a nefrologii se věnuji od roku 1995. Později jsem vedl dvě dialyzační střediska v Bratislavě a působil v medicínském vzdělávání.',
     'home.education_scope' => 'Mé odborné zkušenosti zahrnují hemodialýzu, hemodiafiltraci, peritoneální dialýzu, jaterní dialýzu na systému Prometheus, akutní eliminační metody, ultrasonografii, péči o cévní přístupy a přípravu pacientů k transplantaci ledviny. Tyto zkušenosti propojuji s odborným psaním, přednášením, vzděláváním a tvorbou digitálních projektů v medicíně.',
 
     'home.personal_heading' => 'Mimo medicínu',
-    'home.personal_text' => 'Zajímám se o literaturu, filozofii, poezii a cestování. Blízké jsou mi také cizí jazyky — i proto je tato stránka dostupná v deseti z nich — a volné chvíle trávím čtením, překlady a programováním vlastních projektů.',
-    'home.personal_writing' => 'Ve svých knihách a dalších textech se vracím k medicíně, morálním konfliktům a vztahu člověka k technologiím. Odborné texty píšu pod vlastním jménem, literární tvorba vychází také pod pseudonymem Walter Kyo Csoelle — jeho autorský profil najdete na Amazonu.',
+    'home.personal_text' => 'Zajímám se o literaturu, filozofii, poezii a cestování. Blízké jsou mi také cizí jazyky, i proto je tato stránka dostupná v deseti z nich. Volné chvíle trávím čtením, překlady a programováním vlastních projektů.',
+    'home.personal_writing' => 'Ve svých knihách a dalších textech se vracím k medicíně, morálním konfliktům a vztahu člověka k technologiím. Odborné texty píšu pod vlastním jménem, literární tvorba vychází také pod pseudonymem Walter Kyo Csoelle. Jeho autorský profil najdete na Amazonu.',
 
     'home.identity_nephrologist' => 'Nefrolog',
     'home.identity_internist' => 'Internista',
@@ -157,7 +157,7 @@ return [
     'home.books_cta' => 'Prohlédnout knihy',
     'home.amazon_cta' => 'Autorský profil na Amazonu',
 
-    // Domovská stránka — nefrologie
+    // Domovská stránka: nefrologie
     'home.nephrology_heading' => 'Nefrologie stručně',
     'home.nephrology_intro' => 'Nefrologie není jen dialýza. Spojuje prevenci, včasnou diagnostiku a dlouhodobou léčbu onemocnění ledvin s náhradou funkce ledvin, když konzervativní léčba již nestačí.',
     'home.ckd_title' => 'Chronické onemocnění ledvin (CKD)',
@@ -174,7 +174,7 @@ return [
     'home.diagnostics_text' => 'Diagnostika vychází z anamnézy, fyzikálního vyšetření, vyšetření krve a moči a zobrazovacích metod. Biopsie ledviny se provádí, pokud je klinicky indikována.',
     'home.nephrology_note' => 'Tyto informace slouží ke vzdělávacím účelům a nenahrazují lékařské vyšetření ani individuální doporučení.',
 
-    // Domovská stránka — články, projekty, odkazy, kontakt
+    // Domovská stránka: články, projekty, odkazy, kontakt
     'home.latest_heading' => 'Nejnovější články',
     'home.all_articles' => 'Zobrazit všechny články',
     'home.projects_heading' => 'Vybrané projekty',
@@ -184,7 +184,7 @@ return [
     'home.project_books_text' => 'Přehled mých knih, odborných publikací, kapitol a další autorské tvorby.',
     'home.project_alphagrab_text' => 'Experimentální nástroj pro vyhledávání událostí a vstupenek využívající Ticketmaster Discovery API.',
     'home.project_arenibus_text' => 'Informační systém .NET v pokročilé fázi vývoje pro nefrologické ambulance a dialyzační střediska. Jeho MVP zahrnuje evidenci pacientů a návštěv, předpisy dialyzační léčby, plánování, laboratorní výsledky, auditní záznamy a integraci se slovenským systémem eHealth; veřejná ukázka používá fiktivní data.',
-    'home.project_gumroad_text' => 'Digitální produkty a e-knihy na Gumroadu — Medicínsky pôst a Medical Fasting, SK Nefro Báza 1 a SK Nefro Báza 1 Kompendium ve slovenském, anglickém a německém vydání a německá publikace SK Nefro: Belegt, wahrscheinlich, offen.',
+    'home.project_gumroad_text' => 'Digitální produkty a e-knihy na Gumroadu: Medicínsky pôst a Medical Fasting, SK Nefro Báza 1 a SK Nefro Báza 1 Kompendium ve slovenském, anglickém a německém vydání a německá publikace SK Nefro: Belegt, wahrscheinlich, offen.',
     'home.publications_heading' => 'Prodávané publikace',
     'home.publications_intro' => 'E-knihy, které prodávám na nefro.polascin.net a na Gumroadu.',
     'home.link_pub_nefro_baza' => 'SK Nefro Báza 1 (nefro.polascin.net)',
@@ -211,8 +211,8 @@ return [
     'home.link_nephrosite' => 'NephroSite (ve slovenštině)',
     'home.link_dialysis_bratislava' => 'Dialýza v Bratislavě: Medimpax (ve slovenštině)',
     'home.link_impax_centres' => 'Dialyzační střediska IMPAX (ve slovenštině)',
-    'home.link_vital_2nd' => 'Vital Algorithm — 2. vydání (Amazon)',
-    'home.link_vital_1st' => 'The Vital Algorithm — 1. vydání (Amazon)',
+    'home.link_vital_2nd' => 'Vital Algorithm, 2. vydání (Amazon)',
+    'home.link_vital_1st' => 'The Vital Algorithm, 1. vydání (Amazon)',
     'home.contact_heading' => 'Kontakt',
     'home.contact_intro' => 'V případě odborné spolupráce, přednášky, medicínského překladu nebo digitálního projektu mi napište. Tento kontakt není určen pro naléhavé zdravotní dotazy.',
     'home.contact_cta' => 'Otevřít kontaktní formulář',
@@ -232,7 +232,7 @@ return [
     'article.not_found_heading' => 'Článek nebyl nalezen',
     'article.not_found_text' => 'Požadovaný článek neexistuje nebo není publikován.',
     'article.back_to_list' => 'Zpět na články',
-    'article.admin_preview' => 'Administrátorský náhled — tento článek zatím není veřejně dostupný.',
+    'article.admin_preview' => 'Administrátorský náhled: tento článek zatím není veřejně dostupný.',
     'article.available_in' => 'Dostupné také v jazyce:',
 
     // Kontaktní formulář

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Nočné úlohy polascin.net priamo na hostingu (crontab), bez GitHub Actions.
 #
-#   retention  — retenčné čistenie osobných a prevádzkových údajov
-#   verify-db  — read-only kontrola produkčnej DB; report sa commitne do
+#   retention:   retenčné čistenie osobných a prevádzkových údajov
+#   verify-db:   read-only kontrola produkčnej DB; report sa commitne do
 #                repozitára na serveri (audit-reports/db-latest.md)
 #
 # Skripty sa berú z vetvy `main` v repozitári na serveri, nie z web rootu:
@@ -49,7 +49,7 @@ run_verify_db() {
 	log "Spúšťam read-only kontrolu DB."
 	if ! php_from_main scripts/audit_db_check.php >"$report" 2>"$stderr"; then
 		{
-			echo "# Kontrola produkčnej databázy — polascin.net"
+			echo "# Kontrola produkčnej databázy: polascin.net"
 			echo
 			echo "STATUS: ZLYHANIE"
 			echo "NALEZOV: neznáme"
@@ -78,7 +78,7 @@ run_verify_db() {
 		log "Report sa nezmenil, commit nie je potrebný."
 	else
 		git -c user.name="polascin-ops" -c user.email="polascin-ops@localhost" \
-			commit -q -m "chore(audit): nočná kontrola produkčnej DB — ${status} [skip deploy]"
+			commit -q -m "chore(audit): nočná kontrola produkčnej DB: ${status} [skip deploy]"
 		attempts=0
 		until git push -q origin HEAD:main; do
 			attempts=$((attempts + 1))

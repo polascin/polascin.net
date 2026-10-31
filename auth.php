@@ -119,7 +119,7 @@ function sendSecurityHeaders(): void {
     header('TDM-Reservation: 1');
     // Komunitný signál proti tréningu modelov (noai / noimageai).
     // Google Search ostáva na Googlebot; tréning Gemini rieši Google-Extended
-    // v robots.txt. Súbory knižnice si X-Robots-Tag nastavia samy — inak by
+    // v robots.txt. Súbory knižnice si X-Robots-Tag nastavia samy, inak by
     // noai z tejto odpovede prekrylo ich noindex.
     $robotsTagScript = basename((string) ($_SERVER['SCRIPT_NAME'] ?? ''));
     if ($robotsTagScript !== 'library_file.php') {
@@ -144,7 +144,7 @@ function sendSecurityHeaders(): void {
 
     // Odpoveď sa líši podľa zvoleného jazyka, ktorý pochádza z cookie alebo
     // z Accept-Language. Bez Vary by zdieľaná cache mohla podať odpoveď
-    // v cudzom jazyku — aj s hlavičkou Set-Cookie, ktorá jazyk pripne.
+    // v cudzom jazyku, a to aj s hlavičkou Set-Cookie, ktorá jazyk pripne.
     header('Vary: Cookie, Accept-Language, Sec-Fetch-Site, Origin', false);
 
     if (requestNeedsNoReferrer()) {
@@ -186,7 +186,7 @@ if (session_status() === PHP_SESSION_NONE) {
  *
  * Názov súboru relácie je samotné session ID, takže adresár, ktorý by server
  * dokázal podať, znamená prevzatie relácie. Prvá voľba preto leží **mimo web
- * rootu** — rovnako ako konfiguračný súbor, ktorý `config_loader.php` hľadá
+ * rootu**, rovnako ako konfiguračný súbor, ktorý `config_loader.php` hľadá
  * najprv v nadradenom `private/`. Cesta vnútri web rootu zostáva ako záloha pre
  * prostredia, kde nadradený adresár zapisovateľný nie je; tam ju chráni
  * `.htaccess`.
@@ -218,7 +218,7 @@ if (session_status() === PHP_SESSION_NONE && !session_start()) {
 }
 
 // Hlavičky sa posielajú ešte pred vetvou s vypršaním relácie, ktorá končí
-// presmerovaním a exitom — aj tá odpoveď musí niesť no-store a ostatné hlavičky.
+// presmerovaním a exitom, aj tá odpoveď musí niesť no-store a ostatné hlavičky.
 sendSecurityHeaders();
 
 if (!empty($_SESSION['user_id'])) {
@@ -303,7 +303,7 @@ function restartAnonymousSession(): void {
  * Znovu overí, či je účet v relácii stále aktívny a s akými právami.
  *
  * Bez tejto kontroly by deaktivácia alebo degradácia účtu v databáze nemala
- * žiadny účinok na už prebiehajúcu reláciu — a keďže sa `_last_activity`
+ * žiadny účinok na už prebiehajúcu reláciu, a keďže sa `_last_activity`
  * obnovuje pri každej požiadavke, aktívne používaná ukradnutá relácia by
  * nevypršala nikdy. Výsledok sa cachuje, aby to nebol dotaz navyše pri každom
  * načítaní stránky.

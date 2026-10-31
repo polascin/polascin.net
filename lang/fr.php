@@ -71,12 +71,12 @@ return [
     'footer.facebook' => 'Profil Facebook',
     'footer.email' => 'Envoyer un e-mail',
     'footer.discord' => 'Rejoindre sur Discord',
-    'footer.copyright' => '© 1998 – :year Ľubomír Polaščín. Tous droits réservés.',
+    'footer.copyright' => '© 1998 à :year Ľubomír Polaščín. Tous droits réservés.',
     'footer.privacy' => 'Confidentialité',
     'footer.terms' => 'Conditions d\'utilisation',
     'footer.cookie_settings' => 'Paramètres des cookies',
     'footer.updated' => 'Mis à jour :',
-    'footer.beat_title' => 'Swiss Internet Time — 1 jour = 1000 beats',
+    'footer.beat_title' => 'Swiss Internet Time : 1 jour = 1000 beats',
 
     // Métadonnées des pages
     'meta.default_description' => 'Site personnel et professionnel du Dr Ľubomír Polaščín : néphrologie et dialyse, enseignement et écriture médicale, traduction spécialisée et outils numériques pratiques.',
@@ -90,7 +90,7 @@ return [
     'meta.contact_title' => 'Contact',
     'meta.contact_description' => 'Contactez le Dr Ľubomír Polaščín pour toute question professionnelle, proposition de collaboration ou demande de renseignements.',
     'meta.newsletter_title' => 'Newsletter',
-    'meta.newsletter_description' => 'Abonnez-vous à la newsletter de Polascin.net — actualités sur la néphrologie, la médecine interne, les livres et les technologies.',
+    'meta.newsletter_description' => 'Abonnez-vous à la newsletter de Polascin.net : actualités sur la néphrologie, la médecine interne, les livres et les technologies.',
     'meta.login_title' => 'Connexion',
     'meta.login_description' => 'Connexion administrateur sur Polascin.net.',
     'meta.privacy_title' => 'Politique de confidentialité',
@@ -98,14 +98,14 @@ return [
     'meta.terms_title' => 'Conditions d\'utilisation',
     'meta.terms_description' => 'Conditions d\'utilisation du site web du Dr Ľubomír Polaščín.',
 
-    // Page d'accueil — bandeau principal
+    // Page d'accueil: bandeau principal
     'home.logo_alt' => 'Crystal Kidney',
     'home.hero_title' => 'Dr Ľubomír Polaščín',
     'home.hero_subtitle' => 'Je suis néphrologue et interniste, enseignant en médecine et auteur. Je mets ma longue expérience de la dialyse au service de l\'écriture spécialisée, de la traduction et du développement d\'outils numériques pratiques.',
     'home.cta_about' => 'Ce que je fais',
     'home.cta_articles' => 'Lire les articles',
 
-    // Page d'accueil — parcours
+    // Page d'accueil: parcours
     'home.about_heading' => 'À propos de moi',
     'home.about_intro' => 'Je suis médecin spécialisé en néphrologie et en médecine interne. Mon activité professionnelle s\'est concentrée sur la dialyse et les maladies rénales ; j\'ai dirigé deux centres de dialyse à Bratislava et travaillé dans l\'enseignement médical.',
     'home.about_who' => 'J\'écris des textes spécialisés et littéraires, je traduis des contenus médicaux du slovaque vers l\'anglais et de l\'anglais vers le slovaque, et je crée des sites web et des applications. J\'évalue la technologie et l\'intelligence artificielle selon leur utilité pratique : rendent-elles le savoir plus accessible, simplifient-elles le travail ou améliorent-elles la qualité du résultat ?',
@@ -142,14 +142,14 @@ return [
     'home.skills_ai_text' => 'Modèles de langage, automatisation et évaluation critique de leur usage en médecine',
 
     'home.education_heading' => 'Formation et parcours professionnel',
-    'home.education_school' => 'J\'ai terminé le lycée avec une spécialisation en programmation en 1989 — on programmait alors en Basic et en Pascal — et j\'ai également remporté un concours de programmation au niveau du district.',
+    'home.education_school' => 'J\'ai terminé le lycée avec une spécialisation en programmation en 1989, à une époque où l\'on programmait en Basic et en Pascal, et j\'ai également remporté un concours de programmation au niveau du district.',
     'home.education_text' => 'J\'ai obtenu mon diplôme de médecine à l\'Université Pavol Jozef Šafárik de Košice en 1995. J\'ai obtenu ma qualification en médecine interne en 1998, puis en néphrologie en 2009, année où j\'ai également reçu une certification en échographie abdominale de l\'adulte.',
     'home.education_path' => 'Je travaille dans les domaines de la dialyse et de la néphrologie depuis 1995. J\'ai ensuite dirigé deux centres de dialyse à Bratislava et travaillé dans l\'enseignement médical.',
     'home.education_scope' => 'Mon expérience couvre l\'hémodialyse, l\'hémodiafiltration, la dialyse péritonéale, la dialyse hépatique sur le système Prometheus, l\'épuration extrarénale en situation aiguë, l\'échographie, la prise en charge des abords vasculaires et la préparation des patients à la transplantation rénale. J\'associe cette expérience à l\'écriture scientifique, aux conférences, à l\'enseignement et à la création de projets numériques en médecine.',
 
     'home.personal_heading' => 'Au-delà de la médecine',
-    'home.personal_text' => 'Je m\'intéresse à la littérature, à la philosophie, à la poésie et aux voyages. Les langues étrangères me tiennent également à cœur — c\'est notamment pour cela que ce site est disponible en dix langues — et je consacre mon temps libre à la lecture, à la traduction et à la programmation de mes propres projets.',
-    'home.personal_writing' => 'Dans mes livres et mes autres écrits, je reviens à la médecine, aux conflits moraux et aux relations entre les personnes et la technologie. Je publie mes textes spécialisés sous mon propre nom, tandis que mon œuvre littéraire paraît aussi sous le pseudonyme de Walter Kyo Csoelle — dont le profil d\'auteur est disponible sur Amazon.',
+    'home.personal_text' => 'Je m\'intéresse à la littérature, à la philosophie, à la poésie et aux voyages. Les langues étrangères me tiennent également à cœur, c\'est notamment pour cela que ce site est disponible en dix langues. Je consacre mon temps libre à la lecture, à la traduction et à la programmation de mes propres projets.',
+    'home.personal_writing' => 'Dans mes livres et mes autres écrits, je reviens à la médecine, aux conflits moraux et aux relations entre les personnes et la technologie. Je publie mes textes spécialisés sous mon propre nom, tandis que mon œuvre littéraire paraît aussi sous le pseudonyme de Walter Kyo Csoelle, dont le profil d\'auteur est disponible sur Amazon.',
 
     'home.identity_nephrologist' => 'Néphrologue',
     'home.identity_internist' => 'Interniste',
@@ -157,7 +157,7 @@ return [
     'home.books_cta' => 'Voir les livres',
     'home.amazon_cta' => 'Profil d\'auteur sur Amazon',
 
-    // Page d'accueil — néphrologie
+    // Page d'accueil: néphrologie
     'home.nephrology_heading' => 'La néphrologie en bref',
     'home.nephrology_intro' => 'La néphrologie ne se limite pas à la dialyse. Elle associe la prévention, le diagnostic précoce et le traitement au long cours des maladies rénales aux traitements de suppléance rénale lorsque les soins conservateurs ne suffisent plus.',
     'home.ckd_title' => 'Maladie rénale chronique (MRC)',
@@ -174,7 +174,7 @@ return [
     'home.diagnostics_text' => 'Le diagnostic repose sur l\'anamnèse, l\'examen clinique, les analyses de sang et d\'urine et l\'imagerie. Une biopsie rénale est réalisée lorsqu\'elle est cliniquement indiquée.',
     'home.nephrology_note' => 'Ces informations ont une vocation pédagogique et ne remplacent ni un examen médical ni un avis personnalisé.',
 
-    // Page d'accueil — articles, projets, liens, contact
+    // Page d'accueil: articles, projets, liens, contact
     'home.latest_heading' => 'Derniers articles',
     'home.all_articles' => 'Voir tous les articles',
     'home.projects_heading' => 'Projets sélectionnés',
@@ -184,7 +184,7 @@ return [
     'home.project_books_text' => 'Présentation de mes livres, publications spécialisées, chapitres et autres écrits.',
     'home.project_alphagrab_text' => 'Outil expérimental de recherche d\'événements et de billets utilisant l\'API Ticketmaster Discovery.',
     'home.project_arenibus_text' => 'Un système d’information .NET à un stade avancé de développement pour les cliniques de néphrologie et les centres de dialyse. Son MVP couvre les dossiers des patients et des consultations, les prescriptions de dialyse, la planification, les résultats de laboratoire, les pistes d’audit et l’intégration au système eHealth slovaque ; une démonstration publique utilise des données fictives.',
-    'home.project_gumroad_text' => 'Produits numériques et livres électroniques sur Gumroad — Medicínsky pôst et Medical Fasting, les éditions slovaque, anglaise et allemande de SK Nefro Báza 1 et SK Nefro Báza 1 Kompendium, ainsi que le titre allemand SK Nefro: Belegt, wahrscheinlich, offen.',
+    'home.project_gumroad_text' => 'Produits numériques et livres électroniques sur Gumroad : Medicínsky pôst et Medical Fasting, les éditions slovaque, anglaise et allemande de SK Nefro Báza 1 et SK Nefro Báza 1 Kompendium, ainsi que le titre allemand SK Nefro: Belegt, wahrscheinlich, offen.',
     'home.publications_heading' => 'Publications en vente',
     'home.publications_intro' => 'Livres numériques que je vends sur nefro.polascin.net et sur Gumroad.',
     'home.link_pub_nefro_baza' => 'SK Nefro Báza 1 (nefro.polascin.net)',
@@ -209,10 +209,10 @@ return [
     'home.links_heading' => 'Autres sites et liens',
     'home.links_intro' => 'Mes autres sites, mes livres et une sélection d\'outils.',
     'home.link_nephrosite' => 'NephroSite (en slovaque)',
-    'home.link_dialysis_bratislava' => 'Dialyse à Bratislava – Medimpax (en slovaque)',
+    'home.link_dialysis_bratislava' => 'Dialyse à Bratislava : Medimpax (en slovaque)',
     'home.link_impax_centres' => 'Centres de dialyse IMPAX (en slovaque)',
-    'home.link_vital_2nd' => 'Vital Algorithm — 2e édition (Amazon)',
-    'home.link_vital_1st' => 'The Vital Algorithm — 1re édition (Amazon)',
+    'home.link_vital_2nd' => 'Vital Algorithm, 2e édition (Amazon)',
+    'home.link_vital_1st' => 'The Vital Algorithm, 1re édition (Amazon)',
     'home.contact_heading' => 'Contact',
     'home.contact_intro' => 'Pour une collaboration professionnelle, une conférence, une traduction médicale ou un projet numérique, envoyez-moi un message. Ce contact n\'est pas destiné aux questions médicales urgentes.',
     'home.contact_cta' => 'Ouvrir le formulaire de contact',
@@ -232,7 +232,7 @@ return [
     'article.not_found_heading' => 'Article introuvable',
     'article.not_found_text' => 'L\'article demandé n\'existe pas ou n\'est pas publié.',
     'article.back_to_list' => 'Retour aux articles',
-    'article.admin_preview' => 'Aperçu administrateur — cet article n\'est pas encore accessible au public.',
+    'article.admin_preview' => 'Aperçu administrateur : cet article n\'est pas encore accessible au public.',
     'article.available_in' => 'Également disponible en :',
 
     // Formulaire de contact
