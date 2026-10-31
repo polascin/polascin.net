@@ -62,6 +62,8 @@ $themeColor = $themeColor ?? '#ffffff';
 
 $cssVersion = is_file(__DIR__ . '/css/styles.css') ? (string) filemtime(__DIR__ . '/css/styles.css') : '1';
 $fontsVersion = is_file(__DIR__ . '/css/fonts.css') ? (string) filemtime(__DIR__ . '/css/fonts.css') : '1';
+// Podmnožina Font Awesome len s použitými ikonami (scripts/build_fa_subset.py).
+$iconsVersion = is_file(__DIR__ . '/css/icons.css') ? (string) filemtime(__DIR__ . '/css/icons.css') : '1';
 $consentVersion = is_file(__DIR__ . '/js/consent-default.js') ? (string) filemtime(__DIR__ . '/js/consent-default.js') : '1';
 $jsVersion = is_file(__DIR__ . '/js/main.js') ? (string) filemtime(__DIR__ . '/js/main.js') : '1';
 ?>
@@ -145,9 +147,7 @@ if ($xDefault === null) {
 <link rel="icon" type="image/png" sizes="128x128" href="favicon-128.png">
 
 <link rel="stylesheet" href="css/fonts.css?v=<?= htmlspecialchars(rawurlencode($fontsVersion), ENT_QUOTES, 'UTF-8') ?>">
-<link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/fontawesome.css">
-<link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/solid.css">
-<link rel="stylesheet" href="fontawesome-free-7.1.0-web/css/brands.css">
+<link rel="stylesheet" href="css/icons.css?v=<?= htmlspecialchars(rawurlencode($iconsVersion), ENT_QUOTES, 'UTF-8') ?>">
 
 <link rel="stylesheet" href="css/styles.css?v=<?= htmlspecialchars(rawurlencode($cssVersion), ENT_QUOTES, 'UTF-8') ?>">
 <script src="js/consent-default.js?v=<?= htmlspecialchars(rawurlencode($consentVersion), ENT_QUOTES, 'UTF-8') ?>" defer></script>

@@ -68,6 +68,14 @@ Pred odovzdaním zmien sa kontroluje aj syntax všetkých PHP a JavaScript
 súborov, lokálne pred nasadením cez `hooks/deploy.sh`. Vývoj ani nasadenie
 nezávisia od GitHubu (DEPLOY.md).
 
+## Ikony
+
+Stránky načítavajú `css/icons.css` a písma `fonts/icons-*.woff2`, teda
+podmnožinu Font Awesome len s ikonami, ktoré šablóny používajú. Po pridaní
+novej ikony `fa-*` spusti `scripts/build_fa_subset.py` (návod je v hlavičke
+skriptu) a aktualizuj pin `?v=` v `index.html`, `privacy.html` a `terms.html`.
+`php tests/run.php` upozorní, ak ikona v podmnožine chýba.
+
 ## Nasadenie
 
 Produkčný workflow a lokálny deploy skript synchronizujú iba verejné súbory,

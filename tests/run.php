@@ -409,7 +409,7 @@ foreach (['index.html', 'privacy.html', 'terms.html'] as $staticHeaderFile) {
 // pri výpadku databázy, takže vtedy by vracajúci sa návštevník dostal týždne
 // starý CSS a JS z vlastnej cache, pri consent skripte s dopadom na GDPR.
 // Pin je preto skrátený hash obsahu a drží ho tento test.
-foreach (['css/styles.css', 'css/fonts.css', 'js/main.js', 'js/consent-default.js'] as $staticAsset) {
+foreach (['css/styles.css', 'css/fonts.css', 'css/icons.css', 'js/main.js', 'js/consent-default.js'] as $staticAsset) {
     $expectedAssetVersion = substr(hash_file('sha256', dirname(__DIR__) . '/' . $staticAsset), 0, 8);
     foreach (['index.html', 'privacy.html', 'terms.html'] as $staticAssetFile) {
         $staticAssetMarkup = (string) file_get_contents(dirname(__DIR__) . '/' . $staticAssetFile);
@@ -418,6 +418,47 @@ foreach (['css/styles.css', 'css/fonts.css', 'js/main.js', 'js/consent-default.j
             "{$staticAssetFile} musí odkazovať na {$staticAsset} s aktuálnym cache-busting pinom ?v={$expectedAssetVersion}"
         );
     }
+}
+// Plný Font Awesome (86 KB CSS a 214 KB písiem) blokoval vykreslenie každej
+// stránky kvôli 26 ikonám. Šablóny preto načítavajú podmnožinu zo
+// `scripts/build_fa_subset.py`; nová ikona bez nového behu skriptu by sa
+// zobrazila ako prázdny štvorec.
+$faSubsetCss = (string) file_get_contents(dirname(__DIR__) . '/css/icons.css');
+$faIconSources = array_merge(
+    glob(dirname(__DIR__) . '/*.php') ?: [],
+    glob(dirname(__DIR__) . '/*.html') ?: [],
+    glob(dirname(__DIR__) . '/js/*.js') ?: []
+);
+$faNonIcons = ['solid', 'regular', 'brands', 'classic', 'fw', 'xs', 'sm', 'lg', 'xl', '2xs', '2xl', 'spin', 'pulse', 'border', 'inverse', 'ul', 'li', 'flip', 'beat', 'fade', 'bounce', 'shake'];
+$faUsedIcons = [];
+foreach ($faIconSources as $faSource) {
+    $faSourceContent = (string) file_get_contents($faSource);
+    expectTrue(
+        !str_contains($faSourceContent, 'fontawesome-free-7.1.0-web/css/'),
+        basename($faSource) . ' má načítať css/icons.css, nie plný balík Font Awesome'
+    );
+    preg_match_all('~\bfa-([a-z0-9]+(?:-[a-z0-9]+)*)\b~', $faSourceContent, $faMatches);
+    foreach ($faMatches[1] as $faName) {
+        if (!in_array($faName, $faNonIcons, true) && !preg_match('~^\d+x$|^stack~', $faName)) {
+            $faUsedIcons[$faName] = basename($faSource);
+        }
+    }
+}
+expectTrue(count($faUsedIcons) >= 20, 'Detekcia ikon Font Awesome v šablónach musí nájsť použité ikony');
+foreach ($faUsedIcons as $faName => $faSourceName) {
+    expectTrue(
+        preg_match('~^\.fa-' . preg_quote($faName, '~') . ' \{\n  --fa: "\\\\[0-9a-f]+";~m', $faSubsetCss) === 1,
+        "Ikona fa-{$faName} ({$faSourceName}) chýba v css/icons.css; spusti scripts/build_fa_subset.py"
+    );
+}
+preg_match_all('~url\("\.\./fonts/(icons-[a-z]+\.woff2)\?v=([0-9a-f]{8})"\)~', $faSubsetCss, $faFontUrls, PREG_SET_ORDER);
+expectSame(2, count($faFontUrls), 'Podmnožina Font Awesome musí deklarovať písmo solid aj brands');
+foreach ($faFontUrls as [, $faFontFile, $faFontVersion]) {
+    $faFontPath = dirname(__DIR__) . '/fonts/' . $faFontFile;
+    expectTrue(
+        is_file($faFontPath) && substr(hash_file('sha256', $faFontPath), 0, 8) === $faFontVersion,
+        "Písmo {$faFontFile} musí existovať a jeho ?v= musí zodpovedať obsahu"
+    );
 }
 foreach (['weblogo/index.html', 'weblogo/privacy.html', 'weblogo/terms.html'] as $legacyFontPage) {
     $legacyFontMarkup = (string) file_get_contents(dirname(__DIR__) . '/' . $legacyFontPage);
