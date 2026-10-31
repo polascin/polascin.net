@@ -141,7 +141,7 @@ if ($notFound) {
       <?php if (!empty($article['excerpt'])): ?>
         <p class="article-excerpt" lang="<?= htmlspecialchars($articleLang, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $article['excerpt'], ENT_QUOTES, 'UTF-8') ?></p>
       <?php endif; ?>
-      <?php $coverHtml = articleCoverHtml($article, 'article-cover-img', false); ?>
+      <?php $coverHtml = articleCoverHtml($article, 'article-cover-img', false, false, ARTICLE_COVER_SIZES); ?>
       <?php if ($coverHtml !== ''): ?>
         <figure class="article-cover"><?= $coverHtml ?></figure>
       <?php endif; ?>

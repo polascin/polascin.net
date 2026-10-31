@@ -2538,7 +2538,11 @@ foreach ($coverSources as $coverSource) {
 }
 expectTrue(
     !str_contains(articleCoverHtml(['slug' => basename($coverSources[0] ?? '', '.webp')], 'article-cover-img', false), 'srcset='),
-    'Obálka v detaile článku zostáva bez srcset kariet'
+    'Obálka bez parametra sizes zostáva bez srcset'
+);
+expectTrue(
+    str_contains((string) file_get_contents(dirname(__DIR__) . '/article.php'), "articleCoverHtml(\$article, 'article-cover-img', false, false, ARTICLE_COVER_SIZES)"),
+    'Detail článku musí obálke posielať ARTICLE_COVER_SIZES, aby menšie displeje nesťahovali 1600 px'
 );
 foreach (['index.php', 'articles.php'] as $cardTemplate) {
     expectTrue(

@@ -345,6 +345,9 @@ const ARTICLE_CARD_COVER_WIDTHS = [480, 960];
 // `.card-grid` má stĺpce `minmax(300px, 1fr)` v kontajneri 1200 px: tri
 // stĺpce okolo 400 px, pod 1024 px dva, na mobile jeden na celú šírku.
 const CARD_COVER_SIZES = '(min-width: 1024px) 400px, (min-width: 680px) 50vw, 100vw';
+// Detail článku: `.article-detail .container` má `max-width: 80ch`, teda
+// okolo 700 px (zmerané v prehliadači). Na displeji 1x a na telefóne 2x stačí variant 960 px.
+const ARTICLE_COVER_SIZES = '(min-width: 760px) 700px, 100vw';
 
 /**
  * `srcset` pre obálku na karte. Karta má na počítači okolo 400 px, no plná
