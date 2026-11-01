@@ -721,8 +721,36 @@ expectTrue(
     'Na úzkych displejoch sa musí skryť iba text značky, nie fotografia'
 );
 expectTrue(
-    preg_match('~@media \(max-width: 1100px\).*?\.nav-menu\s*\{.*?position:\s*fixed;~s', $siteStyles) === 1,
-    'Kompaktná navigácia musí zabrániť zalomeniu hlavičky aj tesne nad šírkou tabletu'
+    preg_match('~@media \(max-width: 1320px\)\s*\{\s*\.nav-menu\s*\{\s*position:\s*fixed;~', $siteStyles) === 1,
+    'Kompaktná navigácia musí platiť do 1320px, kým sa názvy vo všetkých jazykoch nezmestia do jedného riadka'
+);
+
+// Navigácia na počítači (nad kompaktnou) musí byť presným opakom kompaktného
+// bloku: pri zlomkovej šírke okna (zoom) medzi `max-width: N` a `min-width: N+1`
+// by inak neplatilo ani jedno pravidlo. Hodnota 1320px vychádza z merania v
+// skutočnom prehliadači (Chrome, klasický posuvník): od 1321px sa všetky
+// položky v desiatich jazykoch zmestia do jedného riadka, najužšia je
+// maďarčina; pôvodných 1100px nestačilo, názvy sa zalamovali a posledné
+// položky sa orezávali mimo obrazovky.
+$desktopNavigationBlock = '';
+if (preg_match('~@media not all and \(max-width: 1320px\)\s*\{(.*?)\n\}~s', $siteStyles, $desktopNavigationMatch) === 1) {
+    $desktopNavigationBlock = $desktopNavigationMatch[1];
+}
+expectTrue(
+    $desktopNavigationBlock !== '',
+    'CSS musí mať blok navigácie pre počítač ako presný opak kompaktnej navigácie (not all and (max-width: 1320px))'
+);
+expectTrue(
+    preg_match('~\.nav-link\s*\{[^}]*white-space:\s*nowrap;~', $desktopNavigationBlock) === 1,
+    'Položky navigácie na počítači sa nesmú zalamovať vo vnútri názvu'
+);
+expectTrue(
+    preg_match('~\.nav-menu\s*\{[^}]*flex-wrap:\s*wrap;~', $desktopNavigationBlock) === 1,
+    'Navigácia na počítači sa musí pri nezmestení zalomiť po celých položkách, nie orezať'
+);
+expectTrue(
+    preg_match('~\.nav-container\s*\{\s*max-width:\s*1440px;~', $desktopNavigationBlock) === 1,
+    'Kontajner navigácie na počítači musí byť širší ako obsah (strop 1440px), inak sa maďarské názvy nezmestia'
 );
 
 // Breakpoint mobilnej navigácie musí byť v JavaScripte rovnaký ako v CSS:
@@ -731,12 +759,13 @@ expectTrue(
 // šírok úplne nedostupná (regresia z commitu b41d628: CSS 1100px, JS 1024px).
 $navigationScript = (string) file_get_contents(dirname(__DIR__) . '/js/main.js');
 expectTrue(
-    str_contains($navigationScript, 'window.matchMedia("(max-width: 1100px)")'),
-    'js/main.js musí prepínať mobilnú navigáciu na rovnakej šírke ako CSS (1100px)'
+    str_contains($navigationScript, 'window.matchMedia("(max-width: 1320px)")'),
+    'js/main.js musí prepínať mobilnú navigáciu na rovnakej šírke ako CSS (1320px)'
 );
-expectTrue(
-    !str_contains($navigationScript, '(max-width: 1024px)'),
-    'js/main.js nesmie používať starý breakpoint navigácie 1024px'
+expectSame(
+    1,
+    preg_match_all('~\(max-width:\s*\d+px\)~', $navigationScript),
+    'js/main.js nesmie obsahovať ďalší (starý) breakpoint šírky okna okrem navigácie'
 );
 expectTrue(
     str_contains($navigationScript, '"ResizeObserver" in window'),

@@ -7,7 +7,7 @@
   // Musí sa zhodovať s breakpointom kompaktnej navigácie v css/styles.css:
   // pri nezhode openMobileMenu() odmietne otvoriť menu, hoci CSS už zobrazuje
   // hamburger, a navigácia je v medzipásme úplne nedostupná.
-  const mobileNavigationQuery = window.matchMedia("(max-width: 1100px)");
+  const mobileNavigationQuery = window.matchMedia("(max-width: 1320px)");
   const reducedMotionQuery = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   );

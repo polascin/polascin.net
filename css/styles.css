@@ -313,7 +313,7 @@ section {
 
 /* Na počítači dostávajú sekcie väčší vertikálny rytmus a kontajner širšie
    vnútorné odsadenie, aby obsah nelipol na okrajoch. Navigácia sa prepína
-   samostatne až nad 1100px, aby sa dlhšie názvy položiek nezalamovali. */
+   samostatne až nad 1320px (pozri blok Navigácia na počítači). */
 @media (min-width: 1025px) {
   .container {
     padding: 0 var(--spacing-md);
@@ -1252,7 +1252,10 @@ footer button:focus-visible {
 }
 
 /* Responsive */
-@media (max-width: 1100px) {
+
+/* Kompaktná navigácia (hamburger) platí do 1320px. Hranica musí byť rovnaká
+   v js/main.js (mobileNavigationQuery) a vo bloku Navigácia na počítači. */
+@media (max-width: 1320px) {
   .nav-menu {
     position: fixed;
     top: var(--navbar-height);
@@ -1311,6 +1314,48 @@ footer button:focus-visible {
 
   .nav-toggle.active span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -6px);
+  }
+}
+
+/* Navigácia na počítači: nad hranicou kompaktnej navigácie sa lišta zmestí
+   do jedného riadka vo všetkých desiatich jazykoch (najdlhšie sú maďarské
+   názvy). Položky sa nezalamujú, lišta je širšia ako obsah stránky a jazyk,
+   téma aj menu sú pri pravom okraji. Keby sa predsa niečo nezmestilo (dlhší
+   preklad, prihlásený správca, väčšie písmo), položky sa zalomia ako celky
+   namiesto orezania. Podmienka je presným opakom kompaktnej navigácie
+   (not all), aby pri zlomkovej šírke okna nevznikla medzera medzi nimi. */
+@media not all and (max-width: 1320px) {
+  .nav-container {
+    max-width: 1440px;
+  }
+
+  .nav-brand-group {
+    margin-right: var(--spacing-sm);
+  }
+
+  .lang-switcher {
+    margin-left: auto;
+  }
+
+  .lang-switcher-toggle {
+    padding: 0.5rem;
+  }
+
+  .theme-toggle-btn {
+    margin-left: 0.5rem;
+  }
+
+  .nav-menu {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    /* Kontajner má strop 1440px, preto medzera nad ním už nerastie. */
+    gap: clamp(0.5rem, 0.9vw, 0.8125rem);
+    row-gap: 0.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.9375rem;
+    white-space: nowrap;
   }
 }
 
