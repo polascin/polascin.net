@@ -97,6 +97,7 @@ const EXPECTED_MIGRATIONS = [
     '2026102902_context_comes_in_batches_article',
     '2026102903_month_of_verification_closing',
     '2026103101_replace_dashes_in_articles',
+    '2026110101_humanize_all_article_texts',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

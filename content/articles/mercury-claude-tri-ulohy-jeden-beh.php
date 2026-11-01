@@ -36,11 +36,11 @@ HTML,
 <p>Mercury mal viac vykázaných reasoning tokenov pri klinickej úlohe a pri kóde, Claude pri úprave textu. Claude vytvoril vo všetkých troch úlohách dlhší viditeľný výstup. Počítadlá rôznych modelov a ich tokenizácia však nie sú priamou mierou intelektuálneho úsilia. Z čísla 3 013 oproti 1 173 sa nedá vyčítať, kto lepšie rozmýšľal.</p>
 <h2>Kvalitu rozhodne kontrola odpovede</h2>
 <p>Podľa pôvodného hodnotenia oba modely pri dabigatrane zachytili zásadnú kontraindikáciu: u dospelých je v európskom súhrne charakteristických vlastností lieku Pradaxa uvedený CrCl pod 30 ml/min. Na posúdenie CrCl sa používa Cockcroftova a Gaultova rovnica. Tento údaj nemožno bez ďalšieho zameniť za eGFR podľa CKD-EPI, vyjadrenú na 1,73 m². Podrobnejšia odpoveď musí navyše správne odlíšiť európske a americké podmienky použitia.</p>
-<p>Pri kóde sa dá overiť aspoň konkrétny bod: žena vo veku 60 rokov, kreatinín 80 µmol/l, dáva podľa kreatinínovej rovnice CKD-EPI 2021 približne 72,704 ml/min/1,73 m². Výsledok 72,7 teda sedí. Jeden správny výpočet však neoveruje celú implementáciu, prevod jednotiek, hraničné vstupy ani validáciu. Bez úplných odpovedí a spustiteľného kódu zostáva priaznivé hodnotenie oboch modelov hodnotením autora pôvodného porovnania.</p>
+<p>Pri kóde sa dá overiť aspoň konkrétny bod: žena vo veku 60 rokov, kreatinín 80 µmol/l, dáva podľa kreatinínovej rovnice CKD-EPI 2021 približne 72,704 ml/min/1,73 m². Výsledok 72,7 teda sedí. Jeden správny výpočet však neoveruje celú implementáciu, prevod jednotiek, hraničné vstupy ani validáciu. Bez úplných odpovedí a spustiteľného kódu ostáva priaznivý záver o oboch modeloch záverom autora pôvodného porovnania.</p>
 <p>Pri slovenskom texte bol Mercury podľa podkladu stručný a bez komentára, Claude pridal poznámku o rekonštrukcii diakritiky. Pri čistej redakčnej úlohe môže takýto dodatok prekážať. Pri neistom klinickom údaji môže byť vysvetlenie neistoty presne tým, čo potrebujem.</p>
 <h2>Do ďalšieho merania patrí aj čas kontroly</h2>
 <p>Ďalší beh by mal uchovať presné zadania, identifikátory modelov, nastavenia úsilia a limity tokenov, opakovane striedať poradie volaní a oddeliť studenú cache od zahriatej. K času odpovede by som pridal čas overenia a opráv. Výstupy by mali dostať hodnotenie podľa vopred určených kritérií, ideálne bez zobrazenia názvu modelu.</p>
-<p>V týchto troch úlohách Mercury priniesol odpovede rýchlejšie a za nižšiu vykázanú cenu. Pre voľbu pracovného nástroja je to užitočný začiatok. O ďalšom použití rozhodne, koľko overenej práce po ňom zostane hotovej.</p>
+<p>V týchto troch úlohách Mercury priniesol odpovede rýchlejšie a za nižšiu vykázanú cenu. Pre voľbu pracovného nástroja je to užitočný začiatok. O ďalšom použití rozhodne, koľko práce po overení ostane naozaj hotovej.</p>
 <p><em>Osobné orientačné porovnanie jedného behu. Klinické príklady slúžia na posúdenie odpovedí AI, nie na rozhodovanie o liečbe konkrétneho pacienta.</em></p>
 HTML,
     ],
@@ -90,11 +90,11 @@ HTML,
 <p>Mercury vykázal více reasoning tokenů u klinické úlohy a kódu, Claude u redakční úlohy. Claude vytvořil ve všech třech případech delší viditelný výstup. Různá tokenizace a počítadla modelů však přímo neměří intelektuální úsilí. Z poměru 3 013 ku 1 173 nelze určit, kdo přemýšlel lépe.</p>
 <h2>Kvalitu rozhodne kontrola odpovědi</h2>
 <p>Podle původního hodnocení oba modely zachytily zásadní kontraindikaci dabigatranu: evropský souhrn údajů o přípravku Pradaxa uvádí u dospělých CrCl pod 30 ml/min. Pro posouzení CrCl slouží Cockcroftova a Gaultova rovnice. Tento údaj nelze jednoduše zaměnit za eGFR podle CKD-EPI vztaženou na 1,73 m². Podrobná odpověď musí správně rozlišovat evropské a americké podmínky použití.</p>
-<p>U kódu lze nezávisle ověřit konkrétní bod: žena ve věku 60 let s kreatininem 80 µmol/l má podle kreatininové rovnice CKD-EPI 2021 eGFR přibližně 72,704 ml/min/1,73 m². Uvedených 72,7 tedy sedí. Jediný správný výpočet ale neověří celou implementaci, převody jednotek, hraniční vstupy ani validaci. Bez úplných odpovědí a spustitelného kódu zůstává příznivý úsudek hodnocením autora původního srovnání.</p>
+<p>U kódu lze nezávisle ověřit konkrétní bod: žena ve věku 60 let s kreatininem 80 µmol/l má podle kreatininové rovnice CKD-EPI 2021 eGFR přibližně 72,704 ml/min/1,73 m². Uvedených 72,7 tedy sedí. Jediný správný výpočet ale neověří celou implementaci, převody jednotek, hraniční vstupy ani validaci. Bez úplných odpovědí a spustitelného kódu zůstává příznivý úsudek úsudkem autora původního srovnání.</p>
 <p>Při úpravě slovenštiny byl Mercury podle podkladu stručný a bez komentáře, Claude přidal poznámku o rekonstrukci diakritiky. U čistě redakčního zadání může dodatek překážet. U nejistého klinického údaje může vysvětlení nejistoty být právě tím potřebným.</p>
 <h2>Příště měřit i čas kontroly</h2>
 <p>Další srovnání by mělo uchovat přesná zadání, identifikátory modelů, nastavení úsilí a limity tokenů, opakovaně střídat pořadí volání a oddělit studenou cache od zahřáté. K času odpovědi bych přidal čas ověřování a oprav. Výstupy by se měly hodnotit podle předem daných kritérií, ideálně bez názvů modelů.</p>
-<p>Ve třech úlohách Mercury dodal odpovědi rychleji a za nižší vykázanou cenu. Pro výběr nástroje je to užitečný začátek. Další rozhodnutí záleží na tom, kolik ověřené práce po něm zůstane hotové.</p>
+<p>Ve třech úlohách Mercury dodal odpovědi rychleji a za nižší vykázanou cenu. Pro výběr nástroje je to užitečný začátek. Další rozhodnutí záleží na tom, kolik práce po ověření zůstane opravdu hotové.</p>
 <p><em>Osobní orientační srovnání jediného běhu. Klinické příklady slouží k posouzení odpovědí AI, nikoli k rozhodování o léčbě konkrétního pacienta.</em></p>
 HTML,
     ],
@@ -229,7 +229,7 @@ HTML,
 <p>A feljegyzés szerint a Mercury tömören, kommentár nélkül szerkesztette a szlovák szöveget. A Claude megjegyzést fűzött az ékezetek helyreállításához. Egy tisztán szerkesztési feladatnál ez zavaró lehet. Bizonytalan klinikai adatnál viszont szükség lehet a bizonytalanság kifejtésére.</p>
 <h2>Legközelebb az ellenőrzés idejét is mérni</h2>
 <p>A következő összehasonlítás őrizze meg a pontos utasításokat, modellazonosítókat, erőfeszítés-beállításokat és tokenkorlátokat, ismételt futásokban váltogassa a hívási sorrendet, és különítse el a hideg és meleg gyorsítótárat. A válaszidőhöz hozzáadnám az ellenőrzés és javítás idejét. Az értékelés előre meghatározott szempontok szerint, lehetőleg a modellnevek ismerete nélkül történjen.</p>
-<p>E három feladatban a Mercury gyorsabban, alacsonyabb kimutatott költséggel válaszolt. Ez hasznos kezdet az eszközválasztáshoz. A további használatról az dönt, mennyi ellenőrzött munka marad utána készen.</p>
+<p>E három feladatban a Mercury gyorsabban, alacsonyabb kimutatott költséggel válaszolt. Ez hasznos kezdet az eszközválasztáshoz. A további használatról az dönt, mennyi munka marad az ellenőrzés után valóban készen.</p>
 <p><em>Személyes, tájékozódó összehasonlítás egyetlen futás alapján. A klinikai példák az AI válaszainak értékelését szolgálják, nem egy adott beteg kezelését.</em></p>
 HTML,
     ],
@@ -283,7 +283,7 @@ HTML,
 <p>За записом, Mercury відредагував словацький текст стисло й без коментаря. Claude додав зауваження про відновлення діакритики. У суто редакційному завданні це може заважати. За невизначеності клінічних даних пояснення цієї невизначеності може бути необхідним.</p>
 <h2>Наступного разу виміряти й час перевірки</h2>
 <p>Наступне порівняння має зберегти точні запити, ідентифікатори моделей, налаштування зусилля та ліміти токенів, чергувати порядок викликів у повторних запусках і відокремити холодний кеш від прогрітого. До часу відповіді я додав би час перевірки й виправлень. Оцінювати слід за наперед визначеними критеріями, бажано без назв моделей.</p>
-<p>У цих трьох завданнях Mercury відповів швидше та з нижчою заявленою вартістю. Це корисний початок вибору інструмента. Подальше використання залежить від того, скільки перевіреної роботи після нього завершено.</p>
+<p>У цих трьох завданнях Mercury відповів швидше та з нижчою заявленою вартістю. Це корисний початок вибору інструмента. Подальше використання залежить від того, скільки роботи після перевірки лишиться справді завершеною.</p>
 <p><em>Особисте орієнтовне порівняння одного запуску. Клінічні приклади оцінюють відповіді AI, а не визначають лікування конкретного пацієнта.</em></p>
 HTML,
     ],

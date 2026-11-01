@@ -32,151 +32,151 @@ return [
         'sk' => [
             'title' => 'Ak celý workflow visí na jednom AI modeli, nemáte workflow. Máte predplatné.',
             'image_alt' => 'Otvorená taška s nástrojmi namiesto zamknutého operačného systému: každý AI model ako iný nástroj.',
-            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra a nástroje ako OpenRouter a Kilo Code ukazujú, že model treba voliť podľa úlohy. Kto si workflow postaví okolo jedného modelu, pri ďalšej aktualizácii ostane stáť.',
+            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra, OpenRouter a Kilo Code ukazujú, že model treba voliť podľa úlohy. Kto si postup postaví okolo jedného modelu, pri ďalšej aktualizácii ostane stáť.',
             'content' => <<<'HTML'
-<p>Tento týždeň ukázali nové vydania modelov niečo jasné. Model sa dá vymeniť podľa úlohy. Väčšina ľudí si to ešte nevšimla.</p>
-<p>Vyšiel DeepSeek-V4.1-Flash. GPT-6 Astra dostal aktualizácie. A nástroje, ktoré skutočne používam, <a href="https://openrouter.ai/">OpenRouter</a> a <a href="https://kilo.ai/">Kilo Code</a>, sa nestarajú, ktorý je „najlepší“. Smerujú na správny model podľa úlohy.</p>
-<p>AI používam v niekoľkých veľmi odlišných úlohách. Pri zhrnutí medicínskej literatúry chcem model, ktorý zvládne uvažovanie v dlhom kontexte. Pri písaní C# migrácií ten, ktorý píše čistý, idiomatický kód. Pri rýchlych prekladoch medicínskej terminológie medzi slovenčinou a angličtinou chcem rýchlosť pred hĺbkou.</p>
-<p>Žiadny jeden model nevyhráva všetky tri. A ten, ktorý vyhráva dnes, nemusí vyhrať budúci mesiac.</p>
-<p>Pasca je postaviť si postup okolo zvlášností jedného modelu. Keď sa zmení, a zmení sa, workflow sa zlomí. Vidím to pri tímoch, ktoré sa preučia na konkrétnu štruktúru promptu alebo správanie API a potom stratia dni, keď poskytovateľ nasadí aktualizáciu.</p>
-<p>Princíp: berte modely ako náradie v taške, nie ako operačný systém. Voľne ich vymeňte. Merajte výstupy, nie vernosť značke.</p>
-<p>Tímy, ktoré si teraz postavia modelovo nezávislý workflow, sa prispôsobia rýchlejšie ako tie, ktoré si vyberú stranu. Viac o tomto prístupe píše aj Kilo pod heslom <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
+<p>Tento týždeň vyšiel DeepSeek-V4.1-Flash a GPT-6 Astra dostal aktualizácie. Ani jeden z nich neberiem ako jediný model na všetko.</p>
+<p><a href="https://openrouter.ai/">OpenRouter</a> a <a href="https://kilo.ai/">Kilo Code</a>, nástroje, ktoré skutočne používam, sa nestarajú, ktorý je „najlepší“. Úlohu pošlú modelu, ktorý sa na ňu hodí.</p>
+<p>AI používam na tri veľmi odlišné veci. Pri zhrnutí medicínskej literatúry chcem model, ktorý udrží dlhý text a ešte z neho vyvodí záver. Pri písaní C# migrácií ten, ktorý píše čistý, idiomatický kód. Pri rýchlom preklade medicínskej terminológie medzi slovenčinou a angličtinou chcem rýchlosť, nie hĺbku.</p>
+<p>Žiadny model nevyhráva všetky tri. A ten, ktorý vyhráva dnes, nemusí vyhrať budúci mesiac.</p>
+<p>Pasca je postaviť si postup okolo zvykov jedného modelu. Keď sa zmení, a zmení sa, postup sa zlomí. Vidím to pri tímoch, ktoré sa naučia jednu štruktúru promptu alebo jedno správanie API a potom stratia dni, keď poskytovateľ nasadí aktualizáciu.</p>
+<p>Modely patria do tašky s náradím. Operačný systém z nich nerobte. Vymeňte ich podľa úlohy a merajte, čo z nich vyjde, nie vernosť značke.</p>
+<p>Kto si postup postaví tak, aby model vedel vymeniť, prispôsobí sa rýchlejšie než ten, kto si vyberie stranu. Kilo to isté volá <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
 <p>Smerujete medzi modelmi, alebo ste oddaní jednému?</p>
 HTML,
         ],
         'en' => [
             'title' => 'If your entire workflow depends on one AI model, you do not have a workflow. You have a subscription.',
             'image_alt' => 'An open tool bag instead of a locked operating system: each AI model as a different instrument.',
-            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra, and tools like OpenRouter and Kilo Code make the point: pick the model for the task. Build around one vendor’s quirks and the next update will stall you.',
+            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra, OpenRouter and Kilo Code make the point: pick the model for the task. Build around one model’s habits and the next update will stall you.',
             'content' => <<<'HTML'
-<p>This week’s model releases made something clear. You can swap the model to fit the task. Most people have not noticed.</p>
-<p>DeepSeek-V4.1-Flash dropped. GPT-6 Astra shipped updates. And the tools I actually use, <a href="https://openrouter.ai/">OpenRouter</a> and <a href="https://kilo.ai/">Kilo Code</a>, do not care which one is “best.” They route to the right model for the task automatically.</p>
-<p>I use AI across several very different jobs. For summarizing medical literature, I want the model that handles long-context reasoning. For writing C# migrations, I want the one that writes clean, idiomatic code. For quick translations between Slovak and English medical terminology, I want speed over depth.</p>
-<p>No single model wins all three. And the one that wins today will not necessarily win next month.</p>
-<p>The trap is building your process around one model’s quirks. When it changes, and it will, your workflow breaks. I have seen this with teams that overfit to a specific prompt structure or API behavior, then lose days when the provider ships an update.</p>
-<p>The principle: treat models like tools in a bag, not like an operating system. Swap freely. Measure outputs, not brand loyalty.</p>
-<p>The teams that build model-agnostic workflows now will adapt faster than the ones picking a side. Kilo frames the same idea as <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
+<p>DeepSeek-V4.1-Flash came out this week, and GPT-6 Astra shipped updates. I am not taking either as the one model for every job.</p>
+<p><a href="https://openrouter.ai/">OpenRouter</a> and <a href="https://kilo.ai/">Kilo Code</a>, the tools I actually use, do not care which model is “best.” They send the task to the model that fits it.</p>
+<p>I use AI for three very different jobs. For summarizing medical literature I want the model that can hold a long text and still draw a conclusion from it. For writing C# migrations I want the one that writes clean, idiomatic code. For quick translation of medical terminology between Slovak and English I want speed, not depth.</p>
+<p>No model wins all three. And the one that wins today will not necessarily win next month.</p>
+<p>The trap is building the process around one model’s habits. When it changes, and it will, the process breaks. I have seen teams learn one prompt structure or one API behaviour, then lose days when the provider ships an update.</p>
+<p>Models belong in a tool bag. Do not make an operating system out of them. Swap them as the task changes, and measure what comes out, not loyalty to a brand.</p>
+<p>Whoever builds the process so the model can be swapped will adapt faster than whoever picks a side. Kilo calls the same idea <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
 <p>Are you routing between models, or are you committed to one?</p>
 HTML,
         ],
         'cs' => [
             'title' => 'Pokud celý workflow visí na jednom AI modelu, nemáte workflow. Máte předplatné.',
             'image_alt' => 'Otevřená brašna s nástroji místo zamčeného operačního systému: každý AI model jako jiný nástroj.',
-            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra a nástroje jako OpenRouter a Kilo Code ukazují, že model je třeba volit podle úkolu. Kdo si workflow postaví kolem jednoho modelu, při další aktualizaci zůstane stát.',
+            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra, OpenRouter a Kilo Code ukazují, že model je třeba volit podle úkolu. Kdo si postup postaví kolem jednoho modelu, při další aktualizaci zůstane stát.',
             'content' => <<<'HTML'
-<p>Tento týden ukázala nová vydání modelů něco jasného. Model se dá vyměnit podle úkolu. Většina lidí si toho ještě nevšimla.</p>
-<p>Vyšel DeepSeek-V4.1-Flash. GPT-6 Astra dostal aktualizace. A nástroje, které skutečně používám, <a href="https://openrouter.ai/">OpenRouter</a> a <a href="https://kilo.ai/">Kilo Code</a>, se nestarají, který je „nejlepší“. Směřují na správný model podle úkolu.</p>
-<p>AI používám v několika velmi odlišných úlohách. Při shrnutí medicínské literatury chci model, který zvládne uvažování v dlouhém kontextu. Při psaní C# migrací ten, který píše čistý, idiomatický kód. Při rychlých překladech medicínské terminologie mezi slovenštinou a angličtinou chci rychlost před hloubkou.</p>
-<p>Žádný jeden model nevyhrává všechny tři. A ten, který vyhrává dnes, nemusí vyhrát příští měsíc.</p>
-<p>Pastí je postavit si postup kolem zvláštností jednoho modelu. Když se změní, a změní se, workflow se zlomí. Vidím to u týmů, které se přeučí na konkrétní strukturu promptu nebo chování API a pak ztratí dny, když poskytovatel nasadí aktualizaci.</p>
-<p>Princip: berte modely jako nářadí v brašně, ne jako operační systém. Volně je vyměňujte. Měřte výstupy, ne věrnost značce.</p>
-<p>Týmy, které si teď postaví modelově nezávislý workflow, se přizpůsobí rychleji než ty, které si vyberou stranu. Více o tomto přístupu píše i Kilo pod heslem <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
+<p>Tento týden vyšel DeepSeek-V4.1-Flash a GPT-6 Astra dostal aktualizace. Ani jeden z nich neberu jako jediný model na všechno.</p>
+<p><a href="https://openrouter.ai/">OpenRouter</a> a <a href="https://kilo.ai/">Kilo Code</a>, nástroje, které skutečně používám, se nestarají, který je „nejlepší“. Úkol pošlou modelu, který se na něj hodí.</p>
+<p>AI používám na tři velmi odlišné věci. Při shrnutí medicínské literatury chci model, který udrží dlouhý text a ještě z něj vyvodí závěr. Při psaní C# migrací ten, který píše čistý, idiomatický kód. Při rychlém překladu medicínské terminologie mezi slovenštinou a angličtinou chci rychlost, ne hloubku.</p>
+<p>Žádný model nevyhrává všechny tři. A ten, který vyhrává dnes, nemusí vyhrát příští měsíc.</p>
+<p>Past je postavit si postup kolem zvyků jednoho modelu. Když se změní, a změní se, postup se zlomí. Vidím to u týmů, které se naučí jednu strukturu promptu nebo jedno chování API a pak ztratí dny, když poskytovatel nasadí aktualizaci.</p>
+<p>Modely patří do brašny s nářadím. Nedělejte z nich operační systém. Vyměňujte je podle úkolu a měřte, co z nich vyjde, ne věrnost značce.</p>
+<p>Kdo si postup postaví tak, aby šel model vyměnit, přizpůsobí se rychleji než ten, kdo si vybere stranu. Kilo totéž nazývá <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
 <p>Směřujete mezi modely, nebo jste oddáni jednomu?</p>
 HTML,
         ],
         'de' => [
             'title' => 'Wenn der ganze Workflow an einem KI-Modell hängt, haben Sie keinen Workflow. Sie haben ein Abo.',
             'image_alt' => 'Eine offene Werkzeugtasche statt eines abgeschlossenen Betriebssystems: jedes KI-Modell als anderes Werkzeug.',
-            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra und Werkzeuge wie OpenRouter und Kilo Code zeigen: Das Modell muss zur Aufgabe passen. Wer den Workflow um ein Modell herum baut, bleibt beim nächsten Update stehen.',
+            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra, OpenRouter und Kilo Code zeigen: Das Modell muss zur Aufgabe passen. Wer den Ablauf um ein Modell herum baut, bleibt beim nächsten Update stehen.',
             'content' => <<<'HTML'
-<p>Die Modellveröffentlichungen dieser Woche haben etwas klar gemacht. Das Modell lässt sich nach der Aufgabe wechseln. Die meisten haben es noch nicht bemerkt.</p>
-<p>DeepSeek-V4.1-Flash ist erschienen. GPT-6 Astra hat Updates bekommen. Und die Werkzeuge, die ich wirklich nutze, <a href="https://openrouter.ai/">OpenRouter</a> und <a href="https://kilo.ai/">Kilo Code</a>, kümmern sich nicht darum, welches „das beste“ ist. Sie routen zum richtigen Modell für die Aufgabe.</p>
-<p>KI nutze ich für mehrere sehr unterschiedliche Aufgaben. Beim Zusammenfassen medizinischer Literatur will ich das Modell, das langes Kontextdenken beherrscht. Beim Schreiben von C#-Migrationen das, das sauberen, idiomatischen Code schreibt. Bei schnellen Übersetzungen medizinischer Terminologie zwischen Slowakisch und Englisch will ich Tempo vor Tiefe.</p>
-<p>Kein einzelnes Modell gewinnt alle drei. Und das, das heute gewinnt, gewinnt nächsten Monat nicht unbedingt.</p>
-<p>Die Falle ist, den Ablauf um die Eigenheiten eines Modells herum zu bauen. Wenn es sich ändert, und das wird es, bricht der Workflow. Ich sehe das bei Teams, die sich auf eine bestimmte Promptstruktur oder ein API-Verhalten überfitten und dann Tage verlieren, wenn der Anbieter ein Update ausliefert.</p>
-<p>Das Prinzip: Behandeln Sie Modelle wie Werkzeuge in einer Tasche, nicht wie ein Betriebssystem. Tauschen Sie frei. Messen Sie Ergebnisse, nicht Markentreue.</p>
-<p>Teams, die sich jetzt modellunabhängige Workflows bauen, passen sich schneller an als die, die eine Seite wählen. Mehr zu diesem Ansatz schreibt Kilo unter dem Stichwort <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Routen Sie zwischen Modellen, oder sind Sie einem verpflichtet?</p>
+<p>Diese Woche ist DeepSeek-V4.1-Flash erschienen, und GPT-6 Astra hat Updates bekommen. Keines von beiden nehme ich als das einzige Modell für alles.</p>
+<p><a href="https://openrouter.ai/">OpenRouter</a> und <a href="https://kilo.ai/">Kilo Code</a>, die Werkzeuge, die ich wirklich nutze, kümmern sich nicht darum, welches „das beste“ ist. Sie schicken die Aufgabe an das Modell, das zu ihr passt.</p>
+<p>KI nutze ich für drei sehr verschiedene Dinge. Beim Zusammenfassen medizinischer Literatur will ich das Modell, das einen langen Text hält und trotzdem einen Schluss daraus zieht. Beim Schreiben von C#-Migrationen das, das sauberen, idiomatischen Code schreibt. Bei der schnellen Übersetzung medizinischer Terminologie zwischen Slowakisch und Englisch will ich Tempo, nicht Tiefe.</p>
+<p>Kein Modell gewinnt alle drei. Was heute gewinnt, muss nächsten Monat nicht wieder gewinnen.</p>
+<p>Die Falle ist, den Ablauf um die Gewohnheiten eines Modells herum zu bauen. Wenn es sich ändert, und das wird es, bricht der Ablauf. Ich sehe das bei Teams, die eine bestimmte Promptstruktur oder ein API-Verhalten lernen und dann Tage verlieren, wenn der Anbieter ein Update ausliefert.</p>
+<p>Modelle gehören in die Werkzeugtasche. Machen Sie kein Betriebssystem aus ihnen. Tauschen Sie sie nach der Aufgabe und messen Sie, was herauskommt, nicht die Treue zu einer Marke.</p>
+<p>Wer den Ablauf so baut, dass sich das Modell tauschen lässt, passt sich schneller an als der, der eine Seite wählt. Kilo nennt dasselbe <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
+<p>Schicken Sie die Aufgaben an verschiedene Modelle, oder bleiben Sie bei einem?</p>
 HTML,
         ],
         'fr' => [
             'title' => 'Si tout votre workflow tient à un seul modèle d\'IA, vous n\'avez pas de workflow. Vous avez un abonnement.',
             'image_alt' => 'Une sacoche d\'outils ouverte à la place d\'un système d\'exploitation verrouillé : chaque modèle d\'IA comme un outil distinct.',
-            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra et des outils comme OpenRouter et Kilo Code le montrent : il faut choisir le modèle selon la tâche. Qui construit son workflow autour d\'un seul modèle s\'arrête à la prochaine mise à jour.',
+            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra, OpenRouter et Kilo Code le montrent : il faut choisir le modèle selon la tâche. Qui construit son travail autour d\'un seul modèle s\'arrête à la prochaine mise à jour.',
             'content' => <<<'HTML'
-<p>Les sorties de modèles de cette semaine ont rendu quelque chose clair. On peut changer de modèle selon la tâche. La plupart des gens ne l'ont pas encore vu.</p>
-<p>DeepSeek-V4.1-Flash est sorti. GPT-6 Astra a reçu des mises à jour. Et les outils que j'utilise vraiment, <a href="https://openrouter.ai/">OpenRouter</a> et <a href="https://kilo.ai/">Kilo Code</a>, ne se soucient pas de savoir lequel est « le meilleur ». Ils acheminent vers le bon modèle selon la tâche.</p>
-<p>J'utilise l'IA pour plusieurs travaux très différents. Pour résumer la littérature médicale, je veux le modèle qui tient le raisonnement en long contexte. Pour écrire des migrations C#, celui qui écrit un code propre et idiomatique. Pour de rapides traductions de terminologie médicale entre slovaque et anglais, je veux la vitesse avant la profondeur.</p>
+<p>Cette semaine, DeepSeek-V4.1-Flash est sorti et GPT-6 Astra a reçu des mises à jour. Je ne prends ni l'un ni l'autre comme le seul modèle pour tout.</p>
+<p><a href="https://openrouter.ai/">OpenRouter</a> et <a href="https://kilo.ai/">Kilo Code</a>, les outils que j'utilise vraiment, ne se demandent pas lequel est « le meilleur ». Ils envoient la tâche au modèle qui lui convient.</p>
+<p>J'utilise l'IA pour trois travaux très différents. Pour résumer la littérature médicale, je veux le modèle qui tient un long texte et en tire encore une conclusion. Pour écrire des migrations C#, celui qui écrit un code propre et idiomatique. Pour traduire vite la terminologie médicale entre le slovaque et l'anglais, je veux la vitesse, pas la profondeur.</p>
 <p>Aucun modèle ne gagne les trois. Et celui qui gagne aujourd'hui ne gagnera pas forcément le mois prochain.</p>
-<p>Le piège est de construire son processus autour des particularités d'un modèle. Quand il change, et il changera, le workflow casse. Je le vois chez des équipes qui se suradaptent à une structure de prompt ou à un comportement d'API, puis perdent des jours quand le fournisseur livre une mise à jour.</p>
-<p>Le principe : traitez les modèles comme des outils dans une sacoche, pas comme un système d'exploitation. Échangez librement. Mesurez les sorties, pas la fidélité à une marque.</p>
-<p>Les équipes qui se construisent maintenant des workflows indépendants du modèle s'adapteront plus vite que celles qui choisissent un camp. Kilo décrit la même idée sous le nom de <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Acheminez-vous entre les modèles, ou êtes-vous lié à un seul ?</p>
+<p>Le piège est de construire le travail autour des habitudes d'un modèle. Quand il change, et il changera, le travail casse. Je le vois dans des équipes qui apprennent une structure de prompt ou un comportement d'API, puis perdent des jours quand le fournisseur livre une mise à jour.</p>
+<p>Les modèles vont dans la sacoche. N'en faites pas un système d'exploitation. Changez-les selon la tâche et mesurez ce qui en sort, pas la fidélité à une marque.</p>
+<p>Qui construit le travail de façon à pouvoir changer de modèle s'adaptera plus vite que celui qui choisit un camp. Kilo appelle la même idée <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
+<p>Envoyez-vous le travail d'un modèle à l'autre, ou êtes-vous lié à un seul ?</p>
 HTML,
         ],
         'es' => [
             'title' => 'Si todo el flujo depende de un solo modelo de IA, no tiene un flujo de trabajo. Tiene una suscripción.',
             'image_alt' => 'Un maletín de herramientas abierto en lugar de un sistema operativo cerrado: cada modelo de IA como una herramienta distinta.',
-            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra y herramientas como OpenRouter y Kilo Code lo dejan claro: elija el modelo según la tarea. Quien construya el flujo alrededor de un modelo se detendrá en la próxima actualización.',
+            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra, OpenRouter y Kilo Code lo dejan claro: elija el modelo según la tarea. Quien construya el trabajo alrededor de un modelo se detendrá en la próxima actualización.',
             'content' => <<<'HTML'
-<p>Los lanzamientos de modelos de esta semana dejaron algo claro. El modelo se puede cambiar según la tarea. La mayoría aún no se ha dado cuenta.</p>
-<p>Salió DeepSeek-V4.1-Flash. GPT-6 Astra recibió actualizaciones. Y las herramientas que realmente uso, <a href="https://openrouter.ai/">OpenRouter</a> y <a href="https://kilo.ai/">Kilo Code</a>, no se preocupan de cuál es «el mejor». Enrutan al modelo adecuado para la tarea.</p>
-<p>Uso la IA en varios trabajos muy distintos. Para resumir literatura médica quiero el modelo que razona en contexto largo. Para escribir migraciones en C#, el que escribe código limpio e idiomático. Para traducciones rápidas de terminología médica entre eslovaco e inglés, quiero velocidad antes que profundidad.</p>
+<p>Esta semana salió DeepSeek-V4.1-Flash y GPT-6 Astra recibió actualizaciones. No tomo ninguno de los dos como el único modelo para todo.</p>
+<p><a href="https://openrouter.ai/">OpenRouter</a> y <a href="https://kilo.ai/">Kilo Code</a>, las herramientas que realmente uso, no se preocupan de cuál es «el mejor». Envían la tarea al modelo que le va.</p>
+<p>Uso la IA para tres trabajos muy distintos. Para resumir literatura médica quiero el modelo que sostiene un texto largo y aun así saca una conclusión. Para escribir migraciones en C#, el que escribe código limpio e idiomático. Para traducir rápido terminología médica entre eslovaco e inglés, quiero velocidad, no profundidad.</p>
 <p>Ningún modelo gana los tres. Y el que gana hoy no tiene por qué ganar el mes que viene.</p>
-<p>La trampa es construir el proceso alrededor de las rarezas de un modelo. Cuando cambie, y cambiará, el flujo se rompe. Lo veo en equipos que se sobreajustan a una estructura de prompt o a un comportamiento de API y luego pierden días cuando el proveedor publica una actualización.</p>
-<p>El principio: trate los modelos como herramientas en un maletín, no como un sistema operativo. Cámbielos con libertad. Mida resultados, no lealtad de marca.</p>
-<p>Los equipos que ahora construyan flujos independientes del modelo se adaptarán más rápido que los que elijan bando. Kilo formula la misma idea como <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>¿Enruta entre modelos o está comprometido con uno?</p>
+<p>La trampa es construir el proceso alrededor de los hábitos de un modelo. Cuando cambie, y cambiará, el proceso se rompe. Lo veo en equipos que aprenden una estructura de prompt o un comportamiento de API y luego pierden días cuando el proveedor publica una actualización.</p>
+<p>Los modelos van en el maletín. No haga de ellos un sistema operativo. Cámbielos según la tarea y mida lo que sale, no la lealtad a una marca.</p>
+<p>Quien construya el proceso de modo que el modelo se pueda cambiar se adaptará más rápido que quien elija bando. Kilo llama a la misma idea <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
+<p>¿Reparte el trabajo entre modelos o está comprometido con uno?</p>
 HTML,
         ],
         'pl' => [
             'title' => 'Jeśli cały workflow wisi na jednym modelu AI, nie macie workflow. Macie abonament.',
             'image_alt' => 'Otwarta torba z narzędziami zamiast zamkniętego systemu operacyjnego: każdy model AI jako inne narzędzie.',
-            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra i narzędzia takie jak OpenRouter i Kilo Code pokazują, że model trzeba dobierać do zadania. Kto zbuduje workflow wokół jednego modelu, przy kolejnej aktualizacji stanie.',
+            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra, OpenRouter i Kilo Code pokazują, że model trzeba dobierać do zadania. Kto zbuduje pracę wokół jednego modelu, przy kolejnej aktualizacji stanie.',
             'content' => <<<'HTML'
-<p>Wydania modeli z tego tygodnia pokazały coś jasno. Model da się wymienić według zadania. Większość ludzi jeszcze tego nie zauważyła.</p>
-<p>Wyszedł DeepSeek-V4.1-Flash. GPT-6 Astra dostał aktualizacje. A narzędzia, których naprawdę używam, <a href="https://openrouter.ai/">OpenRouter</a> i <a href="https://kilo.ai/">Kilo Code</a>, nie obchodzi, który jest „najlepszy”. Kierują do właściwego modelu według zadania.</p>
-<p>AI używam w kilku bardzo różnych zadaniach. Przy streszczaniu literatury medycznej chcę modelu, który ogarnie rozumowanie w długim kontekście. Przy pisaniu migracji C# chcę tego, który pisze czysty, idiomatyczny kod. Przy szybkich tłumaczeniach terminologii medycznej między słowackim a angielskim chcę szybkości przed głębią.</p>
-<p>Żaden jeden model nie wygrywa wszystkich trzech. A ten, który wygrywa dziś, nie musi wygrać za miesiąc.</p>
-<p>Pułapką jest zbudować proces wokół osobliwości jednego modelu. Gdy się zmieni, a zmieni się, workflow pęka. Widzę to u zespołów, które przeuczają się na konkretną strukturę promptu albo zachowanie API, a potem tracą dni, gdy dostawca wdraża aktualizację.</p>
-<p>Zasada: traktujcie modele jak narzędzia w torbie, nie jak system operacyjny. Wymieniajcie je swobodnie. Mierzcie wyniki, nie lojalność wobec marki.</p>
-<p>Zespoły, które teraz zbudują workflow niezależny od modelu, dostosują się szybciej niż te, które wybiorą stronę. Więcej o tym podejściu pisze Kilo pod hasłem <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Kierujecie między modelami, czy jesteście oddani jednemu?</p>
+<p>W tym tygodniu wyszedł DeepSeek-V4.1-Flash, a GPT-6 Astra dostał aktualizacje. Żadnego z nich nie biorę jako jedynego modelu do wszystkiego.</p>
+<p><a href="https://openrouter.ai/">OpenRouter</a> i <a href="https://kilo.ai/">Kilo Code</a>, narzędzia, których naprawdę używam, nie pytają, który jest „najlepszy”. Zadanie wysyłają do modelu, który do niego pasuje.</p>
+<p>AI używam do trzech bardzo różnych rzeczy. Przy streszczaniu literatury medycznej chcę modelu, który utrzyma długi tekst i jeszcze wyciągnie z niego wniosek. Przy pisaniu migracji C# chcę tego, który pisze czysty, idiomatyczny kod. Przy szybkim przekładzie terminologii medycznej między słowackim a angielskim chcę szybkości, nie głębi.</p>
+<p>Żaden model nie wygrywa wszystkich trzech. A ten, który wygrywa dziś, nie musi wygrać za miesiąc.</p>
+<p>Pułapka polega na tym, że proces buduje się wokół przyzwyczajeń jednego modelu. Gdy się zmieni, a zmieni się, proces pęka. Widzę to u zespołów, które uczą się jednej struktury promptu albo jednego zachowania API, a potem tracą dni, gdy dostawca wdraża aktualizację.</p>
+<p>Modele należą do torby z narzędziami. Nie róbcie z nich systemu operacyjnego. Wymieniajcie je według zadania i mierzcie, co z nich wychodzi, nie lojalność wobec marki.</p>
+<p>Kto zbuduje proces tak, żeby model dało się wymienić, dostosuje się szybciej niż ten, kto wybierze stronę. Kilo nazywa to samo <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
+<p>Rozdzielacie pracę między modele, czy jesteście oddani jednemu?</p>
 HTML,
         ],
         'hu' => [
             'title' => 'Ha az egész workflow egyetlen AI-modellen lóg, nincs workflow. Előfizetés van.',
             'image_alt' => 'Nyitott szerszámos táska a bezárt operációs rendszer helyett: minden AI-modell más szerszám.',
-            'excerpt' => 'A DeepSeek-V4.1-Flash, a GPT-6 Astra és az OpenRouterhez vagy a Kilo Code-hoz hasonló eszközök azt mutatják: a modellt a feladathoz kell választani. Aki egy modell köré építi a workflow-t, a következő frissítésnél megáll.',
+            'excerpt' => 'A DeepSeek-V4.1-Flash, a GPT-6 Astra, az OpenRouter és a Kilo Code azt mutatja: a modellt a feladathoz kell választani. Aki egy modell köré építi a munkát, a következő frissítésnél megáll.',
             'content' => <<<'HTML'
-<p>A hét modellkiadásai valamit világossá tettek. A modellt a feladat szerint lehet cserélni. A többség még nem vette észre.</p>
-<p>Megjelent a DeepSeek-V4.1-Flash. A GPT-6 Astra frissítéseket kapott. És az eszközök, amelyeket tényleg használok, az <a href="https://openrouter.ai/">OpenRouter</a> és a <a href="https://kilo.ai/">Kilo Code</a>, nem foglalkoznak azzal, melyik a „legjobb”. A feladathoz illő modellre irányítanak.</p>
-<p>Az AI-t több nagyon különböző feladatra használom. Orvosi irodalom összefoglalásakor a hosszú kontextusban gondolkodó modellt akarom. C#-migrációk írásakor azt, amely tiszta, idiomatikus kódot ír. Szlovák-angol orvosi terminológia gyors fordításakor a sebességet a mélység elé.</p>
-<p>Egyetlen modell sem nyeri mind a hármat. És amelyik ma nyer, nem feltétlenül nyeri a következő hónapot.</p>
-<p>A csapda az, ha a folyamatot egy modell sajátosságaira építjük. Ha változik, és változni fog, a workflow eltörik. Látom ezt azoknál a csapatoknál, amelyek egy adott promptstruktúrára vagy API-viselkedésre túlilleszkednek, majd napokat veszítenek, amikor a szolgáltató frissítést ad ki.</p>
-<p>Az elv: kezeljék a modelleket szerszámként a táskában, ne operációs rendszerként. Cseréljék szabadon. A kimenetet mérjék, ne a márkahűséget.</p>
-<p>A csapatok, amelyek most modellfüggetlen workflow-t építenek, gyorsabban alkalmazkodnak, mint azok, amelyek oldalt választanak. Erről a megközelítésről a Kilo a <a href="https://kilo.ai/model-freedom">model freedom</a> címszó alatt ír.</p>
-<p>Modellek között irányít, vagy egyhez hű?</p>
+<p>Ezen a héten megjelent a DeepSeek-V4.1-Flash, a GPT-6 Astra pedig frissítéseket kapott. Egyiket sem veszem egyetlen modellnek mindenre.</p>
+<p>Az <a href="https://openrouter.ai/">OpenRouter</a> és a <a href="https://kilo.ai/">Kilo Code</a>, az eszközök, amelyeket tényleg használok, nem azzal foglalkoznak, melyik a „legjobb”. A feladatot ahhoz a modellhez küldik, amelyik illik hozzá.</p>
+<p>Az AI-t három nagyon különböző dologra használom. Orvosi irodalom összefoglalásakor olyan modellt akarok, amely megtart egy hosszú szöveget, és még következtetést is levon belőle. C#-migrációk írásakor azt, amely tiszta, idiomatikus kódot ír. A szlovák és angol orvosi szakszavak gyors fordításakor a sebességet, nem a mélységet.</p>
+<p>Egyik modell sem nyeri mind a hármat. És amelyik ma nyer, nem feltétlenül nyeri a következő hónapot.</p>
+<p>A csapda az, ha a folyamatot egy modell szokásaira építjük. Ha változik, és változni fog, a folyamat eltörik. Látom ezt azoknál a csapatoknál, amelyek megtanulnak egy promptfelépítést vagy egy API-viselkedést, majd napokat veszítenek, amikor a szolgáltató frissítést ad ki.</p>
+<p>A modellek a szerszámos táskába valók. Ne csináljanak belőlük operációs rendszert. Cseréljék őket a feladat szerint, és azt mérjék, mi jön ki belőlük, ne a márkahűséget.</p>
+<p>Aki úgy építi a folyamatot, hogy a modellt ki lehessen cserélni, gyorsabban alkalmazkodik, mint aki oldalt választ. A Kilo ugyanezt <a href="https://kilo.ai/model-freedom">model freedom</a> néven írja le.</p>
+<p>A munkát modellek között osztja, vagy egyhez ragaszkodik?</p>
 HTML,
         ],
         'it' => [
             'title' => 'Se l\'intero flusso dipende da un solo modello di IA, non avete un flusso di lavoro. Avete un abbonamento.',
             'image_alt' => 'Una borsa degli attrezzi aperta al posto di un sistema operativo chiuso: ogni modello di IA come un attrezzo diverso.',
-            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra e strumenti come OpenRouter e Kilo Code lo mostrano: il modello va scelto in base al compito. Chi costruisce il flusso intorno a un modello si ferma al prossimo aggiornamento.',
+            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra, OpenRouter e Kilo Code lo mostrano: il modello va scelto in base al compito. Chi costruisce il lavoro intorno a un modello si ferma al prossimo aggiornamento.',
             'content' => <<<'HTML'
-<p>Le uscite di modelli di questa settimana hanno reso chiaro qualcosa. Il modello si può cambiare secondo il compito. La maggior parte delle persone non se n'è ancora accorta.</p>
-<p>È uscito DeepSeek-V4.1-Flash. GPT-6 Astra ha ricevuto aggiornamenti. E gli strumenti che uso davvero, <a href="https://openrouter.ai/">OpenRouter</a> e <a href="https://kilo.ai/">Kilo Code</a>, non si preoccupano di quale sia «il migliore». Instradano verso il modello giusto per il compito.</p>
-<p>Uso l'IA in diversi lavori molto diversi. Per riassumere letteratura medica voglio il modello che gestisce il ragionamento a lungo contesto. Per scrivere migrazioni C#, quello che scrive codice pulito e idiomatico. Per traduzioni rapide di terminologia medica tra slovacco e inglese voglio la velocità prima della profondità.</p>
-<p>Nessun singolo modello vince tutti e tre. E quello che vince oggi non vincerà necessariamente il mese prossimo.</p>
-<p>La trappola è costruire il processo intorno alle idiosincrasie di un modello. Quando cambia, e cambierà, il flusso si spezza. Lo vedo in team che si sovraadattano a una struttura di prompt o a un comportamento delle API e poi perdono giorni quando il fornitore rilascia un aggiornamento.</p>
-<p>Il principio: trattate i modelli come attrezzi in una borsa, non come un sistema operativo. Scambiateli liberamente. Misurate gli output, non la fedeltà al marchio.</p>
-<p>I team che ora costruiscono flussi indipendenti dal modello si adatteranno più in fretta di quelli che scelgono una parte. Kilo formula la stessa idea come <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Instradate tra modelli o siete legati a uno solo?</p>
+<p>Questa settimana è uscito DeepSeek-V4.1-Flash e GPT-6 Astra ha ricevuto aggiornamenti. Non prendo nessuno dei due come unico modello per tutto.</p>
+<p><a href="https://openrouter.ai/">OpenRouter</a> e <a href="https://kilo.ai/">Kilo Code</a>, gli strumenti che uso davvero, non si chiedono quale sia «il migliore». Mandano il compito al modello che gli si addice.</p>
+<p>Uso l'IA per tre lavori molto diversi. Per riassumere la letteratura medica voglio il modello che regge un testo lungo e ne trae comunque una conclusione. Per scrivere migrazioni C#, quello che scrive codice pulito e idiomatico. Per tradurre in fretta la terminologia medica tra slovacco e inglese voglio la velocità, non la profondità.</p>
+<p>Nessun modello vince tutti e tre. E quello che vince oggi non vincerà necessariamente il mese prossimo.</p>
+<p>La trappola è costruire il processo intorno alle abitudini di un modello. Quando cambia, e cambierà, il processo si spezza. Lo vedo in team che imparano una struttura di prompt o un comportamento delle API e poi perdono giorni quando il fornitore rilascia un aggiornamento.</p>
+<p>I modelli stanno nella borsa degli attrezzi. Non fatene un sistema operativo. Cambiateli secondo il compito e misurate ciò che ne esce, non la fedeltà a un marchio.</p>
+<p>Chi costruisce il processo in modo che il modello si possa cambiare si adatterà più in fretta di chi sceglie una parte. Kilo chiama la stessa idea <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
+<p>Ripartite il lavoro tra i modelli o siete legati a uno solo?</p>
 HTML,
         ],
         'uk' => [
             'title' => 'Якщо весь workflow тримається на одній AI-моделі, у вас немає workflow. У вас є підписка.',
             'image_alt' => 'Відкрита сумка з інструментами замість замкненої операційної системи: кожна AI-модель як інший інструмент.',
-            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra і такі інструменти, як OpenRouter і Kilo Code, показують: модель треба обирати під задачу. Хто збудує workflow навколо однієї моделі, на наступному оновленні зупиниться.',
+            'excerpt' => 'DeepSeek-V4.1-Flash, GPT-6 Astra, OpenRouter і Kilo Code показують: модель треба обирати під задачу. Хто збудує роботу навколо однієї моделі, на наступному оновленні зупиниться.',
             'content' => <<<'HTML'
-<p>Випуски моделей цього тижня зробили щось очевидним. Модель можна міняти за завданням. Більшість людей цього ще не помітила.</p>
-<p>Вийшов DeepSeek-V4.1-Flash. GPT-6 Astra отримав оновлення. А інструменти, якими я справді користуюся, <a href="https://openrouter.ai/">OpenRouter</a> і <a href="https://kilo.ai/">Kilo Code</a>, не дбають, який «найкращий». Вони спрямовують на правильну модель під задачу.</p>
-<p>AI я використовую в кількох дуже різних завданнях. Для стислого викладу медичної літератури хочу модель, яка тягне міркування в довгому контексті. Для написання C#-міграцій хочу ту, що пише чистий, ідіоматичний код. Для швидких перекладів медичної термінології між словацькою та англійською хочу швидкість перед глибиною.</p>
-<p>Жодна одна модель не виграє всі три. І та, що виграє сьогодні, не обов'язково виграє наступного місяця.</p>
-<p>Пастка полягає в тому, щоб збудувати процес навколо особливостей однієї моделі. Коли вона зміниться, а зміниться, workflow ламається. Я бачу це в командах, які перенавчаються на конкретну структуру промпту чи поведінку API, а потім втрачають дні, коли постачальник випускає оновлення.</p>
-<p>Принцип: ставтеся до моделей як до інструментів у сумці, а не як до операційної системи. Міняйте вільно. Міряйте виходи, не вірність бренду.</p>
-<p>Команди, які зараз збудують незалежний від моделі workflow, адаптуються швидше за тих, хто обирає сторону. Більше про цей підхід Kilo пише під гаслом <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
-<p>Ви спрямовуєте між моделями чи віддані одній?</p>
+<p>Цього тижня вийшов DeepSeek-V4.1-Flash, а GPT-6 Astra отримав оновлення. Жодну з них я не беру за єдину модель на все.</p>
+<p><a href="https://openrouter.ai/">OpenRouter</a> і <a href="https://kilo.ai/">Kilo Code</a>, інструменти, якими я справді користуюся, не питають, яка «найкраща». Задачу вони віддають моделі, яка їй пасує.</p>
+<p>AI я використовую для трьох дуже різних речей. Для стислого викладу медичної літератури хочу модель, яка втримає довгий текст і ще виведе з нього висновок. Для написання C#-міграцій хочу ту, що пише чистий, ідіоматичний код. Для швидкого перекладу медичної термінології між словацькою та англійською хочу швидкість, не глибину.</p>
+<p>Жодна модель не виграє всі три. І та, що виграє сьогодні, не обов’язково виграє наступного місяця.</p>
+<p>Пастка в тому, щоб збудувати процес навколо звичок однієї моделі. Коли вона зміниться, а зміниться, процес ламається. Я бачу це в командах, які вчать одну структуру промпту чи одну поведінку API, а потім втрачають дні, коли постачальник випускає оновлення.</p>
+<p>Моделі належать до сумки з інструментами. Не робіть із них операційну систему. Міняйте їх за задачею і міряйте, що з них виходить, а не вірність бренду.</p>
+<p>Хто збудує процес так, щоб модель можна було замінити, пристосується швидше за того, хто вибере сторону. Kilo називає те саме <a href="https://kilo.ai/model-freedom">model freedom</a>.</p>
+<p>Ви розподіляєте роботу між моделями чи віддані одній?</p>
 HTML,
         ],
     ],

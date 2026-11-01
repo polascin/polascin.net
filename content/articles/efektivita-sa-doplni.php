@@ -39,11 +39,11 @@ return [
 <p>Inžiniera v texte volá Marcus. Deväť mesiacov si na jeho výkon nikto nesťažoval. Práca chodila načas, zákazníci dostávali odpovede, hlásenia chodili každý piatok a systémy, ktoré mal na starosti, robili menej problémov než predtým. Potom si vzal dva týždne voľna. Do stredu tím zistil, že väčšinu práce, za ktorú ho platili, potichu zautomatizoval.</p>
 <p>Najviac mi ostala otázka, ktorú mu v tom texte položili: prečo si nám to nepovedal? Nie preto, že by niekto klamal. Preto, že uvoľnené hodiny nezostali voľné. Zautomatizoval proces, ušetril čas a do mesiaca bol ten čas plný nových povinností. Časť z nich zautomatizoval tiež. Prišla ďalšia práca.</p>
 <p>Nikto nebol zlomyseľný. Stal sa človekom, ktorý má kapacitu. A firmy vedia veľmi presne, čo s kapacitou spraviť.</p>
-<p>Sám prevádzkujem AI agentov, najmä v Cursori. Pripravujú koncepty, kontrolujú ich a pomáhajú s nasadením. Keďže pracujem sám, som aj ten, kto rozhoduje, čo sa stane s vráteným časom.</p>
+<p>Sám spúšťam AI agentov, najmä v Cursori. Pripravujú koncepty, kontrolujú ich a pomáhajú s nasadením. Keďže pracujem sám, som aj ten, kto rozhoduje, čo sa stane s vráteným časom.</p>
 <p>To je iný problém než ten v Ozcayovom texte. Väčšina tímov nemá výslovnú odpoveď na otázku, čo sa stane s hodinami, ktoré AI vráti.</p>
 <p>Ak nerozhodnete, samo od seba príde viac tej istej práce, len rýchlejšie. Ten čas sa nikomu nevráti.</p>
 <p>Preto som sa o tom začal rozhodovať zámerne. Časť ide do hĺbky, časť do oddychu a časť do práce, ktorú by som predtým odmietol. Nie je to výkaz hodín. Je to pravidlo. Inak sa prázdno doplní samo.</p>
-<p>Vedúci: ak vám zamestnanec povie, že mu AI ušetrila desať hodín týždenne, aký je váš úprimný ďalší krok?</p>
+<p>Ak vám zamestnanec povie, že mu AI ušetrila desať hodín týždenne, aký je váš úprimný ďalší krok?</p>
 
 HTML,
         ],
@@ -58,9 +58,9 @@ HTML,
 <p>Nobody was malicious. He became the person with capacity. And companies know exactly what to do with capacity.</p>
 <p>I run AI agents myself, mostly in Cursor. They draft, review, and help me deploy. I work alone, so I am also the person who decides what happens to the time that comes back.</p>
 <p>That is a different problem from the one in Ozcay’s piece. Most teams have no explicit answer to what happens to the hours AI gives back.</p>
-<p>If you do not decide, the default is more of the same work, only faster. Nobody gets that time back.</p>
+<p>If you do not decide, more of the same work arrives on its own, only faster. Nobody gets that time back.</p>
 <p>So I have started deciding on purpose. Some of it goes to depth, some to rest, and some to work I would have declined before. This is not a timesheet. It is a rule. Otherwise the empty space refills itself.</p>
-<p>Leaders: if an employee tells you AI saved them ten hours a week, what is your honest next move?</p>
+<p>If an employee tells you AI saved them ten hours a week, what is your honest next move?</p>
 
 HTML,
         ],
@@ -73,11 +73,11 @@ HTML,
 <p>Inženýra v textu nazývá Marcus. Devět měsíců si na jeho výkon nikdo nestěžoval. Práce chodila včas, zákazníci dostávali odpovědi, hlášení byla každý pátek a systémy, které měl na starosti, dělaly méně problémů než dřív. Pak si vzal dva týdny volna. Do středy tým zjistil, že většinu práce, za kterou ho platili, potichu zautomatizoval.</p>
 <p>Nejvíc mi zůstala otázka, kterou mu v tom textu položili: proč jsi nám to neřekl? Ne proto, že by někdo lhal. Proto, že uvolněné hodiny nezůstaly volné. Zautomatizoval proces, ušetřil čas a do měsíce byl ten čas plný nových povinností. Část z nich zautomatizoval také. Přišla další práce.</p>
 <p>Nikdo nebyl zlomyslný. Stal se člověkem, který má kapacitu. A firmy velmi přesně vědí, co s kapacitou udělat.</p>
-<p>Sám provozuji AI agenty, zejména v Cursoru. Připravují koncepty, kontrolují je a pomáhají s nasazením. Protože pracuji sám, jsem také ten, kdo rozhoduje, co se stane s vráceným časem.</p>
+<p>Sám spouštím AI agenty, zejména v Cursoru. Připravují koncepty, kontrolují je a pomáhají s nasazením. Protože pracuji sám, jsem také ten, kdo rozhoduje, co se stane s vráceným časem.</p>
 <p>To je jiný problém než ten v Ozcayově textu. Většina týmů nemá výslovnou odpověď na otázku, co se stane s hodinami, které AI vrátí.</p>
 <p>Když nerozhodnete, samo od sebe přijde víc téže práce, jen rychleji. Ten čas se nikomu nevrátí.</p>
 <p>Proto jsem se o tom začal rozhodovat záměrně. Část jde do hloubky, část do odpočinku a část do práce, kterou bych dřív odmítl. Není to výkaz hodin. Je to pravidlo. Jinak se prázdno zaplní samo.</p>
-<p>Vedoucí: když vám zaměstnanec řekne, že mu AI ušetřila deset hodin týdně, jaký je váš upřímný další krok?</p>
+<p>Když vám zaměstnanec řekne, že mu AI ušetřila deset hodin týdně, jaký je váš upřímný další krok?</p>
 
 HTML,
         ],
@@ -92,9 +92,9 @@ HTML,
 <p>Niemand war böswillig. Er wurde der Mensch mit Kapazität. Und Unternehmen wissen genau, was sie mit Kapazität tun.</p>
 <p>Ich betreibe selbst KI-Agenten, vor allem in Cursor. Sie schreiben Entwürfe, prüfen sie und helfen beim Veröffentlichen. Weil ich allein arbeite, entscheide auch ich, was mit der zurückgewonnenen Zeit geschieht.</p>
 <p>Das ist ein anderes Problem als das bei Ozcay. Die meisten Teams haben keine ausdrückliche Antwort darauf, was mit den Stunden geschieht, die KI zurückgibt.</p>
-<p>Wenn Sie nicht entscheiden, kommt standardmäßig mehr von derselben Arbeit, nur schneller. Diese Zeit bekommt niemand zurück.</p>
+<p>Wenn Sie nicht entscheiden, kommt von selbst mehr derselben Arbeit, nur schneller. Diese Zeit bekommt niemand zurück.</p>
 <p>Deshalb habe ich angefangen, das bewusst zu entscheiden. Ein Teil geht in die Tiefe, ein Teil in die Ruhe und ein Teil in Arbeit, die ich früher abgelehnt hätte. Das ist keine Stundenzählung. Es ist eine Regel. Sonst füllt sich die Leere von selbst.</p>
-<p>Führungskräfte: Wenn ein Mitarbeiter Ihnen sagt, dass KI ihm zehn Stunden pro Woche gespart hat, was ist Ihr ehrlicher nächster Schritt?</p>
+<p>Wenn ein Mitarbeiter Ihnen sagt, dass KI ihm zehn Stunden pro Woche gespart hat, was ist Ihr ehrlicher nächster Schritt?</p>
 
 HTML,
         ],
@@ -109,9 +109,9 @@ HTML,
 <p>Personne n’était malveillant. Il est devenu l’homme qui a de la capacité. Et les entreprises savent très bien quoi faire de la capacité.</p>
 <p>Je fais tourner moi-même des agents d’IA, surtout dans Cursor. Ils préparent des brouillons, les relisent et m’aident à publier. Comme je travaille seul, je suis aussi celui qui décide de ce qui arrive au temps récupéré.</p>
 <p>C’est un autre problème que celui du texte d’Ozcay. La plupart des équipes n’ont pas de réponse explicite à ce que deviennent les heures que l’IA rend.</p>
-<p>Si vous ne décidez pas, la valeur par défaut est davantage du même travail, plus vite. Personne ne récupère ce temps.</p>
+<p>Si vous ne décidez pas, le même travail revient de lui-même, en plus grande quantité et plus vite. Personne ne récupère ce temps.</p>
 <p>J’ai donc commencé à en décider exprès. Une part va à la profondeur, une part au repos, une part au travail que j’aurais refusé avant. Ce n’est pas un relevé d’heures. C’est une règle. Sinon, le vide se remplit tout seul.</p>
-<p>Responsables : si un employé vous dit que l’IA lui a fait gagner dix heures par semaine, quel est votre prochain geste honnête ?</p>
+<p>Si un employé vous dit que l’IA lui a fait gagner dix heures par semaine, quel est votre prochain geste honnête ?</p>
 
 HTML,
         ],
@@ -126,9 +126,9 @@ HTML,
 <p>Nadie fue malintencionado. Se convirtió en la persona con capacidad. Y las empresas saben muy bien qué hacer con la capacidad.</p>
 <p>Yo mismo hago funcionar agentes de IA, sobre todo en Cursor. Preparan borradores, los revisan y me ayudan a publicar. Como trabajo solo, también soy quien decide qué pasa con el tiempo recuperado.</p>
 <p>Es un problema distinto del que plantea el texto de Ozcay. La mayoría de los equipos no tiene una respuesta explícita sobre qué ocurre con las horas que la IA devuelve.</p>
-<p>Si usted no decide, lo predeterminado es más del mismo trabajo, más rápido. Nadie recupera ese tiempo.</p>
+<p>Si usted no decide, por sí solo llega más del mismo trabajo, más rápido. Nadie recupera ese tiempo.</p>
 <p>Por eso he empezado a decidirlo a propósito. Una parte va a la profundidad, una al descanso y una al trabajo que antes habría rechazado. No es un parte de horas. Es una regla. Si no, el vacío se llena solo.</p>
-<p>Directivos: si un empleado les dice que la IA le ahorró diez horas a la semana, ¿cuál es su siguiente paso honesto?</p>
+<p>Si un empleado les dice que la IA le ahorró diez horas a la semana, ¿cuál es su siguiente paso honesto?</p>
 
 HTML,
         ],
@@ -143,7 +143,7 @@ HTML,
 <p>Nikt nie był złośliwy. Stał się człowiekiem, który ma zapas czasu. A firmy dokładnie wiedzą, co z zapasem czasu zrobić.</p>
 <p>Sam uruchamiam agentów AI, głównie w Cursorze. Przygotowują szkice, sprawdzają je i pomagają w publikacji. Pracuję sam, więc to ja decyduję, co stanie się z odzyskanym czasem.</p>
 <p>To inny problem niż ten z tekstu Ozcaya. Większość zespołów nie ma wyraźnej odpowiedzi, co dzieje się z godzinami, które oddaje AI.</p>
-<p>Jeśli nie zdecydujesz, domyślnie przyjdzie więcej tej samej pracy, tylko szybciej. Tego czasu nikt nie dostanie z powrotem.</p>
+<p>Jeśli nie zdecydujesz, samo przyjdzie więcej tej samej pracy, tylko szybciej. Tego czasu nikt nie dostanie z powrotem.</p>
 <p>Dlatego zacząłem decydować o tym świadomie. Część idzie w głąb, część na odpoczynek, a część na pracę, którą wcześniej bym odmówił. To nie jest ewidencja godzin. To reguła. Inaczej pustka zapełni się sama.</p>
 <p>Jeśli pracownik powie ci, że AI zaoszczędziło mu dziesięć godzin tygodniowo, jaki jest twój uczciwy następny krok?</p>
 
@@ -160,7 +160,7 @@ HTML,
 <p>Senki nem volt rosszindulatú. Ő lett az, akinek van szabad kapacitása. A cégek pedig pontosan tudják, mit kezdjenek a kapacitással.</p>
 <p>Magam is AI-ügynököket futtatok, főleg a Cursorban. Vázlatokat készítenek, ellenőrzik őket, és segítenek a közzétételben. Mivel egyedül dolgozom, én döntöm el azt is, mi történik a visszakapott idővel.</p>
 <p>Ez más probléma, mint Ozcay szövegében. A legtöbb csapatnak nincs kimondott válasza arra, mi történik az órákkal, amelyeket az AI visszaad.</p>
-<p>Ha nem döntesz, az alapértelmezés ugyanabból a munkából több, csak gyorsabban. Azt az időt senki nem kapja vissza.</p>
+<p>Ha nem döntesz, magától jön több ugyanabból a munkából, csak gyorsabban. Azt az időt senki nem kapja vissza.</p>
 <p>Ezért kezdtem szándékosan dönteni róla. Egy része mélységre megy, egy része pihenésre, egy része olyan munkára, amelyet korábban visszautasítottam volna. Ez nem óraelszámolás. Szabály. Különben az üres hely magától megtelik.</p>
 <p>Ha egy munkatárs azt mondja, hogy az AI heti tíz órát spórolt neki, mi a következő őszinte lépésed?</p>
 
@@ -177,9 +177,9 @@ HTML,
 <p>Nessuno era in malafede. È diventato la persona con capacità libera. E le aziende sanno benissimo cosa fare della capacità.</p>
 <p>Faccio girare anch’io agenti di IA, soprattutto in Cursor. Preparano bozze, le controllano e mi aiutano a pubblicare. Siccome lavoro da solo, sono anche io a decidere che cosa succede al tempo restituito.</p>
 <p>È un problema diverso da quello del testo di Ozcay. La maggior parte dei team non ha una risposta esplicita su che cosa accade alle ore che l’IA restituisce.</p>
-<p>Se non decidi, il valore predefinito è più dello stesso lavoro, più in fretta. Quel tempo non torna a nessuno.</p>
+<p>Se non decidi, da sé arriva più dello stesso lavoro, più in fretta. Quel tempo non torna a nessuno.</p>
 <p>Per questo ho cominciato a deciderlo apposta. Una parte va in profondità, una al riposo e una al lavoro che prima avrei rifiutato. Non è un consuntivo ore. È una regola. Altrimenti il vuoto si riempie da solo.</p>
-<p>Responsabili: se un collaboratore ti dice che l’IA gli ha fatto risparmiare dieci ore a settimana, qual è la tua prossima mossa onesta?</p>
+<p>Se un collaboratore ti dice che l’IA gli ha fatto risparmiare dieci ore a settimana, qual è la tua prossima mossa onesta?</p>
 
 HTML,
         ],
@@ -194,9 +194,9 @@ HTML,
 <p>Ніхто не був зловмисним. Він став людиною, у якої є запас часу. А компанії дуже добре знають, що з запасом часу робити.</p>
 <p>Сам я запускаю ШІ-агентів, переважно в Cursor. Вони готують чернетки, перевіряють їх і допомагають із публікацією. Оскільки я працюю сам, я й вирішую, що станеться з поверненим часом.</p>
 <p>Це інша проблема, ніж та, про яку пише Devrim Ozcay. Більшість команд не має прямої відповіді, що відбувається з годинами, які повертає ШІ.</p>
-<p>Якщо не вирішите, типово прийде більше тієї самої роботи, лише швидше. Той час ніхто не отримає назад.</p>
+<p>Якщо не вирішите, само собою прийде більше тієї самої роботи, лише швидше. Той час ніхто не отримає назад.</p>
 <p>Тому я почав вирішувати це навмисно. Частина йде в глибину, частина на відпочинок, частина на роботу, від якої я раніше відмовився б. Це не табель годин. Це правило. Інакше порожнеча заповниться сама.</p>
-<p>Керівники: якщо працівник скаже вам, що ШІ заощадив йому десять годин на тиждень, який ваш чесний наступний крок?</p>
+<p>Якщо працівник скаже вам, що ШІ заощадив йому десять годин на тиждень, який ваш чесний наступний крок?</p>
 
 HTML,
         ],

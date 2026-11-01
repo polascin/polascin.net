@@ -40,19 +40,19 @@ return [
             'excerpt' => 'Pacient na dialýze sa zhoršoval a systém sa spýtal, prečo patrí inam. Slepé vykonávanie skriptov sme ovládali dávno pred umelou inteligenciou. Najdôležitejší skill je spoznať, kedy postup zastaviť.',
             'content' => <<<'HTML'
 <p>Pacient sa zhoršoval. Z prijímajúceho pracoviska sa pýtali, prečo sme ho poslali práve k nim. V tej chvíli som si uvedomil, že na slepé vykonávanie skriptov nepotrebujeme umelú inteligenciu. Túto schopnosť sme si osvojili dávno pred ňou.</p>
-<p>Asi týždeň sa zhoršoval zdravotný stav pacienta na dialýze.</p>
+<p>Asi týždeň sa pacient na dialýze zhoršoval.</p>
 <p>Na satelitnom dialyzačnom stredisku sme postupne využili všetko, čo máme k dispozícii: opakované fyzikálne vyšetrenia, nové prehodnotenie anamnézy, úpravy parametrov dialyzačného ošetrenia vrátane referenčnej hmotnosti, tradične označovanej ako suchá hmotnosť, laboratórne vyšetrenia, röntgen hrudníka a ultrasonografiu brucha.</p>
 <p>Tam sa naše diagnostické možnosti končia. Nie preto, že by sa nám nechcelo pokračovať. Preto, že dialyzačné stredisko nie je nemocnica.</p>
 <p>Pacientovi sme vysvetlili, že potrebuje ďalšiu diferenciálnu diagnostiku v nemocnici a že ju vzhľadom na progresívnu dýchavicu, vzostup hmotnosti a výrazne obmedzenú toleranciu námahy potrebuje bezodkladne.</p>
 <p>Povedal, že rozumie. Navrhovaný postup však odmietol.</p>
 <p>Jeho dôvody pre zachovanie anonymity nebudem rozvádzať. Z medicínskeho hľadiska nemenili potrebu nemocničného vyšetrenia. Z jeho pohľadu však zjavne zavážili viac než naše vysvetlenie.</p>
-<p>Aj to si zapamätajme. K pacientovi sa ešte vrátime.</p>
+<p>K pacientovi sa ešte vrátim.</p>
 <h2>Pacient mal dýchavicu. Systém mal otázku.</h2>
 <p>O dva dni prišiel pred šiestou ráno na pravidelnú dialýzu. Hmotnostný prírastok mal len 0,2 kilogramu.</p>
 <p>Nie, nie je to preklep. Dvesto gramov za dva dni.</p>
 <p>Príznaky však boli výrazne horšie. Malý hmotnostný prírastok neznamenal malé nebezpečenstvo. Teraz už nasledovalo odoslanie do nemocnice a presun na invalidnom vozíku.</p>
 <p>Krátko nato zazvonil telefón.</p>
-<p>Z prijímajúceho pracoviska sa ozvala žena, ktorú som považoval za lekárku. Považoval, pretože sa nepredstavila.</p>
+<p>Z prijímajúceho pracoviska sa ozvala žena. Za lekárku som ju len pokladal: nepredstavila sa, takže som to nevedel.</p>
 <p>Možno by ste čakali otázky o pacientovom stave. Čo sa zmenilo? Aké boli výsledky? Čo sme vyskúšali? Prečo považujeme situáciu za naliehavú?</p>
 <p>Nie.</p>
 <p>Otázka znela: prečo sme ho poslali práve k nim, keď podľa „rajónu“ patrí do inej nemocnice?</p>
@@ -71,7 +71,6 @@ return [
 <p>Neviem, či niekto na danom pracovisku takýto pokyn vyslovil. Ani nemusí. Niektoré pravidlá sa odovzdávajú bez školenia a bez podpisu. Stačí opakovane vidieť, ktoré správanie sa toleruje, ktoré sa oceňuje a za ktoré príde nepríjemnosť.</p>
 <p>Časom už človek nepotrebuje príkaz. Spustí postup sám.</p>
 <h2>Správna odpoveď na nesprávnu otázku</h2>
-<p>Tu sa podobnosť s umelou inteligenciou stáva zaujímavou.</p>
 <p>Inteligentný systém môže podať výborný výkon, a predsa riešiť nesprávnu úlohu. Ak mu ako hlavný cieľ zadáte chrániť kapacitu pracoviska, môže veľmi efektívne hľadať dôvody, prečo konkrétny pacient patrí inam.</p>
 <p>Lenže medicínska otázka bola iná:</p>
 <p>Čo tento človek potrebuje a ako mu to zabezpečíme včas?</p>
@@ -111,19 +110,19 @@ HTML,
             'excerpt' => 'A dialysis patient was getting worse, and the system asked why he belonged somewhere else. Blindly running a script is a skill we mastered long before artificial intelligence. The one that matters is knowing when to stop.',
             'content' => <<<'HTML'
 <p>The patient was getting worse. The receiving unit asked why we had sent him to them. In that moment I realised that we do not need artificial intelligence in order to run a script blindly. We acquired that ability long before it existed.</p>
-<p>For about a week, a dialysis patient had been deteriorating.</p>
+<p>For about a week, the dialysis patient had been getting worse.</p>
 <p>At the satellite dialysis centre we used, in turn, everything we have: repeated physical examinations, a fresh review of the history, adjustments to the dialysis prescription including the reference weight, traditionally called the dry weight, laboratory tests, a chest X-ray and an abdominal ultrasound.</p>
-<p>That is where our diagnostic reach ends. Not because we would rather stop. Because a dialysis centre is not a hospital.</p>
+<p>That is where our diagnostic reach ends. Not because we did not want to continue. Because a dialysis centre is not a hospital.</p>
 <p>We explained to the patient that he needed further differential diagnosis in hospital, and that, given progressive breathlessness, a rising weight and a sharply limited tolerance of effort, he needed it without delay.</p>
 <p>He said he understood. He still refused the proposed course.</p>
 <p>I will not set out his reasons; anonymity requires that. Medically, they did not change the need for a hospital assessment. From his point of view they clearly weighed more than our explanation.</p>
-<p>Remember that too. We will come back to the patient.</p>
+<p>I will come back to the patient.</p>
 <h2>The patient was breathless. The system had a question.</h2>
 <p>Two days later he arrived before six in the morning for his regular dialysis. His weight gain was only 0.2 kilograms.</p>
 <p>No, that is not a typo. Two hundred grams in two days.</p>
 <p>The symptoms, though, were much worse. A small weight gain did not mean a small danger. This time he was sent to hospital, and moved there in a wheelchair.</p>
 <p>Shortly afterwards the telephone rang.</p>
-<p>A woman called from the receiving unit. I took her for a doctor. I took her for one because she did not introduce herself.</p>
+<p>A woman called from the receiving unit. I can only say I took her for a doctor: she never introduced herself, so I did not know.</p>
 <p>You might have expected questions about the patient’s condition. What had changed? What were the results? What had we already tried? Why did we consider the situation urgent?</p>
 <p>No.</p>
 <p>The question was: why had we sent him to them, when according to the “catchment” he belonged to another hospital?</p>
@@ -142,7 +141,6 @@ HTML,
 <p>I do not know whether anyone on that unit ever said this aloud. They need not have. Some rules are passed on without training and without a signature. It is enough to see, again and again, which behaviour is tolerated, which is rewarded, and which brings trouble.</p>
 <p>After a while a person no longer needs an order. He starts the procedure himself.</p>
 <h2>The right answer to the wrong question</h2>
-<p>Here the resemblance to artificial intelligence becomes interesting.</p>
 <p>An intelligent system can perform excellently and still be solving the wrong task. If its chief goal is to protect the capacity of a unit, it can search very efficiently for reasons why a particular patient belongs somewhere else.</p>
 <p>The medical question was different:</p>
 <p>What does this person need, and how do we secure it in time?</p>
@@ -182,19 +180,19 @@ HTML,
             'excerpt' => 'Pacient na dialýze se zhoršoval a systém se ptal, proč patří jinam. Slepé vykonávání skriptů jsme ovládali dávno před umělou inteligencí. Nejdůležitější skill je poznat, kdy postup zastavit.',
             'content' => <<<'HTML'
 <p>Pacient se zhoršoval. Z přijímajícího pracoviště se ptali, proč jsme ho poslali právě k nim. V té chvíli jsem si uvědomil, že na slepé vykonávání skriptů nepotřebujeme umělou inteligenci. Tuto schopnost jsme si osvojili dávno před ní.</p>
-<p>Asi týden se zhoršoval zdravotní stav pacienta na dialýze.</p>
+<p>Asi týden se pacient na dialýze zhoršoval.</p>
 <p>Na satelitním dialyzačním středisku jsme postupně využili všechno, co máme k dispozici: opakovaná fyzikální vyšetření, nové přehodnocení anamnézy, úpravy parametrů dialyzačního ošetření včetně referenční hmotnosti, tradičně označované jako suchá hmotnost, laboratorní vyšetření, rentgen hrudníku a ultrasonografii břicha.</p>
 <p>Tam naše diagnostické možnosti končí. Ne proto, že by se nám nechtělo pokračovat. Proto, že dialyzační středisko není nemocnice.</p>
 <p>Pacientovi jsme vysvětlili, že potřebuje další diferenciální diagnostiku v nemocnici a že ji vzhledem k progresivní dušnosti, vzestupu hmotnosti a výrazně omezené toleranci námahy potřebuje neprodleně.</p>
 <p>Řekl, že rozumí. Navrhovaný postup však odmítl.</p>
 <p>Jeho důvody pro zachování anonymity nebudu rozvádět. Z medicínského hlediska neměnily potřebu nemocničního vyšetření. Z jeho pohledu však zjevně zavážily víc než naše vysvětlení.</p>
-<p>I to si zapamatujme. K pacientovi se ještě vrátíme.</p>
+<p>K pacientovi se ještě vrátím.</p>
 <h2>Pacient měl dušnost. Systém měl otázku.</h2>
 <p>O dva dny později přišel před šestou ráno na pravidelnou dialýzu. Hmotnostní přírůstek měl jen 0,2 kilogramu.</p>
 <p>Ne, není to překlep. Dvě stě gramů za dva dny.</p>
 <p>Příznaky však byly výrazně horší. Malý hmotnostní přírůstek neznamenal malé nebezpečí. Teď už následovalo odeslání do nemocnice a přesun na invalidním vozíku.</p>
 <p>Krátce nato zazvonil telefon.</p>
-<p>Z přijímajícího pracoviště se ozvala žena, kterou jsem považoval za lékařku. Považoval, protože se nepředstavila.</p>
+<p>Z přijímajícího pracoviště se ozvala žena. Za lékařku jsem ji jen pokládal: nepředstavila se, takže jsem to nevěděl.</p>
 <p>Možná byste čekali otázky o pacientově stavu. Co se změnilo? Jaké byly výsledky? Co jsme vyzkoušeli? Proč považujeme situaci za naléhavou?</p>
 <p>Ne.</p>
 <p>Otázka zněla: proč jsme ho poslali právě k nim, když podle „spádu“ patří do jiné nemocnice?</p>
@@ -213,7 +211,6 @@ HTML,
 <p>Nevím, jestli někdo na daném pracovišti takový pokyn vyslovil. Ani nemusí. Některá pravidla se předávají bez školení a bez podpisu. Stačí opakovaně vidět, které chování se toleruje, které se oceňuje a za které přijde nepříjemnost.</p>
 <p>Časem už člověk nepotřebuje příkaz. Postup spustí sám.</p>
 <h2>Správná odpověď na nesprávnou otázku</h2>
-<p>Tady se podobnost s umělou inteligencí stává zajímavou.</p>
 <p>Inteligentní systém může podat výborný výkon, a přesto řešit nesprávný úkol. Pokud mu jako hlavní cíl zadáte chránit kapacitu pracoviště, může velmi efektivně hledat důvody, proč konkrétní pacient patří jinam.</p>
 <p>Jenže medicínská otázka byla jiná:</p>
 <p>Co tento člověk potřebuje a jak mu to zajistíme včas?</p>
@@ -253,19 +250,19 @@ HTML,
             'excerpt' => 'Ein Dialysepatient verschlechterte sich, und das System fragte, warum er woanders hingehöre. Skripte blind auszuführen konnten wir lange vor der künstlichen Intelligenz. Der wichtigste Skill ist zu erkennen, wann man anhält.',
             'content' => <<<'HTML'
 <p>Der Patient verschlechterte sich. Von der aufnehmenden Station kam die Frage, warum wir ihn gerade dorthin geschickt hatten. In dem Moment wurde mir klar, dass wir für das blinde Abarbeiten von Skripten keine künstliche Intelligenz brauchen. Diese Fähigkeit hatten wir uns lange vor ihr angeeignet.</p>
-<p>Etwa eine Woche lang verschlechterte sich der Zustand eines Dialysepatienten.</p>
+<p>Etwa eine Woche lang verschlechterte sich der Dialysepatient.</p>
 <p>Im Satellitendialysezentrum setzten wir nacheinander alles ein, was uns zur Verfügung steht: wiederholte körperliche Untersuchungen, eine neue Durchsicht der Anamnese, Anpassungen der Dialyseverordnung einschließlich des Referenzgewichts, traditionell Trockengewicht genannt, Laboruntersuchungen, eine Röntgenaufnahme des Thorax und eine Sonographie des Abdomens.</p>
 <p>Dort enden unsere diagnostischen Möglichkeiten. Nicht, weil wir nicht weitermachen wollten. Sondern weil ein Dialysezentrum kein Krankenhaus ist.</p>
 <p>Wir erklärten dem Patienten, dass er eine weitere Differenzialdiagnostik im Krankenhaus brauche und dass er sie angesichts einer fortschreitenden Atemnot, einer Gewichtszunahme und einer deutlich eingeschränkten Belastbarkeit unverzüglich brauche.</p>
 <p>Er sagte, er verstehe. Den vorgeschlagenen Weg lehnte er dennoch ab.</p>
 <p>Seine Gründe führe ich nicht aus; die Anonymität verlangt das. Medizinisch änderten sie nichts an der Notwendigkeit einer Untersuchung im Krankenhaus. Aus seiner Sicht wogen sie offenbar schwerer als unsere Erklärung.</p>
-<p>Auch das sollten wir behalten. Auf den Patienten kommen wir noch zurück.</p>
+<p>Auf den Patienten komme ich noch zurück.</p>
 <h2>Der Patient hatte Atemnot. Das System hatte eine Frage.</h2>
 <p>Zwei Tage später kam er vor sechs Uhr morgens zur regulären Dialyse. Die Gewichtszunahme betrug nur 0,2 Kilogramm.</p>
 <p>Nein, das ist kein Tippfehler. Zweihundert Gramm in zwei Tagen.</p>
 <p>Die Symptome waren jedoch deutlich schlimmer. Eine kleine Gewichtszunahme bedeutete keine kleine Gefahr. Diesmal folgte die Einweisung ins Krankenhaus und der Transport im Rollstuhl.</p>
 <p>Kurz darauf klingelte das Telefon.</p>
-<p>Vom aufnehmenden Arbeitsplatz meldete sich eine Frau, die ich für eine Ärztin hielt. Ich hielt sie dafür, weil sie sich nicht vorstellte.</p>
+<p>Vom aufnehmenden Arbeitsplatz meldete sich eine Frau. Für eine Ärztin hielt ich sie nur: Sie stellte sich nicht vor, also wusste ich es nicht.</p>
 <p>Man hätte Fragen zum Zustand des Patienten erwartet. Was hatte sich geändert? Welche Befunde lagen vor? Was hatten wir bereits versucht? Warum hielten wir die Lage für dringlich?</p>
 <p>Nein.</p>
 <p>Die Frage lautete: Warum hatten wir ihn gerade dorthin geschickt, wenn er nach dem „Einzugsgebiet“ in ein anderes Krankenhaus gehöre?</p>
@@ -284,7 +281,6 @@ HTML,
 <p>Ich weiß nicht, ob jemand auf jener Station diese Anweisung je ausgesprochen hat. Das muss auch niemand. Manche Regeln werden ohne Schulung und ohne Unterschrift weitergegeben. Es genügt, wiederholt zu sehen, welches Verhalten geduldet wird, welches belohnt wird und welches Unannehmlichkeiten bringt.</p>
 <p>Mit der Zeit braucht ein Mensch keinen Befehl mehr. Er startet das Verfahren von selbst.</p>
 <h2>Die richtige Antwort auf die falsche Frage</h2>
-<p>Hier wird die Ähnlichkeit mit künstlicher Intelligenz interessant.</p>
 <p>Ein intelligentes System kann ausgezeichnet arbeiten und trotzdem die falsche Aufgabe lösen. Gibt man ihm als Hauptziel vor, die Kapazität einer Station zu schützen, kann es sehr effizient nach Gründen suchen, warum ein bestimmter Patient woanders hingehört.</p>
 <p>Die medizinische Frage war eine andere:</p>
 <p>Was braucht dieser Mensch, und wie stellen wir es rechtzeitig sicher?</p>
@@ -324,19 +320,19 @@ HTML,
             'excerpt' => 'Un patient dialysé s’aggravait, et le système a demandé pourquoi il relevait d’ailleurs. Exécuter un script à l’aveugle, nous savions le faire bien avant l’intelligence artificielle. Le skill qui compte est de savoir l’interrompre.',
             'content' => <<<'HTML'
 <p>Le patient s’aggravait. L’unité qui le recevait demandait pourquoi nous l’avions adressé précisément chez eux. À cet instant, j’ai compris que l’exécution aveugle des scripts n’a pas besoin d’intelligence artificielle. Nous avions acquis cette capacité bien avant elle.</p>
-<p>Depuis environ une semaine, l’état d’un patient dialysé se dégradait.</p>
+<p>Pendant environ une semaine, l’état du patient dialysé se dégradait.</p>
 <p>Dans le centre de dialyse satellite, nous avons utilisé tour à tour tout ce dont nous disposons : examens cliniques répétés, reprise de l’anamnèse, ajustements des paramètres de la séance, y compris le poids de référence, traditionnellement appelé poids sec, examens de laboratoire, radiographie du thorax et échographie abdominale.</p>
 <p>Là s’arrêtent nos moyens diagnostiques. Non parce que nous n’aurions pas voulu continuer. Parce qu’un centre de dialyse n’est pas un hôpital.</p>
 <p>Nous avons expliqué au patient qu’il lui fallait poursuivre le diagnostic différentiel à l’hôpital et que, devant une dyspnée progressive, une prise de poids et une tolérance à l’effort très réduite, il lui fallait le faire sans délai.</p>
 <p>Il a dit qu’il comprenait. Il a tout de même refusé la démarche proposée.</p>
 <p>Je ne détaillerai pas ses raisons : l’anonymat l’exige. Sur le plan médical, elles ne changeaient pas la nécessité d’un examen hospitalier. De son point de vue, elles pesaient manifestement plus que notre explication.</p>
-<p>Retenons cela aussi. Nous reviendrons au patient.</p>
+<p>Au patient, j’y reviendrai.</p>
 <h2>Le patient était dyspnéique. Le système avait une question.</h2>
 <p>Deux jours plus tard, il est arrivé avant six heures pour sa dialyse habituelle. Sa prise de poids n’était que de 0,2 kilogramme.</p>
 <p>Non, ce n’est pas une coquille. Deux cents grammes en deux jours.</p>
 <p>Les symptômes, eux, étaient nettement pires. Une faible prise de poids ne voulait pas dire un faible danger. Cette fois, il a été adressé à l’hôpital, transporté en fauteuil roulant.</p>
 <p>Peu après, le téléphone a sonné.</p>
-<p>Une femme a appelé depuis l’unité d’accueil. Je l’ai prise pour un médecin. Je l’ai prise pour tel parce qu’elle ne s’est pas présentée.</p>
+<p>Une femme a appelé depuis l’unité d’accueil. Je ne peux dire que je l’ai prise pour un médecin : elle ne s’est pas présentée, donc je ne le savais pas.</p>
 <p>On aurait pu attendre des questions sur l’état du patient. Qu’est-ce qui avait changé ? Quels étaient les résultats ? Qu’avions-nous déjà essayé ? Pourquoi jugions-nous la situation urgente ?</p>
 <p>Non.</p>
 <p>La question était : pourquoi l’avions-nous adressé précisément chez eux, alors que, selon le « secteur », il relevait d’un autre hôpital ?</p>
@@ -355,7 +351,6 @@ HTML,
 <p>Je ne sais pas si quelqu’un, dans ce service, a jamais prononcé cette consigne. Ce n’est pas nécessaire. Certaines règles se transmettent sans formation et sans signature. Il suffit de voir, à plusieurs reprises, quel comportement est toléré, lequel est récompensé, et lequel attire des ennuis.</p>
 <p>Avec le temps, la personne n’a plus besoin d’un ordre. Elle lance la procédure d’elle-même.</p>
 <h2>La bonne réponse à la mauvaise question</h2>
-<p>C’est là que la ressemblance avec l’intelligence artificielle devient intéressante.</p>
 <p>Un système intelligent peut être excellent et résoudre pourtant la mauvaise tâche. Si son objectif principal est de protéger la capacité d’un service, il peut chercher très efficacement les raisons pour lesquelles tel patient relève d’ailleurs.</p>
 <p>Or la question médicale était autre :</p>
 <p>De quoi cette personne a-t-elle besoin, et comment le lui assurons-nous à temps ?</p>
@@ -395,19 +390,19 @@ HTML,
             'excerpt' => 'Un paciente en diálisis empeoraba y el sistema preguntó por qué le correspondía otro sitio. Ejecutar un guion a ciegas lo sabíamos hacer mucho antes de la inteligencia artificial. El skill que importa es saber cuándo detenerlo.',
             'content' => <<<'HTML'
 <p>El paciente empeoraba. Desde la unidad que lo recibía preguntaban por qué se lo habíamos enviado precisamente a ellos. En ese momento comprendí que para ejecutar guiones a ciegas no necesitamos inteligencia artificial. Esa capacidad la habíamos adquirido mucho antes de que existiera.</p>
-<p>Durante cerca de una semana empeoraba el estado de un paciente en diálisis.</p>
+<p>Durante cerca de una semana empeoraba el paciente en diálisis.</p>
 <p>En el centro satélite de diálisis fuimos usando todo lo que tenemos a mano: exploraciones físicas repetidas, una nueva revisión de la anamnesis, ajustes de los parámetros de la sesión, incluido el peso de referencia, llamado tradicionalmente peso seco, analíticas, radiografía de tórax y ecografía abdominal.</p>
 <p>Ahí terminan nuestras posibilidades diagnósticas. No porque no quisiéramos seguir. Porque un centro de diálisis no es un hospital.</p>
 <p>Le explicamos al paciente que necesitaba continuar el diagnóstico diferencial en el hospital y que, ante una disnea progresiva, un aumento de peso y una tolerancia al esfuerzo muy limitada, lo necesitaba sin demora.</p>
 <p>Dijo que lo entendía. Aun así rechazó el camino propuesto.</p>
 <p>No detallaré sus razones: el anonimato lo exige. Desde el punto de vista médico no cambiaban la necesidad de una valoración hospitalaria. Desde el suyo, pesaban claramente más que nuestra explicación.</p>
-<p>Recordemos también eso. Al paciente volveremos.</p>
+<p>Al paciente volveré.</p>
 <h2>El paciente tenía disnea. El sistema tenía una pregunta.</h2>
 <p>Dos días después llegó antes de las seis de la mañana a su diálisis habitual. La ganancia de peso era de solo 0,2 kilogramos.</p>
 <p>No, no es una errata. Doscientos gramos en dos días.</p>
 <p>Los síntomas, en cambio, eran mucho peores. Una ganancia pequeña no significaba un peligro pequeño. Esta vez siguió el envío al hospital y el traslado en silla de ruedas.</p>
 <p>Poco después sonó el teléfono.</p>
-<p>Llamó una mujer desde la unidad receptora. La tomé por médica. La tomé por tal porque no se presentó.</p>
+<p>Llamó una mujer desde la unidad receptora. Solo puedo decir que la tomé por médica: no se presentó, así que no lo supe.</p>
 <p>Cabría esperar preguntas sobre el estado del paciente. ¿Qué había cambiado? ¿Cuáles eran los resultados? ¿Qué habíamos probado ya? ¿Por qué considerábamos urgente la situación?</p>
 <p>No.</p>
 <p>La pregunta fue: ¿por qué se lo habíamos enviado precisamente a ellos, si según la «zona de adscripción» le correspondía otro hospital?</p>
@@ -426,7 +421,6 @@ HTML,
 <p>No sé si alguien en aquella unidad pronunció alguna vez esta consigna. Tampoco hace falta. Algunas reglas se transmiten sin formación y sin firma. Basta con ver, una y otra vez, qué conducta se tolera, cuál se premia y cuál trae un disgusto.</p>
 <p>Con el tiempo la persona ya no necesita una orden. Pone en marcha el procedimiento por su cuenta.</p>
 <h2>La respuesta correcta a la pregunta equivocada</h2>
-<p>Aquí el parecido con la inteligencia artificial se vuelve interesante.</p>
 <p>Un sistema inteligente puede rendir de manera excelente y, aun así, resolver la tarea equivocada. Si su objetivo principal es proteger la capacidad de una unidad, puede buscar con mucha eficacia razones por las que un paciente concreto corresponde a otro sitio.</p>
 <p>Pero la pregunta médica era otra:</p>
 <p>¿Qué necesita esta persona y cómo se lo aseguramos a tiempo?</p>
@@ -466,19 +460,19 @@ HTML,
             'excerpt' => 'Pacjent dializowany pogarszał się, a system zapytał, dlaczego należy gdzie indziej. Ślepe odtwarzanie skryptów opanowaliśmy długo przed sztuczną inteligencją. Najważniejszy skill to rozpoznać, kiedy procedurę przerwać.',
             'content' => <<<'HTML'
 <p>Pacjent pogarszał się. Z przyjmującego oddziału pytano, dlaczego skierowaliśmy go właśnie do nich. W tej chwili zrozumiałem, że do ślepego wykonywania skryptów nie potrzebujemy sztucznej inteligencji. Tę umiejętność opanowaliśmy długo przed nią.</p>
-<p>Mniej więcej przez tydzień pogarszał się stan pacjenta dializowanego.</p>
+<p>Mniej więcej przez tydzień pogarszał się pacjent dializowany.</p>
 <p>W satelitarnej stacji dializ wykorzystaliśmy po kolei wszystko, czym dysponujemy: powtarzane badania przedmiotowe, nowe przejrzenie wywiadu, zmiany parametrów zabiegu dializy, w tym masy referencyjnej, tradycyjnie nazywanej suchą masą, badania laboratoryjne, rentgen klatki piersiowej i ultrasonografię jamy brzusznej.</p>
 <p>Na tym kończą się nasze możliwości diagnostyczne. Nie dlatego, że nie chcielibyśmy iść dalej. Dlatego, że stacja dializ nie jest szpitalem.</p>
 <p>Wyjaśniliśmy pacjentowi, że potrzebuje dalszej diagnostyki różnicowej w szpitalu i że wobec postępującej duszności, wzrostu masy ciała i wyraźnie ograniczonej tolerancji wysiłku potrzebuje jej niezwłocznie.</p>
 <p>Powiedział, że rozumie. Proponowane postępowanie jednak odrzucił.</p>
 <p>Jego powodów nie będę rozwijał: wymaga tego anonimowość. Z medycznego punktu widzenia nie zmieniały potrzeby badania szpitalnego. Z jego punktu widzenia najwyraźniej ważyły więcej niż nasze wyjaśnienie.</p>
-<p>Zapamiętajmy i to. Do pacjenta jeszcze wrócimy.</p>
+<p>Do pacjenta jeszcze wrócę.</p>
 <h2>Pacjent miał duszność. System miał pytanie.</h2>
 <p>Dwa dni później przyszedł przed szóstą rano na regularną dializę. Przyrost masy wynosił tylko 0,2 kilograma.</p>
 <p>Nie, to nie literówka. Dwieście gramów w dwa dni.</p>
 <p>Objawy były jednak znacznie gorsze. Mały przyrost masy nie oznaczał małego niebezpieczeństwa. Tym razem nastąpiło skierowanie do szpitala i przewiezienie na wózku.</p>
 <p>Niedługo potem zadzwonił telefon.</p>
-<p>Z przyjmującego oddziału odezwała się kobieta, którą wziąłem za lekarkę. Wziąłem, bo się nie przedstawiła.</p>
+<p>Z przyjmującego oddziału odezwała się kobieta. Za lekarkę miałem ją tylko w domyśle: nie przedstawiła się, więc nie wiedziałem.</p>
 <p>Można było oczekiwać pytań o stan pacjenta. Co się zmieniło? Jakie były wyniki? Czego już próbowaliśmy? Dlaczego uważamy sytuację za pilną?</p>
 <p>Nie.</p>
 <p>Pytanie brzmiało: dlaczego skierowaliśmy go właśnie do nich, skoro według „rejonu” należy do innego szpitala?</p>
@@ -497,7 +491,6 @@ HTML,
 <p>Nie wiem, czy ktoś na tamtym oddziale wypowiedział takie polecenie. Nie musi. Niektóre reguły przekazuje się bez szkolenia i bez podpisu. Wystarczy wielokrotnie zobaczyć, które zachowanie jest tolerowane, które nagradzane i za które przychodzi nieprzyjemność.</p>
 <p>Z czasem człowiek nie potrzebuje już rozkazu. Procedurę uruchamia sam.</p>
 <h2>Właściwa odpowiedź na niewłaściwe pytanie</h2>
-<p>Tu podobieństwo do sztucznej inteligencji staje się ciekawe.</p>
 <p>Inteligentny system może działać znakomicie, a mimo to rozwiązywać niewłaściwe zadanie. Jeśli jako główny cel otrzyma ochronę wydolności oddziału, może bardzo skutecznie szukać powodów, dla których konkretny pacjent należy gdzie indziej.</p>
 <p>Tymczasem pytanie medyczne było inne:</p>
 <p>Czego ten człowiek potrzebuje i jak mu to zapewnimy na czas?</p>
@@ -537,19 +530,19 @@ HTML,
             'excerpt' => 'A dializált beteg állapota romlott, a rendszer pedig azt kérdezte, miért tartozik máshová. A szkriptek vak követését jóval a mesterséges intelligencia előtt elsajátítottuk. A lényeges skill az, hogy felismerjük, mikor kell megállni.',
             'content' => <<<'HTML'
 <p>A beteg állapota romlott. A felvevő munkahelyről azt kérdezték, miért éppen hozzájuk küldtük. Abban a pillanatban értettem meg, hogy a szkriptek vak végrehajtásához nincs szükség mesterséges intelligenciára. Ezt a képességet jóval előtte sajátítottuk el.</p>
-<p>Körülbelül egy hete romlott egy dializált beteg állapota.</p>
+<p>Körülbelül egy hétig romlott a dializált beteg állapota.</p>
 <p>A szatellit dialízisközpontban sorra felhasználtunk mindent, ami a rendelkezésünkre áll: ismételt fizikális vizsgálatokat, az anamnézis újraértékelését, a dialíziskezelés paramétereinek módosítását, benne a referencia-testsúlyt, amelyet hagyományosan száraz testsúlynak nevezünk, laborvizsgálatokat, mellkasröntgent és hasi ultrahangot.</p>
 <p>Itt érnek véget a diagnosztikus lehetőségeink. Nem azért, mert nem akartunk volna továbbmenni. Azért, mert a dialízisközpont nem kórház.</p>
 <p>Elmagyaráztuk a betegnek, hogy a differenciáldiagnózist kórházban kell folytatni, és hogy a fokozódó nehézlégzés, a testsúlynövekedés és a kifejezetten beszűkült terhelhetőség miatt ezt haladéktalanul kell megtenni.</p>
 <p>Azt mondta, érti. A javasolt utat mégis elutasította.</p>
 <p>Az indokait az anonimitás miatt nem részletezem. Orvosi szempontból nem változtatták meg a kórházi kivizsgálás szükségességét. Az ő szemszögéből azonban nyilvánvalóan többet nyomtak a latban, mint a magyarázatunk.</p>
-<p>Ezt is jegyezzük meg. A beteghez még visszatérünk.</p>
+<p>A beteghez még visszatérek.</p>
 <h2>A betegnek nehézlégzése volt. A rendszernek kérdése.</h2>
 <p>Két nappal később reggel hat előtt érkezett a szokásos dialízisre. A testsúlynövekedés mindössze 0,2 kilogramm volt.</p>
 <p>Nem, nem elírás. Kétszáz gramm két nap alatt.</p>
 <p>A tünetek viszont sokkal rosszabbak voltak. A kis súlynövekedés nem jelentett kis veszélyt. Most már kórházba küldés és kerekesszékes átszállítás következett.</p>
 <p>Röviddel később csengett a telefon.</p>
-<p>A felvevő munkahelyről egy nő jelentkezett, akit orvosnak hittem. Azért hittem annak, mert nem mutatkozott be.</p>
+<p>A felvevő munkahelyről egy nő jelentkezett. Orvosnak csak gondoltam: nem mutatkozott be, így nem tudhattam.</p>
 <p>A beteg állapotáról szóló kérdéseket várhatott volna az ember. Mi változott? Milyenek az eredmények? Mit próbáltunk már? Miért tartjuk sürgősnek a helyzetet?</p>
 <p>Nem.</p>
 <p>A kérdés ez volt: miért küldtük éppen hozzájuk, ha az „ellátási körzet” szerint másik kórházhoz tartozik?</p>
@@ -568,7 +561,6 @@ HTML,
 <p>Nem tudom, kimondta-e valaki azon a munkahelyen ezt az utasítást. Nem is kell. Egyes szabályok képzés és aláírás nélkül adódnak tovább. Elég újra és újra látni, melyik viselkedést tűrik, melyiket jutalmazzák, és melyikért jár kellemetlenség.</p>
 <p>Idővel az embernek már nincs szüksége parancsra. Magától elindítja az eljárást.</p>
 <h2>A helyes válasz a helytelen kérdésre</h2>
-<p>Itt válik érdekessé a hasonlóság a mesterséges intelligenciával.</p>
 <p>Egy intelligens rendszer kiválóan teljesíthet, és mégis a rossz feladatot oldhatja meg. Ha a fő célja egy munkahely kapacitásának védelme, nagyon hatékonyan keresheti az okokat, amiért egy adott beteg máshová tartozik.</p>
 <p>Az orvosi kérdés azonban más volt:</p>
 <p>Mire van szüksége ennek az embernek, és hogyan biztosítjuk ezt időben?</p>
@@ -608,22 +600,22 @@ HTML,
             'excerpt' => 'Un paziente in dialisi peggiorava e il sistema ha chiesto perché spettasse a un altro. Eseguire uno script alla cieca lo sapevamo fare molto prima dell’intelligenza artificiale. Lo skill che conta è riconoscere quando interromperlo.',
             'content' => <<<'HTML'
 <p>Il paziente peggiorava. Dall’unità che lo riceveva chiedevano perché lo avessimo inviato proprio da loro. In quel momento ho capito che per eseguire gli script alla cieca non ci serve l’intelligenza artificiale. Quella capacità l’avevamo acquisita molto prima di lei.</p>
-<p>Da circa una settimana peggiorava lo stato di un paziente in dialisi.</p>
+<p>Per circa una settimana peggiorava il paziente in dialisi.</p>
 <p>Nel centro dialisi satellite abbiamo usato, uno dopo l’altro, tutto ciò che abbiamo a disposizione: esami obiettivi ripetuti, una nuova rilettura dell’anamnesi, modifiche dei parametri del trattamento, compreso il peso di riferimento, chiamato per tradizione peso secco, esami di laboratorio, radiografia del torace ed ecografia dell’addome.</p>
 <p>Lì finiscono le nostre possibilità diagnostiche. Non perché non volessimo continuare. Perché un centro dialisi non è un ospedale.</p>
 <p>Abbiamo spiegato al paziente che gli serviva proseguire la diagnosi differenziale in ospedale e che, davanti a una dispnea progressiva, a un aumento di peso e a una tolleranza allo sforzo molto ridotta, gli serviva senza indugio.</p>
 <p>Ha detto di aver capito. Ha comunque rifiutato il percorso proposto.</p>
 <p>Non esporrò le sue ragioni: l’anonimato lo richiede. Sul piano medico non cambiavano la necessità di una valutazione ospedaliera. Dal suo punto di vista pesavano chiaramente più della nostra spiegazione.</p>
-<p>Ricordiamo anche questo. Al paziente torneremo.</p>
+<p>Al paziente tornerò.</p>
 <h2>Il paziente aveva dispnea. Il sistema aveva una domanda.</h2>
 <p>Due giorni dopo è arrivato prima delle sei del mattino per la dialisi abituale. L’aumento di peso era di soli 0,2 chilogrammi.</p>
 <p>No, non è un refuso. Duecento grammi in due giorni.</p>
 <p>I sintomi, però, erano molto peggiori. Un aumento piccolo non voleva dire un pericolo piccolo. Questa volta è seguito l’invio in ospedale e il trasferimento in sedia a rotelle.</p>
 <p>Poco dopo ha squillato il telefono.</p>
-<p>Dall’unità di accettazione ha chiamato una donna, che ho preso per una medica. L’ho presa per tale perché non si è presentata.</p>
+<p>Dall’unità di accettazione ha chiamato una donna. Posso solo dire di averla presa per una medica: non si è presentata, quindi non lo sapevo.</p>
 <p>Ci si poteva aspettare domande sullo stato del paziente. Che cosa era cambiato? Quali erano i risultati? Che cosa avevamo già provato? Perché ritenevamo urgente la situazione?</p>
 <p>No.</p>
-<p>La domanda era: perché lo avevamo inviato proprio da loro, se secondo il «bacino» spettava a un altro ospedale?</p>
+<p>La domanda era: perché lo avevamo inviato proprio da loro, se secondo il «bacino di utenza» spettava a un altro ospedale?</p>
 <p>Ho spiegato il mio ragionamento. A portata più vicina ci sono due ospedali, ed entrambi hanno un reparto di dialisi. Ho scelto questo perché mi aspettavo possibilità migliori per diagnosticare il suo stato.</p>
 <p>Quando poi ho cominciato a trasmettere le informazioni cliniche, sono riuscito a dire circa due parole.</p>
 <p>La chiamata è finita.</p>
@@ -639,7 +631,6 @@ HTML,
 <p>Non so se qualcuno, in quell’unità, abbia mai pronunciato questa consegna. Non occorre. Alcune regole si trasmettono senza formazione e senza firma. Basta vedere, più volte, quale comportamento si tollera, quale si premia e quale porta un fastidio.</p>
 <p>Col tempo la persona non ha più bisogno di un ordine. Avvia la procedura da sola.</p>
 <h2>La risposta giusta alla domanda sbagliata</h2>
-<p>Qui la somiglianza con l’intelligenza artificiale diventa interessante.</p>
 <p>Un sistema intelligente può rendere in modo eccellente e risolvere comunque il compito sbagliato. Se l’obiettivo principale è proteggere la capacità di un’unità, può cercare con molta efficacia le ragioni per cui un dato paziente spetta altrove.</p>
 <p>La domanda medica, però, era un’altra:</p>
 <p>Di che cosa ha bisogno questa persona, e come glielo assicuriamo in tempo?</p>
@@ -685,16 +676,16 @@ HTML,
 <p>Ми пояснили пацієнтові, що йому потрібна подальша диференційна діагностика в лікарні і що через прогресивну задишку, зростання маси тіла та різко обмежену переносимість навантаження вона потрібна негайно.</p>
 <p>Він сказав, що розуміє. Запропонований шлях усе ж відхилив.</p>
 <p>Його причин я не розгортатиму: цього вимагає анонімність. З медичного погляду вони не змінювали потреби в лікарняному обстеженні. З його погляду вони явно важили більше, ніж наше пояснення.</p>
-<p>Запам’ятаймо і це. До пацієнта ми ще повернемося.</p>
+<p>До пацієнта я ще повернуся.</p>
 <h2>У пацієнта була задишка. У системи було питання.</h2>
 <p>За два дні він прийшов до шостої ранку на черговий діаліз. Приріст маси становив лише 0,2 кілограма.</p>
 <p>Ні, це не друкарська помилка. Двісті грамів за два дні.</p>
 <p>Симптоми ж були значно гірші. Малий приріст маси не означав малої небезпеки. Цього разу було скерування до лікарні і перевезення на візку.</p>
 <p>Невдовзі задзвонив телефон.</p>
-<p>З приймального відділення озвалася жінка, яку я вважав лікаркою. Вважав, бо вона не назвалася.</p>
+<p>З приймального відділення озвалася жінка. Лікаркою я її лише вважав: вона не назвалася, тож я цього не знав.</p>
 <p>Можна було чекати питань про стан пацієнта. Що змінилося? Які результати? Що ми вже спробували? Чому ситуацію вважаємо невідкладною?</p>
 <p>Ні.</p>
-<p>Питання було таке: чому ми скерували його саме до них, якщо за «районом» він належить до іншої лікарні?</p>
+<p>Питання було таке: чому ми скерували його саме до них, якщо за «зоною обслуговування» він належить до іншої лікарні?</p>
 <p>Я пояснив свій хід думки. Найближче розташовані дві лікарні, і в обох є діалізне відділення. Цю я обрав, бо очікував там кращих можливостей з’ясувати його стан.</p>
 <p>Коли я потім почав передавати клінічні відомості, встиг сказати близько двох слів.</p>
 <p>Розмова закінчилася.</p>
@@ -710,7 +701,6 @@ HTML,
 <p>Не знаю, чи хтось на тому робочому місці вимовляв таку вказівку. І не мусить. Деякі правила передаються без навчання і без підпису. Досить раз у раз бачити, яку поведінку терплять, яку відзначають і за яку приходить неприємність.</p>
 <p>З часом людині вже не потрібен наказ. Вона запускає порядок дій сама.</p>
 <h2>Правильна відповідь на неправильне питання</h2>
-<p>Тут подібність до штучного інтелекту стає цікавою.</p>
 <p>Розумна система може працювати блискуче і все ж розв’язувати неправильне завдання. Якщо головна мета полягає в тому, щоб берегти потужність відділення, вона може дуже ефективно шукати причини, чому конкретний пацієнт належить деінде.</p>
 <p>А медичне питання було інше:</p>
 <p>Що потрібно цій людині і як ми забезпечимо це вчасно?</p>
@@ -737,7 +727,7 @@ HTML,
 <p>Люди вміють це вже сьогодні. Без серверів, без моделей, без жодного рядка коду.</p>
 <p>Тому до кожного людського і кожного штучного skill.md я додав би одне речення:</p>
 <p>Якщо ти правильно виконуєш процедуру, але перестаєш бачити людину, зупинись і переглянь мету.</p>
-<p>Пацієнтові не потрібно виграти суперечку про район. Йому потрібно, щоб хтось зрозумів, чому стан погіршується.</p>
+<p>Пацієнтові не потрібно виграти суперечку про зону обслуговування. Йому потрібно, щоб хтось зрозумів, чому стан погіршується.</p>
 <p>Інтелект виявляється не лише тим, як швидко ми знаходимо правильний скрипт.</p>
 <p>Він виявляється і тим, що ми помічаємо, коли саме працює неправильний.</p>
 

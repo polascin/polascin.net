@@ -38,12 +38,11 @@ return [
             'content' => <<<'HTML'
 <p>13. októbra 2026 som zmenil pravidlá hlásení pri niekoľkých sledovaniach. Medzi ne patria kontrola webov aj predplatné na služby umelej inteligencie. Pokyn bol krátky: týždenná správa, alebo prerušenie, keď sa objaví niečo výnimočne dôležité.</p>
 <p>Webov v tej kontrole je štrnásť. Denný e-mail z nej vie byť podrobný a presný. Rozhodnutie na dnešok v ňom byť nemusí.</p>
-<p>Dovtedy som nechával splývať tri úlohy. Kontrola má bežať pravidelne, v tom istom rytme ako doteraz. Bežné zistenia patria do jedného týždenného prehľadu. Okamžitú správu si nechávam na udalosť, pri ktorej mám odísť od inej práce.</p>
+<p>Dovtedy som nechával splývať tri úlohy. Kontrola má bežať v tom istom rytme ako doteraz. Bežné zistenia patria do jedného týždenného prehľadu. Okamžitú správu si nechávam na udalosť, pri ktorej mám odísť od inej práce.</p>
 <p>Denné kontroly bežia ďalej. Bežný denný e-mail z nich už nie.</p>
 <p>Celý týždeň v novom rytme ešte nemám, a tak úžitok zatiaľ neposudzujem.</p>
-<p>Po zmene je jasnejšie, čo od agenta chcem. Nemá poslať správu len preto, že práve skončil svoju úlohu. Má oddeliť bežnú informáciu od dôvodu, pre ktorý ma má odtiahnúť od niečoho iného.</p>
+<p>Agent nemá poslať správu len preto, že práve skončil svoju úlohu. Má oddeliť bežnú informáciu od dôvodu, pre ktorý ma má odtiahnúť od niečoho iného.</p>
 <p>Automatizácia má znížiť počet chvíľ, keď odchádzam od rozrobenej veci.</p>
-<p>Čo si vo vašom postupe zaslúži správu hneď?</p>
 <p><em>Osobná zmena pravidla pri vlastných kontrolách. Úžitok zatiaľ nie je zmeraný a text neodporúča konkrétny nástroj.</em></p>
 
 HTML,
@@ -55,12 +54,11 @@ HTML,
             'content' => <<<'HTML'
 <p>On 13 October 2026 I changed the reporting rules for several checks that already run. Among them are the check on my websites and the subscriptions to artificial-intelligence services. The instruction was short: a weekly report, or an interruption when something exceptionally important appears.</p>
 <p>That website check covers fourteen sites. A daily email from it can be detailed and accurate. It does not have to hold a decision for today.</p>
-<p>Until then I had let three jobs blur together. The check should keep running on the same rhythm as before. Ordinary findings belong in one weekly review. I keep the immediate message for an event that means leaving other work.</p>
+<p>Until then I had let three jobs blur together. The check should keep running in the same rhythm as before. Ordinary findings belong in one weekly review. I keep the immediate message for an event that means leaving other work.</p>
 <p>The daily checks still run. The ordinary daily email from them does not.</p>
 <p>I have not had a full week on the new rhythm, so I am not judging the benefit yet.</p>
-<p>What I want from the agent is clearer after the change. It should not send a report merely because it has finished its run. It should separate routine information from a reason to pull me away from something else.</p>
+<p>The agent should not send a report merely because it has finished its run. It should separate routine information from a reason to pull me away from something else.</p>
 <p>Automation should cut the number of times I leave work that is already under way.</p>
-<p>What earns an immediate message in your own workflow?</p>
 <p><em>A personal change of rules for my own checks. The benefit is not measured yet, and the text recommends no particular tool.</em></p>
 
 HTML,
@@ -72,12 +70,11 @@ HTML,
             'content' => <<<'HTML'
 <p>13. října 2026 jsem změnil pravidla zpráv u několika sledování. Patří mezi ně kontrola webů i předplatné služeb umělé inteligence. Pokyn byl krátký: týdenní zpráva, nebo přerušení, když se objeví něco výjimečně důležitého.</p>
 <p>Webů v té kontrole je čtrnáct. Denní e-mail z ní může být podrobný a přesný. Rozhodnutí na dnešek v něm být nemusí.</p>
-<p>Do té doby jsem nechával splývat tři úkoly. Kontrola má běžet pravidelně, ve stejném rytmu jako dosud. Běžná zjištění patří do jednoho týdenního přehledu. Okamžitou zprávu si nechávám na událost, při které mám odejít od jiné práce.</p>
+<p>Do té doby jsem nechával splývat tři úkoly. Kontrola má běžet ve stejném rytmu jako dosud. Běžná zjištění patří do jednoho týdenního přehledu. Okamžitou zprávu si nechávám na událost, při které mám odejít od jiné práce.</p>
 <p>Denní kontroly běží dál. Běžný denní e-mail z nich už ne.</p>
 <p>Celý týden v novém rytmu ještě nemám, a tak přínos zatím neposuzuji.</p>
-<p>Po změně je jasnější, co od agenta chci. Nemá poslat zprávu jen proto, že právě dokončil svůj úkol. Má oddělit běžnou informaci od důvodu, pro který mě má odvést od něčeho jiného.</p>
+<p>Agent nemá poslat zprávu jen proto, že právě dokončil svůj úkol. Má oddělit běžnou informaci od důvodu, pro který mě má odvést od něčeho jiného.</p>
 <p>Automatizace má snížit počet chvil, kdy odcházím od rozdělané věci.</p>
-<p>Co si ve vašem postupu zaslouží zprávu hned?</p>
 <p><em>Osobní změna pravidla u vlastních kontrol. Přínos zatím není změřený a text nedoporučuje konkrétní nástroj.</em></p>
 
 HTML,
@@ -89,12 +86,11 @@ HTML,
             'content' => <<<'HTML'
 <p>Am 13. Oktober 2026 habe ich die Regeln für Meldungen bei mehreren Überwachungen geändert. Dazu gehören die Kontrolle meiner Websites und die Abonnements für Dienste der künstlichen Intelligenz. Die Anweisung war kurz: ein Wochenbericht, oder eine Unterbrechung, wenn etwas außergewöhnlich Wichtiges auftaucht.</p>
 <p>Diese Kontrolle umfasst vierzehn Websites. Eine tägliche E-Mail daraus kann ausführlich und genau sein. Eine Entscheidung für heute muss nicht darin stehen.</p>
-<p>Bis dahin hatte ich drei Aufgaben ineinanderlaufen lassen. Die Kontrolle soll regelmäßig weiterlaufen, im selben Takt wie bisher. Gewöhnliche Ergebnisse gehören in eine wöchentliche Übersicht. Die sofortige Nachricht bleibt einem Ereignis vorbehalten, bei dem ich andere Arbeit verlassen muss.</p>
+<p>Bis dahin hatte ich drei Aufgaben ineinanderlaufen lassen. Die Kontrolle soll im selben Takt weiterlaufen wie bisher. Gewöhnliche Ergebnisse gehören in eine wöchentliche Übersicht. Die sofortige Nachricht bleibt einem Ereignis vorbehalten, bei dem ich andere Arbeit verlassen muss.</p>
 <p>Die täglichen Kontrollen laufen weiter. Die gewöhnliche tägliche E-Mail daraus nicht mehr.</p>
 <p>Eine volle Woche im neuen Takt habe ich noch nicht, deshalb beurteile ich den Nutzen noch nicht.</p>
-<p>Nach der Änderung ist klarer, was ich vom Agenten will. Er soll nicht nur deshalb einen Bericht schicken, weil er seine Aufgabe gerade beendet hat. Er soll eine gewöhnliche Information von einem Grund trennen, der mich von etwas anderem wegzieht.</p>
+<p>Der Agent soll nicht nur deshalb einen Bericht schicken, weil er seine Aufgabe gerade beendet hat. Er soll eine gewöhnliche Information von einem Grund trennen, der mich von etwas anderem wegzieht.</p>
 <p>Automatisierung soll die Zahl der Momente senken, in denen ich von einer angefangenen Sache weggehe.</p>
-<p>Was verdient in Ihrem Ablauf eine Nachricht sofort?</p>
 <p><em>Eine persönliche Regeländerung bei eigenen Kontrollen. Der Nutzen ist noch nicht gemessen, und der Text empfiehlt kein bestimmtes Werkzeug.</em></p>
 
 HTML,
@@ -109,9 +105,8 @@ HTML,
 <p>Jusque-là, je laissais trois tâches se confondre. Le contrôle doit continuer au même rythme qu’avant. Les constats ordinaires vont dans une seule revue hebdomadaire. Je garde le message immédiat pour un événement qui me fait quitter un autre travail.</p>
 <p>Les contrôles quotidiens continuent. L’e-mail quotidien ordinaire, non.</p>
 <p>Je n’ai pas encore une semaine entière sur le nouveau rythme, et je ne juge donc pas encore le bénéfice.</p>
-<p>Après le changement, ce que j’attends de l’agent est plus clair. Il ne doit pas envoyer un rapport seulement parce qu’il vient de finir sa tâche. Il doit séparer une information ordinaire d’une raison de m’éloigner d’autre chose.</p>
+<p>L’agent ne doit pas envoyer un rapport seulement parce qu’il vient de finir sa tâche. Il doit séparer une information ordinaire d’une raison de m’éloigner d’autre chose.</p>
 <p>L’automatisation doit réduire le nombre de fois où je quitte un travail déjà en cours.</p>
-<p>Qu’est-ce qui, dans votre circuit, mérite un message tout de suite ?</p>
 <p><em>Changement personnel de règle pour mes propres contrôles. Le bénéfice n’est pas encore mesuré, et le texte ne recommande aucun outil particulier.</em></p>
 
 HTML,
@@ -126,9 +121,8 @@ HTML,
 <p>Hasta entonces dejaba que tres tareas se confundieran. El control debe seguir al mismo ritmo de antes. Los hallazgos ordinarios van a una sola revisión semanal. El mensaje inmediato lo reservo para un suceso que me obliga a dejar otro trabajo.</p>
 <p>Los controles diarios siguen. El correo diario ordinario, no.</p>
 <p>Aún no llevo una semana entera con el nuevo ritmo, así que todavía no valoro el beneficio.</p>
-<p>Tras el cambio está más claro lo que quiero del agente. No debe enviar un informe solo porque acaba de terminar su tarea. Debe separar una información ordinaria de un motivo para apartarme de otra cosa.</p>
+<p>El agente no debe enviar un informe solo porque acaba de terminar su tarea. Debe separar una información ordinaria de un motivo para apartarme de otra cosa.</p>
 <p>La automatización debe reducir las veces que dejo un trabajo ya empezado.</p>
-<p>¿Qué merece, en su procedimiento, un mensaje de inmediato?</p>
 <p><em>Un cambio personal de regla en mis propios controles. El beneficio aún no está medido y el texto no recomienda ninguna herramienta concreta.</em></p>
 
 HTML,
@@ -143,9 +137,8 @@ HTML,
 <p>Do tamtej pory pozwalałem, by trzy zadania zlewały się w jedno. Kontrola ma iść dalej w tym samym rytmie co dotąd. Zwykłe ustalenia trafiają do jednego tygodniowego przeglądu. Natychmiastową wiadomość zostawiam na zdarzenie, przy którym mam odejść od innej pracy.</p>
 <p>Codzienne kontrole idą dalej. Zwykły codzienny e-mail z nich już nie.</p>
 <p>Nie mam jeszcze pełnego tygodnia w nowym rytmie, więc korzyści na razie nie oceniam.</p>
-<p>Po zmianie jest jaśniejsze, czego chcę od agenta. Nie ma wysyłać raportu tylko dlatego, że właśnie skończył swoje zadanie. Ma oddzielić zwykłą informację od powodu, dla którego ma mnie oderwać od czegoś innego.</p>
+<p>Agent nie ma wysyłać raportu tylko dlatego, że właśnie skończył swoje zadanie. Ma oddzielić zwykłą informację od powodu, dla którego ma mnie oderwać od czegoś innego.</p>
 <p>Automatyzacja ma zmniejszyć liczbę chwil, w których odchodzę od pracy już zaczętej.</p>
-<p>Co w twoim toku pracy zasługuje na wiadomość od razu?</p>
 <p><em>Osobista zmiana zasady przy własnych kontrolach. Korzyści jeszcze nie zmierzono, a tekst nie poleca konkretnego narzędzia.</em></p>
 
 HTML,
@@ -160,9 +153,8 @@ HTML,
 <p>Addig három feladatot hagytam egybemosódni. Az ellenőrzésnek ugyanabban a ritmusban kell futnia, mint eddig. A szokásos megállapítások egyetlen heti áttekintésbe kerülnek. Az azonnali üzenetet olyan eseményre tartom, amikor más munkát kell otthagynom.</p>
 <p>A napi ellenőrzések tovább futnak. A szokásos napi e-mail belőlük már nem.</p>
 <p>Egy teljes hét az új ritmusban még nincs mögöttem, ezért a hasznot egyelőre nem mérem.</p>
-<p>A változás után világosabb, mit várok az ügynöktől. Ne csak azért küldjön jelentést, mert éppen végzett a feladatával. A szokásos információt válassza el attól az októl, amely miatt félbe kell szakítania azt, amin éppen dolgozom.</p>
+<p>Az ügynök ne csak azért küldjön jelentést, mert éppen végzett a feladatával. A szokásos információt válassza el attól az októl, amely miatt félbe kell szakítania azt, amin éppen dolgozom.</p>
 <p>Az automatizálás csökkentse azoknak az alkalmaknak a számát, amikor otthagyok egy már megkezdett munkát.</p>
-<p>Nálad mi érdemel azonnali üzenetet?</p>
 <p><em>Személyes szabályváltozás a saját ellenőrzéseimnél. A haszon még nincs megmérve, és a szöveg nem ajánl konkrét eszközt.</em></p>
 
 HTML,
@@ -177,9 +169,8 @@ HTML,
 <p>Fino ad allora lasciavo che tre compiti si confondessero. Il controllo deve continuare con lo stesso ritmo di prima. I rilievi ordinari vanno in un solo riepilogo settimanale. Il messaggio immediato lo tengo per un evento per il quale devo lasciare un altro lavoro.</p>
 <p>I controlli quotidiani continuano. L’e-mail quotidiana ordinaria no.</p>
 <p>Non ho ancora una settimana intera sul nuovo ritmo, quindi non valuto ancora il beneficio.</p>
-<p>Dopo il cambiamento è più chiaro che cosa voglio dall’agente. Non deve inviare un resoconto solo perché ha appena finito il suo compito. Deve separare un’informazione ordinaria da un motivo per distogliermi da qualcos’altro.</p>
+<p>L’agente non deve inviare un resoconto solo perché ha appena finito il suo compito. Deve separare un’informazione ordinaria da un motivo per distogliermi da qualcos’altro.</p>
 <p>L’automazione deve ridurre le volte in cui lascio un lavoro già avviato.</p>
-<p>Che cosa, nel tuo procedimento, merita un messaggio subito?</p>
 <p><em>Un cambiamento personale di regola per i miei controlli. Il beneficio non è ancora misurato e il testo non consiglia uno strumento particolare.</em></p>
 
 HTML,
@@ -194,9 +185,8 @@ HTML,
 <p>Доти я дозволяв трьом завданням зливатися. Перевірка має йти далі в тому самому ритмі, що й раніше. Звичайні висновки належать до одного тижневого огляду. Негайне повідомлення лишаю для події, через яку треба відійти від іншої роботи.</p>
 <p>Щоденні перевірки тривають. Звичайний щоденний лист із них уже ні.</p>
 <p>Повного тижня в новому ритмі ще не маю, тож користь поки що не оцінюю.</p>
-<p>Після зміни ясніше, чого я хочу від агента. Він не має надсилати звіт лише тому, що щойно завершив своє завдання. Має відділити звичайну інформацію від причини, через яку мене треба відірвати від чогось іншого.</p>
+<p>Агент не має надсилати звіт лише тому, що щойно завершив своє завдання. Має відділити звичайну інформацію від причини, через яку мене треба відірвати від чогось іншого.</p>
 <p>Автоматизація має зменшити кількість моментів, коли я відходжу від уже початої справи.</p>
-<p>Що у вашій роботі заслуговує на повідомлення одразу?</p>
 <p><em>Особиста зміна правила для власних перевірок. Користь ще не виміряна, і текст не радить конкретного інструмента.</em></p>
 
 HTML,

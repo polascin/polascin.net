@@ -765,6 +765,13 @@ function applySchemaMigrations(PDO $pdo): void {
                 refreshPublishedArticleTextFromFile($pdo, $articlePath);
             }
         },
+        // Redakčný prechod všetkých seedov: humanizácia, korektúra, odstránenie
+        // kalkov a šablón; bez textGrain. Obnova zhodných riadkov DB so seedmi.
+        '2026110101_humanize_all_article_texts' => static function (PDO $pdo): void {
+            foreach (glob(__DIR__ . '/content/articles/*.php') ?: [] as $articlePath) {
+                refreshPublishedArticleTextFromFile($pdo, $articlePath);
+            }
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

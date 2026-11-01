@@ -39,9 +39,9 @@ return [
             'image_alt' => 'Tmavý stôl v noci: tri zatvorené obálky vo fialovom a tyrkysovom svetle, vedľa nich mince a filmový kotúč. Ruka po ne nesiahne.',
             'excerpt' => 'Za jeden týždeň prišli tri nevyžiadané správy: 1 500 dolárov za dvojstranový príbeh, Atlas Agents z iCloudu a book trailer z Gmailu. Chvála, ktorá sedí na kohokoľvek. Neodpovedajte.',
             'content' => <<<'HTML'
-<p>Za jeden týždeň mi traja cudzí ľudia ponúkli peniaze, slávu alebo book trailer. Nikto z nich nečítal, čo píšem.</p>
-<p>Presnejšie: jedna správa sľubovala peniaze, druhá nástroj a tretia trailer, z ktorého vraj príde sláva. Rôzni odosielatelia, tá istá kostra. Chvála, ktorá by sa dala poslať komukoľvek. Neurčité konkrétnosti. Malý prvý krok, ktorý takmer nič nestojí. A tlak, aby ste odpovedali.</p>
-<p>Každú som už rozobral osobitne. Tu je len to, čo majú spoločné.</p>
+<p>Chvála v prvej správe by sa dala poslať komukoľvek s newsletterom. V druhej komukoľvek s verejným GitHubom. V tretej komukoľvek, kto má verejnú synopsu. Prišli v jednom týždni od troch odosielateľov a ani jedna nevznikla z toho, že by niekto čítal, čo píšem.</p>
+<p>Jedna sľubovala peniaze, druhá nástroj a tretia trailer, z ktorého vraj príde sláva. Tá istá kostra: chvála pre kohokoľvek, neurčité konkrétnosti, malý prvý krok, ktorý takmer nič nestojí, a tlak, aby ste odpovedali.</p>
+<p>Každú som už rozobral osobitne.</p>
 <h2>Peniaze: 1 500 dolárov za dve strany</h2>
 <p>Prvá bola platená správa v newslettri Winning Writers. Sľubovala v priemere 1 500 dolárov za dvojstranový príbeh. Za textom stálo AWAI. Nie je to podvod v trestnom zmysle. Obe firmy existujú roky. Je to lievik: bezplatný sprievodca je návnada na kurz. Rozpis je v článku <a href="article.php?slug=awai-dvojstranovy-pribeh-za-1500">1 500 dolárov za dvojstranový príbeh</a>.</p>
 <h2>Nástroj: Atlas Agents z iCloudu</h2>
@@ -57,8 +57,7 @@ return [
 <li><strong>Tlak na odpoveď.</strong> Nie hneď na peniaze. Na to, aby schránka potvrdila, že žije.</li>
 </ul>
 <h2>Čo s tým</h2>
-<p>Neodpovedajte. Ani „nie, ďakujem“. Odpoveď potvrdí, že adresa žije. Potom si zapíšte, čo v správe bolo. Netvrďte, že viete, kto ten človek je. Viete len to, čo správa povedala. Rozbor, ktorý dáte von, trvá asi dvadsať minút a ďalší človek má čo vyhľadať.</p>
-<p>Na aký signál sa spoliehate najviac, keď príde „dokonalá príležitosť“?</p>
+<p>Neodpovedajte. Ani „nie, ďakujem“. Odpoveď potvrdí, že adresa žije. Potom si zapíšte, čo v správe bolo. Netvrďte, že viete, kto ten človek je. Viete len to, čo správa povedala. Rozbor, ktorý dáte von, trvá asi dvadsať minút a ďalší človek má čo vyhľadať. Najspoľahlivejší signál je chvála, ktorá sedí na kohokoľvek.</p>
 
 HTML,
         ],
@@ -67,9 +66,9 @@ HTML,
             'image_alt' => 'A dark desk at night: three sealed envelopes in purple and teal light, with coins and a film reel beside them. A hand does not reach for them.',
             'excerpt' => 'In one week, three unsolicited messages arrived: $1,500 for a two-page story, Atlas Agents from iCloud, and a book trailer from Gmail. Praise that would fit anyone. Do not reply.',
             'content' => <<<'HTML'
-<p>In one week, three strangers offered me money, fame, or a book trailer. None of them had read what I write.</p>
-<p>More precisely: one message promised money, the second sold a tool, and the third offered a trailer that was supposed to bring the fame. Different senders, the same frame. Praise that could have been sent to anyone. Vague specifics. A small first step that costs almost nothing. And a push to reply.</p>
-<p>I have already taken each one apart on its own. This is only what they share.</p>
+<p>The praise in the first message could have gone to anyone with a newsletter. In the second, to anyone with a public GitHub account. In the third, to anyone with a public synopsis. They arrived in one week from three senders, and not one sentence came from someone having read what I write.</p>
+<p>One promised money, the second a tool, and the third a trailer that was supposed to bring the fame. The same frame: praise for anyone, vague specifics, a small first step that costs almost nothing, and a push to reply.</p>
+<p>I have already taken each one apart on its own.</p>
 <h2>Money: $1,500 for two pages</h2>
 <p>The first was a paid message in the Winning Writers newsletter. It promised $1,500 on average for a two-page story. Behind the copy was AWAI. It is not a scam in the criminal sense. Both firms have existed for years. It is a funnel: the free guide is bait for a course. The breakdown is in <a href="article.php?slug=awai-dvojstranovy-pribeh-za-1500">Fifteen hundred dollars for a two-page story</a>.</p>
 <h2>A tool: Atlas Agents from iCloud</h2>
@@ -85,8 +84,7 @@ HTML,
 <li><strong>Pressure to reply.</strong> Not for money, not yet. For the inbox to confirm that it is alive.</li>
 </ul>
 <h2>What to do</h2>
-<p>Do not reply. Not even “no, thank you.” A reply confirms that the address is live. Then write down what was in the message. Do not claim to know who the person is. You only know what the message said. Putting that analysis where someone can find it takes about twenty minutes, and the next person has something to search for.</p>
-<p>What’s the tell you rely on most when a “perfect opportunity” lands?</p>
+<p>Do not reply. Not even “no, thank you.” A reply confirms that the address is live. Then write down what was in the message. Do not claim to know who the person is. You only know what the message said. Putting that analysis where someone can find it takes about twenty minutes, and the next person has something to search for. The most reliable tell is praise that would fit anyone.</p>
 
 HTML,
         ],
@@ -95,9 +93,9 @@ HTML,
             'image_alt' => 'Tmavý stůl v noci: tři zavřené obálky ve fialovém a tyrkysovém světle, vedle nich mince a filmová cívka. Ruka po ně nesáhne.',
             'excerpt' => 'Za jeden týden přišly tři nevyžádané zprávy: 1 500 dolarů za dvoustránkový příběh, Atlas Agents z iCloudu a book trailer z Gmailu. Chvála, která sedí na kohokoli. Neodpovídejte.',
             'content' => <<<'HTML'
-<p>Za jeden týden mi tři cizí lidé nabídli peníze, slávu nebo book trailer. Nikdo z nich nečetl, co píšu.</p>
-<p>Přesněji: jedna zpráva slibovala peníze, druhá nástroj a třetí trailer, ze kterého prý přijde sláva. Různí odesílatelé, táž kostra. Chvála, která by se dala poslat komukoli. Neurčité konkrétnosti. Malý první krok, který skoro nic nestojí. A tlak, abyste odpověděli.</p>
-<p>Každou jsem už rozebral zvlášť. Tady je jen to, co mají společné.</p>
+<p>Chvála v první zprávě by se dala poslat komukoli s newsletterem. Ve druhé komukoli s veřejným GitHubem. Ve třetí komukoli, kdo má veřejnou synopsi. Přišly v jednom týdnu od tří odesílatelů a ani jedna nevznikla z toho, že by někdo četl, co píšu.</p>
+<p>Jedna slibovala peníze, druhá nástroj a třetí trailer, ze kterého prý přijde sláva. Táž kostra: chvála pro kohokoli, neurčité konkrétnosti, malý první krok, který skoro nic nestojí, a tlak, abyste odpověděli.</p>
+<p>Každou jsem už rozebral zvlášť.</p>
 <h2>Peníze: 1 500 dolarů za dvě strany</h2>
 <p>První byla placená zpráva v newsletteru Winning Writers. Slibovala v průměru 1 500 dolarů za dvoustránkový příběh. Za textem stálo AWAI. Není to podvod v trestním smyslu. Obě firmy existují roky. Je to trychtýř: bezplatný průvodce je návnada na kurz. Rozpis je v článku <a href="article.php?slug=awai-dvojstranovy-pribeh-za-1500">1 500 dolarů za dvoustránkový příběh</a>.</p>
 <h2>Nástroj: Atlas Agents z iCloudu</h2>
@@ -113,8 +111,7 @@ HTML,
 <li><strong>Tlak na odpověď.</strong> Ne hned na peníze. Na to, aby schránka potvrdila, že žije.</li>
 </ul>
 <h2>Co s tím</h2>
-<p>Neodpovídejte. Ani „ne, děkuji“. Odpověď potvrdí, že adresa žije. Pak si zapište, co ve zprávě bylo. Netvrďte, že víte, kdo ten člověk je. Víte jen to, co zpráva řekla. Rozbor, který dáte ven, trvá asi dvacet minut a další člověk má co vyhledat.</p>
-<p>Na jaké znamení spoléháte nejvíc, když přijde „dokonalá příležitost“?</p>
+<p>Neodpovídejte. Ani „ne, děkuji“. Odpověď potvrdí, že adresa žije. Pak si zapište, co ve zprávě bylo. Netvrďte, že víte, kdo ten člověk je. Víte jen to, co zpráva řekla. Rozbor, který dáte ven, trvá asi dvacet minut a další člověk má co vyhledat. Nejspolehlivější znamení je chvála, která sedí na kohokoli.</p>
 
 HTML,
         ],
@@ -123,9 +120,9 @@ HTML,
             'image_alt' => 'Ein dunkler Tisch bei Nacht: drei geschlossene Umschläge in violettem und türkisem Licht, daneben Münzen und eine Filmspule. Eine Hand greift nicht danach.',
             'excerpt' => 'In einer Woche kamen drei unerbetene Nachrichten: 1 500 Dollar für eine zweiseitige Geschichte, Atlas Agents aus iCloud und ein Book Trailer von Gmail. Lob, das auf jeden passt. Antworten Sie nicht.',
             'content' => <<<'HTML'
-<p>In einer Woche boten mir drei Fremde Geld, Ruhm oder einen Book Trailer an. Keiner von ihnen hatte gelesen, was ich schreibe.</p>
-<p>Genauer: Eine Nachricht versprach Geld, die zweite verkaufte ein Werkzeug, die dritte bot einen Trailer an, aus dem angeblich der Ruhm kommt. Verschiedene Absender, dasselbe Gerüst. Lob, das sich an jeden schicken ließe. Vage Konkretionen. Ein kleiner erster Schritt, der fast nichts kostet. Und Druck, zu antworten.</p>
-<p>Jede habe ich schon für sich auseinandergenommen. Hier steht nur, was sie teilen.</p>
+<p>Das Lob in der ersten Nachricht hätte an jeden mit einem Newsletter gehen können. In der zweiten an jeden mit einem öffentlichen GitHub. In der dritten an jeden mit einer öffentlichen Synopse. Sie kamen in einer Woche von drei Absendern, und kein Satz war daraus entstanden, dass jemand gelesen hätte, was ich schreibe.</p>
+<p>Eine versprach Geld, die zweite ein Werkzeug, die dritte einen Trailer, aus dem angeblich der Ruhm kommt. Dasselbe Gerüst: Lob für jeden, vage Konkretionen, ein kleiner erster Schritt, der fast nichts kostet, und Druck, zu antworten.</p>
+<p>Jede habe ich schon für sich auseinandergenommen.</p>
 <h2>Geld: 1 500 Dollar für zwei Seiten</h2>
 <p>Die erste war eine bezahlte Nachricht im Newsletter von Winning Writers. Sie versprach im Schnitt 1 500 Dollar für eine zweiseitige Geschichte. Hinter dem Text stand AWAI. Das ist kein Betrug im strafrechtlichen Sinn. Beide Firmen gibt es seit Jahren. Es ist ein Trichter: Der kostenlose Leitfaden ist Köder für einen Kurs. Die Aufschlüsselung steht in <a href="article.php?slug=awai-dvojstranovy-pribeh-za-1500">1 500 Dollar für eine zweiseitige Geschichte</a>.</p>
 <h2>Ein Werkzeug: Atlas Agents aus iCloud</h2>
@@ -141,8 +138,7 @@ HTML,
 <li><strong>Druck zur Antwort.</strong> Noch nicht auf Geld. Darauf, dass das Postfach bestätigt, dass es lebt.</li>
 </ul>
 <h2>Was tun</h2>
-<p>Antworten Sie nicht. Auch nicht mit „nein, danke“. Eine Antwort bestätigt, dass die Adresse lebt. Schreiben Sie danach auf, was in der Nachricht stand. Behaupten Sie nicht, zu wissen, wer die Person ist. Sie wissen nur, was die Nachricht gesagt hat. Die Analyse, die Sie veröffentlichen, dauert etwa zwanzig Minuten, und der nächste Mensch hat etwas zu suchen.</p>
-<p>Woran erkennen Sie ein „perfektes Angebot“ am sichersten, wenn es bei Ihnen landet?</p>
+<p>Antworten Sie nicht. Auch nicht mit „nein, danke“. Eine Antwort bestätigt, dass die Adresse lebt. Schreiben Sie danach auf, was in der Nachricht stand. Behaupten Sie nicht, zu wissen, wer die Person ist. Sie wissen nur, was die Nachricht gesagt hat. Die Analyse, die Sie veröffentlichen, dauert etwa zwanzig Minuten, und der nächste Mensch hat etwas zu suchen. Das verlässlichste Zeichen ist Lob, das auf jeden passt.</p>
 
 HTML,
         ],
@@ -151,9 +147,9 @@ HTML,
             'image_alt' => 'Un bureau sombre la nuit : trois enveloppes fermées en lumière violette et turquoise, avec des pièces et une bobine de film à côté. Une main ne les prend pas.',
             'excerpt' => 'En une semaine, trois messages non sollicités : 1 500 dollars pour une histoire de deux pages, Atlas Agents depuis iCloud, et un book trailer depuis Gmail. Un éloge qui irait à n’importe qui. Ne répondez pas.',
             'content' => <<<'HTML'
-<p>En une semaine, trois inconnus m’ont offert de l’argent, de la gloire ou un book trailer. Aucun n’avait lu ce que j’écris.</p>
-<p>Plus précisément : un message promettait de l’argent, le deuxième vendait un outil, le troisième offrait un trailer d’où la gloire était censée venir. Des expéditeurs différents, la même ossature. Un éloge qui aurait pu partir vers n’importe qui. Des précisions vagues. Un petit premier pas qui ne coûte presque rien. Et une poussée pour que vous répondiez.</p>
-<p>J’ai déjà démonté chacun à part. Ici, seulement ce qu’ils partagent.</p>
+<p>L’éloge du premier message aurait pu partir vers n’importe qui avec une lettre d’information. Celui du deuxième, vers n’importe qui avec un GitHub public. Celui du troisième, vers n’importe qui avec un synopsis public. Ils sont arrivés dans la même semaine, de trois expéditeurs, et aucune phrase ne venait de ce que quelqu’un aurait lu ce que j’écris.</p>
+<p>L’un promettait de l’argent, le deuxième un outil, le troisième un trailer d’où la gloire était censée venir. La même ossature : un éloge pour n’importe qui, des précisions vagues, un petit premier pas qui ne coûte presque rien, et une poussée pour que vous répondiez.</p>
+<p>J’ai déjà démonté chacun à part.</p>
 <h2>L’argent : 1 500 dollars pour deux pages</h2>
 <p>Le premier était un message payé dans la lettre de Winning Writers. Il promettait 1 500 dollars en moyenne pour une histoire de deux pages. Derrière le texte, AWAI. Ce n’est pas une arnaque au sens pénal. Les deux maisons existent depuis des années. C’est un entonnoir : le guide gratuit est un appât vers un cours. Le détail est dans <a href="article.php?slug=awai-dvojstranovy-pribeh-za-1500">1 500 dollars pour une histoire de deux pages</a>.</p>
 <h2>Un outil : Atlas Agents depuis iCloud</h2>
@@ -164,13 +160,12 @@ HTML,
 <h2>La même ossature</h2>
 <ul>
 <li><strong>Un éloge pour n’importe qui.</strong> Pas une phrase qui n’existerait que parce que quelqu’un a lu mon travail.</li>
-<li><strong>Des précisions vagues.</strong> Le chiffre 1 500, l’adresse « superuser », des noms tirés d’une quatrième. Cela ressemble à une preuve. C’est un modèle.</li>
+<li><strong>Des précisions vagues.</strong> Le chiffre 1 500, la formule « superuser », des noms tirés d’un texte de présentation. Cela ressemble à une preuve. C’est un modèle.</li>
 <li><strong>Un petit premier pas.</strong> Télécharger le guide. Répondre à l’iCloud. Se laisser envoyer un échantillon. Presque gratuit, et cela ouvre l’étape suivante.</li>
 <li><strong>La pression de répondre.</strong> Pas tout de suite pour l’argent. Pour que la boîte confirme qu’elle est vivante.</li>
 </ul>
 <h2>Quoi faire</h2>
-<p>Ne répondez pas. Même pas « non, merci ». Une réponse confirme que l’adresse est active. Notez ensuite ce que le message disait. Ne prétendez pas savoir qui est la personne. Vous ne savez que ce que le message a dit. Publier cette analyse prend environ vingt minutes, et la personne suivante a quelque chose à chercher.</p>
-<p>Quel indice vous sert le plus quand une « opportunité parfaite » arrive ?</p>
+<p>Ne répondez pas. Même pas « non, merci ». Une réponse confirme que l’adresse est active. Notez ensuite ce que le message disait. Ne prétendez pas savoir qui est la personne. Vous ne savez que ce que le message a dit. Publier cette analyse prend environ vingt minutes, et la personne suivante a quelque chose à chercher. L’indice le plus sûr est un éloge qui irait à n’importe qui.</p>
 
 HTML,
         ],
@@ -179,9 +174,9 @@ HTML,
             'image_alt' => 'Un escritorio oscuro de noche: tres sobres cerrados con luz violeta y turquesa, monedas y una bobina de película al lado. Una mano no los toca.',
             'excerpt' => 'En una semana llegaron tres mensajes no pedidos: 1 500 dólares por una historia de dos páginas, Atlas Agents desde iCloud y un book trailer desde Gmail. Un elogio que valdría para cualquiera. No responda.',
             'content' => <<<'HTML'
-<p>En una semana, tres desconocidos me ofrecieron dinero, fama o un book trailer. Ninguno había leído lo que escribo.</p>
-<p>Con más precisión: un mensaje prometía dinero, el segundo vendía una herramienta y el tercero ofrecía un tráiler del que, según decía, vendría la fama. Remitentes distintos, el mismo armazón. Un elogio que podría enviarse a cualquiera. Precisiones vagas. Un primer paso pequeño que casi no cuesta nada. Y un empujón para que usted responda.</p>
-<p>Ya desmonté cada uno por separado. Aquí solo está lo que comparten.</p>
+<p>El elogio del primer mensaje podría haberse enviado a cualquiera con un boletín. El del segundo, a cualquiera con un GitHub público. El del tercero, a cualquiera con una sinopsis pública. Llegaron en una semana, de tres remitentes, y ninguna frase nacía de que alguien hubiera leído lo que escribo.</p>
+<p>Uno prometía dinero, el segundo una herramienta y el tercero un tráiler del que, según decía, vendría la fama. El mismo armazón: un elogio para cualquiera, precisiones vagas, un primer paso pequeño que casi no cuesta nada y un empujón para que usted responda.</p>
+<p>Ya desmonté cada uno por separado.</p>
 <h2>Dinero: 1 500 dólares por dos páginas</h2>
 <p>El primero fue un mensaje de pago en el boletín de Winning Writers. Prometía 1 500 dólares de media por una historia de dos páginas. Detrás del texto estaba AWAI. No es una estafa en sentido penal. Las dos casas existen desde hace años. Es un embudo: la guía gratuita es cebo para un curso. El desglose está en <a href="article.php?slug=awai-dvojstranovy-pribeh-za-1500">1 500 dólares por una historia de dos páginas</a>.</p>
 <h2>Una herramienta: Atlas Agents desde iCloud</h2>
@@ -197,8 +192,7 @@ HTML,
 <li><strong>Presión para responder.</strong> Todavía no por el dinero. Para que el buzón confirme que está vivo.</li>
 </ul>
 <h2>Qué hacer</h2>
-<p>No responda. Ni siquiera «no, gracias». Una respuesta confirma que la dirección está viva. Después anote lo que decía el mensaje. No afirme saber quién es la persona. Usted solo sabe lo que el mensaje dijo. Publicar ese análisis lleva unos veinte minutos, y la siguiente persona tiene algo que buscar.</p>
-<p>¿En qué señal confía usted más cuando llega una «oportunidad perfecta»?</p>
+<p>No responda. Ni siquiera «no, gracias». Una respuesta confirma que la dirección está viva. Después anote lo que decía el mensaje. No afirme saber quién es la persona. Usted solo sabe lo que el mensaje dijo. Publicar ese análisis lleva unos veinte minutos, y la siguiente persona tiene algo que buscar. La señal más segura es un elogio que valdría para cualquiera.</p>
 
 HTML,
         ],
@@ -207,9 +201,9 @@ HTML,
             'image_alt' => 'Ciemne biurko w nocy: trzy zamknięte koperty w fioletowym i turkusowym świetle, obok monety i szpula filmowa. Dłoń po nie nie sięga.',
             'excerpt' => 'W jednym tygodniu przyszły trzy niezamówione wiadomości: 1 500 dolarów za dwustronicową historię, Atlas Agents z iClouda i book trailer z Gmaila. Pochwała, która pasuje do każdego. Nie odpowiadaj.',
             'content' => <<<'HTML'
-<p>W jednym tygodniu trzech obcych ludzi zaoferowało mi pieniądze, sławę albo book trailer. Nikt z nich nie czytał tego, co piszę.</p>
-<p>Dokładniej: jedna wiadomość obiecywała pieniądze, druga sprzedawała narzędzie, a trzecia oferowała trailer, z którego rzekomo przyjdzie sława. Różni nadawcy, ten sam szkielet. Pochwała, którą dałoby się wysłać komukolwiek. Mgliste konkrety. Mały pierwszy krok, który prawie nic nie kosztuje. I nacisk, żebyś odpowiedział.</p>
-<p>Każdą rozebrałem już osobno. Tu jest tylko to, co mają wspólne.</p>
+<p>Pochwała w pierwszej wiadomości dałaby się wysłać każdemu z newsletterem. W drugiej każdemu z publicznym GitHubem. W trzeciej każdemu, kto ma publiczne streszczenie. Przyszły w jednym tygodniu od trzech nadawców i żadna nie powstała z tego, że ktoś przeczytał, co piszę.</p>
+<p>Jedna obiecywała pieniądze, druga narzędzie, a trzecia trailer, z którego rzekomo przyjdzie sława. Ten sam szkielet: pochwała dla każdego, mgliste konkrety, mały pierwszy krok, który prawie nic nie kosztuje, i nacisk, żebyś odpowiedział.</p>
+<p>Każdą rozebrałem już osobno.</p>
 <h2>Pieniądze: 1 500 dolarów za dwie strony</h2>
 <p>Pierwsza była płatną wiadomością w newsletterze Winning Writers. Obiecywała średnio 1 500 dolarów za dwustronicową historię. Za tekstem stało AWAI. To nie jest oszustwo w sensie karnym. Obie firmy istnieją od lat. To lejek: darmowy przewodnik jest przynętą na kurs. Szczegóły są w artykule <a href="article.php?slug=awai-dvojstranovy-pribeh-za-1500">1 500 dolarów za dwustronicową historię</a>.</p>
 <h2>Narzędzie: Atlas Agents z iClouda</h2>
@@ -225,8 +219,7 @@ HTML,
 <li><strong>Nacisk na odpowiedź.</strong> Jeszcze nie na pieniądze. Na to, żeby skrzynka potwierdziła, że żyje.</li>
 </ul>
 <h2>Co z tym zrobić</h2>
-<p>Nie odpowiadaj. Nawet „nie, dziękuję”. Odpowiedź potwierdza, że adres żyje. Potem zapisz, co było w wiadomości. Nie twierdź, że wiesz, kim jest ta osoba. Wiesz tylko to, co wiadomość powiedziała. Analiza, którą opublikujesz, zajmuje około dwudziestu minut, a następna osoba ma czego szukać.</p>
-<p>Na jaki sygnał liczysz najbardziej, kiedy wpada „idealna okazja”?</p>
+<p>Nie odpowiadaj. Nawet „nie, dziękuję”. Odpowiedź potwierdza, że adres żyje. Potem zapisz, co było w wiadomości. Nie twierdź, że wiesz, kim jest ta osoba. Wiesz tylko to, co wiadomość powiedziała. Analiza, którą opublikujesz, zajmuje około dwudziestu minut, a następna osoba ma czego szukać. Najpewniejszy sygnał to pochwała, która pasuje do każdego.</p>
 
 HTML,
         ],
@@ -235,9 +228,9 @@ HTML,
             'image_alt' => 'Sötét asztal éjjel: három zárt boríték lila és türkiz fényben, mellettük érmék és egy filmtekercs. Egy kéz nem nyúl értük.',
             'excerpt' => 'Egy hét alatt három kéretlen üzenet jött: 1500 dollár egy kétoldalas történetért, Atlas Agents iCloudról, és book trailer Gmailről. Dicséret, amely bárkire illik. Ne válaszolj.',
             'content' => <<<'HTML'
-<p>Egy hét alatt három idegen pénzt, hírnevet vagy book trailert kínált. Egyikük sem olvasta, amit írok.</p>
-<p>Pontosabban: az egyik üzenet pénzt ígért, a második eszközt árult, a harmadik trailert, amelyből állítólag a hírnév jön. Különböző feladók, ugyanaz a váz. Dicséret, amelyet bárkinek el lehetett volna küldeni. Homályos részletek. Apró első lépés, amely szinte semmibe nem kerül. És nyomás, hogy válaszolj.</p>
-<p>Mindegyiket külön már szétszedtem. Itt csak az van, ami közös bennük.</p>
+<p>Az első üzenet dicsérete bárkinek elmehetett volna, akinek hírlevele van. A másodiké bárkinek, akinek nyilvános GitHubja van. A harmadiké bárkinek, akinek nyilvános szinopszisa van. Egy hét alatt jöttek, három feladótól, és egyik mondat sem azért született, mert valaki olvasta, amit írok.</p>
+<p>Az egyik pénzt ígért, a második eszközt, a harmadik trailert, amelyből állítólag a hírnév jön. Ugyanaz a váz: dicséret bárkinek, homályos részletek, apró első lépés, amely szinte semmibe nem kerül, és nyomás, hogy válaszolj.</p>
+<p>Mindegyiket külön már szétszedtem.</p>
 <h2>Pénz: 1500 dollár két oldalért</h2>
 <p>Az első fizetett üzenet volt a Winning Writers hírlevelében. Átlagosan 1500 dollárt ígért egy kétoldalas történetért. A szöveg mögött az AWAI állt. Ez nem bűncselekmény értelmében vett átverés. Mindkét cég évek óta létezik. Tölcsér: az ingyenes útmutató csalétek egy tanfolyamhoz. A bontás a <a href="article.php?slug=awai-dvojstranovy-pribeh-za-1500">1500 dollár egy kétoldalas történetért</a> című cikkben van.</p>
 <h2>Eszköz: Atlas Agents iCloudról</h2>
@@ -253,8 +246,7 @@ HTML,
 <li><strong>Nyomás a válaszra.</strong> Még nem a pénzre. Arra, hogy a postaláda megerősítse: él.</li>
 </ul>
 <h2>Mi legyen vele</h2>
-<p>Ne válaszolj. Még „nem, köszönöm”-mel sem. A válasz megerősíti, hogy a cím él. Utána írd le, mi volt az üzenetben. Ne állítsd, hogy tudod, ki az az ember. Csak azt tudod, amit az üzenet mondott. A nyilvános elemzés körülbelül húsz perc, és a következő embernek van mit keresnie.</p>
-<p>Melyik jelre hagyatkozol a leginkább, amikor egy „tökéletes lehetőség” érkezik?</p>
+<p>Ne válaszolj. Még „nem, köszönöm”-mel sem. A válasz megerősíti, hogy a cím él. Utána írd le, mi volt az üzenetben. Ne állítsd, hogy tudod, ki az az ember. Csak azt tudod, amit az üzenet mondott. A nyilvános elemzés körülbelül húsz perc, és a következő embernek van mit keresnie. A legbiztosabb jel a dicséret, amely bárkire illik.</p>
 
 HTML,
         ],
@@ -263,9 +255,9 @@ HTML,
             'image_alt' => 'Una scrivania buia di notte: tre buste chiuse in luce viola e turchese, accanto monete e una bobina di pellicola. Una mano non le prende.',
             'excerpt' => 'In una settimana sono arrivati tre messaggi non richiesti: 1 500 dollari per una storia di due pagine, Atlas Agents da iCloud e un book trailer da Gmail. Un elogio che andrebbe a chiunque. Non rispondere.',
             'content' => <<<'HTML'
-<p>In una settimana tre sconosciuti mi hanno offerto denaro, fama o un book trailer. Nessuno aveva letto quello che scrivo.</p>
-<p>Più precisamente: un messaggio prometteva denaro, il secondo vendeva uno strumento, il terzo offriva un trailer da cui, a detta loro, sarebbe arrivata la fama. Mittenti diversi, la stessa ossatura. Un elogio che si poteva mandare a chiunque. Precisazioni vaghe. Un primo passo piccolo che non costa quasi nulla. E una spinta perché tu risponda.</p>
-<p>Li ho già smontati uno per uno. Qui c’è solo ciò che condividono.</p>
+<p>L’elogio del primo messaggio poteva andare a chiunque avesse una newsletter. Quello del secondo, a chiunque avesse un GitHub pubblico. Quello del terzo, a chiunque avesse una sinossi pubblica. Sono arrivati in una settimana da tre mittenti, e nessuna frase nasceva dal fatto che qualcuno avesse letto quello che scrivo.</p>
+<p>Uno prometteva denaro, il secondo uno strumento, il terzo un trailer da cui, a detta loro, sarebbe arrivata la fama. La stessa ossatura: un elogio per chiunque, precisazioni vaghe, un primo passo piccolo che non costa quasi nulla, e una spinta perché tu risponda.</p>
+<p>Li ho già smontati uno per uno.</p>
 <h2>Denaro: 1 500 dollari per due pagine</h2>
 <p>Il primo era un messaggio a pagamento nella newsletter di Winning Writers. Prometteva in media 1 500 dollari per una storia di due pagine. Dietro il testo c’era AWAI. Non è una truffa in senso penale. Entrambe le case esistono da anni. È un imbuto: la guida gratuita è un’esca per un corso. Lo svisceramento è in <a href="article.php?slug=awai-dvojstranovy-pribeh-za-1500">1 500 dollari per una storia di due pagine</a>.</p>
 <h2>Uno strumento: Atlas Agents da iCloud</h2>
@@ -281,8 +273,7 @@ HTML,
 <li><strong>Pressione a rispondere.</strong> Non subito per i soldi. Perché la casella confermi di essere viva.</li>
 </ul>
 <h2>Cosa farne</h2>
-<p>Non rispondere. Nemmeno con «no, grazie». Una risposta conferma che l’indirizzo è vivo. Poi annota che cosa c’era nel messaggio. Non sostenere di sapere chi sia la persona. Sai solo ciò che il messaggio ha detto. Pubblicare quell’analisi richiede circa venti minuti, e la persona dopo ha qualcosa da cercare.</p>
-<p>Qual è il segnale a cui ti affidi di più quando arriva un’«opportunità perfetta»?</p>
+<p>Non rispondere. Nemmeno con «no, grazie». Una risposta conferma che l’indirizzo è vivo. Poi annota che cosa c’era nel messaggio. Non sostenere di sapere chi sia la persona. Sai solo ciò che il messaggio ha detto. Pubblicare quell’analisi richiede circa venti minuti, e la persona dopo ha qualcosa da cercare. Il segnale più sicuro è un elogio che andrebbe a chiunque.</p>
 
 HTML,
         ],
@@ -291,11 +282,11 @@ HTML,
             'image_alt' => 'Темний стіл уночі: три закриті конверти у фіолетовому й бірюзовому світлі, поруч монети й кінобобіна. Рука по них не сягає.',
             'excerpt' => 'За один тиждень надійшли три непрохані листи: 1500 доларів за двосторінкову історію, Atlas Agents з iCloud і book trailer з Gmail. Похвала, яка пасує будь-кому. Не відповідайте.',
             'content' => <<<'HTML'
-<p>За один тиждень троє чужих людей запропонували мені гроші, славу або book trailer. Ніхто з них не читав того, що я пишу.</p>
-<p>Точніше: один лист обіцяв гроші, другий продавав інструмент, третій пропонував трейлер, з якого нібито прийде слава. Різні відправники, той самий каркас. Похвала, яку можна було надіслати будь-кому. Розмиті конкретності. Малий перший крок, який майже нічого не коштує. І тиск, щоб ви відповіли.</p>
-<p>Кожен я вже розібрав окремо. Тут лише те, що в них спільне.</p>
+<p>Похвалу в першому листі можна було надіслати будь-кому з розсилкою. У другому будь-кому з публічним GitHub. У третьому будь-кому, хто має публічний синопсис. Вони прийшли за один тиждень від трьох відправників, і жодне речення не виникло з того, що хтось прочитав, що я пишу.</p>
+<p>Один обіцяв гроші, другий інструмент, третій трейлер, з якого нібито прийде слава. Той самий каркас: похвала для будь-кого, розмиті конкретності, малий перший крок, який майже нічого не коштує, і тиск, щоб ви відповіли.</p>
+<p>Кожен я вже розібрав окремо.</p>
 <h2>Гроші: 1500 доларів за дві сторінки</h2>
-<p>Перший був платним листом у розсилці Winning Writers. Він обіцяв у середньому 1500 доларів за двосторінкову історію. За текстом стояв AWAI. Це не шахрайство в кримінальному сенсі. Обидві фірми існують роками. Це лійка: безкоштовний провідник є наживкою на курс. Розбір є в статті <a href="article.php?slug=awai-dvojstranovy-pribeh-za-1500">1500 доларів за двосторінкову історію</a>.</p>
+<p>Перший був платним листом у розсилці Winning Writers. Він обіцяв у середньому 1500 доларів за двосторінкову історію. За текстом стояв AWAI. Це не шахрайство в кримінальному сенсі. Обидві фірми існують роками. Це лійка: безкоштовний посібник є наживкою на курс. Розбір є в статті <a href="article.php?slug=awai-dvojstranovy-pribeh-za-1500">1500 доларів за двосторінкову історію</a>.</p>
 <h2>Інструмент: Atlas Agents з iCloud</h2>
 <p>Другий був відшліфованим листом про інструменти для ШІ-агентів. Він прийшов з адреси <em>pavankmeka@icloud.com</em> і пропонував Atlas Agents. Gmail поклав його в спам. У полі Кому не було мого імені. Рядок звучав так: «Built for GitHub superusers like you.» Сайт продукту існує. Причини віддавати API-ключі немає. Більше є в статті <a href="article.php?slug=atlas-agents-studeny-email-z-icloud">Atlas Agents з iCloud</a>.</p>
 <h2>Слава: book trailer з Gmail</h2>
@@ -305,12 +296,11 @@ HTML,
 <ul>
 <li><strong>Похвала для будь-кого.</strong> Жодного речення, яке виникло б лише тому, що хтось прочитав мою роботу.</li>
 <li><strong>Розмиті конкретності.</strong> Число 1500, звернення «superuser», імена з анотації. Скидається на доказ. Це шаблон.</li>
-<li><strong>Малий перший крок.</strong> Завантажити провідник. Відповісти на iCloud. Дозволити надіслати зразок. Майже безкоштовно, і він відкриває наступний крок.</li>
+<li><strong>Малий перший крок.</strong> Завантажити посібник. Відповісти на iCloud. Дозволити надіслати зразок. Майже безкоштовно, і він відкриває наступний крок.</li>
 <li><strong>Тиск на відповідь.</strong> Ще не на гроші. На те, щоб скринька підтвердила, що жива.</li>
 </ul>
 <h2>Що з цим робити</h2>
-<p>Не відповідайте. Навіть «ні, дякую». Відповідь підтверджує, що адреса жива. Потім запишіть, що було в листі. Не стверджуйте, що знаєте, хто ця людина. Ви знаєте лише те, що сказав лист. Аналіз, який ви опублікуєте, триває близько двадцяти хвилин, і наступна людина має що шукати.</p>
-<p>На яку ознаку ви покладаєтеся найбільше, коли приходить «ідеальна нагода»?</p>
+<p>Не відповідайте. Навіть «ні, дякую». Відповідь підтверджує, що адреса жива. Потім запишіть, що було в листі. Не стверджуйте, що знаєте, хто ця людина. Ви знаєте лише те, що сказав лист. Аналіз, який ви опублікуєте, триває близько двадцяти хвилин, і наступна людина має що шукати. Найнадійніша ознака: похвала, яка пасує будь-кому.</p>
 
 HTML,
         ],
