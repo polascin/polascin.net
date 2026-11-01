@@ -802,6 +802,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/mensia-suma-nie-je-zlava.php'
             );
         },
+        '2026110107_recommendation_is_not_permission_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/odporucanie-nie-je-povolenie.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
