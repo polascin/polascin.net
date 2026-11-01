@@ -772,6 +772,18 @@ function applySchemaMigrations(PDO $pdo): void {
                 refreshPublishedArticleTextFromFile($pdo, $articlePath);
             }
         },
+        '2026110102_who_owns_release_record_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/kto-vlastni-zaznam-o-vydani.php'
+            );
+        },
+        '2026110103_verify_target_before_verdict_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/pred-verdiktom-over-ciel.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
