@@ -100,6 +100,7 @@ const EXPECTED_MIGRATIONS = [
     '2026110101_humanize_all_article_texts',
     '2026110102_who_owns_release_record_article',
     '2026110103_verify_target_before_verdict_article',
+    '2026110104_release_record_ownership_polish',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

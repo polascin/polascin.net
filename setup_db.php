@@ -784,6 +784,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/pred-verdiktom-over-ciel.php'
             );
         },
+        '2026110104_release_record_ownership_polish' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/kto-vlastni-zaznam-o-vydani.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
