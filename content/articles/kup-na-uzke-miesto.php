@@ -39,8 +39,8 @@ return [
             'excerpt' => 'V októbri som si dal rozobrať BookSpace a Zeely. Jedna ponúka predaj, druhá reklamu a kampaň. Ani jedno z nich samo nepovie, či túto knihu niekto kúpi.',
             'content' => <<<'HTML'
 <p>V októbri som si dal rozobrať <a href="https://bookspace.com/">BookSpace</a> a <a href="https://zeely.ai/">Zeely</a>. Hľadal som, čo z toho sa hodí na moje knihy.</p>
-<p>BookSpace ponúka predajnú infraštruktúru. Zeely ponúka výrobu reklamy a nástroje na kampaň. Sú to rôzne práce. Ani jedno z nich samo neodpovie, či túto konkrétnu knihu niekto kúpi.</p>
-<p>Rozlišujem to takto.</p>
+<p>BookSpace ponúka priamu predajňu autora. Zeely ponúka výrobu reklamy a nástroje na kampaň. Sú to rôzne práce. Ani jedno z nich samo neodpovie, či túto konkrétnu knihu niekto kúpi.</p>
+<p>Kým niečo kúpim, kladiem si štyri otázky.</p>
 <ul>
 <li><strong>Výroba.</strong> Viem ten materiál pripraviť rýchlejšie?</li>
 <li><strong>Distribúcia.</strong> Viem ho dostať pred správnych ľudí?</li>
@@ -61,8 +61,8 @@ HTML,
             'excerpt' => 'In October I asked for analyses of BookSpace and Zeely. One offers a store. The other offers ads and a campaign. Neither, on its own, says whether anyone will buy this book.',
             'content' => <<<'HTML'
 <p>In October I asked for analyses of <a href="https://bookspace.com/">BookSpace</a> and <a href="https://zeely.ai/">Zeely</a>. I was looking for what would fit my books.</p>
-<p>BookSpace offers sales infrastructure. Zeely offers ad production and campaign tools. Those are different jobs. Neither, on its own, answers whether anyone will buy this particular book.</p>
-<p>This is how I separate them.</p>
+<p>BookSpace offers the author a direct store. Zeely offers ad production and campaign tools. Those are different jobs. Neither, on its own, answers whether anyone will buy this particular book.</p>
+<p>Before I buy anything, I ask four questions.</p>
 <ul>
 <li><strong>Production.</strong> Can I make the material faster?</li>
 <li><strong>Distribution.</strong> Can I put it in front of the right people?</li>
@@ -71,7 +71,7 @@ HTML,
 </ul>
 <p>Before I commit to a tool with a recurring fee, I would take one book. The budget would be fixed. I would set the measurement period in advance.</p>
 <p>Before paying, I would check which features actually work today, what renews on its own, and whether anything is charged beyond the subscription.</p>
-<p>Then I would count completed purchases and what remains after advertising, platform fees and fulfillment. I would not count clicks, or how much advertising the tool produces.</p>
+<p>Then I would count completed purchases and what remains after advertising, platform fees and order handling. I would not count clicks, or how much advertising the tool produces.</p>
 <p>A tool can pass its own test and the sale can still fail. A beautiful ad can sell nothing. A storefront with a better margin can have no visitors.</p>
 <p>I start with the bottleneck. I buy the tool only if it addresses that.</p>
 
@@ -83,8 +83,8 @@ HTML,
             'excerpt' => 'V říjnu jsem si nechal rozebrat BookSpace a Zeely. Jedna nabízí prodej, druhá reklamu a kampaň. Ani jedno z nich samo neřekne, jestli tuhle knihu někdo koupí.',
             'content' => <<<'HTML'
 <p>V říjnu jsem si nechal rozebrat <a href="https://bookspace.com/">BookSpace</a> a <a href="https://zeely.ai/">Zeely</a>. Hledal jsem, co z toho se hodí na mé knihy.</p>
-<p>BookSpace nabízí prodejní infrastrukturu. Zeely nabízí výrobu reklamy a nástroje na kampaň. Jsou to různé práce. Ani jedno z nich samo neodpoví, jestli tuhle konkrétní knihu někdo koupí.</p>
-<p>Rozlišuji to takhle.</p>
+<p>BookSpace nabízí přímou prodejnu autora. Zeely nabízí výrobu reklamy a nástroje na kampaň. Jsou to různé práce. Ani jedno z nich samo neodpoví, jestli tuhle konkrétní knihu někdo koupí.</p>
+<p>Než něco koupím, kladu si čtyři otázky.</p>
 <ul>
 <li><strong>Výroba.</strong> Umím ten materiál připravit rychleji?</li>
 <li><strong>Distribuce.</strong> Umím ho dostat před správné lidi?</li>
@@ -105,8 +105,8 @@ HTML,
             'excerpt' => 'Im Oktober habe ich BookSpace und Zeely auseinandernehmen lassen. Das eine bietet Verkauf, das andere Werbung und eine Kampagne. Keines sagt allein, ob jemand dieses Buch kauft.',
             'content' => <<<'HTML'
 <p>Im Oktober habe ich <a href="https://bookspace.com/">BookSpace</a> und <a href="https://zeely.ai/">Zeely</a> auseinandernehmen lassen. Ich suchte, was davon zu meinen Büchern passt.</p>
-<p>BookSpace bietet Verkaufsinfrastruktur. Zeely bietet Werbeproduktion und Werkzeuge für Kampagnen. Das sind verschiedene Arbeiten. Keines von beiden beantwortet allein, ob jemand genau dieses Buch kauft.</p>
-<p>Ich trenne das so.</p>
+<p>BookSpace bietet eine direkte Verkaufsstelle des Autors. Zeely bietet Werbeproduktion und Werkzeuge für Kampagnen. Das sind verschiedene Arbeiten. Keines von beiden beantwortet allein, ob jemand genau dieses Buch kauft.</p>
+<p>Bevor ich etwas kaufe, stelle ich mir vier Fragen.</p>
 <ul>
 <li><strong>Herstellung.</strong> Kann ich das Material schneller fertigmachen?</li>
 <li><strong>Vertrieb.</strong> Kann ich es vor die richtigen Leute bringen?</li>
@@ -127,8 +127,8 @@ HTML,
             'excerpt' => 'En octobre, j’ai fait analyser BookSpace et Zeely. L’un offre la vente, l’autre la publicité et la campagne. Aucun des deux ne dit à lui seul si quelqu’un achètera ce livre.',
             'content' => <<<'HTML'
 <p>En octobre, j’ai fait analyser <a href="https://bookspace.com/">BookSpace</a> et <a href="https://zeely.ai/">Zeely</a>. Je cherchais ce qui convenait à mes livres.</p>
-<p>BookSpace offre une infrastructure de vente. Zeely offre la production de publicités et des outils de campagne. Ce sont des travaux différents. Aucun des deux ne dit, à lui seul, si quelqu’un achètera ce livre précis.</p>
-<p>Je sépare les choses ainsi.</p>
+<p>BookSpace offre une vente directe par l’auteur. Zeely offre la production de publicités et des outils de campagne. Ce sont des travaux différents. Aucun des deux ne dit, à lui seul, si quelqu’un achètera ce livre précis.</p>
+<p>Avant d’acheter quoi que ce soit, je me pose quatre questions.</p>
 <ul>
 <li><strong>Production.</strong> Puis-je préparer le support plus vite ?</li>
 <li><strong>Distribution.</strong> Puis-je le mettre devant les bonnes personnes ?</li>
@@ -149,8 +149,8 @@ HTML,
             'excerpt' => 'En octubre pedí un análisis de BookSpace y de Zeely. Uno ofrece la venta, el otro el anuncio y la campaña. Ninguno de los dos dice por sí solo si alguien comprará este libro.',
             'content' => <<<'HTML'
 <p>En octubre pedí un análisis de <a href="https://bookspace.com/">BookSpace</a> y de <a href="https://zeely.ai/">Zeely</a>. Buscaba qué encajaba con mis libros.</p>
-<p>BookSpace ofrece infraestructura de venta. Zeely ofrece producción de anuncios y herramientas de campaña. Son trabajos distintos. Ninguno de los dos dice por sí solo si alguien comprará este libro concreto.</p>
-<p>Lo separo así.</p>
+<p>BookSpace ofrece una tienda directa del autor. Zeely ofrece producción de anuncios y herramientas de campaña. Son trabajos distintos. Ninguno de los dos dice por sí solo si alguien comprará este libro concreto.</p>
+<p>Antes de comprar nada, me hago cuatro preguntas.</p>
 <ul>
 <li><strong>Producción.</strong> ¿Puedo preparar el material más rápido?</li>
 <li><strong>Distribución.</strong> ¿Puedo ponerlo delante de las personas adecuadas?</li>
@@ -171,8 +171,8 @@ HTML,
             'excerpt' => 'W październiku kazałem rozebrać BookSpace i Zeely. Jedno oferuje sprzedaż, drugie reklamę i kampanię. Żadne z nich samo nie powie, czy ktoś kupi tę książkę.',
             'content' => <<<'HTML'
 <p>W październiku kazałem rozebrać <a href="https://bookspace.com/">BookSpace</a> i <a href="https://zeely.ai/">Zeely</a>. Szukałem, co z tego pasuje do moich książek.</p>
-<p>BookSpace oferuje infrastrukturę sprzedaży. Zeely oferuje produkcję reklam i narzędzia do kampanii. To różne prace. Żadne z nich samo nie odpowie, czy ktoś kupi tę konkretną książkę.</p>
-<p>Rozdzielam to tak.</p>
+<p>BookSpace oferuje bezpośredni sklep autora. Zeely oferuje produkcję reklam i narzędzia do kampanii. To różne prace. Żadne z nich samo nie odpowie, czy ktoś kupi tę konkretną książkę.</p>
+<p>Zanim coś kupię, zadaję sobie cztery pytania.</p>
 <ul>
 <li><strong>Produkcja.</strong> Czy umiem przygotować ten materiał szybciej?</li>
 <li><strong>Dystrybucja.</strong> Czy umiem pokazać go właściwym ludziom?</li>
@@ -193,8 +193,8 @@ HTML,
             'excerpt' => 'Októberben elemzést kértem a BookSpace-ről és a Zeelyről. Az egyik eladást kínál, a másik hirdetést és kampányt. Egyik sem mondja meg önmagában, hogy megveszi-e valaki ezt a könyvet.',
             'content' => <<<'HTML'
 <p>Októberben elemzést kértem a <a href="https://bookspace.com/">BookSpace</a>-ről és a <a href="https://zeely.ai/">Zeely</a>ről. Azt kerestem, mi illik a könyveimhez.</p>
-<p>A BookSpace értékesítési infrastruktúrát kínál. A Zeely hirdetéskészítést és kampányeszközöket kínál. Ezek különböző munkák. Egyik sem válaszol önmagában arra, hogy ezt a konkrét könyvet megveszi-e valaki.</p>
-<p>Így választom szét.</p>
+<p>A BookSpace a szerző közvetlen boltját kínálja. A Zeely hirdetéskészítést és kampányeszközöket kínál. Ezek különböző munkák. Egyik sem válaszol önmagában arra, hogy ezt a konkrét könyvet megveszi-e valaki.</p>
+<p>Mielőtt bármit megveszek, négy kérdést teszek fel magamnak.</p>
 <ul>
 <li><strong>Gyártás.</strong> Gyorsabban el tudom készíteni az anyagot?</li>
 <li><strong>Terjesztés.</strong> Oda tudom tenni a megfelelő emberek elé?</li>
@@ -215,8 +215,8 @@ HTML,
             'excerpt' => 'A ottobre ho chiesto un’analisi di BookSpace e di Zeely. Uno offre la vendita, l’altro la pubblicità e la campagna. Nessuno dei due, da solo, dice se qualcuno comprerà questo libro.',
             'content' => <<<'HTML'
 <p>A ottobre ho chiesto un’analisi di <a href="https://bookspace.com/">BookSpace</a> e di <a href="https://zeely.ai/">Zeely</a>. Cercavo che cosa si adattasse ai miei libri.</p>
-<p>BookSpace offre un’infrastruttura di vendita. Zeely offre la produzione di pubblicità e strumenti per le campagne. Sono lavori diversi. Nessuno dei due risponde da solo se qualcuno comprerà questo libro preciso.</p>
-<p>Li separo così.</p>
+<p>BookSpace offre una vendita diretta dell’autore. Zeely offre la produzione di pubblicità e strumenti per le campagne. Sono lavori diversi. Nessuno dei due risponde da solo se qualcuno comprerà questo libro preciso.</p>
+<p>Prima di comprare qualcosa, mi pongo quattro domande.</p>
 <ul>
 <li><strong>Produzione.</strong> Posso preparare il materiale più in fretta?</li>
 <li><strong>Distribuzione.</strong> Posso metterlo davanti alle persone giuste?</li>
@@ -237,15 +237,15 @@ HTML,
             'excerpt' => 'У жовтні я дав розібрати BookSpace і Zeely. Одне пропонує продаж, друге рекламу і кампанію. Жодне з них саме не скаже, чи хтось купить цю книжку.',
             'content' => <<<'HTML'
 <p>У жовтні я дав розібрати <a href="https://bookspace.com/">BookSpace</a> і <a href="https://zeely.ai/">Zeely</a>. Шукав, що з цього пасує до моїх книжок.</p>
-<p>BookSpace пропонує інфраструктуру продажу. Zeely пропонує виробництво реклами й інструменти для кампанії. Це різна робота. Жодне з них саме не відповість, чи хтось купить саме цю книжку.</p>
-<p>Розрізняю це так.</p>
+<p>BookSpace пропонує пряму книгарню автора. Zeely пропонує виробництво реклами й інструменти для кампанії. Це різна робота. Жодне з них саме не відповість, чи хтось купить саме цю книжку.</p>
+<p>Перш ніж щось купити, ставлю собі чотири питання.</p>
 <ul>
 <li><strong>Виробництво.</strong> Чи можу я підготувати цей матеріал швидше?</li>
 <li><strong>Дистрибуція.</strong> Чи можу я показати його потрібним людям?</li>
 <li><strong>Попит.</strong> Чи ці люди справді його хочуть?</li>
 <li><strong>Економіка.</strong> Чи після витрат від продажу щось лишається?</li>
 </ul>
-<p>Поки не візьму інструмент із повторною платою, я б узяв одну книжку. Бюджет був би фіксований. Період вимірювання я б визначив наперед.</p>
+<p>Перш ніж зобов’яжуся щодо інструмента з повторною платою, я б узяв одну книжку. Бюджет був би фіксований. Період вимірювання я б визначив наперед.</p>
 <p>Ще до оплати я б перевірив, які функції сьогодні справді працюють, що поновлюється само собою і чи доводиться платити ще щось, крім передплати.</p>
 <p>Потім я б рахував завершені покупки і те, що лишається після реклами, комісій платформи і виконання замовлення. Кліки я б не рахував, і не те, скільки реклами інструмент виготовить.</p>
 <p>Інструмент може витримати власну перевірку, а продаж усе одно не вийде. Гарна реклама може не продати нічого. Крамниця з кращою маржею може лишитися без відвідувача.</p>
