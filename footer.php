@@ -111,3 +111,7 @@ $footerBeat = appSwatchBeat($footerUpdateTs);
   data-cookie-decline="<?= te('cookie.decline') ?>"
   data-cookie-accept="<?= te('cookie.accept') ?>"
 ></div>
+
+<?php if (!isLoggedIn()): ?>
+<script src="/js/clarity-consent.js?v=20261101" data-project="axxzsx2xlq" data-consent="external" data-paths="/,/index.php,/articles.php,/article.php,/library.php,/about.php,/privacy.php,/terms.php"></script>
+<?php endif; ?>

@@ -132,9 +132,9 @@ function sendSecurityHeaders(): void {
         "img-src 'self' data: https:; " .
         "style-src 'self' 'nonce-{$nonce}'; " .
         "font-src 'self'; " .
-        "script-src 'self' 'nonce-{$nonce}' https://www.googletagmanager.com https://www.google-analytics.com; " .
+        "script-src 'self' 'nonce-{$nonce}' https://www.googletagmanager.com https://www.google-analytics.com https://*.clarity.ms; " .
         "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com " .
-            "https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net; " .
+            "https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net https://*.clarity.ms; " .
         'frame-ancestors ' . ($sensitiveRequest ? "'none'" : "'self'") . "; " .
         "base-uri 'self'; object-src 'none'; form-action 'self'";
     if (isRequestHttps()) {

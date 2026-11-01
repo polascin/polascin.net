@@ -302,7 +302,7 @@ return [
 
     // Cookies (passed to JavaScript)
     'cookie.title' => 'Analytics cookies',
-    'cookie.description' => 'With your consent, I use Google Analytics 4 to measure visits. Analytics will not load without consent, and advertising features remain disabled. Details are in the',
+    'cookie.description' => 'With your consent, I use Google Analytics 4 and Microsoft Clarity for visits, clicks, scrolling and public-page session recordings with masked text. Analytics does not load without consent. Advertising remains disabled. Details are available in the',
     'cookie.privacy_link' => 'privacy policy',
     'cookie.decline' => 'Decline',
     'cookie.accept' => 'Allow analytics',

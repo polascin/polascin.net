@@ -302,7 +302,7 @@ return [
 
     // Cookies (posílá se do JavaScriptu)
     'cookie.title' => 'Analytické cookies',
-    'cookie.description' => 'S vaším souhlasem používám Google Analytics 4 k měření návštěvnosti. Bez souhlasu se analytika nenačte a reklamní funkce zůstanou vypnuté. Podrobnosti najdete v',
+    'cookie.description' => 'S vaším souhlasem používám Google Analytics 4 a Microsoft Clarity k měření návštěvnosti, kliknutí, posouvání a záznamům používání veřejných stránek s maskovaným textem. Bez souhlasu se analytika nenačte. Reklamní funkce zůstávají vypnuté. Podrobnosti najdete v',
     'cookie.privacy_link' => 'zásadách ochrany soukromí',
     'cookie.decline' => 'Odmítnout',
     'cookie.accept' => 'Povolit analytiku',

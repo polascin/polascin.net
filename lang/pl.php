@@ -302,7 +302,7 @@ return [
 
     // Pliki cookie (przekazywane do JavaScriptu)
     'cookie.title' => 'Pliki cookie analityczne',
-    'cookie.description' => 'Za Twoją zgodą korzystam z Google Analytics 4 do pomiaru odwiedzin. Bez zgody analityka nie zostanie wczytana, a funkcje reklamowe pozostaną wyłączone. Szczegóły znajdują się w',
+    'cookie.description' => 'Za Twoją zgodą używam Google Analytics 4 i Microsoft Clarity do pomiaru wizyt, kliknięć, przewijania i nagrywania sesji na publicznych stronach z maskowanym tekstem. Bez zgody analityka się nie ładuje. Reklama pozostaje wyłączona. Szczegóły w',
     'cookie.privacy_link' => 'polityce prywatności',
     'cookie.decline' => 'Odmawiam',
     'cookie.accept' => 'Zezwól na analitykę',

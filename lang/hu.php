@@ -302,7 +302,7 @@ return [
 
     // Sütik (a JavaScriptnek átadva)
     'cookie.title' => 'Analitikai sütik',
-    'cookie.description' => 'Az Ön hozzájárulásával a Google Analytics 4 segítségével mérem a látogatottságot. Hozzájárulás nélkül az analitika nem töltődik be, a hirdetési funkciók pedig kikapcsolva maradnak. Részletek:',
+    'cookie.description' => 'Hozzájárulásával a Google Analytics 4 és a Microsoft Clarity méri a látogatásokat, kattintásokat és görgetéseket, valamint maszkolt szöveggel rögzíti a nyilvános oldalak munkameneteit. Hozzájárulás nélkül az elemzés nem töltődik be. A hirdetések kikapcsolva maradnak. Részletek:',
     'cookie.privacy_link' => 'adatvédelmi tájékoztató',
     'cookie.decline' => 'Elutasítom',
     'cookie.accept' => 'Analitika engedélyezése',

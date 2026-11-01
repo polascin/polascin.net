@@ -302,7 +302,7 @@ return [
 
     // Cookies (transmis au JavaScript)
     'cookie.title' => 'Cookies analytiques',
-    'cookie.description' => 'Avec votre consentement, j\'utilise Google Analytics 4 pour mesurer la fréquentation. L\'outil d\'analyse ne se charge pas sans consentement et les fonctionnalités publicitaires restent désactivées. Les détails figurent dans la',
+    'cookie.description' => 'Avec votre consentement, j’utilise Google Analytics 4 et Microsoft Clarity pour les visites, clics, défilements et enregistrements de sessions des pages publiques avec texte masqué. Sans consentement, l’analyse ne se charge pas. La publicité reste désactivée. Détails dans la',
     'cookie.privacy_link' => 'politique de confidentialité',
     'cookie.decline' => 'Refuser',
     'cookie.accept' => 'Autoriser l\'analyse d\'audience',

@@ -2,7 +2,7 @@
   "use strict";
 
   const themeStorageKey = "theme";
-  const consentStorageKey = "privacy_consent";
+  const consentStorageKey = "privacy_consent_clarity_v1";
   const gaMeasurementId = "G-9EMD3BVXCJ";
   // Musí sa zhodovať s breakpointom kompaktnej navigácie v css/styles.css:
   // pri nezhode openMobileMenu() odmietne otvoriť menu, hoci CSS už zobrazuje
@@ -445,6 +445,7 @@
     }
 
     function updateAnalyticsConsent(granted, persist = true) {
+      window.dispatchEvent(new CustomEvent("site:analytics-consent", { detail: granted }));
       const analyticsWasLoaded = Boolean(
         document.getElementById("google-analytics-script"),
       );
@@ -513,7 +514,7 @@
         title: cookieContainer.dataset.cookieTitle || "Analytické cookies",
         description:
           cookieContainer.dataset.cookieDescription ||
-          "S vaším súhlasom používam Google Analytics 4 na meranie návštevnosti. Bez súhlasu sa analytika nenačíta a reklamné funkcie zostávajú vypnuté. Podrobnosti nájdete v",
+          "S vaším súhlasom používam Google Analytics 4 a Microsoft Clarity na meranie návštevnosti, kliknutí, posúvania a záznamov používania verejných stránok s maskovaným textom. Bez súhlasu sa analytika nenačíta a reklamné funkcie zostávajú vypnuté. Podrobnosti nájdete v",
         privacyLabel:
           cookieContainer.dataset.cookiePrivacyLabel ||
           "zásadách ochrany súkromia",
