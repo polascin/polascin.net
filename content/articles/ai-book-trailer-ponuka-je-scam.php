@@ -19,7 +19,7 @@ unset($requestedScript, $executedFile);
 
 /**
  * Osobný blogový príspevok: nevyžiadaná ponuka book trailera z Gmailu.
- * Overené: Writer Beware 28. 8. 2026, Author Academy august 2026 (scam č. 8),
+ * Overené: Writer Beware 28. 8. 2026, StoryLift Studio august 2026 (scam č. 8),
  * James Scott Bell, Kill Zone, 17. 8. 2025. Meno v podpise je len to, čo bolo v e-maile.
  */
 return [
@@ -33,21 +33,21 @@ return [
         'sk' => [
             'title' => 'Ponuka book trailera z Gmailu. Žiadne portfólio, len lichôtky a háčik.',
             'image_alt' => 'Nočný písací stôl: otvorená kniha, laptop a tyrkysová holografická postava, ktorá z obálky vyťahuje žiariaci filmový pás.',
-            'excerpt' => 'Nevyžiadaný e-mail z adresy gbabalola@gmail.com zopakoval verejné detaily z knižnej synopsy a ponúkol ukážku book trailera „bez tlaku“. Writer Beware aj Author Academy opisujú ten istý vzorec. Neodpovedajte.',
+            'excerpt' => 'Nevyžiadaný e-mail z adresy m.velen.offers4821@gmail.com zopakoval verejné detaily z knižnej synopsy a ponúkol ukážku book trailera „bez tlaku“. Writer Beware aj StoryLift Studio opisujú ten istý vzorec. Neodpovedajte.',
             'content' => <<<'HTML'
-<p>Prišiel mi e-mail s ponukou book trailera. Odosielateľ sa podpísal ako Gabriel Babalola, adresa bola <em>gbabalola@gmail.com</em>. Písal, že kniha ho zaujala, vymenoval Janu Bravcovú, VITAL-7, Social Utility Score a motív „glitch = vražda“ a spýtal sa, či mi má poslať ukážku. Tón bol mäkký: len ukázať, žiadny tlak.</p>
+<p>Prišiel mi e-mail s ponukou book trailera. Odosielateľ sa podpísal ako Marek Velen, adresa bola <em>m.velen.offers4821@gmail.com</em>. Písal, že kniha ho zaujala, vymenoval Janu Bravcovú, VITAL-7, Social Utility Score a motív „glitch = vražda“ a spýtal sa, či mi má poslať ukážku. Tón bol mäkký: len ukázať, žiadny tlak.</p>
 <p>Znelo to ako filmár, ktorý knihu čítal. Nebol.</p>
 <p>Tie detaily sú verejné. Sedia v synopse na Amazon KDP a na Substacku. Model ich zje a vráti správu, ktorá znie, akoby niekto knihu držal v ruke. Žiadna kapitola, ktorú by nešlo vytiahnuť z anotácie. Žiadny web, žiadne portfólio, žiadne IMDb, žiadna produkčná doména. Len meno a Gmail.</p>
 <p>V septembri mi prišiel <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">podobný lichotivý e-mail o knihe</a>. Tentoraz je háčik book trailer. Vzorec je ten istý.</p>
 <h2>Čo na správe nesedí</h2>
 <ol>
 <li><strong>Gmail namiesto firmy.</strong> <a href="https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/">Victoria Strauss (Writer Beware, 28. augusta 2026)</a> píše, že priame oslovenie od produkčnej spoločnosti je „one of the least likely things ever to happen to you as a writer“. Ak by sa to naozaj stalo, správa príde z firemnej domény, nie z Gmailu.</li>
-<li><strong>Lichôtky z verejného textu.</strong> Personalizácia nie je dôkaz, že niekto knihu čítal. Author Academy v auguste 2026 pripomína, že väčšina takých detailov je verejne dostupná a AI z nich skladá presvedčivý list.</li>
+<li><strong>Lichôtky z verejného textu.</strong> Personalizácia nie je dôkaz, že niekto knihu čítal. StoryLift Studio v auguste 2026 pripomína, že väčšina takých detailov je verejne dostupná a AI z nich skladá presvedčivý list.</li>
 <li><strong>Nevyžiadané oslovenie.</strong> Self-publishing a Hollywood sa takto nestretávajú.</li>
 <li><strong>„Mám vám poslať ukážku?“</strong> Prvý list nežiada peniaze. Writer Beware to volá boiled-frog prístup: „they ease you gently toward the actual money ask over the course of multiple emails.“</li>
 <li><strong>Podpis „Warm regards“.</strong> Rovnaké zakončenie cituje <a href="https://killzoneblog.com/2025/08/your-book-deserves-to-reach-a-larger-audience.html">James Scott Bell (17. augusta 2025)</a> pri AI e-mailoch, ktoré sľubujú väčšie publikum a nemajú web.</li>
 <li><strong>Žiadne overiteľné referencie.</strong> Skutočný filmár pošle IMDb, Vimeo, web produkcie a autorov, ktorým sa dá zavolať. Tu nie je nič z toho.</li>
-<li><strong>Book trailer ako návnada.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">Author Academy, bod 8</a>: za niekoľko tisíc dolárov príde marketingový balík vrátane trailera, ktorý vyzerá, „ako keby vznikol niekomu cez obedňajšiu prestávku“.</li>
+<li><strong>Book trailer ako návnada.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">StoryLift Studio, bod 8</a>: za niekoľko tisíc dolárov príde marketingový balík vrátane trailera, ktorý vyzerá, „ako keby vznikol niekomu cez obedňajšiu prestávku“.</li>
 <li><strong>Nízky tlak.</strong> „Simply to show“, „no pressure“. Odpoveď nie je zdvorilosť. Je to potvrdenie, že schránka žije.</li>
 </ol>
 <h2>Ako to zvyčajne pokračuje</h2>
@@ -72,21 +72,21 @@ HTML,
         'en' => [
             'title' => 'A Gmail offer to make my book trailer. No portfolio, just flattery and a hook.',
             'image_alt' => 'A night-time writing desk: an open book, a laptop, and a teal holographic figure pulling a glowing film strip out of an envelope.',
-            'excerpt' => 'An unsolicited email from gbabalola@gmail.com repeated public details from the book synopsis and offered a book-trailer sample “with no pressure.” Writer Beware and Author Academy describe the same pattern. Do not reply.',
+            'excerpt' => 'An unsolicited email from m.velen.offers4821@gmail.com repeated public details from the book synopsis and offered a book-trailer sample “with no pressure.” Writer Beware and StoryLift Studio describe the same pattern. Do not reply.',
             'content' => <<<'HTML'
-<p>I received an email offering a book trailer. The sender signed as Gabriel Babalola, from <em>gbabalola@gmail.com</em>. He wrote that the book had caught him, named Jana Bravcová, VITAL-7, the Social Utility Score, and the “glitch = murder” hook, and asked whether he should send a sample. The tone was soft: just to show, no pressure.</p>
+<p>I received an email offering a book trailer. The sender signed as Marek Velen, from <em>m.velen.offers4821@gmail.com</em>. He wrote that the book had caught him, named Jana Bravcová, VITAL-7, the Social Utility Score, and the “glitch = murder” hook, and asked whether he should send a sample. The tone was soft: just to show, no pressure.</p>
 <p>It sounded like a filmmaker who had read the book. It was not.</p>
 <p>Those details are public. They sit in the Amazon KDP synopsis and on Substack. A model eats them and returns a message that sounds as if someone held the book. No chapter that cannot be lifted from the blurb. No website, no portfolio, no IMDb, no production domain. A name and a Gmail address.</p>
 <p>In September I received <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">a similar flattering email about a book</a>. This time the hook is a book trailer. The pattern is the same.</p>
 <h2>What does not fit</h2>
 <ol>
 <li><strong>Gmail instead of a company.</strong> <a href="https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/">Victoria Strauss (Writer Beware, 28 August 2026)</a> writes that a production company reaching out directly is “one of the least likely things ever to happen to you as a writer.” If it truly happened, the message would come from a company domain, not Gmail.</li>
-<li><strong>Flattery built from public text.</strong> Personalization is not proof that someone read the book. Author Academy, in August 2026, notes that most such details are publicly available and that AI assembles a convincing letter from them.</li>
+<li><strong>Flattery built from public text.</strong> Personalization is not proof that someone read the book. StoryLift Studio, in August 2026, notes that most such details are publicly available and that AI assembles a convincing letter from them.</li>
 <li><strong>An unsolicited approach.</strong> Self-publishing and Hollywood do not meet this way.</li>
 <li><strong>“Shall I send you the sample?”</strong> The first letter does not ask for money. Writer Beware calls this the boiled-frog approach: “they ease you gently toward the actual money ask over the course of multiple emails.”</li>
 <li><strong>The sign-off “Warm regards.”</strong> <a href="https://killzoneblog.com/2025/08/your-book-deserves-to-reach-a-larger-audience.html">James Scott Bell (17 August 2025)</a> quotes the same closing on AI emails that promise a larger audience and have no website.</li>
 <li><strong>No verifiable references.</strong> A real filmmaker sends IMDb, Vimeo, a production site, and authors you can call. None of that is here.</li>
-<li><strong>The book trailer as bait.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">Author Academy, item 8</a>: for several thousand dollars you get a marketing package that includes a trailer which looks “like it was made during someone’s lunch break.”</li>
+<li><strong>The book trailer as bait.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">StoryLift Studio, item 8</a>: for several thousand dollars you get a marketing package that includes a trailer which looks “like it was made during someone’s lunch break.”</li>
 <li><strong>Low pressure.</strong> “Simply to show,” “no pressure.” A reply is not courtesy. It confirms that the inbox is alive.</li>
 </ol>
 <h2>How it usually continues</h2>
@@ -111,21 +111,21 @@ HTML,
         'cs' => [
             'title' => 'Nabídka book traileru z Gmailu. Žádné portfolio, jen lichotky a háček.',
             'image_alt' => 'Noční psací stůl: otevřená kniha, laptop a tyrkysová holografická postava, která z obálky vytahuje zářící filmový pás.',
-            'excerpt' => 'Nevyžádaný e-mail z adresy gbabalola@gmail.com zopakoval veřejné detaily z knižní synopse a nabídl ukázku book traileru „bez tlaku“. Writer Beware i Author Academy popisují stejný vzorec. Neodpovídejte.',
+            'excerpt' => 'Nevyžádaný e-mail z adresy m.velen.offers4821@gmail.com zopakoval veřejné detaily z knižní synopse a nabídl ukázku book traileru „bez tlaku“. Writer Beware i StoryLift Studio popisují stejný vzorec. Neodpovídejte.',
             'content' => <<<'HTML'
-<p>Přišel mi e-mail s nabídkou book traileru. Odesílatel se podepsal jako Gabriel Babalola, adresa byla <em>gbabalola@gmail.com</em>. Psal, že kniha ho zaujala, jmenoval Janu Bravcovou, VITAL-7, Social Utility Score a motiv „glitch = vražda“ a ptal se, jestli mi má poslat ukázku. Tón byl měkký: jen ukázat, žádný tlak.</p>
+<p>Přišel mi e-mail s nabídkou book traileru. Odesílatel se podepsal jako Marek Velen, adresa byla <em>m.velen.offers4821@gmail.com</em>. Psal, že kniha ho zaujala, jmenoval Janu Bravcovou, VITAL-7, Social Utility Score a motiv „glitch = vražda“ a ptal se, jestli mi má poslat ukázku. Tón byl měkký: jen ukázat, žádný tlak.</p>
 <p>Znělo to jako filmař, který knihu četl. Nebyl.</p>
 <p>Ty detaily jsou veřejné. Sedí v synopsi na Amazon KDP a na Substacku. Model je spolkne a vrátí zprávu, která zní, jako by někdo knihu držel v ruce. Žádná kapitola, kterou by nešlo vytáhnout z anotace. Žádný web, žádné portfolio, žádné IMDb, žádná produkční doména. Jen jméno a Gmail.</p>
 <p>V září mi přišel <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">podobný lichotivý e-mail o knize</a>. Tentokrát je háček book trailer. Vzorec je stejný.</p>
 <h2>Co na zprávě nesedí</h2>
 <ol>
 <li><strong>Gmail místo firmy.</strong> <a href="https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/">Victoria Strauss (Writer Beware, 28. srpna 2026)</a> píše, že přímé oslovení od produkční společnosti je „one of the least likely things ever to happen to you as a writer“. Kdyby se to opravdu stalo, zpráva přijde z firemní domény, ne z Gmailu.</li>
-<li><strong>Lichotky z veřejného textu.</strong> Personalizace není důkaz, že někdo knihu četl. Author Academy v srpnu 2026 připomíná, že většina takových detailů je veřejně dostupná a AI z nich skládá přesvědčivý dopis.</li>
+<li><strong>Lichotky z veřejného textu.</strong> Personalizace není důkaz, že někdo knihu četl. StoryLift Studio v srpnu 2026 připomíná, že většina takových detailů je veřejně dostupná a AI z nich skládá přesvědčivý dopis.</li>
 <li><strong>Nevyžádané oslovení.</strong> Self-publishing a Hollywood se takto nepotkávají.</li>
 <li><strong>„Mám vám poslat ukázku?“</strong> První dopis nežádá peníze. Writer Beware tomu říká boiled-frog přístup: „they ease you gently toward the actual money ask over the course of multiple emails.“</li>
 <li><strong>Podpis „Warm regards“.</strong> Stejné zakončení cituje <a href="https://killzoneblog.com/2025/08/your-book-deserves-to-reach-a-larger-audience.html">James Scott Bell (17. srpna 2025)</a> u AI e-mailů, které slibují větší publikum a nemají web.</li>
 <li><strong>Žádné ověřitelné reference.</strong> Skutečný filmař pošle IMDb, Vimeo, web produkce a autory, kterým se dá zavolat. Tady z toho není nic.</li>
-<li><strong>Book trailer jako návnada.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">Author Academy, bod 8</a>: za několik tisíc dolarů přijde marketingový balík včetně traileru, který vypadá, „jako by vznikl někomu přes oběd“.</li>
+<li><strong>Book trailer jako návnada.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">StoryLift Studio, bod 8</a>: za několik tisíc dolarů přijde marketingový balík včetně traileru, který vypadá, „jako by vznikl někomu přes oběd“.</li>
 <li><strong>Nízký tlak.</strong> „Simply to show“, „no pressure“. Odpověď není zdvořilost. Je to potvrzení, že schránka žije.</li>
 </ol>
 <h2>Jak to obvykle pokračuje</h2>
@@ -150,21 +150,21 @@ HTML,
         'de' => [
             'title' => 'Ein Book-Trailer-Angebot von Gmail. Kein Portfolio, nur Schmeichelei und ein Haken.',
             'image_alt' => 'Ein Schreibtisch bei Nacht: ein offenes Buch, ein Laptop und eine türkise holografische Gestalt, die einen leuchtenden Filmstreifen aus einem Umschlag zieht.',
-            'excerpt' => 'Eine unerbetene E-Mail von gbabalola@gmail.com wiederholte öffentliche Details aus der Buchsynopse und bot eine Book-Trailer-Probe „ohne Druck“ an. Writer Beware und Author Academy beschreiben dasselbe Muster. Antworten Sie nicht.',
+            'excerpt' => 'Eine unerbetene E-Mail von m.velen.offers4821@gmail.com wiederholte öffentliche Details aus der Buchsynopse und bot eine Book-Trailer-Probe „ohne Druck“ an. Writer Beware und StoryLift Studio beschreiben dasselbe Muster. Antworten Sie nicht.',
             'content' => <<<'HTML'
-<p>Ich erhielt eine E-Mail mit dem Angebot eines Book Trailers. Der Absender unterschrieb als Gabriel Babalola, die Adresse war <em>gbabalola@gmail.com</em>. Er schrieb, das Buch habe ihn gepackt, nannte Jana Bravcová, VITAL-7, den Social Utility Score und das Motiv „glitch = Mord“ und fragte, ob er eine Probe schicken solle. Der Ton war weich: nur zeigen, kein Druck.</p>
+<p>Ich erhielt eine E-Mail mit dem Angebot eines Book Trailers. Der Absender unterschrieb als Marek Velen, die Adresse war <em>m.velen.offers4821@gmail.com</em>. Er schrieb, das Buch habe ihn gepackt, nannte Jana Bravcová, VITAL-7, den Social Utility Score und das Motiv „glitch = Mord“ und fragte, ob er eine Probe schicken solle. Der Ton war weich: nur zeigen, kein Druck.</p>
 <p>Es klang nach einem Filmemacher, der das Buch gelesen hatte. Er war es nicht.</p>
 <p>Diese Details sind öffentlich. Sie stehen in der Amazon-KDP-Synopse und auf Substack. Ein Modell schluckt sie und gibt eine Nachricht zurück, die klingt, als hätte jemand das Buch in der Hand gehalten. Kein Kapitel, das sich nicht aus dem Klappentext ziehen ließe. Keine Website, kein Portfolio, kein IMDb, keine Produktionsdomain. Ein Name und Gmail.</p>
 <p>Im September kam <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">eine ähnliche schmeichelnde E-Mail über ein Buch</a>. Diesmal ist der Haken ein Book Trailer. Das Muster ist dasselbe.</p>
 <h2>Was an der Nachricht nicht stimmt</h2>
 <ol>
 <li><strong>Gmail statt Firma.</strong> <a href="https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/">Victoria Strauss (Writer Beware, 28. August 2026)</a> schreibt, eine Produktionsfirma, die sich direkt meldet, sei „one of the least likely things ever to happen to you as a writer“. Wenn es wirklich geschähe, käme die Nachricht von einer Firmendomain, nicht von Gmail.</li>
-<li><strong>Schmeichelei aus öffentlichem Text.</strong> Personalisierung beweist nicht, dass jemand das Buch gelesen hat. Author Academy erinnerte im August 2026 daran, dass die meisten solchen Details öffentlich sind und KI daraus einen überzeugenden Brief baut.</li>
+<li><strong>Schmeichelei aus öffentlichem Text.</strong> Personalisierung beweist nicht, dass jemand das Buch gelesen hat. StoryLift Studio erinnerte im August 2026 daran, dass die meisten solchen Details öffentlich sind und KI daraus einen überzeugenden Brief baut.</li>
 <li><strong>Unerbetene Ansprache.</strong> Self-Publishing und Hollywood treffen sich so nicht.</li>
 <li><strong>„Soll ich Ihnen die Probe schicken?“</strong> Der erste Brief verlangt kein Geld. Writer Beware nennt das den Boiled-Frog-Ansatz: „they ease you gently toward the actual money ask over the course of multiple emails.“</li>
 <li><strong>Die Grußformel „Warm regards“.</strong> Dieselbe Formel zitiert <a href="https://killzoneblog.com/2025/08/your-book-deserves-to-reach-a-larger-audience.html">James Scott Bell (17. August 2025)</a> bei KI-Mails, die ein größeres Publikum versprechen und keine Website haben.</li>
 <li><strong>Keine überprüfbaren Referenzen.</strong> Ein echter Filmemacher schickt IMDb, Vimeo, eine Produktionsseite und Autoren, die man anrufen kann. Hier ist nichts davon.</li>
-<li><strong>Der Book Trailer als Köder.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">Author Academy, Punkt 8</a>: Für mehrere Tausend Dollar kommt ein Marketingpaket samt Trailer, der aussieht, „als wäre er in der Mittagspause entstanden“.</li>
+<li><strong>Der Book Trailer als Köder.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">StoryLift Studio, Punkt 8</a>: Für mehrere Tausend Dollar kommt ein Marketingpaket samt Trailer, der aussieht, „als wäre er in der Mittagspause entstanden“.</li>
 <li><strong>Niedriger Druck.</strong> „Simply to show“, „no pressure“. Eine Antwort ist keine Höflichkeit. Sie bestätigt, dass das Postfach lebt.</li>
 </ol>
 <h2>Wie es gewöhnlich weitergeht</h2>
@@ -189,21 +189,21 @@ HTML,
         'fr' => [
             'title' => 'Une offre de book trailer depuis Gmail. Pas de portfolio, seulement des flatteries et un hameçon.',
             'image_alt' => 'Un bureau la nuit : un livre ouvert, un ordinateur portable et une figure holographique turquoise qui tire une pellicule lumineuse d’une enveloppe.',
-            'excerpt' => 'Un e-mail non sollicité de gbabalola@gmail.com a répété des détails publics du synopsis et a proposé un échantillon de book trailer « sans pression ». Writer Beware et Author Academy décrivent le même schéma. Ne répondez pas.',
+            'excerpt' => 'Un e-mail non sollicité de m.velen.offers4821@gmail.com a répété des détails publics du synopsis et a proposé un échantillon de book trailer « sans pression ». Writer Beware et StoryLift Studio décrivent le même schéma. Ne répondez pas.',
             'content' => <<<'HTML'
-<p>J’ai reçu un e-mail proposant un book trailer. L’expéditeur signait Gabriel Babalola, depuis <em>gbabalola@gmail.com</em>. Il écrivait que le livre l’avait saisi, citait Jana Bravcová, VITAL-7, le Social Utility Score et le motif « glitch = meurtre », et demandait s’il devait envoyer un échantillon. Le ton était doux : juste montrer, aucune pression.</p>
+<p>J’ai reçu un e-mail proposant un book trailer. L’expéditeur signait Marek Velen, depuis <em>m.velen.offers4821@gmail.com</em>. Il écrivait que le livre l’avait saisi, citait Jana Bravcová, VITAL-7, le Social Utility Score et le motif « glitch = meurtre », et demandait s’il devait envoyer un échantillon. Le ton était doux : juste montrer, aucune pression.</p>
 <p>Cela sonnait comme un cinéaste qui avait lu le livre. Ce n’en était pas un.</p>
 <p>Ces détails sont publics. Ils figurent dans le synopsis Amazon KDP et sur Substack. Un modèle les avale et renvoie un message qui donne l’impression que quelqu’un tenait le livre. Aucun chapitre qu’on ne puisse tirer de la quatrième de couverture. Pas de site, pas de portfolio, pas d’IMDb, pas de domaine de production. Un nom et Gmail.</p>
 <p>En septembre, j’ai reçu <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">un e-mail flatteur du même genre au sujet d’un livre</a>. Cette fois, l’hameçon est un book trailer. Le schéma est le même.</p>
 <h2>Ce qui ne tient pas</h2>
 <ol>
 <li><strong>Gmail à la place d’une société.</strong> <a href="https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/">Victoria Strauss (Writer Beware, 28 août 2026)</a> écrit qu’une société de production qui vous contacte directement est « one of the least likely things ever to happen to you as a writer ». Si cela arrivait vraiment, le message viendrait d’un domaine d’entreprise, pas de Gmail.</li>
-<li><strong>Des flatteries tirées d’un texte public.</strong> La personnalisation ne prouve pas qu’on a lu le livre. Author Academy, en août 2026, rappelle que la plupart de ces détails sont publics et que l’IA en assemble une lettre convaincante.</li>
+<li><strong>Des flatteries tirées d’un texte public.</strong> La personnalisation ne prouve pas qu’on a lu le livre. StoryLift Studio, en août 2026, rappelle que la plupart de ces détails sont publics et que l’IA en assemble une lettre convaincante.</li>
 <li><strong>Une démarche non sollicitée.</strong> L’autoédition et Hollywood ne se rencontrent pas ainsi.</li>
 <li><strong>« Voulez-vous que je vous envoie l’échantillon ? »</strong> Le premier message ne demande pas d’argent. Writer Beware appelle cela l’approche de la grenouille : « they ease you gently toward the actual money ask over the course of multiple emails. »</li>
 <li><strong>La formule « Warm regards ».</strong> <a href="https://killzoneblog.com/2025/08/your-book-deserves-to-reach-a-larger-audience.html">James Scott Bell (17 août 2025)</a> cite la même clôture dans des e-mails d’IA qui promettent un plus large public et n’ont pas de site.</li>
 <li><strong>Aucune référence vérifiable.</strong> Un vrai cinéaste envoie IMDb, Vimeo, un site de production et des auteurs qu’on peut appeler. Rien de tout cela ici.</li>
-<li><strong>Le book trailer comme appât.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">Author Academy, point 8</a> : pour plusieurs milliers de dollars arrive un pack marketing avec un trailer qui a l’air « fait pendant la pause déjeuner ».</li>
+<li><strong>Le book trailer comme appât.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">StoryLift Studio, point 8</a> : pour plusieurs milliers de dollars arrive un pack marketing avec un trailer qui a l’air « fait pendant la pause déjeuner ».</li>
 <li><strong>Une faible pression.</strong> « Simply to show », « no pressure ». Répondre n’est pas une politesse. C’est confirmer que la boîte est active.</li>
 </ol>
 <h2>Comment cela continue d’habitude</h2>
@@ -228,21 +228,21 @@ HTML,
         'es' => [
             'title' => 'Una oferta de book trailer desde Gmail. Sin portafolio, solo halagos y un anzuelo.',
             'image_alt' => 'Un escritorio de noche: un libro abierto, un portátil y una figura holográfica turquesa que saca una tira de película luminosa de un sobre.',
-            'excerpt' => 'Un correo no solicitado de gbabalola@gmail.com repitió detalles públicos de la sinopsis y ofreció una muestra de book trailer «sin presión». Writer Beware y Author Academy describen el mismo patrón. No responda.',
+            'excerpt' => 'Un correo no solicitado de m.velen.offers4821@gmail.com repitió detalles públicos de la sinopsis y ofreció una muestra de book trailer «sin presión». Writer Beware y StoryLift Studio describen el mismo patrón. No responda.',
             'content' => <<<'HTML'
-<p>Me llegó un correo con una oferta de book trailer. El remitente firmaba como Gabriel Babalola, desde <em>gbabalola@gmail.com</em>. Escribía que el libro le había llamado, nombraba a Jana Bravcová, VITAL-7, el Social Utility Score y el motivo «glitch = asesinato», y preguntaba si debía enviar una muestra. El tono era blando: solo mostrar, sin presión.</p>
+<p>Me llegó un correo con una oferta de book trailer. El remitente firmaba como Marek Velen, desde <em>m.velen.offers4821@gmail.com</em>. Escribía que el libro le había llamado, nombraba a Jana Bravcová, VITAL-7, el Social Utility Score y el motivo «glitch = asesinato», y preguntaba si debía enviar una muestra. El tono era blando: solo mostrar, sin presión.</p>
 <p>Sonaba a un cineasta que había leído el libro. No lo era.</p>
 <p>Esos detalles son públicos. Están en la sinopsis de Amazon KDP y en Substack. Un modelo los traga y devuelve un mensaje que parece escrito por alguien que tuvo el libro en la mano. Ningún capítulo que no se pueda sacar de la contraportada. Ni web, ni portafolio, ni IMDb, ni dominio de producción. Un nombre y Gmail.</p>
 <p>En septiembre recibí <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">un correo halagador parecido sobre un libro</a>. Esta vez el anzuelo es un book trailer. El patrón es el mismo.</p>
 <h2>Lo que no encaja</h2>
 <ol>
 <li><strong>Gmail en lugar de una empresa.</strong> <a href="https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/">Victoria Strauss (Writer Beware, 28 de agosto de 2026)</a> escribe que una productora que contacta directamente es «one of the least likely things ever to happen to you as a writer». Si ocurriera de verdad, el mensaje llegaría desde un dominio de empresa, no desde Gmail.</li>
-<li><strong>Halagos sacados de un texto público.</strong> La personalización no prueba que alguien leyó el libro. Author Academy, en agosto de 2026, recuerda que la mayoría de esos detalles son públicos y que la IA arma con ellos una carta convincente.</li>
+<li><strong>Halagos sacados de un texto público.</strong> La personalización no prueba que alguien leyó el libro. StoryLift Studio, en agosto de 2026, recuerda que la mayoría de esos detalles son públicos y que la IA arma con ellos una carta convincente.</li>
 <li><strong>Un acercamiento no pedido.</strong> La autopublicación y Hollywood no se encuentran así.</li>
 <li><strong>«¿Le envío la muestra?»</strong> El primer mensaje no pide dinero. Writer Beware lo llama el método de la rana hervida: «they ease you gently toward the actual money ask over the course of multiple emails.»</li>
 <li><strong>El cierre «Warm regards».</strong> El mismo cierre lo cita <a href="https://killzoneblog.com/2025/08/your-book-deserves-to-reach-a-larger-audience.html">James Scott Bell (17 de agosto de 2025)</a> en correos de IA que prometen un público mayor y no tienen web.</li>
 <li><strong>Ninguna referencia verificable.</strong> Un cineasta real envía IMDb, Vimeo, una web de producción y autores a los que se puede llamar. Aquí no hay nada de eso.</li>
-<li><strong>El book trailer como anzuelo.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">Author Academy, punto 8</a>: por varios miles de dólares llega un paquete de marketing con un tráiler que parece «hecho en la pausa del almuerzo».</li>
+<li><strong>El book trailer como anzuelo.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">StoryLift Studio, punto 8</a>: por varios miles de dólares llega un paquete de marketing con un tráiler que parece «hecho en la pausa del almuerzo».</li>
 <li><strong>Poca presión.</strong> «Simply to show», «no pressure». Responder no es cortesía. Confirma que el buzón está vivo.</li>
 </ol>
 <h2>Cómo suele seguir</h2>
@@ -267,21 +267,21 @@ HTML,
         'pl' => [
             'title' => 'Oferta book trailera z Gmaila. Bez portfolio, same pochlebstwa i haczyk.',
             'image_alt' => 'Nocne biurko: otwarta książka, laptop i turkusowa holograficzna postać, która wyciąga z koperty świecącą taśmę filmową.',
-            'excerpt' => 'Niezamówiony e-mail z adresu gbabalola@gmail.com powtórzył publiczne szczegóły ze streszczenia książki i zaproponował próbkę book trailera „bez presji”. Writer Beware i Author Academy opisują ten sam wzorzec. Nie odpowiadajcie.',
+            'excerpt' => 'Niezamówiony e-mail z adresu m.velen.offers4821@gmail.com powtórzył publiczne szczegóły ze streszczenia książki i zaproponował próbkę book trailera „bez presji”. Writer Beware i StoryLift Studio opisują ten sam wzorzec. Nie odpowiadajcie.',
             'content' => <<<'HTML'
-<p>Dostałem e-mail z ofertą book trailera. Nadawca podpisał się jako Gabriel Babalola, adres to <em>gbabalola@gmail.com</em>. Pisał, że książka go zainteresowała, wymienił Janę Bravcovą, VITAL-7, Social Utility Score i motyw „glitch = morderstwo” i spytał, czy ma przysłać próbkę. Ton był miękki: tylko pokazać, żadnej presji.</p>
+<p>Dostałem e-mail z ofertą book trailera. Nadawca podpisał się jako Marek Velen, adres to <em>m.velen.offers4821@gmail.com</em>. Pisał, że książka go zainteresowała, wymienił Janę Bravcovą, VITAL-7, Social Utility Score i motyw „glitch = morderstwo” i spytał, czy ma przysłać próbkę. Ton był miękki: tylko pokazać, żadnej presji.</p>
 <p>Brzmiało to jak filmowiec, który książkę przeczytał. Nie był nim.</p>
 <p>Te szczegóły są publiczne. Stoją w streszczeniu na Amazon KDP i na Substacku. Model je zjada i oddaje wiadomość, która brzmi, jakby ktoś trzymał książkę w ręku. Żaden rozdział, którego nie da się wyciągnąć z notki. Żadna strona, żadne portfolio, żadne IMDb, żadna domena produkcji. Imię i Gmail.</p>
 <p>We wrześniu dostałem <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">podobny pochlebny e-mail o książce</a>. Tym razem haczykiem jest book trailer. Wzorzec jest ten sam.</p>
 <h2>Co w wiadomości nie pasuje</h2>
 <ol>
 <li><strong>Gmail zamiast firmy.</strong> <a href="https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/">Victoria Strauss (Writer Beware, 28 sierpnia 2026)</a> pisze, że bezpośredni kontakt od firmy produkcyjnej to „one of the least likely things ever to happen to you as a writer”. Gdyby naprawdę do tego doszło, wiadomość przyszłaby z domeny firmowej, nie z Gmaila.</li>
-<li><strong>Pochlebstwa z publicznego tekstu.</strong> Personalizacja nie dowodzi, że ktoś książkę przeczytał. Author Academy w sierpniu 2026 przypomina, że większość takich szczegółów jest publiczna, a AI składa z nich przekonujący list.</li>
+<li><strong>Pochlebstwa z publicznego tekstu.</strong> Personalizacja nie dowodzi, że ktoś książkę przeczytał. StoryLift Studio w sierpniu 2026 przypomina, że większość takich szczegółów jest publiczna, a AI składa z nich przekonujący list.</li>
 <li><strong>Niezamówione odezwanie.</strong> Self-publishing i Hollywood tak się nie spotykają.</li>
 <li><strong>„Mam wysłać próbkę?”</strong> Pierwszy list nie prosi o pieniądze. Writer Beware nazywa to podejściem gotowanej żaby: „they ease you gently toward the actual money ask over the course of multiple emails.”</li>
 <li><strong>Podpis „Warm regards”.</strong> To samo zakończenie cytuje <a href="https://killzoneblog.com/2025/08/your-book-deserves-to-reach-a-larger-audience.html">James Scott Bell (17 sierpnia 2025)</a> przy e-mailach AI, które obiecują większą publiczność i nie mają strony.</li>
 <li><strong>Żadnych sprawdzalnych referencji.</strong> Prawdziwy filmowiec przyśle IMDb, Vimeo, stronę produkcji i autorów, do których można zadzwonić. Tu nie ma nic z tego.</li>
-<li><strong>Book trailer jako przynęta.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">Author Academy, punkt 8</a>: za kilka tysięcy dolarów przychodzi pakiet marketingowy z trailerem, który wygląda, „jakby powstał komuś w przerwie na lunch”.</li>
+<li><strong>Book trailer jako przynęta.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">StoryLift Studio, punkt 8</a>: za kilka tysięcy dolarów przychodzi pakiet marketingowy z trailerem, który wygląda, „jakby powstał komuś w przerwie na lunch”.</li>
 <li><strong>Niska presja.</strong> „Simply to show”, „no pressure”. Odpowiedź nie jest uprzejmością. To potwierdzenie, że skrzynka żyje.</li>
 </ol>
 <h2>Jak to zwykle idzie dalej</h2>
@@ -306,21 +306,21 @@ HTML,
         'hu' => [
             'title' => 'Book trailer ajánlat Gmailről. Nincs portfólió, csak hízelgés és horog.',
             'image_alt' => 'Éjszakai íróasztal: nyitott könyv, laptop és türkiz holografikus alak, amely világító filmszalagot húz ki egy borítékból.',
-            'excerpt' => 'A gbabalola@gmail.com címről érkező kéretlen levél megismételte a könyvszinopszis nyilvános részleteit, és „nyomás nélkül” book trailer mintát kínált. A Writer Beware és az Author Academy ugyanezt a mintát írja le. Ne válaszoljon.',
+            'excerpt' => 'A m.velen.offers4821@gmail.com címről érkező kéretlen levél megismételte a könyvszinopszis nyilvános részleteit, és „nyomás nélkül” book trailer mintát kínált. A Writer Beware és az StoryLift Studio ugyanezt a mintát írja le. Ne válaszoljon.',
             'content' => <<<'HTML'
-<p>Kaptam egy e-mailt book trailer ajánlattal. A feladó Gabriel Babalolaként írt alá, a cím <em>gbabalola@gmail.com</em> volt. Azt írta, a könyv megragadta, megnevezte Jana Bravcovát, a VITAL-7-et, a Social Utility Score-t és a „glitch = gyilkosság” motívumot, és megkérdezte, küldjön-e mintát. A hang lágy volt: csak megmutatni, semmi nyomás.</p>
+<p>Kaptam egy e-mailt book trailer ajánlattal. A feladó Marek Velenként írt alá, a cím <em>m.velen.offers4821@gmail.com</em> volt. Azt írta, a könyv megragadta, megnevezte Jana Bravcovát, a VITAL-7-et, a Social Utility Score-t és a „glitch = gyilkosság” motívumot, és megkérdezte, küldjön-e mintát. A hang lágy volt: csak megmutatni, semmi nyomás.</p>
 <p>Úgy hangzott, mint egy filmes, aki olvasta a könyvet. Nem az volt.</p>
 <p>Ezek a részletek nyilvánosak. Az Amazon KDP szinopszisában és a Substackon állnak. A modell lenyeli őket, és olyan üzenetet ad vissza, mintha valaki a kezében tartotta volna a könyvet. Nincs olyan fejezet, amit ne lehetne kiemelni a fülszövegből. Nincs weboldal, portfólió, IMDb, gyártási domain. Egy név és egy Gmail.</p>
 <p>Szeptemberben <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">hasonló hízelgő levelet kaptam egy könyvről</a>. Most a horog a book trailer. A minta ugyanaz.</p>
 <h2>Mi nem stimmel</h2>
 <ol>
 <li><strong>Gmail cég helyett.</strong> <a href="https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/">Victoria Strauss (Writer Beware, 2026. augusztus 28.)</a> azt írja, hogy egy gyártócég közvetlen megkeresése „one of the least likely things ever to happen to you as a writer”. Ha valóban megtörténne, az üzenet céges domainről jönne, nem Gmailről.</li>
-<li><strong>Hízelgés nyilvános szövegből.</strong> A személyre szabás nem bizonyítja, hogy valaki olvasta a könyvet. Az Author Academy 2026 augusztusában emlékeztet: az ilyen részletek többsége nyilvános, és az MI meggyőző levelet rak belőlük össze.</li>
+<li><strong>Hízelgés nyilvános szövegből.</strong> A személyre szabás nem bizonyítja, hogy valaki olvasta a könyvet. Az StoryLift Studio 2026 augusztusában emlékeztet: az ilyen részletek többsége nyilvános, és az MI meggyőző levelet rak belőlük össze.</li>
 <li><strong>Kéretlen megkeresés.</strong> A self-publishing és a Hollywood nem így találkozik.</li>
 <li><strong>„Elküldjem a mintát?”</strong> Az első levél nem kér pénzt. A Writer Beware ezt boiled-frog módszernek hívja: „they ease you gently toward the actual money ask over the course of multiple emails.”</li>
 <li><strong>A „Warm regards” aláírás.</strong> Ugyanezt a zárást idézi <a href="https://killzoneblog.com/2025/08/your-book-deserves-to-reach-a-larger-audience.html">James Scott Bell (2025. augusztus 17.)</a> olyan MI-leveleknél, amelyek nagyobb közönséget ígérnek, és nincs weboldaluk.</li>
 <li><strong>Nincs ellenőrizhető referencia.</strong> Egy igazi filmes IMDb-t, Vimeót, gyártási oldalt és hívható szerzőket küld. Itt ebből semmi nincs.</li>
-<li><strong>A book trailer mint csali.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">Author Academy, 8. pont</a>: néhány ezer dollárért marketingcsomag érkezik, benne egy trailerrel, amely úgy néz ki, „mintha valaki ebédszünetben csinálta volna”.</li>
+<li><strong>A book trailer mint csali.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">StoryLift Studio, 8. pont</a>: néhány ezer dollárért marketingcsomag érkezik, benne egy trailerrel, amely úgy néz ki, „mintha valaki ebédszünetben csinálta volna”.</li>
 <li><strong>Alacsony nyomás.</strong> „Simply to show”, „no pressure”. A válasz nem udvariasság. Annak a jele, hogy a postaláda él.</li>
 </ol>
 <h2>Hogyan folytatódik általában</h2>
@@ -345,21 +345,21 @@ HTML,
         'it' => [
             'title' => 'Un’offerta di book trailer da Gmail. Nessun portfolio, solo lusinghe e un amo.',
             'image_alt' => 'Una scrivania di notte: un libro aperto, un laptop e una figura olografica turchese che tira una pellicola luminosa fuori da una busta.',
-            'excerpt' => 'Un’email non richiesta da gbabalola@gmail.com ha ripetuto dettagli pubblici della sinossi e ha offerto un campione di book trailer «senza pressione». Writer Beware e Author Academy descrivono lo stesso schema. Non rispondete.',
+            'excerpt' => 'Un’email non richiesta da m.velen.offers4821@gmail.com ha ripetuto dettagli pubblici della sinossi e ha offerto un campione di book trailer «senza pressione». Writer Beware e StoryLift Studio descrivono lo stesso schema. Non rispondete.',
             'content' => <<<'HTML'
-<p>Mi è arrivata un’email con l’offerta di un book trailer. Il mittente firmava Gabriel Babalola, da <em>gbabalola@gmail.com</em>. Scriveva che il libro lo aveva colpito, nominava Jana Bravcová, VITAL-7, il Social Utility Score e il motivo «glitch = omicidio», e chiedeva se dovesse mandare un campione. Il tono era morbido: solo per mostrare, nessuna pressione.</p>
+<p>Mi è arrivata un’email con l’offerta di un book trailer. Il mittente firmava Marek Velen, da <em>m.velen.offers4821@gmail.com</em>. Scriveva che il libro lo aveva colpito, nominava Jana Bravcová, VITAL-7, il Social Utility Score e il motivo «glitch = omicidio», e chiedeva se dovesse mandare un campione. Il tono era morbido: solo per mostrare, nessuna pressione.</p>
 <p>Sembrava un cineasta che aveva letto il libro. Non lo era.</p>
 <p>Quei dettagli sono pubblici. Stanno nella sinossi di Amazon KDP e su Substack. Un modello li ingoia e restituisce un messaggio che sembra scritto da chi teneva il libro in mano. Nessun capitolo che non si possa tirare fuori dalla quarta. Nessun sito, nessun portfolio, nessun IMDb, nessun dominio di produzione. Un nome e Gmail.</p>
 <p>A settembre ho ricevuto <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">un’email lusinghiera simile su un libro</a>. Questa volta l’amo è un book trailer. Lo schema è lo stesso.</p>
 <h2>Cosa non torna</h2>
 <ol>
 <li><strong>Gmail al posto di un’azienda.</strong> <a href="https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/">Victoria Strauss (Writer Beware, 28 agosto 2026)</a> scrive che una casa di produzione che vi contatta direttamente è «one of the least likely things ever to happen to you as a writer». Se accadesse davvero, il messaggio arriverebbe da un dominio aziendale, non da Gmail.</li>
-<li><strong>Lusinghe da un testo pubblico.</strong> La personalizzazione non prova che qualcuno abbia letto il libro. Author Academy, nell’agosto 2026, ricorda che la maggior parte di questi dettagli è pubblica e che l’IA ne compone una lettera convincente.</li>
+<li><strong>Lusinghe da un testo pubblico.</strong> La personalizzazione non prova che qualcuno abbia letto il libro. StoryLift Studio, nell’agosto 2026, ricorda che la maggior parte di questi dettagli è pubblica e che l’IA ne compone una lettera convincente.</li>
 <li><strong>Un approccio non richiesto.</strong> Il self-publishing e Hollywood non si incontrano così.</li>
 <li><strong>«Vi mando il campione?»</strong> La prima lettera non chiede denaro. Writer Beware la chiama l’approccio della rana bollita: «they ease you gently toward the actual money ask over the course of multiple emails.»</li>
 <li><strong>La chiusura «Warm regards».</strong> La stessa formula la cita <a href="https://killzoneblog.com/2025/08/your-book-deserves-to-reach-a-larger-audience.html">James Scott Bell (17 agosto 2025)</a> nelle email di IA che promettono un pubblico più ampio e non hanno un sito.</li>
 <li><strong>Nessun riferimento verificabile.</strong> Un vero cineasta manda IMDb, Vimeo, un sito di produzione e autori che si possono chiamare. Qui non c’è nulla di tutto questo.</li>
-<li><strong>Il book trailer come esca.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">Author Academy, punto 8</a>: per alcune migliaia di dollari arriva un pacchetto di marketing con un trailer che sembra «fatto durante la pausa pranzo».</li>
+<li><strong>Il book trailer come esca.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">StoryLift Studio, punto 8</a>: per alcune migliaia di dollari arriva un pacchetto di marketing con un trailer che sembra «fatto durante la pausa pranzo».</li>
 <li><strong>Bassa pressione.</strong> «Simply to show», «no pressure». Rispondere non è cortesia. Conferma che la casella è viva.</li>
 </ol>
 <h2>Come di solito continua</h2>
@@ -384,21 +384,21 @@ HTML,
         'uk' => [
             'title' => 'Пропозиція book trailer з Gmail. Без портфоліо, лише лестощі й гачок.',
             'image_alt' => 'Нічний письмовий стіл: відкрита книга, ноутбук і бірюзова голографічна постать, що витягає з конверта світну кінострічку.',
-            'excerpt' => 'Непроханий лист з адреси gbabalola@gmail.com повторив публічні деталі з синопсису книжки й запропонував зразок book trailer «без тиску». Writer Beware і Author Academy описують той самий шаблон. Не відповідайте.',
+            'excerpt' => 'Непроханий лист з адреси m.velen.offers4821@gmail.com повторив публічні деталі з синопсису книжки й запропонував зразок book trailer «без тиску». Writer Beware і StoryLift Studio описують той самий шаблон. Не відповідайте.',
             'content' => <<<'HTML'
-<p>Мені надійшов лист із пропозицією book trailer. Відправник підписався як Gabriel Babalola, адреса: <em>gbabalola@gmail.com</em>. Він писав, що книжка його зачепила, назвав Яну Бравцову, VITAL-7, Social Utility Score і мотив «glitch = вбивство» та спитав, чи надіслати зразок. Тон був м’який: лише показати, жодного тиску.</p>
+<p>Мені надійшов лист із пропозицією book trailer. Відправник підписався як Marek Velen, адреса: <em>m.velen.offers4821@gmail.com</em>. Він писав, що книжка його зачепила, назвав Яну Бравцову, VITAL-7, Social Utility Score і мотив «glitch = вбивство» та спитав, чи надіслати зразок. Тон був м’який: лише показати, жодного тиску.</p>
 <p>Це звучало як кінематографіст, який прочитав книжку. Він ним не був.</p>
 <p>Ці деталі публічні. Вони стоять у синопсисі на Amazon KDP і на Substack. Модель їх ковтає і повертає лист, ніби хтось тримав книжку в руці. Жодного розділу, якого не витягнути з анотації. Жодного сайту, портфоліо, IMDb, домену продакшену. Ім’я і Gmail.</p>
 <p>У вересні мені надійшов <a href="article.php?slug=ai-generovany-email-o-knihe-je-scam">схожий улесливий лист про книжку</a>. Цього разу гачок: book trailer. Шаблон той самий.</p>
 <h2>Що в листі не сходиться</h2>
 <ol>
 <li><strong>Gmail замість компанії.</strong> <a href="https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/">Victoria Strauss (Writer Beware, 28 серпня 2026)</a> пише, що пряме звернення продакшен-компанії є «one of the least likely things ever to happen to you as a writer». Якби це справді сталося, лист прийшов би з корпоративного домену, не з Gmail.</li>
-<li><strong>Лестощі з публічного тексту.</strong> Персоналізація не доводить, що хтось прочитав книжку. Author Academy у серпні 2026 нагадує: більшість таких деталей публічні, і ШІ складає з них переконливого листа.</li>
+<li><strong>Лестощі з публічного тексту.</strong> Персоналізація не доводить, що хтось прочитав книжку. StoryLift Studio у серпні 2026 нагадує: більшість таких деталей публічні, і ШІ складає з них переконливого листа.</li>
 <li><strong>Непрохане звернення.</strong> Самвидав і Голлівуд так не зустрічаються.</li>
 <li><strong>«Надіслати вам зразок?»</strong> Перший лист не просить грошей. Writer Beware називає це підходом вареної жаби: «they ease you gently toward the actual money ask over the course of multiple emails.»</li>
 <li><strong>Підпис «Warm regards».</strong> Те саме завершення цитує <a href="https://killzoneblog.com/2025/08/your-book-deserves-to-reach-a-larger-audience.html">James Scott Bell (17 серпня 2025)</a> в листах ШІ, які обіцяють більшу авдиторію і не мають сайту.</li>
 <li><strong>Жодних перевірюваних рекомендацій.</strong> Справжній кінематографіст надішле IMDb, Vimeo, сайт продакшену й авторів, яким можна зателефонувати. Тут цього немає.</li>
-<li><strong>Book trailer як наживка.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">Author Academy, пункт 8</a>: за кілька тисяч доларів приходить маркетинговий пакет із трейлером, який виглядає так, «ніби його зробили в обідню перерву».</li>
+<li><strong>Book trailer як наживка.</strong> <a href="https://www.theauthoracademy.com.au/the-new-generation-of-author-scams/">StoryLift Studio, пункт 8</a>: за кілька тисяч доларів приходить маркетинговий пакет із трейлером, який виглядає так, «ніби його зробили в обідню перерву».</li>
 <li><strong>Низький тиск.</strong> «Simply to show», «no pressure». Відповідь не є ввічливістю. Це підтвердження, що скринька жива.</li>
 </ol>
 <h2>Як це зазвичай триває далі</h2>

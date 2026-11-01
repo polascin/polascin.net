@@ -808,6 +808,13 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/odporucanie-nie-je-povolenie.php'
             );
         },
+        // Anonymizácia tretích strán a osobných identifikátorov v starších seedoch
+        // (fiktívne náhrady). Obnova title/excerpt/content zo seed súborov.
+        '2026110108_anonymize_third_party_article_details' => static function (PDO $pdo): void {
+            foreach (glob(__DIR__ . '/content/articles/*.php') ?: [] as $articlePath) {
+                refreshPublishedArticleTextFromFile($pdo, $articlePath);
+            }
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

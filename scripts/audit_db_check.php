@@ -104,6 +104,7 @@ const EXPECTED_MIGRATIONS = [
     '2026110105_release_record_crosslink_mutation',
     '2026110106_smaller_quote_not_discount_article',
     '2026110107_recommendation_is_not_permission_article',
+    '2026110108_anonymize_third_party_article_details',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

@@ -38,7 +38,7 @@ return [
 <p>Ponuku AI-Recepčnej som dostal cez sprostredkovateľa z IMPAX, od zástupcu dodávateľa TOMMAX. Na papieri vyzerala pôsobivo: zachytiť približne 30&nbsp;% neprijatých hovorov, plynulá slovenčina a podľa potreby čeština, nemčina, maďarčina či angličtina, návratnosť často do mesiaca a odhadovaný ročný prínos na tržbách nad 100&nbsp;tisíc eur.</p>
 <p>Medzery sa ukázali v detailoch.</p>
 <p>Slovenčina má pre hlasové modely menej trénovacích dát než angličtina či nemčina. V odbore sa tomu hovorí jazyk s menším zdrojom, <em>lower-resource</em>. Marketingová „plynulosť“ preto nemusí sedieť s medicínskou konverzáciou so staršími pacientmi, ktorí hovoria dialektom, robia pauzy uprostred vety alebo opisujú príznaky oklukou.</p>
-<p>V materiáloch som nenašiel jasný záložný postup ani eskalačný protokol pre bolesť na hrudníku či dýchavičnosť. Chýbali aj certifikácie, ktoré v USA bežne uvádzajú poskytovatelia hlasových služieb v zdravotníctve (HIPAA, SOC&nbsp;2, BAA). Tie však pre slovenskú ambulanciu nie sú záväzným rámcom. Rozhoduje dohoda o spracúvaní osobitných kategórií podľa <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR čl.&nbsp;9</a> a jasné miesto hostingu či prenosu. Prípadové štúdie v ponuke, TYMO Beauty a Manhattan Dental Studio, nie sú nefrológia na Slovensku.</p>
+<p>V materiáloch som nenašiel jasný záložný postup ani eskalačný protokol pre bolesť na hrudníku či dýchavičnosť. Chýbali aj certifikácie, ktoré v USA bežne uvádzajú poskytovatelia hlasových služieb v zdravotníctve (HIPAA, SOC&nbsp;2, BAA). Tie však pre slovenskú ambulanciu nie sú záväzným rámcom. Rozhoduje dohoda o spracúvaní osobitných kategórií podľa <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR čl.&nbsp;9</a> a jasné miesto hostingu či prenosu. Prípadové štúdie v ponuke, Lumen Studio Beauty a Hudson River Dental Studio, nie sú nefrológia na Slovensku.</p>
 <p>Preto som napísal dvanásť otázok pre dodávateľa:</p>
 <ol>
 <li>Aký je presný eskalačný protokol, keď pacient povie „chcem hovoriť s človekom“ alebo „to je núdzový prípad“?</li>
@@ -47,7 +47,7 @@ return [
 <li>Ako zaobchádzate so zdravotnými dátami v zmysle GDPR čl.&nbsp;9? Máte podpísaný DPA? Kde stoja servery a transkripty?</li>
 <li>Aké certifikácie máte (SOC&nbsp;2, ISO&nbsp;27001, alebo ekvivalent)?</li>
 <li>Aká je konkrétna mesačná cena? Koľko minút je zahrnutých? Koľko stojí minúta navyše?</li>
-<li>Máte reálnu referenciu zo slovenskej alebo českej ambulancie (nie zubná klinika v Manhattane)?</li>
+<li>Máte reálnu referenciu zo slovenskej alebo českej ambulancie (nie zubná klinika pri rieke Hudson)?</li>
 <li>Aké jazyky sú production-grade a aké len „claimed-support“? Môžete ukázať transkripty reálnych hovorov v slovenčine?</li>
 <li>Ako sa testuje kvalita slovenčiny? Máte native-speaker QA pre slovenčinu, češtinu, maďarčinu?</li>
 <li>Čo sa stane, keď pacient opisuje príznaky (bolesť na hrudníku, dýchavičnosť)? Rozpozná AI núdzu a nasmeruje na 155?</li>
@@ -55,7 +55,7 @@ return [
 <li>Kto technicky stojí za AI enginom? Používate vlastný model, alebo Vapi/Retell/inú platformu?</li>
 </ol>
 <p>Navrhli sme dvojtýždňový pilot na sekundárnej linke. Ak dodávateľ odpovie na všetkých dvanásť, testujeme. Ak nie, nejdeme ďalej. Otázky som poslal sprostredkovateľovi; ten ich 17.&nbsp;9.&nbsp;2026 preposlal dodávateľovi.</p>
-<p>Americkí poskytovatelia zameraní na zdravotníctvo, napríklad Ona Health, Hello Patient, Talkie.ai či Arini, na svojich stránkach uvádzajú HIPAA, SOC&nbsp;2 a BAA. To je signál o vyspelosti produktu, nie náhrada za európsku dohodu o spracúvaní údajov. V klinike nerozhoduje, kto nasadí hlasovú linku ako prvý. Rozhoduje, či pacient, ktorý volá o druhej v noci s bolesťou na hrudníku, dostane správnu odpoveď.</p>
+<p>Americkí poskytovatelia zameraní na zdravotníctvo, napríklad Haven Voice Care, Deskline Health, Callform.ai či Voxora, na svojich stránkach uvádzajú HIPAA, SOC&nbsp;2 a BAA. To je signál o vyspelosti produktu, nie náhrada za európsku dohodu o spracúvaní údajov. V klinike nerozhoduje, kto nasadí hlasovú linku ako prvý. Rozhoduje, či pacient, ktorý volá o druhej v noci s bolesťou na hrudníku, dostane správnu odpoveď.</p>
 <p><em>Ide o odborný úsudok autora pri hodnotení ponuky pre ambulanciu, nie o recenziu produktu pre pacientov ani o radu volajúcim v núdzi. Pri akútnych príznakoch volajte 155/112.</em></p>
 HTML,
         ],
@@ -67,7 +67,7 @@ HTML,
 <p>The AI-Receptionist offer reached me via an intermediary at IMPAX, from a representative of the vendor TOMMAX. On paper it looked strong: catch roughly 30% of missed calls; fluent Slovak and, as needed, Czech, German, Hungarian, or English; the outlay often pays for itself within a month; and an estimated annual revenue contribution above €100,000.</p>
 <p>The gaps showed up in the details.</p>
 <p>Slovak is a lower-resource language for voice models: less training data than English or German. Marketing “fluency” therefore may not match medical conversations with elderly patients who use dialect, pause mid-sentence, or describe symptoms in roundabout ways.</p>
-<p>I found no clear fallback and no escalation protocol for chest pain or shortness of breath. The pitch also did not present the certifications US healthcare voice vendors often advertise (HIPAA, SOC&nbsp;2, BAA). Those are US instruments, not what binds a Slovak clinic. What matters here is a processing agreement for special categories under <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR Art.&nbsp;9</a>, plus clear hosting and transfer. The case studies on offer, TYMO Beauty and Manhattan Dental Studio, are not nephrology in Slovakia.</p>
+<p>I found no clear fallback and no escalation protocol for chest pain or shortness of breath. The pitch also did not present the certifications US healthcare voice vendors often advertise (HIPAA, SOC&nbsp;2, BAA). Those are US instruments, not what binds a Slovak clinic. What matters here is a processing agreement for special categories under <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR Art.&nbsp;9</a>, plus clear hosting and transfer. The case studies on offer, Lumen Studio Beauty and Hudson River Dental Studio, are not nephrology in Slovakia.</p>
 <p>So I wrote twelve questions for the vendor:</p>
 <ol>
 <li>What is the exact escalation protocol when a patient says “I want to talk to a human” or “this is an emergency”?</li>
@@ -76,7 +76,7 @@ HTML,
 <li>How do you handle health data under GDPR Art.&nbsp;9? Do you have a signed DPA? Where are servers and transcripts hosted?</li>
 <li>What certifications do you hold (SOC&nbsp;2, ISO&nbsp;27001, or equivalent)?</li>
 <li>What is the concrete monthly price? How many minutes are included? What does an extra minute cost?</li>
-<li>Do you have a real reference from a Slovak or Czech outpatient clinic (not a Manhattan dental studio)?</li>
+<li>Do you have a real reference from a Slovak or Czech outpatient clinic (not a Hudson River dental studio)?</li>
 <li>Which languages are production-grade and which are only “claimed support”? Can you show transcripts of real Slovak calls?</li>
 <li>How is Slovak quality tested? Do you have native-speaker QA for Slovak, Czech, and Hungarian?</li>
 <li>What happens when a patient describes symptoms (chest pain, dyspnea)? Does the AI recognise an emergency and direct them to 155?</li>
@@ -84,7 +84,7 @@ HTML,
 <li>Who technically powers the AI engine? Do you use your own model, or Vapi/Retell/another platform?</li>
 </ol>
 <p>We proposed a two-week pilot on a secondary line. If the vendor answers all twelve, we test. If not, we do not. I sent the questions to the intermediary; on 17&nbsp;September&nbsp;2026 he forwarded them to the vendor.</p>
-<p>US healthcare-focused providers, for example Ona Health, Hello Patient, Talkie.ai, or Arini, state HIPAA, SOC&nbsp;2, and BAA on their sites. That is a maturity signal, not a substitute for a European DPA. In a clinic the question is whether the patient who calls at 2&nbsp;a.m. with chest pain gets the right response.</p>
+<p>US healthcare-focused providers, for example Haven Voice Care, Deskline Health, Callform.ai, or Voxora, state HIPAA, SOC&nbsp;2, and BAA on their sites. That is a maturity signal, not a substitute for a European DPA. In a clinic the question is whether the patient who calls at 2&nbsp;a.m. with chest pain gets the right response.</p>
 <p><em>This is the author’s professional judgement when assessing a clinic vendor offer, not a product review for patients and not advice for callers in distress. For acute symptoms, call 155/112.</em></p>
 HTML,
         ],
@@ -96,7 +96,7 @@ HTML,
 <p>Nabídku AI-Recepční jsem dostal přes zprostředkovatele z IMPAX, od zástupce dodavatele TOMMAX. Na papíře vypadala působivě: zachytit přibližně 30&nbsp;% nepřijatých hovorů, plynulá slovenština a podle potřeby čeština, němčina, maďarština či angličtina, návratnost často do měsíce a odhadovaný roční přínos na tržbách nad 100&nbsp;tisíc eur.</p>
 <p>Mezery se ukázaly v detailech.</p>
 <p>Slovenština má pro hlasové modely méně trénovacích dat než angličtina či němčina. V oboru se tomu říká jazyk s menším zdrojem, <em>lower-resource</em>. Marketingová „plynulost“ proto nemusí sedět s medicínskou konverzací se staršími pacienty, kteří mluví dialektem, dělají pauzy uprostřed věty nebo popisují příznaky oklikou.</p>
-<p>V materiálech jsem nenašel jasný záložní postup ani eskalační protokol pro bolest na hrudi či dušnost. Chyběly i certifikace, které v USA běžně uvádějí poskytovatelé hlasových služeb ve zdravotnictví (HIPAA, SOC&nbsp;2, BAA). Ty však pro slovenskou ambulanci nejsou závazným rámcem. Rozhoduje dohoda o zpracování zvláštních kategorií podle <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR čl.&nbsp;9</a> a jasné místo hostingu či přenosu. Případové studie v nabídce, TYMO Beauty a Manhattan Dental Studio, nejsou nefrologie na Slovensku.</p>
+<p>V materiálech jsem nenašel jasný záložní postup ani eskalační protokol pro bolest na hrudi či dušnost. Chyběly i certifikace, které v USA běžně uvádějí poskytovatelé hlasových služeb ve zdravotnictví (HIPAA, SOC&nbsp;2, BAA). Ty však pro slovenskou ambulanci nejsou závazným rámcem. Rozhoduje dohoda o zpracování zvláštních kategorií podle <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR čl.&nbsp;9</a> a jasné místo hostingu či přenosu. Případové studie v nabídce, Lumen Studio Beauty a Hudson River Dental Studio, nejsou nefrologie na Slovensku.</p>
 <p>Proto jsem napsal dvanáct otázek pro dodavatele:</p>
 <ol>
 <li>Jaký je přesný eskalační protokol, když pacient řekne „chci mluvit s člověkem“ nebo „tohle je nouzový případ“?</li>
@@ -105,7 +105,7 @@ HTML,
 <li>Jak zacházíte se zdravotními daty ve smyslu GDPR čl.&nbsp;9? Máte podepsané DPA? Kde stojí servery a transkripty?</li>
 <li>Jaké certifikace máte (SOC&nbsp;2, ISO&nbsp;27001, nebo ekvivalent)?</li>
 <li>Jaká je konkrétní měsíční cena? Kolik minut je zahrnutých? Kolik stojí minuta navíc?</li>
-<li>Máte reálnou referenci ze slovenské nebo české ambulance (ne zubní klinika na Manhattanu)?</li>
+<li>Máte reálnou referenci ze slovenské nebo české ambulance (ne zubní klinika u řeky Hudson)?</li>
 <li>Jaké jazyky jsou production-grade a jaké jen „claimed-support“? Můžete ukázat transkripty reálných hovorů ve slovenštině?</li>
 <li>Jak se testuje kvalita slovenštiny? Máte native-speaker QA pro slovenštinu, češtinu, maďarštinu?</li>
 <li>Co se stane, když pacient popisuje příznaky (bolest na hrudi, dušnost)? Rozpozná AI nouzi a nasměruje na 155?</li>
@@ -113,7 +113,7 @@ HTML,
 <li>Kdo technicky stojí za AI enginem? Používáte vlastní model, nebo Vapi/Retell/jinou platformu?</li>
 </ol>
 <p>Navrhli jsme dvoutýdenní pilot na sekundární lince. Pokud dodavatel odpoví na všech dvanáct, testujeme. Pokud ne, nejdeme dál. Otázky jsem poslal zprostředkovateli; ten je 17.&nbsp;9.&nbsp;2026 přeposlal dodavateli.</p>
-<p>Američtí poskytovatelé zaměření na zdravotnictví, například Ona Health, Hello Patient, Talkie.ai či Arini, na svých stránkách uvádějí HIPAA, SOC&nbsp;2 a BAA. To je signál o vyspělosti produktu, ne náhrada za evropskou smlouvu o zpracování údajů. Na klinice nerozhoduje, kdo nasadí hlasovou linku jako první. Rozhoduje, zda pacient, který volá o druhé v noci s bolestí na hrudi, dostane správnou odpověď.</p>
+<p>Američtí poskytovatelé zaměření na zdravotnictví, například Haven Voice Care, Deskline Health, Callform.ai či Voxora, na svých stránkách uvádějí HIPAA, SOC&nbsp;2 a BAA. To je signál o vyspělosti produktu, ne náhrada za evropskou smlouvu o zpracování údajů. Na klinice nerozhoduje, kdo nasadí hlasovou linku jako první. Rozhoduje, zda pacient, který volá o druhé v noci s bolestí na hrudi, dostane správnou odpověď.</p>
 <p><em>Jde o odborný úsudek autora při hodnocení nabídky pro ambulanci, nikoli o recenzi produktu pro pacienty ani o radu volajícím v nouzi. Při akutních příznacích volejte 155/112.</em></p>
 HTML,
         ],
@@ -125,7 +125,7 @@ HTML,
 <p>Das Angebot zur AI-Rezeption erreichte mich über einen Vermittler von IMPAX, von einem Vertreter des Anbieters TOMMAX. Auf dem Papier wirkte es stark: etwa 30&nbsp;% verpasster Anrufe auffangen; fließendes Slowakisch und bei Bedarf Tschechisch, Deutsch, Ungarisch oder Englisch; die Ausgabe rechnet sich oft innerhalb eines Monats; geschätzter jährlicher Umsatzbeitrag über 100&nbsp;000&nbsp;Euro.</p>
 <p>Die Lücken zeigten sich im Detail.</p>
 <p>Slowakisch hat für Sprachmodelle weniger Trainingsdaten als Englisch oder Deutsch. Im Fach heißt das <em>lower-resource</em>. Die beworbene Sprachgewandtheit muss daher nicht zu medizinischen Gesprächen mit älteren Patientinnen und Patienten passen, die Dialekt sprechen, mitten im Satz pausieren oder Symptome umständlich beschreiben.</p>
-<p>In den Unterlagen fand ich keinen klaren Ausweichplan und kein Eskalationsprotokoll für Brustschmerz oder Atemnot. Es fehlten auch Zertifizierungen, die US-Healthcare-Voice-Anbieter oft nennen (HIPAA, SOC&nbsp;2, BAA). Das sind US-Instrumente, nicht der verbindliche Rahmen für eine slowakische Praxis. Für uns zählt eine Verarbeitungsvereinbarung für besondere Kategorien nach <a href="https://gdpr-info.eu/art-9-gdpr/">DSGVO Art.&nbsp;9</a> sowie klarer Hosting- und Transferort. Die Fallstudien im Angebot, TYMO Beauty und Manhattan Dental Studio, sind keine Nephrologie in der Slowakei.</p>
+<p>In den Unterlagen fand ich keinen klaren Ausweichplan und kein Eskalationsprotokoll für Brustschmerz oder Atemnot. Es fehlten auch Zertifizierungen, die US-Healthcare-Voice-Anbieter oft nennen (HIPAA, SOC&nbsp;2, BAA). Das sind US-Instrumente, nicht der verbindliche Rahmen für eine slowakische Praxis. Für uns zählt eine Verarbeitungsvereinbarung für besondere Kategorien nach <a href="https://gdpr-info.eu/art-9-gdpr/">DSGVO Art.&nbsp;9</a> sowie klarer Hosting- und Transferort. Die Fallstudien im Angebot, Lumen Studio Beauty und Hudson River Dental Studio, sind keine Nephrologie in der Slowakei.</p>
 <p>Deshalb schrieb ich zwölf Fragen an den Anbieter:</p>
 <ol>
 <li>Wie lautet das genaue Eskalationsprotokoll, wenn ein Patient sagt „Ich möchte mit einem Menschen sprechen“ oder „Das ist ein Notfall“?</li>
@@ -134,7 +134,7 @@ HTML,
 <li>Wie gehen Sie mit Gesundheitsdaten im Sinne von DSGVO Art.&nbsp;9 um? Haben Sie eine unterzeichnete AVV/DPA? Wo stehen Server und Transkripte?</li>
 <li>Welche Zertifizierungen haben Sie (SOC&nbsp;2, ISO&nbsp;27001 oder gleichwertig)?</li>
 <li>Wie hoch ist der konkrete Monatspreis? Wie viele Minuten sind enthalten? Was kostet eine Extra-Minute?</li>
-<li>Haben Sie eine echte Referenz aus einer slowakischen oder tschechischen Ambulanz (nicht eine Zahnklinik in Manhattan)?</li>
+<li>Haben Sie eine echte Referenz aus einer slowakischen oder tschechischen Ambulanz (nicht eine Zahnklinik am Hudson)?</li>
 <li>Welche Sprachen sind production-grade und welche nur „claimed support“? Können Sie Transkripte echter slowakischer Anrufe zeigen?</li>
 <li>Wie wird die Slowakisch-Qualität getestet? Haben Sie Native-Speaker-QA für Slowakisch, Tschechisch, Ungarisch?</li>
 <li>Was passiert, wenn ein Patient Symptome beschreibt (Brustschmerz, Dyspnoe)? Erkennt die KI den Notfall und leitet an 155 weiter?</li>
@@ -142,7 +142,7 @@ HTML,
 <li>Wer steht technisch hinter der KI-Engine? Nutzen Sie ein eigenes Modell oder Vapi/Retell/eine andere Plattform?</li>
 </ol>
 <p>Wir schlugen einen zweiwöchigen Pilot auf einer Nebenleitung vor. Beantwortet der Anbieter alle zwölf, testen wir. Wenn nicht, gehen wir nicht weiter. Die Fragen schickte ich an den Vermittler; am 17.&nbsp;9.&nbsp;2026 leitete er sie an den Anbieter weiter.</p>
-<p>US-Anbieter mit Healthcare-Fokus, etwa Ona Health, Hello Patient, Talkie.ai oder Arini, nennen auf ihren Seiten HIPAA, SOC&nbsp;2 und BAA. Das ist ein Reifesignal, kein Ersatz für eine europäische DPA. In der Klinik kommt es darauf an, ob der Patient, der um 2&nbsp;Uhr nachts mit Brustschmerz anruft, die richtige Antwort bekommt.</p>
+<p>US-Anbieter mit Healthcare-Fokus, etwa Haven Voice Care, Deskline Health, Callform.ai oder Voxora, nennen auf ihren Seiten HIPAA, SOC&nbsp;2 und BAA. Das ist ein Reifesignal, kein Ersatz für eine europäische DPA. In der Klinik kommt es darauf an, ob der Patient, der um 2&nbsp;Uhr nachts mit Brustschmerz anruft, die richtige Antwort bekommt.</p>
 <p><em>Dies ist das fachliche Urteil des Autors bei der Bewertung eines Praxisangebots, keine Produktrezension für Patienten und kein Rat für Anrufende in Not. Bei akuten Symptomen 155/112 wählen.</em></p>
 HTML,
         ],
@@ -154,7 +154,7 @@ HTML,
 <p>L'offre AI-Réception m'est parvenue via un intermédiaire d'IMPAX, d'un représentant du fournisseur TOMMAX. Sur le papier, elle impressionnait : rattraper environ 30&nbsp;% des appels manqués ; un slovaque courant et, au besoin, le tchèque, l'allemand, le hongrois ou l'anglais ; un retour sur investissement souvent en un mois ; un gain annuel estimé de plus de 100&nbsp;000&nbsp;euros.</p>
 <p>Les lacunes sont apparues dans le détail.</p>
 <p>Le slovaque fait partie des langues à moindre volume de données d'entraînement pour les modèles vocaux, dites <em>lower-resource</em>. La « fluidité » marketing peut donc ne pas coller aux conversations médicales avec des patients âgés qui parlent dialecte, s'interrompent en milieu de phrase ou décrivent les symptômes de biais.</p>
-<p>Dans les documents, je n'ai trouvé ni repli clair ni protocole d'escalade pour douleur thoracique ou dyspnée. Manquaient aussi les certifications que les acteurs vocaux US healthcare citent souvent (HIPAA, SOC&nbsp;2, BAA). Ce sont des instruments américains, pas le cadre contraignant d'un cabinet slovaque. Pour nous, l'essentiel est un accord de traitement des catégories particulières selon l'<a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 du RGPD</a>, plus un hébergement et un transfert clairs. Les études de cas de l'offre, TYMO Beauty et Manhattan Dental Studio, ne sont pas de la néphrologie en Slovaquie.</p>
+<p>Dans les documents, je n'ai trouvé ni repli clair ni protocole d'escalade pour douleur thoracique ou dyspnée. Manquaient aussi les certifications que les acteurs vocaux US healthcare citent souvent (HIPAA, SOC&nbsp;2, BAA). Ce sont des instruments américains, pas le cadre contraignant d'un cabinet slovaque. Pour nous, l'essentiel est un accord de traitement des catégories particulières selon l'<a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 du RGPD</a>, plus un hébergement et un transfert clairs. Les études de cas de l'offre, Lumen Studio Beauty et Hudson River Dental Studio, ne sont pas de la néphrologie en Slovaquie.</p>
 <p>J'ai donc écrit douze questions au fournisseur :</p>
 <ol>
 <li>Quel est le protocole d'escalade exact lorsqu'un patient dit « je veux parler à un humain » ou « c'est une urgence » ?</li>
@@ -163,7 +163,7 @@ HTML,
 <li>Comment traitez-vous les données de santé au sens de l'art.&nbsp;9 du RGPD ? Avez-vous un DPA signé ? Où sont les serveurs et les transcriptions ?</li>
 <li>Quelles certifications avez-vous (SOC&nbsp;2, ISO&nbsp;27001 ou équivalent) ?</li>
 <li>Quel est le prix mensuel concret ? Combien de minutes sont incluses ? Combien coûte une minute supplémentaire ?</li>
-<li>Avez-vous une référence réelle d'un cabinet slovaque ou tchèque (pas un cabinet dentaire à Manhattan) ?</li>
+<li>Avez-vous une référence réelle d'un cabinet slovaque ou tchèque (pas un cabinet dentaire près de l’Hudson) ?</li>
 <li>Quelles langues sont production-grade et lesquelles seulement « claimed support » ? Pouvez-vous montrer des transcriptions d'appels réels en slovaque ?</li>
 <li>Comment teste-t-on la qualité du slovaque ? Avez-vous une QA locuteur natif pour le slovaque, le tchèque, le hongrois ?</li>
 <li>Que se passe-t-il lorsqu'un patient décrit des symptômes (douleur thoracique, dyspnée) ? L'IA reconnaît-elle l'urgence et oriente-t-elle vers le 155 ?</li>
@@ -171,7 +171,7 @@ HTML,
 <li>Qui alimente techniquement le moteur d'IA ? Utilisez-vous votre propre modèle, ou Vapi/Retell/une autre plateforme ?</li>
 </ol>
 <p>Nous avons proposé un pilote de deux semaines sur une ligne secondaire. Si le fournisseur répond aux douze, nous testons. Sinon, nous n'avançons pas. J'ai envoyé les questions à l'intermédiaire ; le 17&nbsp;septembre&nbsp;2026, il les a transmises au fournisseur.</p>
-<p>Des fournisseurs américains axés santé, par exemple Ona Health, Hello Patient, Talkie.ai ou Arini, indiquent sur leurs sites HIPAA, SOC&nbsp;2 et BAA. C'est un signal de maturité, pas un substitut à un DPA européen. En cabinet, la question est de savoir si le patient qui appelle à 2&nbsp;h du matin avec une douleur thoracique reçoit la bonne réponse.</p>
+<p>Des fournisseurs américains axés santé, par exemple Haven Voice Care, Deskline Health, Callform.ai ou Voxora, indiquent sur leurs sites HIPAA, SOC&nbsp;2 et BAA. C'est un signal de maturité, pas un substitut à un DPA européen. En cabinet, la question est de savoir si le patient qui appelle à 2&nbsp;h du matin avec une douleur thoracique reçoit la bonne réponse.</p>
 <p><em>Il s'agit du jugement professionnel de l'auteur lors de l'évaluation d'une offre pour un cabinet, non d'une revue produit pour les patients ni d'un conseil aux appelants en détresse. En cas de symptômes aigus, composez le 155/112.</em></p>
 HTML,
         ],
@@ -183,7 +183,7 @@ HTML,
 <p>La oferta de AI-Recepción me llegó a través de un intermediario de IMPAX, de un representante del proveedor TOMMAX. Sobre el papel impresionaba: captar aproximadamente el 30&nbsp;% de las llamadas no atendidas; eslovaco fluido y, según necesidad, checo, alemán, húngaro o inglés; retorno de la inversión a menudo en un mes; y un aporte anual estimado de más de 100&nbsp;000&nbsp;euros.</p>
 <p>Las lagunas aparecieron en el detalle.</p>
 <p>El eslovaco pertenece a las lenguas con menor volumen de datos de entrenamiento para modelos de voz, las llamadas <em>lower-resource</em>. La «fluidez» de marketing puede no encajar con conversaciones médicas con pacientes mayores que usan dialecto, hacen pausas a mitad de frase o describen síntomas de forma indirecta.</p>
-<p>En los materiales no encontré un plan de reserva claro ni un protocolo de escalada para dolor torácico o disnea. Tampoco presentaban las certificaciones que suelen citar los proveedores de voz sanitaria en EE.&nbsp;UU. (HIPAA, SOC&nbsp;2, BAA). Son instrumentos estadounidenses, no el marco vinculante de una consulta eslovaca. Para nosotros cuenta un acuerdo de tratamiento de categorías especiales según el <a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 del GDPR</a> y un alojamiento o transferencia claros. Los estudios de caso de la oferta, TYMO Beauty y Manhattan Dental Studio, no son nefrología en Eslovaquia.</p>
+<p>En los materiales no encontré un plan de reserva claro ni un protocolo de escalada para dolor torácico o disnea. Tampoco presentaban las certificaciones que suelen citar los proveedores de voz sanitaria en EE.&nbsp;UU. (HIPAA, SOC&nbsp;2, BAA). Son instrumentos estadounidenses, no el marco vinculante de una consulta eslovaca. Para nosotros cuenta un acuerdo de tratamiento de categorías especiales según el <a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 del GDPR</a> y un alojamiento o transferencia claros. Los estudios de caso de la oferta, Lumen Studio Beauty y Hudson River Dental Studio, no son nefrología en Eslovaquia.</p>
 <p>Por eso escribí doce preguntas al proveedor:</p>
 <ol>
 <li>¿Cuál es el protocolo exacto de escalada cuando un paciente dice «quiero hablar con una persona» o «esto es una emergencia»?</li>
@@ -192,7 +192,7 @@ HTML,
 <li>¿Cómo tratan los datos de salud según el art.&nbsp;9 del GDPR? ¿Tienen un DPA firmado? ¿Dónde están los servidores y las transcripciones?</li>
 <li>¿Qué certificaciones tienen (SOC&nbsp;2, ISO&nbsp;27001 o equivalente)?</li>
 <li>¿Cuál es el precio mensual concreto? ¿Cuántos minutos están incluidos? ¿Cuánto cuesta un minuto extra?</li>
-<li>¿Tienen una referencia real de una consulta eslovaca o checa (no una clínica dental en Manhattan)?</li>
+<li>¿Tienen una referencia real de una consulta eslovaca o checa (no una clínica dental junto al Hudson)?</li>
 <li>¿Qué idiomas son production-grade y cuáles solo «claimed support»? ¿Pueden mostrar transcripciones de llamadas reales en eslovaco?</li>
 <li>¿Cómo se prueba la calidad del eslovaco? ¿Tienen QA con hablantes nativos para eslovaco, checo y húngaro?</li>
 <li>¿Qué ocurre cuando un paciente describe síntomas (dolor torácico, disnea)? ¿La IA reconoce la emergencia y deriva al 155?</li>
@@ -200,7 +200,7 @@ HTML,
 <li>¿Quién impulsa técnicamente el motor de IA? ¿Usan su propio modelo, o Vapi/Retell/otra plataforma?</li>
 </ol>
 <p>Propusimos un piloto de dos semanas en una línea secundaria. Si el proveedor responde a las doce, probamos. Si no, no seguimos. Envié las preguntas al intermediario; el 17&nbsp;de&nbsp;septiembre&nbsp;de&nbsp;2026 las reenvió al proveedor.</p>
-<p>Proveedores estadounidenses centrados en sanidad, por ejemplo Ona Health, Hello Patient, Talkie.ai o Arini, indican en sus sitios HIPAA, SOC&nbsp;2 y BAA. Es una señal de madurez, no un sustituto de un DPA europeo. En la consulta importa si el paciente que llama a las 2&nbsp;de la madrugada con dolor torácico recibe la respuesta correcta.</p>
+<p>Proveedores estadounidenses centrados en sanidad, por ejemplo Haven Voice Care, Deskline Health, Callform.ai o Voxora, indican en sus sitios HIPAA, SOC&nbsp;2 y BAA. Es una señal de madurez, no un sustituto de un DPA europeo. En la consulta importa si el paciente que llama a las 2&nbsp;de la madrugada con dolor torácico recibe la respuesta correcta.</p>
 <p><em>Se trata del juicio profesional del autor al valorar una oferta para una consulta, no de una reseña de producto para pacientes ni de consejo a quienes llaman en urgencia. Ante síntomas agudos, llame al 155/112.</em></p>
 HTML,
         ],
@@ -212,7 +212,7 @@ HTML,
 <p>Ofertę AI-Recepcji dostałem przez pośrednika z IMPAX, od przedstawiciela dostawcy TOMMAX. Na papierze wyglądała imponująco: przechwycić około 30&nbsp;% nieodebranych połączeń; płynny słowacki i w razie potrzeby czeski, niemiecki, węgierski lub angielski; zwrot często w miesiąc; szacowany roczny wzrost przychodów powyżej 100&nbsp;tys. euro.</p>
 <p>Luki wyszły w szczegółach.</p>
 <p>Słowacki ma dla modeli głosowych mniej danych treningowych niż angielski czy niemiecki. W branży nazywa się to językiem o mniejszym zasobie, <em>lower-resource</em>. Marketingowa „płynność” może więc nie pasować do rozmów medycznych ze starszymi pacjentami, którzy mówią dialektem, robią pauzy w środku zdania lub opisują objawy okrężnie.</p>
-<p>W materiałach nie znalazłem jasnego planu awaryjnego ani protokołu eskalacji przy bólu w klatce piersiowej czy duszności. Brakowało też certyfikacji, które w USA często podają dostawcy usług głosowych w ochronie zdrowia (HIPAA, SOC&nbsp;2, BAA). To jednak ramy amerykańskie, nie wiążące dla słowackiej poradni. Dla nas decyduje umowa o przetwarzaniu szczególnych kategorii według <a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 RODO</a> oraz jasne miejsce hostingu i transferu. Studia przypadków w ofercie, TYMO Beauty i Manhattan Dental Studio, to nie nefrologia na Słowacji.</p>
+<p>W materiałach nie znalazłem jasnego planu awaryjnego ani protokołu eskalacji przy bólu w klatce piersiowej czy duszności. Brakowało też certyfikacji, które w USA często podają dostawcy usług głosowych w ochronie zdrowia (HIPAA, SOC&nbsp;2, BAA). To jednak ramy amerykańskie, nie wiążące dla słowackiej poradni. Dla nas decyduje umowa o przetwarzaniu szczególnych kategorii według <a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 RODO</a> oraz jasne miejsce hostingu i transferu. Studia przypadków w ofercie, Lumen Studio Beauty i Hudson River Dental Studio, to nie nefrologia na Słowacji.</p>
 <p>Dlatego napisałem dwanaście pytań do dostawcy:</p>
 <ol>
 <li>Jaki jest dokładny protokół eskalacji, gdy pacjent powie „chcę mówić z człowiekiem” lub „to nagły przypadek”?</li>
@@ -221,7 +221,7 @@ HTML,
 <li>Jak obchodzicie się z danymi zdrowotnymi w sensie art.&nbsp;9 RODO? Czy macie podpisaną DPA? Gdzie stoją serwery i transkrypty?</li>
 <li>Jakie macie certyfikacje (SOC&nbsp;2, ISO&nbsp;27001 lub równoważne)?</li>
 <li>Jaka jest konkretna miesięczna cena? Ile minut jest wliczonych? Ile kosztuje minuta ekstra?</li>
-<li>Czy macie realną referencję ze słowackiej lub czeskiej poradni (nie klinika stomatologiczna na Manhattanie)?</li>
+<li>Czy macie realną referencję ze słowackiej lub czeskiej poradni (nie klinika stomatologiczna nad Hudsonem)?</li>
 <li>Które języki są production-grade, a które tylko „claimed support”? Czy możecie pokazać transkrypty prawdziwych rozmów po słowacku?</li>
 <li>Jak testowana jest jakość słowackiego? Czy macie native-speaker QA dla słowackiego, czeskiego, węgierskiego?</li>
 <li>Co się stanie, gdy pacjent opisuje objawy (ból w klatce, duszność)? Czy AI rozpozna nagły przypadek i skieruje na 155?</li>
@@ -229,7 +229,7 @@ HTML,
 <li>Kto technicznie stoi za silnikiem AI? Używacie własnego modelu, czy Vapi/Retell/innej platformy?</li>
 </ol>
 <p>Zaproponowaliśmy dwutygodniowy pilotaż na linii dodatkowej. Jeśli dostawca odpowie na wszystkie dwanaście, testujemy. Jeśli nie, nie idziemy dalej. Pytania wysłałem pośrednikowi; 17&nbsp;września&nbsp;2026 przekazał je dostawcy.</p>
-<p>Amerykańscy dostawcy skupieni na ochronie zdrowia, np. Ona Health, Hello Patient, Talkie.ai czy Arini, na swoich stronach podają HIPAA, SOC&nbsp;2 i BAA. To sygnał dojrzałości produktu, nie zastępstwo europejskiej DPA. W poradni decyduje to, czy pacjent dzwoniący o drugiej w nocy z bólem w klatce dostanie właściwą odpowiedź.</p>
+<p>Amerykańscy dostawcy skupieni na ochronie zdrowia, np. Haven Voice Care, Deskline Health, Callform.ai czy Voxora, na swoich stronach podają HIPAA, SOC&nbsp;2 i BAA. To sygnał dojrzałości produktu, nie zastępstwo europejskiej DPA. W poradni decyduje to, czy pacjent dzwoniący o drugiej w nocy z bólem w klatce dostanie właściwą odpowiedź.</p>
 <p><em>To fachowa ocena autora przy rozpatrywaniu oferty dla poradni, nie recenzja produktu dla pacjentów ani rada dla dzwoniących w nagłym przypadku. Przy ostrych objawach dzwońcie 155/112.</em></p>
 HTML,
         ],
@@ -241,7 +241,7 @@ HTML,
 <p>Az AI-Recepciós ajánlat egy IMPAX-os közvetítőn keresztül érkezett, a TOMMAX egy képviselőjétől. Papíron erősnek tűnt: kb. 30&nbsp;% elmulasztott hívás megfogása; folyékony szlovák, szükség szerint cseh, német, magyar vagy angol; gyakran egy hónapon belüli megtérülés; évi 100&nbsp;000&nbsp;euró feletti becsült bevételnövekmény.</p>
 <p>A hiányosságok a részletekben jelentek meg.</p>
 <p>A szlovák a hangmodellek számára kisebb tanítóadatú (úgynevezett <em>lower-resource</em>) nyelv. A marketing „folyékonyság” ezért nem feltétlenül illik idősebb, dialektust beszélő, mondat közben szünetelő vagy kerülő úton panaszoló betegek orvosi beszélgetéseihez.</p>
-<p>Az anyagokban nem találtam világos tartalék eljárást, sem mellkasi fájdalomra vagy nehézlégzésre vonatkozó eszkalációs protokollt. Hiányoztak azok a tanúsítványok is, amelyeket az amerikai healthcare voice szereplők gyakran említenek (HIPAA, SOC&nbsp;2, BAA). Ezek amerikai eszközök, nem a szlovák rendelő kötelező kerete. Nálunk a <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR 9.&nbsp;cikk</a> szerinti különleges kategóriák feldolgozási megállapodása és a hosting/átadás helye a lényeg. Az ajánlat esettanulmányai, TYMO Beauty és Manhattan Dental Studio, nem szlovákiai nefrológia.</p>
+<p>Az anyagokban nem találtam világos tartalék eljárást, sem mellkasi fájdalomra vagy nehézlégzésre vonatkozó eszkalációs protokollt. Hiányoztak azok a tanúsítványok is, amelyeket az amerikai healthcare voice szereplők gyakran említenek (HIPAA, SOC&nbsp;2, BAA). Ezek amerikai eszközök, nem a szlovák rendelő kötelező kerete. Nálunk a <a href="https://gdpr-info.eu/art-9-gdpr/">GDPR 9.&nbsp;cikk</a> szerinti különleges kategóriák feldolgozási megállapodása és a hosting/átadás helye a lényeg. Az ajánlat esettanulmányai, Lumen Studio Beauty és Hudson River Dental Studio, nem szlovákiai nefrológia.</p>
 <p>Ezért tizenkét kérdést írtam a szállítónak:</p>
 <ol>
 <li>Mi a pontos eszkalációs protokoll, ha a beteg azt mondja: „emberrel akarok beszélni” vagy „ez sürgős eset”?</li>
@@ -250,7 +250,7 @@ HTML,
 <li>Hogyan kezelik az egészségügyi adatokat a GDPR 9.&nbsp;cikk szerint? Van aláírt DPA? Hol vannak a szerverek és a transcripttek?</li>
 <li>Milyen tanúsítványaik vannak (SOC&nbsp;2, ISO&nbsp;27001 vagy egyenértékű)?</li>
 <li>Mi a konkrét havi ár? Hány perc van benne? Mennyibe kerül egy extra perc?</li>
-<li>Van valódi referenciájuk szlovák vagy cseh rendelőből (nem manhattani fogászati klinika)?</li>
+<li>Van valódi referenciájuk szlovák vagy cseh rendelőből (nem hudson-parti fogászati klinika)?</li>
 <li>Mely nyelvek production-grade, és melyek csak „claimed support”? Mutatnak valódi szlovák hívások transcriptjeit?</li>
 <li>Hogyan tesztelik a szlovák minőségét? Van anyanyelvi QA szlovákra, csehre, magyarra?</li>
 <li>Mi történik, ha a beteg tüneteket ír le (mellkasi fájdalom, dyspnoe)? Felismeri az AI a vészhelyzetet és a 155-re irányít?</li>
@@ -258,7 +258,7 @@ HTML,
 <li>Ki áll technikailag az AI-motor mögött? Saját modellt használnak, vagy Vapi/Retell/más platformot?</li>
 </ol>
 <p>Kéthetes próbaüzemet javasoltunk másodlagos vonalon. Ha a szállító mind a tizenkettőre válaszol, tesztelünk. Ha nem, nem megyünk tovább. A kérdéseket elküldtem a közvetítőnek; ő 2026.&nbsp;szeptember&nbsp;17-én továbbította a szállítónak.</p>
-<p>Az amerikai, egészségügyre fókuszáló szolgáltatók, pl. Ona Health, Hello Patient, Talkie.ai vagy Arini, oldalukon HIPAA-t, SOC&nbsp;2-t és BAA-t említenek. Ez érettségi jel, nem európai DPA-pótlék. A rendelőben az dönt, hogy a hajnali 2-kor mellkasi fájdalommal hívó beteg helyes választ kap-e.</p>
+<p>Az amerikai, egészségügyre fókuszáló szolgáltatók, pl. Haven Voice Care, Deskline Health, Callform.ai vagy Voxora, oldalukon HIPAA-t, SOC&nbsp;2-t és BAA-t említenek. Ez érettségi jel, nem európai DPA-pótlék. A rendelőben az dönt, hogy a hajnali 2-kor mellkasi fájdalommal hívó beteg helyes választ kap-e.</p>
 <p><em>Ez a szerző szakmai ítélete egy rendelői ajánlat értékelésekor, nem termékismertető betegeknek, és nem tanács vészhelyzetben hívóknak. Akut tüneteknél hívja a 155/112-t.</em></p>
 HTML,
         ],
@@ -270,7 +270,7 @@ HTML,
 <p>L'offerta AI-Reception mi è arrivata tramite un intermediario di IMPAX, da un rappresentante del fornitore TOMMAX. Sulla carta sembrava solida: intercettare circa il 30&nbsp;% delle chiamate non risposte; slovacco fluido e, se necessario, ceco, tedesco, ungherese o inglese; ROI spesso entro un mese; contributo annuale stimato oltre 100&nbsp;000&nbsp;euro.</p>
 <p>Le lacune sono emerse nei dettagli.</p>
 <p>Lo slovacco è una lingua con meno dati di addestramento per i modelli vocali, detta <em>lower-resource</em>. La «fluidità» di marketing quindi può non combaciare con conversazioni mediche con pazienti anziani che usano il dialetto, fanno pause a metà frase o descrivono i sintomi in modo indiretto.</p>
-<p>Nei materiali non ho trovato un piano di riserva chiaro né un protocollo di escalation per dolore toracico o dispnea. Mancavano anche le certificazioni che i fornitori vocali healthcare USA citano spesso (HIPAA, SOC&nbsp;2, BAA): strumenti americani, non il quadro vincolante di un ambulatorio slovacco. Per noi conta un accordo di trattamento delle categorie particolari secondo l'<a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 del GDPR</a> e un hosting/trasferimento chiari. I casi citati nell'offerta, TYMO Beauty e Manhattan Dental Studio, non sono nefrologia in Slovacchia.</p>
+<p>Nei materiali non ho trovato un piano di riserva chiaro né un protocollo di escalation per dolore toracico o dispnea. Mancavano anche le certificazioni che i fornitori vocali healthcare USA citano spesso (HIPAA, SOC&nbsp;2, BAA): strumenti americani, non il quadro vincolante di un ambulatorio slovacco. Per noi conta un accordo di trattamento delle categorie particolari secondo l'<a href="https://gdpr-info.eu/art-9-gdpr/">art.&nbsp;9 del GDPR</a> e un hosting/trasferimento chiari. I casi citati nell'offerta, Lumen Studio Beauty e Hudson River Dental Studio, non sono nefrologia in Slovacchia.</p>
 <p>Perciò ho scritto dodici domande al fornitore:</p>
 <ol>
 <li>Qual è l'esatto protocollo di escalation quando un paziente dice «voglio parlare con una persona» o «è un'emergenza»?</li>
@@ -279,7 +279,7 @@ HTML,
 <li>Come gestite i dati sanitari ai sensi dell'art.&nbsp;9 del GDPR? Avete un DPA firmato? Dove stanno server e trascrizioni?</li>
 <li>Quali certificazioni avete (SOC&nbsp;2, ISO&nbsp;27001 o equivalente)?</li>
 <li>Qual è il prezzo mensile concreto? Quanti minuti sono inclusi? Quanto costa un minuto extra?</li>
-<li>Avete un riferimento reale da un ambulatorio slovacco o ceco (non uno studio dentistico a Manhattan)?</li>
+<li>Avete un riferimento reale da un ambulatorio slovacco o ceco (non uno studio dentistico sull’Hudson)?</li>
 <li>Quali lingue sono production-grade e quali solo «claimed support»? Potete mostrare trascrizioni di chiamate reali in slovacco?</li>
 <li>Come si testa la qualità dello slovacco? Avete QA madrelingua per slovacco, ceco, ungherese?</li>
 <li>Cosa succede quando un paziente descrive sintomi (dolore toracico, dispnea)? L'IA riconosce l'emergenza e indirizza al 155?</li>
@@ -287,7 +287,7 @@ HTML,
 <li>Chi alimenta tecnicamente il motore IA? Usate un modello proprio o Vapi/Retell/un'altra piattaforma?</li>
 </ol>
 <p>Abbiamo proposto un pilota di due settimane su una linea secondaria. Se il fornitore risponde a tutte e dodici, testiamo. Se no, non proseguiamo. Ho inviato le domande all'intermediario; il 17&nbsp;settembre&nbsp;2026 le ha inoltrate al fornitore.</p>
-<p>Fornitori USA orientati alla sanità, ad esempio Ona Health, Hello Patient, Talkie.ai o Arini, indicano sui propri siti HIPAA, SOC&nbsp;2 e BAA. È un segnale di maturità, non un sostituto di un DPA europeo. In ambulatorio conta se il paziente che chiama alle 2&nbsp;di notte con dolore toracico riceve la risposta giusta.</p>
+<p>Fornitori USA orientati alla sanità, ad esempio Haven Voice Care, Deskline Health, Callform.ai o Voxora, indicano sui propri siti HIPAA, SOC&nbsp;2 e BAA. È un segnale di maturità, non un sostituto di un DPA europeo. In ambulatorio conta se il paziente che chiama alle 2&nbsp;di notte con dolore toracico riceve la risposta giusta.</p>
 <p><em>Si tratta del giudizio professionale dell'autore nella valutazione di un'offerta per ambulatorio, non di una recensione di prodotto per i pazienti né di un consiglio per chi chiama in emergenza. In caso di sintomi acuti, chiamare 155/112.</em></p>
 HTML,
         ],
@@ -299,7 +299,7 @@ HTML,
 <p>Пропозиція AI-Рецепції надійшла через посередника з IMPAX, від представника постачальника TOMMAX. На папері виглядала сильно: перехопити приблизно 30&nbsp;% пропущених дзвінків; вільна словацька й за потреби чеська, німецька, угорська чи англійська; окупність часто за місяць; оцінений річний приріст виручки понад 100&nbsp;тисяч євро.</p>
 <p>Прогалини вийшли в подробицях.</p>
 <p>Словацька належить до мов із меншим обсягом навчальних даних для голосових моделей, так званих <em>lower-resource</em>. Маркетингова «плинність» тому може не збігатися з медичними розмовами з літніми пацієнтами, які говорять діалектом, роблять паузи посеред речення або описують симптоми опосередковано.</p>
-<p>У матеріалах я не знайшов чіткого запасного порядку і протоколу ескалації при болю в грудях чи задишці. Бракувало й сертифікацій, які в США часто згадують постачальники голосових сервісів у медицині (HIPAA, SOC&nbsp;2, BAA). Це американські інструменти, не обов’язкова рамка для словацької амбулаторії. Для нас вирішує угода про обробку особливих категорій за <a href="https://gdpr-info.eu/art-9-gdpr/">ст.&nbsp;9 GDPR</a> і зрозуміле місце хостингу чи передачі. Приклади в пропозиції, TYMO Beauty і Manhattan Dental Studio, не є нефрологією в Словаччині.</p>
+<p>У матеріалах я не знайшов чіткого запасного порядку і протоколу ескалації при болю в грудях чи задишці. Бракувало й сертифікацій, які в США часто згадують постачальники голосових сервісів у медицині (HIPAA, SOC&nbsp;2, BAA). Це американські інструменти, не обов’язкова рамка для словацької амбулаторії. Для нас вирішує угода про обробку особливих категорій за <a href="https://gdpr-info.eu/art-9-gdpr/">ст.&nbsp;9 GDPR</a> і зрозуміле місце хостингу чи передачі. Приклади в пропозиції, Lumen Studio Beauty і Hudson River Dental Studio, не є нефрологією в Словаччині.</p>
 <p>Тому я написав дванадцять запитань постачальнику:</p>
 <ol>
 <li>Який точний протокол ескалації, коли пацієнт каже «хочу говорити з людиною» або «це невідкладний випадок»?</li>
@@ -316,7 +316,7 @@ HTML,
 <li>Хто технічно стоїть за AI-рушієм? Використовуєте власну модель чи Vapi/Retell/іншу платформу?</li>
 </ol>
 <p>Ми запропонували двотижневий пілот на вторинній лінії. Якщо постачальник відповість на всі дванадцять, тестуємо. Якщо ні, не йдемо далі. Запитання я надіслав посереднику; 17&nbsp;вересня&nbsp;2026 він переслав їх постачальнику.</p>
-<p>Американські провайдери з фокусом на охорону здоров’я, наприклад Ona Health, Hello Patient, Talkie.ai чи Arini, на своїх сайтах зазначають HIPAA, SOC&nbsp;2 і BAA. Це сигнал зрілості продукту, а не заміна європейській DPA. В амбулаторії вирішує те, чи пацієнт, який дзвонить о другій ночі з болем у грудях, отримає правильну відповідь.</p>
+<p>Американські провайдери з фокусом на охорону здоров’я, наприклад Haven Voice Care, Deskline Health, Callform.ai чи Voxora, на своїх сайтах зазначають HIPAA, SOC&nbsp;2 і BAA. Це сигнал зрілості продукту, а не заміна європейській DPA. В амбулаторії вирішує те, чи пацієнт, який дзвонить о другій ночі з болем у грудях, отримає правильну відповідь.</p>
 <p><em>Це фахова оцінка автора при розгляді пропозиції для амбулаторії, не огляд продукту для пацієнтів і не порада тим, хто дзвонить у невідкладності. При гострих симптомах телефонуйте 155/112.</em></p>
 HTML,
         ],
