@@ -589,6 +589,99 @@ foreach (['privacy.html' => '180 dňoch', 'weblogo/privacy.html' => '180 days'] 
         $privacyPath . ' musí obsahovať automatickú retenciu a rovnaké disclosures ako jazykové katalógy'
     );
 }
+// Microsoft Clarity (Beh #62): skript sa načíta iba po analytickom súhlase,
+// iba neprihlásenému návštevníkovi a iba na verejných stránkach s obsahom.
+// Zverejnenie spracúvania musí byť v každom jazyku aj v statickej záložnej
+// stránke rovnaké, inak súhlas nie je informovaný.
+$clarityFooter = (string) file_get_contents(dirname(__DIR__) . '/footer.php');
+$clarityTag = [];
+expectSame(
+    1,
+    preg_match(
+        '~<script src="/js/clarity-consent\.js\?v=<\?= [^"]*? \?>" data-project="([a-z0-9]{10})" data-consent="external" data-paths="([^"]+)"></script>~',
+        $clarityFooter,
+        $clarityTag
+    ),
+    'Pätička musí načítať clarity-consent.js v režime data-consent="external" s 10-znakovým ID projektu'
+);
+expectTrue(
+    preg_match('~<\?php if \(!isLoggedIn\(\)\): \?>.*?clarity-consent\.js.*?<\?php endif; \?>~s', $clarityFooter) === 1,
+    'Clarity sa nesmie načítať prihlásenému administrátorovi'
+);
+$clarityPaths = explode(',', $clarityTag[2] ?? '');
+$clarityPublicPaths = ['/', '/index.php', '/articles.php', '/article.php', '/library.php', '/privacy.php', '/terms.php'];
+expectSame(
+    [],
+    array_values(array_diff($clarityPaths, $clarityPublicPaths)),
+    'Clarity smie bežať iba na verejných stránkach s obsahom, ktoré uvádza ochrana súkromia'
+);
+foreach ($clarityPaths as $clarityPath) {
+    expectTrue(
+        is_file(dirname(__DIR__) . ($clarityPath === '/' ? '/index.php' : $clarityPath)),
+        "Clarity data-paths obsahuje neexistujúcu cestu {$clarityPath}"
+    );
+}
+$clarityKeys = [
+    'privacy.clarity_text',
+    'privacy.clarity_recipient',
+    'privacy.clarity_cookies',
+    'privacy.clarity_policy_link',
+    'privacy.clarity_cookies_link',
+];
+foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $clarityLangFile) {
+    $clarityCatalog = require $clarityLangFile;
+    $clarityName = basename($clarityLangFile);
+    foreach ($clarityKeys as $clarityKey) {
+        $clarityValue = $clarityCatalog[$clarityKey] ?? null;
+        expectTrue(
+            is_string($clarityValue) && trim($clarityValue) !== '' && preg_match('/[<>]/', $clarityValue) === 0,
+            "{$clarityName} musí obsahovať čistý text kľúča {$clarityKey}"
+        );
+    }
+    $clarityCookiesText = (string) ($clarityCatalog['privacy.clarity_cookies'] ?? '');
+    expectTrue(
+        str_contains($clarityCookiesText, '_clck')
+            && str_contains($clarityCookiesText, '_clsk')
+            && str_contains($clarityCookiesText, 'MUID'),
+        "{$clarityName} musí pomenovať cookies Clarity"
+    );
+    $clarityRecipientText = (string) ($clarityCatalog['privacy.clarity_recipient'] ?? '');
+    expectTrue(
+        str_contains($clarityRecipientText, 'Microsoft Ireland Operations Limited')
+            && str_contains($clarityRecipientText, 'SCC')
+            && preg_match('/\b30\b/u', $clarityRecipientText) === 1
+            && preg_match('/\b9\b/u', $clarityRecipientText) === 1,
+        "{$clarityName} musí uvádzať príjemcu, prenosovú záruku a retenciu Clarity"
+    );
+}
+$clarityPrivacyTemplate = (string) file_get_contents(dirname(__DIR__) . '/privacy.php');
+foreach ($clarityKeys as $clarityKey) {
+    expectTrue(
+        str_contains($clarityPrivacyTemplate, "te('{$clarityKey}')"),
+        "privacy.php musí vypísať {$clarityKey} cez te()"
+    );
+}
+expectTrue(
+    substr_count($clarityPrivacyTemplate, 'Microsoft Clarity') === 1
+        && str_contains($clarityPrivacyTemplate, '<h2>Microsoft Clarity</h2>'),
+    'privacy.php nesmie mať text o Clarity natvrdo, iba nadpis so značkou'
+);
+$clarityStaticPrivacy = (string) preg_replace('/\s+/', ' ', (string) file_get_contents(dirname(__DIR__) . '/privacy.html'));
+$claritySkCatalog = require dirname(__DIR__) . '/lang/sk.php';
+expectTrue(
+    str_contains($clarityStaticPrivacy, '<h2>Microsoft Clarity</h2>'),
+    'privacy.html musí mať sekciu Microsoft Clarity'
+);
+foreach ($clarityKeys as $clarityKey) {
+    expectTrue(
+        str_contains($clarityStaticPrivacy, (string) preg_replace('/\s+/', ' ', (string) $claritySkCatalog[$clarityKey])),
+        "privacy.html musí niesť rovnaký text ako lang/sk.php ({$clarityKey})"
+    );
+}
+expectTrue(
+    str_contains($clarityStaticPrivacy, strip_tags((string) $claritySkCatalog['privacy.updated'])),
+    'privacy.html musí mať rovnaký dátum poslednej aktualizácie ako lang/sk.php'
+);
 $i18nSource = (string) file_get_contents(dirname(__DIR__) . '/i18n.php');
 expectTrue(
     str_contains($i18nSource, 'const APP_LANGUAGE_COOKIE_LIFETIME = 31536000;'),

@@ -445,7 +445,9 @@
     }
 
     function updateAnalyticsConsent(granted, persist = true) {
-      window.dispatchEvent(new CustomEvent("site:analytics-consent", { detail: granted }));
+      window.dispatchEvent(
+        new CustomEvent("site:analytics-consent", { detail: granted }),
+      );
       const analyticsWasLoaded = Boolean(
         document.getElementById("google-analytics-script"),
       );

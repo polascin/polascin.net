@@ -113,5 +113,6 @@ $footerBeat = appSwatchBeat($footerUpdateTs);
 ></div>
 
 <?php if (!isLoggedIn()): ?>
-<script src="/js/clarity-consent.js?v=20261101" data-project="axxzsx2xlq" data-consent="external" data-paths="/,/index.php,/articles.php,/article.php,/library.php,/about.php,/privacy.php,/terms.php"></script>
+<?php $clarityVersion = is_file(__DIR__ . '/js/clarity-consent.js') ? (string) filemtime(__DIR__ . '/js/clarity-consent.js') : '1'; ?>
+<script src="/js/clarity-consent.js?v=<?= htmlspecialchars(rawurlencode($clarityVersion), ENT_QUOTES, 'UTF-8') ?>" data-project="axxzsx2xlq" data-consent="external" data-paths="/,/index.php,/articles.php,/article.php,/library.php,/privacy.php,/terms.php"></script>
 <?php endif; ?>

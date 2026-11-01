@@ -45,8 +45,10 @@ $canonicalUrl = absoluteLangUrl($lang, 'privacy.php');
     </ul>
 
     <h2>Microsoft Clarity</h2>
-    <p><?= htmlspecialchars(currentLang() === 'sk' ? 'Microsoft Clarity sa načíta iba po analytickom súhlase. Zaznamenáva návštevy, kliknutia, posúvanie a priebeh používania verejných stránok s maskovaným textom. Slúži na zlepšovanie webu. Údaje prijíma Microsoft; reklamný súhlas zostáva vypnutý. Cookies _clck a _clsk rozlišujú návštevníkov a spájajú zobrazenia do relácií. Súhlas môžete odvolať v nastaveniach cookies. Nový rozsah analytiky vyžaduje nový súhlas.' : 'Microsoft Clarity loads only after analytics consent. It records visits, clicks, scrolling and public-page sessions with masked text to improve the website. Microsoft receives the data; advertising consent stays denied. The _clck and _clsk cookies distinguish visitors and connect page views into sessions. You can withdraw consent in Cookie settings. This new analytics scope requires fresh consent.', ENT_QUOTES, 'UTF-8') ?></p>
-    <p><a href="https://privacy.microsoft.com/privacystatement">Microsoft Privacy Statement</a> · <a href="https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-cookies">Clarity cookies</a></p>
+    <p><?= te('privacy.clarity_text') ?></p>
+    <p><?= te('privacy.clarity_recipient') ?></p>
+    <p><?= te('privacy.clarity_cookies') ?></p>
+    <p><a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener noreferrer"><?= te('privacy.clarity_policy_link') ?></a> · <a href="https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-cookies" target="_blank" rel="noopener noreferrer"><?= te('privacy.clarity_cookies_link') ?></a></p>
 
     <h2><?= te('privacy.s3_heading') ?></h2>
     <p><?= te('privacy.s3_text') ?></p>
