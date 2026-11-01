@@ -790,6 +790,18 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/kto-vlastni-zaznam-o-vydani.php'
             );
         },
+        '2026110105_release_record_crosslink_mutation' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/kto-vlastni-zaznam-o-vydani.php'
+            );
+        },
+        '2026110106_smaller_quote_not_discount_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/mensia-suma-nie-je-zlava.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
