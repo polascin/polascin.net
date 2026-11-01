@@ -105,6 +105,7 @@ const EXPECTED_MIGRATIONS = [
     '2026110106_smaller_quote_not_discount_article',
     '2026110107_recommendation_is_not_permission_article',
     '2026110108_anonymize_third_party_article_details',
+    '2026110109_what_after_congress_better_for_patient_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

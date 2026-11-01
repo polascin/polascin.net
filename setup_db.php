@@ -815,6 +815,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 refreshPublishedArticleTextFromFile($pdo, $articlePath);
             }
         },
+        '2026110109_what_after_congress_better_for_patient_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/co-po-kongrese-lepsie-pre-pacienta.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
