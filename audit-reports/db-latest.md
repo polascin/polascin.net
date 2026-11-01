@@ -1,6 +1,6 @@
 # Kontrola produkčnej databázy: polascin.net
 
-Generované: 2026-10-31 21:37:01 CET  
+Generované: 2026-11-01 21:37:01 CET  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
@@ -18,14 +18,14 @@ Bez nálezov: schéma, migrácie, indexy, účty aj retencia sú v očakávanom 
 
 | Tabuľka | Engine | Collation | Riadkov (presne) |
 | --- | --- | --- | --- |
-| `access_logs` | InnoDB | utf8mb4_unicode_ci | 63257 |
+| `access_logs` | InnoDB | utf8mb4_unicode_ci | 65200 |
 | `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 54 |
-| `articles` | InnoDB | utf8mb4_unicode_ci | 420 |
-| `contact_messages` | InnoDB | utf8mb4_unicode_ci | 3 |
+| `articles` | InnoDB | utf8mb4_unicode_ci | 470 |
+| `contact_messages` | InnoDB | utf8mb4_unicode_ci | 4 |
 | `content_blocks` | InnoDB | utf8mb4_unicode_ci | 5 |
-| `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 4 |
+| `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 6 |
 | `newsletter_subscribers` | InnoDB | utf8mb4_unicode_ci | 0 |
-| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 60 |
+| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 70 |
 | `users` | InnoDB | utf8mb4_unicode_ci | 1 |
 
 ## Migrácie schémy
@@ -90,6 +90,16 @@ Bez nálezov: schéma, migrácie, indexy, účty aj retencia sú v očakávanom 
 - ✅ `2026102902_context_comes_in_batches_article`: 2026-10-29 19:51:24
 - ✅ `2026102903_month_of_verification_closing`: 2026-10-29 19:53:20
 - ✅ `2026103101_replace_dashes_in_articles`: 2026-10-31 05:23:30
+- ✅ `2026110101_humanize_all_article_texts`: 2026-11-01 05:44:49
+- ✅ `2026110102_who_owns_release_record_article`: 2026-11-01 08:44:21
+- ✅ `2026110103_verify_target_before_verdict_article`: 2026-11-01 08:44:21
+- ✅ `2026110104_release_record_ownership_polish`: 2026-11-01 08:48:02
+- ✅ `2026110105_release_record_crosslink_mutation`: 2026-11-01 08:53:24
+- ✅ `2026110106_smaller_quote_not_discount_article`: 2026-11-01 08:57:16
+- ✅ `2026110107_recommendation_is_not_permission_article`: 2026-11-01 08:57:16
+- ✅ `2026110108_anonymize_third_party_article_details`: 2026-11-01 09:05:44
+- ✅ `2026110109_what_after_congress_better_for_patient_article`: 2026-11-01 11:00:48
+- ✅ `2026110110_congress_program_polish`: 2026-11-01 11:08:32
 
 ## Indexy strážené migráciou
 
@@ -105,18 +115,18 @@ Bez nálezov: schéma, migrácie, indexy, účty aj retencia sú v očakávanom 
 
 ## Obsah a jazyky
 
-- Publikovaných článkov: 420
+- Publikovaných článkov: 470
 - Články podľa jazyka:
-  - `cs`: 42
-  - `de`: 42
-  - `en`: 42
-  - `es`: 42
-  - `fr`: 42
-  - `hu`: 42
-  - `it`: 42
-  - `pl`: 42
-  - `sk`: 42
-  - `uk`: 42
+  - `cs`: 47
+  - `de`: 47
+  - `en`: 47
+  - `es`: 47
+  - `fr`: 47
+  - `hu`: 47
+  - `it`: 47
+  - `pl`: 47
+  - `sk`: 47
+  - `uk`: 47
 - Obsahové bloky podľa jazyka:
   - `sk`: 5
 
@@ -127,12 +137,12 @@ Kontaktné správy: **180 dní**; nepotvrdený newsletter: **72 hodín**; admini
 
 | Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |
 | --- | --- | --- | --- |
-| `access_logs` | 63257 | 2026-08-02 21:23:05 | 90 |
-| `contact_messages` | 3 | 2026-10-29 00:06:00 | 2 |
+| `access_logs` | 65200 | 2026-08-03 22:14:53 | 89 |
+| `contact_messages` | 4 | 2026-10-29 00:06:00 | 3 |
 | `newsletter_subscribers` | 0 | - | - |
-| `admin_audit_log` | 54 | 2026-09-11 19:22:06 | 50 |
-| `form_rate_limit` | 4 | 2026-10-31 00:49:54 | 0 |
+| `admin_audit_log` | 54 | 2026-09-11 19:22:06 | 51 |
+| `form_rate_limit` | 6 | 2026-10-31 00:49:54 | 1 |
 
-Kontaktné správy: **0** vybavených, **3** nevybavených
+Kontaktné správy: **0** vybavených, **4** nevybavených
 (z toho **0** nevybavených dlhšie ako 30 dní, **0** správ prekročilo retenčnú lehotu 180 dní).
 
