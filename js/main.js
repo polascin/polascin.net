@@ -402,6 +402,26 @@
 
     const cookieContainer = document.getElementById("cookie-consent-container");
     let consentReturnFocus = null;
+    let bannerResizeObserver = null;
+
+    // Pevný cookie banner zakrýva spodok okna (na mobile až 40 % výšky). Jeho
+    // nameraná výška ide do scroll-padding-bottom a do spodného odsadenia
+    // pätičky, aby zaostrený prvok nezostal pod bannerom a pätička zostala
+    // dosiahnuteľná (WCAG 2.2, SC 2.4.11).
+    function syncBannerOffset(banner) {
+      document.documentElement.style.setProperty(
+        "--cookie-banner-height",
+        `${Math.ceil(banner.getBoundingClientRect().height)}px`,
+      );
+    }
+
+    function releaseBannerOffset() {
+      if (bannerResizeObserver) {
+        bannerResizeObserver.disconnect();
+        bannerResizeObserver = null;
+      }
+      document.documentElement.style.removeProperty("--cookie-banner-height");
+    }
 
     function loadAnalytics() {
       if (document.getElementById("google-analytics-script")) return;
@@ -480,6 +500,7 @@
       if (banner) {
         banner.remove();
       }
+      releaseBannerOffset();
 
       if (
         consentReturnFocus instanceof HTMLElement &&
@@ -567,6 +588,13 @@
         });
 
       cookieContainer.appendChild(banner);
+      syncBannerOffset(banner);
+      if ("ResizeObserver" in window) {
+        bannerResizeObserver = new ResizeObserver(() =>
+          syncBannerOffset(banner),
+        );
+        bannerResizeObserver.observe(banner);
+      }
 
       if (options.focus) {
         banner.querySelector("button")?.focus();

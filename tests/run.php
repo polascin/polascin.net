@@ -774,7 +774,7 @@ expectTrue(
 
 // „Sklenená“ lišta nesmie byť priehľadnejšia, než dovoľuje kontrast stlmeného
 // textu (--text-muted: beat a vek v hlavičke). Meranie z pixelov v Chrome pod
-// čiernym podkladom v svetlej a bielym v tmavej téme: pri krytí 84 % to bolo
+// čiernym podkladom vo svetlej a bielym v tmavej téme: pri krytí 84 % to bolo
 // 4,14:1 a 3,60:1 (WCAG 1.4.3 vyžaduje 4,5:1), pri 92 % je to 5,01:1 a 4,69:1.
 $navbarGlassOpacity = 0;
 if (preg_match('~\.navbar\s*\{\s*background:\s*color-mix\(in srgb,\s*var\(--bg-card\)\s*(\d+)%,\s*transparent\);~', $siteStyles, $navbarGlassMatch) === 1) {
@@ -783,6 +783,121 @@ if (preg_match('~\.navbar\s*\{\s*background:\s*color-mix\(in srgb,\s*var\(--bg-c
 expectTrue(
     $navbarGlassOpacity >= 92 && $navbarGlassOpacity <= 100,
     'Sklenená navigácia musí kryť aspoň 92 %, inak stlmený text lišty klesne pod kontrast 4,5:1 (nájdené krytie: ' . $navbarGlassOpacity . ' %)'
+);
+
+// Pevný cookie banner (position: fixed; bottom: 0) zaberá na mobile až 40 %
+// okna. Prvky zaostrené Tabom sa pri minimálnom posune zastavili pod ním
+// (skutočný prehliadač, 390 x 844: približne 60 zo 74 zastavení na domovskej
+// stránke bolo celých pod bannerom; WCAG 2.2, SC 2.4.11 Focus Not Obscured).
+// js/main.js preto výšku banneru zmeria do --cookie-banner-height, CSS ju
+// používa ako scroll-padding-bottom a ako spodné odsadenie pätičky (bez neho
+// by sa posledné odkazy nedali vyniesť nad banner). Bez banneru je hodnota 0px.
+// K scroll-padding-bottom pribúda rezerva --spacing-sm: obrys fokusu presahuje
+// prvok o 5 px (offset 2 + šírka 3), takže pri zarovnaní okraja prvku presne na
+// banner (alebo na okraj okna) by sa jeho spodná strana stratila pod ním.
+expectTrue(
+    preg_match('~\nhtml\s*\{[^}]*scroll-padding-bottom:\s*calc\(\s*var\(--cookie-banner-height,\s*0px\)\s*\+\s*var\(--spacing-sm\)\s*\);~s', $siteStyles) === 1,
+    'html musí mať scroll-padding-bottom = --cookie-banner-height (bez banneru 0px) + --spacing-sm, inak zaostrený prvok alebo spodná strana jeho obrysu zostane pod bannerom'
+);
+expectTrue(
+    preg_match('~\nfooter\s*\{[^}]*padding-bottom:\s*calc\(var\(--spacing-lg\)\s*\+\s*var\(--cookie-banner-height,\s*0px\)\);~s', $siteStyles) === 1,
+    'Pätička musí mať spodné odsadenie zväčšené o --cookie-banner-height, inak posledné odkazy nejde vyniesť nad banner'
+);
+expectTrue(
+    preg_match('~setProperty\(\s*"--cookie-banner-height",~', $navigationScript) === 1
+        && str_contains($navigationScript, 'removeProperty("--cookie-banner-height")'),
+    'js/main.js musí výšku banneru nastaviť do --cookie-banner-height a po zatvorení banneru ju odstrániť'
+);
+expectTrue(
+    preg_match('~cookieContainer\.appendChild\(banner\);\s*syncBannerOffset\(banner\);~', $navigationScript) === 1
+        && str_contains($navigationScript, 'bannerResizeObserver.observe(banner)'),
+    'Po vložení banneru musí js/main.js hneď zmerať jeho výšku a sledovať jej zmeny (zalomenie textu pri zmene okna)'
+);
+expectTrue(
+    preg_match('~banner\.remove\(\);\s*\}\s*releaseBannerOffset\(\);~', $navigationScript) === 1,
+    'closeCookieBanner musí po odstránení banneru uvoľniť --cookie-banner-height, inak pätička zostane s prázdnym odsadením'
+);
+
+// Obrys fokusu leží 2px mimo prvku (outline-offset), teda na pozadí stránky a
+// nie na výplni tlačidla. Pravidlá :hover a :focus-visible pre .btn-primary a
+// .btn-cookie-accept ho prefarbovali na farbu určenú pre výplň
+// (--focus-on-primary): biela na bielom podklade vo svetlej a tmavomodrá na
+// tmavom v tmavej téme, teda kontrast 1:1 až 1,26:1 (meranie z pixelov v
+// Chrome; WCAG 2.2 SC 1.4.11 vyžaduje 3:1). Obrys preto smie určovať len
+// spoločné pravidlo s --focus-color a jeho kontrast voči povrchom stránky sa
+// tu počíta z tokenov.
+function focusTestTokens(string $css, string $selector): array {
+    $tokens = [];
+    if (preg_match('~(?:^|\n)' . preg_quote($selector, '~') . '\s*\{([^}]*)\}~', $css, $block) === 1) {
+        preg_match_all('~(--[a-z0-9-]+):\s*(#[0-9a-fA-F]{6})\s*;~', $block[1], $pairs, PREG_SET_ORDER);
+        foreach ($pairs as $pair) {
+            $tokens[$pair[1]] = strtolower($pair[2]);
+        }
+    }
+
+    return $tokens;
+}
+
+function focusTestLuminance(string $hex): float {
+    $luminance = 0.0;
+    foreach ([1 => 0.2126, 3 => 0.7152, 5 => 0.0722] as $offset => $weight) {
+        $channel = hexdec(substr($hex, $offset, 2)) / 255;
+        $luminance += $weight * ($channel <= 0.03928 ? $channel / 12.92 : (($channel + 0.055) / 1.055) ** 2.4);
+    }
+
+    return $luminance;
+}
+
+function focusTestContrast(string $first, string $second): float {
+    $firstLuminance = focusTestLuminance($first);
+    $secondLuminance = focusTestLuminance($second);
+
+    return (max($firstLuminance, $secondLuminance) + 0.05) / (min($firstLuminance, $secondLuminance) + 0.05);
+}
+
+foreach (['vo svetlej' => ':root', 'v tmavej' => '[data-theme="dark"]'] as $themeLabel => $themeSelector) {
+    $themeTokens = focusTestTokens($siteStyles, $themeSelector);
+    $ringPairs = [
+        ['--focus-color', '--bg-body'],
+        ['--focus-color', '--bg-surface'],
+        ['--focus-color', '--bg-card'],
+        ['--footer-text', '--footer-bg'],
+    ];
+    foreach ($ringPairs as [$ringToken, $surfaceToken]) {
+        $ringRatio = isset($themeTokens[$ringToken], $themeTokens[$surfaceToken])
+            ? focusTestContrast($themeTokens[$ringToken], $themeTokens[$surfaceToken])
+            : 0.0;
+        expectTrue(
+            $ringRatio >= 3.0,
+            'Obrys fokusu (' . $ringToken . ') musí mať ' . $themeLabel . ' téme kontrast aspoň 3:1 voči ' . $surfaceToken
+                . ' (WCAG 2.2 SC 1.4.11), nameraný pomer: ' . number_format($ringRatio, 2, ',', '') . ':1'
+        );
+    }
+}
+
+$cssWithoutComments = (string) preg_replace('~/\*.*?\*/~s', '', $siteStyles);
+expectTrue(
+    preg_match(
+        '~\.btn:focus-visible,[^{}]*\.btn-cookie-accept:focus-visible,[^{}]*\{[^{}]*outline:\s*3px solid var\(--focus-color\);[^{}]*outline-offset:\s*2px;~',
+        $cssWithoutComments
+    ) === 1,
+    'Spoločné pravidlo :focus-visible musí pre .btn a .btn-cookie-accept určovať obrys 3px solid var(--focus-color) s odsadením 2px'
+);
+$buttonOutlineOverrides = [];
+if (preg_match_all('~([^{}]+)\{([^{}]*)\}~', $cssWithoutComments, $cssRules, PREG_SET_ORDER) > 0) {
+    foreach ($cssRules as $cssRule) {
+        $isButtonRule = preg_match('~\.btn-(?:primary|cookie-accept)\b~', $cssRule[1]) === 1;
+        $setsOutline = preg_match('~(?:^|[;\s])outline(?:-color)?\s*:~', $cssRule[2]) === 1;
+        $isSharedRing = str_contains($cssRule[2], 'outline: 3px solid var(--focus-color);');
+        if ($isButtonRule && $setsOutline && !$isSharedRing) {
+            $buttonOutlineOverrides[] = trim(preg_replace('~\s+~', ' ', $cssRule[1]) ?? '');
+        }
+    }
+}
+expectSame(
+    [],
+    $buttonOutlineOverrides,
+    '.btn-primary a .btn-cookie-accept nesmú mať vlastný obrys: farba výplne na pozadí stránky zanikne (nájdené: ' . implode('; ', $buttonOutlineOverrides) . ')'
 );
 
 // Swatch Internet Time: stotiny sa orezávajú nadol. Zaokrúhlenie by na konci

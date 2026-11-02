@@ -16,7 +16,6 @@
   --on-primary: #ffffff;
   --primary-hover: #3d1a78;
   --focus-color: #3d1a78;
-  --focus-on-primary: #ffffff;
   --footer-bg: #3d1a78;
   --footer-text: #ffffff;
   --navbar-height: 77px;
@@ -40,7 +39,7 @@
   --flag-accent-3: #3d1a78;
 
   /* Biely pruh vlajky by na svetlom podklade zmizol a pruh by vyzeral prerušene,
-     preto sa v svetlej téme používa najsvetlejší odtieň, ktorý je ešte viditeľný. */
+     preto sa vo svetlej téme používa najsvetlejší odtieň, ktorý je ešte viditeľný. */
   --flag-stripe-white: #eef2f7;
   --flag-stripe: linear-gradient(
     90deg,
@@ -83,7 +82,6 @@
   --on-primary: #0f172a;
   --primary-hover: #a5c8ec;
   --focus-color: #ffffff;
-  --focus-on-primary: #0f172a;
   --footer-bg: #241040;
   --footer-text: #f0edf9;
 
@@ -123,6 +121,13 @@ footer {
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--navbar-height) + var(--spacing-sm));
+
+  /* Zaostrený prvok sa pri posune nemá dostať pod pevný cookie banner, ktorého
+     výšku nastavuje js/main.js (bez banneru je 0). Rezerva rovná hornej
+     pokrýva obrys fokusu, ktorý presahuje okraj prvku o 5 px. */
+  scroll-padding-bottom: calc(
+    var(--cookie-banner-height, 0px) + var(--spacing-sm)
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -203,6 +208,10 @@ footer::selection,
   color: #241040;
 }
 
+/* Obrys leží 2px mimo prvku, teda na pozadí stránky. Tlačidlá ho preto
+   nesmú prefarbovať farbou určenou pre výplň (biela na bielej vo svetlej
+   téme, tmavá na tmavej v tmavej): kontrast voči okoliu musí byť aspoň 3:1
+   (WCAG 2.2 SC 1.4.11), čo spĺňa --focus-color v oboch témach. */
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible,
@@ -346,7 +355,7 @@ section {
 /* „Sklenená“ navigácia: obsah pod ňou jemne presvitá. Priehľadnosť sa
    zapína len tam, kde je podporené aj rozmazanie, inak by text pod lištou
    znižoval čitateľnosť. Krytie 92 % drží stlmený text lišty (--text-muted)
-   nad kontrastom 4,5:1 aj v najhoršom prípade: nad čiernym obsahom v svetlej
+   nad kontrastom 4,5:1 aj v najhoršom prípade: nad čiernym obsahom vo svetlej
    téme je to 5,0:1 a nad bielym obsahom v tmavej téme 4,7:1. Pri 84 % bolo
    4,1:1, resp. 3,6:1. */
 @supports (backdrop-filter: blur(1px)) {
@@ -876,7 +885,6 @@ section {
   color: var(--on-primary);
   transform: translateY(-2px);
   box-shadow: 0 4px 6px var(--shadow-color);
-  outline-color: var(--focus-on-primary);
 }
 
 .btn-secondary {
@@ -1144,6 +1152,10 @@ footer {
   background-color: var(--footer-bg);
   color: var(--footer-text);
   padding: var(--spacing-lg) 0;
+
+  /* Pod pätičkou zostáva miesto pre pevný cookie banner, aby posledné odkazy
+     neostali pod ním (premenná sa nastavuje v js/main.js). */
+  padding-bottom: calc(var(--spacing-lg) + var(--cookie-banner-height, 0px));
   text-align: center;
   position: relative;
 }
@@ -1184,7 +1196,7 @@ footer .footer-heading {
 }
 
 /* Pätička je v oboch témach tmavá, takže obrys fokusu musí byť svetlý:
-   --focus-on-primary je v tmavej téme tmavý a zanikol by. */
+   --focus-color je vo svetlej téme tmavofialový a zanikol by. */
 footer a:focus-visible,
 footer button:focus-visible {
   outline-color: var(--footer-text);
@@ -1453,7 +1465,6 @@ footer button:focus-visible {
   background-color: var(--primary-hover);
   border-color: var(--primary-hover);
   color: var(--on-primary);
-  outline-color: var(--focus-on-primary);
 }
 
 .btn-cookie-decline {
