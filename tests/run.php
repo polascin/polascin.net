@@ -901,6 +901,92 @@ expectSame(
     '.btn-primary a .btn-cookie-accept nesmú mať vlastný obrys: farba výplne na pozadí stránky zanikne (nájdené: ' . implode('; ', $buttonOutlineOverrides) . ')'
 );
 
+// Tlač. Prehliadač štandardne netlačí pozadia, takže papier je biely a
+// čitateľnosť drží len farba textu. Merané v Chrome (PDF z produkcie): tmavá
+// téma tlačila text s kontrastom 1,26:1 až 2,36:1, pätička biely text na
+// nevytlačenej fialovej (1:1), nadpis s gradientovou výplňou
+// (-webkit-text-fill-color: transparent) a tlačidlá s farbou --on-primary sa
+// nevytlačili vôbec, pevná navigácia sa opakovala na každej strane, prvky
+// .reveal pod hornou hranou ostali s opacity 0 (JS ich odkrýva až pri posune)
+// a vh v tlači znamená výšku strany, takže hero a .page-content zaberali celé
+// strany (domovská stránka mala 12 strán A4). Tlačový blok preto musí
+// vynútiť svetlú schému, čierny text bez pozadí, viditeľné prvky .reveal,
+// skryť pevné a ovládacie prvky a vynulovať výšky odvodené z vh.
+function printTestBody(string $css): string {
+    $body = '';
+    $offset = 0;
+    $length = strlen($css);
+    while (($start = strpos($css, '@media print', $offset)) !== false) {
+        $open = strpos($css, '{', $start);
+        if ($open === false) {
+            break;
+        }
+        $depth = 0;
+        for ($position = $open; $position < $length; $position++) {
+            if ($css[$position] === '{') {
+                $depth++;
+            } elseif ($css[$position] === '}') {
+                $depth--;
+                if ($depth === 0) {
+                    break;
+                }
+            }
+        }
+        $body .= substr($css, $open + 1, $position - $open - 1) . "\n";
+        $offset = $position + 1;
+    }
+
+    return $body;
+}
+
+$printCss = printTestBody($cssWithoutComments);
+expectTrue(
+    preg_match(
+        '~:root,\s*\[data-theme="dark"\]\s*\{[^{}]*color-scheme:\s*light;[^{}]*--navbar-height:\s*0px\s*!important;[^{}]*--cookie-banner-height:\s*0px\s*!important;~',
+        $printCss
+    ) === 1,
+    'Tlačový blok musí v oboch témach vynútiť color-scheme: light a vynulovať --navbar-height aj --cookie-banner-height s !important (JS ich nastavuje inline)'
+);
+expectTrue(
+    preg_match('~setProperty\(\s*"--navbar-height",~', $navigationScript) === 1,
+    'js/main.js musí --navbar-height nastavovať inline: tlačové pravidlo ju preto prebíja cez !important, bez neho by sa v tlači zachovala výška navigácie'
+);
+expectTrue(
+    preg_match(
+        '~\*,\s*\*::before,\s*\*::after\s*\{[^{}]*background:\s*transparent\s*!important;[^{}]*color:\s*#000\s*!important;[^{}]*-webkit-text-fill-color:\s*currentcolor\s*!important;~',
+        $printCss
+    ) === 1,
+    'Tlačový blok musí mať všeobecné pravidlo: priehľadné pozadie, čierny text a -webkit-text-fill-color: currentcolor, všetko s !important (inak sa v tmavej téme tlačí takmer biely text a gradientový nadpis zmizne)'
+);
+expectTrue(
+    preg_match('~\.reveal\s*\{[^{}]*opacity:\s*1\s*!important;[^{}]*transform:\s*none\s*!important;~', $printCss) === 1,
+    'Tlačový blok musí prvky .reveal vynútiť viditeľné (opacity: 1 !important): bez posunu stránky ostáva obsah pod prvým výrezom priehľadný'
+);
+expectTrue(
+    preg_match('~\.hero,\s*\.page-content\s*\{[^{}]*min-height:\s*0;~', $printCss) === 1,
+    'Tlačový blok musí vynulovať min-height pre .hero a .page-content: vh sa v tlači rovná výške strany a každá sekcia by zaberala celú stranu'
+);
+expectTrue(
+    preg_match('~main a\[href\^="http"\]::after\s*\{[^{}]*content:\s*" \(" attr\(href\) "\)";~', $printCss) === 1,
+    'Tlačový blok musí za externé odkazy v hlavnom obsahu vypísať ich adresu, inak z papiera nejde odkaz nasledovať'
+);
+$printHidden = [];
+if (preg_match_all('~([^{}]+)\{([^{}]*)\}~', $printCss, $printRules, PREG_SET_ORDER) > 0) {
+    foreach ($printRules as $printRule) {
+        if (preg_match('~display:\s*none\s*!important~', $printRule[2]) === 1) {
+            foreach (explode(',', $printRule[1]) as $printSelector) {
+                $printHidden[] = trim($printSelector);
+            }
+        }
+    }
+}
+foreach (['.navbar', '#cookie-consent-container', '.cookie-banner', '.theme-toggle-btn', '.social-links', '.footer-meta', '.hero-buttons', '.contact-form', '.newsletter-form'] as $printControl) {
+    expectTrue(
+        in_array($printControl, $printHidden, true),
+        'Tlačový blok musí skryť ' . $printControl . ' (display: none !important): pevné alebo ovládacie prvky sa na papieri opakujú alebo sú nepoužiteľné'
+    );
+}
+
 // Swatch Internet Time: stotiny sa orezávajú nadol. Zaokrúhlenie by na konci
 // dňa zobrazilo neplatné @1000.00 (beaty bežia od 0.00 po 999.99).
 expectSame('@41.66', appSwatchBeat(0), 'appSwatchBeat musí orezávať stotiny nadol');

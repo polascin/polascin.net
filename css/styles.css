@@ -2252,3 +2252,162 @@ a.lang-chip {
     justify-content: center;
   }
 }
+
+/* Tlač. Prehliadač štandardne netlačí pozadia, takže papier je biely a
+   čitateľnosť drží len farba textu. Bez tohto bloku tlačila tmavá téma takmer
+   biely text, pätička biely text na nevytlačenej fialovej, gradientový nadpis
+   (priehľadná výplň) sa nevytlačil vôbec, pevná navigácia sa opakovala na
+   každej strane a prvky .reveal pod hornou hranou ostali priehľadné, kým ich
+   niekto neposunul do výrezu: domovská stránka mala 12 strán A4, väčšinou
+   takmer prázdnych. Blok je zámerne posledný, aby pri rovnakej špecificite
+   prevážil nad predchádzajúcimi pravidlami. */
+@media print {
+  /* Obe premenné nastavuje JS inline, preto !important. */
+  :root,
+  [data-theme="dark"] {
+    color-scheme: light;
+    --navbar-height: 0px !important;
+    --cookie-banner-height: 0px !important;
+  }
+
+  /* Poistka proti pevným odtieňom (tmavé varianty upozornení, gradient,
+     svetlý text pätičky): všetko sa tlačí čiernym na bielom. */
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    -webkit-text-fill-color: currentcolor !important;
+    border-color: #767676 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Ovládacie a dekoratívne prvky sa na papieri nedajú použiť. Interné
+     tlačidlá a formuláre sa nevytlačia, externé odkazy ostávajú aj s adresou. */
+  .navbar,
+  .skip-link,
+  #cookie-consent-container,
+  .cookie-banner,
+  .theme-toggle-btn,
+  .social-links,
+  .footer-ages,
+  .footer-meta,
+  .hero-buttons,
+  .center-link,
+  .article-translations,
+  .pagination,
+  .contact-form,
+  .newsletter-form,
+  .login-form,
+  a.btn:not([href^="http"]):not([href^="mailto:"]),
+  .hero::before,
+  .hero::after,
+  .card::before,
+  .card-cover,
+  .section-title::after,
+  footer::before {
+    display: none !important;
+  }
+
+  .hero,
+  .page-content {
+    min-height: 0;
+  }
+
+  .hero .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  section,
+  .page-content,
+  .articles-list,
+  .article-detail,
+  .contact-section,
+  .newsletter-section,
+  .auth-section,
+  .admin-section,
+  .latest-articles {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  /* Zoznam kariet je na papieri kompaktný: bez ilustrácií a s menším
+     odsadením sa na stranu zmestia tri riadky namiesto jedného. */
+  .card-grid {
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  footer {
+    margin-top: 1rem;
+    padding: 0.75rem 0 0;
+    border-top: 1px solid #767676;
+  }
+
+  /* Tlačidlá a štítky odkazov sú na papieri obyčajné odkazy v zozname. */
+  .link-grid,
+  .about-actions {
+    display: block;
+    text-align: left;
+  }
+
+  .btn,
+  .pill-link {
+    display: block;
+    min-width: 0;
+    min-height: 0;
+    margin: 0 0 0.35rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  main a,
+  footer a {
+    text-decoration: underline;
+  }
+
+  main a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    font-weight: 400;
+    overflow-wrap: anywhere;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    break-after: avoid-page;
+  }
+
+  .card,
+  figure,
+  img,
+  table,
+  tr,
+  blockquote,
+  pre,
+  .alert {
+    break-inside: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+}

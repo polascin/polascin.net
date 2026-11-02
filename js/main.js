@@ -404,10 +404,10 @@
     let consentReturnFocus = null;
     let bannerResizeObserver = null;
 
-    // Pevný cookie banner zakrýva spodok okna (na mobile až 40 % výšky). Jeho
-    // nameraná výška ide do scroll-padding-bottom a do spodného odsadenia
-    // pätičky, aby zaostrený prvok nezostal pod bannerom a pätička zostala
-    // dosiahnuteľná (WCAG 2.2, SC 2.4.11).
+    // Pevný cookie banner zakrýva spodok okna (na mobile aj viac ako tretinu
+    // výšky). Jeho nameraná výška ide do scroll-padding-bottom a do spodného
+    // odsadenia pätičky, aby zaostrený prvok nezostal pod bannerom a pätička
+    // zostala dosiahnuteľná (WCAG 2.2, SC 2.4.11).
     function syncBannerOffset(banner) {
       document.documentElement.style.setProperty(
         "--cookie-banner-height",

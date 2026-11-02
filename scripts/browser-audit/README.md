@@ -2,9 +2,9 @@
 
 Sada skriptov, ktorá otvorí skutočný Chrome (puppeteer-core) a zmeria to, čo
 statické testy v `tests/run.php` nevidia: rozloženie pri reálnych šírkach okna,
-kontrast z pixelov, prístupnosť cez axe-core, ovládanie klávesnicou a tok
-súhlasu so súkromím. Skripty sa nenasadzujú na server (`.deployignore` vylučuje
-priečinok `scripts`).
+kontrast z pixelov, prístupnosť cez axe-core, ovládanie klávesnicou, tlač do
+PDF a tok súhlasu so súkromím. Skripty sa nenasadzujú na server
+(`.deployignore` vylučuje priečinok `scripts`).
 
 ## Inštalácia
 
@@ -29,6 +29,7 @@ npm run axe        # axe-core (WCAG 2.0, 2.1, 2.2 A a AA a best practice)
 npm run pixels     # kontrast z pixelov tam, kde axe nevie rozhodnúť
 npm run consent    # tok súhlasu so súkromím (Clarity, Google Analytics)
 npm run keyboard   # ovládanie klávesnicou (prechod Tabom a správanie prvkov)
+npm run print      # tlač do PDF (A4): čitateľnosť, opakované prvky, počet strán
 ```
 
 Každý skript vypíše súhrn po slovensky a skončí kódom 0 (bez nálezov) alebo 1
@@ -55,6 +56,13 @@ Pre `keyboard`: `VIEWPORTS` (`desktop` 1280x800, `compact` 1100x800, `mobile`
 prvkov), `PIXELS=0` (preskočí kontrolu ukazovateľa fokusu zo snímok),
 `AXE_OPEN=0` (preskočí axe pri otvorenej ponuke jazykov), `DUMP=1` (vypíše každý
 stop klávesnice s polohou a prekrytím).
+
+Pre `print`: `STATES` (`clean` alebo `banner`), `PAGES` (predvolene `home`,
+`articles`, `article`, `library`, `privacy`, `terms`, `contact`, `newsletter`,
+na požiadanie aj `login`), `SCROLL=1` (stránku pred tlačou prejde, aby sa
+odkryli prvky `.reveal`; bez toho sa meria najhorší prípad, tlač bez posunu),
+`PDF=1` (uloží `tlac-<jazyk>-<téma>-<stav>-<stránka>.pdf` a `print-audit.json` do
+`AUDIT_OUT` na ručnú kontrolu).
 
 Príklad (PowerShell):
 
@@ -84,7 +92,8 @@ produkčné. Po nasadení spusti ten istý beh bez `LOCAL_ROOT`.
 ## Čo skripty nepokrývajú
 
 - Iba Chrome. Firefox a Safari sa nemerajú, oprava overená tu nie je overená
-  tam.
+  tam. Tlač sa meria ako PDF z Chrome (emulované médium `print`, A4, okraje
+  10 mm), nie cez tlačiareň ani cez dialóg iných prehliadačov.
 - Čítačky obrazovky. Axe posúdi len pravidlá, ktoré sa dajú vyhodnotiť strojovo.
 - Prihlásená administrácia. `ADMIN=1` len simuluje položky v navigácii.
 - Ukážkové slugy článkov v `PAGES` môžu časom zastarať, vtedy ich v zozname
@@ -177,3 +186,55 @@ stránkou a podpisom prvku. Obsah stránky sa teda meria raz, v prvom stave z
    meraných oknách (390x844, 320x568, 320x640, 667x375) zníži počet čiastočných
    prekrytí len zo 43 na 41. Bez rezervy ich je 25, no spodná strana obrysu
    zostane pod bannerom.
+
+## Tlač (`print`)
+
+Skript emuluje médium `print`, vytlačí stránku do PDF s predvolenými
+nastaveniami prehliadača (bez tlače pozadí) a zmeria každý text, ktorý sa na
+papieri vykreslí. Okno má 718 x 1123 px, čo zodpovedá A4 s okrajmi 10 mm pri 96
+dpi. Nálezy:
+
+- pevný alebo lepkavý prvok (navigácia, cookie lišta), ktorý by sa opakoval na
+  každej strane,
+- text s priehľadnou výplňou (`-webkit-text-fill-color: transparent`) alebo s
+  nulovou priehľadnosťou, takže sa na papieri nevytlačí,
+- kontrast farby textu voči bielemu papieru (4,5:1, pri veľkom písme 3:1),
+  pozadie prvku sa nepočíta, lebo sa netlačí,
+- vodorovné pretečenie rozloženia, chyby stránky a porušenia CSP pri tlači,
+- počet strán A4 sa len vypíše (z PDF), hranicu nemá.
+
+Pasce pri meraní tlače:
+
+1. `vh` sa v tlači rovná výške strany. Sekcia s `min-height: 80vh` zaberie celú
+   stranu, preto je tlačová verzia bez vynulovania týchto výšok plná takmer
+   prázdnych strán.
+2. Hodnoty nastavené JavaScriptom inline (`--navbar-height`,
+   `--cookie-banner-height`) prebije v tlačovom bloku len `!important`.
+3. Prvky `.reveal` odkrýva JavaScript až pri posune. Bez `SCROLL=1` sa meria
+   najhorší prípad (tlač bez posunu stránky), so `SCROLL=1` bežný prípad.
+4. Počet strán sa číta z PDF a vizuálnu kontrolu nenahradí. Na ručné
+   preskúmanie spusti beh s `PDF=1` a PDF si prezri.
+5. Meranie s `LOCAL_ROOT` podsunie len lokálny CSS a JavaScript, HTML ostáva
+   produkčné, takže tlač nových PHP šablón sa takto neskúša.
+
+## Čo zachytala tlač
+
+Beh proti produkcii (Chrome 156) pred opravou, 216 nálezov v oboch témach:
+
+1. Tmavá téma tlačila svetlý text na biely papier s kontrastom 1,26:1 až 2,36:1,
+   pretože pozadie sa netlačí a farba textu ostala z obrazovky.
+2. Pätička vo svetlej téme tlačila biely text na nevytlačenej fialovej (1:1).
+3. Pevná navigácia sa opakovala na každej strane a prekrývala obsah.
+4. Nadpis hrdinského bloku s gradientovou výplňou a tlačidlá s farbou
+   `--on-primary` sa nevytlačili vôbec.
+5. Prvky `.reveal` mali `opacity: 0` do posunu stránky, takže obsah pod prvým
+   výrezom na papieri chýbal.
+6. Výšky odvodené z `vh` zaberali celé strany. Domovská stránka mala 12 strán
+   A4, článok 3, knižnica 6 a kontakt 2.
+
+Oprava je všeobecný blok `@media print` na konci `css/styles.css` (svetlá
+schéma, čierny text bez pozadia, viditeľné `.reveal`, skryté ovládacie a pevné
+prvky, nulové `min-height`, kompaktné karty bez ilustrácií, adresa za externými
+odkazmi). Po oprave má domovská stránka 8 strán A4, zoznam článkov 5, knižnica
+4, článok 2 a kontakt 1, bez nálezov v oboch témach a v jazykoch sk a hu.
+Strážia ju testy v `tests/run.php`.
