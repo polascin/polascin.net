@@ -870,6 +870,8 @@ section {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px var(--shadow-color);
+  /* Dlhý popisok (adresa v tlačidle) sa pri zväčšenom písme zalomí, nie vytŕča. */
+  overflow-wrap: anywhere;
 }
 
 .btn-primary {
@@ -917,16 +919,20 @@ section {
 .about-text {
   max-width: 76ch;
   margin-inline: auto;
+  overflow-wrap: anywhere;
 }
 
 .about-text > h3 {
   margin-top: var(--spacing-md);
 }
 
-/* Skupiny oblastí pôsobenia: medicína, jazyk, technológie vedľa seba */
+/* Skupiny oblastí pôsobenia: medicína, jazyk, technológie vedľa seba.
+   Minimálna šírka stĺpca je v rem: pri zväčšenom písme (WCAG 1.4.4) ubudne
+   stĺpcov a text sa nezalomí do úzkeho stĺpca, kde by ho orezala karta.
+   Pri bežnej veľkosti písma je to nezmenených 240px. */
 .area-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
   gap: var(--spacing-md);
   margin: var(--spacing-sm) 0 var(--spacing-md);
 }
@@ -1003,9 +1009,12 @@ section {
   background-color: var(--bg-surface);
 }
 
+/* Minimum stĺpca je v rem (18,75rem = 300px pri bežnom písme), aby pri
+   zväčšenom písme ubudlo stĺpcov: v pevných 300px by sa karta so 64px
+   výplňou zúžila a dlhé tlačidlo by sa na jej okraji orezalo. */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.75rem), 1fr));
   gap: var(--spacing-md);
   margin-top: var(--spacing-md);
 }
@@ -1023,6 +1032,8 @@ section {
   height: 100%;
   position: relative;
   overflow: hidden;
+  /* Karta orezáva presahy, preto sa dlhé slovo a adresa lámu radšej samy. */
+  overflow-wrap: anywhere;
 }
 
 .card-cover {
@@ -1204,6 +1215,7 @@ footer button:focus-visible {
 
 .social-links {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: var(--spacing-sm);
   margin-bottom: var(--spacing-sm);
@@ -1231,6 +1243,11 @@ footer button:focus-visible {
 .footer-contact a {
   font-size: 1.1rem;
   font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+a[href^="mailto:"] {
+  overflow-wrap: anywhere;
 }
 
 /* Animations */
@@ -1371,6 +1388,60 @@ footer button:focus-visible {
   .nav-link {
     font-size: 0.9375rem;
     white-space: nowrap;
+  }
+}
+
+/* Bez JavaScriptu nefunguje hamburger ani prepínač témy: tlačidlo, ktoré nič
+   nerobí, sa neukazuje. Pod 1321px by menu zostalo mimo obrazovky bez
+   možnosti ho otvoriť (nedosiahnuteľné boli aj Blog, Knižnica a Prihlásenie),
+   preto sa vloží priamo do lišty a lišta sa posúva spolu s obsahom: pevná
+   lišta s niekoľkými riadkami odkazov by zakrývala veľkú časť malého displeja.
+   Prehliadač bez podpory (scripting) bloky ignoruje, správanie ostane pôvodné. */
+@media (scripting: none) {
+  .nav-toggle,
+  .theme-toggle-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 1320px) and (scripting: none) {
+  :root {
+    --navbar-height: 0px;
+  }
+
+  .navbar {
+    position: relative;
+  }
+
+  .nav-container {
+    flex-wrap: wrap;
+  }
+
+  .nav-menu {
+    position: static;
+    flex: 1 0 100%;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 var(--spacing-sm);
+    padding: var(--spacing-xs) 0 0;
+    overflow: visible;
+    visibility: visible;
+    pointer-events: auto;
+    background: none;
+    box-shadow: none;
+    transition: none;
+  }
+
+  .nav-menu li,
+  .nav-menu .nav-logout-form {
+    width: auto;
+  }
+
+  .nav-menu .nav-link {
+    width: auto;
   }
 }
 
@@ -1572,6 +1643,7 @@ footer button:focus-visible {
 .page-content {
   padding-top: calc(var(--navbar-height) + 3rem);
   min-height: 80vh;
+  overflow-wrap: anywhere;
 }
 
 /* Číslované sekcie sú h2 kvôli hierarchii nadpisov, vizuál zostáva pôvodný */
@@ -1915,7 +1987,7 @@ footer button:focus-visible {
 /* Admin tables */
 .admin-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13.75rem), 1fr));
   gap: 1rem;
   margin: 1.5rem 0;
 }

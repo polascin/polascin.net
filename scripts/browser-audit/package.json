@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Kontroly polascin.net v skutočnom prehliadači: rozloženie, axe-core, kontrast, súhlas, klávesnica, tlač",
+  "description": "Kontroly polascin.net v skutočnom prehliadači: rozloženie, axe-core, kontrast, súhlas, klávesnica, tlač a režimy prístupnosti",
   "scripts": {
     "layout": "node layout-audit.mjs",
     "nav": "node nav-verify.mjs",
@@ -12,7 +12,8 @@
     "pixels": "node contrast-pixels.mjs",
     "consent": "node consent-flow.mjs",
     "keyboard": "node keyboard-audit.mjs",
-    "print": "node print-audit.mjs"
+    "print": "node print-audit.mjs",
+    "modes": "node modes-audit.mjs"
   },
   "dependencies": {
     "axe-core": "4.14.0",

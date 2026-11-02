@@ -3,7 +3,7 @@
 Sada skriptov, ktorá otvorí skutočný Chrome (puppeteer-core) a zmeria to, čo
 statické testy v `tests/run.php` nevidia: rozloženie pri reálnych šírkach okna,
 kontrast z pixelov, prístupnosť cez axe-core, ovládanie klávesnicou, tlač do
-PDF a tok súhlasu so súkromím. Skripty sa nenasadzujú na server
+PDF, tok súhlasu so súkromím a správanie pri nastaveniach prístupnosti. Skripty sa nenasadzujú na server
 (`.deployignore` vylučuje priečinok `scripts`).
 
 ## Inštalácia
@@ -30,6 +30,7 @@ npm run pixels     # kontrast z pixelov tam, kde axe nevie rozhodnúť
 npm run consent    # tok súhlasu so súkromím (Clarity, Google Analytics)
 npm run keyboard   # ovládanie klávesnicou (prechod Tabom a správanie prvkov)
 npm run print      # tlač do PDF (A4): čitateľnosť, opakované prvky, počet strán
+npm run modes      # vynútené farby, znížený pohyb, rozostupy, 200 % text, bez JS
 ```
 
 Každý skript vypíše súhrn po slovensky a skončí kódom 0 (bez nálezov) alebo 1
@@ -49,6 +50,11 @@ odmietnutie), `PAGES`, `SCROLLBARS=1` (klasický posuvník namiesto skrytého),
 `worstcase`, `BREAKPOINT`, `WIDTHS` a `ADMIN=1` (doplní do navigácie položky
 prihláseného správcu) pri `nav`, `BACKDROPS` a `OPACITIES` pri `worstcase`,
 `ONLY`, `DIAG` a `DUMP` pri `pixels`.
+
+Pre `modes`: `MODES` (`forced`, `motion`, `spacing`, `bigtext`, `nojs`),
+`VIEWPORTS` (`wide` 1440x900, `desktop` 1280x800, `mobile` 390x844, `narrow`
+320x640), `MAX_STOPS` (počet zastavení Tabu pri kontrole obrysu v režime
+`forced`) a `SHOTS=1` (uloží snímky do `AUDIT_OUT`).
 
 Pre `keyboard`: `VIEWPORTS` (`desktop` 1280x800, `compact` 1100x800, `mobile`
 390x844, `narrow` 320x640, `tiny` 320x568, `landscape` 667x375), `MAX_STOPS`,
@@ -135,6 +141,10 @@ produkčné. Po nasadení spusti ten istý beh bez `LOCAL_ROOT`.
     obrysu. Pri skúmaní takého nálezu drž tempo Tabu ako skript (po každom Tabe
     počkaj, kým sa dokončí posun): pri rýchlych Taboch je prvok celý mimo okna,
     Chrome ho vycentruje a nález sa nezopakuje.
+13. Pri emulácii `forced-colors: active` v Chrome môže `getComputedStyle()`
+    vrátiť pôvodnú hodnotu `-webkit-text-fill-color`, hoci sa text vykresľuje
+    systémovou farbou. Kontrast preto počítaj z vlastnosti `color`; priehľadnú
+    výplň sleduj osobitne.
 
 ## Ukazovateľ fokusu (`keyboard`)
 

@@ -725,6 +725,48 @@ expectTrue(
     'Kompaktná navigácia musí platiť do 1320px, kým sa názvy vo všetkých jazykoch nezmestia do jedného riadka'
 );
 
+// Pri vypnutom JavaScripte hamburger menu nemožno otvoriť, preto sa pri
+// podporovanom media feature scripting odkazy zobrazia priamo pod značkou.
+expectTrue(
+    str_contains($siteStyles, '@media (scripting: none)')
+        && preg_match('~\.nav-toggle,\s*\.theme-toggle-btn\s*\{\s*display:\s*none;~', $siteStyles) === 1,
+    'Bez JavaScriptu sa nesmú zobrazovať nefunkčné prepínače navigácie a témy'
+);
+expectTrue(
+    preg_match(
+        '~@media \(max-width: 1320px\) and \(scripting: none\).*?\.navbar\s*\{\s*position:\s*relative;.*?\.nav-menu\s*\{[^}]*position:\s*static;[^}]*visibility:\s*visible;[^}]*pointer-events:\s*auto;~s',
+        $siteStyles
+    ) === 1,
+    'Kompaktná navigácia musí byť bez JavaScriptu viditeľná a dosiahnuteľná'
+);
+
+// Pri zväčšenom texte sa minimálna šírka mriežky musí zväčšovať s písmom,
+// aby sa karta nezužovala a neorezávala svoj obsah.
+expectTrue(
+    preg_match('~\.card-grid\s*\{[^}]*grid-template-columns:\s*repeat\(auto-fit,\s*minmax\(min\(100%,\s*18\.75rem\),\s*1fr\)\);~', $siteStyles) === 1,
+    'Karty projektov musia mať minimum stĺpca v rem, aby sa pri zväčšení textu rozložili do menšieho počtu stĺpcov'
+);
+expectTrue(
+    preg_match('~\.area-grid\s*\{[^}]*grid-template-columns:\s*repeat\(auto-fit,\s*minmax\(min\(100%,\s*15rem\),\s*1fr\)\);~', $siteStyles) === 1
+        && preg_match('~\.admin-cards\s*\{[^}]*grid-template-columns:\s*repeat\(auto-fit,\s*minmax\(min\(100%,\s*13\.75rem\),\s*1fr\)\);~', $siteStyles) === 1,
+    'Mriežky oblastí a administračných kariet musia používať škálovateľné minimum stĺpca'
+);
+expectTrue(
+    preg_match('~\.btn\s*\{[^}]*overflow-wrap:\s*anywhere;~', $siteStyles) === 1
+        && preg_match('~\.card\s*\{[^}]*overflow-wrap:\s*anywhere;~', $siteStyles) === 1,
+    'Dlhé adresy a slová v tlačidlách a kartách sa musia zalomiť namiesto orezania'
+);
+expectTrue(
+    preg_match('~\.about-text\s*\{[^}]*overflow-wrap:\s*anywhere;~', $siteStyles) === 1
+        && preg_match('~\.page-content\s*\{[^}]*overflow-wrap:\s*anywhere;~', $siteStyles) === 1
+        && preg_match('~a\[href\^="mailto:"\]\s*\{[^}]*overflow-wrap:\s*anywhere;~', $siteStyles) === 1,
+    'Dlhé slová v próze a e-mailové adresy sa musia zalomiť aj pri 200% zväčšení'
+);
+expectTrue(
+    preg_match('~\.social-links\s*\{[^}]*flex-wrap:\s*wrap;~', $siteStyles) === 1,
+    'Odkazy na sociálne siete sa musia zalomiť pri nedostatočnej šírke'
+);
+
 // Navigácia na počítači (nad kompaktnou) musí byť presným opakom kompaktného
 // bloku: pri zlomkovej šírke okna (zoom) medzi `max-width: N` a `min-width: N+1`
 // by inak neplatilo ani jedno pravidlo. Hodnota 1320px vychádza z merania v
