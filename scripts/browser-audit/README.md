@@ -221,7 +221,7 @@ Pasce pri meraní tlače:
 
 Beh proti produkcii (Chrome 156) pred opravou, 216 nálezov v oboch témach:
 
-1. Tmavá téma tlačila svetlý text na biely papier s kontrastom 1,26:1 až 2,36:1,
+1. Tmavá téma tlačila svetlý text na biely papier s kontrastom 1,13:1 až 2,36:1,
    pretože pozadie sa netlačí a farba textu ostala z obrazovky.
 2. Pätička vo svetlej téme tlačila biely text na nevytlačenej fialovej (1:1).
 3. Pevná navigácia sa opakovala na každej strane a prekrývala obsah.
