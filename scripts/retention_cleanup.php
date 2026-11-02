@@ -5,8 +5,10 @@ declare(strict_types=1);
 /**
  * Automatické retenčné mazanie osobných a prevádzkových údajov.
  *
- * Skript je určený výhradne pre CLI. Workflow ho posiela na produkčný server
- * cez štandardný vstup, takže pomocný súbor nemusí byť vo web roote.
+ * Skript je určený výhradne pre CLI. Na serveri ho spúšťa crontab cez
+ * `hooks/ops/nightly.sh retention`, ktorý ho z vetvy `main` posiela PHP cez
+ * štandardný vstup, takže pomocný súbor nemusí byť vo web roote. Ručnú zálohu
+ * tej istej cesty tvorí workflow `retention-cleanup.yml`.
  * Vypisuje iba počty odstránených riadkov, nikdy obsah záznamov.
  */
 

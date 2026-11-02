@@ -5,10 +5,12 @@ declare(strict_types=1);
 /**
  * Read-only kontrola produkčnej databázy pre nočný audit.
  *
- * Spúšťa ho workflow `verify-db.yml` cez SSH so skriptom na štandardnom vstupe,
- * takže na server sa nič nezapisuje, ani dočasne do web rootu. Preto sa
- * `db_config.php` načítava z `getcwd()`, nie z `__DIR__`: pri čítaní zo stdin
- * je `__DIR__` pracovný adresár a ten workflow nastavuje na web root.
+ * Na serveri ho spúšťa crontab cez `hooks/ops/nightly.sh verify-db` (ručnou
+ * zálohou je workflow `verify-db.yml` cez SSH) a skript dostane na štandardnom
+ * vstupe, takže sa na server nič nezapisuje, ani dočasne do web rootu. Preto
+ * sa `db_config.php` načítava z `getcwd()`, nie z `__DIR__`: pri čítaní zo
+ * stdin je `__DIR__` pracovný adresár a ten nastavuje volajúci (`nightly.sh`
+ * alebo workflow) na web root.
  *
  *   cd <webroot> && POLASCIN_ENV_PATH=<...> php < scripts/audit_db_check.php
  *
@@ -553,8 +555,9 @@ usort(
 $blocking = array_filter($findings, static fn(array $f): bool => $f['severity'] !== 'INFO');
 $status = $blocking === [] ? 'OK' : 'NÁLEZY';
 
-// `STATUS:` a `NALEZOV:` sú strojovo čitateľné značky: workflow podľa nich
-// nastavuje výsledok behu a nočná rutina ich cituje v e-maile.
+// `STATUS:` a `NALEZOV:` sú strojovo čitateľné značky: `hooks/ops/nightly.sh`
+// (resp. záložný workflow) podľa nich nastavuje výsledok behu a nočná rutina
+// ich cituje v e-maile.
 $summary = [];
 $summary[] = 'STATUS: ' . $status;
 $summary[] = 'NALEZOV: ' . count($blocking);

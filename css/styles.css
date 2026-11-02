@@ -345,10 +345,13 @@ section {
 
 /* „Sklenená“ navigácia: obsah pod ňou jemne presvitá. Priehľadnosť sa
    zapína len tam, kde je podporené aj rozmazanie, inak by text pod lištou
-   znižoval čitateľnosť. */
+   znižoval čitateľnosť. Krytie 92 % drží stlmený text lišty (--text-muted)
+   nad kontrastom 4,5:1 aj v najhoršom prípade: nad čiernym obsahom v svetlej
+   téme je to 5,0:1 a nad bielym obsahom v tmavej téme 4,7:1. Pri 84 % bolo
+   4,1:1, resp. 3,6:1. */
 @supports (backdrop-filter: blur(1px)) {
   .navbar {
-    background: color-mix(in srgb, var(--bg-card) 84%, transparent);
+    background: color-mix(in srgb, var(--bg-card) 92%, transparent);
     -webkit-backdrop-filter: blur(14px) saturate(1.3);
     backdrop-filter: blur(14px) saturate(1.3);
   }

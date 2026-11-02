@@ -772,6 +772,19 @@ expectTrue(
     'js/main.js musí synchronizovať --navbar-height s nameranou výškou navigácie'
 );
 
+// „Sklenená“ lišta nesmie byť priehľadnejšia, než dovoľuje kontrast stlmeného
+// textu (--text-muted: beat a vek v hlavičke). Meranie z pixelov v Chrome pod
+// čiernym podkladom v svetlej a bielym v tmavej téme: pri krytí 84 % to bolo
+// 4,14:1 a 3,60:1 (WCAG 1.4.3 vyžaduje 4,5:1), pri 92 % je to 5,01:1 a 4,69:1.
+$navbarGlassOpacity = 0;
+if (preg_match('~\.navbar\s*\{\s*background:\s*color-mix\(in srgb,\s*var\(--bg-card\)\s*(\d+)%,\s*transparent\);~', $siteStyles, $navbarGlassMatch) === 1) {
+    $navbarGlassOpacity = (int) $navbarGlassMatch[1];
+}
+expectTrue(
+    $navbarGlassOpacity >= 92 && $navbarGlassOpacity <= 100,
+    'Sklenená navigácia musí kryť aspoň 92 %, inak stlmený text lišty klesne pod kontrast 4,5:1 (nájdené krytie: ' . $navbarGlassOpacity . ' %)'
+);
+
 // Swatch Internet Time: stotiny sa orezávajú nadol. Zaokrúhlenie by na konci
 // dňa zobrazilo neplatné @1000.00 (beaty bežia od 0.00 po 999.99).
 expectSame('@41.66', appSwatchBeat(0), 'appSwatchBeat musí orezávať stotiny nadol');
