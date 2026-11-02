@@ -785,10 +785,11 @@ expectTrue(
     'Sklenená navigácia musí kryť aspoň 92 %, inak stlmený text lišty klesne pod kontrast 4,5:1 (nájdené krytie: ' . $navbarGlassOpacity . ' %)'
 );
 
-// Pevný cookie banner (position: fixed; bottom: 0) zaberá na mobile až 40 %
+// Pevný cookie banner (position: fixed; bottom: 0) zaberá na mobile až 43 %
 // okna. Prvky zaostrené Tabom sa pri minimálnom posune zastavili pod ním
-// (skutočný prehliadač, 390 x 844: približne 60 zo 74 zastavení na domovskej
-// stránke bolo celých pod bannerom; WCAG 2.2, SC 2.4.11 Focus Not Obscured).
+// (skutočný prehliadač, 390 x 844: 44 zo 74 zastavení na domovskej stránke
+// bolo celých pod bannerom a ďalších šesť čiastočne; WCAG 2.2, SC 2.4.11
+// Focus Not Obscured).
 // js/main.js preto výšku banneru zmeria do --cookie-banner-height, CSS ju
 // používa ako scroll-padding-bottom a ako spodné odsadenie pätičky (bez neho
 // by sa posledné odkazy nedali vyniesť nad banner). Bez banneru je hodnota 0px.

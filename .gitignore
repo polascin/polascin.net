@@ -40,3 +40,6 @@ deploy_info.php
 private/sessions/
 private/cache/
 private/logs/
+
+# Nástroje na kontrolu v prehliadači (scripts/browser-audit): závislosti sa inštalujú lokálne
+scripts/browser-audit/node_modules/

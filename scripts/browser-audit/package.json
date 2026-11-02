@@ -1,0 +1,20 @@
+{
+  "name": "polascin-browser-audit",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Kontroly polascin.net v skutočnom prehliadači: rozloženie, axe-core, kontrast, súhlas, klávesnica",
+  "scripts": {
+    "layout": "node layout-audit.mjs",
+    "nav": "node nav-verify.mjs",
+    "axe": "node axe-scan.mjs",
+    "worstcase": "node nav-worstcase.mjs",
+    "pixels": "node contrast-pixels.mjs",
+    "consent": "node consent-flow.mjs",
+    "keyboard": "node keyboard-audit.mjs"
+  },
+  "dependencies": {
+    "axe-core": "4.14.0",
+    "puppeteer-core": "25.16.0"
+  }
+}
