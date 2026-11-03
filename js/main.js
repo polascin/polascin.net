@@ -587,6 +587,13 @@
           closeCookieBanner();
         });
 
+      // Banner je vizuálne dole, no v poradí Tabu ide hneď za odkaz na
+      // preskočenie navigácie; z pätičky sa k nemu klávesnica dostala až po
+      // asi 75 zastaveniach (Beh #74).
+      const skipLink = document.querySelector(".skip-link");
+      if (skipLink && skipLink.nextElementSibling !== cookieContainer) {
+        skipLink.after(cookieContainer);
+      }
       cookieContainer.appendChild(banner);
       syncBannerOffset(banner);
       if ("ResizeObserver" in window) {

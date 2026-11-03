@@ -1054,12 +1054,17 @@ async function bannerBehaviour(page, where, stops) {
       signatures.some((s) => s.includes("cookie-link")),
     `stopy v bannere: ${signatures.join(", ")}`,
   );
-  const lastRegion = stops.length ? stops[stops.length - 1].region : "";
+  // Od Behu #74 je banner v DOM hneď za odkazom na preskočenie navigácie,
+  // takže ho klávesnica dosiahne skôr ako navigáciu a obsah.
+  const firstIndex = (region) =>
+    stops.findIndex((stop) => stop.region === region);
+  const firstBanner = firstIndex("banner");
+  const firstNav = firstIndex("nav");
   addCheck(
     where,
-    "banner je v poradí Tabu až za pätou (po obsahu)",
-    lastRegion === "banner",
-    `posledný stop: ${lastRegion}`,
+    "banner je v poradí Tabu pred navigáciou (hneď za odkazom na obsah)",
+    firstBanner >= 0 && (firstNav < 0 || firstBanner < firstNav),
+    `prvý stop banneru: ${firstBanner + 1}, prvý stop navigácie: ${firstNav + 1}`,
   );
   if (!(await page.$(".btn-cookie-decline"))) {
     addCheck(

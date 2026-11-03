@@ -1589,6 +1589,58 @@ a[href^="mailto:"] {
   }
 }
 
+/* Malé a nízke okná: rovnaký text súhlasu, menej vzduchu okolo neho. Pri
+   320×568 banner zakrýval 72 až 77 % okna, na šírku (667×375) 68 % (Beh #74).
+   Tlačidlá si držia výšku 44 px a stoja vedľa seba. */
+@media (max-width: 480px), (max-height: 500px) {
+  .cookie-banner {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .cookie-content {
+    gap: var(--spacing-xs);
+  }
+
+  .cookie-title {
+    font-size: 1rem;
+    margin-bottom: 0.125rem;
+  }
+
+  .cookie-text {
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .cookie-text p {
+    margin: 0;
+  }
+
+  .cookie-buttons {
+    flex-wrap: nowrap;
+    gap: var(--spacing-xs);
+  }
+
+  .cookie-buttons > button {
+    flex: 1 1 0;
+    padding: 8px 12px;
+  }
+}
+
+/* Na šírku je miesta do strany dosť: text vľavo, tlačidlá vpravo pod sebou. */
+@media (max-height: 500px) and (min-width: 560px) {
+  .cookie-content {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    text-align: left;
+  }
+
+  .cookie-buttons {
+    width: auto;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+}
+
 /* Cookie Settings Trigger: sedí v pätičke, preto pätičkové farby. */
 .cookie-settings-trigger {
   background: none;

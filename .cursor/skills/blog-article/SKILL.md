@@ -36,7 +36,7 @@ Jazyky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk` (`app
 ## 3. PNG na Google Disk
 
 - Z WebP urob skutočné PNG (`imagepng`, signatúra PNG, nie premenovaný JPEG).
-- Skopíruj na `G:\Môj disk\polascin.net – obálky blogu\` (účet polascin@gmail.com, priečinok `1a_g8vTcMH3hIA2rECaV0aRVoPp3xfwFC`). Staršie ID `1MOa4l69tswsLmQB3ZmYAdoZd9gZ5aVas` je v koši. Over `image/png` a rozmery.
+- Skopíruj na `G:\Môj disk\polascin.net obálky blogu\` (účet polascin@gmail.com, priečinok `1a_g8vTcMH3hIA2rECaV0aRVoPp3xfwFC`). Staršie ID `1MOa4l69tswsLmQB3ZmYAdoZd9gZ5aVas` je v koši. Over `image/png` a rozmery.
 - PNG necommituj. Lokálne tmp zmaž.
 
 ## 4. Test, deploy, produkcia

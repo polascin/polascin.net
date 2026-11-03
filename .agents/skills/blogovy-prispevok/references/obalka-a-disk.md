@@ -51,7 +51,7 @@ Vznikne `images/articles/og/{slug}.jpg` a zmenšeniny kariet `images/articles/ca
 
 ## 4. PNG na Google Disk
 
-Účet polascin@gmail.com, priečinok `polascin.net – obálky blogu` (ID `1a_g8vTcMH3hIA2rECaV0aRVoPp3xfwFC`). Staršie ID `1MOa4l69tswsLmQB3ZmYAdoZd9gZ5aVas` je v koši, nepoužívaj ho.
+Účet polascin@gmail.com, priečinok `polascin.net obálky blogu` (ID `1a_g8vTcMH3hIA2rECaV0aRVoPp3xfwFC`). Staršie ID `1MOa4l69tswsLmQB3ZmYAdoZd9gZ5aVas` je v koši, nepoužívaj ho.
 
 Z WebP urob skutočné PNG (signatúra `89 50 4E 47`, nie premenovaný JPEG):
 
@@ -63,7 +63,7 @@ imagepng($img, $argv[2], 6);
 
 Uloženie, jedna z ciest:
 
-1. **Lokálny Disk pre počítače** (Windows): skopíruj do `G:\Môj disk\polascin.net – obálky blogu\{slug}.png`. Na Macu je to priečinok Google Drive v Finderi s rovnakým názvom. Over, že súbor existuje a má správnu veľkosť; klient Disku ho synchronizuje.
+1. **Lokálny Disk pre počítače** (Windows): skopíruj do `G:\Môj disk\polascin.net obálky blogu\{slug}.png`. Na Macu je to priečinok Google Drive v Finderi s rovnakým názvom. Over, že súbor existuje a má správnu veľkosť; klient Disku ho synchronizuje.
 2. **Google Drive MCP** (ak je pripojený): vytvor súbor `{slug}.png` v priečinku s uvedeným ID, potom si metadáta prečítaj späť a over `image/png` a rozmery.
 
 PNG necommituj. Dočasné súbory v scratchpade zmaž. Ak sa Disk nepodarí (nie je prihlásený klient ani MCP), článok nasaď bez čakania a v reporte to uveď ako otvorený bod.

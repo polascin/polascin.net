@@ -25,7 +25,7 @@ Produkcia
 
 Mimo webu
 
-- [ ] PNG v priečinku `polascin.net – obálky blogu` na Disku polascin@gmail.com (overené spätne).
+- [ ] PNG v priečinku `polascin.net obálky blogu` na Disku polascin@gmail.com (overené spätne).
 - [ ] X, Facebook, LinkedIn, Threads: príspevok so slovenským textom, kanonickou URL a ilustráciou; URL príspevkov v reporte. Zlyhanie siete nahlásené.
 - [ ] Slug doplnený do zoznamu na X v `.cursor/skills/blog-article/SKILL.md` a commitnutý.
 

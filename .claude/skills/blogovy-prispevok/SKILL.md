@@ -69,7 +69,7 @@ Podľa [obalka-a-disk.md](references/obalka-a-disk.md): ilustrácia bez textu a 
 
 ### 6. PNG na Google Disk
 
-Podľa [obalka-a-disk.md](references/obalka-a-disk.md): z WebP skutočné PNG, uložiť do priečinka `polascin.net – obálky blogu` na Disku účtu polascin@gmail.com. PNG necommituj. Tento krok môže bežať súbežne s nasadením, ale pred reportom musí byť hotový alebo nahlásený ako zlyhaný.
+Podľa [obalka-a-disk.md](references/obalka-a-disk.md): z WebP skutočné PNG, uložiť do priečinka `polascin.net obálky blogu` na Disku účtu polascin@gmail.com. PNG necommituj. Tento krok môže bežať súbežne s nasadením, ale pred reportom musí byť hotový alebo nahlásený ako zlyhaný.
 
 ### 7. Testy, commit, push
 

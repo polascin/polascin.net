@@ -3280,6 +3280,34 @@ foreach (['head_meta.php', 'index.html'] as $iconTemplate) {
         "{$iconTemplate} musí ponechať ikony 32 px a 196 px"
     );
 }
+// Zadanie nočnej rutiny sa v paneli mení ručne; repozitár drží predlohu
+// a runbook, ktorý má prednosť (Beh #68, #74).
+$routinePrompt = (string) file_get_contents(dirname(__DIR__) . '/hooks/ops/nightly-routine-prompt.md');
+expectTrue(
+    str_contains($doAuditDoc, 'hooks/ops/mirror-origin.ps1')
+        && str_contains($doAuditDoc, 'hooks/ops/nightly-routine-prompt.md')
+        && str_contains($routinePrompt, '21:37 Europe/Bratislava')
+        && str_contains($routinePrompt, 'vetvu tejto relácie s PR')
+        && !str_contains($routinePrompt, 'gh run watch')
+        && !str_contains($routinePrompt, '20:37 UTC'),
+    'Runbook a predloha zadania nočnej rutiny musia opisovať crontab o 21:37, zrkadlo na GitHub a push na vetvu s PR, nie gh run watch'
+);
+
+// Cookie banner: na malých a nízkych oknách kompaktný, v poradí Tabu hneď
+// za odkazom na preskočenie navigácie (Beh #74).
+$bannerCss = (string) file_get_contents(dirname(__DIR__) . '/css/styles.css');
+$bannerJs = (string) file_get_contents(dirname(__DIR__) . '/js/main.js');
+expectTrue(
+    str_contains($bannerCss, '@media (max-width: 480px), (max-height: 500px) {')
+        && str_contains($bannerCss, '@media (max-height: 500px) and (min-width: 560px) {'),
+    'css/styles.css musí mať kompaktný cookie banner pre úzke a nízke okná'
+);
+expectTrue(
+    str_contains($bannerJs, 'skipLink.after(cookieContainer)')
+        && strpos($bannerJs, 'skipLink.after(cookieContainer)') < strpos($bannerJs, 'cookieContainer.appendChild(banner)'),
+    'js/main.js musí pred vložením banneru presunúť jeho kontajner za odkaz .skip-link'
+);
+
 // Pozvánka discord.gg/MsGmMZbz vypršala (API Discordu: Unknown Invite, Beh #71).
 // Nová smie pribudnúť len ako trvalá pozvánka overená cez API.
 foreach (['footer.php', 'index.html'] as $socialTemplate) {
