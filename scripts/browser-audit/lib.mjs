@@ -266,13 +266,22 @@ export async function gotoWithRetry(page, url, tries = 5) {
   throw new Error(`Vzdávam sa: ${url}`);
 }
 
+// Hláška prehliadača o 429 alebo 503 je limit hostingu na IP, nie chyba
+// stránky (Beh #69, #72). Počíta sa zvlášť v `rateLimited`.
+const RATE_LIMITED = /status of (429|503)\b/;
+
 export function summarizeLog(log) {
   const interesting = (entry) =>
-    entry.type === "error" ||
-    entry.type === "warning" ||
-    entry.type === "assert";
+    (entry.type === "error" ||
+      entry.type === "warning" ||
+      entry.type === "assert") &&
+    !RATE_LIMITED.test(entry.text || "");
   return {
     consoleIssues: log.console.filter(interesting),
+    rateLimited:
+      log.console.filter((entry) => RATE_LIMITED.test(entry.text || ""))
+        .length +
+      log.bad.filter((entry) => [429, 503].includes(entry.status)).length,
     pageerror: log.pageerror,
     failed: log.failed,
     bad: log.bad,

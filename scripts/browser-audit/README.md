@@ -154,7 +154,11 @@ produkčné. Po nasadení spusti ten istý beh bez `LOCAL_ROOT`.
     `NEPLATNÉ` a nezapočíta ho; po sérii neplatných behov počkaj aspoň
     15 minút. Behy bez posunu (merané ešte pred kontrolou 429, takže štýly sa
     zjavne načítali): uk desktop 0,0228 a dvakrát 0,0000, uk mobil dvakrát
-    0,0000, sk desktop dvakrát 0,0000. Pre hu, de a pl platný beh zatiaľ nie je.
+    0,0000, sk desktop dvakrát 0,0000; neskôr hu 0,0052, de a pl 0,0186.
+15. Hlášky konzoly `status of 429` alebo `503` a odpovede 429/503 nie sú chyby
+    stránky. `summarizeLog()` v `lib.mjs` ich vynecháva z `consoleIssues`
+    a počíta v `rateLimited`; `keyboard-audit.mjs` z nich robí upozornenie
+    „limit hostingu“, nie chybu (Beh #72).
 
 ## Ukazovateľ fokusu (`keyboard`)
 

@@ -1168,6 +1168,13 @@ try {
                     issues.csp,
                   ]).slice(0, 300),
                 );
+              if (issues.rateLimited)
+                addFinding(
+                  where,
+                  "warn",
+                  "limit hostingu",
+                  `${issues.rateLimited}× odpoveď 429 alebo 503; obrázky alebo štýly mohli chýbať`,
+                );
               if (BEHAVIOUR && state === "banner" && name === "home")
                 await bannerBehaviour(page, where, stops);
               await page.close();
