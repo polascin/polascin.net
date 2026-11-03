@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-03T07:15:00+01:00 · Tool: claude-code · Session: default_
+_Last updated: 2026-11-03T07:50:00+01:00 · Tool: claude-code · Session: default_
 
 ## Active Task
 
@@ -38,6 +38,8 @@ Standing instruction from the owner (Slovak, 2026-11-01): "Pokračuj vo vývoji,
 - Beh #71 (Loop 8): the footer Discord invite `discord.gg/MsGmMZbz` was dead (Discord API: Unknown Invite); removed from `footer.php`, static `index.html` and the `footer.discord` key in all 10 catalogs, with a guard. 46 other external links returned 200 (Facebook login wall, LinkedIn 999 and the Swatch curl timeout are known bot blocks). Valid cold CLS pl 0.0186; all five measured languages are below 0.1. Deployed `d8c770f` and verified.
 
 - Beh #72 (Loop 9): keyboard behaviour in hu and uk at 1100 px (home, articles) passed 50 of 50 checks; `.pill-link` uses the shared focus rule. `summarizeLog()` in `scripts/browser-audit/lib.mjs` now separates 429/503 console noise into `rateLimited`, and `keyboard-audit.mjs` reports it as a warning.
+
+- Beh #73 (Loop 10): keyboard hu and uk, dark theme with the cookie banner at 1100 px: 58 of 58 behaviour checks, `KLÁVESNICA OK`; 429 responses now show as warnings. The self-paced `/loop` was stopped after this loop because the remaining items are owner decisions or low-value optimisations.
 
 **In flight:**
 
