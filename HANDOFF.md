@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-03T07:50:00+01:00 · Tool: claude-code · Session: default_
+_Last updated: 2026-11-03T09:20:00+01:00 · Tool: claude-code · Session: default_
 
 ## Active Task
 
@@ -41,9 +41,11 @@ Standing instruction from the owner (Slovak, 2026-11-01): "Pokračuj vo vývoji,
 
 - Beh #73 (Loop 10): keyboard hu and uk, dark theme with the cookie banner at 1100 px: 58 of 58 behaviour checks, `KLÁVESNICA OK`; 429 responses now show as warnings. The self-paced `/loop` was stopped after this loop because the remaining items are owner decisions or low-value optimisations.
 
+- Beh #74: the owner delegated the open decisions. Cookie banner compacted and moved after the skip link (deployed `16ea2cf`), Drive folder renamed, runbook made authoritative over the stale routine prompt, Discord and print decided, the stale branch was already gone. New tool `banner-audit.mjs`; `keyboard-audit.mjs` now requires the banner before the navigation.
+
 **In flight:**
 
-- Nothing. Production runs the code of `d8c770f`.
+- Nothing. Production runs the code of `16ea2cf`.
 
 **Tried and rejected:**
 
@@ -85,14 +87,14 @@ Standing instruction from the owner (Slovak, 2026-11-01): "Pokračuj vo vývoji,
 
 ## Open Questions
 
-- [x] Cloud nightly routine `trig_01H8nMFqCZagX3YhSZqVWE8a`: kept in the cloud (a Windows scheduler cannot match its reliability while the PC is off); new prompt for the current runbook is in `hooks/ops/nightly-routine-prompt.md` and must be pasted into the panel by hand (the routine API returned 404 on every update on 2026-11-03), and the DB report reaches GitHub through the local task `polascin.net mirror origin` (`hooks/ops/mirror-origin.ps1`, see DEPLOY.md).
-- [ ] Rename the Google Drive folder for blog covers (its name is `polascin.net`, an en dash, then `obálky blogu`) so the name no longer contains the en dash?
-- [ ] Stale branch `origin/docs/doaudit-rutina-2026-10-24`: delete or keep?
-- [ ] Discord: the footer invite expired and was removed (Beh #71). Add a new permanent invite (no expiry, verified with `https://discord.com/api/v10/invites/<code>`) only if the owner wants the Discord link back; then update the guard in `tests/run.php`.
+- [ ] Nightly routine prompt in the panel is still the old text: the routine API returns 404 for every update and the built-in browser is not signed in to claude.ai. Mitigated: `.doaudit.md` (which the prompt itself puts first) overrides the stale steps, and a test keeps runbook and `hooks/ops/nightly-routine-prompt.md` aligned. Pasting the template into the panel remains the clean fix.
+- [x] Google Drive cover folder renamed to `polascin.net obálky blogu` (same ID); skill references updated (Beh #74).
+- [x] Stale branch `origin/docs/doaudit-rutina-2026-10-24` no longer exists on either remote.
+- [x] Discord: decided to keep the link removed (Beh #74); only the owner can create a new permanent invite.
 - [x] Server leftover `private/deploy-staging-25e8b98-714`: deleted on 2026-11-01 with the owner's approval; `private/` checked on 2026-11-03, no `deploy-staging-*` left.
 - [ ] If the Clarity project has any integration enabled (for example a Google Analytics link), the privacy text must name that recipient. Owner to confirm in the Clarity dashboard; code cannot check it.
-- [ ] Print design (owner preference, low priority): forms (so contact, newsletter and login print as a heading plus footer), card cover images and navigation are hidden in print, and the address of external links is printed after the link text. Change the `@media print` block at the end of `css/styles.css` if the owner wants otherwise (then re-pin `?v=` and update the print guards).
-- [ ] Cookie banner size and position (owner design and consent-wording decision): on a first visit it covers 26 % of a 1280×800 window, 43 % of 390×844, 60 to 72 % of 320×568 and 68 % of a 667×375 landscape window, and it is last in the DOM, so a keyboard user reaches it after about 75 Tab stops. The focus-obscured defect is fixed, the size and order are not changed. Known limitation: at 320×568 and 667×375 the contact textarea stays partly under the banner (Chrome scrolls a textarea by its caret).
+- [x] Print design: current `@media print` kept by decision (Beh #74).
+- [x] Cookie banner: compact on windows up to 480 px wide or 500 px tall (320×568 now 43 to 45 %, 667×375 36 %, 390×844 25 %), and its container is moved after `.skip-link`, so keyboard users reach it before the navigation (Beh #74, `npm run banner`).
 
 ## Working Environment
 

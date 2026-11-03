@@ -7,6 +7,7 @@
   "scripts": {
     "layout": "node layout-audit.mjs",
     "cls": "node cls-audit.mjs",
+    "banner": "node banner-audit.mjs",
     "nav": "node nav-verify.mjs",
     "axe": "node axe-scan.mjs",
     "worstcase": "node nav-worstcase.mjs",

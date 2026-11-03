@@ -32,6 +32,7 @@ npm run keyboard   # ovládanie klávesnicou (prechod Tabom a správanie prvkov)
 npm run print      # tlač do PDF (A4): čitateľnosť, opakované prvky, počet strán
 npm run modes      # vynútené farby, znížený pohyb, rozostupy, 200 % text, bez JS
 npm run cls        # pôvod posunov rozloženia (CLS) pri studenom načítaní
+npm run banner     # koľko okna zakrýva cookie banner (limit LIMIT=50 %)
 ```
 
 Každý skript vypíše súhrn po slovensky a skončí kódom 0 (bez nálezov) alebo 1
@@ -262,3 +263,13 @@ prvky, nulové `min-height`, kompaktné karty bez ilustrácií, adresa za extern
 odkazmi). Po oprave má domovská stránka 8 strán A4, zoznam článkov 5, knižnica
 4, článok 2 a kontakt 1, bez nálezov v oboch témach a v jazykoch sk a hu.
 Strážia ju testy v `tests/run.php`.
+
+## Poučenia (RSI)
+
+- Kontrola, ktorá zapisuje súčasný stav ako požiadavku, musí niesť dôvod.
+  `keyboard-audit.mjs` vyžadoval banner „až za pätou“, hoci to bol opísaný
+  nedostatok, nie zámer; pri zámernej zmene poradia (Beh #74) kontrolu
+  prepíš spolu s kódom.
+- Neplatnosť behu pri 429 posudzuj podľa toho, čo meranie ovplyvní: CLS
+  znehodnotí 429 na štýl aj obrázok, rozmer banneru iba 429 na stránku,
+  štýly, skripty a písma (`banner-audit.mjs`).
