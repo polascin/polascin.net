@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-03T05:02:00+01:00 · Tool: claude-code · Session: default_
+_Last updated: 2026-11-03T05:50:00+01:00 · Tool: claude-code · Session: default_
 
 ## Active Task
 
@@ -33,9 +33,11 @@ Standing instruction from the owner (Slovak, 2026-11-01): "Pokračuj vo vývoji,
 - Beh #68: `hooks/ops/mirror-origin.ps1` (Windows Task Scheduler task `polascin.net mirror origin`, 21:50 and 02:50, fast-forward only) pushes `websupport/main` to GitHub so the cloud routine reads a fresh DB report; tested on real data. The new prompt for the routine is in `hooks/ops/nightly-routine-prompt.md`; the routine API returned 404 on every update.
 - Beh #69 (Loop 6): `scripts/browser-audit/cls-audit.mjs` (`npm run cls`) attributes layout shifts per cold load and marks runs with 429 or 503 responses as invalid. Valid runs: uk desktop 0.0228 and 0.0000, uk mobile 0.0000, sk desktop 0.0000. The hu/de 0.2193 readings were `429 /css/styles.css` (first paint without CSS); no site code changed.
 
+- Beh #70 (Loop 7): valid cold CLS hu 0.0052 and de 0.0186. `head_meta.php` and static `index.html` now list two `rel="icon"` PNGs (32 and 196 px) instead of five, because Chrome downloads every listed icon on a first visit; static pages no longer use the 1 MB `CrystalKidney.png` as icon. Guards in `tests/run.php` (3299 checks). Deployed `c68c90b` and verified.
+
 **In flight:**
 
-- Nothing. Production runs the code of `d881724`; later commits (`08ff630` to `b3bb60e`) touch only docs, `hooks/ops` and `scripts/`, which are not deployed.
+- Nothing. Production runs the code of `c68c90b`.
 
 **Tried and rejected:**
 
@@ -52,7 +54,7 @@ Standing instruction from the owner (Slovak, 2026-11-01): "Pokračuj vo vývoji,
 ## Next Steps
 
 1. Before any work: `git fetch websupport main`, then `git pull --ff-only websupport main` (the server cron commits nightly DB reports); push `websupport`, then `origin`.
-2. Next loop candidates, each time-boxed: keyboard checks in hu and uk at compact widths, `.pill-link` focus rings on remaining pages, external links and the live publication catalog (`.audit.md` section 7), and a valid cold-load CLS run for hu, de and pl with `npm run cls` after at least 15 minutes without production traffic (the uk 0.153 to 0.26 and hu/de 0.22 readings were HTTP 429 on `css/styles.css`, Beh #69). Admin pages require login; never enter credentials. Stop at diminishing returns, and do not treat HTTP 429 responses as application defects.
+2. Next loop candidates, each time-boxed: keyboard checks in hu and uk at compact widths, `.pill-link` focus rings on remaining pages, external links and the live publication catalog (`.audit.md` section 7), and a valid cold-load CLS run for pl (hu and de done in Beh #70) with `npm run cls` after at least 15 minutes without production traffic (the uk 0.153 to 0.26 and hu/de 0.22 readings were HTTP 429 on `css/styles.css`, Beh #69). Admin pages require login; never enter credentials. Stop at diminishing returns, and do not treat HTTP 429 responses as application defects.
 3. Every loop ends the same way: full `php tests/run.php`, `php -l`, Prettier, commit with `[skip deploy]`, push, `bash hooks/deploy.sh --dry-run` and deploy only if code or served assets changed, verify production (through the versioned `?v=` URLs from the HTML), add a "Beh #NN" entry to `.audit.md`, rewrite this file and the session handoff. `hooks/deploy.sh` aborts when any tracked file is modified: back up and `git stash push -- <docs>` (or commit them) before the dry run, `git stash pop` afterwards.
 4. New article covers: run `php scripts/make_og_covers.php` and commit the og JPEG plus both card variants (tests enforce it). New `fa-*` icon in a template: rerun `scripts/build_fa_subset.py` (venv with fonttools outside the repo) and update the `?v=` pin in `index.html`, `privacy.html`, `terms.html`.
 5. If `css/styles.css` or `js/main.js` changes again: re-pin `?v=` in the three static pages (`php -r 'echo substr(hash_file("sha256","css/styles.css"),0,8);'`), keep the 1320 px breakpoint equal in CSS and JS, keep the navbar glass at 92 % or more, keep the shared focus-ring rule without per-button overrides, keep the banner offset (`--cookie-banner-height`, `scroll-padding-bottom`, footer padding) and keep the `@media print` block last in `css/styles.css` with its `!important` rules (JS sets `--navbar-height` and `--cookie-banner-height` inline); tests enforce all of them. A new component that relies on a dark surface, `opacity: 0`, `position: fixed` or `vh` heights needs a print check (`npm run print`).
