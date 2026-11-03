@@ -6,6 +6,7 @@
   "description": "Kontroly polascin.net v skutočnom prehliadači: rozloženie, axe-core, kontrast, súhlas, klávesnica, tlač a režimy prístupnosti",
   "scripts": {
     "layout": "node layout-audit.mjs",
+    "cls": "node cls-audit.mjs",
     "nav": "node nav-verify.mjs",
     "axe": "node axe-scan.mjs",
     "worstcase": "node nav-worstcase.mjs",

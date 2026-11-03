@@ -31,6 +31,7 @@ npm run consent    # tok súhlasu so súkromím (Clarity, Google Analytics)
 npm run keyboard   # ovládanie klávesnicou (prechod Tabom a správanie prvkov)
 npm run print      # tlač do PDF (A4): čitateľnosť, opakované prvky, počet strán
 npm run modes      # vynútené farby, znížený pohyb, rozostupy, 200 % text, bez JS
+npm run cls        # pôvod posunov rozloženia (CLS) pri studenom načítaní
 ```
 
 Každý skript vypíše súhrn po slovensky a skončí kódom 0 (bez nálezov) alebo 1
@@ -145,6 +146,15 @@ produkčné. Po nasadení spusti ten istý beh bez `LOCAL_ROOT`.
     vrátiť pôvodnú hodnotu `-webkit-text-fill-color`, hoci sa text vykresľuje
     systémovou farbou. Kontrast preto počítaj z vlastnosti `color`; priehľadnú
     výplň sleduj osobitne.
+14. Studené načítanie bez cache stiahne asi 25 súborov naraz, čo je limit
+    WebSupport na IP. Keď hosting vráti 429 na `css/styles.css`, Chrome
+    vykreslí stránku bez štýlu a potom so štýlom, a vznikne „posun“ okolo
+    0,22 (navigácia 298 px namiesto 77 px). Tak vznikol aj nález 0,153 až 0,26
+    pre uk a 0,22 pre hu a de (Beh #69). `cls-audit.mjs` takýto beh označí ako
+    `NEPLATNÉ` a nezapočíta ho; po sérii neplatných behov počkaj aspoň
+    15 minút. Behy bez posunu (merané ešte pred kontrolou 429, takže štýly sa
+    zjavne načítali): uk desktop 0,0228 a dvakrát 0,0000, uk mobil dvakrát
+    0,0000, sk desktop dvakrát 0,0000. Pre hu, de a pl platný beh zatiaľ nie je.
 
 ## Ukazovateľ fokusu (`keyboard`)
 
