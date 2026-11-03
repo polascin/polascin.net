@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-03T05:50:00+01:00 · Tool: claude-code · Session: default_
+_Last updated: 2026-11-03T06:30:00+01:00 · Tool: claude-code · Session: default_
 
 ## Active Task
 
@@ -35,9 +35,11 @@ Standing instruction from the owner (Slovak, 2026-11-01): "Pokračuj vo vývoji,
 
 - Beh #70 (Loop 7): valid cold CLS hu 0.0052 and de 0.0186. `head_meta.php` and static `index.html` now list two `rel="icon"` PNGs (32 and 196 px) instead of five, because Chrome downloads every listed icon on a first visit; static pages no longer use the 1 MB `CrystalKidney.png` as icon. Guards in `tests/run.php` (3299 checks). Deployed `c68c90b` and verified.
 
+- Beh #71 (Loop 8): the footer Discord invite `discord.gg/MsGmMZbz` was dead (Discord API: Unknown Invite); removed from `footer.php`, static `index.html` and the `footer.discord` key in all 10 catalogs, with a guard. 46 other external links returned 200 (Facebook login wall, LinkedIn 999 and the Swatch curl timeout are known bot blocks). Valid cold CLS pl 0.0186; all five measured languages are below 0.1. Deployed `d8c770f` and verified.
+
 **In flight:**
 
-- Nothing. Production runs the code of `c68c90b`.
+- Nothing. Production runs the code of `d8c770f`.
 
 **Tried and rejected:**
 
@@ -54,7 +56,7 @@ Standing instruction from the owner (Slovak, 2026-11-01): "Pokračuj vo vývoji,
 ## Next Steps
 
 1. Before any work: `git fetch websupport main`, then `git pull --ff-only websupport main` (the server cron commits nightly DB reports); push `websupport`, then `origin`.
-2. Next loop candidates, each time-boxed: keyboard checks in hu and uk at compact widths, `.pill-link` focus rings on remaining pages, external links and the live publication catalog (`.audit.md` section 7), and a valid cold-load CLS run for pl (hu and de done in Beh #70) with `npm run cls` after at least 15 minutes without production traffic (the uk 0.153 to 0.26 and hu/de 0.22 readings were HTTP 429 on `css/styles.css`, Beh #69). Admin pages require login; never enter credentials. Stop at diminishing returns, and do not treat HTTP 429 responses as application defects.
+2. Next loop candidates, each time-boxed: keyboard checks in hu and uk at compact widths, `.pill-link` focus rings on remaining pages, external links and the live publication catalog (`.audit.md` section 7), optionally `size-adjust` fallback metrics for the hero heading font (the remaining cold CLS of about 0.012 to 0.019 comes from the web-font swap re-wrapping `.hero-title`; below 0.1, so low value). Admin pages require login; never enter credentials. Stop at diminishing returns, and do not treat HTTP 429 responses as application defects.
 3. Every loop ends the same way: full `php tests/run.php`, `php -l`, Prettier, commit with `[skip deploy]`, push, `bash hooks/deploy.sh --dry-run` and deploy only if code or served assets changed, verify production (through the versioned `?v=` URLs from the HTML), add a "Beh #NN" entry to `.audit.md`, rewrite this file and the session handoff. `hooks/deploy.sh` aborts when any tracked file is modified: back up and `git stash push -- <docs>` (or commit them) before the dry run, `git stash pop` afterwards.
 4. New article covers: run `php scripts/make_og_covers.php` and commit the og JPEG plus both card variants (tests enforce it). New `fa-*` icon in a template: rerun `scripts/build_fa_subset.py` (venv with fonttools outside the repo) and update the `?v=` pin in `index.html`, `privacy.html`, `terms.html`.
 5. If `css/styles.css` or `js/main.js` changes again: re-pin `?v=` in the three static pages (`php -r 'echo substr(hash_file("sha256","css/styles.css"),0,8);'`), keep the 1320 px breakpoint equal in CSS and JS, keep the navbar glass at 92 % or more, keep the shared focus-ring rule without per-button overrides, keep the banner offset (`--cookie-banner-height`, `scroll-padding-bottom`, footer padding) and keep the `@media print` block last in `css/styles.css` with its `!important` rules (JS sets `--navbar-height` and `--cookie-banner-height` inline); tests enforce all of them. A new component that relies on a dark surface, `opacity: 0`, `position: fixed` or `vh` heights needs a print check (`npm run print`).
@@ -82,6 +84,7 @@ Standing instruction from the owner (Slovak, 2026-11-01): "Pokračuj vo vývoji,
 - [x] Cloud nightly routine `trig_01H8nMFqCZagX3YhSZqVWE8a`: kept in the cloud (a Windows scheduler cannot match its reliability while the PC is off); new prompt for the current runbook is in `hooks/ops/nightly-routine-prompt.md` and must be pasted into the panel by hand (the routine API returned 404 on every update on 2026-11-03), and the DB report reaches GitHub through the local task `polascin.net mirror origin` (`hooks/ops/mirror-origin.ps1`, see DEPLOY.md).
 - [ ] Rename the Google Drive folder for blog covers (its name is `polascin.net`, an en dash, then `obálky blogu`) so the name no longer contains the en dash?
 - [ ] Stale branch `origin/docs/doaudit-rutina-2026-10-24`: delete or keep?
+- [ ] Discord: the footer invite expired and was removed (Beh #71). Add a new permanent invite (no expiry, verified with `https://discord.com/api/v10/invites/<code>`) only if the owner wants the Discord link back; then update the guard in `tests/run.php`.
 - [x] Server leftover `private/deploy-staging-25e8b98-714`: deleted on 2026-11-01 with the owner's approval; `private/` checked on 2026-11-03, no `deploy-staging-*` left.
 - [ ] If the Clarity project has any integration enabled (for example a Google Analytics link), the privacy text must name that recipient. Owner to confirm in the Clarity dashboard; code cannot check it.
 - [ ] Print design (owner preference, low priority): forms (so contact, newsletter and login print as a heading plus footer), card cover images and navigation are hidden in print, and the address of external links is printed after the link text. Change the `@media print` block at the end of `css/styles.css` if the owner wants otherwise (then re-pin `?v=` and update the print guards).
