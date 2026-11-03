@@ -39,7 +39,7 @@ $canonicalUrl = $canonicalUrl ?? $currentUrl;
  * jazyk bez parametra `lang`.
  *
  * Táto premenná je určená výhradne pre SEO. Prepínač jazyka ju zámerne
- * nepoužíva, pretože by potreboval by parameter `lang` aj pre predvolený jazyk, inak by
+ * nepoužíva, pretože by potreboval parameter `lang` aj pre predvolený jazyk, inak by
  * sa naň nedalo prepnúť späť.
  */
 if (!isset($languageAlternates) || !is_array($languageAlternates)) {
