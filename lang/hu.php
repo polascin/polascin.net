@@ -70,7 +70,6 @@ return [
     'footer.x' => 'X-profil',
     'footer.facebook' => 'Facebook-profil',
     'footer.email' => 'E-mail küldése',
-    'footer.discord' => 'Csatlakozás a Discordon',
     'footer.copyright' => '© 1998 és :year között Ľubomír Polaščín. Minden jog fenntartva.',
     'footer.privacy' => 'Adatvédelem',
     'footer.terms' => 'Felhasználási feltételek',

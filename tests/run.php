@@ -3280,6 +3280,14 @@ foreach (['head_meta.php', 'index.html'] as $iconTemplate) {
         "{$iconTemplate} musí ponechať ikony 32 px a 196 px"
     );
 }
+// Pozvánka discord.gg/MsGmMZbz vypršala (API Discordu: Unknown Invite, Beh #71).
+// Nová smie pribudnúť len ako trvalá pozvánka overená cez API.
+foreach (['footer.php', 'index.html'] as $socialTemplate) {
+    expectTrue(
+        !str_contains((string) file_get_contents(dirname(__DIR__) . '/' . $socialTemplate), 'discord.gg/MsGmMZbz'),
+        "{$socialTemplate} nesmie odkazovať na neplatnú pozvánku Discord"
+    );
+}
 foreach (['index.html', 'privacy.html', 'terms.html'] as $staticIconPage) {
     expectTrue(
         !str_contains((string) file_get_contents(dirname(__DIR__) . '/' . $staticIconPage), 'href="CrystalKidney.png"'),

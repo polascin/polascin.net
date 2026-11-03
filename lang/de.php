@@ -70,7 +70,6 @@ return [
     'footer.x' => 'Profil auf X',
     'footer.facebook' => 'Profil auf Facebook',
     'footer.email' => 'E-Mail senden',
-    'footer.discord' => 'Discord beitreten',
     'footer.copyright' => '© 1998 bis :year Ľubomír Polaščín. Alle Rechte vorbehalten.',
     'footer.privacy' => 'Datenschutz',
     'footer.terms' => 'Nutzungsbedingungen',

@@ -72,9 +72,6 @@ $footerBeat = appSwatchBeat($footerUpdateTs);
       <a href="mailto:lubomir@polascin.net" aria-label="E-mail" title="<?= te('footer.email') ?>">
         <i class="fa-solid fa-envelope" aria-hidden="true"></i>
       </a>
-      <a href="https://discord.gg/MsGmMZbz" target="_blank" rel="noopener noreferrer" aria-label="Discord" title="<?= te('footer.discord') ?>">
-        <i class="fa-brands fa-discord" aria-hidden="true"></i>
-      </a>
     </div>
     <p class="footer-contact">
       <a href="mailto:lubomir@polascin.net">lubomir@polascin.net</a>
