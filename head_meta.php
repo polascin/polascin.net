@@ -140,11 +140,10 @@ if ($xDefault === null) {
 <link rel="apple-touch-icon-precomposed" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon-precomposed" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon-precomposed" sizes="152x152" href="apple-touch-icon-152x152.png">
+<?php /* Chrome stiahne každú ikonu rel="icon" už pri prvej návšteve, preto len dve
+   veľkosti: 32 px pre kartu, 196 px pre vysoké rozlíšenie (Beh #70). */ ?>
 <link rel="icon" type="image/png" sizes="196x196" href="favicon-196x196.png">
-<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="128x128" href="favicon-128.png">
 
 <link rel="stylesheet" href="css/fonts.css?v=<?= htmlspecialchars(rawurlencode($fontsVersion), ENT_QUOTES, 'UTF-8') ?>">
 <link rel="stylesheet" href="css/icons.css?v=<?= htmlspecialchars(rawurlencode($iconsVersion), ENT_QUOTES, 'UTF-8') ?>">

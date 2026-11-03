@@ -3269,6 +3269,24 @@ expectTrue(
     '.doaudit.md musí dokumentovať dennú retenciu v crontabe servera a všetky tabuľky PII_TABLES'
 );
 
+// Chrome stiahne každú ikonu rel="icon" pri prvej návšteve; päť PNG ikon
+// spolu s fontmi prekračovalo limit hostingu na IP (Beh #70).
+foreach (['head_meta.php', 'index.html'] as $iconTemplate) {
+    $iconSource = (string) file_get_contents(dirname(__DIR__) . '/' . $iconTemplate);
+    preg_match_all('/<link\s+rel="icon"[^>]*>/', $iconSource, $iconLinks);
+    expectSame(2, count($iconLinks[0]), "{$iconTemplate} má mať práve dve ikony rel=\"icon\"");
+    expectTrue(
+        str_contains($iconSource, 'favicon-32x32.png') && str_contains($iconSource, 'favicon-196x196.png'),
+        "{$iconTemplate} musí ponechať ikony 32 px a 196 px"
+    );
+}
+foreach (['index.html', 'privacy.html', 'terms.html'] as $staticIconPage) {
+    expectTrue(
+        !str_contains((string) file_get_contents(dirname(__DIR__) . '/' . $staticIconPage), 'href="CrystalKidney.png"'),
+        "{$staticIconPage} nesmie používať 1 MB CrystalKidney.png ako ikonu"
+    );
+}
+
 if ($failures !== []) {
     fwrite(STDERR, "Zlyhané kontroly:\n- " . implode("\n- ", $failures) . "\n");
     exit(1);
