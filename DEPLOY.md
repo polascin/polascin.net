@@ -63,6 +63,24 @@ ssh websupport 'bash -s verify-db' < hooks/ops/nightly.sh
 ssh websupport 'RETENTION_DRY_RUN=true bash -s retention' < hooks/ops/nightly.sh
 ```
 
+### Zrkadlenie reportu na GitHub
+
+Server nemá prístup na GitHub (zámerne, žiadny zapisovací kľúč na hostingu),
+no cloudová auditná rutina klonuje z GitHubu. Preto
+[`hooks/ops/mirror-origin.ps1`](hooks/ops/mirror-origin.ps1) v Plánovači úloh
+Windows (úloha „polascin.net mirror origin“, denne 21:50 a 02:50, zmeškaný beh
+po zapnutí PC) posunie `origin/main` na `websupport/main`. Iba fast-forward;
+keď GitHub nie je predkom `websupport`, skončí kódom 2 a nič nezmení. Beží
+nad hlavným klonom `D:\Dev\polascin.net` (stačia remoty, pracovnú kópiu
+nemení), log je `%LOCALAPPDATA%\polascin\mirror-origin.log`. Keď je PC v noci
+vypnuté, rutina o 03:10 číta report o deň starší; nočný audit to uvádza ako
+zastaraný report, nie ako chybu produkcie.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File hooks\ops\mirror-origin.ps1 -RepoPath D:\Dev\polascin.net
+powershell -NoProfile -ExecutionPolicy Bypass -File hooks\ops\mirror-origin.ps1 -RepoPath D:\Dev\polascin.net -Register
+```
+
 ## GitHub Actions (iba ručná záloha)
 
 ### Nastavenie secrets

@@ -73,7 +73,7 @@ Standing instruction from the owner (Slovak, 2026-11-01): "Pokračuj vo vývoji,
 
 ## Open Questions
 
-- [ ] Cloud nightly routine `trig_01H8nMFqCZagX3YhSZqVWE8a` still clones from GitHub: move it to a local scheduler or keep it as a code-only audit?
+- [x] Cloud nightly routine `trig_01H8nMFqCZagX3YhSZqVWE8a`: kept in the cloud (a Windows scheduler cannot match its reliability while the PC is off); new prompt for the current runbook is in `hooks/ops/nightly-routine-prompt.md` and must be pasted into the panel by hand (the routine API returned 404 on every update on 2026-11-03), and the DB report reaches GitHub through the local task `polascin.net mirror origin` (`hooks/ops/mirror-origin.ps1`, see DEPLOY.md).
 - [ ] Rename the Google Drive folder for blog covers (its name is `polascin.net`, an en dash, then `obálky blogu`) so the name no longer contains the en dash?
 - [ ] Stale branch `origin/docs/doaudit-rutina-2026-10-24`: delete or keep?
 - [x] Server leftover `private/deploy-staging-25e8b98-714`: deleted on 2026-11-01 with the owner's approval; `private/` checked on 2026-11-03, no `deploy-staging-*` left.
