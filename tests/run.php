@@ -3452,6 +3452,17 @@ expectTrue(
         && !preg_match("/header\\('Location: index\\.php'/", $logoutSourceForLang),
     'logout.php musí po odhlásení zachovať jazyk cez langUrl'
 );
+$mainNavSource = (string) file_get_contents(dirname(__DIR__) . '/main_nav.php');
+expectTrue(
+    str_contains($mainNavSource, "langUrl(\$_navLang, 'logout.php')")
+        && !preg_match('/action="logout\\.php"/', $mainNavSource),
+    'main_nav.php musí odhlasovací formulár posielať s langUrl'
+);
+expectTrue(
+    substr_count($newsletterSource, "langUrl(\$lang, 'newsletter.php')") >= 3
+        && !preg_match('/action="newsletter\\.php"/', $newsletterSource),
+    'newsletter.php musí aj unsubscribe potvrdenie posielať s langUrl'
+);
 $guardSource = (string) file_get_contents(dirname(__DIR__) . '/guard.php');
 expectTrue(
     str_contains($guardSource, 'realpath($filename)')
