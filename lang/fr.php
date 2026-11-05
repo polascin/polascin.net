@@ -301,6 +301,7 @@ return [
     'login.totp_submit' => 'Vérifier le code',
     'login.error_totp_invalid' => 'Code de vérification invalide. Vérifiez l\'heure dans l\'application.',
     'login.error_totp_reused' => 'Ce code a déjà été utilisé. Attendez un nouveau code.',
+    'login.error_totp_expired' => 'L\'étape 2FA a expiré. Reconnectez-vous avec votre nom d\'utilisateur et votre mot de passe.',
 
     // Déconnexion (les messages apparaissent sur le site public)
     'logout.success' => 'Vous avez été déconnecté.',

@@ -301,6 +301,7 @@ return [
     'login.totp_submit' => 'Verify code',
     'login.error_totp_invalid' => 'Invalid verification code. Check the time in your authenticator.',
     'login.error_totp_reused' => 'This code has already been used. Wait for a new code.',
+    'login.error_totp_expired' => 'The 2FA step has expired. Sign in again with your username and password.',
 
     // Logout (messages are shown on the public site)
     'logout.success' => 'You have been logged out.',

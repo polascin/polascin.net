@@ -301,6 +301,7 @@ return [
     'login.totp_submit' => 'Verifica codice',
     'login.error_totp_invalid' => 'Codice di verifica non valido. Controlla l\'ora nell\'app.',
     'login.error_totp_reused' => 'Questo codice è già stato utilizzato. Attendi un nuovo codice.',
+    'login.error_totp_expired' => 'Il passaggio 2FA è scaduto. Accedi di nuovo con nome utente e password.',
 
     // Disconnessione (i messaggi compaiono sul sito pubblico)
     'logout.success' => 'Hai effettuato la disconnessione.',

@@ -296,6 +296,7 @@ return [
     'login.totp_submit' => 'Overiť kód',
     'login.error_totp_invalid' => 'Neplatný overovací kód. Skontrolujte čas v autentifikátore.',
     'login.error_totp_reused' => 'Tento kód už bol použitý. Počkajte na nový kód.',
+    'login.error_totp_expired' => 'Platnosť kroku 2FA vypršala. Prihláste sa znova menom a heslom.',
 
     // Odhlásenie (hlásenia sa zobrazujú na verejnej stránke)
     'logout.success' => 'Boli ste odhlásení.',

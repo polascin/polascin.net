@@ -301,6 +301,7 @@ return [
     'login.totp_submit' => 'Kód ellenőrzése',
     'login.error_totp_invalid' => 'Érvénytelen ellenőrző kód. Ellenőrizze az időt az alkalmazásban.',
     'login.error_totp_reused' => 'Ez a kód már fel lett használva. Várjon egy új kódra.',
+    'login.error_totp_expired' => 'A 2FA lépés lejárt. Jelentkezzen be újra a felhasználónévvel és a jelszóval.',
 
     // Kijelentkezés (az üzenetek a nyilvános oldalon jelennek meg)
     'logout.success' => 'Kijelentkezett.',

@@ -301,6 +301,7 @@ return [
     'login.totp_submit' => 'Code bestätigen',
     'login.error_totp_invalid' => 'Ungültiger Bestätigungscode. Prüfen Sie die Zeit in der App.',
     'login.error_totp_reused' => 'Dieser Code wurde bereits verwendet. Warten Sie auf einen neuen Code.',
+    'login.error_totp_expired' => 'Der 2FA-Schritt ist abgelaufen. Melden Sie sich erneut mit Benutzername und Passwort an.',
 
     // Abmeldung (Meldungen erscheinen auf der öffentlichen Seite)
     'logout.success' => 'Sie wurden abgemeldet.',

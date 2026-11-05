@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-05T23:45:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
+_Last updated: 2026-11-06T00:10:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
 
 ## Active Task
 
@@ -9,12 +9,11 @@ _Last updated: 2026-11-05T23:45:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#87 deployed (`f8c5085`). Logout and newsletter unsubscribe forms keep lang via langUrl. Smoke OK.
+**Done:** Beh #75–#87. Beh #88 coded: totp_pending TTL 300s + started_at; translations in all 10 langs. Tests 3345.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. `git pull --ff-only websupport main`.
-2. Loop 13: next concrete defect.
-3. Daily doaudit on its wake only.
+1. Ship Beh #88 (commit, push, deploy), then Loop 14.
+2. Daily doaudit on its wake only.

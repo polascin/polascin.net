@@ -9,21 +9,39 @@ require_once __DIR__ . '/db_config.php';
 
 $errors = [];
 $totpRequired = false;
+$totpPendingExpired = false;
+const LOGIN_TOTP_PENDING_TTL_SECONDS = 300;
 
 if (isLoggedIn()) {
     header('Location: admin.php', true, 303);
     exit;
 }
 
+// Pending 2FA bez user_id neprechádza idle timeoutom authenticatedSessionExpiryReason.
+// Bez vlastného limitu by ostalo otvorené, kým žije súbor relácie.
+if (isset($_SESSION['totp_pending_user_id'])) {
+    $totpPendingStarted = (int) ($_SESSION['totp_pending_started_at'] ?? 0);
+    if (
+        $totpPendingStarted <= 0
+        || (time() - $totpPendingStarted) > LOGIN_TOTP_PENDING_TTL_SECONDS
+    ) {
+        unset($_SESSION['totp_pending_user_id'], $_SESSION['totp_pending_started_at']);
+        $totpPendingExpired = true;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $errors[] = t('login.error_totp_expired');
+        }
+    }
+}
+
 // 2FA krok: overenie TOTP kódu po úspešnom overení hesla
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['totp_pending_user_id'])) {
     $csrfToken = $_POST['csrf_token'] ?? '';
     $trustedOrigin = isTrustedStateChangingRequest();
-    if (!$trustedOrigin || !validateCsrfToken((string) $csrfToken)) {
+        if (!$trustedOrigin || !validateCsrfToken((string) $csrfToken)) {
         http_response_code(400);
         $errors[] = t('error.csrf');
         logCsrfFailure('login_totp', $trustedOrigin, $csrfToken);
-        unset($_SESSION['totp_pending_user_id']);
+        unset($_SESSION['totp_pending_user_id'], $_SESSION['totp_pending_started_at']);
     } else {
         $totpCode = trim((string) ($_POST['totp_code'] ?? ''));
         $pendingUserId = (int) $_SESSION['totp_pending_user_id'];
@@ -49,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['totp_pending_user_
             ) {
                 // Neaktívny účet aj zlý kód hlásime rovnako, aby sa neodlišovali.
                 if (is_array($user) && (int) ($user['is_active'] ?? 0) !== 1) {
-                    unset($_SESSION['totp_pending_user_id']);
+                    unset($_SESSION['totp_pending_user_id'], $_SESSION['totp_pending_started_at']);
                 }
                 http_response_code(401);
                 $errors[] = t('login.error_totp_invalid');
@@ -80,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['totp_pending_user_
                             40
                         );
                         clearFormRateLimit($pdo, 'login_account', $accountRateKey);
-                        unset($_SESSION['totp_pending_user_id']);
+                        unset($_SESSION['totp_pending_user_id'], $_SESSION['totp_pending_started_at']);
 
                         $now = time();
                         $_SESSION['user_id'] = (int) $user['id'];
@@ -106,7 +124,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['totp_pending_user_
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_SESSION['totp_pending_user_id'])) {
+if (
+    $_SERVER['REQUEST_METHOD'] === 'POST'
+    && !isset($_SESSION['totp_pending_user_id'])
+    && !$totpPendingExpired
+) {
     $csrfToken = $_POST['csrf_token'] ?? '';
     $trustedOrigin = isTrustedStateChangingRequest();
     if (!$trustedOrigin || !validateCsrfToken((string) $csrfToken)) {
@@ -163,6 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_SESSION['totp_pending_user
                         $errors[] = t('login.error_credentials');
                     } else {
                         $_SESSION['totp_pending_user_id'] = (int) $user['id'];
+                        $_SESSION['totp_pending_started_at'] = time();
                         $totpRequired = true;
                     }
                 } else {

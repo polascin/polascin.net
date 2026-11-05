@@ -301,6 +301,7 @@ return [
     'login.totp_submit' => 'Zweryfikuj kod',
     'login.error_totp_invalid' => 'Nieprawidłowy kod weryfikacyjny. Sprawdź czas w aplikacji.',
     'login.error_totp_reused' => 'Ten kod został już użyty. Poczekaj na nowy kod.',
+    'login.error_totp_expired' => 'Krok 2FA wygasł. Zaloguj się ponownie nazwą użytkownika i hasłem.',
 
     // Wylogowanie (komunikaty pojawiają się na stronie publicznej)
     'logout.success' => 'Zostałeś wylogowany.',

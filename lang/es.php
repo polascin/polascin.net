@@ -301,6 +301,7 @@ return [
     'login.totp_submit' => 'Verificar código',
     'login.error_totp_invalid' => 'Código de verificación no válido. Comprueba la hora en la aplicación.',
     'login.error_totp_reused' => 'Este código ya se ha usado. Espera un código nuevo.',
+    'login.error_totp_expired' => 'El paso 2FA ha caducado. Vuelva a iniciar sesión con su nombre de usuario y contraseña.',
 
     // Cierre de sesión (los mensajes se muestran en el sitio público)
     'logout.success' => 'Ha cerrado la sesión.',

@@ -3413,6 +3413,22 @@ expectTrue(
         ) === 1,
     'login.php musí po TOTP najprv obnoviť reláciu, až potom stamplovať totp_last_used a vyčistiť login_account'
 );
+expectTrue(
+    str_contains($loginSource, 'LOGIN_TOTP_PENDING_TTL_SECONDS')
+        && str_contains($loginSource, "totp_pending_started_at")
+        && str_contains($loginSource, 'login.error_totp_expired')
+        && str_contains($loginSource, '!$totpPendingExpired'),
+    'login.php musí limitovať totp_pending TTL a po expirácii nesmie spadnúť do heslového POST'
+);
+foreach (array_keys(appLanguages()) as $totpExpiredLang) {
+    $totpExpiredCatalog = loadTranslations($totpExpiredLang);
+    expectTrue(
+        isset($totpExpiredCatalog['login.error_totp_expired'])
+            && is_string($totpExpiredCatalog['login.error_totp_expired'])
+            && $totpExpiredCatalog['login.error_totp_expired'] !== '',
+        "login.error_totp_expired musí existovať v jazyku {$totpExpiredLang}"
+    );
+}
 $helpersCacheSource = (string) file_get_contents(dirname(__DIR__) . '/helpers.php');
 expectTrue(
     str_contains($helpersCacheSource, "unserialize(\$data, ['allowed_classes' => false])")
