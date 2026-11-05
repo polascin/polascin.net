@@ -3377,6 +3377,14 @@ expectTrue(
         && !preg_match('/^\s*\$executedFile\s*===\s*__FILE__/m', $guardSource),
     'guard.php musí porovnávať SCRIPT_FILENAME s realpath chráneného súboru, nie s __FILE__ guard.php'
 );
+// Flash typu info mal triedu alert-success (Beh #78); info → alert-info.
+$headerFlashSource = (string) file_get_contents(dirname(__DIR__) . '/header.php');
+expectTrue(
+    str_contains($headerFlashSource, "\$flashType === 'info' => 'alert-info'")
+        && str_contains($headerFlashSource, "in_array(\$flashType, ['error', 'warning'], true) => 'alert-error'")
+        && str_contains($headerFlashSource, "default => 'alert-success'"),
+    'header.php musí mapovať flash info na alert-info, error/warning na alert-error a ostatné na alert-success'
+);
 
 if ($failures !== []) {
     fwrite(STDERR, "Zlyhané kontroly:\n- " . implode("\n- ", $failures) . "\n");

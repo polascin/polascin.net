@@ -81,8 +81,16 @@ $beatAktualny = appSwatchBeat(time());
 </nav>
 
 <?php if (is_array($flash) && !empty($flash['message'])): ?>
+  <?php
+    $flashType = (string) ($flash['type'] ?? 'success');
+    $flashAlertClass = match (true) {
+        in_array($flashType, ['error', 'warning'], true) => 'alert-error',
+        $flashType === 'info' => 'alert-info',
+        default => 'alert-success',
+    };
+  ?>
   <div class="container flash-container">
-    <div class="alert <?= in_array(($flash['type'] ?? ''), ['error', 'warning'], true) ? 'alert-error' : 'alert-success' ?>">
+    <div class="alert <?= htmlspecialchars($flashAlertClass, ENT_QUOTES, 'UTF-8') ?>">
       <p><?= htmlspecialchars((string) $flash['message'], ENT_QUOTES, 'UTF-8') ?></p>
     </div>
   </div>
