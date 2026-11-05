@@ -10,9 +10,11 @@ require_once __DIR__ . '/helpers.php';
 
 $errors = [];
 $formData = ['name' => '', 'email' => '', 'subject' => '', 'message' => ''];
+// PRG musí niesť aj jazyk: bez ?lang= by pri vypnutých cookies padol
+// flash na detekciu prehliadača namiesto jazyka, v ktorom návštevník písal.
 $redirectWithNeutralSuccess = static function (): never {
     setFlashMessage('success', t('contact.success'));
-    header('Location: contact.php', true, 303);
+    header('Location: ' . langUrl(currentLang(), 'contact.php'), true, 303);
     exit;
 };
 
@@ -90,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ':message' => $message,
                 ]);
                 setFlashMessage('success', t('contact.success'));
-                header('Location: contact.php', true, 303);
+                header('Location: ' . langUrl(currentLang(), 'contact.php'), true, 303);
                 exit;
             } catch (\PDOException $e) {
                 clearFormRateLimit($pdo, 'contact_duplicate', $duplicateKey);

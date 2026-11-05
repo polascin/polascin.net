@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute([':hash' => hashToken($unsubscribeToken)]);
                 if ($stmt->rowCount() > 0) {
                     setFlashMessage('success', t('newsletter.unsubscribed'));
-                    header('Location: newsletter.php', true, 303);
+                    header('Location: ' . langUrl($lang, 'newsletter.php'), true, 303);
                     exit;
                 } else {
                     $errors[] = t('newsletter.unsubscribe_link_used');
@@ -230,7 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if ($errors === []) {
                     setFlashMessage('success', t('newsletter.pending'));
-                    header('Location: newsletter.php', true, 303);
+                    header('Location: ' . langUrl($lang, 'newsletter.php'), true, 303);
                     exit;
                 }
             } catch (\PDOException $e) {

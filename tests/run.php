@@ -3422,6 +3422,18 @@ expectTrue(
     str_contains($loginSource, "header('Location: admin.php', true, 303);"),
     'login.php musí pri už prihlásenom používateľovi presmerovať na admin cez 303'
 );
+$contactSource = (string) file_get_contents(dirname(__DIR__) . '/contact.php');
+expectTrue(
+    substr_count($contactSource, "langUrl(currentLang(), 'contact.php')") >= 2
+        && !preg_match("/header\\('Location: contact\\.php'/", $contactSource),
+    'contact.php musí po POST PRG zachovať jazyk cez langUrl'
+);
+$newsletterSource = (string) file_get_contents(dirname(__DIR__) . '/newsletter.php');
+expectTrue(
+    substr_count($newsletterSource, "langUrl(\$lang, 'newsletter.php')") >= 2
+        && !preg_match("/header\\('Location: newsletter\\.php'/", $newsletterSource),
+    'newsletter.php musí po POST PRG zachovať jazyk cez langUrl'
+);
 $guardSource = (string) file_get_contents(dirname(__DIR__) . '/guard.php');
 expectTrue(
     str_contains($guardSource, 'realpath($filename)')
