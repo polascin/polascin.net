@@ -9,11 +9,12 @@ _Last updated: 2026-11-06T00:10:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#87. Beh #88 coded: totp_pending TTL 300s + started_at; translations in all 10 langs. Tests 3345.
+**Done:** Beh #75–#88 deployed (`a2f8dc1`). totp_pending TTL 300s. Smoke OK.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Ship Beh #88 (commit, push, deploy), then Loop 14.
-2. Daily doaudit on its wake only.
+1. `git pull --ff-only websupport main`.
+2. Loop 14: next concrete defect.
+3. Daily doaudit on its wake only.
