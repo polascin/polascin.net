@@ -3381,7 +3381,7 @@ expectTrue(
 expectTrue(
     str_contains($loginSource, 'Po overení hesla pred 2FA sa nepodarilo obnoviť ID relácie')
         && preg_match(
-            '/\$totpArmed\)\s*\{\s*if\s*\(!regenerateSession\(\)\)/s',
+            '/if \(\$totpArmed\) \{.*?if \(!regenerateSession\(\)\).*?\$_SESSION\[\'totp_pending_user_id\'\]/s',
             $loginSource
         ) === 1,
     'login.php musí pred uložením totp_pending_user_id obnoviť ID relácie'
