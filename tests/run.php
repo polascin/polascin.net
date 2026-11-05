@@ -2462,8 +2462,20 @@ foreach (['/scripts/audit_db_check.php', '/audit-reports/db-latest.md'] as $audi
 // robots.txt má interné adresáre zakazovať rovnako ako content/ a private/:
 // nie je to bezpečnostná vrstva, ale zoznam sa nemá rozchádzať s realitou.
 foreach (
-    ['/scripts/', '/hooks/', '/tests/', '/lang/', '/audit-reports/', '/.cursor/', '/.claude/', '/.codex/']
-    as $robotsPath
+    [
+        '/scripts/',
+        '/hooks/',
+        '/tests/',
+        '/lang/',
+        '/audit-reports/',
+        '/.cursor/',
+        '/.claude/',
+        '/.codex/',
+        '/.github/',
+        '/.idea/',
+        '/.trunk/',
+        '/.vscode/',
+    ] as $robotsPath
 ) {
     expectTrue(
         in_array($robotsPath, $robotsDisallowedPaths, true),
@@ -3433,6 +3445,12 @@ expectTrue(
     substr_count($newsletterSource, "langUrl(\$lang, 'newsletter.php')") >= 2
         && !preg_match("/header\\('Location: newsletter\\.php'/", $newsletterSource),
     'newsletter.php musí po POST PRG zachovať jazyk cez langUrl'
+);
+$logoutSourceForLang = (string) file_get_contents(dirname(__DIR__) . '/logout.php');
+expectTrue(
+    str_contains($logoutSourceForLang, "langUrl(currentLang(), 'index.php')")
+        && !preg_match("/header\\('Location: index\\.php'/", $logoutSourceForLang),
+    'logout.php musí po odhlásení zachovať jazyk cez langUrl'
 );
 $guardSource = (string) file_get_contents(dirname(__DIR__) . '/guard.php');
 expectTrue(

@@ -19,16 +19,20 @@ if (!$trustedOrigin || !validateCsrfToken((string) $csrfToken)) {
     logCsrfFailure('logout', $trustedOrigin, $csrfToken);
     // Hlásenie sa vykreslí na verejnej stránke, teda v jazyku návštevníka.
     setFlashMessage('error', t('logout.csrf_failed'));
-    header('Location: ' . (isLoggedIn() ? 'admin.php' : 'index.php'), true, 303);
+    $csrfDestination = isLoggedIn()
+        ? 'admin.php'
+        : langUrl(currentLang(), 'index.php');
+    header('Location: ' . $csrfDestination, true, 303);
     exit;
 }
 
 logAdminAction($pdo, 'logout', 'session');
+$homeAfterLogout = langUrl(currentLang(), 'index.php');
 clearUserSession();
 if (!session_start()) {
     http_response_code(500);
     exit('Chyba: Nepodarilo sa obnoviť reláciu.');
 }
 setFlashMessage('info', t('logout.success'));
-header('Location: index.php', true, 303);
+header('Location: ' . $homeAfterLogout, true, 303);
 exit;

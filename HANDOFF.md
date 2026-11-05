@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-05T23:00:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
+_Last updated: 2026-11-05T23:22:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
 
 ## Active Task
 
@@ -9,12 +9,11 @@ _Last updated: 2026-11-05T23:00:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#85 deployed (`2246f1d`). Contact/newsletter PRG keeps `lang` via `langUrl`. Smoke OK.
+**Done:** Beh #75–#85. Beh #86 coded: logout keeps lang via langUrl; robots disallow IDE dirs. Tests 3332.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. `git pull --ff-only websupport main`.
-2. Loop 11: next concrete defect.
-3. Daily doaudit on its wake only.
+1. Ship Beh #86 (commit, push, deploy), then Loop 12.
+2. Daily doaudit on its wake only.

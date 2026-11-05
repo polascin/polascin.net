@@ -32,6 +32,10 @@ Disallow: /.cursor/
 Disallow: /.agents/
 Disallow: /.claude/
 Disallow: /.codex/
+Disallow: /.github/
+Disallow: /.idea/
+Disallow: /.trunk/
+Disallow: /.vscode/
 Disallow: /portfolio/
 Disallow: /setup_db.php
 Disallow: /weblogo/
