@@ -3323,6 +3323,42 @@ foreach (['index.html', 'privacy.html', 'terms.html'] as $staticIconPage) {
     );
 }
 
+// Beh #75: query cache sa musí invalidovať pri zmenách článkov; reporting
+// hlavičky bez zbieracieho endpointu sa neposielajú; 2FA overí is_active;
+// guard porovnáva SCRIPT_FILENAME s chráneným súborom, nie s guard.php.
+$authSourceForHeaders = (string) file_get_contents(dirname(__DIR__) . '/auth.php');
+expectTrue(
+    !preg_match("/header\\(\\s*['\"]Expect-CT:/", $authSourceForHeaders)
+        && !preg_match("/header\\(\\s*['\"]NEL:/", $authSourceForHeaders)
+        && !preg_match("/header\\(\\s*['\"]Report-To:/", $authSourceForHeaders)
+        && !preg_match("/header\\(\\s*['\"]Content-Security-Policy-Report-Only/", $authSourceForHeaders)
+        && !preg_match("/header\\([^\\n]*(?:\\.well-known\\/reporting|\\.well-known\\/csp-report)/", $authSourceForHeaders),
+    'auth.php nesmie posielať Expect-CT, NEL, Report-To ani CSP-RO bez existujúceho zbieracieho endpointu'
+);
+$adminArticlesCache = (string) file_get_contents(dirname(__DIR__) . '/admin_articles.php');
+expectTrue(
+    substr_count($adminArticlesCache, 'queryCacheClear()') >= 4,
+    'admin_articles.php musí po každej mutácii článkov vyvolať queryCacheClear()'
+);
+$setupDbSource = (string) file_get_contents(dirname(__DIR__) . '/setup_db.php');
+expectTrue(
+    str_contains($setupDbSource, 'queryCacheClear()'),
+    'setup_db.php musí po seede vyvolať queryCacheClear()'
+);
+$loginSource = (string) file_get_contents(dirname(__DIR__) . '/login.php');
+expectTrue(
+    str_contains($loginSource, "totp_secret, totp_last_used FROM users")
+        && str_contains($loginSource, "(int) (\$user['is_active'] ?? 0) !== 1"),
+    'login.php musí pri 2FA kroku znova overiť is_active'
+);
+$guardSource = (string) file_get_contents(dirname(__DIR__) . '/guard.php');
+expectTrue(
+    str_contains($guardSource, 'realpath($filename)')
+        && str_contains($guardSource, '$executedFile === $protectedFile')
+        && !preg_match('/^\s*\$executedFile\s*===\s*__FILE__/m', $guardSource),
+    'guard.php musí porovnávať SCRIPT_FILENAME s realpath chráneného súboru, nie s __FILE__ guard.php'
+);
+
 if ($failures !== []) {
     fwrite(STDERR, "Zlyhané kontroly:\n- " . implode("\n- ", $failures) . "\n");
     exit(1);

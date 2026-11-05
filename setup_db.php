@@ -1054,6 +1054,8 @@ if (!$existing->fetch()) {
     echo "Admin účet už existuje.\n";
 }
 
+queryCacheClear();
+
 if (!$quiet) {
     echo "Inicializácia databázy polascin.net dokončená.\n";
 }

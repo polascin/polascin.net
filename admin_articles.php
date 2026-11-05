@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     "UPDATE articles SET is_top = :is_top WHERE translation_group = :group"
                 );
                 $update->execute([':is_top' => $nextTop, ':group' => $groupId]);
+                queryCacheClear();
                 logAdminAction($pdo, $nextTop === 1 ? 'article_top_on' : 'article_top_off', 'article_group', $groupId);
                 header('Location: admin_articles.php?top=1', true, 303);
                 exit;
@@ -62,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 $stmt = $pdo->prepare("DELETE FROM articles WHERE translation_group = :group");
                 $stmt->execute([':group' => $groupId]);
+                queryCacheClear();
                 logAdminAction($pdo, 'article_group_delete', 'article_group', $groupId);
                 header('Location: admin_articles.php', true, 303);
                 exit;
@@ -72,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = (int) $_POST['id'];
             $stmt = $pdo->prepare("DELETE FROM articles WHERE id = :id LIMIT 1");
             $stmt->execute([':id' => $id]);
+            queryCacheClear();
             logAdminAction($pdo, 'article_delete', 'article', $id);
             header('Location: admin_articles.php', true, 303);
             exit;
@@ -227,6 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         "UPDATE articles SET is_top = :is_top WHERE translation_group = :group"
                     );
                     $topStmt->execute([':is_top' => $isTop, ':group' => $groupId]);
+                    queryCacheClear();
                     header('Location: admin_articles.php?edit=' . $id . '&saved=1', true, 303);
                     exit;
                 }

@@ -42,7 +42,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['totp_pending_user_
             $stmt->execute([':id' => $pendingUserId]);
             $user = $stmt->fetch();
 
-            if (!is_array($user) || (string) $user['totp_secret'] === '' || !verifyTotpCode((string) $user['totp_secret'], $totpCode)) {
+            if (
+                !is_array($user)
+                || (int) ($user['is_active'] ?? 0) !== 1
+                || (string) ($user['totp_secret'] ?? '') === ''
+                || !verifyTotpCode((string) $user['totp_secret'], $totpCode)
+            ) {
+                // Neaktívny účet aj zlý kód hlásime rovnako, aby sa neodlišovali.
+                if (is_array($user) && (int) ($user['is_active'] ?? 0) !== 1) {
+                    unset($_SESSION['totp_pending_user_id']);
+                }
                 http_response_code(401);
                 $errors[] = t('login.error_totp_invalid');
             } else {

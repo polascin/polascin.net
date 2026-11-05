@@ -23,10 +23,13 @@ function guardInternalAccess(string $filename): void
 {
     $requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
     $executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
+    $protectedFile = realpath($filename);
     $basename = basename($filename);
 
+    // Porovnanie so samotným guard.php by chránený súbor nevyhodnotilo;
+    // správne je realpath($filename).
     if (
-        $executedFile === __FILE__
+        ($executedFile !== false && $protectedFile !== false && $executedFile === $protectedFile)
         || preg_match('~(?:^|/)' . preg_quote($basename, '~') . '(?:/|$)~i', $requestedScript) === 1
     ) {
         if (PHP_SAPI === 'cli') {
@@ -37,5 +40,5 @@ function guardInternalAccess(string $filename): void
         exit('Prístup odmietnutý.');
     }
 
-    unset($requestedScript, $executedFile, $basename);
+    unset($requestedScript, $executedFile, $protectedFile, $basename);
 }
