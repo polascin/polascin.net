@@ -50,7 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $totpErrors[] = 'Potvrdenie identity zlyhalo.';
             } elseif ((int) ($row['totp_enabled'] ?? 0) === 1) {
                 $totpErrors[] = 'Dvojfaktorové overenie už je zapnuté.';
+            } elseif (!regenerateSession()) {
+                http_response_code(503);
+                error_log('Pred uložením totp_setup_secret sa nepodarilo obnoviť ID relácie.');
+                $totpErrors[] = 'Secret sa nepodarilo pripraviť. Skúste to znova.';
             } else {
+                // Secret do relácie až po regenerateSession (session fixation).
                 $_SESSION['totp_setup_secret'] = generateTotpSecret();
                 clearFormRateLimit($pdo, 'admin_totp_setup', $rateKey);
                 setFlashMessage('info', 'Secret bol vygenerovaný. Dokončite zapnutie overovacím kódom.');

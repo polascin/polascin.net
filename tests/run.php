@@ -2258,8 +2258,12 @@ expectTrue(
         && str_contains($adminUsersSource, 'totp_enabled = 1')
         && str_contains($adminUsersSource, 'totp_secret = NULL')
         && str_contains($adminUsersSource, 'totp_last_used = NULL')
-        && !preg_match('/totp_enable[\s\S]*totp_last_used = :period/', $adminUsersSource),
-    'admin_users.php musí umožniť TOTP a pri zapnutí nesmie nastaviť totp_last_used (blokovalo by prvé prihlásenie)'
+        && !preg_match('/totp_enable[\s\S]*totp_last_used = :period/', $adminUsersSource)
+        && preg_match(
+            '/totp_begin[\s\S]*!regenerateSession\(\)[\s\S]*totp_setup_secret/s',
+            $adminUsersSource
+        ) === 1,
+    'admin_users.php musí umožniť TOTP, pri zapnutí nesmie stamplovať totp_last_used a pred setup secret musí obnoviť ID relácie'
 );
 expectTrue(
     str_contains($adminUsersSource, 'totp_enabled, totp_secret, created_at')
@@ -2457,7 +2461,7 @@ foreach (['/scripts/audit_db_check.php', '/audit-reports/db-latest.md'] as $audi
 
 // robots.txt má interné adresáre zakazovať rovnako ako content/ a private/:
 // nie je to bezpečnostná vrstva, ale zoznam sa nemá rozchádzať s realitou.
-foreach (['/scripts/', '/audit-reports/', '/.cursor/'] as $robotsPath) {
+foreach (['/scripts/', '/audit-reports/', '/.cursor/', '/.claude/', '/.codex/'] as $robotsPath) {
     expectTrue(
         in_array($robotsPath, $robotsDisallowedPaths, true),
         "robots.txt musí v skupine User-agent: * zakazovať {$robotsPath}"

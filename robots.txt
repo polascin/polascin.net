@@ -1,5 +1,5 @@
 # robots.txt - polascin.net
-# Updated: 2026-10-18
+# Updated: 2026-11-05
 
 # ── General rules ────────────────────────────────────────────────────────────
 User-agent: *
@@ -27,6 +27,8 @@ Disallow: /scripts/
 Disallow: /audit-reports/
 Disallow: /.cursor/
 Disallow: /.agents/
+Disallow: /.claude/
+Disallow: /.codex/
 Disallow: /portfolio/
 Disallow: /setup_db.php
 Disallow: /weblogo/
