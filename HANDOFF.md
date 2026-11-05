@@ -9,11 +9,12 @@ _Last updated: 2026-11-05T21:48:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#81. Beh #82 coded: TOTP success stamps `totp_last_used` only after `regenerateSession()`; also clears `login_account`. Tests 3319.
+**Done:** Beh #75–#82 deployed (`75c61b2`). TOTP success regenerates session before stamping `totp_last_used` and clears `login_account`. Smoke OK.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Ship Beh #82 (commit, push, deploy), then Loop 8.
-2. Daily doaudit on its wake only.
+1. `git pull --ff-only websupport main`.
+2. Loop 8: next concrete defect.
+3. Daily doaudit on its wake only.
