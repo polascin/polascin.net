@@ -1932,6 +1932,9 @@ a[href^="mailto:"] {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  /* Kotva pre .contact-form-trap (position: absolute), inak by pasca
+     kotvila k vzdialenému predkovi a pri overflow:hidden mohla uniknúť. */
+  position: relative;
 }
 
 .form-group {

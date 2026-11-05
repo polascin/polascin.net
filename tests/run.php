@@ -3445,9 +3445,12 @@ expectTrue(
 );
 $authRedirectSource = (string) file_get_contents(dirname(__DIR__) . '/auth.php');
 expectTrue(
-    substr_count($authRedirectSource, "header('Location: login.php', true, 303);") >= 8
-        && !preg_match("/header\\('Location: login\\.php'\\);/", $authRedirectSource),
-    'auth.php musí pri odhlásení/revalidácii presmerovať na login cez 303 (bez opakovaného POST)'
+    substr_count(
+        $authRedirectSource,
+        "header('Location: ' . langUrl(currentLang(), 'login.php'), true, 303);"
+    ) >= 8
+        && !preg_match("/header\\('Location: login\\.php'/", $authRedirectSource),
+    'auth.php musí pri odhlásení/revalidácii ísť na login cez langUrl a 303'
 );
 expectTrue(
     str_contains($loginSource, "header('Location: admin.php', true, 303);"),

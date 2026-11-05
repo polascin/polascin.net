@@ -230,7 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if (!regenerateSession()) {
                         restartAnonymousSession();
                         setFlashMessage('info', 'Heslo bolo zmenené. Prihláste sa novým heslom.');
-                        header('Location: login.php', true, 303);
+                        header('Location: ' . langUrl(currentLang(), 'login.php'), true, 303);
                         exit;
                     }
                     $_SESSION['_session_rotated_at'] = time();

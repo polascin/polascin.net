@@ -219,7 +219,7 @@ if (!empty($_SESSION['user_id'])) {
         setFlashMessage('info', t('login.session_expired'));
         $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
         if (!in_array($currentScript, ['login.php'], true)) {
-            header('Location: login.php', true, 303);
+            header('Location: ' . langUrl(currentLang(), 'login.php'), true, 303);
             exit;
         }
     } else {
@@ -236,7 +236,7 @@ if (!empty($_SESSION['user_id'])) {
                 setFlashMessage('info', t('login.session_expired'));
                 $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
                 if ($currentScript !== 'login.php') {
-                    header('Location: login.php', true, 303);
+                    header('Location: ' . langUrl(currentLang(), 'login.php'), true, 303);
                     exit;
                 }
             } else {
@@ -315,7 +315,7 @@ function revalidateSessionAccount(): void {
         error_log('Stav účtu sa nepodarilo overiť: databázové spojenie nie je dostupné.');
         restartAnonymousSession();
         setFlashMessage('info', t('login.session_expired'));
-        header('Location: login.php', true, 303);
+        header('Location: ' . langUrl(currentLang(), 'login.php'), true, 303);
         exit;
     }
 
@@ -332,14 +332,14 @@ function revalidateSessionAccount(): void {
         error_log('Nepodarilo sa overiť stav účtu: ' . $e->getMessage());
         restartAnonymousSession();
         setFlashMessage('info', t('login.session_expired'));
-        header('Location: login.php', true, 303);
+        header('Location: ' . langUrl(currentLang(), 'login.php'), true, 303);
         exit;
     }
 
     if (!is_array($account) || (int) $account['is_active'] !== 1) {
         restartAnonymousSession();
         setFlashMessage('info', t('login.account_inactive'));
-        header('Location: login.php', true, 303);
+        header('Location: ' . langUrl(currentLang(), 'login.php'), true, 303);
         exit;
     }
 
@@ -351,7 +351,7 @@ function revalidateSessionAccount(): void {
     ) {
         restartAnonymousSession();
         setFlashMessage('info', t('login.session_expired'));
-        header('Location: login.php', true, 303);
+        header('Location: ' . langUrl(currentLang(), 'login.php'), true, 303);
         exit;
     }
 
@@ -366,7 +366,7 @@ function revalidateSessionAccount(): void {
         if (!regenerateSession()) {
             restartAnonymousSession();
             setFlashMessage('info', t('login.session_expired'));
-            header('Location: login.php', true, 303);
+            header('Location: ' . langUrl(currentLang(), 'login.php'), true, 303);
             exit;
         }
         $_SESSION['_session_rotated_at'] = $now;
@@ -375,7 +375,7 @@ function revalidateSessionAccount(): void {
 
 function requireLogin(): void {
     if (!isLoggedIn()) {
-        header('Location: login.php', true, 303);
+        header('Location: ' . langUrl(currentLang(), 'login.php'), true, 303);
         exit;
     }
     revalidateSessionAccount();
