@@ -80,14 +80,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             http_response_code(401);
             $totpErrors[] = 'Overovací kód nie je platný. Skontrolujte čas v autentifikátore.';
         } else {
+            // totp_last_used nechávame NULL: hodnota z overenia pri zapnutí
+            // by inak zablokovala prvé prihlásenie až na dve periody (~60 s)
+            // ako „už použitý kód“.
             $update = $pdo->prepare(
                 "UPDATE users
-                 SET totp_secret = :secret, totp_enabled = 1, totp_last_used = :period
+                 SET totp_secret = :secret, totp_enabled = 1, totp_last_used = NULL
                  WHERE id = :id AND is_admin = 1 AND is_active = 1 AND totp_enabled = 0"
             );
             $update->execute([
                 ':secret' => $pendingSecret,
-                ':period' => intdiv(time(), 30),
                 ':id' => $currentAdminId,
             ]);
             if ($update->rowCount() !== 1) {

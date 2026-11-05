@@ -2256,8 +2256,10 @@ expectTrue(
         && str_contains($adminUsersSource, 'verifyTotpCode(')
         && str_contains($adminUsersSource, "\$_SESSION['totp_setup_secret']")
         && str_contains($adminUsersSource, 'totp_enabled = 1')
-        && str_contains($adminUsersSource, 'totp_secret = NULL'),
-    'admin_users.php musí umožniť zapnutie a vypnutie TOTP s overením hesla a kódu'
+        && str_contains($adminUsersSource, 'totp_secret = NULL')
+        && str_contains($adminUsersSource, 'totp_last_used = NULL')
+        && !preg_match('/totp_enable[\s\S]*totp_last_used = :period/', $adminUsersSource),
+    'admin_users.php musí umožniť TOTP a pri zapnutí nesmie nastaviť totp_last_used (blokovalo by prvé prihlásenie)'
 );
 $contactSource = (string) file_get_contents(dirname(__DIR__) . '/contact.php');
 expectTrue(

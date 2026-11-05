@@ -9,7 +9,6 @@ require_once __DIR__ . '/db_config.php';
 
 $errors = [];
 $totpRequired = false;
-$totpUserId = 0;
 
 if (isLoggedIn()) {
     header('Location: admin.php');
@@ -149,7 +148,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_SESSION['totp_pending_user
                 if ($totpArmed) {
                     $_SESSION['totp_pending_user_id'] = (int) $user['id'];
                     $totpRequired = true;
-                    $totpUserId = (int) $user['id'];
                 } else {
                     $authenticatedPasswordHash = (string) $user['password_hash'];
                     if (password_needs_rehash((string) $user['password_hash'], PASSWORD_BCRYPT, appPasswordHashOptions())) {

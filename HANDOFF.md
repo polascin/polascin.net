@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-05T20:20:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
+_Last updated: 2026-11-05T20:40:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
 
 ## Active Task
 
@@ -9,12 +9,12 @@ _Last updated: 2026-11-05T20:20:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#77 as before. Beh #78: flash `info` → `alert-info` in `header.php`.
+**Done:** Beh #75–#78. Beh #79: TOTP enable must not set `totp_last_used` (blocked first login ~60s).
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
 1. `git pull --ff-only websupport main`.
-2. Loop 4: next concrete defect.
-3. Daily doaudit on its own wake.
+2. Loop 5: next concrete defect.
+3. Daily doaudit on its wake only.
