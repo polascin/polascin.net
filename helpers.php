@@ -134,9 +134,17 @@ function queryCacheGet(string $key): mixed {
     if ($data === false) {
         return null;
     }
-    // Cache ukladá len skaláry a polia; objekty nepovoľujeme (PHP object injection).
+    // Cache ukladá len skaláry a polia. allowed_classes=>false stále môže
+    // vrátiť __PHP_Incomplete_Class, preto objekty dodatočne odmietame.
     $result = @unserialize($data, ['allowed_classes' => false]);
-    return $result === false && $data !== 'b:0;' ? null : $result;
+    if ($result === false && $data !== 'b:0;') {
+        return null;
+    }
+    if (is_object($result)) {
+        @unlink($file);
+        return null;
+    }
+    return $result;
 }
 
 /**

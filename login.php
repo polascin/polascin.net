@@ -11,7 +11,7 @@ $errors = [];
 $totpRequired = false;
 
 if (isLoggedIn()) {
-    header('Location: admin.php');
+    header('Location: admin.php', true, 303);
     exit;
 }
 

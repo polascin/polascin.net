@@ -3404,8 +3404,23 @@ expectTrue(
 $helpersCacheSource = (string) file_get_contents(dirname(__DIR__) . '/helpers.php');
 expectTrue(
     str_contains($helpersCacheSource, "unserialize(\$data, ['allowed_classes' => false])")
+        && str_contains($helpersCacheSource, 'is_object($result)')
+        && preg_match(
+            '/unserialize\(\$data, \[\'allowed_classes\' => false\]\)[\s\S]*?is_object\(\$result\)[\s\S]*?@unlink\(\$file\)/s',
+            $helpersCacheSource
+        ) === 1
         && !preg_match('/@unserialize\(\$data\);/', $helpersCacheSource),
-    'queryCacheGet musí unserializeovať bez povolených tried (ochrana pred object injection)'
+    'queryCacheGet musí odmietnuť objekty aj __PHP_Incomplete_Class po unserialize'
+);
+$authRedirectSource = (string) file_get_contents(dirname(__DIR__) . '/auth.php');
+expectTrue(
+    substr_count($authRedirectSource, "header('Location: login.php', true, 303);") >= 8
+        && !preg_match("/header\\('Location: login\\.php'\\);/", $authRedirectSource),
+    'auth.php musí pri odhlásení/revalidácii presmerovať na login cez 303 (bez opakovaného POST)'
+);
+expectTrue(
+    str_contains($loginSource, "header('Location: admin.php', true, 303);"),
+    'login.php musí pri už prihlásenom používateľovi presmerovať na admin cez 303'
 );
 $guardSource = (string) file_get_contents(dirname(__DIR__) . '/guard.php');
 expectTrue(

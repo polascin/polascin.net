@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-05T22:12:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
+_Last updated: 2026-11-05T22:35:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
 
 ## Active Task
 
@@ -9,12 +9,11 @@ _Last updated: 2026-11-05T22:12:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#83 deployed (`602336f`). Safe query-cache unserialize; robots disallow `/hooks/`, `/tests/`, `/lang/`. Smoke OK; robots verified on production.
+**Done:** Beh #75–#83. Beh #84 coded: query cache rejects `__PHP_Incomplete_Class`; auth/login redirects use 303. Tests 3325.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. `git pull --ff-only websupport main`.
-2. Loop 9: next concrete defect.
-3. Daily doaudit on its wake only.
+1. Ship Beh #84 (commit, push, deploy), then Loop 10.
+2. Daily doaudit on its wake only.
