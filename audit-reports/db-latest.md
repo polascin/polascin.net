@@ -1,6 +1,6 @@
 # Kontrola produkčnej databázy: polascin.net
 
-Generované: 2026-11-04 21:37:01 CET  
+Generované: 2026-11-05 19:39:38 CET  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
@@ -18,14 +18,14 @@ Bez nálezov: schéma, migrácie, indexy, účty aj retencia sú v očakávanom 
 
 | Tabuľka | Engine | Collation | Riadkov (presne) |
 | --- | --- | --- | --- |
-| `access_logs` | InnoDB | utf8mb4_unicode_ci | 70927 |
+| `access_logs` | InnoDB | utf8mb4_unicode_ci | 71555 |
 | `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 54 |
 | `articles` | InnoDB | utf8mb4_unicode_ci | 470 |
-| `contact_messages` | InnoDB | utf8mb4_unicode_ci | 4 |
+| `contact_messages` | InnoDB | utf8mb4_unicode_ci | 6 |
 | `content_blocks` | InnoDB | utf8mb4_unicode_ci | 5 |
-| `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 0 |
+| `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 7 |
 | `newsletter_subscribers` | InnoDB | utf8mb4_unicode_ci | 0 |
-| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 70 |
+| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 71 |
 | `users` | InnoDB | utf8mb4_unicode_ci | 1 |
 
 ## Migrácie schémy
@@ -100,6 +100,7 @@ Bez nálezov: schéma, migrácie, indexy, účty aj retencia sú v očakávanom 
 - ✅ `2026110108_anonymize_third_party_article_details`: 2026-11-01 09:05:44
 - ✅ `2026110109_what_after_congress_better_for_patient_article`: 2026-11-01 11:00:48
 - ✅ `2026110110_congress_program_polish`: 2026-11-01 11:08:32
+- ✅ `2026110501_totp_2fa_support`: 2026-11-05 11:31:13
 
 ## Indexy strážené migráciou
 
@@ -137,12 +138,12 @@ Kontaktné správy: **180 dní**; nepotvrdený newsletter: **72 hodín**; admini
 
 | Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |
 | --- | --- | --- | --- |
-| `access_logs` | 70927 | 2026-08-06 21:17:31 | 90 |
-| `contact_messages` | 4 | 2026-10-29 00:06:00 | 6 |
+| `access_logs` | 71555 | 2026-08-07 20:08:23 | 89 |
+| `contact_messages` | 6 | 2026-10-29 00:06:00 | 7 |
 | `newsletter_subscribers` | 0 | - | - |
-| `admin_audit_log` | 54 | 2026-09-11 19:22:06 | 54 |
-| `form_rate_limit` | 0 | - | - |
+| `admin_audit_log` | 54 | 2026-09-11 19:22:06 | 55 |
+| `form_rate_limit` | 7 | 2026-11-05 07:32:55 | 0 |
 
-Kontaktné správy: **0** vybavených, **4** nevybavených
+Kontaktné správy: **0** vybavených, **6** nevybavených
 (z toho **0** nevybavených dlhšie ako 30 dní, **0** správ prekročilo retenčnú lehotu 180 dní).
 
