@@ -291,6 +291,16 @@ return [
     'login.error_rate_limit' => 'Příliš mnoho pokusů o přihlášení. Zkuste to znovu později.',
     'login.session_expired' => 'Vaše relace vypršela z důvodu nečinnosti. Přihlaste se znovu.',
     'login.account_inactive' => 'Váš účet již není aktivní. Přihlaste se znovu.',
+    'login.totp_prompt' => 'TOTP prompt (cs)',
+    'login.totp_code' => 'TOTP code (cs)',
+    'login.totp_submit' => 'TOTP submit (cs)',
+    'login.error_totp_invalid' => 'TOTP invalid (cs)',
+    'login.error_totp_reused' => 'TOTP reused (cs)',
+    'login.totp_prompt' => 'Zadejte 6místný kód z autentizační aplikace.',
+    'login.totp_code' => 'Ověřovací kód (2FA)',
+    'login.totp_submit' => 'Ověřit kód',
+    'login.error_totp_invalid' => 'Neplatný ověřovací kód. Zkontrolujte čas v aplikaci.',
+    'login.error_totp_reused' => 'Tento kód byl již použit. Počkejte na nový kód.',
 
     // Odhlášení (hlášení se zobrazují na veřejné stránce)
     'logout.success' => 'Byli jste odhlášeni.',

@@ -291,6 +291,11 @@ return [
     'login.error_rate_limit' => 'Príliš veľa pokusov o prihlásenie. Skúste to znova neskôr.',
     'login.session_expired' => 'Vaša relácia vypršala z dôvodu nečinnosti. Prihláste sa znova.',
     'login.account_inactive' => 'Váš účet už nie je aktívny. Prihláste sa znova.',
+    'login.totp_prompt' => 'Zadajte 6-miestny kód z autentifikátora.',
+    'login.totp_code' => 'Overovací kód (2FA)',
+    'login.totp_submit' => 'Overiť kód',
+    'login.error_totp_invalid' => 'Neplatný overovací kód. Skontrolujte čas v autentifikátore.',
+    'login.error_totp_reused' => 'Tento kód už bol použitý. Počkajte na nový kód.',
 
     // Odhlásenie (hlásenia sa zobrazujú na verejnej stránke)
     'logout.success' => 'Boli ste odhlásení.',

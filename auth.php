@@ -102,6 +102,14 @@ function sendSecurityHeaders(): void {
     header('Cross-Origin-Opener-Policy: same-origin');
     header('Cross-Origin-Resource-Policy: same-origin');
     header('X-Permitted-Cross-Domain-Policies: none');
+    // Doplnkové hlavičky pre lepšiu bezpečnosť
+    // Expect-CT: Certificate Transparency monitoring (deprecated but harmless)
+    if (isRequestHttps()) {
+        header('Expect-CT: max-age=86400, enforce');
+    }
+    // NEL (Network Error Logging) pre monitoring sieťových chýb
+    header('NEL: {"report_to":"default","max_age":31536000,"include_subdomains":true}');
+    header('Report-To: {"group":"default","max_age":31536000,"endpoints":[{"url":"https://polascin.net/.well-known/reporting"}]}');
     // Výhrada práv k textovému a dátovému dolovaniu (W3C TDM Reservation).
     // Platí pre stránky aj pre súbory knižnice. Bežné vyhľadávanie nemení.
     header('TDM-Reservation: 1');
@@ -129,6 +137,10 @@ function sendSecurityHeaders(): void {
         $csp .= '; upgrade-insecure-requests';
     }
     header('Content-Security-Policy: ' . $csp);
+
+    // CSP Report-Only pre monitoring porušení CSP (neblokuje, len reportuje)
+    $cspReport = $csp . '; report-uri /.well-known/csp-report; report-to csp-endpoint';
+    header('Content-Security-Policy-Report-Only: ' . $cspReport);
 
     // Odpoveď sa líši podľa zvoleného jazyka, ktorý pochádza z cookie alebo
     // z Accept-Language. Bez Vary by zdieľaná cache mohla podať odpoveď

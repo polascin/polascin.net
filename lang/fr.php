@@ -291,6 +291,16 @@ return [
     'login.error_rate_limit' => 'Trop de tentatives de connexion. Veuillez réessayer plus tard.',
     'login.session_expired' => 'Votre session a expiré pour cause d\'inactivité. Veuillez vous reconnecter.',
     'login.account_inactive' => 'Votre compte n\'est plus actif. Veuillez vous reconnecter.',
+    'login.totp_prompt' => 'TOTP prompt (fr)',
+    'login.totp_code' => 'TOTP code (fr)',
+    'login.totp_submit' => 'TOTP submit (fr)',
+    'login.error_totp_invalid' => 'TOTP invalid (fr)',
+    'login.error_totp_reused' => 'TOTP reused (fr)',
+    'login.totp_prompt' => 'Entrez le code à 6 chiffres de votre application d\'authentification.',
+    'login.totp_code' => 'Code de vérification (2FA)',
+    'login.totp_submit' => 'Vérifier le code',
+    'login.error_totp_invalid' => 'Code de vérification invalide. Vérifiez l\'heure dans l\'application.',
+    'login.error_totp_reused' => 'Ce code a déjà été utilisé. Attendez un nouveau code.',
 
     // Déconnexion (les messages apparaissent sur le site public)
     'logout.success' => 'Vous avez été déconnecté.',

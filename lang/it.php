@@ -291,6 +291,16 @@ return [
     'login.error_rate_limit' => 'Troppi tentativi di accesso. Riprova più tardi.',
     'login.session_expired' => 'La sessione è scaduta per inattività. Accedi di nuovo.',
     'login.account_inactive' => 'Il tuo account non è più attivo. Accedi di nuovo.',
+    'login.totp_prompt' => 'TOTP prompt (it)',
+    'login.totp_code' => 'TOTP code (it)',
+    'login.totp_submit' => 'TOTP submit (it)',
+    'login.error_totp_invalid' => 'TOTP invalid (it)',
+    'login.error_totp_reused' => 'TOTP reused (it)',
+    'login.totp_prompt' => 'Inserisci il codice a 6 cifre dalla tua app di autenticazione.',
+    'login.totp_code' => 'Codice di verifica (2FA)',
+    'login.totp_submit' => 'Verifica codice',
+    'login.error_totp_invalid' => 'Codice di verifica non valido. Controlla l\'ora nell\'app.',
+    'login.error_totp_reused' => 'Questo codice è già stato utilizzato. Attendi un nuovo codice.',
 
     // Disconnessione (i messaggi compaiono sul sito pubblico)
     'logout.success' => 'Hai effettuato la disconnessione.',

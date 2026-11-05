@@ -827,6 +827,20 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/co-po-kongrese-lepsie-pre-pacienta.php'
             );
         },
+        '2026110501_totp_2fa_support' => static function (PDO $pdo): void {
+            // TOTP secret pre dvojfaktorové overenie (Base32, 32 znakov)
+            if (!columnExists($pdo, 'users', 'totp_secret')) {
+                $pdo->exec("ALTER TABLE users ADD COLUMN totp_secret VARCHAR(64) NULL AFTER must_change_password");
+            }
+            // Zapnuté 2FA - ak je 1, používateľ musí zadávať TOTP kód pri prihlásení
+            if (!columnExists($pdo, 'users', 'totp_enabled')) {
+                $pdo->exec("ALTER TABLE users ADD COLUMN totp_enabled TINYINT(1) NOT NULL DEFAULT 0 AFTER totp_secret");
+            }
+            // Posledné použitie TOTP kódu (na zabránenie replay útoku)
+            if (!columnExists($pdo, 'users', 'totp_last_used')) {
+                $pdo->exec("ALTER TABLE users ADD COLUMN totp_last_used INT UNSIGNED NULL AFTER totp_enabled");
+            }
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

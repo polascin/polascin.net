@@ -291,6 +291,16 @@ return [
     'login.error_rate_limit' => 'Demasiados intentos de inicio de sesión. Inténtelo de nuevo más tarde.',
     'login.session_expired' => 'Su sesión ha caducado por inactividad. Inicie sesión de nuevo.',
     'login.account_inactive' => 'Su cuenta ya no está activa. Inicie sesión de nuevo.',
+    'login.totp_prompt' => 'TOTP prompt (es)',
+    'login.totp_code' => 'TOTP code (es)',
+    'login.totp_submit' => 'TOTP submit (es)',
+    'login.error_totp_invalid' => 'TOTP invalid (es)',
+    'login.error_totp_reused' => 'TOTP reused (es)',
+    'login.totp_prompt' => 'Introduce el código de 6 dígitos de tu aplicación de autenticación.',
+    'login.totp_code' => 'Código de verificación (2FA)',
+    'login.totp_submit' => 'Verificar código',
+    'login.error_totp_invalid' => 'Código de verificación no válido. Comprueba la hora en la aplicación.',
+    'login.error_totp_reused' => 'Este código ya se ha usado. Espera un código nuevo.',
 
     // Cierre de sesión (los mensajes se muestran en el sitio público)
     'logout.success' => 'Ha cerrado la sesión.',

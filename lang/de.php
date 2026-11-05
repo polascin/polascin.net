@@ -291,6 +291,16 @@ return [
     'login.error_rate_limit' => 'Zu viele Anmeldeversuche. Bitte versuchen Sie es später erneut.',
     'login.session_expired' => 'Ihre Sitzung ist wegen Inaktivität abgelaufen. Bitte melden Sie sich erneut an.',
     'login.account_inactive' => 'Ihr Konto ist nicht mehr aktiv. Bitte melden Sie sich erneut an.',
+    'login.totp_prompt' => 'TOTP prompt (de)',
+    'login.totp_code' => 'TOTP code (de)',
+    'login.totp_submit' => 'TOTP submit (de)',
+    'login.error_totp_invalid' => 'TOTP invalid (de)',
+    'login.error_totp_reused' => 'TOTP reused (de)',
+    'login.totp_prompt' => 'Geben Sie den 6-stelligen Code aus Ihrer Authentifizierungs-App ein.',
+    'login.totp_code' => 'Bestätigungscode (2FA)',
+    'login.totp_submit' => 'Code bestätigen',
+    'login.error_totp_invalid' => 'Ungültiger Bestätigungscode. Prüfen Sie die Zeit in der App.',
+    'login.error_totp_reused' => 'Dieser Code wurde bereits verwendet. Warten Sie auf einen neuen Code.',
 
     // Abmeldung (Meldungen erscheinen auf der öffentlichen Seite)
     'logout.success' => 'Sie wurden abgemeldet.',

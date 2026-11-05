@@ -291,6 +291,16 @@ return [
     'login.error_rate_limit' => 'Забагато спроб входу. Спробуйте пізніше.',
     'login.session_expired' => 'Сеанс завершено через бездіяльність. Увійдіть знову.',
     'login.account_inactive' => 'Ваш обліковий запис більше не активний. Увійдіть знову.',
+    'login.totp_prompt' => 'TOTP prompt (uk)',
+    'login.totp_code' => 'TOTP code (uk)',
+    'login.totp_submit' => 'TOTP submit (uk)',
+    'login.error_totp_invalid' => 'TOTP invalid (uk)',
+    'login.error_totp_reused' => 'TOTP reused (uk)',
+    'login.totp_prompt' => 'Введіть 6-значний код з вашого автентифікатора.',
+    'login.totp_code' => 'Код підтвердження (2FA)',
+    'login.totp_submit' => 'Підтвердити код',
+    'login.error_totp_invalid' => 'Недійсний код підтвердження. Перевірте час в автентифікаторі.',
+    'login.error_totp_reused' => 'Цей код вже використано. Зачекайте на новий код.',
 
     // Вихід (повідомлення показуються на загальнодоступній сторінці)
     'logout.success' => 'Ви вийшли з системи.',

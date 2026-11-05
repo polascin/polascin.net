@@ -291,6 +291,16 @@ return [
     'login.error_rate_limit' => 'Zbyt wiele prób logowania. Spróbuj ponownie później.',
     'login.session_expired' => 'Sesja wygasła z powodu bezczynności. Zaloguj się ponownie.',
     'login.account_inactive' => 'Twoje konto nie jest już aktywne. Zaloguj się ponownie.',
+    'login.totp_prompt' => 'TOTP prompt (pl)',
+    'login.totp_code' => 'TOTP code (pl)',
+    'login.totp_submit' => 'TOTP submit (pl)',
+    'login.error_totp_invalid' => 'TOTP invalid (pl)',
+    'login.error_totp_reused' => 'TOTP reused (pl)',
+    'login.totp_prompt' => 'Wprowadź 6-cyfrowy kod z aplikacji uwierzytelniającej.',
+    'login.totp_code' => 'Kod weryfikacyjny (2FA)',
+    'login.totp_submit' => 'Zweryfikuj kod',
+    'login.error_totp_invalid' => 'Nieprawidłowy kod weryfikacyjny. Sprawdź czas w aplikacji.',
+    'login.error_totp_reused' => 'Ten kod został już użyty. Poczekaj na nowy kod.',
 
     // Wylogowanie (komunikaty pojawiają się na stronie publicznej)
     'logout.success' => 'Zostałeś wylogowany.',

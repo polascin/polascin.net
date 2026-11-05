@@ -90,6 +90,208 @@ function assetVersion(string $path): string {
 }
 
 /**
+ * ============================================
+ * Jednoduchý file-based query cache
+ * ============================================
+ */
+
+const QUERY_CACHE_DIR = __DIR__ . '/private/cache';
+const QUERY_CACHE_TTL = 300; // 5 minút
+
+/**
+ * Vráti cache adresár, vytvorí ho ak neexistuje.
+ */
+function queryCacheDir(): string {
+    if (!is_dir(QUERY_CACHE_DIR)) {
+        @mkdir(QUERY_CACHE_DIR, 0700, true);
+    }
+    return QUERY_CACHE_DIR;
+}
+
+/**
+ * Vypočíta cache kľúč z SQL dotazu a parametrov.
+ */
+function queryCacheKey(string $sql, array $params = []): string {
+    return 'q_' . hash('sha256', $sql . serialize($params));
+}
+
+/**
+ * Získa hodnotu z cache alebo null ak expirovala/neexistuje.
+ *
+ * @return mixed
+ */
+function queryCacheGet(string $key): mixed {
+    $file = queryCacheDir() . '/' . $key . '.cache';
+    if (!is_file($file)) {
+        return null;
+    }
+    $mtime = @filemtime($file);
+    if ($mtime === false || (time() - $mtime) > QUERY_CACHE_TTL) {
+        @unlink($file);
+        return null;
+    }
+    $data = @file_get_contents($file);
+    if ($data === false) {
+        return null;
+    }
+    $result = @unserialize($data);
+    return $result === false && $data !== 'b:0;' ? null : $result;
+}
+
+/**
+ * Uloží hodnotu do cache.
+ *
+ * @param mixed $value
+ */
+function queryCacheSet(string $key, mixed $value): void {
+    $file = queryCacheDir() . '/' . $key . '.cache';
+    @file_put_contents($file, serialize($value), LOCK_EX);
+}
+
+/**
+ * Vymaže celý query cache.
+ */
+function queryCacheClear(): void {
+    $files = glob(queryCacheDir() . '/q_*.cache');
+    if (is_array($files)) {
+        foreach ($files as $file) {
+            @unlink($file);
+        }
+    }
+}
+
+/**
+ * ============================================
+ * TOTP (Time-based One-Time Password) - RFC 6238
+ * ============================================
+ */
+
+/**
+ * Vygeneruje náhodný TOTP secret (Base32).
+ *
+ * @return string Base32 zakódovaný secret (32 znakov = 160 bitov)
+ */
+function generateTotpSecret(): string {
+    $bytes = random_bytes(20);
+    return base32Encode($bytes);
+}
+
+/**
+ * Base32 kódovanie (RFC 4648).
+ */
+function base32Encode(string $data): string {
+    $alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+    $result = '';
+    $buffer = 0;
+    $bitsLeft = 0;
+
+    for ($i = 0, $len = strlen($data); $i < $len; $i++) {
+        $buffer = ($buffer << 8) | ord($data[$i]);
+        $bitsLeft += 8;
+        while ($bitsLeft >= 5) {
+            $bitsLeft -= 5;
+            $result .= $alphabet[($buffer >> $bitsLeft) & 0x1F];
+        }
+    }
+    if ($bitsLeft > 0) {
+        $result .= $alphabet[($buffer << (5 - $bitsLeft)) & 0x1F];
+    }
+    return $result;
+}
+
+/**
+ * Base32 dekódovanie (RFC 4648).
+ */
+function base32Decode(string $data): string {
+    $alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+    $data = strtoupper(rtrim($data, '='));
+    $result = '';
+    $buffer = 0;
+    $bitsLeft = 0;
+
+    for ($i = 0, $len = strlen($data); $i < $len; $i++) {
+        $pos = strpos($alphabet, $data[$i]);
+        if ($pos === false) {
+            continue;
+        }
+        $buffer = ($buffer << 5) | $pos;
+        $bitsLeft += 5;
+        if ($bitsLeft >= 8) {
+            $bitsLeft -= 8;
+            $result .= chr(($buffer >> $bitsLeft) & 0xFF);
+        }
+    }
+    return $result;
+}
+
+/**
+ * Vypočíta TOTP kód pre daný secret a čas.
+ *
+ * @param string $secret Base32 zakódovaný secret
+ * @param int|null $timestamp Unix timestamp (null = aktuálny čas)
+ * @param int $digits Počet číslic (predvolene 6)
+ * @param int $period Perióda v sekundách (predvolene 30)
+ * @return string TOTP kód
+ */
+function generateTotpCode(string $secret, ?int $timestamp = null, int $digits = 6, int $period = 30): string {
+    $timestamp ??= time();
+    $counter = intdiv($timestamp, $period);
+    $binaryCounter = pack('N*', 0) . pack('N*', $counter);
+    $hash = hash_hmac('sha1', $binaryCounter, base32Decode($secret), true);
+    $offset = ord($hash[strlen($hash) - 1]) & 0x0F;
+    $code = (
+        ((ord($hash[$offset]) & 0x7F) << 24) |
+        ((ord($hash[$offset + 1]) & 0xFF) << 16) |
+        ((ord($hash[$offset + 2]) & 0xFF) << 8) |
+        (ord($hash[$offset + 3]) & 0xFF)
+    ) % (10 ** $digits);
+    return str_pad((string) $code, $digits, '0', STR_PAD_LEFT);
+}
+
+/**
+ * Overí TOTP kód s povoleným časovým posunom (±1 perióda).
+ *
+ * @param string $secret Base32 zakódovaný secret
+ * @param string $code Zadaný TOTP kód
+ * @param int|null $timestamp Unix timestamp (null = aktuálny čas)
+ * @param int $window Počet periód povolených na oboch stranách (predvolene 1)
+ * @return bool
+ */
+function verifyTotpCode(string $secret, string $code, ?int $timestamp = null, int $window = 1): bool {
+    $timestamp ??= time();
+    $period = 30;
+    $currentCounter = intdiv($timestamp, $period);
+
+    for ($i = -$window; $i <= $window; $i++) {
+        $testCounter = $currentCounter + $i;
+        $testCode = generateTotpCode($secret, $testCounter * $period);
+        if (hash_equals($testCode, $code)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * Vygeneruje TOTP URI pre QR kód (otpauth://).
+ *
+ * @param string $secret Base32 secret
+ * @param string $accountName Účet (napr. email)
+ * @param string $issuer Názov služby
+ * @return string otpauth:// URI
+ */
+function generateTotpUri(string $secret, string $accountName, string $issuer = 'polascin.net'): string {
+    $params = http_build_query([
+        'secret' => $secret,
+        'issuer' => $issuer,
+        'algorithm' => 'SHA1',
+        'digits' => 6,
+        'period' => 30,
+    ], '', '&', PHP_QUERY_RFC3986);
+    return 'otpauth://totp/' . rawurlencode($issuer) . ':' . rawurlencode($accountName) . '?' . $params;
+}
+
+/**
  * Obsahový blok v požadovanom jazyku.
  *
  * Ak blok pre daný jazyk neexistuje, použije sa `$default`: v šablónach je to
@@ -121,6 +323,12 @@ function getContentBlock(PDO $pdo, string $key, string $default = '', ?string $l
 function countPublishedArticles(PDO $pdo, ?string $lang = null): int {
     $lang ??= function_exists('currentLang') ? currentLang() : 'sk';
 
+    $cacheKey = queryCacheKey('countPublishedArticles', ['lang' => $lang]);
+    $cached = queryCacheGet($cacheKey);
+    if ($cached !== null) {
+        return (int) $cached;
+    }
+
     try {
         $stmt = $pdo->prepare(
             "SELECT COUNT(*) FROM articles
@@ -128,7 +336,9 @@ function countPublishedArticles(PDO $pdo, ?string $lang = null): int {
                AND lang = :lang"
         );
         $stmt->execute([':lang' => $lang]);
-        return (int) $stmt->fetchColumn();
+        $result = (int) $stmt->fetchColumn();
+        queryCacheSet($cacheKey, $result);
+        return $result;
     } catch (\PDOException $e) {
         error_log('countPublishedArticles error: ' . $e->getMessage());
         return 0;
@@ -140,6 +350,12 @@ function countPublishedArticles(PDO $pdo, ?string $lang = null): int {
  */
 function getPublishedArticles(PDO $pdo, int $limit = 10, int $offset = 0, ?string $lang = null): array {
     $lang ??= function_exists('currentLang') ? currentLang() : 'sk';
+
+    $cacheKey = queryCacheKey('getPublishedArticles', ['lang' => $lang, 'limit' => $limit, 'offset' => $offset]);
+    $cached = queryCacheGet($cacheKey);
+    if (is_array($cached)) {
+        return $cached;
+    }
 
     try {
         $stmt = $pdo->prepare(
@@ -155,7 +371,9 @@ function getPublishedArticles(PDO $pdo, int $limit = 10, int $offset = 0, ?strin
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $result = $stmt->fetchAll();
+        queryCacheSet($cacheKey, $result);
+        return $result;
     } catch (\PDOException $e) {
         error_log('getPublishedArticles error: ' . $e->getMessage());
         return [];

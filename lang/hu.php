@@ -291,6 +291,16 @@ return [
     'login.error_rate_limit' => 'Túl sok bejelentkezési kísérlet. Próbálja meg később.',
     'login.session_expired' => 'A munkamenet inaktivitás miatt lejárt. Jelentkezzen be újra.',
     'login.account_inactive' => 'A fiókja már nem aktív. Jelentkezzen be újra.',
+    'login.totp_prompt' => 'TOTP prompt (hu)',
+    'login.totp_code' => 'TOTP code (hu)',
+    'login.totp_submit' => 'TOTP submit (hu)',
+    'login.error_totp_invalid' => 'TOTP invalid (hu)',
+    'login.error_totp_reused' => 'TOTP reused (hu)',
+    'login.totp_prompt' => 'Írja be a 6 jegyű kódot a hitelesítő alkalmazásból.',
+    'login.totp_code' => 'Ellenőrző kód (2FA)',
+    'login.totp_submit' => 'Kód ellenőrzése',
+    'login.error_totp_invalid' => 'Érvénytelen ellenőrző kód. Ellenőrizze az időt az alkalmazásban.',
+    'login.error_totp_reused' => 'Ez a kód már fel lett használva. Várjon egy új kódra.',
 
     // Kijelentkezés (az üzenetek a nyilvános oldalon jelennek meg)
     'logout.success' => 'Kijelentkezett.',

@@ -291,6 +291,16 @@ return [
     'login.error_rate_limit' => 'Too many login attempts. Please try again later.',
     'login.session_expired' => 'Your session has expired due to inactivity. Please log in again.',
     'login.account_inactive' => 'Your account is no longer active. Please log in again.',
+    'login.totp_prompt' => 'TOTP prompt (en)',
+    'login.totp_code' => 'TOTP code (en)',
+    'login.totp_submit' => 'TOTP submit (en)',
+    'login.error_totp_invalid' => 'TOTP invalid (en)',
+    'login.error_totp_reused' => 'TOTP reused (en)',
+    'login.totp_prompt' => 'Enter the 6-digit code from your authenticator app.',
+    'login.totp_code' => 'Verification code (2FA)',
+    'login.totp_submit' => 'Verify code',
+    'login.error_totp_invalid' => 'Invalid verification code. Check the time in your authenticator.',
+    'login.error_totp_reused' => 'This code has already been used. Wait for a new code.',
 
     // Logout (messages are shown on the public site)
     'logout.success' => 'You have been logged out.',
