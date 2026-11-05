@@ -1,43 +1,37 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-05T19:50:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
+_Last updated: 2026-11-05T20:00:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
 
 ## Active Task
 
-1. Self-paced `/loop` for continuous polascin.net fixes (AGENT_LOOP_WAKE_polascin_dev).
-2. **Standing:** run `.doaudit.md` once daily (AGENT_LOOP_WAKE_polascin_doaudit).
+1. Self-paced `/loop` for continuous polascin.net fixes (`AGENT_LOOP_WAKE_polascin_dev`, ~20 min).
+2. Daily `.doaudit.md` (`AGENT_LOOP_WAKE_polascin_doaudit`, 24 h).
 
 ## Current State
 
 **Done:**
 
-- Beh #75 deployed (`7e1594b`): reporting headers, query cache clear, 2FA is_active, guard, `.codex` exclude.
-- Beh #76 (this doaudit): TOTP requires non-empty secret before challenge; Prettier `js/main.js` + static `?v=dfa6b9dd`; fresh DB report `113973b` (STATUS OK, 71 migrations); publication catalog unchanged and matching.
+- Beh #75: reporting headers, query cache clear, 2FA is_active, guard, `.codex`.
+- Beh #76: TOTP requires secret; daily doaudit; DB report refreshed.
+- Beh #77 (Loop 2): TOTP enable/disable UI in `admin_users.php` (session pending secret, password + code).
 
 **In flight:**
 
-- Commit/deploy of Beh #76 code + audit notes (if not yet finished in this turn).
+- Deploy of Beh #77 if not finished in this turn.
 
-**Open / deferred:**
+**Open:**
 
-- TOTP enrollment UI missing in `admin_users.php` (helpers + login ready).
-- Clarity integrations naming (owner dashboard).
-- Nightly Claude routine panel prompt still stale (API 404).
+- Clarity integrations naming (owner).
+- Nightly Claude routine panel prompt (API 404).
+- Optional: QR image without third-party host (local SVG later).
 
 ## Next Steps
 
 1. `git pull --ff-only websupport main`.
-2. On daily doaudit wake: follow `.doaudit.md` fully; if migration landed after `db-latest.md`, re-run `verify-db`.
-3. On 20m dev wake: one concrete defect (prefer TOTP admin enrollment or next RSI item).
-4. End each loop: tests, commit `[skip deploy]`, push websupport then origin, deploy if code changed, Beh #NN, rewrite this file + `.codex/handoffs/`.
-
-## Key Decisions
-
-- Daily doaudit is a separate wake from the 20m improvement loop.
-- Incomplete TOTP UI documented, not half-implemented in Beh #76.
+2. Loop 3: next concrete defect (e.g. spot-check production login page, catalog drift, or a11y residual).
+3. Daily doaudit wake: full `.doaudit.md`.
+4. End each loop: tests, `[skip deploy]` commit, push websupport then origin, deploy if code changed, Beh #NN, HANDOFF + `.codex/handoffs/`, re-arm wake.
 
 ## Working Environment
 
-- `d:\Dev\polascin.net`, branch `main`.
-- Deploy: `hooks/deploy.sh` via Git Bash + SSH `websupport`.
-- ggshield: `C:\Python314\Scripts` on PATH for commits.
+- `d:\Dev\polascin.net`, `main`. Deploy via `hooks/deploy.sh` + SSH `websupport`.

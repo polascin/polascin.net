@@ -2247,6 +2247,18 @@ expectTrue(
         && str_contains($mainNavSource, "'admin_users.php'"),
     'Správa administrátorov musí byť dostupná z panela aj admin navigácie'
 );
+expectTrue(
+    str_contains($adminUsersSource, "action === 'totp_begin'")
+        && str_contains($adminUsersSource, "action === 'totp_enable'")
+        && str_contains($adminUsersSource, "action === 'totp_disable'")
+        && str_contains($adminUsersSource, "action === 'totp_cancel'")
+        && str_contains($adminUsersSource, 'generateTotpSecret()')
+        && str_contains($adminUsersSource, 'verifyTotpCode(')
+        && str_contains($adminUsersSource, "\$_SESSION['totp_setup_secret']")
+        && str_contains($adminUsersSource, 'totp_enabled = 1')
+        && str_contains($adminUsersSource, 'totp_secret = NULL'),
+    'admin_users.php musí umožniť zapnutie a vypnutie TOTP s overením hesla a kódu'
+);
 $contactSource = (string) file_get_contents(dirname(__DIR__) . '/contact.php');
 expectTrue(
     str_contains($contactSource, 'isTrustedStateChangingRequest()')
