@@ -2262,8 +2262,11 @@ expectTrue(
         && preg_match(
             '/totp_begin[\s\S]*!regenerateSession\(\)[\s\S]*totp_setup_secret/s',
             $adminUsersSource
-        ) === 1,
-    'admin_users.php musí umožniť TOTP, pri zapnutí nesmie stamplovať totp_last_used a pred setup secret musí obnoviť ID relácie'
+        ) === 1
+        && str_contains($adminUsersSource, 'ADMIN_TOTP_SETUP_TTL_SECONDS')
+        && str_contains($adminUsersSource, "totp_setup_started_at")
+        && str_contains($adminUsersSource, 'Platnosť setup secretu vypršala'),
+    'admin_users.php musí umožniť TOTP, TTL setup secretu, bez totp_last_used pri zapnutí a regeneráciu pred secretom'
 );
 expectTrue(
     str_contains($adminUsersSource, 'totp_enabled, totp_secret, created_at')

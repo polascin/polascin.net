@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-06T00:10:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
+_Last updated: 2026-11-06T00:32:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
 
 ## Active Task
 
@@ -9,12 +9,11 @@ _Last updated: 2026-11-06T00:10:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#88 deployed (`a2f8dc1`). totp_pending TTL 300s. Smoke OK.
+**Done:** Beh #75–#88. Beh #89 coded: totp_setup_secret TTL 600s; removed TOTP placeholder translations. Tests 3345.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. `git pull --ff-only websupport main`.
-2. Loop 14: next concrete defect.
-3. Daily doaudit on its wake only.
+1. Ship Beh #89 (commit, push, deploy), then Loop 15.
+2. Daily doaudit on its wake only.

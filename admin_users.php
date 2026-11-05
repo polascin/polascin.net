@@ -14,6 +14,23 @@ $totpErrors = [];
 $newAdminEmail = '';
 $mustChangePassword = !empty($_SESSION['must_change_password']);
 $currentAdminId = (int) $_SESSION['user_id'];
+const ADMIN_TOTP_SETUP_TTL_SECONDS = 600;
+
+// Setup secret v relácii nesmie žiť neobmedzene (aj pri aktívnej admin relácii).
+$totpSetupExpired = false;
+if (isset($_SESSION['totp_setup_secret'])) {
+    $totpSetupStarted = (int) ($_SESSION['totp_setup_started_at'] ?? 0);
+    if (
+        $totpSetupStarted <= 0
+        || (time() - $totpSetupStarted) > ADMIN_TOTP_SETUP_TTL_SECONDS
+    ) {
+        unset($_SESSION['totp_setup_secret'], $_SESSION['totp_setup_started_at']);
+        $totpSetupExpired = true;
+    }
+}
+if ($totpSetupExpired && $_SERVER['REQUEST_METHOD'] !== 'POST') {
+    setFlashMessage('info', 'Platnosť setup secretu vypršala. Vygenerujte nový secret.');
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = (string) ($_POST['action'] ?? '');
@@ -57,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 // Secret do relácie až po regenerateSession (session fixation).
                 $_SESSION['totp_setup_secret'] = generateTotpSecret();
+                $_SESSION['totp_setup_started_at'] = time();
                 clearFormRateLimit($pdo, 'admin_totp_setup', $rateKey);
                 setFlashMessage('info', 'Secret bol vygenerovaný. Dokončite zapnutie overovacím kódom.');
                 header('Location: admin_users.php#totp', true, 303);
@@ -64,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     } elseif ($action === 'totp_cancel') {
-        unset($_SESSION['totp_setup_secret']);
+        unset($_SESSION['totp_setup_secret'], $_SESSION['totp_setup_started_at']);
         setFlashMessage('info', 'Zapínanie dvojfaktorového overenia bolo zrušené.');
         header('Location: admin_users.php#totp', true, 303);
         exit;
@@ -73,7 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $totpCode = trim((string) ($_POST['totp_code'] ?? ''));
         $rateKey = 'usr:' . substr(hash('sha256', (string) $currentAdminId), 0, 40);
         if ($pendingSecret === '') {
-            $totpErrors[] = 'Najprv vygenerujte nový secret.';
+            $totpErrors[] = $totpSetupExpired
+                ? 'Platnosť setup secretu vypršala. Vygenerujte nový secret.'
+                : 'Najprv vygenerujte nový secret.';
         } elseif (!preg_match('/^[0-9]{6}$/', $totpCode)) {
             http_response_code(400);
             $totpErrors[] = 'Overovací kód musí mať 6 číslic.';
@@ -100,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($update->rowCount() !== 1) {
                 $totpErrors[] = 'Dvojfaktorové overenie sa nepodarilo zapnúť. Skúste to znova.';
             } else {
-                unset($_SESSION['totp_setup_secret']);
+                unset($_SESSION['totp_setup_secret'], $_SESSION['totp_setup_started_at']);
                 clearFormRateLimit($pdo, 'admin_totp_enable', $rateKey);
                 logAdminAction($pdo, 'admin_totp_enable', 'user', $currentAdminId);
                 setFlashMessage('success', 'Dvojfaktorové overenie je zapnuté.');
@@ -145,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                      WHERE id = :id AND is_admin = 1 AND is_active = 1"
                 );
                 $update->execute([':id' => $currentAdminId]);
-                unset($_SESSION['totp_setup_secret']);
+                unset($_SESSION['totp_setup_secret'], $_SESSION['totp_setup_started_at']);
                 clearFormRateLimit($pdo, 'admin_totp_disable', $rateKey);
                 logAdminAction($pdo, 'admin_totp_disable', 'user', $currentAdminId);
                 setFlashMessage('success', 'Dvojfaktorové overenie je vypnuté.');
