@@ -9,11 +9,12 @@ _Last updated: 2026-11-05T22:12:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#82. Beh #83 coded: `queryCacheGet` unserialize with `allowed_classes => false`; robots disallow `/hooks/`, `/tests/`, `/lang/`. Tests 3323.
+**Done:** Beh #75–#83 deployed (`602336f`). Safe query-cache unserialize; robots disallow `/hooks/`, `/tests/`, `/lang/`. Smoke OK; robots verified on production.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Ship Beh #83 (commit, push, deploy), then Loop 9.
-2. Daily doaudit on its wake only.
+1. `git pull --ff-only websupport main`.
+2. Loop 9: next concrete defect.
+3. Daily doaudit on its wake only.
