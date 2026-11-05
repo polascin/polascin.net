@@ -9,11 +9,12 @@ _Last updated: 2026-11-05T23:00:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#84. Beh #85 coded: contact/newsletter PRG redirects keep `lang` via `langUrl`. Tests 3327.
+**Done:** Beh #75–#85 deployed (`2246f1d`). Contact/newsletter PRG keeps `lang` via `langUrl`. Smoke OK.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Ship Beh #85 (commit, push, deploy), then Loop 11.
-2. Daily doaudit on its wake only.
+1. `git pull --ff-only websupport main`.
+2. Loop 11: next concrete defect.
+3. Daily doaudit on its wake only.
