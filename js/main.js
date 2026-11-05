@@ -546,7 +546,8 @@
         banner.querySelector(".cookie-title").textContent = strings.title;
         banner.querySelector(".cookie-description-text").textContent =
           strings.description;
-        banner.querySelector(".btn-cookie-decline").textContent = strings.decline;
+        banner.querySelector(".btn-cookie-decline").textContent =
+          strings.decline;
         banner.querySelector(".btn-cookie-accept").textContent = strings.accept;
 
         const privacyLink = banner.querySelector(".cookie-link");
@@ -582,7 +583,8 @@
         banner.querySelector(".cookie-title").textContent = strings.title;
         banner.querySelector(".cookie-description-text").textContent =
           strings.description;
-        banner.querySelector(".btn-cookie-decline").textContent = strings.decline;
+        banner.querySelector(".btn-cookie-decline").textContent =
+          strings.decline;
         banner.querySelector(".btn-cookie-accept").textContent = strings.accept;
 
         const privacyLink = banner.querySelector(".cookie-link");

@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_SESSION['totp_pending_user
             header('Retry-After: 900');
             $errors[] = t('login.error_rate_limit');
         } else {
-            $stmt = $pdo->prepare("SELECT id, username, email, password_hash, is_admin, is_active, must_change_password, totp_enabled FROM users WHERE username = :username LIMIT 1");
+            $stmt = $pdo->prepare("SELECT id, username, email, password_hash, is_admin, is_active, must_change_password, totp_enabled, totp_secret FROM users WHERE username = :username LIMIT 1");
             $stmt->execute([':username' => appTextSlice($username, 0, 255)]);
             $user = $stmt->fetch();
 
@@ -142,8 +142,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_SESSION['totp_pending_user
                 http_response_code(401);
                 $errors[] = t('login.error_credentials');
             } else {
-                // Ak má používateľ zapnuté 2FA, uložíme jeho ID do session a zobrazíme TOTP formulár
-                if ((int) ($user['totp_enabled'] ?? 0) === 1) {
+                // 2FA len keď je zapnuté a secret je vyplnený. Samotný totp_enabled=1
+                // bez secretu by inak zablokoval prihlásenie na TOTP formulári.
+                $totpArmed = (int) ($user['totp_enabled'] ?? 0) === 1
+                    && (string) ($user['totp_secret'] ?? '') !== '';
+                if ($totpArmed) {
                     $_SESSION['totp_pending_user_id'] = (int) $user['id'];
                     $totpRequired = true;
                     $totpUserId = (int) $user['id'];

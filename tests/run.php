@@ -3352,6 +3352,12 @@ expectTrue(
         && str_contains($loginSource, "(int) (\$user['is_active'] ?? 0) !== 1"),
     'login.php musí pri 2FA kroku znova overiť is_active'
 );
+expectTrue(
+    str_contains($loginSource, 'totp_enabled, totp_secret FROM users')
+        && str_contains($loginSource, "\$totpArmed = (int) (\$user['totp_enabled'] ?? 0) === 1")
+        && str_contains($loginSource, "(\$user['totp_secret'] ?? '') !== ''"),
+    'login.php musí 2FA spustiť len pri totp_enabled=1 a neprázdnom totp_secret'
+);
 $guardSource = (string) file_get_contents(dirname(__DIR__) . '/guard.php');
 expectTrue(
     str_contains($guardSource, 'realpath($filename)')
