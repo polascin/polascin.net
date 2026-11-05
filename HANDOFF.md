@@ -9,11 +9,12 @@ _Last updated: 2026-11-06T00:32:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#88. Beh #89 coded: totp_setup_secret TTL 600s; removed TOTP placeholder translations. Tests 3345.
+**Done:** Beh #75–#89 deployed (`0573532`). totp_setup_secret TTL 600s; placeholder translations cleaned. Smoke OK.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Ship Beh #89 (commit, push, deploy), then Loop 15.
-2. Daily doaudit on its wake only.
+1. `git pull --ff-only websupport main`.
+2. Loop 15: next concrete defect.
+3. Daily doaudit on its wake only.
