@@ -3390,6 +3390,14 @@ expectTrue(
         ) === 1,
     'login.php musí pred uložením totp_pending_user_id obnoviť ID relácie'
 );
+expectTrue(
+    str_contains($loginSource, 'Po overení TOTP sa nepodarilo obnoviť ID relácie')
+        && preg_match(
+            '/Po overení TOTP sa nepodarilo obnoviť ID relácie\.[\s\S]*?totp_last_used = :period[\s\S]*?clearFormRateLimit\(\$pdo, \'login_account\'/s',
+            $loginSource
+        ) === 1,
+    'login.php musí po TOTP najprv obnoviť reláciu, až potom stamplovať totp_last_used a vyčistiť login_account'
+);
 $guardSource = (string) file_get_contents(dirname(__DIR__) . '/guard.php');
 expectTrue(
     str_contains($guardSource, 'realpath($filename)')

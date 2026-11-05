@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-05T21:26:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
+_Last updated: 2026-11-05T21:48:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
 
 ## Active Task
 
@@ -9,12 +9,11 @@ _Last updated: 2026-11-05T21:26:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#81 deployed (`adea9dc`). Robots disallow `/.codex/` and `/.claude/`; `totp_begin` regenerates session before `totp_setup_secret`. Smoke OK; `robots.txt` verified on production.
+**Done:** Beh #75–#81. Beh #82 coded: TOTP success stamps `totp_last_used` only after `regenerateSession()`; also clears `login_account`. Tests 3319.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. `git pull --ff-only websupport main`.
-2. Loop 7: next concrete defect.
-3. Daily doaudit on its wake only (PID still armed).
+1. Ship Beh #82 (commit, push, deploy), then Loop 8.
+2. Daily doaudit on its wake only.

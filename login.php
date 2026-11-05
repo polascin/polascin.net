@@ -61,18 +61,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['totp_pending_user_
                     http_response_code(401);
                     $errors[] = t('login.error_totp_reused');
                 } else {
-                    clearFormRateLimit($pdo, 'login_totp', $ip);
-                    clearFormRateLimit($pdo, 'login_attempt', $ip);
-                    unset($_SESSION['totp_pending_user_id']);
-
-                    // Aktualizácia posledného použitého TOTP obdobia
-                    $pdo->prepare("UPDATE users SET totp_last_used = :period WHERE id = :id")
-                        ->execute([':period' => $currentPeriod, ':id' => $pendingUserId]);
-
+                    // Najprv obnoviť ID relácie. Až potom stamplovať totp_last_used
+                    // a zrušiť pending: pri zlyhaní regenerateSession() by inak
+                    // platný kód zhorel a pending by zmizol (~60 s výpadok).
                     if (!regenerateSession()) {
                         http_response_code(503);
+                        error_log('Po overení TOTP sa nepodarilo obnoviť ID relácie.');
                         $errors[] = t('login.error_credentials');
                     } else {
+                        $pdo->prepare("UPDATE users SET totp_last_used = :period WHERE id = :id")
+                            ->execute([':period' => $currentPeriod, ':id' => $pendingUserId]);
+
+                        clearFormRateLimit($pdo, 'login_totp', $ip);
+                        clearFormRateLimit($pdo, 'login_attempt', $ip);
+                        $accountRateKey = 'usr:' . substr(
+                            hash('sha256', strtolower((string) $user['username'])),
+                            0,
+                            40
+                        );
+                        clearFormRateLimit($pdo, 'login_account', $accountRateKey);
+                        unset($_SESSION['totp_pending_user_id']);
+
                         $now = time();
                         $_SESSION['user_id'] = (int) $user['id'];
                         $_SESSION['username'] = (string) $user['username'];
