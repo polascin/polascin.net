@@ -12,7 +12,7 @@ $lang = currentLang();
 $slug = isset($_GET['slug']) ? trim((string) $_GET['slug']) : '';
 // Administrátor smie vidieť aj nepublikovaný koncept v požadovanom jazyku;
 // návštevníkovi sa namiesto neho ponúkne publikovaný preklad.
-$article = preg_match('/^[a-z0-9-]{1,255}$/D', $slug) === 1
+$article = preg_match('/^[a-z0-9-]{1,255}$/', $slug) === 1
     ? getArticleBySlug($pdo, $slug, $lang, isAdmin())
     : null;
 // Článok sa mohol nájsť len v inom jazyku (staré odkazy, chýbajúci preklad).

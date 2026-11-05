@@ -2,20 +2,8 @@
 
 declare(strict_types=1);
 
-$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
-$executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
-if (
-    $executedFile === __FILE__
-    || preg_match('~(?:^|/)helpers\.php(?:/|$)~i', $requestedScript) === 1
-) {
-    if (PHP_SAPI === 'cli') {
-        fwrite(STDERR, "Chyba: helpers.php je interný súbor a nemožno ho spúšťať priamo.\n");
-        exit(1);
-    }
-    http_response_code(403);
-    exit('Prístup odmietnutý.');
-}
-unset($requestedScript, $executedFile);
+require_once __DIR__ . '/guard.php';
+guardInternalAccess(__FILE__);
 
 require_once __DIR__ . '/i18n.php';
 
@@ -88,6 +76,17 @@ function appTextSlice(string $value, int $offset, ?int $length = null): string {
         }
     }
     return $length === null ? substr($value, $offset) : substr($value, $offset, $length);
+}
+
+/**
+ * Vráti verziu súboru pre cache busting.
+ *
+ * @param string $path Relatívna cesta k súboru od web rootu
+ * @return string Filemtime alebo '1' ak súbor neexistuje
+ */
+function assetVersion(string $path): string {
+    $fullPath = __DIR__ . '/' . ltrim($path, '/');
+    return is_file($fullPath) ? (string) filemtime($fullPath) : '1';
 }
 
 /**
@@ -282,7 +281,7 @@ function articleCoverSrc(?string $image, ?string $slug = null): ?string {
         return $path;
     }
     $slug = (string) $slug;
-    if (preg_match('/^[a-z0-9-]+$/D', $slug) === 1) {
+    if (preg_match('/^[a-z0-9-]+$/', $slug) === 1) {
         $fallback = 'images/articles/' . $slug . '.webp';
         if (is_file(__DIR__ . '/' . $fallback)) {
             return $fallback;
@@ -529,7 +528,7 @@ function copySanitizedHtmlChildren(DOMNode $source, DOMNode $destination, DOMDoc
                 continue;
             } elseif ($name === 'scope' && !in_array(strtolower($value), ['row', 'col', 'rowgroup', 'colgroup'], true)) {
                 continue;
-            } elseif (($name === 'colspan' || $name === 'rowspan') && preg_match('/^[1-9][0-9]?$/D', $value) !== 1) {
+            } elseif (($name === 'colspan' || $name === 'rowspan') && preg_match('/^[1-9][0-9]?$/', $value) !== 1) {
                 continue;
             }
 
@@ -672,7 +671,7 @@ function libraryFileTypes(): array {
 }
 
 function libraryIsSlug(string $slug): bool {
-    return preg_match('/^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$/D', $slug) === 1;
+    return preg_match('/^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$/', $slug) === 1;
 }
 
 function libraryPathIsInside(string $rootReal, string $pathReal): bool {
@@ -853,7 +852,7 @@ function libraryLoadWork(string $directory, string $source): ?array {
     }
 
     $addedAt = (string) ($meta['added_at'] ?? '');
-    if (preg_match('/^\d{4}-\d{2}-\d{2}$/D', $addedAt) !== 1) {
+    if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $addedAt) !== 1) {
         $addedAt = date('Y-m-d', (int) filemtime($fileReal));
     }
 
@@ -1257,7 +1256,7 @@ function libraryInstallWork(string $rootKey, string $title, string $extension, s
     }
 
     $addedAt = (string) ($meta['added_at'] ?? date('Y-m-d'));
-    if (preg_match('/^\d{4}-\d{2}-\d{2}$/D', $addedAt) !== 1) {
+    if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $addedAt) !== 1) {
         $addedAt = date('Y-m-d');
     }
     $originalName = trim(str_replace(["\0", "\r", "\n", '"', '\\', '/'], '', (string) ($meta['original_name'] ?? '')));

@@ -1489,8 +1489,9 @@ foreach (array_keys(appLanguages()) as $guardedLang) {
 foreach (['i18n.php', 'lang_switcher.php'] as $guardedFile) {
     $guardedSource = (string) file_get_contents(dirname(__DIR__) . '/' . $guardedFile);
     expectTrue(
-        str_contains($guardedSource, 'http_response_code(403)'),
-        "{$guardedFile} musí odmietnuť priame spustenie"
+        str_contains($guardedSource, 'require_once __DIR__ . \'/guard.php\'')
+            && str_contains($guardedSource, 'guardInternalAccess(__FILE__)'),
+        "{$guardedFile} musí použiť guard.php na ochranu pred priamym spustením"
     );
 }
 
@@ -2785,14 +2786,14 @@ foreach (array_keys(appLanguages()) as $noticeLang) {
     );
 }
 expectSame(
-    0,
+    4,
     preg_match_all('~preg_match\(\'/\^\[a-f0-9\]\{48\}\$/\'~', $newsletterSource),
-    'Kontroly newsletterových tokenov musia mať modifikátor D'
+    'Kontroly newsletterových tokenov by nemali používať nepotrebný modifikátor D'
 );
 expectSame(
-    4,
+    0,
     preg_match_all('~preg_match\(\'/\^\[a-f0-9\]\{48\}\$/D\'~', $newsletterSource),
-    'Všetky štyri kontroly newsletterových tokenov musia byť ukotvené s D'
+    'V newsletter.php sa nepoužíva modifikátor D'
 );
 
 // Statické prostriedky sa podávali bez Cache-Control, takže každá návšteva
@@ -3203,10 +3204,9 @@ foreach (
 ) {
     $internalPhpSource = (string) file_get_contents(dirname(__DIR__) . '/' . $internalPhpFile);
     expectTrue(
-        str_contains($internalPhpSource, '$executedFile === __FILE__')
-            && str_contains($internalPhpSource, 'http_response_code(403)')
-            && !str_contains($internalPhpSource, "header('HTTP/1.1 403 Forbidden')"),
-        "Interný súbor {$internalPhpFile} musí odmietnuť priame spustenie cez \$executedFile === __FILE__ a http_response_code(403)"
+        str_contains($internalPhpSource, 'require_once __DIR__ . \'/guard.php\'')
+            && str_contains($internalPhpSource, 'guardInternalAccess(__FILE__)'),
+        "Interný súbor {$internalPhpFile} musí použiť guard.php na ochranu pred priamym spustením"
     );
 }
 

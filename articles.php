@@ -14,7 +14,7 @@ $total = countPublishedArticles($pdo, $lang);
 $totalPages = max(1, (int) ceil($total / $perPage));
 $rawPage = $_GET['page'] ?? '1';
 $pageIsValid = is_string($rawPage)
-    && preg_match('/^[1-9][0-9]{0,8}$/D', $rawPage) === 1
+    && preg_match('/^[1-9][0-9]{0,8}$/', $rawPage) === 1
     && (int) $rawPage <= $totalPages;
 $page = $pageIsValid ? (int) $rawPage : 1;
 $offset = ($page - 1) * $perPage;

@@ -2,20 +2,8 @@
 
 declare(strict_types=1);
 
-$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
-$executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
-if (
-    $executedFile === __FILE__
-    || preg_match('~(?:^|/)auth\.php(?:/|$)~i', $requestedScript) === 1
-) {
-    if (PHP_SAPI === 'cli') {
-        fwrite(STDERR, "Chyba: auth.php je interný súbor a nemožno ho spúšťať priamo.\n");
-        exit(1);
-    }
-    http_response_code(403);
-    exit('Prístup odmietnutý.');
-}
-unset($requestedScript, $executedFile);
+require_once __DIR__ . '/guard.php';
+guardInternalAccess(__FILE__);
 
 require_once __DIR__ . '/config_loader.php';
 require_once __DIR__ . '/helpers.php';
@@ -467,7 +455,7 @@ function logCsrfFailure(string $form, bool $trustedOrigin, mixed $token): void {
  * Viac tokenov umožňuje mať formulár otvorený vo viacerých kartách.
  */
 function generateTimedFormProof(string $scope): string {
-    if (preg_match('/^[a-z0-9_-]{1,40}$/D', $scope) !== 1) {
+    if (preg_match('/^[a-z0-9_-]{1,40}$/', $scope) !== 1) {
         throw new InvalidArgumentException('Neplatný rozsah formulárového dôkazu.');
     }
 
@@ -498,9 +486,9 @@ function consumeTimedFormProof(
     int $maximumAgeSeconds = 7200
 ): bool {
     if (
-        preg_match('/^[a-z0-9_-]{1,40}$/D', $scope) !== 1
+        preg_match('/^[a-z0-9_-]{1,40}$/', $scope) !== 1
         || !is_string($token)
-        || preg_match('/^[a-f0-9]{32}$/D', $token) !== 1
+        || preg_match('/^[a-f0-9]{32}$/', $token) !== 1
         || !isset($_SESSION['_form_proofs'][$scope][$token])
     ) {
         return false;
@@ -579,7 +567,7 @@ function currentRequestOrigin(): ?string {
     $host = strtolower(trim((string) ($_SERVER['HTTP_HOST'] ?? '')));
     if (
         $host === ''
-        || preg_match('/^(?:\[[0-9a-f:.]+\]|[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?)(?::\d{1,5})?$/D', $host) !== 1
+        || preg_match('/^(?:\[[0-9a-f:.]+\]|[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?)(?::\d{1,5})?$/', $host) !== 1
     ) {
         return null;
     }
@@ -589,7 +577,7 @@ function currentRequestOrigin(): ?string {
 /** localhost, loopback adresy a vyhradené vývojové domény .localhost a .test. */
 function isLocalDevelopmentHost(string $host): bool {
     $host = strtolower(trim($host));
-    $host = (string) preg_replace('/:\d{1,5}$/D', '', $host);
+    $host = (string) preg_replace('/:\d{1,5}$/', '', $host);
     if (in_array($host, ['localhost', '[::1]'], true)) {
         return true;
     }

@@ -1,21 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
-$partialName = basename(__FILE__);
-$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
-$executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
-if (
-    $executedFile === __FILE__
-    || preg_match('~(?:^|/)' . preg_quote($partialName, '~') . '(?:/|$)~i', $requestedScript) === 1
-) {
-    if (PHP_SAPI === 'cli') {
-        fwrite(STDERR, "Chyba: {$partialName} je interný súbor a nemožno ho spúšťať priamo.\n");
-        exit(1);
-    }
-    http_response_code(403);
-    exit('Prístup odmietnutý.');
-}
-unset($partialName, $requestedScript, $executedFile);
+require_once __DIR__ . '/guard.php';
+guardInternalAccess(__FILE__);
 
 $siteName = 'Polascin.net';
 $baseUrl = getAppBaseUrl();
@@ -60,12 +48,16 @@ $ogImageAlt = $ogImageAlt ?? t('common.author');
 $ogImageType = $ogImageType ?? 'image/jpeg';
 $themeColor = $themeColor ?? '#ffffff';
 
-$cssVersion = is_file(__DIR__ . '/css/styles.css') ? (string) filemtime(__DIR__ . '/css/styles.css') : '1';
-$fontsVersion = is_file(__DIR__ . '/css/fonts.css') ? (string) filemtime(__DIR__ . '/css/fonts.css') : '1';
+// Načítanie verzií pre cache busting
+if (!function_exists('assetVersion')) {
+    require_once __DIR__ . '/helpers.php';
+}
+$cssVersion = assetVersion('css/styles.css');
+$fontsVersion = assetVersion('css/fonts.css');
 // Podmnožina Font Awesome len s použitými ikonami (scripts/build_fa_subset.py).
-$iconsVersion = is_file(__DIR__ . '/css/icons.css') ? (string) filemtime(__DIR__ . '/css/icons.css') : '1';
-$consentVersion = is_file(__DIR__ . '/js/consent-default.js') ? (string) filemtime(__DIR__ . '/js/consent-default.js') : '1';
-$jsVersion = is_file(__DIR__ . '/js/main.js') ? (string) filemtime(__DIR__ . '/js/main.js') : '1';
+$iconsVersion = assetVersion('css/icons.css');
+$consentVersion = assetVersion('js/consent-default.js');
+$jsVersion = assetVersion('js/main.js');
 ?>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

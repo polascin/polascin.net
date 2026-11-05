@@ -1,21 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
-$partialName = basename(__FILE__);
-$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
-$executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
-if (
-    $executedFile === __FILE__
-    || preg_match('~(?:^|/)' . preg_quote($partialName, '~') . '(?:/|$)~i', $requestedScript) === 1
-) {
-    if (PHP_SAPI === 'cli') {
-        fwrite(STDERR, "Chyba: {$partialName} je interný súbor a nemožno ho spúšťať priamo.\n");
-        exit(1);
-    }
-    http_response_code(403);
-    exit('Prístup odmietnutý.');
-}
-unset($partialName, $requestedScript, $executedFile);
+require_once __DIR__ . '/guard.php';
+guardInternalAccess(__FILE__);
 
 $year = date('Y');
 $footerLang = currentLang();
@@ -108,6 +96,22 @@ $footerBeat = appSwatchBeat($footerUpdateTs);
   data-cookie-decline="<?= te('cookie.decline') ?>"
   data-cookie-accept="<?= te('cookie.accept') ?>"
 ></div>
+
+<!-- Cookie banner template (skryté, JS ho zviditeľní podľa potreby) -->
+<div id="cookie-banner-template" style="display:none;">
+  <div class="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-consent-title" aria-describedby="cookie-consent-description">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        <h2 id="cookie-consent-title" class="cookie-title"></h2>
+        <p id="cookie-consent-description"><span class="cookie-description-text"></span> <a class="cookie-link" target="_blank" rel="noopener noreferrer"></a>.</p>
+      </div>
+      <div class="cookie-buttons">
+        <button type="button" class="btn btn-secondary btn-cookie-decline"></button>
+        <button type="button" class="btn btn-primary btn-cookie-accept"></button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php if (!isLoggedIn()): ?>
 <?php $clarityVersion = is_file(__DIR__ . '/js/clarity-consent.js') ? (string) filemtime(__DIR__ . '/js/clarity-consent.js') : '1'; ?>

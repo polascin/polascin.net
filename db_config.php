@@ -2,21 +2,8 @@
 
 declare(strict_types=1);
 
-// Ochrana pred priamym prístupom vrátane požiadaviek s PATH_INFO.
-$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
-$executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
-if (
-    $executedFile === __FILE__
-    || preg_match('~(?:^|/)db_config\.php(?:/|$)~i', $requestedScript) === 1
-) {
-    if (PHP_SAPI === 'cli') {
-        fwrite(STDERR, "Chyba: db_config.php je interný súbor a nemožno ho spúšťať priamo.\n");
-        exit(1);
-    }
-    http_response_code(403);
-    exit("Prístup odmietnutý.");
-}
-unset($requestedScript, $executedFile);
+require_once __DIR__ . '/guard.php';
+guardInternalAccess(__FILE__);
 
 require_once __DIR__ . '/config_loader.php';
 

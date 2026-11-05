@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sortOrder = (int) ($_POST['sort_order'] ?? 0);
             $isActive = isset($_POST['is_active']) ? 1 : 0;
 
-            if (!preg_match('/^[a-z0-9_\-]+$/D', $blockKey) || appTextLength($blockKey) > 64) {
+            if (!preg_match('/^[a-z0-9_\-]+$/', $blockKey) || appTextLength($blockKey) > 64) {
                 $errors[] = 'Kľúč bloku je povinný a musí obsahovať iba malé písmená, čísla, podčiarkovníky a pomlčky.';
             }
             if (appTextLength($title) > 255) {

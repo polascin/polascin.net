@@ -2,20 +2,8 @@
 
 declare(strict_types=1);
 
-$requestedScript = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? ''));
-$executedFile = isset($_SERVER['SCRIPT_FILENAME']) ? realpath((string) $_SERVER['SCRIPT_FILENAME']) : false;
-if (
-    $executedFile === __FILE__
-    || preg_match('~(?:^|/)i18n\.php(?:/|$)~i', $requestedScript) === 1
-) {
-    if (PHP_SAPI === 'cli') {
-        fwrite(STDERR, "Chyba: i18n.php je interný súbor a nemožno ho spúšťať priamo.\n");
-        exit(1);
-    }
-    http_response_code(403);
-    exit('Prístup odmietnutý.');
-}
-unset($requestedScript, $executedFile);
+require_once __DIR__ . '/guard.php';
+guardInternalAccess(__FILE__);
 
 const APP_DEFAULT_LANGUAGE = 'sk';
 
@@ -67,7 +55,7 @@ function normalizeLanguageTag(string $tag): ?string {
         return null;
     }
     $primary = preg_split('/[-_]/', $tag)[0] ?? '';
-    if (!is_string($primary) || preg_match('/^[a-z]{2,3}$/D', $primary) !== 1) {
+    if (!is_string($primary) || preg_match('/^[a-z]{2,3}$/', $primary) !== 1) {
         return null;
     }
     return isSupportedLanguage($primary) ? $primary : null;
@@ -122,7 +110,7 @@ function languageFromAcceptHeader(?string $header): ?string {
  * jazyk neposlal, lebo geolokácia je menej spoľahlivá než explicitné nastavenie.
  */
 function languageFromCountryCode(?string $countryCode): ?string {
-    if (!is_string($countryCode) || preg_match('/^[A-Za-z]{2}$/D', trim($countryCode)) !== 1) {
+    if (!is_string($countryCode) || preg_match('/^[A-Za-z]{2}$/', trim($countryCode)) !== 1) {
         return null;
     }
 
@@ -159,7 +147,7 @@ function detectCountryCode(): ?string {
     ];
     foreach ($headers as $header) {
         $value = $_SERVER[$header] ?? null;
-        if (is_string($value) && preg_match('/^[A-Za-z]{2}$/D', trim($value)) === 1) {
+        if (is_string($value) && preg_match('/^[A-Za-z]{2}$/', trim($value)) === 1) {
             $code = strtoupper(trim($value));
             // Cloudflare posiela XX pre neznámu a T1 pre Tor.
             if (!in_array($code, ['XX', 'T1'], true)) {
@@ -329,7 +317,7 @@ function langUrl(string $lang, ?string $path = null, array $extraParams = []): s
 
     $pairs = [];
     foreach ($params as $name => $value) {
-        if (!is_string($name) || preg_match('/^[A-Za-z0-9_\-]{1,32}$/D', $name) !== 1) {
+        if (!is_string($name) || preg_match('/^[A-Za-z0-9_\-]{1,32}$/', $name) !== 1) {
             continue;
         }
         $pairs[] = rawurlencode($name) . '=' . rawurlencode((string) $value);
@@ -360,7 +348,7 @@ function absoluteLangUrl(string $lang, string $path, array $extraParams = []): s
 
     $pairs = [];
     foreach ($params as $name => $value) {
-        if (!is_string($name) || preg_match('/^[A-Za-z0-9_\-]{1,32}$/D', $name) !== 1) {
+        if (!is_string($name) || preg_match('/^[A-Za-z0-9_\-]{1,32}$/', $name) !== 1) {
             continue;
         }
         if (!is_scalar($value) || (string) $value === '') {

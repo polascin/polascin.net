@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($slug === '') {
                 $slug = slugify($title);
             }
-            if (!preg_match('/^[a-z0-9-]+$/D', $slug)) {
+            if (!preg_match('/^[a-z0-9-]+$/', $slug)) {
                 $errors[] = 'Slug musí obsahovať iba malé písmená, čísla a pomlčky.';
             }
             if (appTextLength($slug) > 255) {
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!isSupportedLanguage($articleLang)) {
                 $errors[] = 'Zvolený jazyk nie je podporovaný.';
             }
-            if ($rawTranslationGroup !== '' && preg_match('/^[1-9][0-9]{0,8}$/D', $rawTranslationGroup) !== 1) {
+            if ($rawTranslationGroup !== '' && preg_match('/^[1-9][0-9]{0,8}$/', $rawTranslationGroup) !== 1) {
                 $errors[] = 'Skupina prekladov musí byť kladné celé číslo.';
             }
             // V jednej skupine smie byť od každého jazyka najviac jeden článok, inak

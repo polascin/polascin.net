@@ -525,14 +525,8 @@
 
       consentReturnFocus = options.returnFocus || null;
 
-      const banner = document.createElement("div");
-      banner.className = "cookie-banner";
-      banner.setAttribute("role", "dialog");
-      banner.setAttribute("aria-modal", "false");
-      banner.setAttribute("aria-labelledby", "cookie-consent-title");
-      banner.setAttribute("aria-describedby", "cookie-consent-description");
-      // Texty prichádzajú preložené zo servera cez data atribúty. Vkladajú sa
-      // ako textContent, takže sa nikdy neinterpretujú ako HTML.
+      // Use server-side template instead of creating HTML from string
+      const template = document.getElementById("cookie-banner-template");
       const strings = {
         title: cookieContainer.dataset.cookieTitle || "Analytické cookies",
         description:
@@ -545,32 +539,60 @@
         accept: cookieContainer.dataset.cookieAccept || "Povoliť analytiku",
       };
 
-      banner.innerHTML = `
-        <div class="cookie-content">
-          <div class="cookie-text">
-            <h2 id="cookie-consent-title" class="cookie-title"></h2>
-            <p id="cookie-consent-description"><span class="cookie-description-text"></span> <a class="cookie-link"></a>.</p>
-          </div>
-          <div class="cookie-buttons">
-            <button type="button" class="btn-cookie-decline"></button>
-            <button type="button" class="btn-cookie-accept"></button>
-          </div>
-        </div>
-      `;
+      let banner;
+      if (template) {
+        // Use template from server
+        banner = template.querySelector(".cookie-banner").cloneNode(true);
+        banner.querySelector(".cookie-title").textContent = strings.title;
+        banner.querySelector(".cookie-description-text").textContent =
+          strings.description;
+        banner.querySelector(".btn-cookie-decline").textContent = strings.decline;
+        banner.querySelector(".btn-cookie-accept").textContent = strings.accept;
 
-      banner.querySelector(".cookie-title").textContent = strings.title;
-      banner.querySelector(".cookie-description-text").textContent =
-        strings.description;
-      banner.querySelector(".btn-cookie-decline").textContent = strings.decline;
-      banner.querySelector(".btn-cookie-accept").textContent = strings.accept;
+        const privacyLink = banner.querySelector(".cookie-link");
+        if (privacyLink) {
+          privacyLink.textContent = strings.privacyLabel;
+          privacyLink.setAttribute(
+            "href",
+            cookieContainer.dataset.privacyUrl || "privacy.php",
+          );
+        }
+      } else {
+        // Fallback: create banner manually if template doesn't exist
+        banner = document.createElement("div");
+        banner.className = "cookie-banner";
+        banner.setAttribute("role", "dialog");
+        banner.setAttribute("aria-modal", "false");
+        banner.setAttribute("aria-labelledby", "cookie-consent-title");
+        banner.setAttribute("aria-describedby", "cookie-consent-description");
 
-      const privacyLink = banner.querySelector(".cookie-link");
-      if (privacyLink) {
-        privacyLink.textContent = strings.privacyLabel;
-        privacyLink.setAttribute(
-          "href",
-          cookieContainer.dataset.privacyUrl || "privacy.php",
-        );
+        banner.innerHTML = `
+          <div class="cookie-content">
+            <div class="cookie-text">
+              <h2 id="cookie-consent-title" class="cookie-title"></h2>
+              <p id="cookie-consent-description"><span class="cookie-description-text"></span> <a class="cookie-link"></a>.</p>
+            </div>
+            <div class="cookie-buttons">
+              <button type="button" class="btn-cookie-decline"></button>
+              <button type="button" class="btn-cookie-accept"></button>
+            </div>
+          </div>
+        `;
+
+        banner.querySelector(".cookie-title").textContent = strings.title;
+        banner.querySelector(".cookie-description-text").textContent =
+          strings.description;
+        banner.querySelector(".btn-cookie-decline").textContent = strings.decline;
+        banner.querySelector(".btn-cookie-accept").textContent = strings.accept;
+
+        const privacyLink = banner.querySelector(".cookie-link");
+        if (privacyLink) {
+          privacyLink.textContent = strings.privacyLabel;
+          privacyLink.setAttribute(
+            "href",
+            cookieContainer.dataset.privacyUrl || "privacy.php",
+          );
+        }
       }
 
       banner
