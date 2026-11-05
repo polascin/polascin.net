@@ -1233,7 +1233,7 @@ expectTrue(
 );
 
 // Lokálne konfigurácie editorov a nástrojov nesmú skončiť vo verejnom web roote.
-foreach (['.vscode', '.claude', '.trunk', '.cursor', '.idea', '.agents'] as $localToolDir) {
+foreach (['.vscode', '.claude', '.codex', '.trunk', '.cursor', '.idea', '.agents'] as $localToolDir) {
     expectTrue(
         preg_match('~(^|\r?\n)' . preg_quote($localToolDir, '~') . '(\r?\n|$)~', $deployIgnoreRules) === 1,
         ".deployignore musí vylúčiť {$localToolDir} z nasadenia"
@@ -2373,6 +2373,7 @@ foreach (['scripts', 'audit-reports'] as $auditOnlyDir) {
 $internalWebRootDirs = [
     '.agents',
     '.claude',
+    '.codex',
     '.cursor',
     '.idea',
     '.trunk',
