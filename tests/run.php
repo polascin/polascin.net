@@ -2461,7 +2461,10 @@ foreach (['/scripts/audit_db_check.php', '/audit-reports/db-latest.md'] as $audi
 
 // robots.txt má interné adresáre zakazovať rovnako ako content/ a private/:
 // nie je to bezpečnostná vrstva, ale zoznam sa nemá rozchádzať s realitou.
-foreach (['/scripts/', '/audit-reports/', '/.cursor/', '/.claude/', '/.codex/'] as $robotsPath) {
+foreach (
+    ['/scripts/', '/hooks/', '/tests/', '/lang/', '/audit-reports/', '/.cursor/', '/.claude/', '/.codex/']
+    as $robotsPath
+) {
     expectTrue(
         in_array($robotsPath, $robotsDisallowedPaths, true),
         "robots.txt musí v skupine User-agent: * zakazovať {$robotsPath}"
@@ -3397,6 +3400,12 @@ expectTrue(
             $loginSource
         ) === 1,
     'login.php musí po TOTP najprv obnoviť reláciu, až potom stamplovať totp_last_used a vyčistiť login_account'
+);
+$helpersCacheSource = (string) file_get_contents(dirname(__DIR__) . '/helpers.php');
+expectTrue(
+    str_contains($helpersCacheSource, "unserialize(\$data, ['allowed_classes' => false])")
+        && !preg_match('/@unserialize\(\$data\);/', $helpersCacheSource),
+    'queryCacheGet musí unserializeovať bez povolených tried (ochrana pred object injection)'
 );
 $guardSource = (string) file_get_contents(dirname(__DIR__) . '/guard.php');
 expectTrue(

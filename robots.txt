@@ -24,6 +24,9 @@ Disallow: /library_file.php
 Disallow: /private/
 Disallow: /content/
 Disallow: /scripts/
+Disallow: /hooks/
+Disallow: /tests/
+Disallow: /lang/
 Disallow: /audit-reports/
 Disallow: /.cursor/
 Disallow: /.agents/

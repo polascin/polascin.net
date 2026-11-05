@@ -134,7 +134,8 @@ function queryCacheGet(string $key): mixed {
     if ($data === false) {
         return null;
     }
-    $result = @unserialize($data);
+    // Cache ukladá len skaláry a polia; objekty nepovoľujeme (PHP object injection).
+    $result = @unserialize($data, ['allowed_classes' => false]);
     return $result === false && $data !== 'b:0;' ? null : $result;
 }
 
