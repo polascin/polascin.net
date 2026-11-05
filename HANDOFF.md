@@ -19,8 +19,8 @@ Standing instruction from the owner (Slovak): continue development, bug hunting,
 
 **In flight:**
 
-- Deploy of Beh #75 (commit pending / in progress).
-- Grok headless review started in parallel; may still be running.
+- Nothing. Production runs `7e1594b` (Beh #75). Grok headless review hung
+  without output and was stopped; retry with a shorter prompt in Loop 2.
 
 **Tried and rejected:**
 
