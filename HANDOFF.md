@@ -9,11 +9,12 @@ _Last updated: 2026-11-05T23:45:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#86. Beh #87 coded: logout + newsletter unsubscribe forms use langUrl. Tests 3334.
+**Done:** Beh #75–#87 deployed (`f8c5085`). Logout and newsletter unsubscribe forms keep lang via langUrl. Smoke OK.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Ship Beh #87 (commit, push, deploy), then Loop 13.
-2. Daily doaudit on its wake only.
+1. `git pull --ff-only websupport main`.
+2. Loop 13: next concrete defect.
+3. Daily doaudit on its wake only.
