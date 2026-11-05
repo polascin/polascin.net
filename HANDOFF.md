@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-06T00:55:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
+_Last updated: 2026-11-06T00:55:30+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
 
 ## Active Task
 
@@ -9,11 +9,11 @@ _Last updated: 2026-11-06T00:55:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#89. Beh #90 coded: auth login redirects use langUrl; contact-form position relative for honeypot; CSS pin updated. Tests 3345.
+**Done:** Beh #75–#90 at `388bc9b` (deployed). Auth login redirects use langUrl; contact-form honeypot CSS anchor; static CSS pins refreshed. Tests 3345.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Ship Beh #90 (commit, push, deploy), then Loop 16.
+1. Loop 16: find and fix the next concrete defect.
 2. Daily doaudit on its wake only.
