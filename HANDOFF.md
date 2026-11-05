@@ -9,11 +9,12 @@ _Last updated: 2026-11-05T23:22:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#85. Beh #86 coded: logout keeps lang via langUrl; robots disallow IDE dirs. Tests 3332.
+**Done:** Beh #75–#86 deployed (`84ef985`). Logout keeps lang; robots disallow IDE dirs. Smoke OK; robots verified on production.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Ship Beh #86 (commit, push, deploy), then Loop 12.
-2. Daily doaudit on its wake only.
+1. `git pull --ff-only websupport main`.
+2. Loop 12: next concrete defect.
+3. Daily doaudit on its wake only.
