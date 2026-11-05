@@ -2274,6 +2274,11 @@ expectTrue(
         && str_contains($adminUsersSource, "\$adminTotpOn ? 'Zapnuté' : 'Vypnuté'"),
     'Zoznam administrátorov musí zobrazovať stav 2FA'
 );
+expectTrue(
+    str_contains($adminUsersSource, "action === 'create_admin'")
+        && str_contains($adminUsersSource, 'isEmailDomainValid($newAdminEmail)'),
+    'Vytvorenie administrátora musí overiť MX/A domény e-mailu (Beh #91)'
+);
 $contactSource = (string) file_get_contents(dirname(__DIR__) . '/contact.php');
 expectTrue(
     str_contains($contactSource, 'isTrustedStateChangingRequest()')

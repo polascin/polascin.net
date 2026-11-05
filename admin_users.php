@@ -252,7 +252,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $initialPassword = (string) ($_POST['initial_password'] ?? '');
         $initialPasswordConfirmation = (string) ($_POST['initial_password_confirmation'] ?? '');
 
-        if (!filter_var($newAdminEmail, FILTER_VALIDATE_EMAIL) || appTextLength($newAdminEmail) > 255) {
+        if (
+            !filter_var($newAdminEmail, FILTER_VALIDATE_EMAIL)
+            || appTextLength($newAdminEmail) > 255
+            || !isEmailDomainValid($newAdminEmail)
+        ) {
             $createErrors[] = 'Zadajte platnú e-mailovú adresu nového administrátora.';
         }
         if ($authorizingPassword === '' || strlen($authorizingPassword) > APP_PASSWORD_MAX_BYTES) {
