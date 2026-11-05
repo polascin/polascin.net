@@ -303,7 +303,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $admins = $pdo->query(
-    "SELECT id, email, is_active, must_change_password, created_at
+    "SELECT id, email, is_active, must_change_password, totp_enabled, totp_secret, created_at
      FROM users
      WHERE is_admin = 1
      ORDER BY created_at ASC, id ASC"
@@ -450,16 +450,21 @@ $canonicalUrl = $baseUrl . '/admin_users.php';
         <div class="table-responsive">
           <table class="admin-table">
             <thead>
-              <tr><th scope="col">E-mail</th><th scope="col">Stav</th><th scope="col">Vytvorený</th></tr>
+              <tr><th scope="col">E-mail</th><th scope="col">Stav</th><th scope="col">2FA</th><th scope="col">Vytvorený</th></tr>
             </thead>
             <tbody>
               <?php foreach ($admins as $admin): ?>
+                <?php
+                  $adminTotpOn = (int) ($admin['totp_enabled'] ?? 0) === 1
+                      && (string) ($admin['totp_secret'] ?? '') !== '';
+                ?>
                 <tr>
                   <td><?= htmlspecialchars((string) $admin['email'], ENT_QUOTES, 'UTF-8') ?><?= (int) $admin['id'] === $currentAdminId ? ' (vy)' : '' ?></td>
                   <td>
                     <?= (int) $admin['is_active'] === 1 ? 'Aktívny' : 'Neaktívny' ?>
                     <?= (int) $admin['must_change_password'] === 1 ? ' (čaká na zmenu hesla)' : '' ?>
                   </td>
+                  <td><?= $adminTotpOn ? 'Zapnuté' : 'Vypnuté' ?></td>
                   <td><?= htmlspecialchars((string) $admin['created_at'], ENT_QUOTES, 'UTF-8') ?></td>
                 </tr>
               <?php endforeach; ?>

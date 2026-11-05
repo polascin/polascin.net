@@ -2261,6 +2261,12 @@ expectTrue(
         && !preg_match('/totp_enable[\s\S]*totp_last_used = :period/', $adminUsersSource),
     'admin_users.php musí umožniť TOTP a pri zapnutí nesmie nastaviť totp_last_used (blokovalo by prvé prihlásenie)'
 );
+expectTrue(
+    str_contains($adminUsersSource, 'totp_enabled, totp_secret, created_at')
+        && str_contains($adminUsersSource, '<th scope="col">2FA</th>')
+        && str_contains($adminUsersSource, "\$adminTotpOn ? 'Zapnuté' : 'Vypnuté'"),
+    'Zoznam administrátorov musí zobrazovať stav 2FA'
+);
 $contactSource = (string) file_get_contents(dirname(__DIR__) . '/contact.php');
 expectTrue(
     str_contains($contactSource, 'isTrustedStateChangingRequest()')
@@ -3371,6 +3377,14 @@ expectTrue(
         && str_contains($loginSource, "\$totpArmed = (int) (\$user['totp_enabled'] ?? 0) === 1")
         && str_contains($loginSource, "(\$user['totp_secret'] ?? '') !== ''"),
     'login.php musí 2FA spustiť len pri totp_enabled=1 a neprázdnom totp_secret'
+);
+expectTrue(
+    str_contains($loginSource, 'Po overení hesla pred 2FA sa nepodarilo obnoviť ID relácie')
+        && preg_match(
+            '/\$totpArmed\)\s*\{\s*if\s*\(!regenerateSession\(\)\)/s',
+            $loginSource
+        ) === 1,
+    'login.php musí pred uložením totp_pending_user_id obnoviť ID relácie'
 );
 $guardSource = (string) file_get_contents(dirname(__DIR__) . '/guard.php');
 expectTrue(

@@ -146,8 +146,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_SESSION['totp_pending_user
                 $totpArmed = (int) ($user['totp_enabled'] ?? 0) === 1
                     && (string) ($user['totp_secret'] ?? '') !== '';
                 if ($totpArmed) {
-                    $_SESSION['totp_pending_user_id'] = (int) $user['id'];
-                    $totpRequired = true;
+                    // Po overení hesla obnoviť ID relácie skôr, než sa do nej
+                    // uloží totp_pending_user_id (ochrana pred session fixation).
+                    if (!regenerateSession()) {
+                        http_response_code(503);
+                        error_log('Po overení hesla pred 2FA sa nepodarilo obnoviť ID relácie.');
+                        $errors[] = t('login.error_credentials');
+                    } else {
+                        $_SESSION['totp_pending_user_id'] = (int) $user['id'];
+                        $totpRequired = true;
+                    }
                 } else {
                     $authenticatedPasswordHash = (string) $user['password_hash'];
                     if (password_needs_rehash((string) $user['password_hash'], PASSWORD_BCRYPT, appPasswordHashOptions())) {
