@@ -1,19 +1,20 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-06T04:02:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
+_Last updated: 2026-11-06T04:05:00+01:00 · Tool: cursor · Session: loop paused_
 
 ## Active Task
 
-1. Dev `/loop` (`AGENT_LOOP_WAKE_polascin_dev`, ~20 min).
-2. Daily `.doaudit.md` (`AGENT_LOOP_WAKE_polascin_doaudit`, 24 h, PID 39728).
+Vývojová slučka (`AGENT_LOOP_WAKE_polascin_dev`) je **prechodne zastavená** na pokyn používateľa (2026-11-06).
+
+Denný wake `.doaudit.md` (`AGENT_LOOP_WAKE_polascin_doaudit`, PID 39728) ostáva armovaný (~4 h do ticku).
 
 ## Current State
 
-**Done:** Beh #75–#99 at `cb66a23` (deployed). contact Retry-After matches failing rate window. Tests 3356.
+**Done:** Beh #75–#99 at `94f34d8` / `cb66a23` (deployed). Posledný kódový Beh #99: contact `Retry-After` podľa okna limitu. Testy 3356. Working tree čistý, `main` synchronizovaný.
 
-**Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
+**Open (owner, mimo slučky):** Clarity integrations; nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Loop 25 on next wake: find and fix the next concrete defect.
-2. Daily doaudit on its wake only (~4 h left).
+1. Na obnovenie vývoja: armuj znova `AGENT_LOOP_WAKE_polascin_dev` (1200 s) a pokračuj Loop 25.
+2. Denný doaudit nechaj bežať, alebo ho zastav ručne (PID 39728), ak má byť aj ten pozastavený.
