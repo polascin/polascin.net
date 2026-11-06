@@ -97,6 +97,9 @@ DirectoryIndex index.php index.html
 # Kontakt na hlásenie zraniteľností podľa RFC 9116 (.well-known/security.txt).
 <Files "security.txt">
     Require all granted
+    <IfModule mod_headers.c>
+        Header set Content-Type "text/plain; charset=utf-8"
+    </IfModule>
 </Files>
 
 <FilesMatch "^(\.deployignore|env\.ini\.example)$">

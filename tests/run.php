@@ -3277,7 +3277,9 @@ expectTrue(
     $securityTxtExpires !== false && $securityTxtExpires > time() + 30 * 86400 && $securityTxtExpires < time() + 400 * 86400,
     'security.txt Expires musí byť o 30 až 400 dní; pred vypršaním ho obnov'
 );
-expectTrue(str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), '<Files "security.txt">'), '.htaccess musí povoliť security.txt napriek zákazu .txt');
+expectTrue(
+    str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), '<Files "security.txt">')
+        && str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), 'Header set Content-Type "text/plain; charset=utf-8"'), '.htaccess musí povoliť security.txt napriek zákazu .txt');
 $libraryPage = (string) file_get_contents(dirname(__DIR__) . '/library.php');
 $libraryFilePage = (string) file_get_contents(dirname(__DIR__) . '/library_file.php');
 $libraryAdminPage = (string) file_get_contents(dirname(__DIR__) . '/admin_library.php');
