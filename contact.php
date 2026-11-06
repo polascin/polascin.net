@@ -40,13 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = trim(str_replace(["\r\n", "\r"], "\n", requestString($_POST, 'message')));
         $formData = compact('name', 'email', 'subject', 'message');
 
-        if (appTextLength($name) < 2 || appTextLength($name) > 255 || containsDisallowedControlCharacters($name)) {
+        if (appTextLength($name) < 2 || appTextLength($name) > 255 || containsDisallowedSingleLineCharacters($name)) {
             $errors[] = t('contact.error_name');
         }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || appTextLength($email) > 255) {
             $errors[] = t('contact.error_email');
         }
-        if (($subject !== '' && appTextLength($subject) > 255) || containsDisallowedControlCharacters($subject)) {
+        if (($subject !== '' && appTextLength($subject) > 255) || containsDisallowedSingleLineCharacters($subject)) {
             $errors[] = t('contact.error_subject');
         }
         if (appTextLength($message) < 20 || appTextLength($message) > 5000 || containsDisallowedControlCharacters($message)) {

@@ -640,6 +640,15 @@ function containsDisallowedControlCharacters(string $value): bool {
     return preg_match('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', $value) === 1;
 }
 
+/**
+ * Jednoriadkové pole (meno, predmet) nesmie niesť ani CR/LF. Prehliadač ich
+ * z `<input type="text">` odstráni, podvrhnutý POST nie; v hlavičke e-mailu
+ * by umožnili header injection.
+ */
+function containsDisallowedSingleLineCharacters(string $value): bool {
+    return containsDisallowedControlCharacters($value) || preg_match('/[\r\n]/', $value) === 1;
+}
+
 function regenerateSession(): bool {
     return session_regenerate_id(true);
 }
