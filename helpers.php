@@ -1132,6 +1132,7 @@ function libraryLoadWork(string $directory, string $source): ?array {
         'kind' => $types[$extension]['kind'],
         'mime' => $types[$extension]['mime'],
         'bytes' => (int) $bytes,
+        'mtime' => (int) filemtime($fileReal),
         'path' => $fileReal,
         'source' => $source,
     ];
@@ -1333,6 +1334,55 @@ function libraryContentDisposition(bool $inline, string $downloadName): string {
     $type = $inline ? 'inline' : 'attachment';
 
     return $type . '; filename="' . $ascii . '"; filename*=UTF-8\'\'' . rawurlencode($downloadName);
+}
+
+/**
+ * Silný validátor pre podmienené GET. Inline PDF a príloha majú iné hlavičky,
+ * preto majú aj iný ETag.
+ */
+function libraryEtag(array $work, bool $inline): string {
+    $seed = implode('|', [
+        (string) ($work['slug'] ?? ''),
+        (string) ($work['filename'] ?? ''),
+        (string) (int) ($work['bytes'] ?? 0),
+        (string) (int) ($work['mtime'] ?? 0),
+        $inline ? 'inline' : 'attachment',
+    ]);
+
+    return '"' . substr(hash('sha256', $seed), 0, 32) . '"';
+}
+
+/**
+ * RFC 9110, 13.1.2 a 13.1.3: If-None-Match má prednosť pred If-Modified-Since.
+ *
+ * @param array<string, mixed> $server
+ */
+function libraryRequestIsFresh(string $etag, int $mtime, array $server): bool {
+    $ifNoneMatch = $server['HTTP_IF_NONE_MATCH'] ?? null;
+    if (is_string($ifNoneMatch) && trim($ifNoneMatch) !== '') {
+        foreach (explode(',', $ifNoneMatch) as $candidate) {
+            $candidate = trim($candidate);
+            if ($candidate === '*') {
+                return true;
+            }
+            if (str_starts_with($candidate, 'W/')) {
+                $candidate = substr($candidate, 2);
+            }
+            if ($candidate === $etag) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    $ifModifiedSince = $server['HTTP_IF_MODIFIED_SINCE'] ?? null;
+    if (!is_string($ifModifiedSince) || $mtime < 1 || strlen($ifModifiedSince) > 64) {
+        return false;
+    }
+    $since = strtotime($ifModifiedSince);
+
+    return $since !== false && $since >= $mtime;
 }
 
 function libraryFileUrl(string $slug, bool $download): string {

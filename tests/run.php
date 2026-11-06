@@ -3177,6 +3177,30 @@ try {
         'Názov na stiahnutie nesmie obsahovať .php'
     );
     expectTrue(str_contains(libraryFileUrl('poznamka', true), 'download=1'), 'Odkaz na stiahnutie musí žiadať prílohu');
+
+    $libraryEtagWork = ['slug' => 'poznamka', 'filename' => 'a.pdf', 'bytes' => 10, 'mtime' => 1700000000];
+    $libraryEtagInline = libraryEtag($libraryEtagWork, true);
+    expectTrue(preg_match('/^"[0-9a-f]{32}"$/', $libraryEtagInline) === 1, 'ETag knižnice musí byť silný a v úvodzovkách');
+    expectTrue($libraryEtagInline !== libraryEtag($libraryEtagWork, false), 'Inline PDF a príloha musia mať iný ETag');
+    expectTrue(
+        $libraryEtagInline !== libraryEtag(['mtime' => 1700000001] + $libraryEtagWork, true),
+        'Zmena súboru musí zmeniť ETag'
+    );
+    expectTrue(libraryRequestIsFresh($libraryEtagInline, 1700000000, ['HTTP_IF_NONE_MATCH' => '"x", ' . $libraryEtagInline]), 'Zhodný ETag zo zoznamu musí dať 304');
+    expectTrue(libraryRequestIsFresh($libraryEtagInline, 1700000000, ['HTTP_IF_NONE_MATCH' => 'W/' . $libraryEtagInline]), 'Slabé porovnanie ETag musí dať 304');
+    expectTrue(!libraryRequestIsFresh($libraryEtagInline, 1700000000, ['HTTP_IF_NONE_MATCH' => '"iny"']), 'Iný ETag nesmie dať 304');
+    expectTrue(
+        !libraryRequestIsFresh($libraryEtagInline, 1700000000, [
+            'HTTP_IF_NONE_MATCH' => '"iny"',
+            'HTTP_IF_MODIFIED_SINCE' => gmdate('D, d M Y H:i:s', 1800000000) . ' GMT',
+        ]),
+        'If-None-Match má prednosť pred If-Modified-Since'
+    );
+    expectTrue(libraryRequestIsFresh($libraryEtagInline, 1700000000, ['HTTP_IF_MODIFIED_SINCE' => gmdate('D, d M Y H:i:s', 1700000000) . ' GMT']), 'Nezmenený súbor od dátumu musí dať 304');
+    expectTrue(!libraryRequestIsFresh($libraryEtagInline, 1700000000, ['HTTP_IF_MODIFIED_SINCE' => gmdate('D, d M Y H:i:s', 1699999999) . ' GMT']), 'Novší súbor nesmie dať 304');
+    expectTrue(!libraryRequestIsFresh($libraryEtagInline, 1700000000, ['HTTP_IF_MODIFIED_SINCE' => 'nezmysel']), 'Neplatný dátum nesmie dať 304');
+    expectTrue(!libraryRequestIsFresh($libraryEtagInline, 1700000000, []), 'Bez podmienky sa súbor posiela celý');
+    expectTrue(is_int(libraryFind((string) $libraryText['slug'])['mtime'] ?? null), 'Dielo knižnice musí niesť čas zmeny súboru');
 } finally {
     libraryUseRoots(null);
     libraryTestRemoveTree($libraryTestRoot);
@@ -3193,6 +3217,13 @@ expectTrue(
         && str_contains($libraryFilePage, "\$kind === 'html'")
         && str_contains($libraryFilePage, 'text/plain; charset=UTF-8'),
     'Súbor knižnice sa musí podávať s nosniff a HTML nie ako stránka'
+);
+expectTrue(
+    str_contains($libraryFilePage, 'libraryRequestIsFresh')
+        && str_contains($libraryFilePage, 'http_response_code(304)')
+        && str_contains($libraryFilePage, "header('ETag: '")
+        && str_contains($libraryFilePage, 'Allow: GET, HEAD'),
+    'Súbor knižnice musí podporovať podmienené GET a odmietnuť iné metódy'
 );
 expectTrue(str_contains($libraryAdminPage, 'requireAdmin()'), 'Správa knižnice musí byť len pre administrátora');
 expectTrue(str_contains($libraryAdminPage, 'validateCsrfToken'), 'Správa knižnice musí overovať CSRF');
