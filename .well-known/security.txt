@@ -1,0 +1,4 @@
+Contact: mailto:lubomir@polascin.net
+Expires: 2027-11-01T00:00:00.000Z
+Preferred-Languages: sk, en, cs
+Canonical: https://polascin.net/.well-known/security.txt

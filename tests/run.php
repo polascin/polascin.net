@@ -3262,7 +3262,22 @@ expectSame('Náhrada', getContentBlock($contentBlockPdo, 'chyba', 'Náhrada', 'd
 $contentBlockPdo->exec("DROP TABLE content_blocks");
 expectSame('Ahoj & svet', getContentBlock($contentBlockPdo, 'hero_title', 'x', 'sk'), 'Bloky jazyka sa v jednej požiadavke načítajú len raz');
 $brokenContentPdo = new PDO('sqlite::memory:', null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+// Očakávaná chyba DB nemá zašpiniť výstup testov.
+$previousErrorLog = ini_set('error_log', PHP_OS_FAMILY === 'Windows' ? 'NUL' : '/dev/null');
 expectSame('Záloha', getContentBlock($brokenContentPdo, 'hero_title', 'Záloha', 'sk'), 'Chyba DB musí vrátiť predvolený text');
+ini_set('error_log', $previousErrorLog === false ? '' : $previousErrorLog);
+$securityTxt = (string) @file_get_contents(dirname(__DIR__) . '/.well-known/security.txt');
+expectTrue(str_contains($securityTxt, "Contact: mailto:lubomir@polascin.net
+"), 'security.txt musí mať Contact (RFC 9116)');
+expectTrue(str_contains($securityTxt, "Canonical: https://polascin.net/.well-known/security.txt
+"), 'security.txt musí mať Canonical');
+expectTrue(preg_match('/^[\x09\x0A\x20-\x7E]+$/', $securityTxt) === 1, 'security.txt musí byť ASCII bez skrytých znakov');
+$securityTxtExpires = preg_match('/^Expires: (\S+)$/m', $securityTxt, $securityTxtMatch) === 1 ? strtotime($securityTxtMatch[1]) : false;
+expectTrue(
+    $securityTxtExpires !== false && $securityTxtExpires > time() + 30 * 86400 && $securityTxtExpires < time() + 400 * 86400,
+    'security.txt Expires musí byť o 30 až 400 dní; pred vypršaním ho obnov'
+);
+expectTrue(str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), '<Files "security.txt">'), '.htaccess musí povoliť security.txt napriek zákazu .txt');
 $libraryPage = (string) file_get_contents(dirname(__DIR__) . '/library.php');
 $libraryFilePage = (string) file_get_contents(dirname(__DIR__) . '/library_file.php');
 $libraryAdminPage = (string) file_get_contents(dirname(__DIR__) . '/admin_library.php');
