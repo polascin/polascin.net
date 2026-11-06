@@ -13,7 +13,12 @@ $totpPendingExpired = false;
 const LOGIN_TOTP_PENDING_TTL_SECONDS = 300;
 
 if (isLoggedIn()) {
-    header('Location: admin.php', true, 303);
+    // Pri must_change_password neskákať cez admin.php (requireAdmin by
+    // hneď poslal na admin_users). Rovnaký cieľ ako po úspešnom logine.
+    $destination = !empty($_SESSION['must_change_password'])
+        ? 'admin_users.php?change_required=1'
+        : 'admin.php';
+    header('Location: ' . $destination, true, 303);
     exit;
 }
 
@@ -37,7 +42,7 @@ if (isset($_SESSION['totp_pending_user_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['totp_pending_user_id'])) {
     $csrfToken = $_POST['csrf_token'] ?? '';
     $trustedOrigin = isTrustedStateChangingRequest();
-        if (!$trustedOrigin || !validateCsrfToken((string) $csrfToken)) {
+    if (!$trustedOrigin || !validateCsrfToken((string) $csrfToken)) {
         http_response_code(400);
         $errors[] = t('error.csrf');
         logCsrfFailure('login_totp', $trustedOrigin, $csrfToken);

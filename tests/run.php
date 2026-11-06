@@ -3458,8 +3458,11 @@ expectTrue(
     'auth.php musí pri odhlásení/revalidácii ísť na login cez langUrl a 303'
 );
 expectTrue(
-    str_contains($loginSource, "header('Location: admin.php', true, 303);"),
-    'login.php musí pri už prihlásenom používateľovi presmerovať na admin cez 303'
+    preg_match(
+        '/if \(isLoggedIn\(\)\) \{[\s\S]*?must_change_password[\s\S]*?admin_users\.php\?change_required=1[\s\S]*?admin\.php[\s\S]*?header\(\'Location: \' \. \$destination, true, 303\);/s',
+        $loginSource
+    ) === 1,
+    'login.php musí pri už prihlásenom používateľovi rešpektovať must_change_password (Beh #92)'
 );
 $contactSource = (string) file_get_contents(dirname(__DIR__) . '/contact.php');
 expectTrue(
