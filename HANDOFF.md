@@ -1,21 +1,18 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-06T04:07:00+01:00 · Tool: cursor · Session: all loops paused_
+_Last updated: 2026-11-06T19:52:00+01:00 · Tool: claude-code · Session: dev loop active_
 
 ## Active Task
 
-Všetky slučky sú **prechodne zastavené** (2026-11-06):
-
-- `AGENT_LOOP_WAKE_polascin_dev` (vývoj) — zastavená
-- `AGENT_LOOP_WAKE_polascin_doaudit` (denný audit) — zastavená (PID 39728 ukončený)
+Vývojová slučka obnovená (/loop, dynamický režim). Posledný Beh #101.
 
 ## Current State
 
-**Done:** Beh #75–#99 at `cb66a23` (kód) / `aa1c31f` (pause docs). Working tree čistý pred týmto zápisom. Testy 3356. Produkcia nasadená.
+**Done:** Beh #101 at `69aa63b` (kód) / `36f3310` (audit). Testy 3413. Produkcia nasadená a overená. DB report OK (`a818b15`).
 
 **Open (owner):** Clarity integrations; nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Vývoj: armuj `AGENT_LOOP_WAKE_polascin_dev` (1200 s), pokračuj Loop 25.
-2. Denný audit: armuj `AGENT_LOOP_WAKE_polascin_doaudit` (86400 s) a pri ticku spusti `.doaudit.md`.
+1. `git pull --ff-only websupport main && php tests/run.php`
+2. Beh #102: revízia `sitemap.php`, `article.php`, `admin_library.php`; po slučke `.doaudit.md`.
