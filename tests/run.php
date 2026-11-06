@@ -3486,6 +3486,16 @@ expectTrue(
         && !preg_match('/@unserialize\(\$data\);/', $helpersCacheSource),
     'queryCacheGet musí odmietnuť objekty aj __PHP_Incomplete_Class po unserialize'
 );
+expectTrue(
+    str_contains($helpersCacheSource, 'function queryCacheSet')
+        && str_contains($helpersCacheSource, 'is_object($value)')
+        && str_contains($helpersCacheSource, 'queryCacheArrayIsScalarTree')
+        && preg_match(
+            '/function queryCacheSet[\s\S]*?is_object\(\$value\)[\s\S]*?queryCacheArrayIsScalarTree/s',
+            $helpersCacheSource
+        ) === 1,
+    'queryCacheSet nesmie serializovať objekty ani polia s objektmi (Beh #96)'
+);
 $authRedirectSource = (string) file_get_contents(dirname(__DIR__) . '/auth.php');
 expectTrue(
     substr_count(

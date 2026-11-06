@@ -150,11 +150,39 @@ function queryCacheGet(string $key): mixed {
 /**
  * Uloží hodnotu do cache.
  *
+ * Cache je určená len pre skaláre a polia (pozri queryCacheGet). Objekty a
+ * resource by sa serializovali do krehkého stavu a pri čítaní by sa aj tak
+ * zahodili; sem ich preto vôbec nezapisujeme (Beh #96).
+ *
  * @param mixed $value
  */
 function queryCacheSet(string $key, mixed $value): void {
+    if (is_object($value) || is_resource($value)) {
+        return;
+    }
+    if (is_array($value) && !queryCacheArrayIsScalarTree($value)) {
+        return;
+    }
     $file = queryCacheDir() . '/' . $key . '.cache';
     @file_put_contents($file, serialize($value), LOCK_EX);
+}
+
+/**
+ * @param array<mixed> $value
+ */
+function queryCacheArrayIsScalarTree(array $value): bool {
+    foreach ($value as $item) {
+        if (is_array($item)) {
+            if (!queryCacheArrayIsScalarTree($item)) {
+                return false;
+            }
+            continue;
+        }
+        if (is_object($item) || is_resource($item)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 /**
