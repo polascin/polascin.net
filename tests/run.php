@@ -2856,6 +2856,13 @@ expectTrue(
         && str_contains($newsletterSource, "langUrl(\$lang, 'privacy.php')"),
     'Newsletter musí priamo uvádzať prvú vrstvu informácií o súhlase, retencii a odhlásení'
 );
+expectTrue(
+    str_contains($newsletterSource, "consumeTimedFormProof('newsletter'")
+        && str_contains($newsletterSource, 'name="website"')
+        && str_contains($newsletterSource, "generateTimedFormProof('newsletter')")
+        && str_contains($newsletterSource, 'data-submit-once'),
+    'Odber newslettera musí mať časovaný dôkaz, honeypot a ochranu pred dvojklikom (Beh #95)'
+);
 foreach (array_keys(appLanguages()) as $noticeLang) {
     $noticeCatalogue = require dirname(__DIR__) . '/lang/' . $noticeLang . '.php';
     expectTrue(

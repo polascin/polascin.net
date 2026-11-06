@@ -186,6 +186,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     } elseif ($formAction === 'subscribe') {
+        // Rovnaká tichá odpoveď ako pri kontakte: bot nesmie rozlíšiť úspech.
+        $isLikelyBot = trim((string) ($_POST['website'] ?? '')) !== ''
+            || !consumeTimedFormProof('newsletter', $_POST['form_proof'] ?? null, 2, 7200);
+        if ($isLikelyBot) {
+            setFlashMessage('success', t('newsletter.pending'));
+            header('Location: ' . langUrl($lang, 'newsletter.php'), true, 303);
+            exit;
+        }
+
         $email = trim((string) ($_POST['email'] ?? ''));
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || appTextLength($email) > 255) {
             $errors[] = t('newsletter.error_email');
@@ -248,6 +257,7 @@ $pageTitle = t('meta.newsletter_title') . ' | ' . t('common.author');
 $seoDescription = t('meta.newsletter_description');
 $robotsMeta = 'noindex, follow';
 $canonicalUrl = absoluteLangUrl($lang, 'newsletter.php');
+$formProof = generateTimedFormProof('newsletter');
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang, ENT_QUOTES, 'UTF-8') ?>">
@@ -286,12 +296,17 @@ $canonicalUrl = absoluteLangUrl($lang, 'newsletter.php');
 
       <?php if ($action === ''): ?>
         <p><?= te('newsletter.intro') ?></p>
-        <form method="post" action="<?= htmlspecialchars(langUrl($lang, 'newsletter.php'), ENT_QUOTES, 'UTF-8') ?>" class="newsletter-form" novalidate>
+        <form method="post" action="<?= htmlspecialchars(langUrl($lang, 'newsletter.php'), ENT_QUOTES, 'UTF-8') ?>" class="newsletter-form" data-submit-once novalidate>
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
           <input type="hidden" name="form_action" value="subscribe">
+          <input type="hidden" name="form_proof" value="<?= htmlspecialchars($formProof, ENT_QUOTES, 'UTF-8') ?>">
+          <div class="contact-form-trap" aria-hidden="true">
+            <label for="newsletter-website">Website</label>
+            <input type="text" id="newsletter-website" name="website" value="" tabindex="-1" autocomplete="off">
+          </div>
           <div class="form-group">
             <label for="email"><?= te('newsletter.email') ?> <span aria-label="<?= te('common.required') ?>">*</span></label>
-            <input type="email" id="email" name="email" value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>" required maxlength="255">
+            <input type="email" id="email" name="email" value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>" required maxlength="255" autocomplete="email" inputmode="email">
           </div>
           <p class="form-hint"><?= te('newsletter.privacy_notice') ?> <a href="<?= htmlspecialchars(langUrl($lang, 'privacy.php'), ENT_QUOTES, 'UTF-8') ?>"><?= te('footer.privacy') ?></a>.</p>
           <button type="submit" class="btn btn-primary"><?= te('newsletter.subscribe') ?></button>

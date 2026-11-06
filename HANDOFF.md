@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-06T02:05:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
+_Last updated: 2026-11-06T02:28:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
 
 ## Active Task
 
@@ -9,11 +9,11 @@ _Last updated: 2026-11-06T02:05:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#94 at `62fe956` (deployed). admin_users CSRF/trust errors route by action. Tests 3350.
+**Done:** Beh #75–#94. Beh #95 coded: newsletter subscribe honeypot + timed form proof. Tests 3351.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Loop 20 on next wake: find and fix the next concrete defect.
+1. Ship Beh #95 (commit, push, deploy), then Loop 21 on wake.
 2. Daily doaudit on its wake only.
