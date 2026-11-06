@@ -52,6 +52,8 @@ DirectoryIndex index.php index.html
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteRule ^sitemap\.xml$ sitemap.php [L]
+    # Charset pre security.txt vie nastaviť len PHP (pozri security_txt.php).
+    RewriteRule ^\.well-known/security\.txt$ security_txt.php [L]
 </IfModule>
 
 # ── Presmerovanie starých statických .html adries na .php ─────────────────────
@@ -97,8 +99,6 @@ DirectoryIndex index.php index.html
 # Kontakt na hlásenie zraniteľností podľa RFC 9116 (.well-known/security.txt).
 <Files "security.txt">
     Require all granted
-    # Content-Type statického súboru určuje mod_mime; Header set ho neprepíše.
-    ForceType "text/plain; charset=utf-8"
 </Files>
 
 <FilesMatch "^(\.deployignore|env\.ini\.example)$">

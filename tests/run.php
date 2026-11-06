@@ -3279,7 +3279,8 @@ expectTrue(
 );
 expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), '<Files "security.txt">')
-        && str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), 'ForceType "text/plain; charset=utf-8"'), '.htaccess musí povoliť security.txt napriek zákazu .txt');
+        && str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), 'RewriteRule ^\.well-known/security\.txt$ security_txt.php [L]')
+        && str_contains((string) file_get_contents(dirname(__DIR__) . '/security_txt.php'), "header('Content-Type: text/plain; charset=utf-8');"), 'security.txt musí ísť cez security_txt.php s charset=utf-8 (RFC 9116)');
 $libraryPage = (string) file_get_contents(dirname(__DIR__) . '/library.php');
 $libraryFilePage = (string) file_get_contents(dirname(__DIR__) . '/library_file.php');
 $libraryAdminPage = (string) file_get_contents(dirname(__DIR__) . '/admin_library.php');
