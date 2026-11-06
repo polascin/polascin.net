@@ -3222,6 +3222,14 @@ expectTrue(!requestBodyExceededPostLimit(['CONTENT_LENGTH' => '7000'], [], [], 8
 expectTrue(!requestBodyExceededPostLimit(['CONTENT_LENGTH' => '9000'], ['csrf_token' => 'x'], [], 8000), 'Prijatý POST nie je pretečenie');
 expectTrue(!requestBodyExceededPostLimit(['CONTENT_LENGTH' => 'abc'], [], [], 8000), 'Neplatná dĺžka nie je pretečenie');
 expectTrue(!requestBodyExceededPostLimit([], [], [], 8000), 'Bez Content-Length nie je pretečenie');
+$sitemapSource = (string) file_get_contents(dirname(__DIR__) . '/sitemap.php');
+expectTrue(
+    str_contains($sitemapSource, "'lists_articles' => true")
+        && str_contains($sitemapSource, '$latestArticleByLang[$language]')
+        && str_contains($sitemapSource, "'lists_library' => true")
+        && strpos($sitemapSource, '$articleRows = $articleStmt->fetchAll()') < strpos($sitemapSource, '$staticPages = ['),
+    'lastmod domovskej stránky, zoznamu článkov a knižnice musí rásť s najnovším obsahom'
+);
 $libraryPage = (string) file_get_contents(dirname(__DIR__) . '/library.php');
 $libraryFilePage = (string) file_get_contents(dirname(__DIR__) . '/library_file.php');
 $libraryAdminPage = (string) file_get_contents(dirname(__DIR__) . '/admin_library.php');

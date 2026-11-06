@@ -19,16 +19,68 @@ function sitemapDatabaseDate(?string $value, string $fallback): string {
     return date(DATE_ATOM, $timestamp !== false ? $timestamp : (int) strtotime($fallback));
 }
 
+function sitemapLatest(string ...$dates): string {
+    $latest = '';
+    $latestTimestamp = PHP_INT_MIN;
+    foreach ($dates as $date) {
+        $timestamp = strtotime($date);
+        if ($timestamp !== false && $timestamp > $latestTimestamp) {
+            $latestTimestamp = $timestamp;
+            $latest = $date;
+        }
+    }
+
+    return $latest;
+}
+
 $languages = array_keys(appLanguages());
+
+// Všetky publikované články sa načítajú jedným dotazom a skupiny prekladov sa
+// zostavia v PHP. Sitemap je verejný endpoint bez serverovej cache, takže sa
+// tu neoplatí dotazovať databázu pre každý článok zvlášť.
+$articleRows = [];
+try {
+    $articleStmt = $pdo->query(
+        "SELECT slug, lang, translation_group, published_at, updated_at
+         FROM articles
+         WHERE is_published = 1 AND published_at IS NOT NULL AND published_at <= NOW()"
+    );
+    $articleRows = $articleStmt->fetchAll();
+} catch (\PDOException $e) {
+    error_log('sitemap articles error: ' . $e->getMessage());
+}
+
+// Domovská stránka a zoznam článkov ukazujú najnovšie články. Ich `lastmod`
+// preto nesmie zostať na čase úpravy PHP súboru, keď pribudne článok.
+$latestArticleByLang = [];
+foreach ($articleRows as $row) {
+    $rowLang = (string) ($row['lang'] ?? '');
+    if (!isSupportedLanguage($rowLang)) {
+        continue;
+    }
+    $rowDate = sitemapDatabaseDate($row['updated_at'] ?? null, (string) ($row['published_at'] ?? ''));
+    $latestArticleByLang[$rowLang] = isset($latestArticleByLang[$rowLang])
+        ? sitemapLatest($latestArticleByLang[$rowLang], $rowDate)
+        : $rowDate;
+}
+
+$libraryWorks = libraryList();
+$latestLibraryDate = '';
+foreach ($libraryWorks as $libraryWork) {
+    $libraryMtime = (int) ($libraryWork['mtime'] ?? 0);
+    if ($libraryMtime > 0) {
+        $latestLibraryDate = sitemapLatest($latestLibraryDate, date(DATE_ATOM, $libraryMtime));
+    }
+}
 
 /**
  * Statické stránky existujú vo všetkých jazykoch, takže každá dostane vlastnú
  * URL a k nej kompletnú sadu `xhtml:link` alternatív.
  */
 $staticPages = [
-    ['path' => 'index.php', 'changefreq' => 'weekly', 'priority' => '1.0'],
-    ['path' => 'articles.php', 'changefreq' => 'weekly', 'priority' => '0.8'],
-    ['path' => 'library.php', 'changefreq' => 'weekly', 'priority' => '0.7'],
+    ['path' => 'index.php', 'changefreq' => 'weekly', 'priority' => '1.0', 'lists_articles' => true],
+    ['path' => 'articles.php', 'changefreq' => 'weekly', 'priority' => '0.8', 'lists_articles' => true],
+    ['path' => 'library.php', 'changefreq' => 'weekly', 'priority' => '0.7', 'lists_library' => true],
     ['path' => 'contact.php', 'changefreq' => 'monthly', 'priority' => '0.6'],
 ];
 
@@ -39,9 +91,16 @@ foreach ($staticPages as $page) {
         $alternates[$language] = absoluteLangUrl($language, $page['path']);
     }
     foreach ($languages as $language) {
+        $lastmod = sitemapLastModified(__DIR__ . '/' . $page['path']);
+        if (($page['lists_articles'] ?? false) && isset($latestArticleByLang[$language])) {
+            $lastmod = sitemapLatest($lastmod, $latestArticleByLang[$language]);
+        }
+        if (($page['lists_library'] ?? false) && $latestLibraryDate !== '') {
+            $lastmod = sitemapLatest($lastmod, $latestLibraryDate);
+        }
         $urls[] = [
             'loc' => $alternates[$language],
-            'lastmod' => sitemapLastModified(__DIR__ . '/' . $page['path']),
+            'lastmod' => $lastmod,
             'changefreq' => $page['changefreq'],
             'priority' => $page['priority'],
             'alternates' => $alternates,
@@ -49,7 +108,7 @@ foreach ($staticPages as $page) {
     }
 }
 
-foreach (libraryList() as $libraryWork) {
+foreach ($libraryWorks as $libraryWork) {
     $librarySlug = (string) ($libraryWork['slug'] ?? '');
     if ($librarySlug === '') {
         continue;
@@ -68,21 +127,6 @@ foreach (libraryList() as $libraryWork) {
             'alternates' => $libraryAlternates,
         ];
     }
-}
-
-// Všetky publikované články sa načítajú jedným dotazom a skupiny prekladov sa
-// zostavia v PHP. Sitemap je verejný endpoint bez serverovej cache, takže sa
-// tu neoplatí dotazovať databázu pre každý článok zvlášť.
-$articleRows = [];
-try {
-    $articleStmt = $pdo->query(
-        "SELECT slug, lang, translation_group, published_at, updated_at
-         FROM articles
-         WHERE is_published = 1 AND published_at IS NOT NULL AND published_at <= NOW()"
-    );
-    $articleRows = $articleStmt->fetchAll();
-} catch (\PDOException $e) {
-    error_log('sitemap articles error: ' . $e->getMessage());
 }
 
 $translationMap = [];
