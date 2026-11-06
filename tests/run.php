@@ -3279,7 +3279,7 @@ expectTrue(
 );
 expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), '<Files "security.txt">')
-        && str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), 'Header set Content-Type "text/plain; charset=utf-8"'), '.htaccess musí povoliť security.txt napriek zákazu .txt');
+        && str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), 'ForceType "text/plain; charset=utf-8"'), '.htaccess musí povoliť security.txt napriek zákazu .txt');
 $libraryPage = (string) file_get_contents(dirname(__DIR__) . '/library.php');
 $libraryFilePage = (string) file_get_contents(dirname(__DIR__) . '/library_file.php');
 $libraryAdminPage = (string) file_get_contents(dirname(__DIR__) . '/admin_library.php');
