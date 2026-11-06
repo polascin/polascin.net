@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-06T03:14:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
+_Last updated: 2026-11-06T03:15:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
 
 ## Active Task
 
@@ -9,11 +9,11 @@ _Last updated: 2026-11-06T03:14:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#96. Beh #97 coded: data-submit-once on login and admin save forms. Tests 3354.
+**Done:** Beh #75–#97 at `dc2bfcf` (deployed). data-submit-once on login and admin save forms. Tests 3354.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Ship Beh #97 (commit, push, deploy), then Loop 23 on wake.
-2. Daily doaudit on its wake only.
+1. Loop 23 on next wake: find and fix the next concrete defect.
+2. Daily doaudit on its wake only (~5–6 h left).
