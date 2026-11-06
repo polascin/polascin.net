@@ -15,10 +15,16 @@ Disallow: /admin_users.php
 Disallow: /auth.php
 Disallow: /config_loader.php
 Disallow: /db_config.php
+Disallow: /deploy_info.php
+Disallow: /footer.php
+Disallow: /head_meta.php
+Disallow: /header.php
 Disallow: /helpers.php
 Disallow: /i18n.php
+Disallow: /lang_switcher.php
 Disallow: /login.php
 Disallow: /logout.php
+Disallow: /main_nav.php
 Disallow: /newsletter.php
 Disallow: /library_file.php
 Disallow: /private/

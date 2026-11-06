@@ -1221,6 +1221,31 @@ expectSame(
     $uncoveredAdminPages,
     'robots.txt musí zakazovať každú stránku, ktorá vyžaduje requireAdmin()'
 );
+// Interné PHP z <FilesMatch> v .htaccess majú byť aj v robots.txt (Beh #93).
+$htaccessDeniedPhp = [];
+if (
+    preg_match(
+        '~<FilesMatch "\^\(([^"]+)\)\\\\\.php\$">\s*\r?\n\s*Require all denied~',
+        $htaccessRules,
+        $htaccessDeniedMatch
+    ) === 1
+) {
+    foreach (explode('|', $htaccessDeniedMatch[1]) as $deniedPhpBase) {
+        $htaccessDeniedPhp[] = '/' . $deniedPhpBase . '.php';
+    }
+}
+expectTrue($htaccessDeniedPhp !== [], '.htaccess musí obsahovať FilesMatch so zoznamom interných PHP');
+$uncoveredDeniedPhp = [];
+foreach ($htaccessDeniedPhp as $deniedPhpPath) {
+    if (!in_array($deniedPhpPath, $robotsDisallowedPaths, true)) {
+        $uncoveredDeniedPhp[] = $deniedPhpPath;
+    }
+}
+expectSame(
+    [],
+    $uncoveredDeniedPhp,
+    'robots.txt musí zakazovať každé interné PHP zo .htaccess FilesMatch (Beh #93)'
+);
 $gitignoreRules = (string) file_get_contents(dirname(__DIR__) . '/.gitignore');
 $deployIgnoreRules = (string) file_get_contents(dirname(__DIR__) . '/.deployignore');
 expectTrue(
@@ -3481,6 +3506,11 @@ expectTrue(
     str_contains($logoutSourceForLang, "langUrl(currentLang(), 'index.php')")
         && !preg_match("/header\\('Location: index\\.php'/", $logoutSourceForLang),
     'logout.php musí po odhlásení zachovať jazyk cez langUrl'
+);
+expectTrue(
+    str_contains($logoutSourceForLang, 'must_change_password')
+        && str_contains($logoutSourceForLang, 'admin_users.php?change_required=1'),
+    'logout.php musí pri zlyhaní CSRF rešpektovať must_change_password (Beh #93)'
 );
 $mainNavSource = (string) file_get_contents(dirname(__DIR__) . '/main_nav.php');
 expectTrue(

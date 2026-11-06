@@ -19,9 +19,13 @@ if (!$trustedOrigin || !validateCsrfToken((string) $csrfToken)) {
     logCsrfFailure('logout', $trustedOrigin, $csrfToken);
     // Hlásenie sa vykreslí na verejnej stránke, teda v jazyku návštevníka.
     setFlashMessage('error', t('logout.csrf_failed'));
-    $csrfDestination = isLoggedIn()
-        ? 'admin.php'
-        : langUrl(currentLang(), 'index.php');
+    if (!isLoggedIn()) {
+        $csrfDestination = langUrl(currentLang(), 'index.php');
+    } elseif (!empty($_SESSION['must_change_password'])) {
+        $csrfDestination = 'admin_users.php?change_required=1';
+    } else {
+        $csrfDestination = 'admin.php';
+    }
     header('Location: ' . $csrfDestination, true, 303);
     exit;
 }

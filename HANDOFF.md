@@ -1,6 +1,6 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-06T01:19:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
+_Last updated: 2026-11-06T01:42:00+01:00 · Tool: cursor · Session: loop-dev + daily-doaudit_
 
 ## Active Task
 
@@ -9,11 +9,11 @@ _Last updated: 2026-11-06T01:19:00+01:00 · Tool: cursor · Session: loop-dev + 
 
 ## Current State
 
-**Done:** Beh #75–#92 at `4241098` (deployed). login already-logged-in respects must_change_password. Tests 3346.
+**Done:** Beh #75–#92. Beh #93 coded: logout CSRF respects must_change; robots lists htaccess-denied PHP. Tests 3349.
 
 **Open:** Clarity integrations (owner); nightly routine panel prompt; optional local TOTP QR SVG.
 
 ## Next Steps
 
-1. Loop 18 on next wake: find and fix the next concrete defect.
+1. Ship Beh #93 (commit, push, deploy), then Loop 19 on wake.
 2. Daily doaudit on its wake only.
