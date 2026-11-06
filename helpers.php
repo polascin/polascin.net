@@ -74,6 +74,25 @@ function appAgeParts(float $years): array {
     return [$whole, '.' . str_pad((string) ($thousandths - $whole * 1000), 3, '0', STR_PAD_LEFT)];
 }
 
+/**
+ * Kladné celé číslo z $_GET/$_POST (id záznamu). Pole by `(int)` pretypovalo
+ * na 1 a akcia by zasiahla záznam s id 1; neplatná hodnota preto vráti null.
+ *
+ * @param array<array-key, mixed> $source
+ */
+function requestPositiveInt(array $source, string $key): ?int {
+    $value = $source[$key] ?? null;
+    if (is_int($value)) {
+        return $value > 0 ? $value : null;
+    }
+    if (!is_string($value) || preg_match('/^[1-9][0-9]{0,9}$/', $value) !== 1) {
+        return null;
+    }
+    $number = (int) $value;
+
+    return $number <= 2147483647 ? $number : null;
+}
+
 function appTextLength(string $value): int {
     if (function_exists('mb_strlen')) {
         return mb_strlen($value, 'UTF-8');

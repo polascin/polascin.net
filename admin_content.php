@@ -15,21 +15,25 @@ $editing = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken)) {
+    if (!isTrustedStateChangingRequest() || !validateCsrfToken($csrfToken)) {
         http_response_code(400);
         $errors[] = 'Neplatný bezpečnostný token.';
     } else {
         $action = $_POST['action'] ?? '';
-        if ($action === 'delete' && isset($_POST['id'])) {
+        $deleteId = $action === 'delete' ? requestPositiveInt($_POST, 'id') : null;
+        if ($action === 'delete' && $deleteId === null) {
+            $errors[] = 'Blok na odstránenie nie je platný.';
+        }
+        if ($deleteId !== null) {
             $stmt = $pdo->prepare("DELETE FROM content_blocks WHERE id = :id LIMIT 1");
-            $stmt->execute([':id' => (int) $_POST['id']]);
-            logAdminAction($pdo, 'content_delete', 'content_block', (int) $_POST['id']);
+            $stmt->execute([':id' => $deleteId]);
+            logAdminAction($pdo, 'content_delete', 'content_block', $deleteId);
             header('Location: admin_content.php', true, 303);
             exit;
         }
 
         if ($action === 'save') {
-            $id = isset($_POST['id']) && is_numeric($_POST['id']) ? (int) $_POST['id'] : null;
+            $id = requestPositiveInt($_POST, 'id');
             $blockKey = trim((string) ($_POST['block_key'] ?? ''));
             $title = trim((string) ($_POST['title'] ?? ''));
             $rawContent = trim((string) ($_POST['content'] ?? ''));

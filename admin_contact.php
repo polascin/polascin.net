@@ -10,9 +10,9 @@ requireAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
-    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+    $id = requestPositiveInt($_POST, 'id') ?? 0;
     $action = (string) ($_POST['action'] ?? '');
-    if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken)) {
+    if (!isTrustedStateChangingRequest() || !validateCsrfToken($csrfToken)) {
         setFlashMessage('error', 'Akciu sa nepodarilo overiť.');
     } elseif ($action === 'delete_all') {
         $confirmation = (string) ($_POST['confirmation'] ?? '');

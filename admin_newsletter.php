@@ -10,8 +10,8 @@ requireAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
-    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-    if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken) || $id < 1) {
+    $id = requestPositiveInt($_POST, 'id') ?? 0;
+    if (!isTrustedStateChangingRequest() || !validateCsrfToken($csrfToken) || $id < 1) {
         setFlashMessage('error', 'Odstránenie sa nepodarilo overiť.');
     } else {
         $stmt = $pdo->prepare("DELETE FROM newsletter_subscribers WHERE id = :id LIMIT 1");

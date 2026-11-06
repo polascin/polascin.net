@@ -25,7 +25,7 @@ $allArticles = (function () use ($pdo): array {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken)) {
+    if (!isTrustedStateChangingRequest() || !validateCsrfToken($csrfToken)) {
         http_response_code(400);
         $errors[] = 'Neplatný bezpečnostný token.';
     } else {
@@ -70,8 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        if ($action === 'delete' && isset($_POST['id'])) {
-            $id = (int) $_POST['id'];
+        $deleteId = $action === 'delete' ? requestPositiveInt($_POST, 'id') : null;
+        if ($action === 'delete' && $deleteId === null) {
+            $errors[] = 'Článok na odstránenie nie je platný.';
+        }
+        if ($deleteId !== null) {
+            $id = $deleteId;
             $stmt = $pdo->prepare("DELETE FROM articles WHERE id = :id LIMIT 1");
             $stmt->execute([':id' => $id]);
             queryCacheClear();
@@ -81,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (in_array($action, ['save', 'publish'], true)) {
-            $id = isset($_POST['id']) && is_numeric($_POST['id']) ? (int) $_POST['id'] : null;
+            $id = requestPositiveInt($_POST, 'id');
             $title = trim((string) ($_POST['title'] ?? ''));
             $slug = trim((string) ($_POST['slug'] ?? ''));
             $excerpt = strip_tags(trim((string) ($_POST['excerpt'] ?? '')));

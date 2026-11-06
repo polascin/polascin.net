@@ -32,6 +32,22 @@ expectTrue(
     'Vek v hlavičke a pätičke musí ísť cez appAgeParts()'
 );
 expectSame('x', requestString(['slug' => 'x'], 'slug'), 'requestString musí vrátiť reťazec');
+expectSame(42, requestPositiveInt(['id' => '42'], 'id'), 'requestPositiveInt musí prijať kladné číslo');
+expectSame(null, requestPositiveInt(['id' => ['7']], 'id'), 'Pole id nesmie dať 1 ako pri (int)');
+expectSame(null, requestPositiveInt(['id' => '0'], 'id'), 'Nula nie je platné id');
+expectSame(null, requestPositiveInt(['id' => '-3'], 'id'), 'Záporné id je neplatné');
+expectSame(null, requestPositiveInt(['id' => '1e3'], 'id'), 'Exponent nie je platné id');
+expectSame(null, requestPositiveInt(['id' => '99999999999'], 'id'), 'Príliš veľké id je neplatné');
+expectSame(null, requestPositiveInt([], 'id'), 'Chýbajúce id je null');
+foreach (['admin_articles.php', 'admin_content.php', 'admin_contact.php', 'admin_newsletter.php'] as $adminIdPage) {
+    $adminIdSource = (string) file_get_contents(dirname(__DIR__) . '/' . $adminIdPage);
+    expectTrue(
+        str_contains($adminIdSource, 'requestPositiveInt($_POST, \'id\')')
+            && !str_contains($adminIdSource, '(int) $_POST[\'id\']')
+            && !str_contains($adminIdSource, 'validateCsrfToken((string)'),
+        $adminIdPage . ' musí brať id cez requestPositiveInt() a CSRF token bez pretypovania'
+    );
+}
 expectTrue(containsDisallowedSingleLineCharacters("Predmet\r\nBcc: x@example.com"), 'Jednoriadkové pole nesmie prijať CR/LF');
 expectTrue(containsDisallowedSingleLineCharacters("Meno\x00"), 'Jednoriadkové pole nesmie prijať NUL');
 expectTrue(!containsDisallowedSingleLineCharacters('Ľubomír Polaščín'), 'Bežné meno s diakritikou je platné');
