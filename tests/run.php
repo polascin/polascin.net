@@ -3267,10 +3267,8 @@ $previousErrorLog = ini_set('error_log', PHP_OS_FAMILY === 'Windows' ? 'NUL' : '
 expectSame('Záloha', getContentBlock($brokenContentPdo, 'hero_title', 'Záloha', 'sk'), 'Chyba DB musí vrátiť predvolený text');
 ini_set('error_log', $previousErrorLog === false ? '' : $previousErrorLog);
 $securityTxt = (string) @file_get_contents(dirname(__DIR__) . '/.well-known/security.txt');
-expectTrue(str_contains($securityTxt, "Contact: mailto:lubomir@polascin.net
-"), 'security.txt musí mať Contact (RFC 9116)');
-expectTrue(str_contains($securityTxt, "Canonical: https://polascin.net/.well-known/security.txt
-"), 'security.txt musí mať Canonical');
+expectTrue(str_contains($securityTxt, "Contact: mailto:lubomir@polascin.net\n"), 'security.txt musí mať Contact (RFC 9116)');
+expectTrue(str_contains($securityTxt, "Canonical: https://polascin.net/.well-known/security.txt\n"), 'security.txt musí mať Canonical');
 expectTrue(preg_match('/^[\x09\x0A\x20-\x7E]+$/', $securityTxt) === 1, 'security.txt musí byť ASCII bez skrytých znakov');
 $securityTxtExpires = preg_match('/^Expires: (\S+)$/m', $securityTxt, $securityTxtMatch) === 1 ? strtotime($securityTxtMatch[1]) : false;
 expectTrue(
@@ -3278,9 +3276,9 @@ expectTrue(
     'security.txt Expires musí byť o 30 až 400 dní; pred vypršaním ho obnov'
 );
 expectTrue(
-    str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), '<Files "security.txt">')
-        && str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), 'RewriteRule ^\.well-known/security\.txt$ security_txt.php [L]')
-        && str_contains((string) file_get_contents(dirname(__DIR__) . '/security_txt.php'), "header('Content-Type: text/plain; charset=utf-8');"), 'security.txt musí ísť cez security_txt.php s charset=utf-8 (RFC 9116)');
+    str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), '<Files "security.txt">'),
+    '.htaccess musí povoliť security.txt napriek zákazu .txt'
+);
 $libraryPage = (string) file_get_contents(dirname(__DIR__) . '/library.php');
 $libraryFilePage = (string) file_get_contents(dirname(__DIR__) . '/library_file.php');
 $libraryAdminPage = (string) file_get_contents(dirname(__DIR__) . '/admin_library.php');

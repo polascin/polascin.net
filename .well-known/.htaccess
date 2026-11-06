@@ -1,6 +1,0 @@
-# security.txt ide cez PHP kvoli charset=utf-8 (RFC 9116, Beh #109).
-# Koreňový .htaccess sa na /.well-known/ na tomto hostingu neuplatní.
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteRule ^security\.txt$ /security_txt.php [L]
-</IfModule>
