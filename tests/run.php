@@ -2325,6 +2325,12 @@ expectTrue(
     'Kontaktný formulár musí obmedzovať distribuovaný spam, odosielateľa aj duplicity'
 );
 expectTrue(
+    str_contains($contactSource, '$rateLimitRetryAfter = 86400')
+        && str_contains($contactSource, "header('Retry-After: ' . \$rateLimitRetryAfter)")
+        && !preg_match("/contact_sender[\s\S]*header\\('Retry-After: 3600'\\)/s", $contactSource),
+    'Retry-After pri contact_sender musí byť 86400 s, nie pevných 3600 (Beh #99)'
+);
+expectTrue(
     str_contains($contactSource, 'minlength="20"')
         && str_contains($contactSource, "clearFormRateLimit(\$pdo, 'contact_duplicate', \$duplicateKey)"),
     'Správa musí mať minimálnu dĺžku a neúspešný zápis musí uvoľniť deduplikačný limit'

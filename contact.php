@@ -55,12 +55,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Limity sa počítajú až po syntaktickej validácii. Pseudokľúče sú
         // jednosmerné hashe, takže pomocná tabuľka neuchováva ďalšiu kópiu e-mailu.
+        // Retry-After musí zodpovedať oknu limitu, ktorý zlyhal (Beh #99):
+        // contact_sender má 86 400 s, nie 3 600.
         $ip = getClientIpAddress();
+        $rateLimitRetryAfter = null;
         if (empty($errors) && !checkFormRateLimit($pdo, 'contact_form', $ip, 3, 3600)) {
             $errors[] = t('contact.error_rate_limit');
+            $rateLimitRetryAfter = 3600;
         }
         if (empty($errors) && !checkFormRateLimit($pdo, 'contact_global', 'global', 30, 3600)) {
             $errors[] = t('contact.error_rate_limit');
+            $rateLimitRetryAfter = 3600;
         }
         if (empty($errors) && !isEmailDomainValid($email)) {
             $errors[] = t('contact.error_email');
@@ -68,10 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $senderKey = 'mail:' . substr(hash('sha256', strtolower($email)), 0, 40);
         if (empty($errors) && !checkFormRateLimit($pdo, 'contact_sender', $senderKey, 3, 86400)) {
             $errors[] = t('contact.error_rate_limit');
+            $rateLimitRetryAfter = 86400;
         }
-        if ($errors !== [] && in_array(t('contact.error_rate_limit'), $errors, true)) {
+        if ($rateLimitRetryAfter !== null) {
             http_response_code(429);
-            header('Retry-After: 3600');
+            header('Retry-After: ' . $rateLimitRetryAfter);
         }
 
         if (empty($errors)) {
