@@ -14,8 +14,7 @@ $flash = function_exists('popFlashMessage') ? popFlashMessage() : null;
 // Aktuálne počítaný vek, rovnaký výpočet ako na old.polascin.net
 // (narodenie 4. 3. 1971 o 8:30, rok = 365,25 dňa).
 $vekAktualny = (time() - mktime(8, 30, 0, 3, 4, 1971)) / (60 * 60 * 24 * 365.25);
-$vekRoky = (int) floor($vekAktualny);
-$vekZlomok = substr(number_format($vekAktualny, 3, '.', ''), -4);
+[$vekRoky, $vekZlomok] = appAgeParts($vekAktualny);
 
 // Aktuálny Swatch Internet Time ako v hlavičke nefro.polascin.net
 // (BMT = UTC+1, 1 deň = 1000 beatov); js/main.js ho ďalej aktualizuje naživo.

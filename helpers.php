@@ -60,6 +60,20 @@ function requestString(array $source, string $key, string $default = ''): string
     return is_string($value) ? $value : $default;
 }
 
+/**
+ * Vek v rokoch na zobrazenie: celé roky a tri desatinné miesta.
+ * Desatinná časť sa oreže, nie zaokrúhli. Inak by pred narodeninami
+ * (zlomok od 0,9995) vyšlo napr. „52.000“ namiesto „52.999“.
+ *
+ * @return array{0: int, 1: string}
+ */
+function appAgeParts(float $years): array {
+    $thousandths = (int) floor($years * 1000 + 1e-6);
+    $whole = intdiv($thousandths, 1000);
+
+    return [$whole, '.' . str_pad((string) ($thousandths - $whole * 1000), 3, '0', STR_PAD_LEFT)];
+}
+
 function appTextLength(string $value): int {
     if (function_exists('mb_strlen')) {
         return mb_strlen($value, 'UTF-8');

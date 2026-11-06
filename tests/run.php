@@ -23,6 +23,14 @@ function expectSame(mixed $expected, mixed $actual, string $message): void {
 }
 
 expectSame(7, appTextLength('Ľubomír'), 'UTF-8 dĺžka musí fungovať aj bez mbstring');
+expectSame([52, '.999'], appAgeParts(52.9996), 'Vek pred narodeninami sa nesmie zaokrúhliť na .000');
+expectSame([53, '.000'], appAgeParts(53.0), 'Celé roky majú desatiny .000');
+expectSame([53, '.042'], appAgeParts(53.0425), 'Desatinná časť veku má tri miesta s nulami');
+expectTrue(
+    !str_contains((string) file_get_contents(dirname(__DIR__) . '/header.php'), 'number_format(')
+        && !str_contains((string) file_get_contents(dirname(__DIR__) . '/footer.php'), 'number_format('),
+    'Vek v hlavičke a pätičke musí ísť cez appAgeParts()'
+);
 expectSame('x', requestString(['slug' => 'x'], 'slug'), 'requestString musí vrátiť reťazec');
 expectSame('', requestString(['slug' => ['x']], 'slug'), 'requestString nesmie pole pretypovať na „Array“');
 expectSame('subscribe', requestString([], 'form_action', 'subscribe'), 'requestString musí vrátiť predvolenú hodnotu');

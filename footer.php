@@ -67,7 +67,8 @@ $footerBeat = appSwatchBeat($footerUpdateTs);
 
     <p class="footer-ages">
       <?php foreach ($vekoveHodnoty as $vekHodnota): ?>
-        <span class="footer-age"><?= (int) floor($vekHodnota) ?><small><?= substr(number_format($vekHodnota, 3, '.', ''), -4) ?></small></span>
+        <?php [$vekCele, $vekDesatiny] = appAgeParts($vekHodnota); ?>
+        <span class="footer-age"><?= $vekCele ?><small><?= htmlspecialchars($vekDesatiny, ENT_QUOTES, 'UTF-8') ?></small></span>
       <?php endforeach; ?>
     </p>
 
