@@ -698,8 +698,24 @@
         if (submitButton) {
           submitButton.disabled = true;
           submitButton.setAttribute("aria-disabled", "true");
+          submitButton.dataset.submitOnceDisabled = "true";
         }
       });
+    });
+
+    // Po návrate tlačidlom Späť obnoví prehliadač stránku z bfcache aj
+    // s vypnutým tlačidlom. Formulár by sa potom nedal odoslať znova.
+    window.addEventListener("pageshow", (event) => {
+      if (!event.persisted) {
+        return;
+      }
+      document
+        .querySelectorAll("[data-submit-once-disabled]")
+        .forEach((button) => {
+          button.disabled = false;
+          button.removeAttribute("aria-disabled");
+          delete button.dataset.submitOnceDisabled;
+        });
     });
   });
 })();

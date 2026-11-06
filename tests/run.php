@@ -2351,7 +2351,9 @@ expectTrue(
 );
 expectTrue(
     str_contains($mainJsSource, 'form[data-submit-once]')
-        && str_contains($mainJsSource, 'submitButton.disabled = true'),
+        && str_contains($mainJsSource, 'submitButton.disabled = true')
+        && str_contains($mainJsSource, '"pageshow"')
+        && str_contains($mainJsSource, 'event.persisted'),
     'Klient musí zabrániť opakovanému odoslaniu dvojklikom'
 );
 $stylesSource = (string) file_get_contents(dirname(__DIR__) . '/css/styles.css');
