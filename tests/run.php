@@ -3230,6 +3230,19 @@ expectTrue(
         && strpos($sitemapSource, '$articleRows = $articleStmt->fetchAll()') < strpos($sitemapSource, '$staticPages = ['),
     'lastmod domovskej stránky, zoznamu článkov a knižnice musí rásť s najnovším obsahom'
 );
+$renderHeadMetaForTest = static function (array $vars): string {
+    extract($vars);
+    ob_start();
+    include dirname(__DIR__) . '/head_meta.php';
+
+    return (string) ob_get_clean();
+};
+$headSingleLanguage = $renderHeadMetaForTest(['languageAlternates' => [], 'ogLocaleLang' => 'en']);
+expectTrue(str_contains($headSingleLanguage, '<meta property="og:locale" content="en_US">'), 'og:locale musí byť jazyk obsahu, nie rozhrania');
+expectTrue(!str_contains($headSingleLanguage, 'og:locale:alternate'), 'Obsah bez prekladu nesmie ohlasovať og:locale:alternate');
+$headAllLanguages = $renderHeadMetaForTest([]);
+expectSame(count(appLanguages()) - 1, substr_count($headAllLanguages, 'og:locale:alternate'), 'Stránka vo všetkých jazykoch ohlási ostatné lokality');
+expectTrue(str_contains((string) file_get_contents(dirname(__DIR__) . '/article.php'), '$ogLocaleLang = $articleLang;'), 'Článok musí nastaviť og:locale podľa jazyka článku');
 $libraryPage = (string) file_get_contents(dirname(__DIR__) . '/library.php');
 $libraryFilePage = (string) file_get_contents(dirname(__DIR__) . '/library_file.php');
 $libraryAdminPage = (string) file_get_contents(dirname(__DIR__) . '/admin_library.php');

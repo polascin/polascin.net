@@ -41,6 +41,7 @@ if ($notFound) {
     // Kanonická URL patrí jazyku, v ktorom je článok skutočne napísaný.
     $canonicalUrl = absoluteLangUrl($articleLang, 'article.php', ['slug' => (string) $article['slug']]);
     $ogType = 'article';
+    $ogLocaleLang = $articleLang;
 
     // Jazykové varianty ukazujú na skutočné preklady, nie na tú istú URL.
     $articleTranslations = array_filter(

@@ -37,6 +37,19 @@ if (!isset($languageAlternates) || !is_array($languageAlternates)) {
     // znamená „tento obsah existuje len v jednom jazyku“.
     $languageAlternates = languageAlternatesFor($canonicalUrl);
 }
+// Open Graph opisuje jazyk obsahu, nie rozhrania: článok zobrazený bez
+// prekladu (jazyk rozhrania iný než článku) si `$ogLocaleLang` nastaví sám.
+// Alternatívne lokality sú len tie, ktoré majú skutočný variant v hreflang.
+$ogLocaleLang = isset($ogLocaleLang) && is_string($ogLocaleLang) && isSupportedLanguage($ogLocaleLang)
+    ? $ogLocaleLang
+    : $metaLang;
+$ogLocaleAlternates = [];
+foreach (array_keys($languageAlternates) as $ogAlternateLang) {
+    $ogAlternateLang = (string) $ogAlternateLang;
+    if ($ogAlternateLang !== $ogLocaleLang && isSupportedLanguage($ogAlternateLang)) {
+        $ogLocaleAlternates[] = (string) appLanguages()[$ogAlternateLang]['locale'];
+    }
+}
 $robotsMeta = $robotsMeta ?? 'index, follow, max-image-preview:large';
 $ogType = $ogType ?? 'website';
 $ogImage = $ogImage ?? ($baseUrl . '/images/profile.jpg');
@@ -106,11 +119,9 @@ if ($xDefault === null) {
 <meta property="og:description" content="<?= htmlspecialchars($seoDescription, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:url" content="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:site_name" content="<?= htmlspecialchars($siteName, ENT_QUOTES, 'UTF-8') ?>">
-<meta property="og:locale" content="<?= htmlspecialchars(currentLocale(), ENT_QUOTES, 'UTF-8') ?>">
-<?php foreach (appLanguages() as $ogLang => $ogMeta): ?>
-<?php if ($ogLang !== $metaLang): ?>
-<meta property="og:locale:alternate" content="<?= htmlspecialchars((string) $ogMeta['locale'], ENT_QUOTES, 'UTF-8') ?>">
-<?php endif; ?>
+<meta property="og:locale" content="<?= htmlspecialchars((string) appLanguages()[$ogLocaleLang]['locale'], ENT_QUOTES, 'UTF-8') ?>">
+<?php foreach ($ogLocaleAlternates as $ogAlternateLocale): ?>
+<meta property="og:locale:alternate" content="<?= htmlspecialchars($ogAlternateLocale, ENT_QUOTES, 'UTF-8') ?>">
 <?php endforeach; ?>
 <meta property="og:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:image:width" content="<?= (int) $ogImageWidth ?>">
