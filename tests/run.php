@@ -23,6 +23,15 @@ function expectSame(mixed $expected, mixed $actual, string $message): void {
 }
 
 expectSame(7, appTextLength('Ľubomír'), 'UTF-8 dĺžka musí fungovať aj bez mbstring');
+expectSame('x', requestString(['slug' => 'x'], 'slug'), 'requestString musí vrátiť reťazec');
+expectSame('', requestString(['slug' => ['x']], 'slug'), 'requestString nesmie pole pretypovať na „Array“');
+expectSame('subscribe', requestString([], 'form_action', 'subscribe'), 'requestString musí vrátiť predvolenú hodnotu');
+foreach (['article.php', 'newsletter.php', 'contact.php', 'login.php'] as $publicInputPage) {
+    expectTrue(
+        preg_match('/\(string\) \(?\$_(GET|POST)\[/', (string) file_get_contents(dirname(__DIR__) . '/' . $publicInputPage)) !== 1,
+        $publicInputPage . ' nesmie pretypovať verejný vstup cez (string), ale cez requestString()'
+    );
+}
 expectSame('Ľub', appTextSlice('Ľubomír', 0, 3), 'UTF-8 skrátenie nesmie rozbiť znak');
 expectSame(
     'pokrok-v-zdravi-obliciek',

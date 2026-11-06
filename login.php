@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['totp_pending_user_
         logCsrfFailure('login_totp', $trustedOrigin, $csrfToken);
         unset($_SESSION['totp_pending_user_id'], $_SESSION['totp_pending_started_at']);
     } else {
-        $totpCode = trim((string) ($_POST['totp_code'] ?? ''));
+        $totpCode = trim(requestString($_POST, 'totp_code'));
         $pendingUserId = (int) $_SESSION['totp_pending_user_id'];
         $ip = getClientIpAddress();
 
@@ -141,8 +141,8 @@ if (
         $errors[] = t('error.csrf');
         logCsrfFailure('login', $trustedOrigin, $csrfToken);
     } else {
-        $username = trim((string) ($_POST['username'] ?? ''));
-        $password = (string) ($_POST['password'] ?? '');
+        $username = trim(requestString($_POST, 'username'));
+        $password = requestString($_POST, 'password');
 
         $credentialsHaveValidLength = $username !== ''
             && appTextLength($username) <= 255

@@ -48,6 +48,18 @@ function appSwatchBeat(int $timestamp): string {
     return sprintf('@%d.%02d', intdiv($beatHundredths, 100), $beatHundredths % 100);
 }
 
+/**
+ * Hodnota z $_GET/$_POST ako reťazec. Pole (`?slug[]=x`) sa nepretypuje na
+ * „Array“ s varovaním v logu, ale vráti predvolenú hodnotu.
+ *
+ * @param array<array-key, mixed> $source
+ */
+function requestString(array $source, string $key, string $default = ''): string {
+    $value = $source[$key] ?? null;
+
+    return is_string($value) ? $value : $default;
+}
+
 function appTextLength(string $value): int {
     if (function_exists('mb_strlen')) {
         return mb_strlen($value, 'UTF-8');

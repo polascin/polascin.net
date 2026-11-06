@@ -9,7 +9,7 @@ require_once __DIR__ . '/helpers.php';
 /** @var PDO $pdo */
 
 $action = $_GET['action'] ?? '';
-$token = isset($_GET['token']) ? trim((string) $_GET['token']) : '';
+$token = trim(requestString($_GET, 'token'));
 $action = is_string($action) && in_array($action, ['confirm', 'unsubscribe'], true) ? $action : '';
 $lang = currentLang();
 $message = '';
@@ -151,10 +151,10 @@ if ($action === 'confirm' && $token !== '') {
 $errors = [];
 $email = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $formAction = (string) ($_POST['form_action'] ?? 'subscribe');
+    $formAction = requestString($_POST, 'form_action', 'subscribe');
     if ($formAction === 'unsubscribe') {
         $action = 'unsubscribe';
-        $token = trim((string) ($_POST['token'] ?? ''));
+        $token = trim(requestString($_POST, 'token'));
         $showUnsubscribeConfirmation = preg_match('/^[a-f0-9]{48}$/', $token) === 1;
     }
     $csrfToken = $_POST['csrf_token'] ?? '';
@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } elseif ($formAction === 'subscribe') {
         // Rovnaká tichá odpoveď ako pri kontakte: bot nesmie rozlíšiť úspech.
-        $isLikelyBot = trim((string) ($_POST['website'] ?? '')) !== ''
+        $isLikelyBot = trim(requestString($_POST, 'website')) !== ''
             || !consumeTimedFormProof('newsletter', $_POST['form_proof'] ?? null, 2, 7200);
         if ($isLikelyBot) {
             setFlashMessage('success', t('newsletter.pending'));
@@ -195,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        $email = trim((string) ($_POST['email'] ?? ''));
+        $email = trim(requestString($_POST, 'email'));
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || appTextLength($email) > 255) {
             $errors[] = t('newsletter.error_email');
         }

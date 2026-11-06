@@ -28,16 +28,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         http_response_code(400);
         $errors[] = t('error.csrf');
     } elseif (empty($errors)) {
-        $isLikelyBot = trim((string) ($_POST['website'] ?? '')) !== ''
+        $isLikelyBot = trim(requestString($_POST, 'website')) !== ''
             || !consumeTimedFormProof('contact', $_POST['form_proof'] ?? null, 2, 7200);
         if ($isLikelyBot) {
             $redirectWithNeutralSuccess();
         }
 
-        $name = trim((string) ($_POST['name'] ?? ''));
-        $email = trim((string) ($_POST['email'] ?? ''));
-        $subject = trim((string) ($_POST['subject'] ?? ''));
-        $message = trim(str_replace(["\r\n", "\r"], "\n", (string) ($_POST['message'] ?? '')));
+        $name = trim(requestString($_POST, 'name'));
+        $email = trim(requestString($_POST, 'email'));
+        $subject = trim(requestString($_POST, 'subject'));
+        $message = trim(str_replace(["\r\n", "\r"], "\n", requestString($_POST, 'message')));
         $formData = compact('name', 'email', 'subject', 'message');
 
         if (appTextLength($name) < 2 || appTextLength($name) > 255 || containsDisallowedControlCharacters($name)) {

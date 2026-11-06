@@ -9,7 +9,7 @@ require_once __DIR__ . '/helpers.php';
 /** @var PDO $pdo */
 
 $lang = currentLang();
-$slug = isset($_GET['slug']) ? trim((string) $_GET['slug']) : '';
+$slug = trim(requestString($_GET, 'slug'));
 // Administrátor smie vidieť aj nepublikovaný koncept v požadovanom jazyku;
 // návštevníkovi sa namiesto neho ponúkne publikovaný preklad.
 $article = preg_match('/^[a-z0-9-]{1,255}$/', $slug) === 1
