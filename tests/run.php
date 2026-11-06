@@ -3251,6 +3251,18 @@ expectTrue(!str_contains($headSingleLanguage, 'og:locale:alternate'), 'Obsah bez
 $headAllLanguages = $renderHeadMetaForTest([]);
 expectSame(count(appLanguages()) - 1, substr_count($headAllLanguages, 'og:locale:alternate'), 'Stránka vo všetkých jazykoch ohlási ostatné lokality');
 expectTrue(str_contains((string) file_get_contents(dirname(__DIR__) . '/article.php'), '$ogLocaleLang = $articleLang;'), 'Článok musí nastaviť og:locale podľa jazyka článku');
+$contentBlockPdo = new PDO('sqlite::memory:', null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+$contentBlockPdo->exec("CREATE TABLE content_blocks (block_key TEXT, content TEXT, lang TEXT, is_active INTEGER)");
+$contentBlockPdo->exec("INSERT INTO content_blocks VALUES ('hero_title', '<b>Ahoj</b> &amp; svet', 'sk', 1), ('hero_title', 'Hello', 'en', 1), ('about_who', 'Skryté', 'sk', 0), ('about_intro', '', 'sk', 1)");
+expectSame('Ahoj & svet', getContentBlock($contentBlockPdo, 'hero_title', 'x', 'sk'), 'Blok obsahu sa číta podľa jazyka a bez HTML');
+expectSame('Hello', getContentBlock($contentBlockPdo, 'hero_title', 'x', 'en'), 'Iný jazyk má vlastný blok');
+expectSame('Predvolené', getContentBlock($contentBlockPdo, 'about_who', 'Predvolené', 'sk'), 'Neaktívny blok sa nahradí prekladom');
+expectSame('Predvolené', getContentBlock($contentBlockPdo, 'about_intro', 'Predvolené', 'sk'), 'Prázdny blok sa nahradí prekladom');
+expectSame('Náhrada', getContentBlock($contentBlockPdo, 'chyba', 'Náhrada', 'de'), 'Jazyk bez blokov dá predvolený text');
+$contentBlockPdo->exec("DROP TABLE content_blocks");
+expectSame('Ahoj & svet', getContentBlock($contentBlockPdo, 'hero_title', 'x', 'sk'), 'Bloky jazyka sa v jednej požiadavke načítajú len raz');
+$brokenContentPdo = new PDO('sqlite::memory:', null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+expectSame('Záloha', getContentBlock($brokenContentPdo, 'hero_title', 'Záloha', 'sk'), 'Chyba DB musí vrátiť predvolený text');
 $libraryPage = (string) file_get_contents(dirname(__DIR__) . '/library.php');
 $libraryFilePage = (string) file_get_contents(dirname(__DIR__) . '/library_file.php');
 $libraryAdminPage = (string) file_get_contents(dirname(__DIR__) . '/admin_library.php');

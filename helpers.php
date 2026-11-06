@@ -364,20 +364,31 @@ function generateTotpUri(string $secret, string $accountName, string $issuer = '
 function getContentBlock(PDO $pdo, string $key, string $default = '', ?string $lang = null): string {
     $lang ??= function_exists('currentLang') ? currentLang() : 'sk';
 
-    try {
-        $stmt = $pdo->prepare(
-            "SELECT content FROM content_blocks
-             WHERE block_key = :key AND lang = :lang AND is_active = 1
-             LIMIT 1"
-        );
-        $stmt->execute([':key' => $key, ':lang' => $lang]);
-        $row = $stmt->fetch();
-        $content = is_array($row) && !empty($row['content']) ? (string) $row['content'] : $default;
-        return html_entity_decode(strip_tags(sanitizeHtmlContent($content)), ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    } catch (\PDOException $e) {
-        error_log('getContentBlock error: ' . $e->getMessage());
-        return html_entity_decode(strip_tags(sanitizeHtmlContent($default)), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    // Domovská stránka číta päť blokov. Všetky aktívne bloky jazyka sa
+    // načítajú jedným dotazom a do konca požiadavky sa pamätajú.
+    static $blocksByLang = [];
+    $cacheId = spl_object_id($pdo) . '|' . $lang;
+    if (!array_key_exists($cacheId, $blocksByLang)) {
+        try {
+            $stmt = $pdo->prepare(
+                "SELECT block_key, content FROM content_blocks
+                 WHERE lang = :lang AND is_active = 1"
+            );
+            $stmt->execute([':lang' => $lang]);
+            $blocks = [];
+            foreach ($stmt->fetchAll() as $row) {
+                $blocks[(string) $row['block_key']] = (string) ($row['content'] ?? '');
+            }
+            $blocksByLang[$cacheId] = $blocks;
+        } catch (\PDOException $e) {
+            error_log('getContentBlock error: ' . $e->getMessage());
+            $blocksByLang[$cacheId] = null;
+        }
     }
+    $blocks = $blocksByLang[$cacheId];
+    $content = is_array($blocks) && !empty($blocks[$key]) ? $blocks[$key] : $default;
+
+    return html_entity_decode(strip_tags(sanitizeHtmlContent($content)), ENT_QUOTES | ENT_HTML5, 'UTF-8');
 }
 
 /**
