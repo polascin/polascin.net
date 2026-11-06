@@ -34,15 +34,31 @@ if ($totpSetupExpired && $_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = (string) ($_POST['action'] ?? '');
+    // Chyby dôvery/CSRF/must_change musia skončiť pri formulári, ktorý ich
+    // spôsobil (TOTP alebo create_admin), nie vždy pri zmene hesla.
+    $appendAdminFormError = static function (string $message) use (
+        $action,
+        &$passwordErrors,
+        &$totpErrors,
+        &$createErrors
+    ): void {
+        if (str_starts_with($action, 'totp_')) {
+            $totpErrors[] = $message;
+        } elseif ($action === 'create_admin') {
+            $createErrors[] = $message;
+        } else {
+            $passwordErrors[] = $message;
+        }
+    };
     if (!isTrustedStateChangingRequest()) {
         http_response_code(403);
-        $passwordErrors[] = 'Požiadavka nepochádza z dôveryhodnej stránky.';
+        $appendAdminFormError('Požiadavka nepochádza z dôveryhodnej stránky.');
     } elseif (!validateCsrfToken($_POST['csrf_token'] ?? null)) {
         http_response_code(400);
-        $passwordErrors[] = 'Platnosť formulára vypršala. Obnovte stránku a skúste to znova.';
+        $appendAdminFormError('Platnosť formulára vypršala. Obnovte stránku a skúste to znova.');
     } elseif ($mustChangePassword && $action !== 'change_password') {
         http_response_code(403);
-        $passwordErrors[] = 'Pred ďalšou správou stránky si musíte zmeniť dočasné heslo.';
+        $appendAdminFormError('Pred ďalšou správou stránky si musíte zmeniť dočasné heslo.');
     } elseif ($action === 'totp_begin') {
         $confirmCredential = (string) ($_POST['confirm_credential'] ?? '');
         $rateKey = 'usr:' . substr(hash('sha256', (string) $currentAdminId), 0, 40);

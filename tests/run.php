@@ -2304,6 +2304,12 @@ expectTrue(
         && str_contains($adminUsersSource, 'isEmailDomainValid($newAdminEmail)'),
     'Vytvorenie administrátora musí overiť MX/A domény e-mailu (Beh #91)'
 );
+expectTrue(
+    str_contains($adminUsersSource, '$appendAdminFormError')
+        && str_contains($adminUsersSource, "str_starts_with(\$action, 'totp_')")
+        && str_contains($adminUsersSource, "\$action === 'create_admin'"),
+    'CSRF/dôvera v admin_users.php musí hlásiť chybu pri TOTP alebo create_admin (Beh #94)'
+);
 $contactSource = (string) file_get_contents(dirname(__DIR__) . '/contact.php');
 expectTrue(
     str_contains($contactSource, 'isTrustedStateChangingRequest()')
