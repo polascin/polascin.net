@@ -101,6 +101,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($title === '' || appTextLength($title) > 255) {
                 $errors[] = 'Názov je povinný (max 255 znakov).';
             }
+            // Názov, autor a alt text idú do <title>, og:title a JSON-LD;
+            // zalomenie riadku alebo riadiaci znak by rozbil náhľady.
+            foreach (['Názov' => $title, 'Autor' => $author, 'Alternatívny text obálky' => $imageAlt] as $singleLineLabel => $singleLineValue) {
+                if (containsDisallowedSingleLineCharacters($singleLineValue)) {
+                    $errors[] = $singleLineLabel . ' nesmie obsahovať zalomenie riadku ani riadiace znaky.';
+                }
+            }
             if ($slug === '') {
                 $slug = slugify($title);
             }

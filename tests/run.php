@@ -37,6 +37,12 @@ expectTrue(containsDisallowedSingleLineCharacters("Meno\x00"), 'Jednoriadkové p
 expectTrue(!containsDisallowedSingleLineCharacters('Ľubomír Polaščín'), 'Bežné meno s diakritikou je platné');
 expectTrue(!containsDisallowedControlCharacters("Riadok 1\nRiadok 2"), 'Správa smie mať viac riadkov');
 expectSame(2, substr_count((string) file_get_contents(dirname(__DIR__) . '/contact.php'), 'containsDisallowedSingleLineCharacters('), 'Meno a predmet kontaktu musia odmietnuť zalomenie riadku');
+$adminArticlesSource = (string) file_get_contents(dirname(__DIR__) . '/admin_articles.php');
+expectTrue(
+    str_contains($adminArticlesSource, "'Názov' => \$title, 'Autor' => \$author, 'Alternatívny text obálky' => \$imageAlt]")
+        && str_contains($adminArticlesSource, 'containsDisallowedSingleLineCharacters($singleLineValue)'),
+    'Názov, autor a alt text článku musia odmietnuť zalomenie riadku'
+);
 expectSame('', requestString(['slug' => ['x']], 'slug'), 'requestString nesmie pole pretypovať na „Array“');
 expectSame('subscribe', requestString([], 'form_action', 'subscribe'), 'requestString musí vrátiť predvolenú hodnotu');
 foreach (['article.php', 'newsletter.php', 'contact.php', 'login.php'] as $publicInputPage) {
