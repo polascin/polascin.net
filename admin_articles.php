@@ -316,7 +316,7 @@ $canonicalUrl = $baseUrl . '/admin_articles.php';
       <?php if ($success): ?><div class="alert alert-success"><p><?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?></p></div><?php endif; ?>
       <?php foreach ($errors as $error): ?><div class="alert alert-error"><p><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p></div><?php endforeach; ?>
 
-      <form method="post" action="admin_articles.php" class="admin-form">
+      <form method="post" action="admin_articles.php" class="admin-form" data-submit-once>
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
         <input type="hidden" name="action" value="save">
         <?php if ($editing): ?><input type="hidden" name="id" value="<?= (int) $editing['id'] ?>"><?php endif; ?>

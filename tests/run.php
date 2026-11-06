@@ -3512,6 +3512,17 @@ expectTrue(
     ) === 1,
     'login.php musí pri už prihlásenom používateľovi rešpektovať must_change_password (Beh #92)'
 );
+expectTrue(
+    substr_count($loginSource, 'class="login-form" data-submit-once') === 2,
+    'login.php musí na hesle aj TOTP zabrániť dvojitému odoslaniu (Beh #97)'
+);
+$adminArticlesSource = (string) file_get_contents(dirname(__DIR__) . '/admin_articles.php');
+$adminContentSource = (string) file_get_contents(dirname(__DIR__) . '/admin_content.php');
+expectTrue(
+    str_contains($adminArticlesSource, 'class="admin-form" data-submit-once')
+        && str_contains($adminContentSource, 'class="admin-form" data-submit-once'),
+    'Ukladanie článku a obsahového bloku musí mať data-submit-once (Beh #97)'
+);
 $contactSource = (string) file_get_contents(dirname(__DIR__) . '/contact.php');
 expectTrue(
     substr_count($contactSource, "langUrl(currentLang(), 'contact.php')") >= 2

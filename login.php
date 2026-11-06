@@ -260,7 +260,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'login.php');
         <div class="alert alert-error"><p><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p></div>
       <?php endforeach; ?>
       <?php if ($totpRequired || isset($_SESSION['totp_pending_user_id'])): ?>
-      <form method="post" action="<?= htmlspecialchars(langUrl($lang, 'login.php'), ENT_QUOTES, 'UTF-8') ?>" class="login-form" novalidate>
+      <form method="post" action="<?= htmlspecialchars(langUrl($lang, 'login.php'), ENT_QUOTES, 'UTF-8') ?>" class="login-form" data-submit-once novalidate>
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
         <p><?= te('login.totp_prompt') ?></p>
         <div class="form-group">
@@ -270,7 +270,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'login.php');
         <button type="submit" class="btn btn-primary"><?= te('login.totp_submit') ?></button>
       </form>
       <?php else: ?>
-      <form method="post" action="<?= htmlspecialchars(langUrl($lang, 'login.php'), ENT_QUOTES, 'UTF-8') ?>" class="login-form" novalidate>
+      <form method="post" action="<?= htmlspecialchars(langUrl($lang, 'login.php'), ENT_QUOTES, 'UTF-8') ?>" class="login-form" data-submit-once novalidate>
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
         <div class="form-group">
           <label for="username"><?= te('login.username') ?></label>
