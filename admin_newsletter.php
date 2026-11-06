@@ -55,7 +55,7 @@ $canonicalUrl = $baseUrl . '/admin_newsletter.php';
             <td><?= htmlspecialchars((string) $sub['created_at'], ENT_QUOTES, 'UTF-8') ?></td>
             <td><?= $sub['confirmed_at'] ? htmlspecialchars((string) $sub['confirmed_at'], ENT_QUOTES, 'UTF-8') : '-' ?></td>
             <td>
-              <form method="post" action="admin_newsletter.php" class="inline-form" data-confirm="Natrvalo odstrániť tohto odberateľa?">
+              <form method="post" action="admin_newsletter.php" class="inline-form" data-submit-once data-confirm="Natrvalo odstrániť tohto odberateľa?">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
                 <input type="hidden" name="id" value="<?= (int) $sub['id'] ?>">
                 <button type="submit" class="btn btn-sm btn-danger">Odstrániť</button>

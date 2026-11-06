@@ -286,7 +286,7 @@ $formProof = generateTimedFormProof('newsletter');
       <?php endif; ?>
 
       <?php if ($showUnsubscribeConfirmation): ?>
-        <form method="post" action="<?= htmlspecialchars(langUrl($lang, 'newsletter.php'), ENT_QUOTES, 'UTF-8') ?>" class="newsletter-form">
+        <form method="post" action="<?= htmlspecialchars(langUrl($lang, 'newsletter.php'), ENT_QUOTES, 'UTF-8') ?>" class="newsletter-form" data-submit-once>
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
           <input type="hidden" name="form_action" value="unsubscribe">
           <input type="hidden" name="token" value="<?= htmlspecialchars($token, ENT_QUOTES, 'UTF-8') ?>">

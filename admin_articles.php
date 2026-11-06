@@ -455,13 +455,13 @@ $canonicalUrl = $baseUrl . '/admin_articles.php';
               <a href="admin_articles.php?edit=<?= (int) $primary['id'] ?>" class="btn btn-sm btn-secondary">Upraviť</a>
               <a href="<?= htmlspecialchars(langUrl((string) ($primary['lang'] ?? APP_DEFAULT_LANGUAGE), 'article.php', ['slug' => (string) $primary['slug']]), ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">Zobraziť</a>
               <?php if ($group['group'] !== null): ?>
-              <form method="post" action="admin_articles.php" class="inline-form">
+              <form method="post" action="admin_articles.php" class="inline-form" data-submit-once>
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
                 <input type="hidden" name="action" value="toggle_top">
                 <input type="hidden" name="translation_group" value="<?= (int) $group['group'] ?>">
                 <button type="submit" class="btn btn-sm <?= (int) $group['is_top'] === 1 ? 'btn-primary' : 'btn-secondary' ?>"><?= (int) $group['is_top'] === 1 ? 'Zrušiť Top' : 'Top (Navrchu)' ?></button>
               </form>
-              <form method="post" action="admin_articles.php" class="inline-form" data-confirm="Odstrániť všetky jazykové verzie tohto článku?">
+              <form method="post" action="admin_articles.php" class="inline-form" data-submit-once data-confirm="Odstrániť všetky jazykové verzie tohto článku?">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
                 <input type="hidden" name="action" value="delete_group">
                 <input type="hidden" name="translation_group" value="<?= (int) $group['group'] ?>">

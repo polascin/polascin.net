@@ -3523,6 +3523,20 @@ expectTrue(
         && str_contains($adminContentSource, 'class="admin-form" data-submit-once'),
     'Ukladanie článku a obsahového bloku musí mať data-submit-once (Beh #97)'
 );
+$mainNavSourceForSubmit = (string) file_get_contents(dirname(__DIR__) . '/main_nav.php');
+$newsletterSourceForSubmit = (string) file_get_contents(dirname(__DIR__) . '/newsletter.php');
+$adminContactSource = (string) file_get_contents(dirname(__DIR__) . '/admin_contact.php');
+$adminNewsletterSource = (string) file_get_contents(dirname(__DIR__) . '/admin_newsletter.php');
+expectTrue(
+    str_contains($mainNavSourceForSubmit, 'nav-logout-form" data-submit-once')
+        && str_contains($newsletterSourceForSubmit, 'form_action" value="unsubscribe"')
+        && substr_count($newsletterSourceForSubmit, 'newsletter-form" data-submit-once') >= 2
+        && substr_count($adminArticlesSource, 'inline-form" data-submit-once') >= 2
+        && str_contains($adminContentSource, 'inline-form" data-submit-once')
+        && substr_count($adminContactSource, 'data-submit-once') >= 3
+        && str_contains($adminNewsletterSource, 'inline-form" data-submit-once'),
+    'Logout, unsubscribe a admin inline akcie musia mať data-submit-once (Beh #98)'
+);
 $contactSource = (string) file_get_contents(dirname(__DIR__) . '/contact.php');
 expectTrue(
     substr_count($contactSource, "langUrl(currentLang(), 'contact.php')") >= 2

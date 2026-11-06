@@ -175,7 +175,7 @@ $canonicalUrl = $baseUrl . '/admin_content.php';
             <td><?= (int) $block['is_active'] === 1 ? 'Áno' : 'Nie' ?></td>
             <td class="actions">
               <a href="admin_content.php?edit=<?= (int) $block['id'] ?>" class="btn btn-sm btn-secondary">Upraviť</a>
-              <form method="post" action="admin_content.php" class="inline-form" data-confirm="Odstrániť tento blok?">
+              <form method="post" action="admin_content.php" class="inline-form" data-submit-once data-confirm="Odstrániť tento blok?">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
                 <input type="hidden" name="action" value="delete">
                 <input type="hidden" name="id" value="<?= (int) $block['id'] ?>">

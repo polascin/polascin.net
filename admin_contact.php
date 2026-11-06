@@ -96,6 +96,7 @@ $canonicalUrl = $baseUrl . '/admin_contact.php';
           method="post"
           action="admin_contact.php"
           class="inline-form"
+          data-submit-once
           data-confirm="Natrvalo odstrániť všetky kontaktné správy (<?= $messageCount ?>)? Túto akciu nemožno vrátiť späť."
         >
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
@@ -122,14 +123,14 @@ $canonicalUrl = $baseUrl . '/admin_contact.php';
             <td class="actions">
               <a href="#message-<?= (int) $msg['id'] ?>" class="btn btn-sm btn-secondary">Zobraziť</a>
               <?php if ((int) $msg['is_read'] === 0): ?>
-              <form method="post" action="admin_contact.php" class="inline-form">
+              <form method="post" action="admin_contact.php" class="inline-form" data-submit-once>
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
                 <input type="hidden" name="action" value="mark_read">
                 <input type="hidden" name="id" value="<?= (int) $msg['id'] ?>">
                 <button type="submit" class="btn btn-sm btn-primary">Označiť ako prečítané</button>
               </form>
               <?php endif; ?>
-              <form method="post" action="admin_contact.php" class="inline-form" data-confirm="Natrvalo odstrániť túto správu?">
+              <form method="post" action="admin_contact.php" class="inline-form" data-submit-once data-confirm="Natrvalo odstrániť túto správu?">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
                 <input type="hidden" name="action" value="delete">
                 <input type="hidden" name="id" value="<?= (int) $msg['id'] ?>">
