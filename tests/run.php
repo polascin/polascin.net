@@ -3215,6 +3215,11 @@ try {
     libraryTestRemoveTree($libraryTestRoot);
 }
 
+expectTrue(requestBodyExceededPostLimit(['CONTENT_LENGTH' => '9000'], [], [], 8000), 'Telo nad post_max_size sa musí rozpoznať');
+expectTrue(!requestBodyExceededPostLimit(['CONTENT_LENGTH' => '7000'], [], [], 8000), 'Telo pod limitom nie je pretečenie');
+expectTrue(!requestBodyExceededPostLimit(['CONTENT_LENGTH' => '9000'], ['csrf_token' => 'x'], [], 8000), 'Prijatý POST nie je pretečenie');
+expectTrue(!requestBodyExceededPostLimit(['CONTENT_LENGTH' => 'abc'], [], [], 8000), 'Neplatná dĺžka nie je pretečenie');
+expectTrue(!requestBodyExceededPostLimit([], [], [], 8000), 'Bez Content-Length nie je pretečenie');
 $libraryPage = (string) file_get_contents(dirname(__DIR__) . '/library.php');
 $libraryFilePage = (string) file_get_contents(dirname(__DIR__) . '/library_file.php');
 $libraryAdminPage = (string) file_get_contents(dirname(__DIR__) . '/admin_library.php');
@@ -3236,6 +3241,7 @@ expectTrue(
 );
 expectTrue(str_contains($libraryAdminPage, 'requireAdmin()'), 'Správa knižnice musí byť len pre administrátora');
 expectTrue(str_contains($libraryAdminPage, 'validateCsrfToken'), 'Správa knižnice musí overovať CSRF');
+expectTrue(str_contains($libraryAdminPage, 'requestBodyExceededPostLimit(') && str_contains($libraryAdminPage, 'http_response_code(413)'), 'Príliš veľký upload musí hlásiť limit, nie CSRF');
 expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/sitemap.php'), 'libraryList()'),
     'Sitemap musí uvádzať diela knižnice'

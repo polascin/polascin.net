@@ -972,6 +972,31 @@ function libraryIniBytes(string $value): int {
     return $bytes;
 }
 
+/**
+ * PHP pri tele nad `post_max_size` zahodí `$_POST` aj `$_FILES` bez chyby.
+ * Bez tejto kontroly by formulár hlásil neplatný CSRF token.
+ *
+ * @param array<string, mixed> $server
+ * @param array<array-key, mixed> $post
+ * @param array<array-key, mixed> $files
+ */
+function requestBodyExceededPostLimit(array $server, array $post, array $files, ?int $postLimitBytes = null): bool {
+    if ($post !== [] || $files !== []) {
+        return false;
+    }
+    $length = $server['CONTENT_LENGTH'] ?? null;
+    if (!is_string($length) && !is_int($length)) {
+        return false;
+    }
+    $length = (string) $length;
+    if (preg_match('/^\d{1,18}$/', $length) !== 1) {
+        return false;
+    }
+    $limit = $postLimitBytes ?? libraryIniBytes((string) ini_get('post_max_size'));
+
+    return $limit > 0 && (int) $length > $limit;
+}
+
 function libraryUploadLimitBytes(): int {
     $limit = LIBRARY_UPLOAD_MAX_BYTES;
     foreach (['upload_max_filesize', 'post_max_size'] as $iniKey) {

@@ -20,7 +20,10 @@ $form = [
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (!isTrustedStateChangingRequest() || !validateCsrfToken(is_string($csrfToken) ? $csrfToken : '')) {
+    if (requestBodyExceededPostLimit($_SERVER, $_POST, $_FILES)) {
+        http_response_code(413);
+        $errors[] = 'Súbor je väčší, než server prijme (najviac ' . libraryFormatSize(libraryUploadLimitBytes()) . '). Formulár sa neodoslal.';
+    } elseif (!isTrustedStateChangingRequest() || !validateCsrfToken(is_string($csrfToken) ? $csrfToken : '')) {
         http_response_code(400);
         $errors[] = 'Neplatný bezpečnostný token. Odošlite formulár znova.';
     } else {
