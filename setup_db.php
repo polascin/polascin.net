@@ -841,6 +841,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 $pdo->exec("ALTER TABLE users ADD COLUMN totp_last_used INT UNSIGNED NULL AFTER totp_enabled");
             }
         },
+        '2026110601_low_sodium_salt_kidney_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/sol-so-znizenym-obsahom-sodika-a-oblicky.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
