@@ -668,12 +668,27 @@
           now.getUTCMinutes() * 60000 +
           now.getUTCSeconds() * 1000 +
           now.getUTCMilliseconds();
-        beatClock.textContent =
+        const beat =
           "@" +
           (Math.floor(((ms + 3600000) % 86400000) / 864) / 100).toFixed(2);
+        // Zapisuje sa len zmena: každé priradenie textContent nahradí textový
+        // uzol a spustí prepočet štýlov (Beh #123).
+        if (beatClock.textContent !== beat) {
+          beatClock.textContent = beat;
+        }
       };
       updateBeat();
-      window.setInterval(updateBeat, 500);
+      let beatTimer = window.setInterval(updateBeat, 500);
+      // V skrytej karte hodiny nikto nevidí; po návrate sa hneď dorovnajú.
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          window.clearInterval(beatTimer);
+          beatTimer = 0;
+        } else if (!beatTimer) {
+          updateBeat();
+          beatTimer = window.setInterval(updateBeat, 500);
+        }
+      });
     }
 
     document.querySelectorAll("form[data-confirm]").forEach((form) => {

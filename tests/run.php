@@ -1103,6 +1103,13 @@ expectSame('@41.66', appSwatchBeat(0), 'appSwatchBeat musí orezávať stotiny n
 expectSame('@999.98', appSwatchBeat(82799), 'Posledná sekunda BMT dňa nesmie byť @1000.00');
 expectSame('@0.00', appSwatchBeat(82800), 'Polnoc BMT musí byť @0.00');
 expectSame('@999.98', appSwatchBeat(-3601), 'appSwatchBeat musí zvládnuť aj záporný unix čas');
+$beatClockJs = (string) file_get_contents(dirname(__DIR__) . '/js/main.js');
+expectTrue(
+    str_contains($beatClockJs, 'beatClock.textContent !== beat')
+        && str_contains($beatClockJs, 'window.clearInterval(beatTimer)')
+        && str_contains($beatClockJs, '"visibilitychange"'),
+    'Hodiny @beat musia zapisovať len zmenu a v skrytej karte stáť (Beh #123)'
+);
 expectTrue(
     str_contains($navigationScript, '/ 864) / 100'),
     'js/main.js musí beat orezávať nadol rovnakou aritmetikou ako appSwatchBeat'
