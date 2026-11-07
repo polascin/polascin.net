@@ -679,6 +679,14 @@ async function menuBehaviour(page, where) {
   await page.focus("#navToggle");
   await page.keyboard.press("Enter");
   await sleep(450);
+  // Fokus sa presúva v requestAnimationFrame; pod záťažou môže prísť neskôr
+  // ako po 450 ms (Beh #117: jeden falošný nález z dvoch behov).
+  await page
+    .waitForFunction(
+      () => document.getElementById("navMenu").contains(document.activeElement),
+      { timeout: 1500 },
+    )
+    .catch(() => {});
   let state = await page.evaluate(menuState);
   addCheck(
     where,
