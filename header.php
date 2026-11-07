@@ -19,8 +19,11 @@ $vekAktualny = (time() - mktime(8, 30, 0, 3, 4, 1971)) / (60 * 60 * 24 * 365.25)
 // Aktuálny Swatch Internet Time ako v hlavičke nefro.polascin.net
 // (BMT = UTC+1, 1 deň = 1000 beatov); js/main.js ho ďalej aktualizuje naživo.
 $beatAktualny = appSwatchBeat(time());
+// Stránka s <base href> (404.php) si nastaví cieľ s vlastnou cestou, inak by
+// odkaz bez JavaScriptu skočil na úvodnú stránku.
+$skipLinkHref = isset($skipLinkHref) && is_string($skipLinkHref) ? $skipLinkHref : '#main-content';
 ?>
-<a href="#main-content" class="skip-link"><?= te('common.skip_to_content') ?></a>
+<a href="<?= htmlspecialchars($skipLinkHref, ENT_QUOTES, 'UTF-8') ?>" class="skip-link"><?= te('common.skip_to_content') ?></a>
 
 <nav class="navbar" aria-label="<?= te('common.main_navigation') ?>">
   <div class="container nav-container">

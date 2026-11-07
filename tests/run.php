@@ -3313,6 +3313,17 @@ expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), '<Files "security.txt">'),
     '.htaccess musí povoliť security.txt napriek zákazu .txt'
 );
+$notFoundPage = (string) file_get_contents(dirname(__DIR__) . '/404.php');
+expectTrue(
+    str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), 'ErrorDocument 404 /404.php')
+        && str_contains($notFoundPage, 'http_response_code(404);')
+        && str_contains($notFoundPage, 'noindex, follow')
+        && str_contains($notFoundPage, 'error404.heading')
+        && str_contains($notFoundPage, '<base href=')
+        && str_contains($notFoundPage, '$skipLinkHref = ')
+        && str_contains((string) file_get_contents(dirname(__DIR__) . '/header.php'), ": '#main-content';"),
+    'Neexistujúca adresa musí dostať lokalizovanú stránku 404 s kódom 404 a noindex'
+);
 $libraryPage = (string) file_get_contents(dirname(__DIR__) . '/library.php');
 $libraryFilePage = (string) file_get_contents(dirname(__DIR__) . '/library_file.php');
 $libraryAdminPage = (string) file_get_contents(dirname(__DIR__) . '/admin_library.php');

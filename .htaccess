@@ -48,6 +48,9 @@ DirectoryIndex index.php index.html
     </FilesMatch>
 </IfModule>
 
+# ── Vlastná stránka 404 (lokalizovaná, s CSP a navigáciou) ───────────────────
+ErrorDocument 404 /404.php
+
 # ── Presmerovanie sitemap.xml na dynamický sitemap.php ─────────────────────────
 <IfModule mod_rewrite.c>
     RewriteEngine On
