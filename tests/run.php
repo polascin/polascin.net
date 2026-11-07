@@ -39,6 +39,18 @@ expectSame(null, requestPositiveInt(['id' => '-3'], 'id'), 'Záporné id je nepl
 expectSame(null, requestPositiveInt(['id' => '1e3'], 'id'), 'Exponent nie je platné id');
 expectSame(null, requestPositiveInt(['id' => '99999999999'], 'id'), 'Príliš veľké id je neplatné');
 expectSame(null, requestPositiveInt([], 'id'), 'Chýbajúce id je null');
+foreach (glob(dirname(__DIR__) . '/*.php') ?: [] as $csrfPage) {
+    expectTrue(
+        !str_contains((string) file_get_contents($csrfPage), 'validateCsrfToken((string)'),
+        basename($csrfPage) . ': validateCsrfToken() prijíma mixed, pole sa nesmie pretypovať na „Array“'
+    );
+}
+$newsletterSource = (string) file_get_contents(dirname(__DIR__) . '/newsletter.php');
+expectTrue(
+    str_contains($newsletterSource, "checkFormRateLimit(\$pdo, 'newsletter_recipient', \$recipientKey, 3, 86400)")
+        && strpos($newsletterSource, "'newsletter_recipient'") < strpos($newsletterSource, 'sendNewsletterEmail($email'),
+    'Potvrdzovací e-mail newslettera musí mať limit podľa adresáta pred odoslaním'
+);
 foreach (['admin_articles.php', 'admin_content.php', 'admin_contact.php', 'admin_newsletter.php'] as $adminIdPage) {
     $adminIdSource = (string) file_get_contents(dirname(__DIR__) . '/' . $adminIdPage);
     expectTrue(

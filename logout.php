@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $csrfToken = $_POST['csrf_token'] ?? '';
 $trustedOrigin = isTrustedStateChangingRequest();
-if (!$trustedOrigin || !validateCsrfToken((string) $csrfToken)) {
+if (!$trustedOrigin || !validateCsrfToken($csrfToken)) {
     logCsrfFailure('logout', $trustedOrigin, $csrfToken);
     // Hlásenie sa vykreslí na verejnej stránke, teda v jazyku návštevníka.
     setFlashMessage('error', t('logout.csrf_failed'));

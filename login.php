@@ -42,7 +42,7 @@ if (isset($_SESSION['totp_pending_user_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['totp_pending_user_id'])) {
     $csrfToken = $_POST['csrf_token'] ?? '';
     $trustedOrigin = isTrustedStateChangingRequest();
-    if (!$trustedOrigin || !validateCsrfToken((string) $csrfToken)) {
+    if (!$trustedOrigin || !validateCsrfToken($csrfToken)) {
         http_response_code(400);
         $errors[] = t('error.csrf');
         logCsrfFailure('login_totp', $trustedOrigin, $csrfToken);
@@ -136,7 +136,7 @@ if (
 ) {
     $csrfToken = $_POST['csrf_token'] ?? '';
     $trustedOrigin = isTrustedStateChangingRequest();
-    if (!$trustedOrigin || !validateCsrfToken((string) $csrfToken)) {
+    if (!$trustedOrigin || !validateCsrfToken($csrfToken)) {
         http_response_code(400);
         $errors[] = t('error.csrf');
         logCsrfFailure('login', $trustedOrigin, $csrfToken);

@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $showUnsubscribeConfirmation = preg_match('/^[a-f0-9]{48}$/', $token) === 1;
     }
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (!isTrustedStateChangingRequest() || !validateCsrfToken((string) $csrfToken)) {
+    if (!isTrustedStateChangingRequest() || !validateCsrfToken($csrfToken)) {
         http_response_code(400);
         $errors[] = t('error.csrf');
     } elseif ($formAction === 'unsubscribe') {
@@ -206,6 +206,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         if (empty($errors) && !isEmailDomainValid($email)) {
             $errors[] = t('newsletter.error_domain');
+        }
+        // Limit podľa IP nestačí: z meniacich sa adries by sa dala zaplaviť cudzia
+        // schránka potvrdzovacími e-mailmi. Odpoveď ostáva neutrálna, aby
+        // neprezradila, či adresa existuje (Beh #119).
+        if (empty($errors)) {
+            $recipientKey = 'mail:' . substr(hash('sha256', strtolower($email)), 0, 40);
+            if (!checkFormRateLimit($pdo, 'newsletter_recipient', $recipientKey, 3, 86400)) {
+                setFlashMessage('success', t('newsletter.pending'));
+                header('Location: ' . langUrl($lang, 'newsletter.php'), true, 303);
+                exit;
+            }
         }
 
         if (empty($errors)) {
