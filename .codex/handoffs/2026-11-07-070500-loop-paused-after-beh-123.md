@@ -1,0 +1,71 @@
+# Handoff: loop-paused-after-beh-123
+
+## Metadata
+
+- Generated At: 2026-11-07T07:05:00+01:00
+- Project Root: D:\Dev\polascin.net\.claude\worktrees\vyvoj-opravy-vylepsenia-b834d6
+- Git Branch: claude/polascin-portal-development-a66fd3 (push na `websupport main`, potom `origin main`)
+- Head Commit: eec50b6 (+ docs commit)
+
+## Original Goal
+
+Slučka /loop: vývoj, hľadanie a úplná oprava chýb, optimalizácia polascin.net; po každej slučke `.doaudit.md` a handoff.
+
+## Current State
+
+Beh #123 nasadený a overený. Slučka prechodne zastavená na pokyn vlastníka; žiadne naplánované prebudenie.
+
+## Completed This Session
+
+- Beh #101: ETag, Last-Modified, 304 a 405 pre `library_file.php`.
+- Beh #102: `requestString()` v `helpers.php`, použité v `article.php`, `newsletter.php`, `contact.php`, `login.php`; test zakazuje `(string) $_GET/$_POST[...]` v nich.
+- Beh #103: `requestBodyExceededPostLimit()`; `admin_library.php` hlási 413 a limit namiesto falošnej CSRF chyby.
+- Beh #104: `js/main.js` po návrate z bfcache (`pageshow`, `event.persisted`) znova povolí tlačidlá `data-submit-once`; pin `?v=ac3068d7` v statických HTML.
+- Beh #105: `sitemap.php` dáva `/`, `articles.php` a `library.php` `lastmod` podľa najnovšieho článku v jazyku a najnovšieho diela (`sitemapLatest()`).
+- Beh #106: `head_meta.php` `og:locale` podľa `$ogLocaleLang` (článok = `$articleLang`), `og:locale:alternate` len z `$languageAlternates`; test vykresľuje head_meta.
+- Beh #107: `appAgeParts()` v `helpers.php` oreže vek na tisíciny; `header.php` a `footer.php` ju používajú.
+- Beh #108: `getContentBlock()` načíta aktívne bloky jazyka jedným dotazom so statickou pamäťou na požiadavku; testy na SQLite v pamäti.
+- Beh #109: `/.well-known/security.txt` (RFC 9116), povolený v `.htaccess`; test stráži Expires. Charset nejde nastaviť: `/.well-known/` obsluhuje hosting bez `.htaccess`, statické typy určuje openresty (známa výnimka).
+- Beh #110: `containsDisallowedSingleLineCharacters()` v `auth.php`; meno a predmet kontaktu odmietnu CR/LF.
+- Beh #111: `admin_articles.php` odmietne zalomenie a riadiace znaky v názve, autorovi a alt texte.
+- Beh #112: `requestPositiveInt()` v `helpers.php`; admin mazanie a ukladanie (články, bloky, kontakt, newsletter) bez `(int) $_POST['id']`; CSRF token bez pretypovania.
+- Beh #113: `work.json` má voliteľné `lang` (predvolené `sk`); `library.php` dáva `lang` na názov, popis, text a katalóg a JSON-LD `inLanguage`.
+- Beh #114: `admin_library.php` ponúka „Jazyk textu“; `librarySaveUpload()` má parameter `$lang`.
+- Beh #115: `404.php` + `ErrorDocument 404 /404.php`, kľúče `error404.*` v 10 katalógoch, `<base href>`, `$skipLinkHref` v `header.php`, jazyk z `REDIRECT_QUERY_STRING`.
+- Beh #116: regresia z `67f3bb3` (5. 11.): šablóna banneru skrytá `style="display:none"` bola pre CSP viditeľná ako prázdny pruh na každej stránke; teraz `<template>`, `main.js` klonuje z `.content`; test zakazuje atribút `style=` v PHP šablónach; `axe-scan.mjs` čistí log pre každú stránku.
+- Beh #117: keyboard (falošný nález časovania, test čaká až 1,5 s) a modes (0 chýb) na produkcii.
+- Beh #118: layout, print a banner OK; `privacy.s5_text` má druhý výskyt vety „ešte treba doložiť“.
+- Beh #119: `newsletter_recipient` limit 3/24 h podľa hashu adresy pred odoslaním potvrdenia; `validateCsrfToken()` bez pretypovania vo všetkých PHP (test). Deploy `2174aa1` 04:10, CLS OK.
+- Beh #120: `articleTimeHtml()` v `helpers.php`; dátumy v článku, zozname a na úvode ako `<time datetime>`. Deploy `348b454` 04:44. „Top“ články pred najnovšími sú zámer (4a2a5df).
+- Beh #121: smoke check v `hooks/deploy.sh` overuje aj atribút `style=` na úvode, vlastnú 404 v UTF-8 a `security.txt`; `--smoke-only` proti produkcii prešiel.
+- Beh #122: `hooks/ops/nightly.sh` a `scripts/audit_db_check.php` bez nálezu.
+- Beh #123: hodiny @beat v `main.js` zapisujú len zmenu a v skrytej karte stoja; pin `?v=1d290f4d`; deploy `a19b689` 06:51.
+
+## Validated
+
+- `php tests/run.php` OK: 3508; deploy `eec50b6` 02:27; v prehliadači 0 viditeľných bannerov po odmietnutí, axe 0 porušení, consent-flow OK.
+
+## Not Yet Validated
+
+- Serverový PHP error log som nečítal; upload nad limit na produkcii neskúšaný; návrat z bfcache v prehliadači neskúšaný (len testy).
+
+## Remaining Work
+
+- Beh #124: revízia `css/styles.css` (nepoužité selektory, tlač); slučka po 60 min.
+- Vlastník: `privacy.s3_item5` má verejnú vetu „ešte treba doložiť“ (GA4 príjemcovia a prenosy); text som nemenil.
+- Admin súbory ešte používajú `(string) $_POST[...]` (len pre admina, nízka priorita).
+
+## Decisions
+
+- `.htaccess` neplatí pre `/.well-known/` a nemení Content-Type statických súborov (openresty).
+- Shell nástroja zlúči zdvojené spätné lomky aj v heredocu: spätnú lomku skladať cez `chr(92)` a kontrolovať `grep -P` na riadiace znaky.
+- Kontroly `curl` nevidia blokovanie CSP v prehliadači; pri zmene šablón spúšťať `scripts/browser-audit` (`npm ci` v worktree).
+- Lokálny test cez `php -S` nejde bez DB; nezastavovať PHP cez `taskkill /IM php.exe`.
+
+## Critical Files
+
+- `helpers.php` (`requestString`, `libraryEtag`, `libraryRequestIsFresh`), `.audit.md` Beh #101 a #102.
+
+## Next Command
+
+git pull --ff-only websupport main && php tests/run.php

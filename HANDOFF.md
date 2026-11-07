@@ -1,10 +1,10 @@
 # Handoff: polascin-site-improvement-loop
 
-_Last updated: 2026-11-07T06:55:00+01:00 · Tool: claude-code · Session: dev loop active_
+_Last updated: 2026-11-07T07:05:00+01:00 · Tool: claude-code · Session: dev loop paused_
 
 ## Active Task
 
-Vývojová slučka obnovená (/loop, dynamický režim). Posledný Beh #123.
+Vývojová slučka je **prechodne zastavená** na pokyn vlastníka (2026-11-07 ráno). Posledný Beh #123. Žiadne naplánované prebudenie.
 
 ## Current State
 
@@ -14,5 +14,5 @@ Vývojová slučka obnovená (/loop, dynamický režim). Posledný Beh #123.
 
 ## Next Steps
 
-1. `git pull --ff-only websupport main && php tests/run.php`
+1. Obnovenie: `/loop` s pôvodným zadaním; pred prácou `git pull --ff-only websupport main && php tests/run.php`.
 2. Beh #124: revízia `css/styles.css` (nepoužité selektory, tlač); slučka beží po 60 min; po slučke `.doaudit.md`. `security.txt` Expires 2027-11-01: test zlyhá 30 dní vopred.
