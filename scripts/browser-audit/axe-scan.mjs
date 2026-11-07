@@ -40,6 +40,8 @@ const allPages = {
   contact: "/contact.php",
   newsletter: "/newsletter.php",
   login: "/login.php",
+  libraryWork: "/library.php?slug=sk-nefro-belegt-wahrscheinlich-offen",
+  notFound: "/neexistujuca-stranka/",
 };
 const bannerPages = ["home", "article", "privacy", "contact"];
 const wanted = (process.env.PAGES || Object.keys(allPages).join(",")).split(

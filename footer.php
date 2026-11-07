@@ -98,8 +98,10 @@ $footerBeat = appSwatchBeat($footerUpdateTs);
   data-cookie-accept="<?= te('cookie.accept') ?>"
 ></div>
 
-<!-- Cookie banner template (skryté, JS ho zviditeľní podľa potreby) -->
-<div id="cookie-banner-template" style="display:none;">
+<?php /* Šablóna cookie banneru. <template> nie je v DOM ani viditeľná; skrytie cez
+   style="display:none" CSP (style-src bez unsafe-inline) zablokovala a na každej
+   stránke ostal prázdny banner (Beh #116). */ ?>
+<template id="cookie-banner-template">
   <div class="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-consent-title" aria-describedby="cookie-consent-description">
     <div class="cookie-content">
       <div class="cookie-text">
@@ -112,7 +114,7 @@ $footerBeat = appSwatchBeat($footerUpdateTs);
       </div>
     </div>
   </div>
-</div>
+</template>
 
 <?php if (!isLoggedIn()): ?>
 <?php $clarityVersion = is_file(__DIR__ . '/js/clarity-consent.js') ? (string) filemtime(__DIR__ . '/js/clarity-consent.js') : '1'; ?>

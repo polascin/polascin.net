@@ -3313,6 +3313,23 @@ expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), '<Files "security.txt">'),
     '.htaccess musí povoliť security.txt napriek zákazu .txt'
 );
+// CSP style-src nemá 'unsafe-inline', preto atribút style="" prehliadač
+// ignoruje. Šablóna banneru skrytá cez style="display:none" tak ostala na
+// každej stránke viditeľná a prázdna (Beh #116).
+foreach (glob(dirname(__DIR__) . '/*.php') ?: [] as $templateFile) {
+    $templateSource = (string) file_get_contents($templateFile);
+    expectTrue(
+        preg_match('/<[a-z][^>]*\sstyle\s*=/i', $templateSource) !== 1,
+        basename($templateFile) . ' nesmie mať HTML atribút style="", CSP ho zablokuje'
+    );
+}
+$footerSource = (string) file_get_contents(dirname(__DIR__) . '/footer.php');
+expectTrue(
+    str_contains($footerSource, '<template id="cookie-banner-template">')
+        && str_contains($footerSource, '</template>')
+        && str_contains((string) file_get_contents(dirname(__DIR__) . '/js/main.js'), 'template.content'),
+    'Šablóna cookie banneru musí byť <template> a main.js ju musí klonovať z .content'
+);
 $notFoundPage = (string) file_get_contents(dirname(__DIR__) . '/404.php');
 expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/.htaccess'), 'ErrorDocument 404 /404.php')

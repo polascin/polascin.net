@@ -542,7 +542,10 @@
       let banner;
       if (template) {
         // Use template from server
-        banner = template.querySelector(".cookie-banner").cloneNode(true);
+        // <template> má obsah v .content, nie v DOM (Beh #116).
+        const templateRoot =
+          template instanceof HTMLTemplateElement ? template.content : template;
+        banner = templateRoot.querySelector(".cookie-banner").cloneNode(true);
         banner.querySelector(".cookie-title").textContent = strings.title;
         banner.querySelector(".cookie-description-text").textContent =
           strings.description;
