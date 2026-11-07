@@ -1692,7 +1692,7 @@ function libraryInstallWork(string $rootKey, string $title, string $extension, s
  * @param array<string, mixed> $file
  * @return array{ok: bool, error: string, slug: string}
  */
-function librarySaveUpload(string $title, string $author, string $description, array $file, string $topic = ''): array {
+function librarySaveUpload(string $title, string $author, string $description, array $file, string $topic = '', string $lang = ''): array {
     $failed = static fn(string $error): array => ['ok' => false, 'error' => $error, 'slug' => ''];
     $uploadError = (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE);
     if ($uploadError === UPLOAD_ERR_INI_SIZE || $uploadError === UPLOAD_ERR_FORM_SIZE) {
@@ -1734,6 +1734,7 @@ function librarySaveUpload(string $title, string $author, string $description, a
         'original_name' => $original,
         'added_at' => date('Y-m-d'),
         'topic' => $topic,
+        'lang' => $lang,
     ]);
 }
 

@@ -16,6 +16,7 @@ $form = [
     'author' => 'MUDr. Ľubomír Polaščín',
     'description' => '',
     'topic' => '',
+    'lang' => APP_DEFAULT_LANGUAGE,
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -43,8 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $form['author'] = isset($_POST['author']) && is_string($_POST['author']) ? trim($_POST['author']) : '';
             $form['description'] = isset($_POST['description']) && is_string($_POST['description']) ? trim($_POST['description']) : '';
             $form['topic'] = isset($_POST['topic']) && is_string($_POST['topic']) ? trim($_POST['topic']) : '';
+            $form['lang'] = requestString($_POST, 'lang', APP_DEFAULT_LANGUAGE);
+            if (!isSupportedLanguage($form['lang'])) {
+                $form['lang'] = APP_DEFAULT_LANGUAGE;
+            }
             $file = isset($_FILES['file']) && is_array($_FILES['file']) ? $_FILES['file'] : [];
-            $saved = librarySaveUpload($form['title'], $form['author'], $form['description'], $file, $form['topic']);
+            $saved = librarySaveUpload($form['title'], $form['author'], $form['description'], $file, $form['topic'], $form['lang']);
             if (!$saved['ok']) {
                 $errors[] = $saved['error'];
             } else {
@@ -106,6 +111,14 @@ $canonicalUrl = $baseUrl . '/admin_library.php';
             <?php foreach (libraryTopics() as $topic): ?>
               <?php if ($topic === 'other') { continue; } ?>
               <option value="<?= htmlspecialchars($topic, ENT_QUOTES, 'UTF-8') ?>"<?= $form['topic'] === $topic ? ' selected' : '' ?>><?= te('library.topic.' . $topic) ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="library-lang">Jazyk textu</label>
+          <select id="library-lang" name="lang">
+            <?php foreach (appLanguages() as $libraryLangCode => $libraryLangMeta): ?>
+              <option value="<?= htmlspecialchars($libraryLangCode, ENT_QUOTES, 'UTF-8') ?>"<?= $form['lang'] === $libraryLangCode ? ' selected' : '' ?>><?= htmlspecialchars((string) $libraryLangMeta['native'], ENT_QUOTES, 'UTF-8') ?></option>
             <?php endforeach; ?>
           </select>
         </div>

@@ -3337,6 +3337,12 @@ expectTrue(
 );
 expectTrue(str_contains($libraryAdminPage, 'requireAdmin()'), 'Správa knižnice musí byť len pre administrátora');
 expectTrue(str_contains($libraryAdminPage, 'validateCsrfToken'), 'Správa knižnice musí overovať CSRF');
+expectTrue(
+    str_contains($libraryAdminPage, 'name="lang"')
+        && str_contains($libraryAdminPage, '$form[\'topic\'], $form[\'lang\']);')
+        && str_contains($libraryAdminPage, 'isSupportedLanguage($form[\'lang\'])'),
+    'Nahrávanie diela musí ponúknuť a overiť jazyk textu'
+);
 expectTrue(str_contains($libraryAdminPage, 'requestBodyExceededPostLimit(') && str_contains($libraryAdminPage, 'http_response_code(413)'), 'Príliš veľký upload musí hlásiť limit, nie CSRF');
 expectTrue(
     str_contains((string) file_get_contents(dirname(__DIR__) . '/sitemap.php'), 'libraryList()'),
