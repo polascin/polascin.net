@@ -1227,6 +1227,13 @@ expectTrue(
     str_contains($deployScript, "CSP na produkcii povoľuje 'unsafe-inline'"),
     "Smoke check v hooks/deploy.sh musí odmietnuť CSP s 'unsafe-inline'"
 );
+expectTrue(
+    str_contains($deployScript, 'obsahuje atribút style=')
+        && str_contains($deployScript, '/neexistujuca-stranka-smoke/')
+        && str_contains($deployScript, '*charset=utf-8*')
+        && str_contains($deployScript, '/.well-known/security.txt'),
+    'Smoke check v hooks/deploy.sh musí overiť style="", vlastnú 404 v UTF-8 a security.txt (Beh #121)'
+);
 // Bod 5 sekcie „Dokončenie“ v `.doaudit.md` vymenúva kľúčové URL; keďže ich
 // nočná rutina overiť nemôže, musia byť v smoke checku (Beh #24).
 foreach (['"/"', '"/articles.php"', '"/library.php"', '"/contact.php"', '"/newsletter.php"', '"/sitemap.php"', '"/login.php"', '"/privacy.php"', '"/terms.php"'] as $smokeUrl) {

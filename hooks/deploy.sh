@@ -84,9 +84,35 @@ smoke_check() {
 	done
 	# Hlavičky z deploy.yml: kontroluje sa prítomnosť, nie presná hodnota,
 	# hosting niektoré prepisuje (Beh #24).
-	local headers_file header
+	local headers_file header home_body content_type
 	headers_file=$(mktemp)
-	curl -sS -D "$headers_file" -o /dev/null --max-time 30 "${retry[@]}" "${base%/}/" || true
+	home_body=$(mktemp)
+	curl -sS -D "$headers_file" -o "$home_body" --max-time 30 "${retry[@]}" "${base%/}/" || true
+	# CSP style-src nemá 'unsafe-inline': atribút style="" prehliadač ignoruje
+	# a skryté prvky ostanú viditeľné (prázdny cookie banner, Beh #116).
+	if grep -qiE '<[a-z][^>]*[[:space:]]style[[:space:]]*=' "$home_body"; then
+		echo "  CHYBA úvodná stránka obsahuje atribút style=\"\", CSP ho zablokuje" >&2
+		failed=1
+	else
+		echo "  OK   úvodná stránka bez atribútu style=\"\""
+	fi
+	rm -f "$home_body"
+	# Vlastná stránka 404 (ErrorDocument, Beh #115): kód 404 a UTF-8, nie
+	# predvolená stránka Apache v iso-8859-1.
+	content_type=$(curl -sS -o /dev/null -w '%{http_code} %{content_type}' --max-time 30 "${retry[@]}" "${base%/}/neexistujuca-stranka-smoke/" || echo "000")
+	if [[ $content_type == 404* && ${content_type,,} == *charset=utf-8* ]]; then
+		echo "  OK   ${content_type}  /neexistujuca-stranka-smoke/ (vlastná 404)"
+	else
+		echo "  CHYBA ${content_type}  neexistujúca adresa nedáva vlastnú 404 v UTF-8" >&2
+		failed=1
+	fi
+	code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "${retry[@]}" "${base%/}/.well-known/security.txt" || echo "000")
+	if [[ $code == "200" ]]; then
+		echo "  OK   ${code}  /.well-known/security.txt"
+	else
+		echo "  CHYBA ${code}  /.well-known/security.txt" >&2
+		failed=1
+	fi
 	for header in "strict-transport-security" "x-content-type-options" "x-frame-options" "referrer-policy" "permissions-policy" "cross-origin-opener-policy" "cross-origin-resource-policy" "x-permitted-cross-domain-policies" "content-security-policy" "tdm-reservation" "x-robots-tag"; do
 		if grep -qi "^${header}:" "$headers_file"; then
 			echo "  OK   hlavička ${header}"
