@@ -138,7 +138,7 @@ if ($notFound) {
         <div class="alert alert-info" role="status"><p><?= te('articles.no_translation') ?></p></div>
       <?php endif; ?>
       <h1 lang="<?= htmlspecialchars($articleLang, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $article['title'], ENT_QUOTES, 'UTF-8') ?></h1>
-      <p class="article-meta"><?= htmlspecialchars(formatArticleDate($article['published_at'] ?? null, $articleLang), ENT_QUOTES, 'UTF-8') ?><?php if (!empty($article['author'])): ?> · <?= htmlspecialchars((string) $article['author'], ENT_QUOTES, 'UTF-8') ?><?php endif; ?></p>
+      <p class="article-meta"><?= articleTimeHtml($article['published_at'] ?? null, $articleLang) ?><?php if (!empty($article['author'])): ?> · <?= htmlspecialchars((string) $article['author'], ENT_QUOTES, 'UTF-8') ?><?php endif; ?></p>
       <?php if (!empty($article['excerpt'])): ?>
         <p class="article-excerpt" lang="<?= htmlspecialchars($articleLang, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $article['excerpt'], ENT_QUOTES, 'UTF-8') ?></p>
       <?php endif; ?>

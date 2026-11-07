@@ -32,6 +32,18 @@ expectTrue(
     'Vek v hlavičke a pätičke musí ísť cez appAgeParts()'
 );
 expectSame('x', requestString(['slug' => 'x'], 'slug'), 'requestString musí vrátiť reťazec');
+$articleTime = articleTimeHtml('2026-11-06 19:30:00', 'en');
+expectTrue(
+    preg_match('/^<time datetime="2026-11-06T19:30:00[+-]\d{2}:\d{2}">[^<]+<\/time>$/', $articleTime) === 1,
+    'articleTimeHtml musí dať <time> s ISO dátumom (získané: ' . $articleTime . ')'
+);
+expectSame('', articleTimeHtml(null), 'Prázdny dátum nedá žiadny <time>');
+foreach (['article.php', 'articles.php', 'index.php'] as $articleTimePage) {
+    expectTrue(
+        str_contains((string) file_get_contents(dirname(__DIR__) . '/' . $articleTimePage), 'articleTimeHtml('),
+        $articleTimePage . ' musí vypisovať dátum článku ako <time datetime>'
+    );
+}
 expectSame(42, requestPositiveInt(['id' => '42'], 'id'), 'requestPositiveInt musí prijať kladné číslo');
 expectSame(null, requestPositiveInt(['id' => ['7']], 'id'), 'Pole id nesmie dať 1 ako pri (int)');
 expectSame(null, requestPositiveInt(['id' => '0'], 'id'), 'Nula nie je platné id');

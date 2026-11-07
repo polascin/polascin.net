@@ -211,7 +211,7 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
         <article class="card reveal">
           <?= articleCoverHtml($article, 'card-cover', true, true, CARD_COVER_SIZES) ?>
           <h3><a href="<?= htmlspecialchars(langUrl($lang, 'article.php', ['slug' => (string) $article['slug']]), ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $article['title'], ENT_QUOTES, 'UTF-8') ?></a></h3>
-          <p class="article-meta"><?= htmlspecialchars(formatArticleDate($article['published_at'] ?? null), ENT_QUOTES, 'UTF-8') ?></p>
+          <p class="article-meta"><?= articleTimeHtml($article['published_at'] ?? null) ?></p>
           <p><?= htmlspecialchars(buildSeoExcerpt((string) ($article['excerpt'] ?? '')), ENT_QUOTES, 'UTF-8') ?></p>
         </article>
         <?php endforeach; ?>

@@ -725,6 +725,26 @@ function formatArticleDate(?string $datetime, ?string $lang = null): string {
     }
 }
 
+/**
+ * Dátum článku ako <time datetime="…"> so strojovo čitateľnou hodnotou
+ * (ISO 8601) a lokalizovaným textom. Výstup je escapovaný HTML.
+ */
+function articleTimeHtml(?string $datetime, ?string $lang = null): string {
+    $label = formatArticleDate($datetime, $lang);
+    if ($label === '') {
+        return '';
+    }
+    try {
+        $iso = (new DateTimeImmutable((string) $datetime, new DateTimeZone(date_default_timezone_get() ?: 'Europe/Bratislava')))
+            ->format(DATE_ATOM);
+    } catch (\Throwable) {
+        return htmlspecialchars($label, ENT_QUOTES, 'UTF-8');
+    }
+
+    return '<time datetime="' . htmlspecialchars($iso, ENT_QUOTES, 'UTF-8') . '">'
+        . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '</time>';
+}
+
 function buildSeoExcerpt(string $text, int $maxLen = 170): string {
     $decoded = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     $stripped = strip_tags($decoded);
