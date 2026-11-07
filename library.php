@@ -38,6 +38,7 @@ if ($notFound) {
         '@type' => 'CreativeWork',
         'name' => (string) $work['title'],
         'headline' => (string) $work['title'],
+        'inLanguage' => (string) $work['lang'],
         'author' => [
             '@type' => 'Person',
             'name' => $authorName,
@@ -101,7 +102,7 @@ $printOnPage = is_array($work) && (string) $work['kind'] !== 'pdf';
   <article class="library-reader article-detail">
     <div class="container">
       <p class="library-back"><a href="<?= htmlspecialchars(langUrl($lang, 'library.php'), ENT_QUOTES, 'UTF-8') ?>"><?= te('library.back') ?></a></p>
-      <h1><?= htmlspecialchars((string) $work['title'], ENT_QUOTES, 'UTF-8') ?></h1>
+      <h1 lang="<?= htmlspecialchars((string) $work['lang'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $work['title'], ENT_QUOTES, 'UTF-8') ?></h1>
       <p class="article-meta">
         <?php if ((string) $work['author'] !== ''): ?>
           <?= te('common.author_meta_prefix') ?>: <?= htmlspecialchars((string) $work['author'], ENT_QUOTES, 'UTF-8') ?> ·
@@ -114,7 +115,7 @@ $printOnPage = is_array($work) && (string) $work['kind'] !== 'pdf';
         <?php endif; ?>
       </p>
       <?php if ((string) $work['description'] !== ''): ?>
-        <p class="article-excerpt"><?= htmlspecialchars((string) $work['description'], ENT_QUOTES, 'UTF-8') ?></p>
+        <p class="article-excerpt" lang="<?= htmlspecialchars((string) $work['lang'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $work['description'], ENT_QUOTES, 'UTF-8') ?></p>
       <?php endif; ?>
       <div class="library-toolbar">
         <a class="btn btn-secondary btn-sm" href="<?= htmlspecialchars(libraryFileUrl((string) $work['slug'], true), ENT_QUOTES, 'UTF-8') ?>"><?= te('library.download') ?></a>
@@ -125,7 +126,7 @@ $printOnPage = is_array($work) && (string) $work['kind'] !== 'pdf';
         <?php endif; ?>
       </div>
       <?php if ($readableHtml !== null): ?>
-        <div class="article-body library-sheet"><?= $readableHtml ?></div>
+        <div class="article-body library-sheet" lang="<?= htmlspecialchars((string) $work['lang'], ENT_QUOTES, 'UTF-8') ?>"><?= $readableHtml ?></div>
       <?php elseif ((string) $work['kind'] === 'pdf'): ?>
         <iframe class="library-pdf" title="<?= te('library.pdf_label') ?>" src="<?= htmlspecialchars(libraryFileUrl((string) $work['slug'], false), ENT_QUOTES, 'UTF-8') ?>#toolbar=1"></iframe>
       <?php elseif ((string) $work['kind'] === 'epub'): ?>
@@ -149,7 +150,7 @@ $printOnPage = is_array($work) && (string) $work['kind'] !== 'pdf';
           <div class="card-grid">
             <?php foreach ($group['works'] as $item): ?>
             <article class="card reveal">
-              <h3><a href="<?= htmlspecialchars(langUrl($lang, 'library.php', ['slug' => (string) $item['slug']]), ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $item['title'], ENT_QUOTES, 'UTF-8') ?></a></h3>
+              <h3 lang="<?= htmlspecialchars((string) $item['lang'], ENT_QUOTES, 'UTF-8') ?>"><a href="<?= htmlspecialchars(langUrl($lang, 'library.php', ['slug' => (string) $item['slug']]), ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $item['title'], ENT_QUOTES, 'UTF-8') ?></a></h3>
               <p class="article-meta">
                 <?php if ((string) $item['author'] !== ''): ?>
                   <?= htmlspecialchars((string) $item['author'], ENT_QUOTES, 'UTF-8') ?> ·
@@ -158,7 +159,7 @@ $printOnPage = is_array($work) && (string) $work['kind'] !== 'pdf';
                 · <?= htmlspecialchars(libraryFormatSize((int) $item['bytes']), ENT_QUOTES, 'UTF-8') ?>
               </p>
               <?php if ((string) $item['description'] !== ''): ?>
-                <p><?= htmlspecialchars(buildSeoExcerpt((string) $item['description']), ENT_QUOTES, 'UTF-8') ?></p>
+                <p lang="<?= htmlspecialchars((string) $item['lang'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars(buildSeoExcerpt((string) $item['description']), ENT_QUOTES, 'UTF-8') ?></p>
               <?php endif; ?>
               <p class="library-card-actions">
                 <a class="btn btn-primary btn-sm" href="<?= htmlspecialchars(langUrl($lang, 'library.php', ['slug' => (string) $item['slug']]), ENT_QUOTES, 'UTF-8') ?>"><?= te('library.read') ?></a>

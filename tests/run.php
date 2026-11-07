@@ -3183,6 +3183,13 @@ try {
     $libraryPdfWork = libraryFind((string) $libraryPdf['slug']);
     expectSame('pdf', is_array($libraryPdfWork) ? (string) $libraryPdfWork['kind'] : '', 'PDF musí mať druh pdf');
     expectSame(null, is_array($libraryPdfWork) ? libraryReadableHtml($libraryPdfWork) : 'x', 'PDF sa nesmie vykresliť ako HTML');
+    expectSame(APP_DEFAULT_LANGUAGE, is_array($libraryPdfWork) ? (string) $libraryPdfWork['lang'] : '', 'Dielo bez jazyka je v predvolenom jazyku');
+    $libraryGerman = libraryInstallWork('shipped', 'Deutsch', 'txt', "Text\n", ['lang' => 'DE']);
+    $libraryGermanWork = $libraryGerman['ok'] ? libraryFind((string) $libraryGerman['slug']) : null;
+    expectSame('de', is_array($libraryGermanWork) ? (string) $libraryGermanWork['lang'] : '', 'Jazyk diela sa uloží a načíta normalizovaný');
+    $libraryUnknownLang = libraryInstallWork('shipped', 'Neznámy', 'txt', "Text\n", ['lang' => 'xx']);
+    $libraryUnknownLangWork = $libraryUnknownLang['ok'] ? libraryFind((string) $libraryUnknownLang['slug']) : null;
+    expectSame(APP_DEFAULT_LANGUAGE, is_array($libraryUnknownLangWork) ? (string) $libraryUnknownLangWork['lang'] : '', 'Nepodporovaný jazyk diela padne na predvolený');
 
     expectTrue(!libraryInstallWork('shipped', 'Binárka', 'txt', "text\0skryty")['ok'], 'Text s nulovým bajtom sa nesmie uložiť');
     expectTrue(!libraryInstallWork('shipped', 'Falošné PDF', 'pdf', '<html>nie pdf</html>')['ok'], 'Súbor bez PDF hlavičky sa nesmie uložiť ako PDF');
@@ -3311,6 +3318,9 @@ $libraryFilePage = (string) file_get_contents(dirname(__DIR__) . '/library_file.
 $libraryAdminPage = (string) file_get_contents(dirname(__DIR__) . '/admin_library.php');
 expectTrue(str_contains($libraryPage, 'data-print'), 'Čítacia stránka musí mať tlačidlo tlače');
 expectTrue(str_contains($libraryPage, 'libraryReadableHtml'), 'Čítacia stránka musí text vykresliť sanitizovane');
+expectSame(4, substr_count($libraryPage, '(string) $work[\'lang\']'), 'Názov, popis a text diela a JSON-LD inLanguage musia niesť jazyk diela');
+expectSame(2, substr_count($libraryPage, '(string) $item[\'lang\']'), 'Názov a popis diela v katalógu musia niesť jazyk diela');
+expectTrue(str_contains($libraryPage, '\'inLanguage\' => (string) $work[\'lang\']'), 'JSON-LD diela musí mať inLanguage');
 expectTrue(
     str_contains($libraryFilePage, 'X-Content-Type-Options: nosniff')
         && str_contains($libraryFilePage, 'libraryContentDisposition')

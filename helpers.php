@@ -1198,6 +1198,11 @@ function libraryLoadWork(string $directory, string $source): ?array {
     if ($position < 1 || $position > 999) {
         $position = 0;
     }
+    // Jazyk textu diela, nie rozhrania (WCAG 3.1.2). Bez údaja platí slovenčina.
+    $workLang = is_string($meta['lang'] ?? null) ? strtolower(trim((string) $meta['lang'])) : '';
+    if (!isSupportedLanguage($workLang)) {
+        $workLang = APP_DEFAULT_LANGUAGE;
+    }
 
     return [
         'slug' => $slug,
@@ -1206,6 +1211,7 @@ function libraryLoadWork(string $directory, string $source): ?array {
         'description' => $description,
         'topic' => $topic,
         'position' => $position,
+        'lang' => $workLang,
         'added_at' => $addedAt,
         'filename' => $filename,
         'original_name' => $originalName,
@@ -1661,6 +1667,10 @@ function libraryInstallWork(string $rootKey, string $title, string $extension, s
     }
     if ($position >= 1 && $position <= 999) {
         $record['position'] = $position;
+    }
+    $workLang = strtolower(trim((string) ($meta['lang'] ?? '')));
+    if ($workLang !== '' && isSupportedLanguage($workLang)) {
+        $record['lang'] = $workLang;
     }
     try {
         $json = json_encode($record, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR);
