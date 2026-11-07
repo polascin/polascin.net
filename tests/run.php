@@ -3321,6 +3321,7 @@ expectTrue(
         && str_contains($notFoundPage, 'error404.heading')
         && str_contains($notFoundPage, '<base href=')
         && str_contains($notFoundPage, '$skipLinkHref = ')
+        && str_contains($notFoundPage, 'REDIRECT_QUERY_STRING')
         && str_contains((string) file_get_contents(dirname(__DIR__) . '/header.php'), ": '#main-content';"),
     'Neexistujúca adresa musí dostať lokalizovanú stránku 404 s kódom 404 a noindex'
 );

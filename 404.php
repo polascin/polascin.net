@@ -15,6 +15,15 @@ try {
     exit;
 }
 
+// Pri ErrorDocument dostane PHP pôvodný query string len v
+// REDIRECT_QUERY_STRING; jazyk z neplatnej adresy (?lang=de) sa tak zachová.
+if (!isset($_GET['lang']) && is_string($_SERVER['REDIRECT_QUERY_STRING'] ?? null)) {
+    parse_str((string) $_SERVER['REDIRECT_QUERY_STRING'], $originalQuery);
+    if (isset($originalQuery['lang']) && is_string($originalQuery['lang'])) {
+        $_GET['lang'] = $originalQuery['lang'];
+    }
+}
+
 require_once __DIR__ . '/auth.php';
 
 http_response_code(404);
