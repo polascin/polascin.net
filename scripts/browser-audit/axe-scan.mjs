@@ -100,6 +100,11 @@ try {
             allPages[name] && (state === "clean" || bannerPages.includes(name)),
         );
         for (const name of names) {
+          // Log patrí jednej stránke; inak by sa nálezy predchádzajúcej
+          // stránky pripísali aj ďalším (Beh #116).
+          for (const entries of Object.values(log)) {
+            if (Array.isArray(entries)) entries.length = 0;
+          }
           const url = `${BASE}${allPages[name]}${allPages[name].includes("?") ? "&" : "?"}lang=${lang}`;
           const response = await gotoWithRetry(page, url);
           const status = response ? response.status() : 0;
@@ -179,6 +184,16 @@ try {
               addGroup(rule.id, rule.impact, state, lang, theme, name, node);
           }
           const issues = summarizeLog(log);
+          // Stránka 404 vracia 404 zámerne; prehliadač to zapíše ako chybu.
+          if (name === "notFound" && status === 404) {
+            issues.consoleIssues = issues.consoleIssues.filter(
+              (entry) =>
+                !(
+                  String(entry.text || "").includes("status of 404") &&
+                  String(entry.url || "").startsWith(url)
+                ),
+            );
+          }
           if (
             issues.consoleIssues.length ||
             issues.pageerror.length ||
