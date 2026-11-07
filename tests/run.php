@@ -3361,6 +3361,18 @@ foreach (glob(dirname(__DIR__) . '/*.php') ?: [] as $templateFile) {
         basename($templateFile) . ' nesmie mať HTML atribút style="", CSP ho zablokuje'
     );
 }
+// Zásady súkromia nesmú verejne ukazovať nedokončené body (Beh #124).
+foreach (glob(dirname(__DIR__) . '/lang/*.php') ?: [] as $privacyCatalogFile) {
+    $privacyCatalog = require $privacyCatalogFile;
+    foreach (['privacy.s3_item5', 'privacy.s5_text'] as $privacyKey) {
+        expectTrue(
+            preg_match('/treba doložiť|třeba doložit|still need|noch belegt|restent? à documenter|deben acreditarse|debe documentarse|dokumentálni kell|igazolni kell|ancora (essere )?documentat|wymaga(ją)? (jeszcze )?(udokumentowania|dokumentacji)|потребує підтвердження|потрібно документально/u', (string) ($privacyCatalog[$privacyKey] ?? '')) !== 1
+                && str_contains((string) ($privacyCatalog[$privacyKey] ?? ''), 'Google'),
+            basename($privacyCatalogFile) . ' ' . $privacyKey . ' nesmie obsahovať nedokončený bod a musí menovať Google'
+        );
+    }
+}
+expectTrue(!str_contains((string) file_get_contents(dirname(__DIR__) . '/privacy.html'), 'treba doložiť'), 'privacy.html nesmie obsahovať „treba doložiť“');
 $footerSource = (string) file_get_contents(dirname(__DIR__) . '/footer.php');
 expectTrue(
     str_contains($footerSource, '<template id="cookie-banner-template">')
