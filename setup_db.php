@@ -859,6 +859,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/kongres-nefrologia-2026-piat-otazok.php'
             );
         },
+        '2026110803_missed_dialysis_outreach_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/preco-zostane-dialyzacne-kreslo-prazdne.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
