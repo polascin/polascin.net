@@ -112,6 +112,7 @@ const EXPECTED_MIGRATIONS = [
     '2026110501_totp_2fa_support',
     '2026110601_low_sodium_salt_kidney_article',
     '2026110801_congress_2026_tailored_care_article',
+    '2026110802_congress_2026_opening_refresh',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

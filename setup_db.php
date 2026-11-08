@@ -853,6 +853,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/kongres-nefrologia-2026-piat-otazok.php'
             );
         },
+        '2026110802_congress_2026_opening_refresh' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/kongres-nefrologia-2026-piat-otazok.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
