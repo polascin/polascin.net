@@ -871,6 +871,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/co-znamenaju-stadia-chronickej-choroby-obliciek.php'
             );
         },
+        '2026110805_missed_dialysis_howto_polish' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/preco-zostane-dialyzacne-kreslo-prazdne.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

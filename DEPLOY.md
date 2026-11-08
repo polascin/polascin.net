@@ -202,11 +202,13 @@ Ak nepoužiješ explicitný `known_hosts` súbor, lokálny skript predvolene pou
 
 Z rootu repozitára:
 
-Ak na stroji chýba `rsync` (Git Bash na Windows), skript prenesie
-`git archive HEAD` cez SSH do dočasného adresára v `private/` a `rsync`
-spustí na serveri s porovnaním obsahu (`-c`). Nasadzuje sa iba commitnutý
-stav; necommitnuté zmeny skript odmietne. V tomto režime `--dry-run` naozaj
-porovná server s HEAD a vypíše, čo by sa zmenilo, bez zásahu do web rootu.
+Ak na stroji chýba `rsync` (Git Bash na Windows), skript v režime `archive`
+rozbalí `git archive` priamo z `~/git/polascin.net.git` na serveri (ak už
+má commit z `git push websupport main`), prípadne prenesie `git archive HEAD`
+cez SSH do dočasného adresára v `private/`, a `rsync` spustí na serveri
+s porovnaním obsahu (`-c`). Nasadzuje sa iba commitnutý stav; necommitnuté
+zmeny skript odmietne. V tomto režime `--dry-run` naozaj porovná server
+s HEAD a vypíše, čo by sa zmenilo, bez zásahu do web rootu.
 
 ```bash
 # Náhľad zmien (v režime archive porovnanie so serverom)

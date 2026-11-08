@@ -23,7 +23,7 @@ Ak slug už existuje, nerob duplikát článku ani sociálnych príspevkov. Zozn
 
 ## Text
 
-Dodaný text spracuj tvorivo: esej s jasnou pointou, vlastným sledom myšlienok a konkrétnym jazykom. Fakty, čísla, citácie ani medicínske a právne tvrdenia nepridávaj. Čo v zdroji nie je, nechaj ako medzeru.
+Dodaný text spracuj tvorivo: esej s jasnou pointou, vlastným sledom myšlienok a konkrétnym jazykom. Fakty, čísla, citácie ani medicínske a právne tvrdenia nepridávaj. Čo v zdroji nie je, nechaj ako medzeru. Ak používateľ žiada zamaskovať obchodné a osobné podrobnosti tretích strán, nahraď mená osôb, názvy firiem a identifikátory fiktívnymi údajmi vo všetkých jazykoch a uveď to v záverečnej poznámke článku.
 
 Potom text prejdi podľa skillu humanizácie. Jazykové verzie urob vo všetkých jazykoch z `appLanguages()` (zoznam je v `blog-article` a v `i18n.php`, neskracuj ho). V každom jazyku skontroluj terminológiu, gramatiku, interpunkciu, diakritiku a jednotný štýl. Tú istú významovú opravu prenes do všetkých verzií.
 

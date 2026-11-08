@@ -35,7 +35,8 @@ Referencie v tomto skille:
 2. **Nevymýšľaj fakty.** Čo v zdroji nie je, do eseje nepatrí. Čísla, mená, citácie, medicínske a právne tvrdenia over (WebSearch, WebFetch, primárny zdroj). Ak sa niečo nedá overiť, povedz to v reporte a v texte to nechaj označené alebo vynechaj.
 3. **Datovaná udalosť verzus dnešný stav.** Ak návrh opisuje stav, ktorý medzitým zmenil vlastný zverejnený katalóg autora (nefro.polascin.net, books.polascin.net), ponechaj datovanú udalosť a uveď neskorší overený stav. Prekonaný stav nepodávaj ako súčasný.
 4. **Žiadne pomlčky** (em ani en) v slovenskom texte ani v prekladoch, kde to nie je norma. Čiarky, dvojbodky, samostatné vety. Rozsahy slovom: „2020 až 2024“.
-5. **Článok na webe nečaká** na Disk ani na sociálne siete. Nasadenie ide hneď po testoch.
+5. **Anonymizácia tretích strán na požiadanie.** Ak používateľ žiada zamaskovať obchodné a osobné podrobnosti tretích strán, nahraď mená osôb, názvy firiem a identifikátory fiktívnymi údajmi vo všetkých jazykoch a uveď to v záverečnej poznámke článku.
+6. **Článok na webe nečaká** na Disk ani na sociálne siete. Nasadenie ide hneď po testoch.
 
 ## Postup
 
