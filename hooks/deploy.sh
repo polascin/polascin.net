@@ -403,9 +403,15 @@ else
 	}
 	trap cleanup_stage EXIT
 
-	echo "[deploy] Prenášam git archive ${COMMIT} do dočasného adresára mimo web rootu..."
-	git archive --format=tar HEAD |
-		ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "umask 022 && mkdir -p '${STAGE}' && tar -xf - -C '${STAGE}'"
+	FULL_COMMIT=$(git rev-parse HEAD)
+	echo "[deploy] Pripravujem git archive ${COMMIT} do dočasného adresára mimo web rootu..."
+	if ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "git --git-dir=\"\$HOME/git/polascin.net.git\" cat-file -e '${FULL_COMMIT}^{commit}' 2>/dev/null"; then
+		ssh_idempotent "umask 022 && mkdir -p '${STAGE}' && git --git-dir=\"\$HOME/git/polascin.net.git\" archive --format=tar '${FULL_COMMIT}' | tar -xf - -C '${STAGE}'"
+	else
+		echo "[deploy] Prenášam git archive ${COMMIT} cez SSH..."
+		git archive --format=tar HEAD |
+			ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "umask 022 && mkdir -p '${STAGE}' && tar -xf - -C '${STAGE}'"
+	fi
 	ssh "${SSH_OPTS[@]}" "$SSH_SPEC" "cat > '${STAGE}/deploy_info.php'" <deploy_info.php
 
 	# -c porovnáva obsah, nie čas z archívu: nezmenené súbory ostanú
