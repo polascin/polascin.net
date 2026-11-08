@@ -45,7 +45,7 @@ Jazyky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk` (`app
 - Ak je `main` za `origin/main`, najprv `git pull --ff-only`.
 - Commit a push na `main`. Hooky nepreskakuj, force push nie. Nekomituj `private/`, `.env`, `*.ini` okrem `env.ini.example`, ani PNG.
 - Ak GitGuardian hlási `ggshield: command not found`, pred commit pridaj do `PATH` adresár s `ggshield.exe` pod `%USERPROFILE%\.cache\pre-commit\`. Git config nemeň.
-- Z lokálneho Windows alebo Mac prostredia nasadzuj lokálnymi nástrojmi cez SSH alias `websupport`, potom spusti `setup_db.php` a over idempotentný druhý beh. Existujúci Actions deploy nie je lokálna cesta nasadenia. Pri lokálnych commitoch použi `[skip deploy]`, aby sa predišlo súbehu so starším automatickým workflow.
+- Z lokálneho Windows alebo Mac prostredia nasadzuj lokálnymi nástrojmi (`bash hooks/deploy.sh --migrate`) cez SSH alias `websupport` a následne over idempotentný druhý beh `php setup_db.php`. Keď je commit už pushnutý na `websupport`, režim `archive` v `hooks/deploy.sh` rozbalí strom priamo z `~/git/polascin.net.git` na serveri. Existujúci Actions deploy nie je lokálna cesta nasadenia. Pri lokálnych commitoch použi `[skip deploy]`, aby sa predišlo súbehu so starším automatickým workflow.
 - Over produkciu: `/`, articles, contact, newsletter, sitemap, login HTTP 200; `/deploy_info.php` a `/i18n.php` 403; CSP s nonce a bezpečnostné hlavičky. Spot-check SK, EN a jeden ďalší jazyk plus hreflang v sitemape. `og:image` je JPEG. `og:title` kanonickej stránky je slovenský; anglický titulok v náhľade crawlera je jazyk session, nie chyba seedu.
 
 ## 5. Sociálne siete
