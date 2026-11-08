@@ -1,6 +1,6 @@
 # Kontrola produkčnej databázy: polascin.net
 
-Generované: 2026-11-07 21:37:02 CET  
+Generované: 2026-11-08 21:37:01 CET  
 Server: `MariaDB 11.4.x`  
 Režim: read-only transakcia, iba `SELECT`/`SHOW`
 
@@ -18,14 +18,14 @@ Bez nálezov: schéma, migrácie, indexy, účty aj retencia sú v očakávanom 
 
 | Tabuľka | Engine | Collation | Riadkov (presne) |
 | --- | --- | --- | --- |
-| `access_logs` | InnoDB | utf8mb4_unicode_ci | 73883 |
+| `access_logs` | InnoDB | utf8mb4_unicode_ci | 75543 |
 | `admin_audit_log` | InnoDB | utf8mb4_unicode_ci | 59 |
-| `articles` | InnoDB | utf8mb4_unicode_ci | 480 |
-| `contact_messages` | InnoDB | utf8mb4_unicode_ci | 1 |
+| `articles` | InnoDB | utf8mb4_unicode_ci | 510 |
+| `contact_messages` | InnoDB | utf8mb4_unicode_ci | 2 |
 | `content_blocks` | InnoDB | utf8mb4_unicode_ci | 5 |
-| `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 4 |
+| `form_rate_limit` | InnoDB | utf8mb4_unicode_ci | 7 |
 | `newsletter_subscribers` | InnoDB | utf8mb4_unicode_ci | 0 |
-| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 72 |
+| `schema_migrations` | InnoDB | utf8mb4_unicode_ci | 77 |
 | `users` | InnoDB | utf8mb4_unicode_ci | 1 |
 
 ## Migrácie schémy
@@ -102,6 +102,11 @@ Bez nálezov: schéma, migrácie, indexy, účty aj retencia sú v očakávanom 
 - ✅ `2026110110_congress_program_polish`: 2026-11-01 11:08:32
 - ✅ `2026110501_totp_2fa_support`: 2026-11-05 11:31:13
 - ✅ `2026110601_low_sodium_salt_kidney_article`: 2026-11-06 19:37:37
+- ✅ `2026110801_congress_2026_tailored_care_article`: 2026-11-08 15:54:50
+- ✅ `2026110802_congress_2026_opening_refresh`: 2026-11-08 16:10:09
+- ✅ `2026110803_missed_dialysis_outreach_article`: 2026-11-08 17:42:31
+- ✅ `2026110804_ckd_stages_explained_article`: 2026-11-08 17:42:31
+- ✅ `2026110805_missed_dialysis_howto_polish`: 2026-11-08 18:06:04
 
 ## Indexy strážené migráciou
 
@@ -117,18 +122,18 @@ Bez nálezov: schéma, migrácie, indexy, účty aj retencia sú v očakávanom 
 
 ## Obsah a jazyky
 
-- Publikovaných článkov: 480
+- Publikovaných článkov: 510
 - Články podľa jazyka:
-  - `cs`: 48
-  - `de`: 48
-  - `en`: 48
-  - `es`: 48
-  - `fr`: 48
-  - `hu`: 48
-  - `it`: 48
-  - `pl`: 48
-  - `sk`: 48
-  - `uk`: 48
+  - `cs`: 51
+  - `de`: 51
+  - `en`: 51
+  - `es`: 51
+  - `fr`: 51
+  - `hu`: 51
+  - `it`: 51
+  - `pl`: 51
+  - `sk`: 51
+  - `uk`: 51
 - Obsahové bloky podľa jazyka:
   - `sk`: 5
 
@@ -139,12 +144,12 @@ Kontaktné správy: **180 dní**; nepotvrdený newsletter: **72 hodín**; admini
 
 | Tabuľka | Riadkov | Najstarší záznam | Vek (dní) |
 | --- | --- | --- | --- |
-| `access_logs` | 73883 | 2026-08-09 21:56:41 | 89 |
-| `contact_messages` | 1 | 2026-11-07 08:40:19 | 0 |
+| `access_logs` | 75543 | 2026-08-10 22:37:23 | 89 |
+| `contact_messages` | 2 | 2026-11-07 08:40:19 | 1 |
 | `newsletter_subscribers` | 0 | - | - |
-| `admin_audit_log` | 59 | 2026-09-11 19:22:06 | 57 |
-| `form_rate_limit` | 4 | 2026-11-07 08:40:18 | 0 |
+| `admin_audit_log` | 59 | 2026-09-11 19:22:06 | 58 |
+| `form_rate_limit` | 7 | 2026-11-07 08:40:18 | 1 |
 
-Kontaktné správy: **0** vybavených, **1** nevybavených
+Kontaktné správy: **0** vybavených, **2** nevybavených
 (z toho **0** nevybavených dlhšie ako 30 dní, **0** správ prekročilo retenčnú lehotu 180 dní).
 
