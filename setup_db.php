@@ -865,6 +865,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/preco-zostane-dialyzacne-kreslo-prazdne.php'
             );
         },
+        '2026110804_ckd_stages_explained_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/co-znamenaju-stadia-chronickej-choroby-obliciek.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

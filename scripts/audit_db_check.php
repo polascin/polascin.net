@@ -114,6 +114,7 @@ const EXPECTED_MIGRATIONS = [
     '2026110801_congress_2026_tailored_care_article',
     '2026110802_congress_2026_opening_refresh',
     '2026110803_missed_dialysis_outreach_article',
+    '2026110804_ckd_stages_explained_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
