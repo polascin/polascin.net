@@ -51,3 +51,12 @@ Slug `co-zostane-ked-ai-stichne`, kanonická URL `https://polascin.net/article.p
 - X a Threads: v overenej relácii chýbalo prihlásenie; úspešné publikovanie nebolo potvrdené. Pri pokračovaní najprv over profil a existujúce príspevky.
 
 Facebook ani LinkedIn k tomuto slugu nezakladaj znova.
+
+### Súbežné duplicity z druhého chatu, zistené 10. novembra 2026
+
+K rovnakému slugu vznikol pri súbežnom publikovaní ešte jeden pár príspevkov:
+
+- Duplicitný Facebook: https://www.facebook.com/lubomir.polascin/posts/pfbid027ycjtbpQ1bQ9pyVx2j5reGe8zu3yJWSJEpH8XKyJpf7EMyYNUYUVhKLJ1ht3ptsDl
+- Duplicitný LinkedIn: https://www.linkedin.com/feed/update/urn:li:activity:7525749798793256960/
+
+Ich odstránenie bolo navrhnuté používateľovi, zatiaľ nie je potvrdené ani vykonané. Existujúce prvé publikácie uvedené vyššie ostávajú zachované. K tomuto článku už nezakladaj ďalší Facebook ani LinkedIn príspevok. X a Threads ostávajú bez potvrdeného zverejnenia. Pred každým externým odoslaním znovu prever stav súbežných úloh a evidenciu publikovania.
