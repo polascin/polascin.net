@@ -43,6 +43,7 @@ Referencie v tomto skille:
 
 - `git pull --ff-only websupport main`, potom `git status`; pracuj na čistom `main`.
 - Navrhni slug `[a-z0-9-]+` bez diakritiky, krátky, z pointy článku. Over, že neexistuje.
+- Pred vytvorením porovnaj aj tému s poslednými článkami a rozpracovanými zmenami, nielen slug. Pri súbežnej práci zjednoť návrhy do jediného článku a nezakladaj druhú publikáciu. Cudzie zmeny neprepisuj; pred deployom znovu over HEAD a prebiehajúci deploy. Starší izolovaný checkout nesmie prepísať novší nasadený obsah.
 - Prečítaj si dva až tri posledné články v `content/articles/` kvôli hlasu, dĺžke a štruktúre.
 
 ### 2. Slovenská esej

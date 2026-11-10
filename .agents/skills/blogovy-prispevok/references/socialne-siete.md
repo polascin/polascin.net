@@ -40,3 +40,14 @@ Spoločné pravidlá:
 |------|-------|----------|
 | Substack | `https://polascin.substack.com/publish/post` | Priamy editor, nie sidebar Create. Audience Everyone. Pri „Add subscribe buttons“ klikni „Publish without buttons“, nezaškrtávaj „Don’t ask again“. Verejná URL je `/p/…` bez query. |
 | Medium | `https://medium.com/new-story` | Cloudflare „Attention Required!“ alebo editor bez textového poľa znamená stop. Stránku nechaj otvorenú. |
+
+
+## Overené publikovanie 10. novembra 2026
+
+Slug `co-zostane-ked-ai-stichne`, kanonická URL `https://polascin.net/article.php?slug=co-zostane-ked-ai-stichne`:
+
+- Facebook s náhľadom finálnej ilustrácie: https://www.facebook.com/lubomir.polascin/posts/pfbid0z1z8mvZ3nsEYoDKFhBqyqAFM6jPezMnhE95LJnu93U55WB7nqc464rEUigYAsosBl
+- LinkedIn s náhľadom finálnej ilustrácie: https://www.linkedin.com/feed/update/urn:li:activity:7525749398547476480/
+- X a Threads: v overenej relácii chýbalo prihlásenie; úspešné publikovanie nebolo potvrdené. Pri pokračovaní najprv over profil a existujúce príspevky.
+
+Facebook ani LinkedIn k tomuto slugu nezakladaj znova.
