@@ -117,6 +117,7 @@ const EXPECTED_MIGRATIONS = [
     '2026110804_ckd_stages_explained_article',
     '2026110805_missed_dialysis_howto_polish',
     '2026111001_ai_medical_learning_article',
+    '2026111002_ai_medical_learning_polish',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
