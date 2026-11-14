@@ -931,6 +931,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/anomalia-este-nie-je-introspekcia.php'
             );
         },
+        '2026111408_anomaly_not_introspection_polish' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/anomalia-este-nie-je-introspekcia.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
