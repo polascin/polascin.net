@@ -1,48 +1,100 @@
 ---
 name: blogovy-prispevok
 description: >-
-  Turns supplied text or inspiration into a polascin.net blog post and
-  publishes it through the existing blog-article pipeline: a creative edit,
-  every language from appLanguages(), deep proofreading, a 16:10 cover, a
-  Google Drive PNG on polascin@gmail.com, deploy, and social posts with the
-  illustration. Use when the user supplies text or inšpirácia for a blog
-  article on polascin.net, asks to publish or zverejniť článok, or asks to
-  improve a blogový príspevok. If the source text is missing, do not invent
-  an article.
+  Publishes a polascin.net blog post from text or inspiration supplied by the
+  user: creative essay, deep proofreading, all ten site languages, 16:10 cover
+  in the site colours, PNG to Google Drive (polascin@gmail.com), database
+  seed and migration, tests, commit, push, local deploy via websupport,
+  production check, then posts with the illustration on X, Facebook,
+  LinkedIn and Threads, and a final improvement pass. Use when the user
+  supplies text or inšpirácia for a blog article on polascin.net, asks to
+  zverejniť or publish a blogový príspevok, or asks to improve one. If the
+  source text is missing, stop and ask for it; never invent the article.
 ---
 
-# Blogový príspevok
+# Blogový príspevok na polascin.net
 
-Vstupný skill pre blog na polascin.net. Hneď prečítaj a dodrž `.cursor/skills/humanizacia-neodborneho-textu/SKILL.md` a `.cursor/skills/blog-article/SKILL.md`. Jazyky, seed, obálka, Disk, testy, nasadenie a sociálne siete sú v `blog-article`. Tu sú len doplnky, ktoré sa s tým postupom nesmú rozísť.
+Celý postup od dodaného textu po overené nasadenie a sociálne siete. Pracuj v repozitári `D:\Dev\polascin.net` (na Macu v jeho klone). Pred začiatkom si prečítaj `.cursor/skills/humanizacia-neodborneho-textu/SKILL.md` a jeho `references/vzorce.md`; ten istý postup redakcie platí aj tu. Zoznam slugov už uverejnených na X je iba v `.cursor/skills/blog-article/SKILL.md` (krok 5). Jediný zdroj pravdy pre databázu je `setup_db.php`.
 
-## Keď text chýba
+Referencie v tomto skille:
 
-Ak používateľ ohlási text alebo inšpiráciu a text v správe nie je, zastav. Nevymýšľaj esej. Článok, preklady, obálka, nahratie na Disk a sociálne príspevky sú mimo rozsahu, kým zdrojový text neexistuje.
+- [Seed súbor článku a migrácia](references/seed-a-migracia.md)
+- [Obálka, OG obrázok a PNG na Google Disk](references/obalka-a-disk.md)
+- [Sociálne siete](references/socialne-siete.md)
+- [Kontrolný zoznam na záver](references/kontrola.md)
 
-Ak slug už existuje, nerob duplikát článku ani sociálnych príspevkov. Úpravu live textu rob cez novú migráciu `refreshPublishedArticleTextFromFile` (seeder samotný existujúci obsah neprepíše). Zoznam slugov na X dopĺňaj v `.cursor/skills/blog-article/SKILL.md`, nie tu.
+## Kedy zastaviť
 
-## Text
+- **Text chýba.** Ak správa ohlasuje text alebo inšpiráciu a za ohlásením nič nie je, zastav sa a vypýtaj si text. Nevymýšľaj esej, nerob preklady, obálku, Disk ani sociálne siete.
+- **Slug už existuje** (`content/articles/{slug}.php` alebo záznam v `setup_db.php`). Nerob druhý článok ani druhé sociálne príspevky. Úpravu existujúceho článku rieš migráciou cez `refreshPublishedArticleTextFromFile`.
+- **Čisto dokumentačná zmena** článok nespúšťa.
 
-Dodaný text spracuj tvorivo: esej s jasnou pointou, vlastným sledom myšlienok a konkrétnym jazykom. Fakty, čísla, citácie ani medicínske a právne tvrdenia nepridávaj. Čo v zdroji nie je, nechaj ako medzeru. Ak používateľ žiada zamaskovať obchodné a osobné podrobnosti tretích strán, nahraď mená osôb, názvy firiem/produktov (napr. Arenibus → fiktívne Heliora) a identifikátory fiktívnymi údajmi vo všetkých jazykoch; súkromné hashe commitov a interné URL neuvádzaj. V závere každej jazykovej verzie uveď, že ide o fiktívne náhrady.
+## Trvalé pravidlá
 
-Potom text prejdi podľa skillu humanizácie. Jazykové verzie urob vo všetkých jazykoch z `appLanguages()` (zoznam je v `blog-article` a v `i18n.php`, neskracuj ho). V každom jazyku skontroluj terminológiu, gramatiku, interpunkciu, diakritiku a jednotný štýl. Tú istú významovú opravu prenes do všetkých verzií.
+1. **Žiadny textGrain.** Žiadne skryté znaky, zrno, šum, textúrne prekrytia ani umelé zdrsnenie. Platí pre text článku, preklady, alt text, sociálne príspevky aj ilustráciu. Platí natrvalo, aj keby o to niekto znova žiadal. Obyčajný text, čistý obraz.
+2. **Nevymýšľaj fakty.** Čo v zdroji nie je, do eseje nepatrí. Čísla, mená, citácie, medicínske a právne tvrdenia over (WebSearch, WebFetch, primárny zdroj). Ak sa niečo nedá overiť, povedz to v reporte a v texte to nechaj označené alebo vynechaj.
+3. **Datovaná udalosť verzus dnešný stav.** Ak návrh opisuje stav, ktorý medzitým zmenil vlastný zverejnený katalóg autora (nefro.polascin.net, books.polascin.net), ponechaj datovanú udalosť a uveď neskorší overený stav. Prekonaný stav nepodávaj ako súčasný.
+4. **Žiadne pomlčky** (em ani en) v slovenskom texte ani v prekladoch, kde to nie je norma. Čiarky, dvojbodky, samostatné vety. Rozsahy slovom: „2020 až 2024“.
+5. **Anonymizácia tretích strán na požiadanie.** Ak používateľ žiada zamaskovať obchodné a osobné podrobnosti tretích strán, nahraď mená osôb, názvy firiem/produktov (napr. Arenibus → fiktívne Heliora) a identifikátory fiktívnymi údajmi vo všetkých jazykoch; súkromné hashe commitov a interné URL neuvádzaj. V závere každej jazykovej verzie uveď, že ide o fiktívne náhrady.
+6. **Článok na webe nečaká** na Disk ani na sociálne siete. Nasadenie ide hneď po testoch.
 
-Keď je návrh všetkých jazykov hotový, urob ešte jeden redakčný prechod podľa vlastného úsudku. Až potom pokračuj obálkou a ďalšími krokmi v `blog-article`.
+## Postup
 
-## Trvalý zákaz textGrain
+### 1. Príprava
 
-TextGrain, skryté znaky a akékoľvek umelé zdrsnenie sú zakázané v texte článku, v prekladoch, v alt texte, v sociálnych príspevkoch aj na ilustrácii. Žiadne zrno, šum ani textúrne prekrytie. Obyčajný text a čistý obraz. Platí natrvalo, aj keď o to používateľ požiada znova.
+- `git pull --ff-only websupport main`, potom `git status`; pracuj na čistom `main`.
+- Navrhni slug `[a-z0-9-]+` bez diakritiky, krátky, z pointy článku. Over, že neexistuje.
+- Prečítaj si dva až tri posledné články v `content/articles/` kvôli hlasu, dĺžke a štruktúre.
 
-## Obálka a Disk
+### 2. Slovenská esej
 
-Ku každému príspevku vygeneruj a pripoj príjemnú, príťažlivú, výraznú a presvedčivú ilustráciu vysokej kvality. Pomer 16:10, iný pomer len keď ho téma potrebuje. Farby zlaď s webom a s už zverejnenými obálkami. Postup a odtiene sú v `blog-article`, krok 2. PNG na Disk účtu polascin@gmail.com ulož podľa kroku 3. Novú cestu nevymýšľaj.
+- Z dodaného textu napíš tvorivo esej s jasnou pointou: konkrétna udalosť alebo číslo skoro na začiatku, potom úsudok, na konci veta, ktorá nesie pointu. Úvod neopakuje titulok. Bez výzvy na kontakt, bez `<script>`, bez otázky „a čo vy?“ na záver.
+- Pri osobnej alebo medicínskej skúsenosti doplň krátky disclaimer v texte (podľa existujúcich článkov).
+- Potom prejdi text podľa skillu humanizácie: strojová kostra, nafúknuté slová, kalky, diakritika, čiarky, `nielen`, úvodzovky „ “.
+- Titulok do 255 znakov, excerpt dva až štyri vety, `image_alt` opisuje obrázok (nie druhý titulok, do 255 znakov).
 
-## Poradie a nasadenie
+### 3. Jazykové verzie
 
-Drž poradie z `.cursor/rules/blog-article-pipeline.mdc` a z `blog-article`: korektúra vrátane druhého prechodu a seed so všetkými jazykmi, obálka WebP a `php scripts/make_og_covers.php`, PNG na Disk, testy, commit, push, deploy, overenie produkcie, až potom sociálne siete. Článok nenechávaj čakať na Disk ani na siete.
+- Jazyky sú presne tie z `appLanguages()` v `i18n.php`: `sk`, `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk`. Zoznam neskracuj; ak sa v `i18n.php` zmení, platí `i18n.php`.
+- Každý jazyk je samostatný preklad eseje, nie strojový prepis: terminológia, gramatika, interpunkcia a diakritika podľa cieľového jazyka, jednotný štýl s ostatnými článkami. Čeština bez slovenských reálií (dýchavica → dušnosť, rajón → spád, odporúčania → doporučení). Vlastné mená, URL, čísla a názvy diel ostávajú.
+- Hĺbková kontrola každého jazyka zvlášť. Tú istú významovú opravu prenes do všetkých verzií. Pravopisnú chybu oprav v jazyku, v ktorom je.
+- Keď sú hotové všetky jazyky, urob ešte jeden redakčný prechod podľa vlastného úsudku vo všetkých desiatich.
 
-Sociálne príspevky uverejni s ilustráciou spôsobom z kroku 5 v `blog-article`. Povinné účty sú https://x.com/polascin (@polascin), https://www.facebook.com/lubomir.polascin, https://www.linkedin.com/in/lubomirpolascin/ a https://www.threads.com/@lubomirpolascin. Substack a Medium patria k úlohe len vtedy, keď o ne používateľ v tej istej úlohe výslovne požiada. Nové API nepridávaj.
+### 4. Seed a migrácia
 
-Lokálne nasadenie ide cez SSH alias `websupport` a lokálne nástroje. Commit označ `[skip deploy]`, aby starší workflow nespustil súbežný deploy. Migráciu over aj druhým, idempotentným behom.
+Podľa [seed-a-migracia.md](references/seed-a-migracia.md): `content/articles/{slug}.php` s 403 strážou, migrácia `YYYYMMDDNN_short_name` v `setup_db.php` a rovnaký kľúč v `EXPECTED_MIGRATIONS` v `scripts/audit_db_check.php`. `published_at` je teraz v Europe/Bratislava (test odmieta budúcnosť).
 
-Na konci skontroluj, že je celý postup hotový: commit, push na `main` a overené nasadenie. Čisto dokumentačné zmeny článok nespúšťajú.
+### 5. Obálka
+
+Podľa [obalka-a-disk.md](references/obalka-a-disk.md): ilustrácia bez textu a log, pomer 16:10 (iný len keď ho téma potrebuje), farby webu (fialová `#3d1a78`, tyrkys `#078d70`, svetlé pozadie alebo tmavá scéna ako posledné obálky), príjemná, výrazná a presvedčivá. Výstup `images/articles/{slug}.webp` 1600×1000, kvalita 82, potom `php scripts/make_og_covers.php` (JPEG `images/articles/og/{slug}.jpg` a zmenšeniny kariet `images/articles/card/{slug}-480.webp` a `-960.webp` idú do commitu, bez nich test spadne).
+
+### 6. PNG na Google Disk
+
+Podľa [obalka-a-disk.md](references/obalka-a-disk.md): z WebP skutočné PNG, uložiť do priečinka `polascin.net obálky blogu` na Disku účtu polascin@gmail.com. PNG necommituj. Tento krok môže bežať súbežne s nasadením, ale pred reportom musí byť hotový alebo nahlásený ako zlyhaný.
+
+### 7. Testy, commit, push
+
+- `php -l` nad zmenenými PHP súbormi, `php tests/run.php` musí prejsť celé.
+- Commit iba so súbormi článku: seed, `setup_db.php`, `scripts/audit_db_check.php`, WebP, OG JPEG. Žiadne `private/`, `.env`, `*.ini` okrem `env.ini.example`, žiadne PNG. Správa `feat(blog): {slovenský titulok} [skip deploy]` s jednou vetou v tele. Hooky nepreskakuj, force push nie. Ak pre-commit hlási `ggshield: command not found`, doplň do `PATH` adresár s `ggshield.exe` (`C:\Python314\Scripts` alebo pod `%USERPROFILE%\.cache\pre-commit\`), Git config nemeň.
+- `git push websupport main`, potom `git push origin main` (zrkadlo). Push nič nenasadzuje.
+
+### 8. Nasadenie a overenie produkcie
+
+- Len lokálnymi nástrojmi cez SSH alias `websupport`. GitHub Actions nie sú cesta nasadenia.
+- `bash hooks/deploy.sh --dry-run` a skontroluj zoznam zmien (iba súbory článku a `deploy_info.php`). Potom `bash hooks/deploy.sh --migrate`. Skript prenesie `git archive HEAD` a na serveri spustí `setup_db.php`.
+- Druhý, idempotentný beh migrácie: spusti `setup_db.php` na serveri ešte raz rovnakým spôsobom (príkaz je v `hooks/deploy.sh`, časť `--migrate`; `REMOTE_PATH` a `REMOTE_ENV_PATH` sú v `~/.config/polascin/deploy.env`). Druhý beh nesmie nič meniť ani zlyhať.
+- Overenie: `https://polascin.net/article.php?slug={slug}` HTTP 200 a slovenský `og:title`; `/`, `articles.php`, `contact.php`, `newsletter.php`, `sitemap.php`, `login.php` 200; `/deploy_info.php` a `/i18n.php` 403; CSP s nonce a bezpečnostné hlavičky; `og:image` je JPEG a je dostupný (200, `image/jpeg`). Spot-check SK, EN a jeden ďalší jazyk cez `?lang=` a hreflang v `sitemap.php`. Pri 375 px článok nepreteká.
+
+### 9. Sociálne siete
+
+Podľa [socialne-siete.md](references/socialne-siete.md), až po HTTP 200 kanonickej URL `https://polascin.net/article.php?slug={slug}` (bez `lang=`). Povinné sú X (@polascin), Facebook, LinkedIn a Threads, každý príspevok po slovensky, s kanonickou URL a s ilustráciou. Substack a Medium len na výslovnú žiadosť v tej istej úlohe. Po úspechu na X doplň slug do zoznamu v `.cursor/skills/blog-article/SKILL.md` a commitni `docs(skills): slug {slug} je na X [skip deploy]`.
+
+### 10. Záverečné vylepšenie a kontrola
+
+- Prečítaj si zverejnený článok ešte raz v SK a aspoň v EN ako čitateľ. Ak nájdeš, čo zlepšiť (presnejšie slovo, nadbytočná veta, lepšia pointa), uprav seed vo všetkých jazykoch, pridaj migráciu `refreshPublishedArticleTextFromFile`, testy, commit, push, deploy s `--migrate`, overenie. Ak článok zlepšiť netreba, napíš to v reporte.
+- Prejdi [kontrola.md](references/kontrola.md): všetko commitnuté, `main` pushnutý na `websupport` aj `origin`, nasadenie overené, Disk, štyri siete, zoznam slugov na X.
+- Záznam do `.audit.md` patrí len vtedy, keď sa menil kód mimo obsahu článku.
+
+## Report
+
+Po slovensky, bez formuliek: čo bolo urobené (slug, kanonická URL, jazyky, obálka, Disk, commit SHA, nasadenie, odkazy na príspevky), čo bolo overené (HTTP kódy, druhý beh migrácie, testy), čo ostalo otvorené (sieť, ktorá zastavila na prihlásení, neoverený fakt, chýbajúca príloha). Heslá, passkey ani 2FA nikdy nehádaj a nezadávaj; dialóg nechaj otvorený používateľovi a pokračuj ostatným.
