@@ -35,7 +35,7 @@ return [
             'excerpt' => 'Keď dvaja administrátori upravia tú istú verziu profilu pracovníka, bežné „posledný zápis vyhráva“ môže obom odpovedať úspechom a pritom jednu prácu potichu zmazať. V Heliora som doplnil kontrolu verzie, ktorú klient pošle so zápisom.',
             'content' => <<<'HTML'
 <p>Dvaja ľudia uložia platnú úpravu. Obaja uvidia, že sa to podarilo. V databáze ostane len neskorší zápis.</p>
-<p>Takto sa správa bežné správanie „posledný zápis vyhráva“, keď dvaja administrátori pracujú z tej istej verzie profilu pracovníka. Server prijme oba zápisy. Prvý z nich však zmizne bez varovania.</p>
+<p>Takto funguje bežné „posledný zápis vyhráva“, keď dvaja administrátori pracujú z tej istej verzie profilu pracovníka. Server prijme oba zápisy. Prvý z nich však zmizne bez varovania.</p>
 <p>V Heliora, fiktívne označenom systéme pre nefrológiu a dialýzu, som preto pri úpravách profilu pracovníka a registrácie doplnil kontrolu verzie, ktorú pošle klient. Server musí vedieť, ktorú verziu človek naozaj upravil.</p>
 <p>Ak verzia v požiadavke chýba, server ju odmietne stavom HTTP 400. Ak je zastaraná, vráti konflikt HTTP 409 namiesto tichého prepísania novšieho záznamu. Rozdiel je podstatný. Načítať najnovšiu verziu na serveri tesne pred uložením ešte nehovorí, či formulár používateľa už nebol zastaraný.</p>
 <p>Integračné testy overujú konflikt a to, že uložený záznam ostane nezmenený. Ide o jeden chránený postup, nie o tvrdenie, že každé riziko súbehu v systéme zmizlo.</p>
@@ -65,7 +65,7 @@ HTML,
             'excerpt' => 'Když dva administrátoři upraví tutéž verzi profilu pracovníka, běžné „poslední zápis vyhrává“ může oběma odpovědět úspěchem a přitom jednu práci potichu smazat. V Heliora jsem doplnil kontrolu verze, kterou klient pošle se zápisem.',
             'content' => <<<'HTML'
 <p>Dva lidé uloží platnou úpravu. Oba uvidí, že se to povedlo. V databázi zůstane jen pozdější zápis.</p>
-<p>Tak se chová běžné „poslední zápis vyhrává“, když dva administrátoři pracují z téže verze profilu pracovníka. Server přijme oba zápisy. První z nich však zmizí bez varování.</p>
+<p>Tak funguje běžné „poslední zápis vyhrává“, když dva administrátoři pracují z téže verze profilu pracovníka. Server přijme oba zápisy. První z nich však zmizí bez varování.</p>
 <p>V Heliora, fiktivně označeném systému pro nefrologii a dialýzu, jsem proto u úprav profilu pracovníka a registrace doplnil kontrolu verze, kterou pošle klient. Server musí vědět, kterou verzi člověk opravdu upravil.</p>
 <p>Pokud verze v požadavku chybí, server ji odmítne stavem HTTP 400. Pokud je zastaralá, vrátí konflikt HTTP 409 místo tichého přepsání novějšího záznamu. Rozdíl je podstatný. Načíst nejnovější verzi na serveru těsně před uložením ještě neříká, zda formulář uživatele už nebyl zastaralý.</p>
 <p>Integrační testy ověřují konflikt a to, že uložený záznam zůstane nezměněný. Jde o jeden chráněný postup, ne o tvrzení, že každé riziko souběhu v systému zmizelo.</p>
