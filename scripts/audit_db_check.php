@@ -126,6 +126,7 @@ const EXPECTED_MIGRATIONS = [
     '2026111406_portable_intent_local_permissions_polish',
     '2026111407_anomaly_not_introspection_article',
     '2026111408_anomaly_not_introspection_polish',
+    '2026111409_no_shown_difference_not_equality_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

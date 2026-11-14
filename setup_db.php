@@ -937,6 +937,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/anomalia-este-nie-je-introspekcia.php'
             );
         },
+        '2026111409_no_shown_difference_not_equality_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/neukazany-rozdiel-nie-je-dokaz-rovnosti.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
