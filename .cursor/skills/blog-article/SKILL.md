@@ -70,7 +70,7 @@ Už na X (neopakovať): `sestnast-tokenov-na-rozmyslanie`, `lekar-ako-pacient-gl
 |------|--------|----------------|
 | Facebook | `https://www.facebook.com/lubomir.polascin` | Feed composer, nie skeleton na profile. Text vlož raz, URL naraz zo schránky, nie po znakoch (náhľad sa načítava pri každom znaku a hosting vráti 429). Ak náhľad ukáže 429, Sharing Debugger „Scrape Again“ a nový composer. Ak `innerText` ostane prázdny, nepublikuj a nechaj dialóg používateľovi. |
 | LinkedIn | `https://www.linkedin.com/in/lubomirpolascin/` alebo `/sharing/compose` | Post to Anyone. Vložený text stratí prázdne riadky: odseky píš s Enter Enter, URL vlož. Ak je Post disabled, medzera a backspace. URN ber len z príspevku, ktorého text začína hookom. |
-| Threads | `https://www.threads.com/@lubomirpolascin` | Cookie banner Decline/Allow. Nepíš `slowly`. Pred Post musí byť hook v `innerText` raz. Pri zdvojení nepublikuj. |
+| Threads | `https://www.threads.com/@lubomirpolascin` | Cookie banner Decline/Allow. Nepíš `slowly`. Pred Post musí byť hook v `innerText` raz. Pri zdvojení nepublikuj. Lexical composer v Cursor IDE browser často neberie `fill`/`type` a Uverejniť dialóg zatvorí bez príspevku: vtedy nechaj hotový text používateľovi a nevyhlasuj zverejnenie. |
 | Substack | `https://polascin.substack.com/publish/post` | Priamy editor, nie sidebar Create. Audience Everyone. Ak vyskočí „Add subscribe buttons“, klikni „Publish without buttons“ a nezaškrtávaj „Don’t ask again“. Verejná URL je v poli na share center (`/p/…`), bez query. |
 | Medium | `https://medium.com/new-story` | Cloudflare „Attention Required!“ alebo editor bez textového poľa (iframe) znamená stop. Stránku nechaj otvorenú. |
 

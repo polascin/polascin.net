@@ -19,7 +19,7 @@ Vstupný skill pre blog na polascin.net. Hneď prečítaj a dodrž `.cursor/skil
 
 Ak používateľ ohlási text alebo inšpiráciu a text v správe nie je, zastav. Nevymýšľaj esej. Článok, preklady, obálka, nahratie na Disk a sociálne príspevky sú mimo rozsahu, kým zdrojový text neexistuje.
 
-Ak slug už existuje, nerob duplikát článku ani sociálnych príspevkov. Zoznam slugov na X dopĺňaj v `.cursor/skills/blog-article/SKILL.md`, nie tu.
+Ak slug už existuje, nerob duplikát článku ani sociálnych príspevkov. Úpravu live textu rob cez novú migráciu `refreshPublishedArticleTextFromFile` (seeder samotný existujúci obsah neprepíše). Zoznam slugov na X dopĺňaj v `.cursor/skills/blog-article/SKILL.md`, nie tu.
 
 ## Text
 

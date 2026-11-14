@@ -41,13 +41,33 @@ Spoločné pravidlá:
 | Substack | `https://polascin.substack.com/publish/post` | Priamy editor, nie sidebar Create. Audience Everyone. Pri „Add subscribe buttons“ klikni „Publish without buttons“, nezaškrtávaj „Don’t ask again“. Verejná URL je `/p/…` bez query. |
 | Medium | `https://medium.com/new-story` | Cloudflare „Attention Required!“ alebo editor bez textového poľa znamená stop. Stránku nechaj otvorenú. |
 
+
+## Overené publikovanie 10. novembra 2026
+
+Slug `co-zostane-ked-ai-stichne`, kanonická URL `https://polascin.net/article.php?slug=co-zostane-ked-ai-stichne`:
+
+- Facebook s náhľadom finálnej ilustrácie: https://www.facebook.com/lubomir.polascin/posts/pfbid0z1z8mvZ3nsEYoDKFhBqyqAFM6jPezMnhE95LJnu93U55WB7nqc464rEUigYAsosBl
+- LinkedIn s náhľadom finálnej ilustrácie: https://www.linkedin.com/feed/update/urn:li:activity:7525749398547476480/
+- X a Threads: v overenej relácii chýbalo prihlásenie; úspešné publikovanie nebolo potvrdené. Pri pokračovaní najprv over profil a existujúce príspevky.
+
+Facebook ani LinkedIn k tomuto slugu nezakladaj znova.
+
+### Súbežné duplicity z druhého chatu, zistené 10. novembra 2026
+
+K rovnakému slugu vznikol pri súbežnom publikovaní ešte jeden pár príspevkov:
+
+- Duplicitný Facebook: https://www.facebook.com/lubomir.polascin/posts/pfbid027ycjtbpQ1bQ9pyVx2j5reGe8zu3yJWSJEpH8XKyJpf7EMyYNUYUVhKLJ1ht3ptsDl
+- Duplicitný LinkedIn: https://www.linkedin.com/feed/update/urn:li:activity:7525749798793256960/
+
+Ich odstránenie bolo navrhnuté používateľovi, zatiaľ nie je potvrdené ani vykonané. Existujúce prvé publikácie uvedené vyššie ostávajú zachované. K tomuto článku už nezakladaj ďalší Facebook ani LinkedIn príspevok. X a Threads ostávajú bez potvrdeného zverejnenia. Pred každým externým odoslaním znovu prever stav súbežných úloh a evidenciu publikovania.
+
 ## Overené publikovanie 14. novembra 2026
 
 Slug `rast-ktory-zhorsi-pristup`, kanonická URL `https://polascin.net/article.php?slug=rast-ktory-zhorsi-pristup`:
 
 - LinkedIn (text + OG náhľad): https://www.linkedin.com/feed/update/urn:li:activity:7527308178036826112/
-- X: v Cursor IDE browser stále prihlasovací formulár; nepublikované.
-- Facebook: relácia prihlásená, text v composeri bol, ale Post dialóg nezavrel a na profile príspevok nebol; nepublikované.
-- Threads: relácia prihlásená (@lubomirpolascin), Lexical paste/fill do composera zlyhal; Uverejniť neklikané; nepublikované.
+- Facebook: v jednej relácii sa na profile objavil odkaz na `slug=rast-ktory-zhorsi-pristup`; po obnovení timeline príspevky v a11y strome často chýbali. Pred ďalším odoslaním over profil; ak príspevok je, neduplikuj. Permalink ešte nie je v tomto zozname.
+- X: Cursor IDE browser na passkey/2FA; nepublikované.
+- Threads: relácia @lubomirpolascin OK, ale Lexical composer v Cursor browseri neberie spoľahlivo fill/type; klik Uverejniť dialóg zatvorí bez príspevku na profile. Ručné vloženie textu + URL (a PNG z Disku) ostáva potrebné.
 
-LinkedIn k tomuto slugu nezakladaj znova.
+LinkedIn k tomuto slugu nezakladaj znova. X a Threads k tomuto slugu zakladaj len po overení, že na profile ešte nie sú.

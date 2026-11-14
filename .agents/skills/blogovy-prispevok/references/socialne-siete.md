@@ -66,8 +66,8 @@ Ich odstránenie bolo navrhnuté používateľovi, zatiaľ nie je potvrdené ani
 Slug `rast-ktory-zhorsi-pristup`, kanonická URL `https://polascin.net/article.php?slug=rast-ktory-zhorsi-pristup`:
 
 - LinkedIn (text + OG náhľad): https://www.linkedin.com/feed/update/urn:li:activity:7527308178036826112/
-- X: v Cursor IDE browser stále prihlasovací formulár; nepublikované.
-- Facebook: relácia prihlásená, text v composeri bol, ale Post dialóg nezavrel a na profile príspevok nebol; nepublikované.
-- Threads: relácia prihlásená (@lubomirpolascin), Lexical paste/fill do composera zlyhal; Uverejniť neklikané; nepublikované.
+- Facebook: v jednej relácii sa na profile objavil odkaz na `slug=rast-ktory-zhorsi-pristup`; po obnovení timeline príspevky v a11y strome často chýbali. Pred ďalším odoslaním over profil; ak príspevok je, neduplikuj. Permalink ešte nie je v tomto zozname.
+- X: Cursor IDE browser na passkey/2FA; nepublikované.
+- Threads: relácia @lubomirpolascin OK, ale Lexical composer v Cursor browseri neberie spoľahlivo fill/type; klik Uverejniť dialóg zatvorí bez príspevku na profile. Ručné vloženie textu + URL (a PNG z Disku) ostáva potrebné.
 
-LinkedIn k tomuto slugu nezakladaj znova.
+LinkedIn k tomuto slugu nezakladaj znova. X a Threads k tomuto slugu zakladaj len po overení, že na profile ešte nie sú.
