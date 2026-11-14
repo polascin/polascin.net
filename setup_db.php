@@ -889,6 +889,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/co-zostane-ked-ai-stichne.php'
             );
         },
+        '2026111401_growth_worsens_access_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/rast-ktory-zhorsi-pristup.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
