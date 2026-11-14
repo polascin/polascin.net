@@ -967,6 +967,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/ak-student-potrebuje-ai-na-skusku.php'
             );
         },
+        '2026111414_signature_not_yet_launch_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/podpis-este-nie-je-vydanie.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
