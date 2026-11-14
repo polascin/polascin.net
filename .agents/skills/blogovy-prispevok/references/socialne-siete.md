@@ -60,3 +60,14 @@ K rovnakému slugu vznikol pri súbežnom publikovaní ešte jeden pár príspev
 - Duplicitný LinkedIn: https://www.linkedin.com/feed/update/urn:li:activity:7525749798793256960/
 
 Ich odstránenie bolo navrhnuté používateľovi, zatiaľ nie je potvrdené ani vykonané. Existujúce prvé publikácie uvedené vyššie ostávajú zachované. K tomuto článku už nezakladaj ďalší Facebook ani LinkedIn príspevok. X a Threads ostávajú bez potvrdeného zverejnenia. Pred každým externým odoslaním znovu prever stav súbežných úloh a evidenciu publikovania.
+
+## Overené publikovanie 14. novembra 2026
+
+Slug `rast-ktory-zhorsi-pristup`, kanonická URL `https://polascin.net/article.php?slug=rast-ktory-zhorsi-pristup`:
+
+- LinkedIn (text + OG náhľad): https://www.linkedin.com/feed/update/urn:li:activity:7527308178036826112/
+- X: v Cursor IDE browser stále prihlasovací formulár; nepublikované.
+- Facebook: relácia prihlásená, text v composeri bol, ale Post dialóg nezavrel a na profile príspevok nebol; nepublikované.
+- Threads: relácia prihlásená (@lubomirpolascin), Lexical paste/fill do composera zlyhal; Uverejniť neklikané; nepublikované.
+
+LinkedIn k tomuto slugu nezakladaj znova.

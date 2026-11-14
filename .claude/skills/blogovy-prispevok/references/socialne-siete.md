@@ -40,3 +40,14 @@ Spoločné pravidlá:
 |------|-------|----------|
 | Substack | `https://polascin.substack.com/publish/post` | Priamy editor, nie sidebar Create. Audience Everyone. Pri „Add subscribe buttons“ klikni „Publish without buttons“, nezaškrtávaj „Don’t ask again“. Verejná URL je `/p/…` bez query. |
 | Medium | `https://medium.com/new-story` | Cloudflare „Attention Required!“ alebo editor bez textového poľa znamená stop. Stránku nechaj otvorenú. |
+
+## Overené publikovanie 14. novembra 2026
+
+Slug `rast-ktory-zhorsi-pristup`, kanonická URL `https://polascin.net/article.php?slug=rast-ktory-zhorsi-pristup`:
+
+- LinkedIn (text + OG náhľad): https://www.linkedin.com/feed/update/urn:li:activity:7527308178036826112/
+- X: v Cursor IDE browser stále prihlasovací formulár; nepublikované.
+- Facebook: relácia prihlásená, text v composeri bol, ale Post dialóg nezavrel a na profile príspevok nebol; nepublikované.
+- Threads: relácia prihlásená (@lubomirpolascin), Lexical paste/fill do composera zlyhal; Uverejniť neklikané; nepublikované.
+
+LinkedIn k tomuto slugu nezakladaj znova.
