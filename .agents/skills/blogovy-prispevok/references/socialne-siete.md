@@ -33,6 +33,7 @@ Spoločné pravidlá:
 
 - `https://www.threads.com/@lubomirpolascin`. Cookie banner: odmietni nepovinné.
 - Pred „Post“ musí byť hook v `innerText` presne raz. Pri zdvojení textu nepublikuj, vyčisti a napíš znova.
+- Lexical composer v Cursor IDE browser často neberie `fill`/`type` a Uverejniť dialóg zatvorí bez príspevku na profile. Vtedy nechaj hotový text používateľovi a nevyhlasuj zverejnenie.
 
 ## Substack a Medium (len na výslovnú žiadosť)
 
