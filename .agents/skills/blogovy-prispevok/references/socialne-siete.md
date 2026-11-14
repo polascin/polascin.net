@@ -22,6 +22,7 @@ Spoločné pravidlá:
 - `https://www.facebook.com/lubomir.polascin`, feed composer („Čo máte na mysli?“), nie skeleton na profile.
 - Text vlož naraz. URL vlož naraz zo schránky, nie po znakoch (náhľad sa načítava pri každom znaku a hosting vráti 429). Ak náhľad ukáže chybu 429, otvor Sharing Debugger, „Scrape Again“, a nový composer.
 - Ak je po vložení `innerText` composeru prázdny, nepublikuj; nechaj dialóg používateľovi.
+- Ak composer už drží koncept iného článku (súbežná úloha), neprepisuj ho. Ulož cudzí koncept alebo dialóg nechaj a pokračuj inou sieťou.
 
 ## LinkedIn
 
@@ -72,3 +73,14 @@ Slug `rast-ktory-zhorsi-pristup`, kanonická URL `https://polascin.net/article.p
 - Threads: relácia @lubomirpolascin OK, ale Lexical composer v Cursor browseri neberie spoľahlivo fill/type; klik Uverejniť dialóg zatvorí bez príspevku na profile. Ručné vloženie textu + URL (a PNG z Disku) ostáva potrebné.
 
 LinkedIn k tomuto slugu nezakladaj znova. X a Threads k tomuto slugu zakladaj len po overení, že na profile ešte nie sú.
+
+## Overené publikovanie 14. novembra 2026 (prenosný zámer)
+
+Slug `prenosny-zamer-miestne-opravnenia`, kanonická URL `https://polascin.net/article.php?slug=prenosny-zamer-miestne-opravnenia`:
+
+- LinkedIn (text + OG náhľad JPEG): https://www.linkedin.com/feed/update/urn:li:activity:7527317547722088449/
+- Facebook: v composeri bol koncept iného článku (Heliora); neprepisované. Texty a PNG sú na Disku.
+- X: Cursor IDE browser bez prihlásenia (redirect na login/onboarding); nepublikované.
+- Threads: relácia @lubomirpolascin OK, dialóg „Nové vlákno“ otvorený, Lexical však neprijal `fill` (pole ostalo prázdne); nepublikované. Texty sú na Disku.
+
+LinkedIn k tomuto slugu nezakladaj znova. X, Facebook a Threads zakladaj len po overení, že na profile ešte nie sú.
