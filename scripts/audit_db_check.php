@@ -129,6 +129,8 @@ const EXPECTED_MIGRATIONS = [
     '2026111409_no_shown_difference_not_equality_article',
     '2026111410_two_valid_edits_silent_loss_article',
     '2026111411_two_valid_edits_silent_loss_polish',
+    '2026111412_student_needs_ai_exam_article',
+    '2026111413_student_needs_ai_exam_polish',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

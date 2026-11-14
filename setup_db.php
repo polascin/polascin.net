@@ -955,6 +955,18 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/dve-platne-upravy-jedna-strata.php'
             );
         },
+        '2026111412_student_needs_ai_exam_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/ak-student-potrebuje-ai-na-skusku.php'
+            );
+        },
+        '2026111413_student_needs_ai_exam_polish' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/ak-student-potrebuje-ai-na-skusku.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
