@@ -925,6 +925,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/prenosny-zamer-miestne-opravnenia.php'
             );
         },
+        '2026111407_anomaly_not_introspection_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/anomalia-este-nie-je-introspekcia.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

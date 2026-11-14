@@ -124,6 +124,7 @@ const EXPECTED_MIGRATIONS = [
     '2026111404_who_audits_investigator_article',
     '2026111405_portable_intent_local_permissions_article',
     '2026111406_portable_intent_local_permissions_polish',
+    '2026111407_anomaly_not_introspection_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
