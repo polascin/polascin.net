@@ -123,6 +123,7 @@ const EXPECTED_MIGRATIONS = [
     '2026111403_growth_worsens_access_fictional_frame',
     '2026111404_who_audits_investigator_article',
     '2026111405_portable_intent_local_permissions_article',
+    '2026111406_portable_intent_local_permissions_polish',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

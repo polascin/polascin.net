@@ -919,6 +919,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/prenosny-zamer-miestne-opravnenia.php'
             );
         },
+        '2026111406_portable_intent_local_permissions_polish' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/prenosny-zamer-miestne-opravnenia.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
