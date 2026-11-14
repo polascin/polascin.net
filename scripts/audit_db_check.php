@@ -119,6 +119,7 @@ const EXPECTED_MIGRATIONS = [
     '2026111001_ai_medical_learning_article',
     '2026111002_ai_medical_learning_polish',
     '2026111401_growth_worsens_access_article',
+    '2026111402_growth_worsens_access_polish',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

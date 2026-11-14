@@ -13,6 +13,6 @@ Text článku, prekladov, alt textu, sociálnych príspevkov ani ilustrácie nep
 
 Ak návrh opisuje stav, ktorý medzitým zmenil vlastný zverejnený katalóg autora, ponechaj datovanú udalosť a uveď neskorší overený stav. Prekonaný stav nepodávaj ako súčasný.
 
-Pri lokálnej práci nasadzuj cez SSH alias `websupport` lokálnymi nástrojmi. Commit označ `[skip deploy]`, aby starší workflow nespustil súbežný deploy. Over migráciu aj jej druhé idempotentné spustenie. Pri benchmarkoch odlíš dodané merania od nezávislého overenia, skontroluj súčty a pomery a nevyvodzuj kvalitu uvažovania z počtu reasoning tokenov.
+Pri lokálnej práci nasadzuj cez `bash hooks/deploy.sh --migrate` (SSH alias `websupport`). GitHub Actions „Deploy to polascin.net“ je len záloha `workflow_dispatch`. Commit označ `[skip deploy]`. Over migráciu aj jej druhé idempotentné spustenie. Na Macu: `~/.config/polascin/deploy.env`, File Provider cesta k obálkam a overenie PNG cez Drive `search`. Ak Cursor browser nemá prihlásené sociálne session, priprav balík (texty + Disk) a blocker uveď v reporte. Pri benchmarkoch odlíš dodané merania od nezávislého overenia, skontroluj súčty a pomery a nevyvodzuj kvalitu uvažovania z počtu reasoning tokenov.
 
 Pre Claude Code platí ten istý postup cez `CLAUDE.md` v koreni repozitára a skill `.claude/skills/blogovy-prispevok/SKILL.md`; zoznam slugov na X zostáva iba v `.cursor/skills/blog-article/SKILL.md`.

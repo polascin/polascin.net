@@ -895,6 +895,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/rast-ktory-zhorsi-pristup.php'
             );
         },
+        '2026111402_growth_worsens_access_polish' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/rast-ktory-zhorsi-pristup.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

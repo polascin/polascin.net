@@ -36,7 +36,7 @@ Jazyky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk` (`app
 ## 3. PNG na Google Disk
 
 - Z WebP urob skutočné PNG (`imagepng`, signatúra PNG, nie premenovaný JPEG).
-- Skopíruj na `G:\Môj disk\polascin.net obálky blogu\` (účet polascin@gmail.com, priečinok `1a_g8vTcMH3hIA2rECaV0aRVoPp3xfwFC`). Staršie ID `1MOa4l69tswsLmQB3ZmYAdoZd9gZ5aVas` je v koši. Over `image/png` a rozmery.
+- Skopíruj na `G:\Môj disk\polascin.net obálky blogu\` (Windows) alebo `~/Library/CloudStorage/GoogleDrive-polascin@gmail.com/Môj disk/polascin.net obálky blogu/` (Mac); účet polascin@gmail.com, priečinok `1a_g8vTcMH3hIA2rECaV0aRVoPp3xfwFC`. Staršie ID `1MOa4l69tswsLmQB3ZmYAdoZd9gZ5aVas` je v koši. Google Drive MCP `create_file` nevie binárne PNG: po lokálnej kópii over cloud cez `search` (`exactName`, `folderId`). Texty sociálnych príspevkov ulož ako Google Doc do toho istého priečinka.
 - PNG necommituj. Lokálne tmp zmaž.
 
 ## 4. Test, deploy, produkcia
@@ -45,12 +45,12 @@ Jazyky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk` (`app
 - Ak je `main` za `origin/main`, najprv `git pull --ff-only`.
 - Commit a push na `main`. Hooky nepreskakuj, force push nie. Nekomituj `private/`, `.env`, `*.ini` okrem `env.ini.example`, ani PNG.
 - Ak GitGuardian hlási `ggshield: command not found`, pred commit pridaj do `PATH` adresár s `ggshield.exe` pod `%USERPROFILE%\.cache\pre-commit\`. Git config nemeň.
-- Z lokálneho Windows alebo Mac prostredia nasadzuj lokálnymi nástrojmi (`bash hooks/deploy.sh --migrate`) cez SSH alias `websupport` a následne over idempotentný druhý beh `php setup_db.php`. Keď je commit už pushnutý na `websupport`, režim `archive` v `hooks/deploy.sh` rozbalí strom priamo z `~/git/polascin.net.git` na serveri. Existujúci Actions deploy nie je lokálna cesta nasadenia. Pri lokálnych commitoch použi `[skip deploy]`, aby sa predišlo súbehu so starším automatickým workflow.
+- Z lokálneho Windows alebo Mac prostredia nasadzuj lokálnymi nástrojmi (`bash hooks/deploy.sh --migrate`) cez SSH alias `websupport` a následne over idempotentný druhý beh `php setup_db.php`. Keď je commit už pushnutý na `websupport`, režim `archive` v `hooks/deploy.sh` rozbalí strom priamo z `~/git/polascin.net.git` na serveri. GitHub Actions „Deploy to polascin.net“ je od Behu #49 len `workflow_dispatch` záloha; push na `main` ho nespúšťa. Pri lokálnych commitoch použi `[skip deploy]`. Na Macu maj `~/.config/polascin/deploy.env` (`POLASCIN_DEPLOY_TARGET=websupport`, `POLASCIN_REMOTE_PATH` = `readlink -f ~/polascin.net/web` na serveri) a pred prácou `git pull --ff-only websupport main`.
 - Over produkciu: `/`, articles, contact, newsletter, sitemap, login HTTP 200; `/deploy_info.php` a `/i18n.php` 403; CSP s nonce a bezpečnostné hlavičky. Spot-check SK, EN a jeden ďalší jazyk plus hreflang v sitemape. `og:image` je JPEG. `og:title` kanonickej stránky je slovenský; anglický titulok v náhľade crawlera je jazyk session, nie chyba seedu.
 
 ## 5. Sociálne siete
 
-Až po HTTP 200 kanonickej URL `https://polascin.net/article.php?slug=SLUG` (bez `lang=`). Text vždy slovenský, s touto URL a s ilustráciou. Povinné siete sú X, Facebook, LinkedIn a Threads. Substack a Medium patria k úlohe len vtedy, keď o ne používateľ v tej istej úlohe výslovne požiada. Heslo, passkey ani 2FA nehádaj. Dialóg nechaj otvorený, na danej sieti zastav a pokračuj ostatnými. Sieť, ktorá zlyhá, nahlás; web ostane live. Pred ďalším článkom skontroluj, či slug na profile už nie je.
+Až po HTTP 200 kanonickej URL `https://polascin.net/article.php?slug=SLUG` (bez `lang=`). Text vždy slovenský, s touto URL a s ilustráciou. Povinné siete sú X, Facebook, LinkedIn a Threads. Substack a Medium patria k úlohe len vtedy, keď o ne používateľ v tej istej úlohe výslovne požiada. Heslo, passkey ani 2FA nehádaj. Dialóg nechaj otvorený, na danej sieti zastav a pokračuj ostatnými. Sieť, ktorá zlyhá, nahlás; web ostane live. Pred ďalším článkom skontroluj, či slug na profile už nie je. Cursor IDE browser často nemá prihlásené session (X/FB/LinkedIn/Threads ukazujú „Prihlásiť sa“): balík textov + PNG na Disk priprav vždy; bez session nepublikuj a v reporte uveď blocker. Slug do zoznamu nižšie pridaj len po overenom permalinku.
 
 Prehliadač: `cursor-ide-browser` (tabs → navigate → lock → interact → unlock). CDP `DOM.setFileInputFiles` je zakázané. Ak súbor inak nenahráš, uverejni text a kanonickú URL (OG JPEG z webu) a v reporte napíš, že lokálna príloha zlyhala.
 
