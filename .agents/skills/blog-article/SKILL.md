@@ -41,7 +41,8 @@ Jazyky: `sk` (zdroj), `en`, `cs`, `de`, `fr`, `es`, `pl`, `hu`, `it`, `uk` (`app
 
 ## 4. Test, deploy, produkcia
 
-- `php tests/run.php` musí prejsť.
+- `php tests/run.php` musí prejsť. Lokálne `env.ini` s `APP_BASE_URL=http://127.0.0.1:…` a `APP_ENV=local` zhodí kanonické URL testy: spusti s dočasným INI cez `POLASCIN_ENV_PATH` a `APP_BASE_URL=https://polascin.net` (súbor s tajomstvami necommituj).
+- Deploy cez `hooks/deploy.sh` robí rsync pracovného stromu: nedokončené `content/articles/*.php` a ich obálky sa môžu dostať na server. Nechávaj v strome len to, čo má ísť live, alebo ich pred deployom odlož mimo `content/articles/`.
 - Ak je `main` za `origin/main`, najprv `git pull --ff-only`.
 - Commit a push na `main`. Hooky nepreskakuj, force push nie. Nekomituj `private/`, `.env`, `*.ini` okrem `env.ini.example`, ani PNG.
 - Ak GitGuardian hlási `ggshield: command not found`, pred commit pridaj do `PATH` adresár s `ggshield.exe` pod `%USERPROFILE%\.cache\pre-commit\`. Git config nemeň.
@@ -68,9 +69,9 @@ Už na X (neopakovať): `sestnast-tokenov-na-rozmyslanie`, `lekar-ako-pacient-gl
 
 | Sieť | Vstup | Ako publikovať |
 |------|--------|----------------|
-| Facebook | `https://www.facebook.com/lubomir.polascin` | Feed composer, nie skeleton na profile. Text vlož raz, URL naraz zo schránky, nie po znakoch (náhľad sa načítava pri každom znaku a hosting vráti 429). Ak náhľad ukáže 429, Sharing Debugger „Scrape Again“ a nový composer. Ak `innerText` ostane prázdny, nepublikuj a nechaj dialóg používateľovi. |
-| LinkedIn | `https://www.linkedin.com/in/lubomirpolascin/` alebo `/sharing/compose` | Post to Anyone. Vložený text stratí prázdne riadky: odseky píš s Enter Enter, URL vlož. Ak je Post disabled, medzera a backspace. URN ber len z príspevku, ktorého text začína hookom. |
-| Threads | `https://www.threads.com/@lubomirpolascin` | Cookie banner Decline/Allow. Nepíš `slowly`. Pred Post musí byť hook v `innerText` raz. Pri zdvojení nepublikuj. Lexical composer v Cursor IDE browser často neberie `fill`/`type` a Uverejniť dialóg zatvorí bez príspevku: vtedy nechaj hotový text používateľovi a nevyhlasuj zverejnenie. |
+| Facebook | `https://www.facebook.com/lubomir.polascin` | Feed composer, nie skeleton na profile. Text vlož raz, URL naraz zo schránky, nie po znakoch (náhľad sa načítava pri každom znaku a hosting vráti 429). Ak náhľad ukáže 429, Sharing Debugger „Scrape Again“ a nový composer. Ak `innerText` ostane prázdny, nepublikuj a nechaj dialóg používateľovi. Text v tlačidle „What's on your mind?“ po Post nie je dôkaz zverejnenia: over permalink (pfbid/posts) alebo text vo feede mimo composera. |
+| LinkedIn | `https://www.linkedin.com/in/lubomirpolascin/` alebo `/sharing/compose` | Post to Anyone. Vložený text stratí prázdne riadky: odseky píš s Enter Enter, URL vlož. Ak je Post disabled, medzera a backspace (alebo `InputEvent` cez Runtime.evaluate). URN ber len z príspevku, ktorého text začína hookom; over aj na `/in/…/recent-activity/all/` (čas „now“/„1m“). |
+| Threads | `https://www.threads.com/@lubomirpolascin` | Cookie banner Decline/Allow. Nepíš `slowly`. Pred Post musí byť hook v `innerText` raz. Pri zdvojení nepublikuj. Lexical composer v Cursor IDE browser často neberie `fill`/`type` a Uverejniť dialóg zatvorí bez príspevku; tlačidlo „Vytvoriť“ niekedy neotvorí dialóg vôbec: vtedy nechaj hotový text používateľovi a nevyhlasuj zverejnenie. |
 | Substack | `https://polascin.substack.com/publish/post` | Priamy editor, nie sidebar Create. Audience Everyone. Ak vyskočí „Add subscribe buttons“, klikni „Publish without buttons“ a nezaškrtávaj „Don’t ask again“. Verejná URL je v poli na share center (`/p/…`), bez query. |
 | Medium | `https://medium.com/new-story` | Cloudflare „Attention Required!“ alebo editor bez textového poľa (iframe) znamená stop. Stránku nechaj otvorenú. |
 
