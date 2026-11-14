@@ -907,6 +907,18 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/rast-ktory-zhorsi-pristup.php'
             );
         },
+        '2026111404_who_audits_investigator_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/kto-kontroluje-vysetrovatela.php'
+            );
+        },
+        '2026111405_portable_intent_local_permissions_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/prenosny-zamer-miestne-opravnenia.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
