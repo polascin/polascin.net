@@ -84,3 +84,16 @@ Slug `prenosny-zamer-miestne-opravnenia`, kanonická URL `https://polascin.net/a
 - Threads: relácia @lubomirpolascin OK, dialóg „Nové vlákno“ otvorený, Lexical však neprijal `fill` (pole ostalo prázdne); nepublikované. Texty sú na Disku.
 
 LinkedIn k tomuto slugu nezakladaj znova. X, Facebook a Threads zakladaj len po overení, že na profile ešte nie sú.
+
+## Overené publikovanie 17. novembra 2026
+
+Slug `najuzitocnejsia-ai-kreslila-mapu`, kanonická URL `https://polascin.net/article.php?slug=najuzitocnejsia-ai-kreslila-mapu`, všetko cez Claude in Chrome v prihlásenej relácii:
+
+- X (@polascin, text + priložený OG JPEG): https://x.com/polascin/status/2122577701525410237
+- LinkedIn (text + OG náhľad): https://www.linkedin.com/feed/update/urn:li:activity:7527842574972383232/
+- Facebook (text + OG náhľad): príspevok overený na profile, permalink nezaznamenaný.
+- Threads (text + priložený OG JPEG): https://www.threads.com/@lubomirpolascin/post/Df1S-puiGFa
+
+Poznámky k postupu: na X po prvom kliknutí na Uverejniť vyskočí pripomienka popisu obrázka a príspevok sa medzitým odošle, pred ďalším pokusom over profil. Na Threads sa URL písaná po znakoch zalinkuje len po `/article`; riadok s URL označ a vlož celý naraz (`insertText`), nesprávnu kartu náhľadu zavri a prilož JPEG.
+
+K tomuto slugu už nezakladaj príspevok na žiadnej zo štyroch sietí.
