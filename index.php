@@ -89,11 +89,16 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
   <section id="about" class="about">
     <div class="container">
       <h2 class="section-title reveal"><?= te('home.about_heading') ?></h2>
-      <div class="about-grid">
-        <div class="about-text">
+      <div class="about-intro">
+        <img src="images/lubomir-polascin-karikatura.webp" alt="<?= te('home.caricature_alt') ?>" class="about-caricature" width="1254" height="1254" loading="lazy" decoding="async">
+        <div>
           <p><?= nl2br(htmlspecialchars($aboutIntro, ENT_QUOTES, 'UTF-8'), false) ?></p>
           <p><?= nl2br(htmlspecialchars($aboutWho, ENT_QUOTES, 'UTF-8'), false) ?></p>
           <p><?= te('home.about_synthesis') ?></p>
+        </div>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
 
           <h3><?= te('home.areas_heading') ?></h3>
           <div class="area-grid">

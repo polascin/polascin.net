@@ -916,6 +916,29 @@ section {
 /* Súvislý text nesmie na počítači tiecť na plnú šírku kontajnera: riadok
    dlhší než ~75 znakov sa zle číta. Prózu preto drží úzky stĺpec v strede;
    mriežky vnútri (oblasti, zručnosti) môžu byť širšie. */
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: var(--spacing-lg);
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.about-caricature {
+  display: block;
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+  margin-inline: auto;
+  border-radius: 1rem;
+}
+
+@media (max-width: 48rem) {
+  .about-intro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .about-text {
   max-width: 76ch;
   margin-inline: auto;

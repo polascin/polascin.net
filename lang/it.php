@@ -98,6 +98,7 @@ return [
     'meta.terms_description' => 'Condizioni d\'uso del sito web del dott. Ľubomír Polaščín.',
 
     // Home: sezione principale
+    'home.caricature_alt' => 'Caricatura di Ľubomír Polaščín nel suo studio con libri, un apparecchio per dialisi e un computer.',
     'home.logo_alt' => 'Crystal Kidney',
     'home.hero_title' => 'Dott. Ľubomír Polaščín',
     'home.hero_subtitle' => 'Sono nefrologo e internista, formatore in ambito medico e autore. Metto la mia lunga esperienza in dialisi al servizio della scrittura specialistica, della traduzione e dello sviluppo di strumenti digitali pratici.',

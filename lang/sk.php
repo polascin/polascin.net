@@ -98,6 +98,7 @@ return [
     'meta.terms_description' => 'Podmienky používania webovej stránky MUDr. Ľubomíra Polaščína.',
 
     // Domovská stránka: hrdina
+    'home.caricature_alt' => 'Karikatúra Ľubomíra Polaščína v pracovni s knihami, dialyzačným prístrojom a počítačom.',
     'home.logo_alt' => 'Crystal Kidney',
     'home.hero_title' => 'MUDr. Ľubomír Polaščín',
     'home.hero_subtitle' => 'Som nefrológ a internista, medicínsky pedagóg a autor. Dlhoročnú skúsenosť s dialýzou prepájam s odborným písaním, prekladmi a tvorbou praktických digitálnych nástrojov.',

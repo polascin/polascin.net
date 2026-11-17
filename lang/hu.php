@@ -98,6 +98,7 @@ return [
     'meta.terms_description' => 'Dr. Ľubomír Polaščín webhelyének felhasználási feltételei.',
 
     // Kezdőlap: fejrész
+    'home.caricature_alt' => 'Ľubomír Polaščín karikatúrája a dolgozószobájában, könyvekkel, dialízisgéppel és számítógéppel.',
     'home.logo_alt' => 'Crystal Kidney',
     'home.hero_title' => 'Dr. Ľubomír Polaščín',
     'home.hero_subtitle' => 'Nefrológus és belgyógyász, orvosi oktató és szerző vagyok. A dialízis terén szerzett sokéves tapasztalatomat szakmai szövegírásban, fordításban és gyakorlati digitális eszközök fejlesztésében hasznosítom.',

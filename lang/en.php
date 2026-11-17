@@ -98,6 +98,7 @@ return [
     'meta.terms_description' => 'Terms of use for the website of Ľubomír Polaščín, MD.',
 
     // Home page: hero
+    'home.caricature_alt' => 'Caricature of Ľubomír Polaščín in his study with books, a dialysis machine and a computer.',
     'home.logo_alt' => 'Crystal Kidney',
     'home.hero_title' => 'Ľubomír Polaščín, MD',
     'home.hero_subtitle' => 'I am a nephrologist and internist, medical educator and author. I bring long experience in dialysis to specialist writing, translation and the development of practical digital tools.',
