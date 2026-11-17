@@ -123,6 +123,7 @@ function sendSecurityHeaders(): void {
         "img-src 'self' data: https:; " .
         "style-src 'self' 'nonce-{$nonce}'; " .
         "font-src 'self'; " .
+        "frame-src 'self'" . ($robotsTagScript === 'index.php' ? " https://partner.mrtns.eu" : '') . "; " .
         "script-src 'self' 'nonce-{$nonce}' https://www.googletagmanager.com https://www.google-analytics.com https://*.clarity.ms; " .
         "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com " .
             "https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net https://*.clarity.ms; " .

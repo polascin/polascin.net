@@ -2566,3 +2566,10 @@ a.lang-chip {
     widows: 3;
   }
 }
+
+.martinus-banner {
+  display: block;
+  max-width: 100%;
+  border: 0;
+  margin-block: var(--spacing-md);
+}
