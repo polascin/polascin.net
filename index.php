@@ -173,7 +173,10 @@ $canonicalUrl = absoluteLangUrl($lang, 'index.php');
         <h2 id="marza-title">Marža z krvi</h2>
         <h3><?= te('home.marza_subtitle') ?></h3>
         <p><?= te('home.marza_text') ?></p>
-        <iframe src="https://partner.mrtns.eu/banners/generator.php?uItem=4304111&amp;brand_id=1&amp;z=H8DMXS&amp;color=violet&amp;show_price=0&amp;size=square" title="Marža z krvi: Martinus" class="martinus-banner" width="300" height="300" loading="lazy" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin"></iframe>
+        <div class="martinus-banner-container">
+          <iframe src="https://partner.mrtns.eu/banners/generator.php?uItem=4304111&amp;brand_id=1&amp;z=H8DMXS&amp;color=violet&amp;show_price=0&amp;size=square" title="Marža z krvi: Martinus" class="martinus-banner" width="300" height="300" loading="lazy" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin"></iframe>
+        </div>
+        <script src="js/responsive-banner.js?v=<?= htmlspecialchars(assetVersion('js/responsive-banner.js'), ENT_QUOTES, 'UTF-8') ?>" defer></script>
         <div class="about-actions">
           <a href="https://polascin.gumroad.com/l/marza-z-krvi" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><?= te('home.marza_gumroad') ?></a>
           <a href="https://nefro.polascin.net/publikacie.php" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><?= te('home.marza_nefro') ?></a>

@@ -2567,9 +2567,17 @@ a.lang-chip {
   }
 }
 
+.martinus-banner-container {
+  width: min(100%, 300px);
+  aspect-ratio: 1;
+  margin-block: var(--spacing-md);
+}
+
 .martinus-banner {
   display: block;
-  max-width: 100%;
+  width: 300px;
+  height: 300px;
+  max-width: none;
   border: 0;
-  margin-block: var(--spacing-md);
+  transform-origin: top left;
 }
