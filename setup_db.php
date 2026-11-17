@@ -973,6 +973,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/podpis-este-nie-je-vydanie.php'
             );
         },
+        '2026111701_most_useful_ai_drew_map_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/najuzitocnejsia-ai-kreslila-mapu.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
