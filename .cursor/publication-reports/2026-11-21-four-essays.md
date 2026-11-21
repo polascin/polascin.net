@@ -75,3 +75,20 @@ Motívy:
 - NCCIH: [Be an Informed Consumer](https://www.nccih.nih.gov/health/be-an-informed-consumer), všeobecný rámec hodnotenia zdravotných tvrdení. Modelový prístroj nie je hodnotením konkrétneho výrobku.
 - Information Commissioner's Office: [How do we ensure anonymisation is effective?](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/anonymisation/how-do-we-ensure-anonymisation-is-effective/), princíp posudzovania identifikovateľnosti v kontexte. Text ho nepoužíva ako výklad slovenského práva.
 - Ľubomír Polaščín: [Marža z krvi, verejný katalóg Digiport](https://www.digiport.cz/detail/bupebooks-1112189-marza-z-krvi/), dostupnosť a námet. Žiadne súkromné správy či obchodné kontakty nie sú citované.
+
+## Opätovná kontrola sociálnych príspevkov po jazykovej revízii
+
+21. novembra 2026 boli v prihlásenej relácii Chrome otvorené všetky existujúce odkazy uvedené vyššie. Kontrola sa týkala textu, anonymizácie, súladu s článkami po migráciách `2026112106_four_essays_language_privacy_refresh` a `2026112107_deployment_essay_alt_refresh`, správneho motívu ilustrácie a čitateľnosti obrazového náhľadu.
+
+| Článok | X | Facebook | LinkedIn | Threads |
+| --- | --- | --- | --- | --- |
+| Bunky sa v reklame prebúdzajú | V poriadku | Doplnený alternatívny popis fotografie | V poriadku | V poriadku |
+| Najprv priprav náhradu | V poriadku | V poriadku | V poriadku | V poriadku |
+| Meno sme vymazali | V poriadku | V poriadku | V poriadku | V poriadku |
+| Minúty, ktoré v tabuľke nevidno | V poriadku | V poriadku | V poriadku | V poriadku |
+
+Prvé tri sociálne texty už označovali situácie ako modelové a neobsahovali názov výrobku, firmy, pracoviska, presnú cenu ani súkromný odkaz. Literárne príspevky jednoznačne odkazovali na román. Ich význam sa opravou článkov nezmenil, preto nebolo potrebné prepisovať ich text. Obálky boli vizuálne skontrolované pri každej zo šestnástich publikácií a zodpovedajú príslušnému článku. Automatické anglické titulky odkazových kariet sú v súlade s anglickými verziami článkov; vlastné texty príspevkov sú slovenské.
+
+Pri facebookovej fotografii `10245940897636121` pôvodne chýbal alternatívny popis. Priamo v existujúcej fotografii bol uložený tento text: „Ilustrácia vo fialových a tyrkysových farbách: sklenený hranol, lupa nad otvoreným prázdnym zápisníkom a neoznačený prístroj v pozadí.“ Uloženie bolo overené po obnovení stránky aj opätovným otvorením editora alternatívneho textu.
+
+Nevznikol nový príspevok, komentár ani opakované zdieľanie. Identifikátory a odkazy všetkých šestnástich publikácií zostali zachované. Kontrola sa nevzťahuje na iné, staršie príspevky na týchto profiloch.
