@@ -137,6 +137,7 @@ const EXPECTED_MIGRATIONS = [
     '2026112102_stage_before_switch_article',
     '2026112103_privacy_inference_article',
     '2026112104_minutes_novel_article',
+    '2026112105_minutes_novel_polish',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

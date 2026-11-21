@@ -1003,6 +1003,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/minuty-ktore-v-tabulke-nevidno.php'
             );
         },
+        '2026112105_minutes_novel_polish' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/minuty-ktore-v-tabulke-nevidno.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
