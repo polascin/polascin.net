@@ -1009,6 +1009,24 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/minuty-ktore-v-tabulke-nevidno.php'
             );
         },
+        '2026112106_four_essays_language_privacy_refresh' => static function (PDO $pdo): void {
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/slub-nie-je-vysledok.php'
+            );
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/najprv-priprav-potom-prepni.php'
+            );
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/meno-chyba-clovek-zostava.php'
+            );
+            refreshPublishedArticleTextFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/minuty-ktore-v-tabulke-nevidno.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
