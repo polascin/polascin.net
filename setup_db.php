@@ -1027,6 +1027,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/minuty-ktore-v-tabulke-nevidno.php'
             );
         },
+        '2026112107_deployment_essay_alt_refresh' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/najprv-priprav-potom-prepni.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
