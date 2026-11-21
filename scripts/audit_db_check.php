@@ -133,6 +133,10 @@ const EXPECTED_MIGRATIONS = [
     '2026111413_student_needs_ai_exam_polish',
     '2026111414_signature_not_yet_launch_article',
     '2026111701_most_useful_ai_drew_map_article',
+    '2026112101_health_promise_article',
+    '2026112102_stage_before_switch_article',
+    '2026112103_privacy_inference_article',
+    '2026112104_minutes_novel_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */

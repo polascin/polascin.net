@@ -979,6 +979,30 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/najuzitocnejsia-ai-kreslila-mapu.php'
             );
         },
+        '2026112101_health_promise_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/slub-nie-je-vysledok.php'
+            );
+        },
+        '2026112102_stage_before_switch_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/najprv-priprav-potom-prepni.php'
+            );
+        },
+        '2026112103_privacy_inference_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/meno-chyba-clovek-zostava.php'
+            );
+        },
+        '2026112104_minutes_novel_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/minuty-ktore-v-tabulke-nevidno.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
