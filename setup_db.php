@@ -1039,6 +1039,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/co-drzi-spomienku-pohromade.php'
             );
         },
+        '2026112802_clause_is_not_proof_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/klauzula-nie-je-dokaz.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
