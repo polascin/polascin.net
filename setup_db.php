@@ -1045,6 +1045,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/klauzula-nie-je-dokaz.php'
             );
         },
+        '2026112803_biotin_before_blood_draw_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/biotin-pred-odberom-krvi.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);
