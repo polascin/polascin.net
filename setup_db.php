@@ -1051,6 +1051,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/biotin-pred-odberom-krvi.php'
             );
         },
+        '2026112804_devs_is_deus_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/devs-sa-vyslovuje-deus.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

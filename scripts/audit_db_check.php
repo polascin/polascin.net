@@ -143,6 +143,7 @@ const EXPECTED_MIGRATIONS = [
     '2026112801_memory_metabolism_article',
     '2026112802_clause_is_not_proof_article',
     '2026112803_biotin_before_blood_draw_article',
+    '2026112804_devs_is_deus_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
