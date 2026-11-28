@@ -1033,6 +1033,12 @@ function applySchemaMigrations(PDO $pdo): void {
                 __DIR__ . '/content/articles/najprv-priprav-potom-prepni.php'
             );
         },
+        '2026112801_memory_metabolism_article' => static function (PDO $pdo): void {
+            seedPublishedArticleFromFile(
+                $pdo,
+                __DIR__ . '/content/articles/co-drzi-spomienku-pohromade.php'
+            );
+        },
     ];
 
     $applied = $pdo->query("SELECT version FROM schema_migrations")->fetchAll(PDO::FETCH_COLUMN);

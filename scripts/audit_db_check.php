@@ -140,6 +140,7 @@ const EXPECTED_MIGRATIONS = [
     '2026112105_minutes_novel_polish',
     '2026112106_four_essays_language_privacy_refresh',
     '2026112107_deployment_essay_alt_refresh',
+    '2026112801_memory_metabolism_article',
 ];
 
 /** Očakávané tabuľky. Zhodu s `setup_db.php` stráži test v `tests/run.php`. */
